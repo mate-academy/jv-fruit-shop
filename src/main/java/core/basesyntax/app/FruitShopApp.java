@@ -1,8 +1,8 @@
 package core.basesyntax.app;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.file.FileReader;
-import core.basesyntax.service.file.FileWriter;
+import core.basesyntax.service.file.reader.FileReader;
+import core.basesyntax.service.file.writer.FileWriter;
 import core.basesyntax.service.parser.DataParser;
 import core.basesyntax.service.performer.Performer;
 import core.basesyntax.service.reporter.Reporter;
