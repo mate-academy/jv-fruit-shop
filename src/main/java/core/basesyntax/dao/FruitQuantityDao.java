@@ -7,7 +7,7 @@ public interface FruitQuantityDao {
 
     void replace(String fruit, int quantity);
 
-    Map<String, Integer> getALl();
+    Map<String, Integer> getAll();
 
     int get(String fruit);
 }
