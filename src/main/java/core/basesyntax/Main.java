@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.data.FruitMapper;
 import core.basesyntax.data.FruitTransaction;
-import core.basesyntax.data.Report;
 import core.basesyntax.data.ReportService;
+import core.basesyntax.data.Stock;
 import core.basesyntax.io.CsvFileReader;
 import core.basesyntax.io.CsvFileWriter;
 import core.basesyntax.io.ReadFromFile;
@@ -21,7 +21,7 @@ public class Main {
         FruitMapper fruitMapper = new FruitMapper();
         List<FruitTransaction> fruitTransactions = fruitMapper.mapData(allLines);
         OperationProcessor operationProcessor = new OperationProcessor();
-        Report processReport = operationProcessor.process(fruitTransactions);
+        Stock processReport = operationProcessor.process(fruitTransactions);
         ReportService reportService = new ReportService();
         List<String> report = reportService.generateReport(processReport.getData());
         WriteToFile writeToFile = new CsvFileWriter();
