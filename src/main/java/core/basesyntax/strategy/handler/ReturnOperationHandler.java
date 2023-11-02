@@ -1,13 +1,14 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImp;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.handler.OperationHandler;
 
-public class PurchaseOperationHandler implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private FruitDao dataBase;
 
-    public PurchaseOperationHandler() {
+    public ReturnOperationHandler() {
         this.dataBase = new FruitDaoImp();
     }
 
@@ -15,7 +16,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     public boolean doOperation(FruitTransaction fruit) {
         String fruitName = fruit.getFruit();
         int fruitQuantity = fruit.getQuantity();
-        dataBase.getStorage().put(fruitName, dataBase.get(fruitName) - fruitQuantity);
+        dataBase.getStorage().put(fruitName, dataBase.get(fruitName) + fruitQuantity);
         return true;
     }
 }

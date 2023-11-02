@@ -1,13 +1,14 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImp;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.handler.OperationHandler;
 
-public class ReturnOperationHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private FruitDao dataBase;
 
-    public ReturnOperationHandler() {
+    public SupplyOperationHandler() {
         this.dataBase = new FruitDaoImp();
     }
 

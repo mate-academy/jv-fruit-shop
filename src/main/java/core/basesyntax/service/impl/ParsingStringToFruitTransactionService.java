@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Parsing;
 
 public class ParsingStringToFruitTransactionService implements Parsing {
-    private static final String RUNTIME_EXCEPTION_MESSAGE = "can't parse this line";
+    private static final String CANT_WRITE_EXCEPTION_MESSAGE = "can't parse this line";
     private static final String SPLITER = ",";
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT_NAME = 1;
@@ -20,6 +20,6 @@ public class ParsingStringToFruitTransactionService implements Parsing {
                         Integer.parseInt(splitedLine[INDEX_OF_QUANTITY]));
             }
         }
-        throw new RuntimeException(RUNTIME_EXCEPTION_MESSAGE);
+        throw new RuntimeException(CANT_WRITE_EXCEPTION_MESSAGE);
     }
 }
