@@ -1,12 +1,12 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.CustomFileReader;
+import core.basesyntax.service.DataReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CsvFileReader implements CustomFileReader {
+public class CsvFileReader implements DataReader {
     private static final String CANNOT_READ_FILE_MESSAGE = "Cannot read the file at ";
 
     @Override

@@ -1,8 +1,6 @@
 package core.basesyntax.transaction;
 
 public class FruitTransaction {
-    private static final String INVALID_OPERATION_MESSAGE = "The provided operation code "
-            + "is invalid: ";
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -46,7 +44,8 @@ public class FruitTransaction {
                 case "s" -> SUPPLY;
                 case "p" -> PURCHASE;
                 case "r" -> RETURN;
-                default -> throw new RuntimeException(INVALID_OPERATION_MESSAGE + code);
+                default -> throw new RuntimeException("The provided operation code "
+                        + "is invalid: " + code);
             };
         }
 

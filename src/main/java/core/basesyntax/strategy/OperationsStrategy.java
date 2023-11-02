@@ -13,6 +13,6 @@ public class OperationsStrategy {
 
     public void performTransaction(FruitTransaction fruitTransaction) {
         OperationHandler operationHandler = handlers.get(fruitTransaction.getOperation());
-        operationHandler.performOperation(fruitTransaction);
+        operationHandler.handleOperation(fruitTransaction);
     }
 }

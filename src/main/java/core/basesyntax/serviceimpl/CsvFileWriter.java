@@ -1,12 +1,12 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.CustomFileWriter;
+import core.basesyntax.service.DataWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class CsvFileWriter implements CustomFileWriter {
+public class CsvFileWriter implements DataWriter {
     private static final String CANNOT_WRITE_TO_FILE_MESSAGE = "Cannot write to the file: ";
 
     @Override
