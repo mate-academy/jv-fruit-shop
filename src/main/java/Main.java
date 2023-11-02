@@ -16,8 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    private static final String TEST_DATA_FILE_NAME = "src/main/java/resource/data.csv";
-    private static final String TEST_RESULT_FILE_NAME = "src/main/java/resource/result.csv";
+    private static final String TEST_DATA_FILE_NAME = "src/main/java/resources/data.csv";
+    private static final String TEST_RESULT_FILE_NAME = "src/main/java/resources/result.csv";
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();

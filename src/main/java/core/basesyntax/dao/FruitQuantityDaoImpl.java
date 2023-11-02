@@ -10,12 +10,7 @@ public class FruitQuantityDaoImpl implements FruitQuantityDao {
     }
 
     @Override
-    public void replace(String fruit, int quantity) {
-        FruitStorage.fruitQuantity.replace(fruit, quantity);
-    }
-
-    @Override
-    public Map<String, Integer> getALl() {
+    public Map<String, Integer> getAll() {
         return FruitStorage.fruitQuantity;
     }
 

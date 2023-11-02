@@ -14,6 +14,6 @@ public class ReturnOperationHandlerImpl implements OperationHandler {
     public void perform(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int currentQuantity = fruitQuantityDao.get(fruit);
-        fruitQuantityDao.replace(fruit, currentQuantity + fruitTransaction.getQuantity());
+        fruitQuantityDao.add(fruit, currentQuantity + fruitTransaction.getQuantity());
     }
 }

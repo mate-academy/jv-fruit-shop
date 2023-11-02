@@ -14,7 +14,7 @@ public class FruitReporterImpl implements Reporter {
     @Override
     public String createReport() {
         StringBuilder builder = new StringBuilder(REPORT_HEADER);
-        for (String fruit : fruitQuantityDao.getALl().keySet()) {
+        for (String fruit : fruitQuantityDao.getAll().keySet()) {
             builder.append(System.lineSeparator())
                     .append(fruit)
                     .append(DATA_SEPARATOR)
