@@ -1,4 +1,4 @@
-package core.basesyntax.service.file;
+package core.basesyntax.service.file.reader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package core.basesyntax.service.file;
+package core.basesyntax.service.file.writer;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
