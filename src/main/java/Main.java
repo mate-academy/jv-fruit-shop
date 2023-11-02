@@ -23,13 +23,12 @@ public class Main {
         Map<Operation, OperationHandler> operationOperationHandlerMap = new HashMap<>();
         fillOperationMap(operationOperationHandlerMap);
         FruitShopApp fruitShopApp = new FruitShopApp(
-                TEST_DATA_FILE_NAME, TEST_RESULT_FILE_NAME,
                 new CsvFileWriter(), new CsvFileReader(),
                 new FruitReporterImpl(new FruitQuantityDaoImpl()),
                 new FruitTransactionPerformerImpl(
                         new OperationStrategyImpl(operationOperationHandlerMap)),
                 new FruitTransactionDataParserImpl());
-        fruitShopApp.createDailyReport();
+        fruitShopApp.createDailyReport(TEST_DATA_FILE_NAME, TEST_RESULT_FILE_NAME);
     }
 
     private static void fillOperationMap(

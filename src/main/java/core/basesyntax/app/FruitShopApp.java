@@ -9,20 +9,15 @@ import core.basesyntax.service.reporter.Reporter;
 import java.util.List;
 
 public class FruitShopApp {
-    private final String dataFile;
-    private final String resultFile;
     private final FileWriter fileWriter;
     private final FileReader fileReader;
     private final Reporter reporter;
     private final Performer performer;
     private final DataParser dataParser;
 
-    public FruitShopApp(String dataFile, String resultFile,
-                        FileWriter fileWriter, FileReader fileReader,
+    public FruitShopApp(FileWriter fileWriter, FileReader fileReader,
                         Reporter reporter, Performer performer,
                         DataParser dataParser) {
-        this.dataFile = dataFile;
-        this.resultFile = resultFile;
         this.fileWriter = fileWriter;
         this.fileReader = fileReader;
         this.reporter = reporter;
@@ -30,10 +25,10 @@ public class FruitShopApp {
         this.dataParser = dataParser;
     }
 
-    public void createDailyReport() {
+    public void createDailyReport(String fromFile, String toFile) {
         List<FruitTransaction> fruitTransactions =
-                dataParser.parseData(fileReader.readFromFile(dataFile));
+                dataParser.parseData(fileReader.readFromFile(fromFile));
         performer.performAll(fruitTransactions);
-        fileWriter.writeIntoFile(resultFile, reporter.createReport());
+        fileWriter.writeIntoFile(toFile, reporter.createReport());
     }
 }

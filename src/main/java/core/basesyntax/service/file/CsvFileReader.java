@@ -16,7 +16,7 @@ public class CsvFileReader implements FileReader {
             reader.lines().skip(AMOUNT_OF_LINES_TO_SKIP)
                     .forEach(dataLines::add);
         } catch (IOException e) {
-            throw new RuntimeException(CANT_READ_DATA_FROM_FILE_MESSAGE + path);
+            throw new RuntimeException(CANT_READ_DATA_FROM_FILE_MESSAGE + path, e);
         }
         return dataLines;
     }
