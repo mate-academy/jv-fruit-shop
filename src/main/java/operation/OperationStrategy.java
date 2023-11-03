@@ -1,5 +1,7 @@
 package operation;
 
+import model.Operation;
+
 public interface OperationStrategy {
-    OperationHandler get(String operationType);
+    OperationHandler get(Operation operationType);
 }
