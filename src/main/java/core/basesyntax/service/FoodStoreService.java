@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransactions;
 import java.util.List;
 
 public interface FoodStoreService {
-    List<String> createReport(List<String> dataFromFile);
+    void proccessOperaton(List<FruitTransactions> fruitTransactionsList);
 }
