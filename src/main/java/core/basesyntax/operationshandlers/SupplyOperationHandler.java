@@ -3,6 +3,7 @@ package core.basesyntax.operationshandlers;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storagedao.StorageDao;
+
 import java.util.Map;
 
 public class SupplyOperationHandler implements OperationHandler {
@@ -17,9 +18,7 @@ public class SupplyOperationHandler implements OperationHandler {
         validAmount(transaction);
         if (storageDao.isInStorage(transaction.getFruitName())) {
             Map.Entry<Fruit,Integer> fruitAndQuantity = storageDao.get(transaction.getFruitName());
-            Integer fruitQuantity = fruitAndQuantity.getValue();
-            Integer fruitQuantityFromTransaction = transaction.getQuantity();
-            fruitAndQuantity.setValue(fruitQuantityFromTransaction + fruitQuantity);
+            fruitAndQuantity.setValue(transaction.getQuantity() + fruitAndQuantity.getValue());
         } else {
             storageDao.add(new Fruit(transaction.getFruitName()), transaction.getQuantity());
         }

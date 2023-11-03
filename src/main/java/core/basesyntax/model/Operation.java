@@ -1,13 +1,13 @@
 package core.basesyntax.model;
 
-public enum OperationsWithFruits {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
 
     private final String code;
-    OperationsWithFruits(String code) {
+    Operation(String code) {
         this.code = code;
     }
 
@@ -15,7 +15,7 @@ public enum OperationsWithFruits {
         return code;
     }
 
-    public static OperationsWithFruits getOperation(String code) {
+    public static Operation getOperation(String code) {
         return switch (code) {
             case "b" -> BALANCE;
             case "s" -> SUPPLY;

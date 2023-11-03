@@ -5,10 +5,10 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storagedao.StorageDao;
 import java.util.Map;
 
-public class ReturnOperationHandlers implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private final StorageDao storageDao;
 
-    public ReturnOperationHandlers(StorageDao storageDao) {
+    public ReturnOperationHandler(StorageDao storageDao) {
         this.storageDao = storageDao;
     }
 
@@ -17,9 +17,7 @@ public class ReturnOperationHandlers implements OperationHandler {
         validAmount(transaction);
         if (storageDao.isInStorage(transaction.getFruitName())) {
             Map.Entry<Fruit,Integer> fruitAndQuantity = storageDao.get(transaction.getFruitName());
-            Integer fruitQuantity = fruitAndQuantity.getValue();
-            Integer fruitQuantityFromTransaction = transaction.getQuantity();
-            fruitAndQuantity.setValue(fruitQuantity + fruitQuantityFromTransaction);
+            fruitAndQuantity.setValue(fruitAndQuantity.getValue() + transaction.getQuantity());
         } else {
             storageDao.add(new Fruit(transaction.getFruitName()), transaction.getQuantity());
         }

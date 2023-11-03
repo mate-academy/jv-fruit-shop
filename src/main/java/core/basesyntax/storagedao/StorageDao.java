@@ -10,4 +10,6 @@ public interface StorageDao {
 
     boolean isInStorage(String name);
 
+    Integer getQuantityByName(String name);
+
 }

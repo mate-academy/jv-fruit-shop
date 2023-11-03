@@ -20,6 +20,15 @@ public class StorageDaoImpl implements StorageDao {
         return null;
     }
 
+    public Integer getQuantityByName(String name) {
+        for (Map.Entry<Fruit,Integer> entry : Storage.fruits.entrySet()) {
+            if (entry.getKey().getName().equals(name)) {
+                return entry.getValue();
+            }
+        }
+        return 0;
+    }
+
     public boolean isInStorage(String name) {
         return get(name) != null;
     }
