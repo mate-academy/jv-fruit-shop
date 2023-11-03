@@ -5,7 +5,7 @@ import operation.OperationStrategy;
 import service.TransactionProcessor;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public TransactionProcessorImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;

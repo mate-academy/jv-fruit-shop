@@ -12,11 +12,16 @@ public class ReportImpl implements Report {
     public String create() {
         StringBuilder reportBuilder = new StringBuilder();
 
-        reportBuilder.append(HEADER + System.lineSeparator());
+        reportBuilder
+                .append(HEADER)
+                .append(System.lineSeparator());
 
         for (Map.Entry<String, Integer> entry : Storage.getFruitsAndAmount().entrySet()) {
-            reportBuilder.append(entry.getKey() + SEPARATOR + entry.getValue()
-                    + System.lineSeparator());
+            reportBuilder
+                    .append(entry.getKey())
+                    .append(SEPARATOR)
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
 
         return reportBuilder.toString();
