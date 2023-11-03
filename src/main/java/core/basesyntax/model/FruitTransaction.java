@@ -1,15 +1,15 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private Operation operation;
+    private FruitTransactionOperation operation;
     private String fruit;
     private int quantity;
 
-    public Operation getOperation() {
+    public FruitTransactionOperation getOperation() {
         return operation;
     }
 
-    public void setOperation(Operation operation) {
+    public void setOperation(FruitTransactionOperation operation) {
         this.operation = operation;
     }
 
@@ -27,26 +27,5 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private String code;
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public static FruitTransaction.Operation getOperation(String operationLetter) {
-            for (Operation operation : Operation.values()) {
-                if (operation.code.equals(operationLetter)) {
-                    return operation;
-                }
-            }
-            throw new RuntimeException("no such operation: " + operationLetter);
-        }
     }
 }

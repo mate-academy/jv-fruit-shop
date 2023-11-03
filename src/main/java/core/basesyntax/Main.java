@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransactionOperation;
 import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
@@ -28,7 +29,7 @@ public class Main {
 
     private static final String TRANSACTIONS_PATH = "src/main/java/resources/transactions.csv";
     private static final String REPORT_PATH = "src/main/java/resources/report.csv";
-    private static Map<FruitTransaction.Operation, OperationHandler> strategyMap = new HashMap<>();
+    private static Map<FruitTransactionOperation, OperationHandler> strategyMap = new HashMap<>();
 
     public static void main(String[] args) {
         fillMap();
@@ -52,9 +53,9 @@ public class Main {
     }
 
     private static void fillMap() {
-        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        strategyMap.put(FruitTransactionOperation.BALANCE, new BalanceHandler());
+        strategyMap.put(FruitTransactionOperation.PURCHASE, new PurchaseHandler());
+        strategyMap.put(FruitTransactionOperation.SUPPLY, new SupplyHandler());
+        strategyMap.put(FruitTransactionOperation.RETURN, new ReturnHandler());
     }
 }
