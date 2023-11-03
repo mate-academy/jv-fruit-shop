@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransactions;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FileServiceImpl;
 import core.basesyntax.service.FoodStoreService;
@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
         List<String> dailyData = fileService.read(INPUT_FILE_NAME);
         dailyData.remove(TITLE_ELEMENT_INDEX);
-        List<FruitTransactions> fruitTransactions = transactionParser.parseTransactions(dailyData);
+        List<FruitTransaction> fruitTransactions = transactionParser.parseTransactions(dailyData);
         foodStoreService.processTransactions(fruitTransactions);
         String report = reportService.createReport();
         fileService.write(report, OUTPUT_FILE_NAME);
