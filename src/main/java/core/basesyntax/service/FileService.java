@@ -6,5 +6,5 @@ public interface FileService {
 
     List<String> read(String fileName);
 
-    void write(List<String> content, String fileName);
+    void write(String content, String fileName);
 }

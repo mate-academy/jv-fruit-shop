@@ -8,6 +8,8 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int TYPE_POSITION_AFTER_SPLIT = 0;
     private static final int FRUIT_NAME_POSITION_AFTER_SPLIT = 1;
     private static final int QUANTITY_POSITION_AFTER_SPLIT = 2;
+    private static final int EXPECTED_LENGTH_AFTER_SPLIT = 3;
+    private static final int EXPECTED_LENGTH_OF_TYPE = 1;
 
     @Override
     public List<FruitTransactions> parseTransactions(List<String> lines) {
@@ -24,7 +26,7 @@ public class TransactionParserImpl implements TransactionParser {
 
     private String[] parseValue(String line) {
         String[] split = line.split(",");
-        if (split.length != 3) {
+        if (split.length != EXPECTED_LENGTH_AFTER_SPLIT) {
             throw new IllegalArgumentException("Invalid input data: expected format "
                     + "'<type>,<fruit_name>,<quantity>'");
         }
@@ -32,7 +34,7 @@ public class TransactionParserImpl implements TransactionParser {
     }
 
     private char validTypeValue(String line) {
-        if (line.length() != 1) {
+        if (line.length() != EXPECTED_LENGTH_OF_TYPE) {
             throw new RuntimeException("Type should be only singe character: " + line);
         }
         return line.charAt(TYPE_POSITION_AFTER_SPLIT);

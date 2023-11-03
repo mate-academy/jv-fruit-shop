@@ -4,6 +4,7 @@ package core.basesyntax.service;
 import static core.basesyntax.db.Storage.reportData;
 
 import core.basesyntax.model.FruitTransactions;
+import core.basesyntax.strategy.Type;
 import core.basesyntax.strategy.TypeStrategy;
 import core.basesyntax.strategy.TypeStrategyImpl;
 import core.basesyntax.strategy.type.BalanceTypeHandler;
@@ -18,16 +19,16 @@ import java.util.Map;
 public class FoodStoreServiceImpl implements FoodStoreService {
     private Map<Character, TypeHandlers> typeHandlersMap = new HashMap<>() {
         {
-            put('b', new BalanceTypeHandler());
-            put('s', new SupplyTypeHandler());
-            put('p', new PurchaseTypeHandler());
-            put('r', new ReturnTypeHandler());
+            put(Type.Balance.getCharValue(), new BalanceTypeHandler());
+            put(Type.Supply.getCharValue(), new SupplyTypeHandler());
+            put(Type.Purchase.getCharValue(), new PurchaseTypeHandler());
+            put(Type.Return.getCharValue(), new ReturnTypeHandler());
         }
     };
     private TypeStrategy typeStrategy = new TypeStrategyImpl(typeHandlersMap);
 
     @Override
-    public void proccessOperaton(List<FruitTransactions> fruitTransactionsList) {
+    public void processTransactions(List<FruitTransactions> fruitTransactionsList) {
         for (FruitTransactions transactions : fruitTransactionsList) {
             if (!reportData.containsKey(transactions.getName())) {
                 reportData.put(transactions.getName(),transactions.getQuantity());
