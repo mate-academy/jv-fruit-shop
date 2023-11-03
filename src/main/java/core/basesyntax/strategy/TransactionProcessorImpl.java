@@ -6,37 +6,35 @@ import core.basesyntax.data.Stock;
 import java.util.List;
 import java.util.Map;
 
-public class OperationProcessorImpl implements OperationProcessor {
+public class TransactionProcessorImpl implements TransactionProcessor {
     private static final String EXCEPTION_NO_SUCH_OPERATION_MESSAGE
             = "No such type operation";
 
-    private OperationHandler getOperationHandler(Operation operation) {
-
+    private DataHandler getOperationHandler(Operation operation) {
         switch (operation) {
             case BALANCE -> {
-                return new BalanceOperationHandler();
+                return new BalanceDataHandler();
             }
             case SUPPLY -> {
-                return new SupplyOperationHandler();
+                return new SupplyDataHandler();
             }
             case PURCHASE -> {
-                return new PurchaseOperationHandler();
+                return new PurchaseDataHandler();
             }
             case RETURN -> {
-                return new ReturnOperationHandler();
+                return new ReturnDataHandler();
             }
             default -> throw new RuntimeException(EXCEPTION_NO_SUCH_OPERATION_MESSAGE);
         }
     }
 
     @Override
-    public Stock process(List<FruitTransaction> fruitTransactionsList) {
+    public void process(List<FruitTransaction> fruitTransactionsList) {
         Stock report = new Stock();
         Map<String, Integer> data = report.getData();
         for (FruitTransaction transaction : fruitTransactionsList) {
-            OperationHandler handler = getOperationHandler(transaction.getOperation());
+            DataHandler handler = getOperationHandler(transaction.getOperation());
             handler.processWithData(transaction, data);
         }
-        return report;
     }
 }

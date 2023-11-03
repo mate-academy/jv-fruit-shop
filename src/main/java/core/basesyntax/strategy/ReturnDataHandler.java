@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.data.FruitTransaction;
 import java.util.Map;
 
-public class ReturnOperationHandler implements OperationHandler {
+public class ReturnDataHandler implements DataHandler {
     @Override
     public void processWithData(FruitTransaction transaction, Map<String, Integer> data) {
         String fruit = transaction.getFruit();

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFileReader implements ReadFromFile {
+public class CsvFileReader implements ReaderFromFile {
     private static final String EXCEPTION_FIND_FILE_MESSAGE = "Can't find file by path: ";
 
     @Override

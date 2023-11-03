@@ -2,6 +2,6 @@ package core.basesyntax.io;
 
 import java.util.List;
 
-public interface WriteToFile {
+public interface WriterToFile {
     void writeFile(List<String> report, String filepath);
 }
