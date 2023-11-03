@@ -16,7 +16,7 @@ public class OperationStrategyImp implements OperationStrategy {
     @Override
     public boolean getOperations(List<FruitTransaction> fruitTransaction) {
         for (FruitTransaction fruit : fruitTransaction) {
-            operationOperationHandlerMap.get(fruit.getOperation()).doOperation(fruit);
+            operationOperationHandlerMap.get(fruit.getOperation()).handle(fruit);
         }
         return true;
     }

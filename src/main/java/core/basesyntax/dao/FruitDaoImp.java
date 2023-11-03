@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import static core.basesyntax.db.Storage.storage;
+import static core.basesyntax.db.Storage.STORAGE;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
@@ -8,21 +8,21 @@ import java.util.Map;
 
 public class FruitDaoImp implements FruitDao {
     public Map<String, Integer> getStorage() {
-        return storage;
+        return STORAGE;
     }
 
     public void add(String type, Integer quantity) {
-        storage.put(type, quantity);
+        STORAGE.put(type, quantity);
     }
 
     @Override
     public void add(List<FruitTransaction> list) {
         for (FruitTransaction item : list) {
-            storage.put(item.getFruit(), 0);
+            STORAGE.put(item.getFruit(), 0);
         }
     }
 
     public Integer get(String key) {
-        return storage.get(key);
+        return STORAGE.get(key);
     }
 }

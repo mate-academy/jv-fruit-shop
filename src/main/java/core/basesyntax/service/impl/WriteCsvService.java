@@ -10,13 +10,13 @@ public class WriteCsvService implements Writer {
     private static final String RUNTIME_EXCEPTION_MESSAGE = "Can't write file ";
 
     @Override
-    public boolean write(String report, String path) {
+    public boolean write(String content, String path) {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(
                     new FileWriter(path));
             bufferedWriter.write(TITLE_TEXT);
             bufferedWriter.newLine();
-            bufferedWriter.write(report);
+            bufferedWriter.write(content);
             bufferedWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(RUNTIME_EXCEPTION_MESSAGE + path, e);

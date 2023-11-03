@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface Writer {
-    boolean write(String report, String path);
+    boolean write(String content, String path);
 }
