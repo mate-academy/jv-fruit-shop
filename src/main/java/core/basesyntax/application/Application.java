@@ -10,10 +10,12 @@ import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportMapper;
+import core.basesyntax.service.TransactionsProcessor;
 import core.basesyntax.serviceimpl.CsvFileReader;
 import core.basesyntax.serviceimpl.CsvFileWriter;
 import core.basesyntax.serviceimpl.FruitMapper;
 import core.basesyntax.serviceimpl.FruitSalesReportGenerator;
+import core.basesyntax.serviceimpl.FruitTransactionsProcessor;
 import core.basesyntax.serviceimpl.ReportToArrayConverter;
 import core.basesyntax.strategy.OperationsStrategy;
 import core.basesyntax.transaction.FruitTransaction;
@@ -42,9 +44,10 @@ public class Application {
 
         List<FruitTransaction> fruitTransactions = fruitMapper.mapData(strings);
         OperationsStrategy operationsStrategy = new OperationsStrategy(handlerMap);
-        for (FruitTransaction fruitTransaction : fruitTransactions) {
-            operationsStrategy.performTransaction(fruitTransaction);
-        }
+
+        TransactionsProcessor fruitTransactionsProcessor = new
+                FruitTransactionsProcessor(operationsStrategy);
+        fruitTransactionsProcessor.processTransactions(fruitTransactions);
 
         ReportGenerator reportGenerator = new FruitSalesReportGenerator();
         String report = reportGenerator.generateReport();
