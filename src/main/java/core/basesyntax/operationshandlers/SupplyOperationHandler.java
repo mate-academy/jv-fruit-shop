@@ -3,7 +3,6 @@ package core.basesyntax.operationshandlers;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storagedao.StorageDao;
-
 import java.util.Map;
 
 public class SupplyOperationHandler implements OperationHandler {

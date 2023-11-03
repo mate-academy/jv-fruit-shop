@@ -6,6 +6,7 @@ public class FruitTransaction {
     private Operation operation;
     private int quantity;
     private String fruitName;
+
     public FruitTransaction() {
 
     }

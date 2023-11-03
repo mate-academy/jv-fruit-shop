@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.serviceinterfaces.Mapper;
 import core.basesyntax.serviceinterfaces.FileReader;
+import core.basesyntax.serviceinterfaces.Mapper;
 import core.basesyntax.serviceinterfaces.ReportCreator;
 import core.basesyntax.serviceinterfaces.Writer;
-import core.basesyntax.services.MapperImpl;
 import core.basesyntax.services.CsvReader;
 import core.basesyntax.services.CsvReportCreatorImpl;
 import core.basesyntax.services.CsvWriter;
 import core.basesyntax.services.FruitShopServiceImpl;
+import core.basesyntax.services.MapperImpl;
 import core.basesyntax.services.OperationsHandlersBuilder;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;

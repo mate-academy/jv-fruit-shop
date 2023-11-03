@@ -1,7 +1,7 @@
 package core.basesyntax.services;
 
-import core.basesyntax.serviceinterfaces.Mapper;
 import core.basesyntax.serviceinterfaces.FileReader;
+import core.basesyntax.serviceinterfaces.Mapper;
 import core.basesyntax.serviceinterfaces.ReportCreator;
 import core.basesyntax.serviceinterfaces.Writer;
 import java.util.List;
