@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileReaderService;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -13,6 +12,7 @@ public class CsvFileReader implements FileReaderService {
     public List<String> read(String filePath) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             List<String> csvData = new ArrayList<>();
+            bufferedReader.readLine();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 csvData.add(line);

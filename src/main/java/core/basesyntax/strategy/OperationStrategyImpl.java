@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.OperationHandler;
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -13,8 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void processOperation(FruitTransaction fruitTransaction) {
-        OperationHandler operationHandler = handlers.get(fruitTransaction.getOperation());
-        operationHandler.handle(fruitTransaction);
+    public OperationHandler getHandler(FruitTransaction fruitTransaction) {
+        return handlers.get(fruitTransaction.getOperation());
     }
 }

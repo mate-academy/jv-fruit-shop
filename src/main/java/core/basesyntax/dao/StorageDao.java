@@ -5,7 +5,7 @@ import java.util.Map;
 public interface StorageDao {
     Map<String, Integer> getStorage();
 
-    int getAmountByObjectType(String objectName);
+    int getQuantityByObjectType(String object);
 
-    void putToStorage(String objectName, int amount);
+    void putToStorage(String object, int quantity);
 }

@@ -1,23 +1,22 @@
 package core.basesyntax.dao;
 
+import core.basesyntax.db.FruitStorage;
 import java.util.Map;
-
-import static core.basesyntax.db.FruitStorage.fruitStorage;  // static import
 
 public class FruitStorageDaoImpl implements StorageDao {
 
     @Override
     public Map<String, Integer> getStorage() {
-        return fruitStorage;
+        return FruitStorage.getFruitStorage();
     }
 
     @Override
-    public int getAmountByObjectType(String fruitName) {
-        return fruitStorage.get(fruitName);
+    public int getQuantityByObjectType(String fruit) {
+        return FruitStorage.getFruitStorage().get(fruit);
     }
 
     @Override
-    public void putToStorage(String fruitName, int amount) {
-        fruitStorage.put(fruitName, amount);
+    public void putToStorage(String fruit, int quantity) {
+        FruitStorage.getFruitStorage().put(fruit, quantity);
     }
 }

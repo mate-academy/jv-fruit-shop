@@ -1,5 +1,7 @@
 package core.basesyntax.reporter;
 
-public interface ReportGenerator {
+import core.basesyntax.dao.StorageDao;
 
+public interface ReportGenerator {
+    String createReport(StorageDao storageDao);
 }
