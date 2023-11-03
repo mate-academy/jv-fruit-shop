@@ -10,7 +10,11 @@ public class ReportServiceImpl implements ReportService {
     private static final String COMMA = ",";
     private static final String HEADER = "fruit,quantity";
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private FruitStorageDao storageDao = new FruitStorageDaoImpl();
+    private final FruitStorageDao storageDao;
+
+    public ReportServiceImpl() {
+        this.storageDao = new FruitStorageDaoImpl();
+    }
 
     @Override
     public String createReport() {

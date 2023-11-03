@@ -17,6 +17,6 @@ public enum FruitTransactionOperation {
                 return operation;
             }
         }
-        throw new RuntimeException("no such operation: " + operationLetter);
+        throw new RuntimeException("No such operation: " + operationLetter);
     }
 }
