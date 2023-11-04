@@ -11,12 +11,12 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void put(String fruitName, int quantity) {
-        storage.fruits.put(fruitName, quantity);
+        storage.getFruits().put(fruitName, quantity);
     }
 
     @Override
     public int get(String fruitName) {
-        return storage.fruits.getOrDefault(fruitName, 0);
+        return storage.getFruits().getOrDefault(fruitName, 0);
     }
 
     @Override

@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ProcessorData;
-
 import java.util.List;
 
 public class ProcessorDataImpl implements ProcessorData {

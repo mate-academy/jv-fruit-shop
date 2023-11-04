@@ -3,7 +3,7 @@ package core.basesyntax.operation;
 import core.basesyntax.dao.FruitDao;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public PurchaseOperationHandler(FruitDao fruitDao) {
         this.fruitDao = fruitDao;

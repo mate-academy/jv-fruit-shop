@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ConverterDataToObject;
 import core.basesyntax.service.CreatereObjectsList;
-
 import java.util.ArrayList;
 import java.util.List;
 
