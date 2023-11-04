@@ -4,6 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface OperationStrategy {
-    boolean getOperations(List<FruitTransaction> fruitTransactions);
+    boolean getHandle(List<FruitTransaction> fruitTransactions);
 
 }

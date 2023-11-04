@@ -4,17 +4,17 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceHandler implements OperationHandler {
-    private FruitDao dataBase;
+    private FruitDao fruitDao;
 
     public BalanceHandler(FruitDao fruitDao) {
-        this.dataBase = fruitDao;
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public boolean handle(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruit();
         int fruitQuantity = fruitTransaction.getQuantity();
-        dataBase.getStorage().put(fruitName, fruitQuantity);
+        fruitDao.getStorage().put(fruitName, fruitQuantity);
         return true;
     }
 }
