@@ -9,13 +9,13 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperationHandler;
 import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
-import core.basesyntax.service.CreatereObjectsList;
+import core.basesyntax.service.GetterTransactions;
 import core.basesyntax.service.CreatereReport;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ProcessorData;
 import core.basesyntax.service.ReaderFromFile;
 import core.basesyntax.service.WriterToFile;
-import core.basesyntax.service.impl.CreatereObjectsListImpl;
+import core.basesyntax.service.impl.GetterTransactionsImpl;
 import core.basesyntax.service.impl.CreatereReportImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ProcessorDataImpl;
@@ -32,6 +32,12 @@ public class Main {
     private final FruitDao fruitDao = new FruitDaoImpl(storage);
     private final Map<FruitTransaction.Operation, OperationHandler> handlerMap
             = createHandlerMap();
+    private final ReaderFromFile readerFromFile = new ReaderFromFileImpl();
+    private final GetterTransactions getterTransactions = new GetterTransactionsImpl();
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
+    private final ProcessorData processorData = new ProcessorDataImpl(operationStrategy);
+    private final CreatereReport createreReport = new CreatereReportImpl();
+    private final WriterToFile writerToFile = new WriterToFileImpl();
 
     public void main() {
         String dataFromFile = getDataFromFile(INPUT_FILE_PATH);
@@ -42,28 +48,22 @@ public class Main {
     }
 
     private String getDataFromFile(String inputFileName) {
-        ReaderFromFile readerFromFile = new ReaderFromFileImpl();
         return readerFromFile.readFromFile(inputFileName);
     }
 
     private List<FruitTransaction> createFruitTransactionList(String data) {
-        CreatereObjectsList createreObjectsList = new CreatereObjectsListImpl();
-        return createreObjectsList.getObjectList(data);
+        return getterTransactions.getTransactions(data);
     }
 
     private void processingData(List<FruitTransaction> fruitTransactions) {
-        OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
-        ProcessorData processorData = new ProcessorDataImpl(operationStrategy);
         processorData.processData(fruitTransactions);
     }
 
     private String createReport() {
-        CreatereReport createreReport = new CreatereReportImpl();
         return createreReport.createReport(fruitDao);
     }
 
     private void writeToFile(String outputData, String outputFileName) {
-        WriterToFile writerToFile = new WriterToFileImpl();
         writerToFile.writeToFile(outputData, outputFileName);
     }
 

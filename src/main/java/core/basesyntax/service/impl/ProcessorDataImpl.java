@@ -15,7 +15,7 @@ public class ProcessorDataImpl implements ProcessorData {
     @Override
     public void processData(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            operationStrategy.get(fruitTransaction.getOperation())
+            operationStrategy.getOperationHandler(fruitTransaction.getOperation())
                     .doOperation(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }
