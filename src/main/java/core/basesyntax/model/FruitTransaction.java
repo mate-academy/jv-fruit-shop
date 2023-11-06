@@ -4,8 +4,6 @@ import java.util.NoSuchElementException;
 
 public class FruitTransaction {
     private static final String ILLEGAL_ARGUMENT_EXCEPTION_MESSAGE = "Quantity can't be negative";
-    private static final String NO_SUCH_ELEMENT_EXCEPTION_MESSAGE
-            = "Element doesn't exist for this code: ";
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -59,7 +57,8 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new NoSuchElementException(NO_SUCH_ELEMENT_EXCEPTION_MESSAGE + operationCode);
+            throw new NoSuchElementException(
+                    "Element doesn't exist for this code: " + operationCode);
         }
     }
 }

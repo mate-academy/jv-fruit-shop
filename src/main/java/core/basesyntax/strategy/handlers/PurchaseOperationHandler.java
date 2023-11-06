@@ -4,7 +4,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private static final String RUNTIME_EXCEPTION_MESSAGE
+    private static final String NEGATIVE_BALANCE_MESSAGE
             = "Negative balance after purchase operation";
     private final StorageDao storageDao;
 
@@ -19,7 +19,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         int currentBalance = storageDao.getQuantityByObjectType(fruit);
         int newBalance = currentBalance - quantity;
         if (newBalance < 0) {
-            throw new RuntimeException(RUNTIME_EXCEPTION_MESSAGE);
+            throw new RuntimeException(NEGATIVE_BALANCE_MESSAGE);
         }
         storageDao.putToStorage(fruit, newBalance);
     }

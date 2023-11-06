@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitStorageDaoImpl;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.reporter.CsvReportGenerator;
@@ -12,7 +12,7 @@ import core.basesyntax.service.TransactionPerformerImpl;
 import core.basesyntax.service.impl.CsvFileReader;
 import core.basesyntax.service.impl.CsvFileWriter;
 import core.basesyntax.service.impl.FruitMapper;
-import core.basesyntax.service.impl.Mapper;
+import core.basesyntax.service.impl.FruitMapperImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handlers.BalanceOperationHandler;
@@ -29,9 +29,9 @@ public class Main {
     public static void main(String[] args) {
         FileReaderService fileReader = new CsvFileReader();
         FileWriterService fileWriter = new CsvFileWriter();
-        Mapper mapper = new FruitMapper();
-        StorageDao storageDao = new FruitStorageDaoImpl();
-        ReportGenerator reportGenerator = new CsvReportGenerator();
+        FruitMapper fruitMapper = new FruitMapperImpl();
+        StorageDao storageDao = new FruitDao();
+        ReportGenerator reportGenerator = new CsvReportGenerator(storageDao);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storageDao),
@@ -41,10 +41,10 @@ public class Main {
         ));
 
         List<String> allLines = fileReader.read(INPUT_FILE_PATH);
-        List<FruitTransaction> transactions = mapper.mapLinesIntoTransaction(allLines);
+        List<FruitTransaction> transactions = fruitMapper.mapLinesIntoTransactions(allLines);
         TransactionPerformer transactionPerformer = new TransactionPerformerImpl(operationStrategy);
         transactionPerformer.performTransactions(transactions);
-        String report = reportGenerator.createReport(storageDao);
+        String report = reportGenerator.createReport();
         fileWriter.write(report, OUTPUT_FILE_PATH);
     }
 }
