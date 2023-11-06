@@ -1,4 +1,4 @@
-package core.basesyntax.file;
+package core.basesyntax.service;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -16,7 +16,7 @@ public class MapWriteToFileImpl implements MapWriteToFile {
                 bufferedWriter.write("\n" + entry.getKey() + "," + entry.getValue());
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Cant write file");
         }
     }
 }

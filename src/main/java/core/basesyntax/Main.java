@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.ListToMapImpl;
-import core.basesyntax.file.MapWriteToFileImpl;
-import core.basesyntax.file.ReadFromFileImpl;
+import core.basesyntax.service.MapWriteToFileImpl;
+import core.basesyntax.service.ReadFromFileImpl;
 
 public class Main {
     private static final String READ_FILE_NAME = "file.csv";
