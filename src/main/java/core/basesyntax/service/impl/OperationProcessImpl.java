@@ -1,8 +1,11 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationProcess;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class OperationProcessImpl implements OperationProcess{
+public class OperationProcessImpl implements OperationProcess {
     private OperationStrategy operationStrategy;
 
     public OperationProcessImpl(OperationStrategy operationStrategy) {

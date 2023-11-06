@@ -1,6 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 public class FruitTransaction {
+    private static final String EXCEPTION_MESSAGE = "No such Operation!";
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -36,6 +37,9 @@ public class FruitTransaction {
         RETURN("r");
 
         private String code;
+        Operation(String code) {
+            this.code = code;
+        }
 
         public static Operation getOperationByCode(String code) {
             Operation[] values = Operation.values();
@@ -44,11 +48,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("No such Operation!");
-        }
-
-        Operation(String code) {
-            this.code = code;
+            throw new RuntimeException(EXCEPTION_MESSAGE);
         }
 
         public String getCode() {
