@@ -2,6 +2,9 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 
+import java.util.Map;
+import java.util.Set;
+
 public class FruitDaoImpl implements FruitDao {
     private final Storage storage;
 
@@ -20,8 +23,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Storage getStorage() {
-        return storage;
+    public Set<Map.Entry<String, Integer>> getInventoryEntries() {
+        return storage.getFruits().entrySet();
     }
-
 }

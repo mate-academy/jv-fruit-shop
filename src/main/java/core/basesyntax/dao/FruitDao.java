@@ -1,12 +1,12 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
+import java.util.Map;
+import java.util.Set;
 
 public interface FruitDao {
-
     void put(String fruitName, int quantity);
 
     int get(String fruitName);
 
-    Storage getStorage();
+    Set<Map.Entry<String, Integer>> getInventoryEntries();
 }

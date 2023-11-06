@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 
-public interface ConverterDataToObject {
+public interface DataConverter {
     FruitTransaction convertDataToObject(String data);
 }

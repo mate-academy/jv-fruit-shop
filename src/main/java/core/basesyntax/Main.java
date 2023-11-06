@@ -9,18 +9,18 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperationHandler;
 import core.basesyntax.operation.ReturnOperationHandler;
 import core.basesyntax.operation.SupplyOperationHandler;
-import core.basesyntax.service.CreatereReport;
-import core.basesyntax.service.GetterTransactions;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.TransactionsGetter;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.ProcessorData;
-import core.basesyntax.service.ReaderFromFile;
-import core.basesyntax.service.WriterToFile;
-import core.basesyntax.service.impl.CreatereReportImpl;
-import core.basesyntax.service.impl.GetterTransactionsImpl;
+import core.basesyntax.service.DataProcessor;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.TransactionsGetterImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
-import core.basesyntax.service.impl.ProcessorDataImpl;
-import core.basesyntax.service.impl.ReaderFromFileImpl;
-import core.basesyntax.service.impl.WriterToFileImpl;
+import core.basesyntax.service.impl.DataProcessorImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,12 +32,12 @@ public class Main {
     private final FruitDao fruitDao = new FruitDaoImpl(storage);
     private final Map<FruitTransaction.Operation, OperationHandler> handlerMap
             = createHandlerMap();
-    private final ReaderFromFile readerFromFile = new ReaderFromFileImpl();
-    private final GetterTransactions getterTransactions = new GetterTransactionsImpl();
+    private final FileReader fileReader = new FileReaderImpl();
+    private final TransactionsGetter transactionsGetter = new TransactionsGetterImpl();
     private final OperationStrategy operationStrategy = new OperationStrategyImpl(handlerMap);
-    private final ProcessorData processorData = new ProcessorDataImpl(operationStrategy);
-    private final CreatereReport createreReport = new CreatereReportImpl();
-    private final WriterToFile writerToFile = new WriterToFileImpl();
+    private final DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
+    private final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+    private final FileWriter fileWriter = new FileWriterImpl();
 
     public void main() {
         String dataFromFile = getDataFromFile(INPUT_FILE_PATH);
@@ -48,23 +48,23 @@ public class Main {
     }
 
     private String getDataFromFile(String inputFileName) {
-        return readerFromFile.readFromFile(inputFileName);
+        return fileReader.readFromFile(inputFileName);
     }
 
     private List<FruitTransaction> createFruitTransactionList(String data) {
-        return getterTransactions.getTransactions(data);
+        return transactionsGetter.getTransactions(data);
     }
 
     private void processingData(List<FruitTransaction> fruitTransactions) {
-        processorData.processData(fruitTransactions);
+        dataProcessor.processData(fruitTransactions);
     }
 
     private String createReport() {
-        return createreReport.createReport(fruitDao);
+        return reportGenerator.createReport(fruitDao);
     }
 
     private void writeToFile(String outputData, String outputFileName) {
-        writerToFile.writeToFile(outputData, outputFileName);
+        fileWriter.writeToFile(outputData, outputFileName);
     }
 
     private Map<FruitTransaction.Operation, OperationHandler> createHandlerMap() {

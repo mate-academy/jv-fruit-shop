@@ -50,5 +50,16 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation identifyOperation(String codeOperation) {
+            Operation[] operations = Operation.values();
+            for (Operation operation : operations) {
+                if (operation.getCode().equals(codeOperation)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Can't to identify operation for code: "
+                    + codeOperation);
+        }
     }
 }

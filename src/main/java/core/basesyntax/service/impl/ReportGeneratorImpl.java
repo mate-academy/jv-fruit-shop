@@ -1,15 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.service.CreatereReport;
+import core.basesyntax.service.ReportGenerator;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class CreatereReportImpl implements CreatereReport {
+public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String createReport(FruitDao fruitDao) {
-        HashMap<String, Integer> fruits = fruitDao.getStorage().getFruits();
-        return fruits.entrySet().stream()
+        Set<Map.Entry<String, Integer>> fruits = fruitDao.getInventoryEntries();
+        return fruits.stream()
                 .map(e -> e.getKey() + ',' + e.getValue().toString())
                 .collect(Collectors.joining(System.lineSeparator()));
     }
