@@ -9,11 +9,11 @@ public class ReturnOperationHandler implements OperationHandler {
     public void handle(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruit();
         Integer transactionQuantity = fruitTransaction.getQuantity();
-        if (!Storage.shopStorage.containsKey(fruitName)) {
-            Storage.shopStorage.put(fruitName, fruitTransaction.getQuantity());
+        if (!Storage.SHOPSTORAGE.containsKey(fruitName)) {
+            Storage.SHOPSTORAGE.put(fruitName, fruitTransaction.getQuantity());
         } else {
-            Integer currentQuantity = Storage.shopStorage.get(fruitName);
-            Storage.shopStorage.put(fruitName, currentQuantity + transactionQuantity);
+            Integer currentQuantity = Storage.SHOPSTORAGE.get(fruitName);
+            Storage.SHOPSTORAGE.put(fruitName, currentQuantity + transactionQuantity);
         }
     }
 }

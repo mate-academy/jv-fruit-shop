@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class OperationProcessImpl implements OperationProcess {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public OperationProcessImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;

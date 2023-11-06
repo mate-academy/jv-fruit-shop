@@ -7,8 +7,8 @@ import core.basesyntax.strategy.OperationHandler;
 public class BalanceOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        if (!Storage.shopStorage.containsKey(fruitTransaction.getFruit())) {
-            Storage.shopStorage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        if (!Storage.SHOPSTORAGE.containsKey(fruitTransaction.getFruit())) {
+            Storage.SHOPSTORAGE.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }
 }

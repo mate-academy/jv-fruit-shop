@@ -36,9 +36,9 @@ public class Main {
         OperationProcess operationProcess = new OperationProcessImpl(operationStrategy);
         operationProcess.processTransaction(fruitTransactions);
         ReportCreator createReport = new ReportCreatorImpl();
-        String report = createReport.createReport(Storage.shopStorage);
+        String report = createReport.createReport(Storage.SHOPSTORAGE);
         WriterService writerService = new WriterServiceImp();
-        writerService.writeCvsFile(report, FILE_TO_WRITE);
+        writerService.writeFile(report, FILE_TO_WRITE);
     }
 
     private static Map<Operation, OperationHandler> createOperationHandlers() {

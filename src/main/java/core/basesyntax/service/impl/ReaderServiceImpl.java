@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,11 +17,15 @@ public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> read(String filePath) {
         if (filePath == null) {
-            throw new RuntimeException(NULL_MESSAGE);
+            throw new IllegalArgumentException(NULL_MESSAGE);
         }
         File file = new File(filePath);
         if (!file.exists()) {
-            throw new RuntimeException(DO_NOT_EXIST_MESSAGE + filePath);
+            try {
+                throw new FileNotFoundException(DO_NOT_EXIST_MESSAGE + filePath);
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(DO_NOT_EXIST_MESSAGE + filePath, e);
+            }
         }
         List<String> data = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
