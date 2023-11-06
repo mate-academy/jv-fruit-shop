@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.service.ReportGenerator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
