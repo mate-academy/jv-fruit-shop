@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.db.FileReadService;
-import core.basesyntax.db.FileReadServiceImpl;
+import core.basesyntax.db.FileReadImpl;
+import core.basesyntax.db.FileReader;
 import core.basesyntax.db.Storage;
 import core.basesyntax.db.WriteDataToFile;
 import core.basesyntax.db.WriteDataToFileImpl;
@@ -33,8 +33,8 @@ public class Main {
                 FruitOperation.Operation.SUPPLY, new SupplyCalculatorImpl()
         );
 
-        FileReadService readService = new FileReadServiceImpl();
-        List<String> dataFromReport = readService.readDataFromReport(INPUT_FILE);
+        FileReader readService = new FileReadImpl();
+        List<String> dataFromReport = readService.readFile(INPUT_FILE);
 
         OperationParser operationParserParser = new OperationParserImpl();
         List<FruitOperation> fruitTransaction = operationParserParser
@@ -45,7 +45,7 @@ public class Main {
         operationProcessor.process(fruitTransaction);
 
         Accounting accounting = new AccountingImpl();
-        String report = accounting.accountingReport(Storage.getFruitKindsAndQuantity());
+        String report = accounting.makeReport(Storage.getFruitKindsAndQuantity());
 
         WriteDataToFile writeDataToFile = new WriteDataToFileImpl();
         writeDataToFile.writeDataToFile(report, REPORT_FILE);

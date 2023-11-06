@@ -6,11 +6,9 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
 public class WriteDataToFileImpl implements WriteDataToFile {
-    private static final String FILE_PATH = "src/main/resources/Report.csv";
-
     @Override
     public void writeDataToFile(String data, String fileName) {
-        File file = new File(FILE_PATH);
+        File file = new File(fileName);
         try {
             Files.write(file.toPath(), data.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {

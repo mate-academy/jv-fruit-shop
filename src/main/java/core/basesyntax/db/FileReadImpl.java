@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class FileReadServiceImpl implements FileReadService {
+public class FileReadImpl implements FileReader {
     @Override
-    public List<String> readDataFromReport(String file) {
-        File reportFile = new File(file);
+    public List<String> readFile(String fileName) {
+        File reportFile = new File(fileName);
         List<String> report;
         try {
             report = Files.readAllLines(reportFile.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Unable to read data from file " + file, e);
+            throw new RuntimeException("Unable to read data from file " + fileName, e);
         }
         return report;
     }

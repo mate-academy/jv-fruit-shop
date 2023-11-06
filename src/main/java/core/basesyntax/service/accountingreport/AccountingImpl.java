@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class AccountingImpl implements Accounting {
     @Override
-    public String accountingReport(Map<String, Integer> fruitKindsAndQuantity) {
+    public String makeReport(Map<String, Integer> fruitKindsAndQuantity) {
         StringBuilder builder = new StringBuilder();
         builder.append(FIRST_LINE).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruitKindsAndQuantity.entrySet()) {
@@ -15,6 +15,12 @@ public class AccountingImpl implements Accounting {
             builder.append(entry.getKey()).append(COMMA).append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        return builder.toString();
+        String report = builder.toString();
+        printReportToConsole(report);
+        return report;
+    }
+
+    private void printReportToConsole(String report) {
+        System.out.println(report);
     }
 }

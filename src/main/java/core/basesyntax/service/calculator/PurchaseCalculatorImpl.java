@@ -7,8 +7,16 @@ public class PurchaseCalculatorImpl implements OperationCalculator {
 
     @Override
     public void handle(FruitOperation fruitTransaction) {
-        Storage.getFruitKindsAndQuantity().put(fruitTransaction.getFruit(),
-                Storage.getFruitKindsAndQuantity().get(fruitTransaction.getFruit())
-                        - fruitTransaction.getQuantity());
+        String fruit = fruitTransaction.getFruit();
+        int quantity = fruitTransaction.getQuantity();
+        int currentQuantity = Storage.getFruitKindsAndQuantity().getOrDefault(fruit, 0);
+        int newQuantity = currentQuantity - quantity;
+
+        if (newQuantity < 0) {
+            throw new RuntimeException("Balance for " + fruit + " is negative");
+        }
+
+        Storage.getFruitKindsAndQuantity().put(fruit, newQuantity);
     }
 }
+
