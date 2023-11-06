@@ -18,7 +18,6 @@ import core.basesyntax.service.operation.FruitOperation;
 import core.basesyntax.service.operation.OperationParser;
 import core.basesyntax.service.operation.OperationParserImpl;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,28 +26,28 @@ public class Main {
     private static final String REPORT_FILE = "src/main/resources/Report.csv";
 
     public static void main(String[] args) {
-        Map<FruitOperation.Operation, OperationCalculator> operationStrategyMap = new HashMap<>();
-        operationStrategyMap.put(FruitOperation.Operation.BALANCE, new BalanceCalculatorImpl());
-        operationStrategyMap.put(FruitOperation.Operation.PURCHASE, new PurchaseCalculatorImpl());
-        operationStrategyMap.put(FruitOperation.Operation.RETURN, new ReturnCalculatorImpl());
-        operationStrategyMap.put(FruitOperation.Operation.SUPPLY, new SupplyCalculatorImpl());
+        Map<FruitOperation.Operation, OperationCalculator> operationStrategyMap = Map.of(
+                FruitOperation.Operation.BALANCE, new BalanceCalculatorImpl(),
+                FruitOperation.Operation.PURCHASE, new PurchaseCalculatorImpl(),
+                FruitOperation.Operation.RETURN, new ReturnCalculatorImpl(),
+                FruitOperation.Operation.SUPPLY, new SupplyCalculatorImpl()
+        );
 
         FileReadService readService = new FileReadServiceImpl();
         List<String> dataFromReport = readService.readDataFromReport(INPUT_FILE);
 
         OperationParser operationParserParser = new OperationParserImpl();
-        List<FruitOperation> fruitTransaction =
-                operationParserParser.getFruitTransaction(dataFromReport);
-
+        List<FruitOperation> fruitTransaction = operationParserParser
+                .getFruitTransaction(dataFromReport);
         TransactionProcessor operationProcessor = new TransactionProcessorImpl(
                 new OperationStrategyImpl(operationStrategyMap)
         );
         operationProcessor.process(fruitTransaction);
 
         Accounting accounting = new AccountingImpl();
-        String account = accounting.accountingReport(Storage.getFruitKindsAndQuantity());
+        String report = accounting.accountingReport(Storage.getFruitKindsAndQuantity());
 
         WriteDataToFile writeDataToFile = new WriteDataToFileImpl();
-        writeDataToFile.writeDataToFile(account, REPORT_FILE);
+        writeDataToFile.writeDataToFile(report, REPORT_FILE);
     }
 }

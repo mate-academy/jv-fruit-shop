@@ -5,7 +5,6 @@ import core.basesyntax.service.strategy.OperationStrategy;
 import java.util.List;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-
     private OperationStrategy countStrategy;
 
     public TransactionProcessorImpl(OperationStrategy countStrategy) {

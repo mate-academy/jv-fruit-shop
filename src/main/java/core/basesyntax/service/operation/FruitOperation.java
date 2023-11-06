@@ -3,7 +3,6 @@ package core.basesyntax.service.operation;
 import java.util.Arrays;
 
 public class FruitOperation {
-
     private Operation operation;
     private String fruit;
     private int quantity;

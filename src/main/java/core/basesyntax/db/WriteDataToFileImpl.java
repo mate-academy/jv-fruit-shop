@@ -12,8 +12,7 @@ public class WriteDataToFileImpl implements WriteDataToFile {
     public void writeDataToFile(String data, String fileName) {
         File file = new File(FILE_PATH);
         try {
-            file.createNewFile();
-            Files.write(file.toPath(), data.getBytes(), StandardOpenOption.APPEND);
+            Files.write(file.toPath(), data.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
             throw new RuntimeException("Unable to create a file " + file, e);
         }

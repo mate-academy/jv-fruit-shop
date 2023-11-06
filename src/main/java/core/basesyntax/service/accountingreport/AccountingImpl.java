@@ -18,4 +18,3 @@ public class AccountingImpl implements Accounting {
         return builder.toString();
     }
 }
-
