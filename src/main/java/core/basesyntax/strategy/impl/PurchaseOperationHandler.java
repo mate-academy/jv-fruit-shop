@@ -5,9 +5,9 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private static final String LESS_QUANTITY_MESSAGE = "You have less product "
-            + "than you are trying to buy! ";
-    private static final String EXCEPTION_MESSAGE = "You don't have such fruits!";
+    private static final String NOT_ENOUGH_AMOUNT_MESSAGE = "You don't have such an amount of: ";
+    private static final String STORAGE_FRUIT_EXCEPTION_MESSAGE = "In your storage,"
+            + " you don`t have any: ";
 
     @Override
     public void handle(FruitTransaction fruitTransaction) {
@@ -16,12 +16,12 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (Storage.shopStorage.containsKey(fruitName)) {
             Integer availableQuantity = Storage.shopStorage.get(fruitName);
             if (availableQuantity < transactionQuantity) {
-                throw new RuntimeException(LESS_QUANTITY_MESSAGE + fruitName);
+                throw new RuntimeException(NOT_ENOUGH_AMOUNT_MESSAGE + fruitName);
             } else {
                 Storage.shopStorage.put(fruitName, availableQuantity - transactionQuantity);
             }
         } else {
-            throw new RuntimeException(EXCEPTION_MESSAGE);
+            throw new RuntimeException(STORAGE_FRUIT_EXCEPTION_MESSAGE + fruitName);
         }
     }
 }
