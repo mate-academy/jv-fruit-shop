@@ -31,6 +31,7 @@ public class FruitDB {
                 throw new RuntimeException("Cant remove " + quantity + " " + name
                         + "because have " + fruitDB.get(name));
             }
+
         } else {
             throw new RuntimeException("Cant remove " + name
                     + "because don't have this in DB");

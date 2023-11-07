@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package core.basesyntax.dao;
 
 public enum Operation {
     BALANCE("b"),
@@ -16,7 +16,7 @@ public enum Operation {
         return code;
     }
 
-    public static Operation fromAbbreviation(String abbreviation) {
+    public static Operation getOperation(String abbreviation) {
         for (Operation operation : values()) {
             if (operation.getCode().equals(abbreviation)) {
                 return operation;
@@ -29,10 +29,9 @@ public enum Operation {
     public static boolean validAbbreviation(String abbreviation) {
         for (Operation operation : values()) {
             if (operation.getCode().equals(abbreviation)) {
-                return false;
+                return true;
             }
         }
-
-        return true;
+        return false;
     }
 }

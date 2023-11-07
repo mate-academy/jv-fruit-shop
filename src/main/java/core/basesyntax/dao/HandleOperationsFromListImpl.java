@@ -1,11 +1,10 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitDB;
-import core.basesyntax.db.Operation;
 import java.util.List;
 import java.util.Map;
 
-public class ListToMapImpl implements ListToMap {
+public class HandleOperationsFromListImpl implements HandleOperationsFromList {
     private static final String SEPARATOR = ",";
     private static final int OPERATION = 0;
     private static final int NAME = 1;
@@ -13,28 +12,22 @@ public class ListToMapImpl implements ListToMap {
     private final FruitDB fruitDB = new FruitDB();
 
     @Override
-    public Map<String, Integer> listToMap(List<String> stringList) {
+    public Map<String, Integer> getMapReport(List<String> stringList,
+                                             Map<Operation, FruitOperation> operationMap) {
         for (String str : stringList) {
             String[] infoStr = str.split(SEPARATOR);
-            if (Operation.validAbbreviation(infoStr[OPERATION])) {
+            if (!Operation.validAbbreviation(infoStr[OPERATION])) {
                 continue;
             }
 
-            Operation operation = Operation.fromAbbreviation(infoStr[OPERATION]);
+            Operation operation = Operation.getOperation(infoStr[OPERATION]);
             String name = infoStr[NAME];
             Integer quantity = Integer.parseInt(infoStr[QUANTITY]);
 
-            switch (operation) {
-                case BALANCE:
-                case SUPPLY:
-                case RETURN:
-                    fruitDB.add(name, quantity);
-                    break;
-                case PURCHASE:
-                    fruitDB.remove(name, quantity);
-                    break;
-                default:
-                    break;
+            FruitOperation fruitOperation = operationMap.get(operation);
+
+            if (fruitOperation != null) {
+                fruitOperation.performOperation(fruitDB, name, quantity);
             }
         }
 
