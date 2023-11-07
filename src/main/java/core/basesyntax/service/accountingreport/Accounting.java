@@ -4,6 +4,6 @@ import java.util.Map;
 
 public interface Accounting {
     String COMMA = ",";
-    String FIRST_LINE = "fruit,quantity";
+    String HEADER = "fruit,quantity";
     String makeReport(Map<String, Integer> fruitKindsAndQuantity);
 }

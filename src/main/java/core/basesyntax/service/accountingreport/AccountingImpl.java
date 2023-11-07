@@ -6,7 +6,7 @@ public class AccountingImpl implements Accounting {
     @Override
     public String makeReport(Map<String, Integer> fruitKindsAndQuantity) {
         StringBuilder builder = new StringBuilder();
-        builder.append(FIRST_LINE).append(System.lineSeparator());
+        builder.append(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : fruitKindsAndQuantity.entrySet()) {
             if (entry.getValue() < 0) {
                 throw new RuntimeException("Quantity : " + entry.getKey()
