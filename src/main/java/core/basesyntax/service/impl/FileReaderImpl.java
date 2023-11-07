@@ -13,8 +13,8 @@ public class FileReaderImpl implements FileReader {
         File file = new File(fromFileName);
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(file))) {
             StringBuilder stringBuilder = new StringBuilder();
-            String value = reader.readLine();
-            while (value != null) {
+            String value;
+            while ((value = reader.readLine()) != null) {
                 stringBuilder.append(value).append(RECORD_SEPARATOR);
                 value = reader.readLine();
             }

@@ -12,6 +12,11 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void doOperation(String fruitName, int quantity) {
         int balanceValue = fruitDao.get(fruitName);
-        fruitDao.put(fruitName, balanceValue - quantity);
+        if (quantity <= balanceValue) {
+            fruitDao.put(fruitName, balanceValue - quantity);
+        } else {
+            throw new RuntimeException("Value of resulting balance can't be negative. Fruit: "
+                    + fruitName + ", balance = " + balanceValue + ", purchase = " + quantity);
+        }
     }
 }
