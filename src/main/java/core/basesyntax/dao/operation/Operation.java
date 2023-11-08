@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.dao.operation;
 
 public enum Operation {
     BALANCE("b"),
@@ -30,6 +30,8 @@ public enum Operation {
         for (Operation operation : values()) {
             if (operation.getCode().equals(abbreviation)) {
                 return true;
+            } else {
+                throw new RuntimeException("Operation is not valid");
             }
         }
         return false;
