@@ -1,9 +1,12 @@
 package core.basesyntax.service;
 
-public class StorageManagerImpl implements StorageManager {
-    @Override
-    public boolean update(String name, Integer quantity) {
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.Operation;
 
-        return false;
+public class StorageManagerImpl implements StorageManager {
+    FruitStorageDao fruitStorageDao;
+    @Override
+    public void update(String name, Integer quantity) {
+
     }
 }

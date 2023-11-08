@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface StorageManager {
-    boolean update(String name, Integer quantity);
+    void update(String name, Integer quantity);
 }
