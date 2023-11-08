@@ -1,6 +1,8 @@
 package core.basesyntax.dao.transaction;
 
 import core.basesyntax.dao.operation.Operation;
+import core.basesyntax.dao.storagedao.FruitStorageDao;
+import core.basesyntax.db.FruitStorage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +12,9 @@ public class TransactionImpl implements Transaction {
     private static final int OPERATION = 0;
     private static final int NAME = 1;
     private static final int QUANTITY = 2;
+    private FruitStorageDao fruitStorageDao;
     @Override
-    public List<FruitTransaction> getTransactionList(List<String> stringList) {
+    public void getTransactionList(List<String> stringList) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         String[] infoString;
         for (String str : stringList) {
@@ -22,10 +25,9 @@ public class TransactionImpl implements Transaction {
                     String name = infoString[NAME];
                     Integer quantity = Integer.parseInt(infoString[QUANTITY]);
 
-                    fruitTransactionList.add(new FruitTransaction(operation, name, quantity));
+                    fruitStorageDao.add(new FruitTransaction(operation, name, quantity));
                 }
             }
         }
-        return new ArrayList<>(fruitTransactionList);
     }
 }

@@ -4,7 +4,7 @@ import core.basesyntax.dao.operation.OperationHandler;
 
 public class BalanceOperation implements OperationHandler {
     @Override
-    public void useOperation(String name, Integer quantity) {
-
+    public Integer useOperation(Integer quantity) {
+        return quantity;
     }
 }

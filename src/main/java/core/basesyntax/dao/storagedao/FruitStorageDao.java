@@ -1,12 +1,11 @@
 package core.basesyntax.dao.storagedao;
 
+import core.basesyntax.dao.transaction.FruitTransaction;
+
+import java.util.List;
 import java.util.Map;
 
 public interface FruitStorageDao {
-    void putToStorage(String name, Integer quantity);
-    void removeToStorage(String name);
-    Integer get(String name);
-    Map<String, Integer> getAllStorage();
-    boolean containsKey(String name);
-
+    void add(FruitTransaction fruitTransaction);
+    List<FruitTransaction> getAllTransaction();
 }
