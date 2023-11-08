@@ -7,8 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
+<<<<<<< HEAD
     @Override
     public List<String> readFromFile(String fileName) {
+=======
+
+    @Override
+    public List<String> readFile(String fileName) {
+>>>>>>> hw-second-solution
         List<String> lineArray = new ArrayList<>();
 
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
