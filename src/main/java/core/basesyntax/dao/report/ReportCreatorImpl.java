@@ -1,15 +1,19 @@
 package core.basesyntax.dao.report;
 
-import core.basesyntax.dao.operation.*;
+import core.basesyntax.dao.operation.BalanceOperation;
+import core.basesyntax.dao.operation.Operation;
+import core.basesyntax.dao.operation.OperationHandler;
+import core.basesyntax.dao.operation.PurchaseOperation;
+import core.basesyntax.dao.operation.ReturnOperation;
+import core.basesyntax.dao.operation.SupplyOperation;
 import core.basesyntax.dao.storagedao.FruitStorageDao;
+import core.basesyntax.dao.storagedao.FruitStorageDaoImpl;
 import core.basesyntax.dao.transaction.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
     private final Map<Operation, OperationHandler> operationHandlerMap;
-    private FruitStorageDao fruitStorageDao;
 
     public ReportCreatorImpl() {
         operationHandlerMap = new HashMap<>();
@@ -23,8 +27,11 @@ public class ReportCreatorImpl implements ReportCreator {
     @Override
     public Map<String, Integer> updateStorage() {
         Map<String, Integer> reportMap = new HashMap<>();
+        FruitStorageDao fruitStorageDao = new FruitStorageDaoImpl();
+
         for (FruitTransaction fruitTransaction : fruitStorageDao.getAllTransaction()) {
             String fruitName = fruitTransaction.getName();
+
             Integer fruitTransactionQuantity = operationHandlerMap
                     .get(fruitTransaction.getOperation())
                     .useOperation(fruitTransaction.getQuantity());
@@ -35,9 +42,10 @@ public class ReportCreatorImpl implements ReportCreator {
                     Integer newValue = oldValue + fruitTransactionQuantity;
                     reportMap.put(fruitName, newValue);
                 } else {
-                    throw new RuntimeException("Don't have "+ fruitTransactionQuantity
+                    throw new RuntimeException("Don't have " + fruitTransaction.getQuantity()
                             + " " + fruitName);
                 }
+
             } else {
                 if (fruitTransactionQuantity > 0) {
                     reportMap.put(fruitName, fruitTransactionQuantity);

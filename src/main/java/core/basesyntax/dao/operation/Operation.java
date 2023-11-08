@@ -30,8 +30,6 @@ public enum Operation {
         for (Operation operation : values()) {
             if (operation.getCode().equals(abbreviation)) {
                 return true;
-            } else {
-                throw new RuntimeException("Operation is not valid");
             }
         }
         return false;
