@@ -17,7 +17,19 @@
         </maven.checkstyle.plugin.configLocation>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>apache</id>
+            <url>https://repository.apache.org/content/repositories/releases/</url>
+        </repository>
+    </repositories>
+
     <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>1.8</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
