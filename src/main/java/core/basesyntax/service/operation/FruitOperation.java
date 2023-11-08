@@ -52,7 +52,7 @@ public class FruitOperation {
                     .filter(operation -> operation.code.equals(code))
                     .findAny()
                     .orElseThrow(
-                            () -> new RuntimeException("Invalid Operation code " + code));
+                            () -> new IllegalArgumentException("Invalid Operation code " + code));
         }
     }
 }

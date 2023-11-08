@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 
-public class WriteDataToFileImpl implements WriteDataToFile {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void writeDataToFile(String data, String fileName) {
         File file = new File(fileName);

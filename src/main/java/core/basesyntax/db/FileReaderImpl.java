@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class FileReadImpl implements FileReader {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFile(String fileName) {
         File reportFile = new File(fileName);

@@ -4,12 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class Storage {
-    private static final Map<String, Integer> FRUIT_KINDS_AND_QUANTITY = new HashMap<>();
-
-    public static Map<String, Integer> getFruitKindsAndQuantity() {
-        return FRUIT_KINDS_AND_QUANTITY;
-    }
+public class StorageDao {
+    public static final Map<String, Integer> FRUIT_KINDS_AND_QUANTITY = new HashMap<>();
 
     public static void addFruit(String fruit, int quantity) {
         FRUIT_KINDS_AND_QUANTITY.put(fruit, quantity);
