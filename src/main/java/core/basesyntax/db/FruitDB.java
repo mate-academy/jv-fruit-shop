@@ -8,7 +8,7 @@ public class FruitDB {
     private final Map<String, Integer> fruitDB;
 
     public FruitDB() {
-        fruitDB = new HashMap<>();
+        this.fruitDB = new HashMap<>();
     }
 
     public void add(String name, Integer quantity) {

@@ -1,31 +1,28 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.BalanceOperation;
-import core.basesyntax.dao.FruitOperation;
-import core.basesyntax.dao.HandleOperationsFromListImpl;
-import core.basesyntax.dao.Operation;
-import core.basesyntax.dao.PurchaseOperation;
-import core.basesyntax.dao.ReturnOperation;
-import core.basesyntax.dao.SupplyOperation;
-import core.basesyntax.service.FileServiceImpl;
-import java.util.HashMap;
-import java.util.Map;
+import core.basesyntax.dao.OperationManager;
+import core.basesyntax.dao.OperationManagerImpl;
+import core.basesyntax.db.FruitDB;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileReaderImpl;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileWriterImpl;
 
 public class Main {
     private static final String READ_FILE_NAME = "file.csv";
     private static final String WRITE_FILE_NAME = "report_file.csv";
 
     public static void main(String[] args) {
-        Map<Operation, FruitOperation> operationMap = new HashMap<>();
-        operationMap.put(Operation.BALANCE, new BalanceOperation());
-        operationMap.put(Operation.SUPPLY, new SupplyOperation());
-        operationMap.put(Operation.RETURN, new ReturnOperation());
-        operationMap.put(Operation.PURCHASE, new PurchaseOperation());
+        FruitDB fruitDB = new FruitDB();
+        FileReader fileReader = new FileReaderImpl();
+        OperationManager operationManager = new OperationManagerImpl();
 
-        FileServiceImpl fileService = new FileServiceImpl();
-        HandleOperationsFromListImpl stringToDB = new HandleOperationsFromListImpl();
+        FileWriter fileWriter = new FileWriterImpl();
 
-        fileService.createReport(stringToDB.getMapReport(fileService
-                .readFromFile(READ_FILE_NAME), operationMap), WRITE_FILE_NAME);
+        operationManager
+                .addInfoToDB(
+                        fileReader.readFromFile(READ_FILE_NAME), fruitDB);
+        fileWriter
+                .writeToFile(fruitDB.getAllFruits(), WRITE_FILE_NAME);
     }
 }

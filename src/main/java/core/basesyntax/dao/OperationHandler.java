@@ -2,6 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitDB;
 
-public interface FruitOperation {
+public interface OperationHandler {
     void performOperation(FruitDB fruitDB, String name, Integer quantity);
 }
