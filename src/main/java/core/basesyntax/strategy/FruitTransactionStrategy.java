@@ -13,28 +13,29 @@ public class FruitTransactionStrategy {
     public Map<String, Integer> operationFromFruit(Map<String, Integer> dataBase,
                                                    List<FruitTransaction> fruitTransactions) {
 
+        BalanceTransactionStrategy balanceTransactionStrategy
+                = new BalanceTransactionStrategy();
+        PurchaseTransactionStrategy purchaseTransactionStrategy
+                = new PurchaseTransactionStrategy();
+        SupplyTransactionStrategy supplyTransactionStrategy
+                = new SupplyTransactionStrategy();
+        ReturnTransactionStrategy returnTransactionStrategy
+                = new ReturnTransactionStrategy();
+
         for (FruitTransaction transaction : fruitTransactions) {
             String fruit = transaction.getFruit();
             int quantity = transaction.getQuantity();
             switch (transaction.getOperation().getCode()) {
                 case "b" -> {
-                    BalanceTransactionStrategy balanceTransactionStrategy
-                            = new BalanceTransactionStrategy();
                     balanceTransactionStrategy.process(dataBase, fruit, quantity);
                 }
                 case "p" -> {
-                    PurchaseTransactionStrategy purchaseTransactionStrategy
-                            = new PurchaseTransactionStrategy();
                     purchaseTransactionStrategy.process(dataBase, fruit, quantity);
                 }
                 case "s" -> {
-                    SupplyTransactionStrategy supplyTransactionStrategy
-                            = new SupplyTransactionStrategy();
                     supplyTransactionStrategy.process(dataBase, fruit, quantity);
                 }
                 case "r" -> {
-                    ReturnTransactionStrategy returnTransactionStrategy
-                            = new ReturnTransactionStrategy();
                     returnTransactionStrategy.process(dataBase, fruit, quantity);
                 }
                 default -> throw new RuntimeException("Unknown operation type");
