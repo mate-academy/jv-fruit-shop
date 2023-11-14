@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface DataReader<T> {
 
-    List<T> dataFromFile();
+    List<T> dataFromFile(String fromFile);
 }

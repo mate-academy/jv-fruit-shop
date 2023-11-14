@@ -3,26 +3,24 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.DataWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVPrinter;
 
 public class DataWriterImpl implements DataWriter {
 
-    private static final String CSV_FILE_NAME = "src/main/resources/report.csv";
-
     @Override
-    public void writeData(Map<String, Integer> dataBase) {
+    public void writeData(String report, String toFile) {
 
-        try (FileWriter fileWriter = new FileWriter(CSV_FILE_NAME);
+        try (FileWriter fileWriter = new FileWriter(toFile);
                 CSVPrinter csvPrinter = new CSVPrinter(fileWriter, CSVFormat.DEFAULT)) {
-            csvPrinter.printRecord("Fruit", "Value");
-            for (Map.Entry<String, Integer> entry : dataBase.entrySet()) {
-                csvPrinter.printRecord(entry.getKey(), entry.getValue());
+            String[] lines = report.split(System.lineSeparator());
+            for (String line : lines) {
+                String[] fields = line.split(",");
+                csvPrinter.printRecord(fields[0], Integer.parseInt(fields[1]));
             }
-            System.out.println("Data successfully written to " + CSV_FILE_NAME);
+            System.out.println("Data successfully written to " + toFile);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can't wrote report to file" + toFile, e);
         }
     }
 }

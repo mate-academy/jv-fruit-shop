@@ -1,16 +1,19 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.FruitStrategy;
-import java.util.Map;
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.db.FruitDB;
+import core.basesyntax.strategy.TransactionProcessor;
 
-public class BalanceTransactionStrategy implements FruitStrategy {
+public class BalanceTransactionStrategy implements TransactionProcessor {
 
     @Override
-    public void process(Map<String, Integer> dataBase, String fruit, int quantity) {
+    public void process(FruitTransaction transaction) {
 
-        if (dataBase.containsKey(fruit)) {
-            quantity += dataBase.get(fruit);
+        String fruit = transaction.getFruit();
+        int quantity = transaction.getQuantity();
+        if (FruitDB.FRUIT_DATA_BASE.containsKey(transaction.getFruit())) {
+            quantity += FruitDB.FRUIT_DATA_BASE.get(fruit);
         }
-        dataBase.put(fruit, quantity);
+        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
     }
 }

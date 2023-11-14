@@ -9,13 +9,11 @@ import java.util.List;
 
 public class DataReaderImpl implements DataReader<String> {
 
-    private static final String FILE_PART = "src/main/resources/inputData.csv";
-
     @Override
-    public List<String> dataFromFile() {
+    public List<String> dataFromFile(String fromFile) {
         List<String> lines = new ArrayList<>();
         String line;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(FILE_PART))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFile))) {
             boolean firstLine = true;
             while ((line = bufferedReader.readLine()) != null) {
                 if (firstLine) {
@@ -25,7 +23,7 @@ public class DataReaderImpl implements DataReader<String> {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file");
+            throw new RuntimeException("Can't read data from file" + fromFile, e);
         }
         return lines;
     }

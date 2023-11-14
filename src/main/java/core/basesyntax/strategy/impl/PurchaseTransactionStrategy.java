@@ -1,16 +1,20 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.FruitStrategy;
-import java.util.Map;
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.db.FruitDB;
+import core.basesyntax.strategy.TransactionProcessor;
 
-public class PurchaseTransactionStrategy implements FruitStrategy {
+public class PurchaseTransactionStrategy implements TransactionProcessor {
+
     @Override
-    public void process(Map<String, Integer> dataBase, String fruit, int quantity) {
+    public void process(FruitTransaction transaction) {
 
-        if (dataBase.containsKey(fruit)) {
-            int currentQuantity = dataBase.get(fruit);
+        String fruit = transaction.getFruit();
+        int quantity = transaction.getQuantity();
+        if (FruitDB.FRUIT_DATA_BASE.containsKey(fruit)) {
+            int currentQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
             if (currentQuantity >= quantity) {
-                dataBase.put(fruit, currentQuantity - quantity);
+                FruitDB.FRUIT_DATA_BASE.put(fruit, currentQuantity - quantity);
             } else {
                 System.out.println("Warning: Not enough " + fruit + " in inventory.");
             }

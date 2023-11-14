@@ -1,8 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.FruitTransaction;
 import java.util.List;
 
-public interface LineParser<T> {
+public interface LineParser {
 
-    List<T> createListOfTransactions(List<String> lines);
+    List<FruitTransaction> createListOfTransactions(List<String> lines);
 }

@@ -5,7 +5,7 @@ import core.basesyntax.service.LineParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LineParserImpl implements LineParser<FruitTransaction> {
+public class LineParserImpl implements LineParser {
 
     private static final int OPERATION_CODE_NUMBER = 0;
     private static final int FRUIT_NUMBER = 1;
