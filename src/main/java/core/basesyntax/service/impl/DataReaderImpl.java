@@ -14,12 +14,7 @@ public class DataReaderImpl implements DataReader<String> {
         List<String> lines = new ArrayList<>();
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFile))) {
-            boolean firstLine = true;
             while ((line = bufferedReader.readLine()) != null) {
-                if (firstLine) {
-                    firstLine = false;
-                    continue;
-                }
                 lines.add(line);
             }
         } catch (IOException e) {

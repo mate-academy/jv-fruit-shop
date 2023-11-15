@@ -19,7 +19,7 @@ public class Main {
         LineParser lineParser = new LineParserImpl();
         List<FruitTransaction> fruitTransactions = lineParser.createListOfTransactions(inputData);
         FruitTransactionStrategy transactionStrategy = new FruitTransactionStrategy();
-        transactionStrategy.operationFromFruit(fruitTransactions);
+        transactionStrategy.executeTransaction(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.makeReport();
         DataWriter dataWriter = new DataWriterImpl();

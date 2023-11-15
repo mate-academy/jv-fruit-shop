@@ -8,9 +8,7 @@ import core.basesyntax.strategy.impl.SupplyTransactionStrategy;
 import java.util.List;
 
 public class FruitTransactionStrategy {
-
-    public void operationFromFruit(List<FruitTransaction> fruitTransactions) {
-
+    public void executeTransaction(List<FruitTransaction> fruitTransactions) {
         BalanceTransactionStrategy balanceTransactionStrategy
                 = new BalanceTransactionStrategy();
         PurchaseTransactionStrategy purchaseTransactionStrategy
