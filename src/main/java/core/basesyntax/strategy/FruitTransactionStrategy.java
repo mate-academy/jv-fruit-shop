@@ -20,13 +20,13 @@ public class FruitTransactionStrategy {
 
         for (FruitTransaction transaction : fruitTransactions) {
             String code = transaction.getOperation().getCode();
-            if (code.equals("b")) {
+            if (code.equals(FruitTransaction.Operation.BALANCE.getCode())) {
                 balanceTransactionStrategy.process(transaction);
-            } else if (code.equals("p")) {
+            } else if (code.equals(FruitTransaction.Operation.PURCHASE.getCode())) {
                 purchaseTransactionStrategy.process(transaction);
-            } else if (code.equals("s")) {
+            } else if (code.equals(FruitTransaction.Operation.SUPPLY.getCode())) {
                 supplyTransactionStrategy.process(transaction);
-            } else if (code.equals("r")) {
+            } else if (code.equals(FruitTransaction.Operation.RETURN.getCode())) {
                 returnTransactionStrategy.process(transaction);
             }
         }
