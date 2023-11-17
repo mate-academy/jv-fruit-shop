@@ -5,7 +5,8 @@ import core.basesyntax.db.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.ItemTransaction;
 
 public class ReturnOperationHandler implements DataOperation {
-    StorageDao storageDao = new StorageDaoImpl();
+    private final StorageDao storageDao = new StorageDaoImpl();
+
     @Override
     public void handle(ItemTransaction transaction) {
         storageDao.addItem(transaction.getName(), transaction.getQuantity());

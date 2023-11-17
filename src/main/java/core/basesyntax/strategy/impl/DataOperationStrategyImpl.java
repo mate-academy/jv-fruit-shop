@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.operations.DataOperation;
 import core.basesyntax.db.operations.BalanceOperationHandler;
+import core.basesyntax.db.operations.DataOperation;
 import core.basesyntax.db.operations.PurchaseOperationHandler;
 import core.basesyntax.db.operations.ReturnOperationHandler;
 import core.basesyntax.db.operations.SupplyOperationHandler;

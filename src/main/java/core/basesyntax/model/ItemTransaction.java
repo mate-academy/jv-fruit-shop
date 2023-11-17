@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public final class ItemTransaction {
     private final Operation operation;
     private final String name;
