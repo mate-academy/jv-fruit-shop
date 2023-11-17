@@ -1,8 +1,8 @@
 package core.basesyntax.db.operations;
 
-import core.basesyntax.db.dao.StorageDao;
-import core.basesyntax.model.Item;
+
+import core.basesyntax.model.ItemTransaction;
 
 public interface DataOperation {
-    void handle(Item item, StorageDao dao);
+    void handle(ItemTransaction transaction);
 }

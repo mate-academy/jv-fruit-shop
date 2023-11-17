@@ -2,10 +2,11 @@ package core.basesyntax.db.operations;
 
 import core.basesyntax.db.dao.StorageDao;
 import core.basesyntax.model.Item;
+import core.basesyntax.model.ItemTransaction;
 
-public class OperationSupply implements DataOperation {
+public class SupplyOperationHandler implements DataOperation {
     @Override
-    public void handle(Item item, StorageDao dao) {
+    public void handle(ItemTransaction transaction) {
         dao.supply(item);
     }
 }

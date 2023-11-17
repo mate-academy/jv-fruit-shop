@@ -24,23 +24,4 @@ public final class ItemTransaction {
     public int getQuantity() {
         return quantity;
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        ItemTransaction that = (ItemTransaction) o;
-        return quantity == that.quantity
-                && operation == that.operation
-                && Objects.equals(name, that.name);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(operation, name, quantity);
-    }
 }

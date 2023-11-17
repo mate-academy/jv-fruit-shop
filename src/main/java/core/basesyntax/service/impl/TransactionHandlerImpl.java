@@ -5,12 +5,12 @@ import core.basesyntax.db.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.Item;
 import core.basesyntax.model.ItemTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.Handler;
+import core.basesyntax.service.TransactionHandler;
 import core.basesyntax.strategy.DataOperationStrategy;
 import core.basesyntax.strategy.impl.DataOperationStrategyImpl;
 import java.util.List;
 
-public class HandlerImpl implements Handler {
+public class TransactionHandlerImpl implements TransactionHandler {
     private final DataOperationStrategy dataOperationStrategy = new DataOperationStrategyImpl();
 
     @Override

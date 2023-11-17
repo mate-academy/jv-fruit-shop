@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import core.basesyntax.db.InMemoryStorage;
 import core.basesyntax.model.ItemTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.Handler;
+import core.basesyntax.service.TransactionHandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +15,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class HandlerImpTest {
+class TransactionHandlerImpTest {
 
-    private final Handler handler = new HandlerImpl();
+    private final TransactionHandler transactionHandler = new TransactionHandlerImpl();
 
     @AfterAll
     public static void clearStorageAfterTest() {
@@ -40,7 +40,7 @@ class HandlerImpTest {
         input.add(new ItemTransaction(Operation.PURCHASE,"apple", 20));
         input.add(new ItemTransaction(Operation.PURCHASE,"banana", 5));
         input.add(new ItemTransaction(Operation.SUPPLY,"banana", 50));
-        handler.handle(input);
+        transactionHandler.handle(input);
         Map<String, Integer> expected = new HashMap<>();
         expected.put("banana", 152);
         expected.put("apple", 90);
@@ -50,6 +50,6 @@ class HandlerImpTest {
     @Test
     void handle_nullData() {
         assertThrows(NullPointerException.class, () ->
-                handler.handle(null));
+                transactionHandler.handle(null));
     }
 }
