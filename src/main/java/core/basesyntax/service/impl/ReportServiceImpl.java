@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.InMemoryStorage;
-import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.ReportService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ReportCreatorImpl implements ReportCreator {
+public class ReportServiceImpl implements ReportService {
     @Override
     public List<String> report() {
         List<String> strings = new ArrayList<>();
