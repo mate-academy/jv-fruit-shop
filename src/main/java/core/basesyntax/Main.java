@@ -1,22 +1,22 @@
 package core.basesyntax;
 
-import core.basesyntax.converter.Converter;
-import core.basesyntax.converter.ConverterImpl;
-import core.basesyntax.handler.Handler;
-import core.basesyntax.handler.HandlerImpl;
-import core.basesyntax.reader.Reader;
-import core.basesyntax.reader.ReaderImpl;
-import core.basesyntax.report.ReportCreator;
-import core.basesyntax.report.ReportCreatorImpl;
-import core.basesyntax.writer.DataWriter;
-import core.basesyntax.writer.DataWriterImpl;
+import core.basesyntax.model.ItemTransaction;
+import core.basesyntax.service.Converter;
+import core.basesyntax.service.DataWriter;
+import core.basesyntax.service.Handler;
+import core.basesyntax.service.Reader;
+import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.impl.ConverterImpl;
+import core.basesyntax.service.impl.DataWriterImpl;
+import core.basesyntax.service.impl.HandlerImpl;
+import core.basesyntax.service.impl.ReaderImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
         Reader csvReader = new ReaderImpl();
-        List<String> strings = csvReader.read("input.csv");
-
+        List<String> strings = csvReader.read("src/main/resources/input.csv");
         Converter converter = new ConverterImpl();
         List<ItemTransaction> itemTransactions = converter.convert(strings);
 
