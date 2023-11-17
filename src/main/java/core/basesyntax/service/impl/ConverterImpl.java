@@ -30,7 +30,7 @@ public class ConverterImpl implements Converter {
         }
 
         try {
-            Operation operation = Operation.fromString(partString[INDEX_TYPE_OPERATION].trim());
+            Operation operation = Operation.getByCode(partString[INDEX_TYPE_OPERATION].trim());
             String item = partString[INDEX_ITEM].trim();
             int quantity = Integer.parseInt(partString[INDEX_QUANTITY].trim());
             return new ItemTransaction(operation, item, quantity);

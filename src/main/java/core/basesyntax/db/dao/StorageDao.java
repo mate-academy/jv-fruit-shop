@@ -1,13 +1,7 @@
 package core.basesyntax.db.dao;
 
-import core.basesyntax.model.Item;
-
 public interface StorageDao {
-    void balance(Item item);
-
-    void purchase(Item item);
-
-    void returnItem(Item item);
-
-    void supply(Item item);
+    void putItem(String name, int quantity);
+    void  addItem(String name, int quantity);
+    int getBalance(String name);
 }

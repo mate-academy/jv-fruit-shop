@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.InMemoryStorage;
 import core.basesyntax.model.ItemTransaction;
 import core.basesyntax.service.Converter;
 import core.basesyntax.service.DataWriter;
@@ -15,7 +16,7 @@ import java.util.List;
 
 public class Main {
     private final static String INPUT_FILE_PATH = "src/main/resources/input.csv";
-    private final static String OUTPUT_FILE_PATH = "src/main/resources/input.csv";
+    private final static String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Reader csvReader = new ReaderImpl();

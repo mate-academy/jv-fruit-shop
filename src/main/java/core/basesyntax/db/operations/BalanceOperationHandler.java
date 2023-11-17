@@ -1,12 +1,13 @@
 package core.basesyntax.db.operations;
 
 import core.basesyntax.db.dao.StorageDao;
-import core.basesyntax.model.Item;
+import core.basesyntax.db.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.ItemTransaction;
 
 public class BalanceOperationHandler implements DataOperation {
+    StorageDao storageDao = new StorageDaoImpl();
     @Override
     public void handle(ItemTransaction transaction) {
-        dao.balance(item);
+        storageDao.putItem(transaction.getName(), transaction.getQuantity());
     }
 }

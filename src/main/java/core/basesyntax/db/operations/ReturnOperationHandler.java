@@ -1,12 +1,13 @@
 package core.basesyntax.db.operations;
 
 import core.basesyntax.db.dao.StorageDao;
-import core.basesyntax.model.Item;
+import core.basesyntax.db.dao.impl.StorageDaoImpl;
 import core.basesyntax.model.ItemTransaction;
 
 public class ReturnOperationHandler implements DataOperation {
+    StorageDao storageDao = new StorageDaoImpl();
     @Override
     public void handle(ItemTransaction transaction) {
-        dao.returnItem(item);
+        storageDao.addItem(transaction.getName(), transaction.getQuantity());
     }
 }
