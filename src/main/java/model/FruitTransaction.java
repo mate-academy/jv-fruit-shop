@@ -1,5 +1,7 @@
 package model;
 
+import java.util.NoSuchElementException;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -43,6 +45,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getOperationFromCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new NoSuchElementException("There is no operation for code:" + code);
         }
     }
 }

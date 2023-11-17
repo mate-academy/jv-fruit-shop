@@ -1,5 +1,7 @@
 package service;
 
-public interface CsvFileReaderService {
+import java.util.List;
 
+public interface CsvFileReaderService {
+    List<String> readFromCsvFile(String fileName);
 }

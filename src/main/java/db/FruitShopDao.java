@@ -1,5 +1,9 @@
 package db;
 
-public interface FruitShopDao {
+import model.FruitTransaction;
 
+public interface FruitShopDao {
+    void add(FruitTransaction fruitTransaction);
+
+    void update(FruitTransaction fruitTransaction);
 }
