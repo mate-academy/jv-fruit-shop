@@ -1,15 +1,17 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.impl.TransactionDaoImpl;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.dao.impl.StorageDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataService;
+import core.basesyntax.service.ConvertDataService;
+import core.basesyntax.service.ProcessDataService;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriteDataToFileService;
-import core.basesyntax.service.impl.DataServiceImpl;
+import core.basesyntax.service.impl.ConvertDataServiceImpl;
+import core.basesyntax.service.impl.ProcessDataServiceImpl;
 import core.basesyntax.service.impl.ReadDataFromFileServiceImpl;
-import core.basesyntax.service.impl.TransactionServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.WriteDataToFileServiceImpl;
-import core.basesyntax.service.strategy.impl.FruitResolverImpl;
 import core.basesyntax.service.strategy.impl.OperationResolverImpl;
 import java.util.HashMap;
 import java.util.List;
@@ -26,19 +28,19 @@ public class Main {
         operationMap.put("s", Operation.SUPPLY);
         operationMap.put("p", Operation.PURCHASE);
         operationMap.put("r", Operation.RETURN);
-        Map<String, Fruit> fruitMap = new HashMap<>();
-        fruitMap.put("banana", Fruit.BANANA);
-        fruitMap.put("apple", Fruit.APPLE);
 
         ReadDataFromFileServiceImpl readDataFromFile = new ReadDataFromFileServiceImpl();
         List<String> listDataFromFile = readDataFromFile.readFromFile(PATH_TRANSACTIONS);
 
-        DataService dataService = new DataServiceImpl(new TransactionDaoImpl(),
-                new TransactionServiceImpl(
-                        new TransactionDaoImpl(),
-                        new OperationResolverImpl(operationMap),
-                        new FruitResolverImpl(fruitMap)));
-        String report = dataService.processingTransaction(listDataFromFile);
+        ConvertDataService convertData =
+                new ConvertDataServiceImpl(new OperationResolverImpl(operationMap));
+        List<FruitTransaction> operations = convertData.processingData(listDataFromFile);
+
+        ProcessDataService processDataService = new ProcessDataServiceImpl(new StorageDaoImpl());
+        Map<String, Integer> reportMap = processDataService.processing(operations);
+
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.prepareReport(reportMap);
 
         WriteDataToFileService writeDataToFile = new WriteDataToFileServiceImpl();
         writeDataToFile.writeData(PATH_REPORT, report);
