@@ -5,5 +5,5 @@ import model.FruitTransaction;
 import java.util.List;
 
 public interface ProcessCsvDataService {
-    List<FruitTransaction> processData(List<String> rawData);
+    void processData(List<String> rawData);
 }

@@ -3,9 +3,9 @@ package db;
 import model.FruitTransaction;
 import storage.Storage;
 import strategy.FruitStrategy;
-import strategy.OperationHandler;
 
-import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.Map;
 
 public class FruitShopDaoCsvImpl implements FruitShopDao {
     private FruitStrategy fruitStrategy;
@@ -17,10 +17,15 @@ public class FruitShopDaoCsvImpl implements FruitShopDao {
     @Override
     public void add(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
-            Storage.fruitQuantities.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+            fruitStrategy.getOperationHandler(fruitTransaction.getOperation()).handleOperation(fruitTransaction);
             return;
         }
         update(fruitTransaction);
+    }
+
+    @Override
+    public Map<String, Integer> getAllFruitsAndQuantities() {
+        return Collections.unmodifiableMap(Storage.fruitQuantities);
     }
 
     @Override

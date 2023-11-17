@@ -3,8 +3,6 @@ package service.impl;
 import db.FruitShopDao;
 import model.FruitTransaction;
 import service.ProcessCsvDataService;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
@@ -19,9 +17,7 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
     }
 
     @Override
-    public List<FruitTransaction> processData(List<String> rawData) {
-        List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
-
+    public void processData(List<String> rawData) {
         for(int i = 1; i < rawData.size(); i++) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] csvFields = rawData.get(i).split(SEPARATOR);
@@ -29,8 +25,8 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
             fruitTransaction.setOperation(FruitTransaction.Operation.getOperationFromCode(csvFields[OPERATION_INDEX]));
             fruitTransaction.setFruit(csvFields[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(csvFields[QUANTITY_INDEX]));
-            fruitTransactionsList.add(fruitTransaction);
+
+            fruitShopDao.add(fruitTransaction);
         }
-        return fruitTransactionsList;
     }
 }
