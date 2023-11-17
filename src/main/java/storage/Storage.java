@@ -1,10 +1,8 @@
 package storage;
 
-import model.FruitTransaction;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    public static final List<FruitTransaction> transactions = new ArrayList<>();
+    public static final Map<String, Integer> fruitQuantities = new HashMap<>();
 }
