@@ -17,7 +17,8 @@ public class FruitShopDaoCsvImpl implements FruitShopDao {
     @Override
     public void add(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
-            fruitStrategy.getOperationHandler(fruitTransaction.getOperation()).handleOperation(fruitTransaction);
+            fruitStrategy.getOperationHandler(fruitTransaction.getOperation())
+                    .handleOperation(fruitTransaction);
             return;
         }
         update(fruitTransaction);
@@ -30,6 +31,7 @@ public class FruitShopDaoCsvImpl implements FruitShopDao {
 
     @Override
     public void update(FruitTransaction fruitTransaction) {
-        fruitStrategy.getOperationHandler(fruitTransaction.getOperation()).handleOperation(fruitTransaction);
+        fruitStrategy.getOperationHandler(fruitTransaction.getOperation())
+                .handleOperation(fruitTransaction);
     }
 }
