@@ -1,9 +1,9 @@
 package service.impl;
 
 import db.FruitShopDao;
+import java.util.List;
 import model.FruitTransaction;
 import service.ProcessCsvDataService;
-import java.util.List;
 
 public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
     private static final String SEPARATOR = ",";
@@ -21,14 +21,14 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
         if (rawData == null) {
             throw new RuntimeException("Incorrect data passed!");
         }
-        for(int i = 1; i < rawData.size(); i++) {
+        for (int i = 1; i < rawData.size(); i++) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] csvFields = rawData.get(i).split(SEPARATOR);
 
             fruitTransaction.setOperation(FruitTransaction.Operation
                     .getOperationFromCode(csvFields[OPERATION_INDEX]));
             fruitTransaction.setFruit(csvFields[FRUIT_INDEX]);
-            if(Integer.parseInt(csvFields[QUANTITY_INDEX]) < 0) {
+            if (Integer.parseInt(csvFields[QUANTITY_INDEX]) < 0) {
                 throw new RuntimeException("Quantity can't be less then 0!");
             }
             fruitTransaction.setQuantity(Integer.parseInt(csvFields[QUANTITY_INDEX]));

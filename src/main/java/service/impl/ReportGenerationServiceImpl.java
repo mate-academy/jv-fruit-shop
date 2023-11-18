@@ -1,10 +1,10 @@
 package service.impl;
 
 import db.FruitShopDao;
-import service.ReportGenerationService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import service.ReportGenerationService;
 
 public class ReportGenerationServiceImpl implements ReportGenerationService {
     private static final String FIRST_REPORT_LINE = "fruit,quantity";

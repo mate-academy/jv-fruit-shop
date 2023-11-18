@@ -1,5 +1,8 @@
 import db.FruitShopDao;
 import db.FruitShopDaoCsvImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import service.CsvFileReaderService;
 import service.CsvFileWriterService;
@@ -9,10 +12,13 @@ import service.impl.CsvFileReaderServiceImpl;
 import service.impl.CsvFileWriterServiceImpl;
 import service.impl.ProcessCsvDataServiceImpl;
 import service.impl.ReportGenerationServiceImpl;
-import strategy.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import strategy.BalanceOperationHandler;
+import strategy.FruitStrategy;
+import strategy.FruitStrategyImpl;
+import strategy.OperationHandler;
+import strategy.PurchaseOperationHandler;
+import strategy.ReturnOperationHandler;
+import strategy.SupplyOperationHandler;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/resources/input_file.csv";
@@ -21,7 +27,8 @@ public class Main {
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
 
@@ -33,7 +40,8 @@ public class Main {
         ProcessCsvDataService processService = new ProcessCsvDataServiceImpl(fruitShopDao);
         processService.processData(list);
 
-        ReportGenerationService reportGenerationService = new ReportGenerationServiceImpl(fruitShopDao);
+        ReportGenerationService reportGenerationService =
+                new ReportGenerationServiceImpl(fruitShopDao);
         List<String> report = reportGenerationService.generateReport();
 
         CsvFileWriterService writerService = new CsvFileWriterServiceImpl();

@@ -1,11 +1,10 @@
 package db;
 
+import java.util.Collections;
+import java.util.Map;
 import model.FruitTransaction;
 import storage.Storage;
 import strategy.FruitStrategy;
-
-import java.util.Collections;
-import java.util.Map;
 
 public class FruitShopDaoCsvImpl implements FruitShopDao {
     private FruitStrategy fruitStrategy;

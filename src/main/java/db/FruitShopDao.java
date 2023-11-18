@@ -1,8 +1,7 @@
 package db;
 
-import model.FruitTransaction;
-
 import java.util.Map;
+import model.FruitTransaction;
 
 public interface FruitShopDao {
     void add(FruitTransaction fruitTransaction);
