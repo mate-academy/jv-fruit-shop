@@ -4,13 +4,15 @@ import service.CsvFileReaderService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class CsvFileReaderServiceImpl implements CsvFileReaderService {
     @Override
     public List<String> readFromCsvFile(String fileName) {
-        List<String> fruitTransactions = new ArrayList<>();
+        if (fileName == null || !fileName.endsWith(".csv")) {
+            throw new RuntimeException("Incorrect file name or extension!");
+        }
+        List<String> fruitTransactions;
         try {
             fruitTransactions = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {

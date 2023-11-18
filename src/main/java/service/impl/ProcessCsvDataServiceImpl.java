@@ -18,14 +18,20 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
 
     @Override
     public void processData(List<String> rawData) {
+        if (rawData == null) {
+            throw new RuntimeException("Incorrect data passed!");
+        }
         for(int i = 1; i < rawData.size(); i++) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] csvFields = rawData.get(i).split(SEPARATOR);
 
-            fruitTransaction.setOperation(FruitTransaction.Operation.getOperationFromCode(csvFields[OPERATION_INDEX]));
+            fruitTransaction.setOperation(FruitTransaction.Operation
+                    .getOperationFromCode(csvFields[OPERATION_INDEX]));
             fruitTransaction.setFruit(csvFields[FRUIT_INDEX]);
+            if(Integer.parseInt(csvFields[QUANTITY_INDEX]) < 0) {
+                throw new RuntimeException("Quantity can't be less then 0!");
+            }
             fruitTransaction.setQuantity(Integer.parseInt(csvFields[QUANTITY_INDEX]));
-
             fruitShopDao.add(fruitTransaction);
         }
     }

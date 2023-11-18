@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_NAME = "src/main/resources/input_file.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/output_file.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -23,18 +26,17 @@ public class Main {
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlerMap);
-
         FruitShopDao fruitShopDao = new FruitShopDaoCsvImpl(fruitStrategy);
-        CsvFileReaderService service = new CsvFileReaderServiceImpl();
-        List<String> list = service.readFromCsvFile("input_file.csv");
+        CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
+        List<String> list = readerService.readFromCsvFile(INPUT_FILE_NAME);
 
-        ProcessCsvDataService service1 = new ProcessCsvDataServiceImpl(fruitShopDao);
-        service1.processData(list);
+        ProcessCsvDataService processService = new ProcessCsvDataServiceImpl(fruitShopDao);
+        processService.processData(list);
 
-        ReportGenerationService service2 = new ReportGenerationServiceImpl(fruitShopDao);
-        List<String> report = service2.generateReport();
+        ReportGenerationService reportGenerationService = new ReportGenerationServiceImpl(fruitShopDao);
+        List<String> report = reportGenerationService.generateReport();
 
-        CsvFileWriterService service3 = new CsvFileWriterServiceImpl();
-        service3.writeToNewCsvFile("some_outputfile2.csv", report);
+        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
+        writerService.writeToNewCsvFile(OUTPUT_FILE_NAME, report);
     }
 }
