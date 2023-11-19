@@ -5,7 +5,6 @@ import core.basesyntax.db.FruitDB;
 import core.basesyntax.strategy.TransactionProcessor;
 
 public class ReturnTransactionStrategy implements TransactionProcessor {
-
     @Override
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();

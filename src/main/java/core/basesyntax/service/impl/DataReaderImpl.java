@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataReaderImpl implements DataReader<String> {
-
     @Override
     public List<String> dataFromFile(String fromFile) {
         List<String> lines = new ArrayList<>();
