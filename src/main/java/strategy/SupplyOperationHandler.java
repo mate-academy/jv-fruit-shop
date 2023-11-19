@@ -1,8 +1,6 @@
 package strategy;
 
 import db.FruitShopDao;
-import model.FruitTransaction;
-import storage.Storage;
 
 public class SupplyOperationHandler implements OperationHandler {
     private FruitShopDao fruitShopDao;

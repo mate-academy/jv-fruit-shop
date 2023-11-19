@@ -2,10 +2,10 @@ package service.impl;
 
 import db.FruitShopDao;
 import java.util.List;
-import model.FruitTransaction;
+
+import model.Operation;
 import service.ProcessCsvDataService;
 import strategy.FruitStrategy;
-import strategy.OperationHandler;
 
 public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
     private static final String SEPARATOR = ",";
@@ -31,11 +31,10 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
             if (Integer.parseInt(csvFields[QUANTITY_INDEX]) < 0) {
                 throw new RuntimeException("Quantity can't be less then 0!");
             }
-            int quantity = Integer.parseInt(csvFields[QUANTITY_INDEX]);
-            int newQuantity = fruitStrategy.getOperationHandler(FruitTransaction.Operation
+            int quantityFromRow = Integer.parseInt(csvFields[QUANTITY_INDEX]);
+            int newQuantity = fruitStrategy.getOperationHandler(Operation
                             .getOperationFromCode(csvFields[OPERATION_INDEX]))
-                    .handleOperation(fruitName, quantity);
-
+                    .handleOperation(fruitName, quantityFromRow);
             fruitShopDao.add(fruitName, newQuantity);
         }
     }

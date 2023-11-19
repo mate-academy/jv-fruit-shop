@@ -3,7 +3,8 @@ import db.FruitShopDaoCsvImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
+
+import model.Operation;
 import service.CsvFileReaderService;
 import service.CsvFileWriterService;
 import service.ProcessCsvDataService;
@@ -27,12 +28,12 @@ public class Main {
     public static void main(String[] args) {
         FruitShopDao fruitShopDao = new FruitShopDaoCsvImpl();
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler(fruitShopDao));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitShopDao));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitShopDao));
+        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler(fruitShopDao));
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler(fruitShopDao));
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlerMap);
 
