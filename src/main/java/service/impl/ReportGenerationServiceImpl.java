@@ -3,7 +3,7 @@ package service.impl;
 import db.FruitShopDao;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 import service.ReportGenerationService;
 
 public class ReportGenerationServiceImpl implements ReportGenerationService {
@@ -18,14 +18,10 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
     public List<String> generateReport() {
         List<String> createReport = new ArrayList<>();
         createReport.add(REPORT_FIRST_LINE);
-        Map<String, Integer> allFruitsAndQuantities = fruitShopDao.getAllFruitsAndQuantities();
-        StringBuilder builder = new StringBuilder();
-
-        for (Map.Entry<String, Integer> entry : allFruitsAndQuantities.entrySet()) {
-            builder.append(entry.getKey()).append(",").append(entry.getValue());
-            createReport.add(builder.toString());
-            builder.setLength(0);
-        }
+        createReport.addAll(fruitShopDao.getAllFruitsAndQuantities()
+                .entrySet().stream()
+                .map(entry -> entry.getKey() + "," + entry.getValue())
+                .collect(Collectors.toList()));
         return createReport;
     }
 }

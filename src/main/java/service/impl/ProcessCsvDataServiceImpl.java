@@ -20,22 +20,27 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
     }
 
     @Override
-    public void processData(List<String> rawData) {
+    public String processData(List<String> rawData) {
         if (rawData == null) {
             throw new RuntimeException("Incorrect data passed!");
         }
         for (int i = 1; i < rawData.size(); i++) {
-            String[] csvFields = rawData.get(i).split(SEPARATOR);
-            String fruitName = csvFields[FRUIT_INDEX];
-            int quantityFromCsvRow = Integer.parseInt(csvFields[QUANTITY_INDEX]);
-
-            if (quantityFromCsvRow < 0) {
-                throw new RuntimeException("Quantity can't be less then 0!");
-            }
-            int newQuantity = fruitStrategy.getOperationHandler(Operation
-                            .getOperationFromCode(csvFields[OPERATION_INDEX]))
-                    .handleOperation(fruitName, quantityFromCsvRow);
-            fruitShopDao.add(fruitName, newQuantity);
+            processCsvRow(rawData.get(i));
         }
+        return fruitShopDao.getAllFruitsAndQuantities().entrySet().stream().toList().toString();
+    }
+
+    private void processCsvRow(String csvRow) {
+        String[] csvFields = csvRow.split(SEPARATOR);
+        String fruitName = csvFields[FRUIT_INDEX];
+        int quantityFromCsvRow = Integer.parseInt(csvFields[QUANTITY_INDEX]);
+
+        if (quantityFromCsvRow < 0) {
+            throw new RuntimeException("Quantity can't be less then 0!");
+        }
+        int newQuantity = fruitStrategy.getOperationHandler(Operation
+                        .getOperationFromCode(csvFields[OPERATION_INDEX]))
+                .handleOperation(fruitName, quantityFromCsvRow);
+        fruitShopDao.add(fruitName, newQuantity);
     }
 }
