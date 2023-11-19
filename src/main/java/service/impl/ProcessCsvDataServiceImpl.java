@@ -2,7 +2,6 @@ package service.impl;
 
 import db.FruitShopDao;
 import java.util.List;
-
 import model.Operation;
 import service.ProcessCsvDataService;
 import strategy.FruitStrategy;
@@ -28,13 +27,14 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
         for (int i = 1; i < rawData.size(); i++) {
             String[] csvFields = rawData.get(i).split(SEPARATOR);
             String fruitName = csvFields[FRUIT_INDEX];
-            if (Integer.parseInt(csvFields[QUANTITY_INDEX]) < 0) {
+            int quantityFromCsvRow = Integer.parseInt(csvFields[QUANTITY_INDEX]);
+
+            if (quantityFromCsvRow < 0) {
                 throw new RuntimeException("Quantity can't be less then 0!");
             }
-            int quantityFromRow = Integer.parseInt(csvFields[QUANTITY_INDEX]);
             int newQuantity = fruitStrategy.getOperationHandler(Operation
                             .getOperationFromCode(csvFields[OPERATION_INDEX]))
-                    .handleOperation(fruitName, quantityFromRow);
+                    .handleOperation(fruitName, quantityFromCsvRow);
             fruitShopDao.add(fruitName, newQuantity);
         }
     }

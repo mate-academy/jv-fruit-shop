@@ -1,8 +1,7 @@
 package strategy;
 
-import model.Operation;
-
 import java.util.Map;
+import model.Operation;
 
 public class FruitStrategyImpl implements FruitStrategy {
     private Map<Operation, OperationHandler> operationHandlerMap;

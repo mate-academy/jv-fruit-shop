@@ -7,7 +7,7 @@ import java.util.Map;
 import service.ReportGenerationService;
 
 public class ReportGenerationServiceImpl implements ReportGenerationService {
-    private static final String FIRST_REPORT_LINE = "fruit,quantity";
+    private static final String REPORT_FIRST_LINE = "fruit,quantity";
     private FruitShopDao fruitShopDao;
 
     public ReportGenerationServiceImpl(FruitShopDao fruitShopDao) {
@@ -17,7 +17,7 @@ public class ReportGenerationServiceImpl implements ReportGenerationService {
     @Override
     public List<String> generateReport() {
         List<String> createReport = new ArrayList<>();
-        createReport.add(FIRST_REPORT_LINE);
+        createReport.add(REPORT_FIRST_LINE);
         Map<String, Integer> allFruitsAndQuantities = fruitShopDao.getAllFruitsAndQuantities();
         StringBuilder builder = new StringBuilder();
 

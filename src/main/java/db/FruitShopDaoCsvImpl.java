@@ -1,9 +1,8 @@
 package db;
 
-import storage.Storage;
-
 import java.util.Collections;
 import java.util.Map;
+import storage.Storage;
 
 public class FruitShopDaoCsvImpl implements FruitShopDao {
 

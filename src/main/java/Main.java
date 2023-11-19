@@ -3,7 +3,6 @@ import db.FruitShopDaoCsvImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import model.Operation;
 import service.CsvFileReaderService;
 import service.CsvFileWriterService;
@@ -40,7 +39,8 @@ public class Main {
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String> list = readerService.readFromCsvFile(INPUT_FILE_NAME);
 
-        ProcessCsvDataService processService = new ProcessCsvDataServiceImpl(fruitShopDao, fruitStrategy);
+        ProcessCsvDataService processService =
+                new ProcessCsvDataServiceImpl(fruitShopDao, fruitStrategy);
         processService.processData(list);
 
         ReportGenerationService reportGenerationService =

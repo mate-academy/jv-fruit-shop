@@ -8,6 +8,7 @@ public class ReturnOperationHandler implements OperationHandler {
     public ReturnOperationHandler(FruitShopDao fruitShopDao) {
         this.fruitShopDao = fruitShopDao;
     }
+
     @Override
     public int handleOperation(String fruit, int quantity) {
         int oldQuantity = fruitShopDao.getFruitQuantity(fruit);
