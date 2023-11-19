@@ -1,13 +1,18 @@
 package strategy;
 
+import db.FruitShopDao;
 import model.FruitTransaction;
 import storage.Storage;
 
 public class ReturnOperationHandler implements OperationHandler {
+    private FruitShopDao fruitShopDao;
+
+    public ReturnOperationHandler(FruitShopDao fruitShopDao) {
+        this.fruitShopDao = fruitShopDao;
+    }
     @Override
-    public void handleOperation(FruitTransaction fruitTransaction) {
-        Integer quantity = Storage.fruitQuantities.get(fruitTransaction.getFruit());
-        Integer newQuantity = quantity + fruitTransaction.getQuantity();
-        Storage.fruitQuantities.put(fruitTransaction.getFruit(), newQuantity);
+    public int handleOperation(String fruit, int quantity) {
+        int oldQuantity = fruitShopDao.getFruitQuantity(fruit);
+        return oldQuantity + quantity;
     }
 }

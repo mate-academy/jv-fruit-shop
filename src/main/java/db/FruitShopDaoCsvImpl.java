@@ -1,26 +1,15 @@
 package db;
 
+import storage.Storage;
+
 import java.util.Collections;
 import java.util.Map;
-import model.FruitTransaction;
-import storage.Storage;
-import strategy.FruitStrategy;
 
 public class FruitShopDaoCsvImpl implements FruitShopDao {
-    private FruitStrategy fruitStrategy;
-
-    public FruitShopDaoCsvImpl(FruitStrategy fruitStrategy) {
-        this.fruitStrategy = fruitStrategy;
-    }
 
     @Override
-    public void add(FruitTransaction fruitTransaction) {
-        if (fruitTransaction.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
-            fruitStrategy.getOperationHandler(fruitTransaction.getOperation())
-                    .handleOperation(fruitTransaction);
-            return;
-        }
-        update(fruitTransaction);
+    public void add(String fruit, Integer quantity) {
+        Storage.fruitQuantities.put(fruit, quantity);
     }
 
     @Override
@@ -29,8 +18,7 @@ public class FruitShopDaoCsvImpl implements FruitShopDao {
     }
 
     @Override
-    public void update(FruitTransaction fruitTransaction) {
-        fruitStrategy.getOperationHandler(fruitTransaction.getOperation())
-                .handleOperation(fruitTransaction);
+    public Integer getFruitQuantity(String fruit) {
+        return Storage.fruitQuantities.get(fruit);
     }
 }

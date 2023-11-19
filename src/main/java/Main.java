@@ -25,19 +25,21 @@ public class Main {
     private static final String OUTPUT_FILE_NAME = "src/main/resources/output_file.csv";
 
     public static void main(String[] args) {
+        FruitShopDao fruitShopDao = new FruitShopDaoCsvImpl();
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+                new PurchaseOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitShopDao));
+        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitShopDao));
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlerMap);
-        FruitShopDao fruitShopDao = new FruitShopDaoCsvImpl(fruitStrategy);
+
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String> list = readerService.readFromCsvFile(INPUT_FILE_NAME);
 
-        ProcessCsvDataService processService = new ProcessCsvDataServiceImpl(fruitShopDao);
+        ProcessCsvDataService processService = new ProcessCsvDataServiceImpl(fruitShopDao, fruitStrategy);
         processService.processData(list);
 
         ReportGenerationService reportGenerationService =

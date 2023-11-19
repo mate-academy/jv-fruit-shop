@@ -1,16 +1,20 @@
 package strategy;
 
-import model.FruitTransaction;
-import storage.Storage;
+import db.FruitShopDao;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private FruitShopDao fruitShopDao;
+
+    public PurchaseOperationHandler(FruitShopDao fruitShopDao) {
+        this.fruitShopDao = fruitShopDao;
+    }
     @Override
-    public void handleOperation(FruitTransaction fruitTransaction) {
-        Integer quantity = Storage.fruitQuantities.get(fruitTransaction.getFruit());
-        Integer newQuantity = quantity - fruitTransaction.getQuantity();
+    public int handleOperation(String fruit, int quantity) {
+        int oldQuantity = fruitShopDao.getFruitQuantity(fruit);
+        int newQuantity = oldQuantity - quantity;
         if (newQuantity < 0) {
             throw new RuntimeException("Balance can't be negative!");
         }
-        Storage.fruitQuantities.put(fruitTransaction.getFruit(), newQuantity);
+        return newQuantity;
     }
 }
