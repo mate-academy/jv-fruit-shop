@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -14,11 +13,9 @@ public class ProcessServiceImpl implements ProcessService {
     }
 
     @Override
-    public Storage processObjects(List<FruitTransaction> data) {
-        Storage storage = new Storage();
+    public void processObjects(List<FruitTransaction> data) {
         for (FruitTransaction transaction : data) {
-            operationStrategy.get(transaction).perform(transaction, storage);
+            operationStrategy.get(transaction).perform(transaction);
         }
-        return storage;
     }
 }

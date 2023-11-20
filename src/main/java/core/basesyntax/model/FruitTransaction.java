@@ -9,9 +9,7 @@ public class FruitTransaction {
     private int quantity;
 
     public FruitTransaction(String operation, String fruit, int quantity) {
-        this.operation = Arrays.stream(Operation.values())
-                .filter(o -> o.getCode().equals(operation))
-                .findFirst().orElseThrow(NoSuchElementException::new);
+        this.operation = Operation.getOption(operation);
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -42,6 +40,12 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getOption(String option) {
+            return Arrays.stream(Operation.values())
+                    .filter(o -> o.getCode().equals(option))
+                    .findFirst().orElseThrow(NoSuchElementException::new);
         }
     }
 }

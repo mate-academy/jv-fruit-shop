@@ -2,13 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ActivitiesDao;
 import core.basesyntax.dao.ActivitiesDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertorService;
+import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ProcessService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.ConvertorServiceImpl;
+import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ProcessServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
@@ -38,7 +37,7 @@ public class HelloWorld {
         operationPerformerMap.put(FruitTransaction.Operation.SUPPLY,
                 new OperationSupplyPerformer());
 
-        ConvertorService convertorService = new ConvertorServiceImpl();
+        ParserService parserService = new ParserServiceImpl();
         ReaderService readerService = new ReaderServiceImpl();
         ActivitiesDao activitiesDao = new ActivitiesDaoImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationPerformerMap);
@@ -46,9 +45,9 @@ public class HelloWorld {
         ReportService reportService = new ReportServiceImpl();
 
         List<String> fileData = readerService.read(RECORD_PATH);
-        List<FruitTransaction> fruitTransactions = convertorService.convertData(fileData);
-        Storage storage = shopService.processObjects(fruitTransactions);
-        String report = reportService.createReport(storage);
+        List<FruitTransaction> fruitTransactions = parserService.parseData(fileData);
+        shopService.processObjects(fruitTransactions);
+        String report = reportService.createReport();
         activitiesDao.write(report, REPORT_PATH);
     }
 }

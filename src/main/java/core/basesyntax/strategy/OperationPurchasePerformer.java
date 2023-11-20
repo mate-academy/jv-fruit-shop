@@ -5,8 +5,8 @@ import core.basesyntax.model.FruitTransaction;
 
 public class OperationPurchasePerformer implements OperationPerformer {
     @Override
-    public void perform(FruitTransaction transaction, Storage storage) {
-        storage.getFruits().compute(transaction.getFruit(),
+    public void perform(FruitTransaction transaction) {
+        Storage.getFruits().compute(transaction.getFruit(),
                 (key, val) -> val - transaction.getQuantity());
     }
 }
