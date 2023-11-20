@@ -1,24 +1,26 @@
-import db.FruitShopDao;
-import db.FruitShopDaoCsvImpl;
+package core.basesyntax;
+
+import core.basesyntax.db.FruitShopDao;
+import core.basesyntax.db.FruitShopDaoCsvImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import model.Operation;
-import service.CsvFileReaderService;
-import service.CsvFileWriterService;
-import service.ProcessCsvDataService;
-import service.ReportGenerationService;
-import service.impl.CsvFileReaderServiceImpl;
-import service.impl.CsvFileWriterServiceImpl;
-import service.impl.ProcessCsvDataServiceImpl;
-import service.impl.ReportGenerationServiceImpl;
-import strategy.BalanceOperationHandler;
-import strategy.FruitStrategy;
-import strategy.FruitStrategyImpl;
-import strategy.OperationHandler;
-import strategy.PurchaseOperationHandler;
-import strategy.ReturnOperationHandler;
-import strategy.SupplyOperationHandler;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.CsvFileWriterService;
+import core.basesyntax.service.ProcessCsvDataService;
+import core.basesyntax.service.ReportGenerationService;
+import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
+import core.basesyntax.service.impl.ProcessCsvDataServiceImpl;
+import core.basesyntax.service.impl.ReportGenerationServiceImpl;
+import core.basesyntax.strategy.BalanceOperationHandler;
+import core.basesyntax.strategy.FruitStrategy;
+import core.basesyntax.strategy.FruitStrategyImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperationHandler;
+import core.basesyntax.strategy.ReturnOperationHandler;
+import core.basesyntax.strategy.SupplyOperationHandler;
 
 public class Main {
     private static final String INPUT_FILE_NAME = "src/main/resources/input_file.csv";

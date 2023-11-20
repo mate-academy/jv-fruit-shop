@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import db.FruitShopDao;
+import core.basesyntax.db.FruitShopDao;
 import java.util.List;
-import model.Operation;
-import service.ProcessCsvDataService;
-import strategy.FruitStrategy;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.ProcessCsvDataService;
+import core.basesyntax.strategy.FruitStrategy;
 
 public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
     private static final String SEPARATOR = ",";

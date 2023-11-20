@@ -1,6 +1,6 @@
-package strategy;
+package core.basesyntax.strategy;
 
-import db.FruitShopDao;
+import core.basesyntax.db.FruitShopDao;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private FruitShopDao fruitShopDao;

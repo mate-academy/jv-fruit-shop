@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
-import db.FruitShopDao;
+import core.basesyntax.db.FruitShopDao;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import service.ReportGenerationService;
+import core.basesyntax.service.ReportGenerationService;
 
 public class ReportGenerationServiceImpl implements ReportGenerationService {
     private static final String REPORT_FIRST_LINE = "fruit,quantity";

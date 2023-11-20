@@ -1,4 +1,4 @@
-package strategy;
+package core.basesyntax.strategy;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override

@@ -1,8 +1,8 @@
-package db;
+package core.basesyntax.db;
 
 import java.util.Collections;
 import java.util.Map;
-import storage.Storage;
+import core.basesyntax.storage.Storage;
 
 public class FruitShopDaoCsvImpl implements FruitShopDao {
     @Override
