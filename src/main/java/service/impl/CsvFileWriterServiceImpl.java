@@ -1,11 +1,11 @@
-package core.basesyntax.service.impl;
+package service.impl;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
-import core.basesyntax.service.CsvFileWriterService;
+import service.CsvFileWriterService;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
     @Override

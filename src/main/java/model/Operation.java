@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package model;
 
 import java.util.NoSuchElementException;
 
