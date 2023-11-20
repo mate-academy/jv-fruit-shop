@@ -3,7 +3,7 @@ package db;
 import java.util.Map;
 
 public interface FruitShopDao {
-    void add(String fruit, Integer quantity);
+    void put(String fruit, Integer quantity);
 
     Map<String, Integer> getAllFruitsAndQuantities();
 

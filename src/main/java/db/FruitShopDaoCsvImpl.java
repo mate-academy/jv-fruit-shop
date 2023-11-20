@@ -6,7 +6,7 @@ import storage.Storage;
 
 public class FruitShopDaoCsvImpl implements FruitShopDao {
     @Override
-    public void add(String fruit, Integer quantity) {
+    public void put(String fruit, Integer quantity) {
         Storage.fruitQuantities.put(fruit, quantity);
     }
 

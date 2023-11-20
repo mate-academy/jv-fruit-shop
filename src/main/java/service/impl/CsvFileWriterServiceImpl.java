@@ -16,13 +16,9 @@ public class CsvFileWriterServiceImpl implements CsvFileWriterService {
             throw new RuntimeException("Incorrect file name, extension or data!");
         }
         File file = new File(fileName);
-        StringBuilder builder = new StringBuilder();
 
-        for (String line : dataToWrite) {
-            builder.append(line).append(System.lineSeparator());
-        }
         try {
-            Files.write(file.toPath(), builder.toString().getBytes(), StandardOpenOption.CREATE);
+            Files.write(file.toPath(), dataToWrite, StandardOpenOption.CREATE);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to a file " + fileName, e);
         }

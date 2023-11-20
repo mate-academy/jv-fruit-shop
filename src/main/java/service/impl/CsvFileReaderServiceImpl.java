@@ -12,12 +12,10 @@ public class CsvFileReaderServiceImpl implements CsvFileReaderService {
         if (fileName == null || !fileName.endsWith(".csv")) {
             throw new RuntimeException("Incorrect file name or extension!");
         }
-        List<String> fruitTransactions;
         try {
-            fruitTransactions = Files.readAllLines(Path.of(fileName));
+            return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file named: " + fileName, e);
         }
-        return fruitTransactions;
     }
 }

@@ -41,6 +41,6 @@ public class ProcessCsvDataServiceImpl implements ProcessCsvDataService {
         int newQuantity = fruitStrategy.getOperationHandler(Operation
                         .getOperationFromCode(csvFields[OPERATION_INDEX]))
                 .handleOperation(fruitName, quantityFromCsvRow);
-        fruitShopDao.add(fruitName, newQuantity);
+        fruitShopDao.put(fruitName, newQuantity);
     }
 }
