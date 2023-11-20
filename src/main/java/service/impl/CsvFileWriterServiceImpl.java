@@ -8,7 +8,6 @@ import java.util.List;
 import service.CsvFileWriterService;
 
 public class CsvFileWriterServiceImpl implements CsvFileWriterService {
-
     @Override
     public void writeToNewCsvFile(String fileName, List<String> dataToWrite) {
         if (fileName == null
