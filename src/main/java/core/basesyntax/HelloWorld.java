@@ -23,7 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main {
+public class HelloWorld {
     private static final String RECORD_PATH = "src\\main\\resources\\infoRecord.csv";
     private static final String REPORT_PATH = "src\\main\\resources\\report.csv";
 
