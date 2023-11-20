@@ -3,14 +3,17 @@ import db.FruitShopDaoCsvImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
 import model.Operation;
+import service.ConvertToFruitTransactionService;
 import service.CsvFileReaderService;
 import service.CsvFileWriterService;
-import service.ProcessCsvDataService;
+import service.FruitTransactionService;
 import service.ReportGenerationService;
+import service.impl.ConverterToFruitTransactionImpl;
 import service.impl.CsvFileReaderServiceImpl;
 import service.impl.CsvFileWriterServiceImpl;
-import service.impl.ProcessCsvDataServiceImpl;
+import service.impl.FruitTransactionServiceImpl;
 import service.impl.ReportGenerationServiceImpl;
 import strategy.BalanceOperationHandler;
 import strategy.FruitStrategy;
@@ -39,9 +42,12 @@ public class Main {
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
         List<String> list = readerService.readFromCsvFile(INPUT_FILE_NAME);
 
-        ProcessCsvDataService processService =
-                new ProcessCsvDataServiceImpl(fruitShopDao, fruitStrategy);
-        processService.processData(list);
+        ConvertToFruitTransactionService converterService = new ConverterToFruitTransactionImpl();
+        List<FruitTransaction> convertedList = converterService.convert(list);
+
+        FruitTransactionService processService =
+                new FruitTransactionServiceImpl(fruitShopDao, fruitStrategy);
+        processService.processTransactions(convertedList);
 
         ReportGenerationService reportGenerationService =
                 new ReportGenerationServiceImpl(fruitShopDao);
