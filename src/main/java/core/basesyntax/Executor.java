@@ -25,9 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Executor {
     private static final String INPUT_FILE = "src/main/resources/input.csv";
     private static final String INPUT_FILE_HEADER = "type,fruit,quantity";
