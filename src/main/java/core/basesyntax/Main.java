@@ -1,11 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.service.DataMaker;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.LineParser;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.impl.DataMakerImpl;
 import core.basesyntax.service.impl.DataReaderImpl;
 import core.basesyntax.service.impl.DataWriterImpl;
 import core.basesyntax.service.impl.LineParserImpl;
@@ -23,9 +21,7 @@ public class Main {
         FruitTransactionStrategy transactionStrategy = new FruitTransactionStrategy();
         transactionStrategy.executeTransaction(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.makeReport();
-        DataMaker dataMaker = new DataMakerImpl();
-        String data = dataMaker.getDataToWrite(report);
+        String data = reportService.makeReport();
         DataWriter dataWriter = new DataWriterImpl();
         String toFile = "src/main/resources/report.csv";
         dataWriter.writeData(data, toFile);

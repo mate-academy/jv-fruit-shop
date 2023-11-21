@@ -8,16 +8,12 @@ public class PurchaseTransactionStrategy implements TransactionProcessor {
     @Override
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        int quantity = transaction.getQuantity();
-        if (FruitDB.FRUIT_DATA_BASE.containsKey(fruit)) {
-            int currentQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
-            if (currentQuantity >= quantity) {
-                FruitDB.FRUIT_DATA_BASE.put(fruit, currentQuantity - quantity);
-            } else {
-                System.out.println("Warning: Not enough " + fruit + " in inventory.");
-            }
-        } else {
-            System.out.println("Warning: " + fruit + " not found in inventory.");
+        int transactionQuantity = transaction.getQuantity();
+        int dbQuantity = FruitDB.FRUIT_DATA_BASE.getOrDefault(fruit, 0);
+        int newQuantity = dbQuantity - transactionQuantity;
+        if (newQuantity < 0) {
+            throw new RuntimeException("Warning: Not enough " + fruit + " in inventory.");
         }
+        FruitDB.FRUIT_DATA_BASE.put(fruit, newQuantity);
     }
 }

@@ -8,10 +8,10 @@ public class BalanceTransactionStrategy implements TransactionProcessor {
     @Override
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        int quantity = transaction.getQuantity();
-        if (FruitDB.FRUIT_DATA_BASE.containsKey(transaction.getFruit())) {
-            quantity += FruitDB.FRUIT_DATA_BASE.get(fruit);
+        if (FruitDB.FRUIT_DATA_BASE.containsKey(fruit)) {
+            FruitDB.FRUIT_DATA_BASE.get(fruit);
+        } else {
+            throw new RuntimeException("Warning: Not enough " + fruit + " in inventory.");
         }
-        FruitDB.FRUIT_DATA_BASE.put(fruit, quantity);
     }
 }
