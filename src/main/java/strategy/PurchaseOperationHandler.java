@@ -1,6 +1,7 @@
 package strategy;
 
 import db.FruitShopDao;
+import model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
     private FruitShopDao fruitShopDao;
@@ -10,12 +11,12 @@ public class PurchaseOperationHandler implements OperationHandler {
     }
 
     @Override
-    public int handleOperation(String fruit, int quantity) {
-        int oldQuantity = fruitShopDao.getFruitQuantity(fruit);
-        int newQuantity = oldQuantity - quantity;
+    public void handleOperation(FruitTransaction transaction) {
+        String fruit = transaction.getFruit();
+        int newQuantity = fruitShopDao.getFruitQuantity(fruit) - transaction.getQuantity();
         if (newQuantity < 0) {
             throw new RuntimeException("Balance can't be negative!");
         }
-        return newQuantity;
+        fruitShopDao.put(fruit, newQuantity);
     }
 }

@@ -31,7 +31,7 @@ public class Main {
         FruitShopDao fruitShopDao = new FruitShopDaoCsvImpl();
 
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler(fruitShopDao));
         operationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler(fruitShopDao));
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler(fruitShopDao));

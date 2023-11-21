@@ -18,16 +18,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     @Override
     public String processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            processSingleTransaction(transaction);
+            fruitStrategy.getOperationHandler(transaction.getOperation())
+                    .handleOperation(transaction);
         }
         return fruitShopDao.getAllFruitsAndQuantities().entrySet().stream().toList().toString();
-    }
-
-    private void processSingleTransaction(FruitTransaction fruitTransaction) {
-        String fruitName = fruitTransaction.getFruit();
-        int quantity = fruitTransaction.getQuantity();
-        int newQuantity = fruitStrategy.getOperationHandler(fruitTransaction.getOperation())
-                .handleOperation(fruitName, quantity);
-        fruitShopDao.put(fruitName, newQuantity);
     }
 }

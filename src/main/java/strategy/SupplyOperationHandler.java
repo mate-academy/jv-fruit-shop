@@ -1,6 +1,7 @@
 package strategy;
 
 import db.FruitShopDao;
+import model.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
     private FruitShopDao fruitShopDao;
@@ -10,8 +11,9 @@ public class SupplyOperationHandler implements OperationHandler {
     }
 
     @Override
-    public int handleOperation(String fruit, int quantity) {
-        int oldQuantity = fruitShopDao.getFruitQuantity(fruit);
-        return oldQuantity + quantity;
+    public void handleOperation(FruitTransaction transaction) {
+        String fruit = transaction.getFruit();
+        int newQuantity = fruitShopDao.getFruitQuantity(fruit) + transaction.getQuantity();
+        fruitShopDao.put(fruit, newQuantity);
     }
 }
