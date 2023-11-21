@@ -17,9 +17,6 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
 
     @Override
     public String processTransactions(List<FruitTransaction> transactions) {
-        if (transactions == null) {
-            throw new RuntimeException("Incorrect data passed!");
-        }
         for (FruitTransaction transaction : transactions) {
             processSingleTransaction(transaction);
         }

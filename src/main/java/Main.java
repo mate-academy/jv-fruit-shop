@@ -40,14 +40,14 @@ public class Main {
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlerMap);
 
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
-        List<String> list = readerService.readFromCsvFile(INPUT_FILE_NAME);
+        List<String> inputFileLines = readerService.readFromCsvFile(INPUT_FILE_NAME);
 
         ConvertToFruitTransactionService converterService = new ConverterToFruitTransactionImpl();
-        List<FruitTransaction> convertedList = converterService.convert(list);
+        List<FruitTransaction> transactions = converterService.convert(inputFileLines);
 
         FruitTransactionService processService =
                 new FruitTransactionServiceImpl(fruitShopDao, fruitStrategy);
-        processService.processTransactions(convertedList);
+        processService.processTransactions(transactions);
 
         ReportGenerationService reportGenerationService =
                 new ReportGenerationServiceImpl(fruitShopDao);

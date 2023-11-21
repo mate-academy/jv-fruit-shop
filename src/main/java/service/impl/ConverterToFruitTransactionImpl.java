@@ -14,9 +14,6 @@ public class ConverterToFruitTransactionImpl implements ConvertToFruitTransactio
 
     @Override
     public List<FruitTransaction> convert(List<String> rawData) {
-        if (rawData == null) {
-            throw new RuntimeException("Incorrect data passed!");
-        }
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = 1; i < rawData.size(); i++) {
             String[] csvFields = rawData.get(i).split(SEPARATOR);
