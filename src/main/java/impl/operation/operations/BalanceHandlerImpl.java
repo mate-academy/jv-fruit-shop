@@ -8,7 +8,7 @@ public class BalanceHandlerImpl implements OperationHandler {
     private final AccountDao accountDao = new AccountDaoImpl();
 
     @Override
-    public void updateQuantity(FruitTransaction fruitTransaction) {
-        accountDao.putInfoToStorage(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+    public void handleTransaction(FruitTransaction fruitTransaction) {
+        accountDao.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

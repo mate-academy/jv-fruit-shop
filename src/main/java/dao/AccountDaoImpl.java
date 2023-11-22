@@ -10,7 +10,7 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public void putInfoToStorage(String fruitName, Integer quantity) {
+    public void put(String fruitName, Integer quantity) {
         Storage.STORAGE.put(fruitName, quantity);
     }
 

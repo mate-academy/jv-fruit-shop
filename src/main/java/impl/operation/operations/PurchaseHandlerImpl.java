@@ -9,12 +9,12 @@ public class PurchaseHandlerImpl implements OperationHandler {
     private final AccountDao accountDao = new AccountDaoImpl();
 
     @Override
-    public void updateQuantity(FruitTransaction fruitTransaction) {
+    public void handleTransaction(FruitTransaction fruitTransaction) {
         Integer fruitQuantity = accountDao.getAmountByFruit(fruitTransaction.getFruit());
         Integer newFruitQuantity = fruitQuantity - fruitTransaction.getQuantity();
         if (newFruitQuantity < 0) {
             throw new NegativeBalanceException("Quantity can not be negative after purchase!");
         }
-        accountDao.putInfoToStorage(fruitTransaction.getFruit(), newFruitQuantity);
+        accountDao.put(fruitTransaction.getFruit(), newFruitQuantity);
     }
 }

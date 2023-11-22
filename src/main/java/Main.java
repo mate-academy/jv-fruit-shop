@@ -1,7 +1,7 @@
-import impl.CreateReportImpl;
-import impl.ParseFruitTransactionsImpl;
 import impl.ReadFileImpl;
-import impl.ToFruitTransactionImpl;
+import impl.ReportServiceImpl;
+import impl.TransactionParserImpl;
+import impl.TransactionServiceImpl;
 import impl.WriteToFileImpl;
 import impl.operation.OperationStrategy;
 import impl.operation.OperationStrategyImpl;
@@ -15,10 +15,10 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
-import service.CreateReportService;
-import service.ParseFruitTransactionService;
 import service.ReadFileService;
-import service.ToFruitTransactionService;
+import service.ReportService;
+import service.TransactionParser;
+import service.TransactionService;
 import service.WriteToFileService;
 
 public class Main {
@@ -34,17 +34,17 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         ReadFileService readFileService = new ReadFileImpl();
-        ToFruitTransactionService toFruitTransactionService = new ToFruitTransactionImpl();
-        ParseFruitTransactionService parseFruitTransactionService =
-                new ParseFruitTransactionsImpl(operationStrategy);
-        CreateReportService createReportService = new CreateReportImpl();
+        TransactionParser transactionParser = new TransactionParserImpl();
+        TransactionService transactionService =
+                new TransactionServiceImpl(operationStrategy);
+        ReportService reportService = new ReportServiceImpl();
         WriteToFileService writeToFileService = new WriteToFileImpl();
 
         List<String> fileInfo = readFileService.readFile(PATH_TO_INPUT_INFO_FILE);
-        List<FruitTransaction> fruitTransactions = toFruitTransactionService
-                .getListOfFruitTransactions(fileInfo);
-        parseFruitTransactionService.parseFruitTransactions(fruitTransactions);
-        String report = createReportService.report();
+        List<FruitTransaction> fruitTransactions = transactionParser
+                .parseTransactions(fileInfo);
+        transactionService.processTransactions(fruitTransactions);
+        String report = reportService.createReport();
         writeToFileService.writeToFile(PATH_TO_REPORT_FILE, report);
     }
 }

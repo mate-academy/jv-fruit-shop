@@ -3,20 +3,20 @@ package impl;
 import impl.operation.OperationStrategy;
 import java.util.List;
 import model.FruitTransaction;
-import service.ParseFruitTransactionService;
+import service.TransactionService;
 
-public class ParseFruitTransactionsImpl implements ParseFruitTransactionService {
+public class TransactionServiceImpl implements TransactionService {
     private final OperationStrategy operationStrategy;
 
-    public ParseFruitTransactionsImpl(OperationStrategy operationStrategy) {
+    public TransactionServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void parseFruitTransactions(List<FruitTransaction> fruitTransactions) {
+    public void processTransactions(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
             operationStrategy.getOperationHandler(fruitTransaction.getOperation())
-                    .updateQuantity(fruitTransaction);
+                    .handleTransaction(fruitTransaction);
         }
     }
 }

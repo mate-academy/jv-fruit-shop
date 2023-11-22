@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        return null;
+        throw new RuntimeException("The entered operation does not exist");
     }
 }

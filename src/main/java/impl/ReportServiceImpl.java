@@ -3,15 +3,15 @@ package impl;
 import dao.AccountDao;
 import dao.AccountDaoImpl;
 import java.util.Map;
-import service.CreateReportService;
+import service.ReportService;
 
-public class CreateReportImpl implements CreateReportService {
+public class ReportServiceImpl implements ReportService {
     private static final String HEADER = "fruit,quantity";
     private static final String COMA = ",";
     private final AccountDao accountDao = new AccountDaoImpl();
 
     @Override
-    public String report() {
+    public String createReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(HEADER);
         for (Map.Entry<String, Integer> entry : accountDao.getAll().entrySet()) {
