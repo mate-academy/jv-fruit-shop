@@ -20,7 +20,7 @@ public class FruitTransactionStrategy {
         processors.put(FruitTransaction.Operation.RETURN, new ReturnTransactionStrategy());
     }
 
-    public void executeTransaction(List<FruitTransaction> fruitTransactions) {
+    public void executeTransactions(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
             TransactionProcessor processor = processors.get(operation);

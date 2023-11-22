@@ -9,7 +9,7 @@ public class ReturnTransactionStrategy implements TransactionProcessor {
     public void process(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        int currentQuantity = FruitDB.FRUIT_DATA_BASE.get(fruit);
+        int currentQuantity = FruitDB.FRUIT_DATA_BASE.getOrDefault(fruit, 0);
         FruitDB.FRUIT_DATA_BASE.put(fruit, currentQuantity + quantity);
     }
 }

@@ -19,11 +19,11 @@ public class Main {
         LineParser lineParser = new LineParserImpl();
         List<FruitTransaction> fruitTransactions = lineParser.createListOfTransactions(inputData);
         FruitTransactionStrategy transactionStrategy = new FruitTransactionStrategy();
-        transactionStrategy.executeTransaction(fruitTransactions);
+        transactionStrategy.executeTransactions(fruitTransactions);
         ReportService reportService = new ReportServiceImpl();
-        String data = reportService.makeReport();
+        String report = reportService.makeReport();
         DataWriter dataWriter = new DataWriterImpl();
         String toFile = "src/main/resources/report.csv";
-        dataWriter.writeData(data, toFile);
+        dataWriter.writeData(report, toFile);
     }
 }
