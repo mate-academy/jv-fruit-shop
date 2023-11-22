@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class Executor {
     private static final String INPUT_FILE = "src/main/resources/input.csv";
-    private static final String INPUT_FILE_HEADER = "type,fruit,quantity";
+    private static final String REPORT_FILE = "src/main/resources/report.csv";
     private static final Storage FRUIT_STOCK = new Storage();
     private static final FruitStockDao FRUIT_STOCK_DAO = new FruitStockDaoImpl(FRUIT_STOCK);
 
@@ -41,17 +41,17 @@ public class Executor {
                 new PurchaseOperationHandlerImpl(FRUIT_STOCK_DAO));
         operationHandlerMap.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandlerImpl(FRUIT_STOCK_DAO));
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReaderService readerService = new ReaderServiceImpl();
         List<String> data = readerService.readFile(INPUT_FILE);
         ConverterService converterService = new ConverterServiceImpl();
+        List<FruitTransaction> fruitTransactions =
+                converterService.convertToFruitTransactions(data);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ProcessorService processorService = new ProcessorServiceImpl(operationStrategy);
-        data.stream()
-                .filter(string -> !string.equals(INPUT_FILE_HEADER))
-                .map(converterService::convertStringToFruitTransaction)
-                .forEach(processorService::process);
-        ReportCreator<Storage> reportCreator = new ReportCreatorImpl();
-        WriterService<String> writerService = new WriterMapToCsvServiceImpl();
-        writerService.writeReport(reportCreator.createReport(FRUIT_STOCK));
+        processorService.processTransactions(fruitTransactions);
+        ReportCreator reportCreator = new ReportCreatorImpl(FRUIT_STOCK);
+        String report = reportCreator.createReport();
+        WriterService writerService = new WriterMapToCsvServiceImpl();
+        writerService.writeReport(report, REPORT_FILE);
     }
 }

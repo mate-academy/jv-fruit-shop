@@ -6,15 +6,14 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class WriterMapToCsvServiceImpl implements WriterService<String> {
-    private static final String REPORT_FILE = "src/main/resources/report.csv";
+public class WriterMapToCsvServiceImpl implements WriterService {
 
     @Override
-    public void writeReport(String dataType) {
-        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(REPORT_FILE))) {
-            writer.write(dataType);
+    public void writeReport(String data, String fileName) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(fileName))) {
+            writer.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("File " + REPORT_FILE + " not found");
+            throw new RuntimeException("File " + fileName + " not found");
         }
     }
 }

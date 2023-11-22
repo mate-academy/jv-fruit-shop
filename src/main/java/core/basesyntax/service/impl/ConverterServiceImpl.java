@@ -2,28 +2,22 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ConverterService;
-import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConverterServiceImpl implements ConverterService {
     private static final String DELIMITER = ",";
+    private static final int ELEMENT_NUMBER_FOR_OPERATION = 0;
+    private static final int ELEMENT_NUMBER_FOR_FRUIT_NAME = 1;
+    private static final int ELEMENT_NUMBER_FOR_FRUIT_AMOUNT = 2;
 
     @Override
-    public FruitTransaction convertStringToFruitTransaction(String transaction) {
-        String[] fields = transaction.split(DELIMITER);
-        FruitTransaction.Operation operation = getOperationByCode(fields[0]);
-        int amount;
-        try {
-            amount = Integer.parseInt(fields[2]);
-        } catch (NumberFormatException e) {
-            throw new RuntimeException("Parsing " + fields[2] + " to integer failed");
-        }
-        return new FruitTransaction(operation, fields[1], amount);
-    }
-
-    public FruitTransaction.Operation getOperationByCode(String code) {
-        return Arrays.stream(FruitTransaction.Operation.values())
-                .filter(value -> value.getCode().equals(code))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Code " + code + " not found"));
+    public List<FruitTransaction> convertToFruitTransactions(List<String> data) {
+        return data.stream()
+                .map(string -> string.split(DELIMITER))
+                .map(array -> new FruitTransaction(FruitTransaction.Operation.getOperationByCode(
+                        array[ELEMENT_NUMBER_FOR_OPERATION]), array[ELEMENT_NUMBER_FOR_FRUIT_NAME],
+                        Integer.parseInt(array[ELEMENT_NUMBER_FOR_FRUIT_AMOUNT])))
+                .collect(Collectors.toList());
     }
 }

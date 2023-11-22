@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReaderServiceImpl implements ReaderService {
+    private static final String INPUT_FILE_HEADER = "type,fruit,quantity";
 
     @Override
     public List<String> readFile(String inputFileName) {
@@ -16,6 +17,7 @@ public class ReaderServiceImpl implements ReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + inputFileName);
         }
+        transactions.remove(INPUT_FILE_HEADER);
         return transactions;
     }
 }

@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ProcessorService;
 import core.basesyntax.strategy.OperationStrategy;
+import java.util.List;
 
 public class ProcessorServiceImpl implements ProcessorService {
     private final OperationStrategy operationStrategy;
@@ -12,7 +13,8 @@ public class ProcessorServiceImpl implements ProcessorService {
     }
 
     @Override
-    public void process(FruitTransaction transaction) {
-        operationStrategy.get(transaction.getOperation()).operate(transaction);
+    public void processTransactions(List<FruitTransaction> transactions) {
+        transactions.forEach(transaction -> operationStrategy.get(transaction.getOperation())
+                .operate(transaction));
     }
 }

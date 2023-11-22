@@ -38,5 +38,12 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getOperationByCode(String code) {
+            return java.util.Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(value -> value.getCode().equals(code))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Code " + code + " not found"));
+        }
     }
 }
