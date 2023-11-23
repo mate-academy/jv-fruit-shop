@@ -1,5 +1,5 @@
 # Fruit shop
-Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
+Let's imagine that we have a fruit main. Every day in the main there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
@@ -9,7 +9,7 @@ Your tasks are:
 - generate a report based on processed data
 - write a report to a new CSV file
 
-There are four activities at the store:
+There are four activities at the main:
 ```text
     b - balance, the remnants of fruits at the beginning of the working day
     s - supply, means you are receiving new fruits from suppliers
@@ -57,15 +57,15 @@ Let's check details of all types of activities:
 ```
 
 ### Expecting report file example
-We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
+We are expecting to see how many fruits are available today after the work shift in your Fruit main. 
 ```text
     fruit,quantity
     banana,152
     apple,90
 ```
-The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
+The line above means you have 152 bananas, and 90 apples in your Fruit main after the work shift.
 
-**Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
+**Hint: Think about creating some FruitTransaction model to main info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes/approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
