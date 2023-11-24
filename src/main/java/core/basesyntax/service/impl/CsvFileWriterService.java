@@ -1,10 +1,10 @@
-package shop.service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import shop.service.FileWriterService;
 
 public class CsvFileWriterService implements FileWriterService {
     private static final String COMMA_DELIMITER = ",";

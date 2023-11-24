@@ -1,8 +1,8 @@
-package shop.dao;
+package core.basesyntax.dao;
 
+import core.basesyntax.db.Storage;
 import java.util.HashMap;
 import java.util.Map;
-import shop.db.Storage;
 
 public class FruitDao {
 

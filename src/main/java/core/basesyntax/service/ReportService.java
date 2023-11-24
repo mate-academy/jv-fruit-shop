@@ -1,8 +1,8 @@
-package shop.service;
+package core.basesyntax.service;
 
+import core.basesyntax.dao.FruitDao;
 import java.util.ArrayList;
 import java.util.List;
-import shop.dao.FruitDao;
 
 public class ReportService {
     private static final String FRUIT_HEADER = "fruit";

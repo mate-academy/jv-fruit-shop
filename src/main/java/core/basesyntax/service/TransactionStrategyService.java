@@ -1,8 +1,8 @@
-package shop.service;
+package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.TransactionService;
 import java.util.Map;
-import shop.model.FruitTransaction;
-import shop.strategy.TransactionService;
 
 public class TransactionStrategyService {
     private final Map<FruitTransaction.Operation, TransactionService> operationStrategies;

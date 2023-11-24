@@ -1,7 +1,7 @@
-package shop.strategy;
+package core.basesyntax.strategy;
 
-import shop.dao.FruitDao;
-import shop.model.FruitTransaction;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.FruitTransaction;
 
 public interface TransactionService {
     FruitDao dao = new FruitDao();

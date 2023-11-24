@@ -1,21 +1,21 @@
-package shop;
+package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.InputConverterService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TransactionStrategyService;
+import core.basesyntax.service.impl.CsvFileReaderService;
+import core.basesyntax.service.impl.CsvFileWriterService;
+import core.basesyntax.strategy.BalanceTransactionService;
+import core.basesyntax.strategy.PurchaseTransactionService;
+import core.basesyntax.strategy.ReturnTransactionService;
+import core.basesyntax.strategy.SupplyTransactionService;
+import core.basesyntax.strategy.TransactionService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import shop.model.FruitTransaction;
-import shop.service.FileReaderService;
-import shop.service.FileWriterService;
-import shop.service.InputConverterService;
-import shop.service.ReportService;
-import shop.service.TransactionStrategyService;
-import shop.service.impl.CsvFileReaderService;
-import shop.service.impl.CsvFileWriterService;
-import shop.strategy.BalanceTransactionService;
-import shop.strategy.PurchaseTransactionService;
-import shop.strategy.ReturnTransactionService;
-import shop.strategy.SupplyTransactionService;
-import shop.strategy.TransactionService;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/input_data.csv";

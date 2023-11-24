@@ -1,8 +1,8 @@
-package shop.service;
+package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
-import shop.model.FruitTransaction;
 
 public class InputConverterService {
     private static final int HEADERS_LINES_NUM = 1;

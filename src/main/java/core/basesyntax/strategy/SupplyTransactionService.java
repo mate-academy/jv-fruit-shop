@@ -1,6 +1,6 @@
-package shop.strategy;
+package core.basesyntax.strategy;
 
-import shop.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyTransactionService implements TransactionService {
     @Override

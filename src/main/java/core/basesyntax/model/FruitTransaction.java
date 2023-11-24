@@ -1,4 +1,4 @@
-package shop.model;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private final Operation operation;

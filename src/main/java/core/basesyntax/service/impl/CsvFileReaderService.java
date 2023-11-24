@@ -1,12 +1,12 @@
-package shop.service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import shop.service.FileReaderService;
 
 public class CsvFileReaderService implements FileReaderService {
     private static final String COMMA_DELIMITER = ",";
