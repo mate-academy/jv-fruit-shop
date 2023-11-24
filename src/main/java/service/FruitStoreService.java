@@ -29,10 +29,12 @@ public class FruitStoreService {
             TransactionStrategy strategy = strategyMap.get(transaction.getOperation());
             if (strategy != null) {
                 strategy.apply(fruitStorage, transaction);
+            } else {
+                throw new StrategyException(
+                        "Strategy not found for operation: " + transaction.getOperation());
             }
         }
 
         return fruitStorage;
     }
 }
-
