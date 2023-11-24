@@ -1,14 +1,13 @@
 package main;
 
 import db.FruitStorage;
+import java.util.List;
 import model.FruitTransaction;
 import service.FileReader;
 import service.FileReaderImpl;
 import service.FileWriter;
 import service.FileWriterImpl;
 import service.FruitStoreService;
-
-import java.util.List;
 
 public class FruitStoreMain {
     private static final String INPUT_FILE_NAME = "src/main/resources/storage.csv";

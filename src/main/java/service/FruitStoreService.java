@@ -1,8 +1,8 @@
 package service;
 
+import db.FruitStorage;
 import java.util.List;
 import java.util.Map;
-import db.FruitStorage;
 import model.FruitTransaction;
 import strategy.BalanceStrategy;
 import strategy.PurchaseStrategy;
