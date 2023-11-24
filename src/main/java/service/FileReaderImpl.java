@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
-import model.FruitTransactionStorage;
 
 public class FileReaderImpl implements FileReader {
     private static final String SPLIT_REGEX = ",";
@@ -14,7 +13,7 @@ public class FileReaderImpl implements FileReader {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public FruitTransactionStorage read(String inputFileName) {
+    public List<FruitTransaction> read(String inputFileName) {
         List<FruitTransaction> transactions = new ArrayList<>();
 
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(inputFileName))) {
@@ -55,6 +54,6 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("Can't read from file: " + inputFileName);
         }
 
-        return new FruitTransactionStorage(transactions);
+        return transactions;
     }
 }

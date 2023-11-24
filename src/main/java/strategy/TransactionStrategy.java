@@ -1,6 +1,6 @@
 package strategy;
 
-import model.FruitStorage;
+import db.FruitStorage;
 import model.FruitTransaction;
 
 public interface TransactionStrategy {

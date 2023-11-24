@@ -1,7 +1,9 @@
 package service;
 
-import model.FruitTransactionStorage;
+import model.FruitTransaction;
+
+import java.util.List;
 
 public interface FileReader {
-    FruitTransactionStorage read(String inputFileName);
+    List<FruitTransaction> read(String inputFileName);
 }

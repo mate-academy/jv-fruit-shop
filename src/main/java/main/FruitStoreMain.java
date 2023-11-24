@@ -1,12 +1,14 @@
 package main;
 
-import model.FruitStorage;
-import model.FruitTransactionStorage;
+import db.FruitStorage;
+import model.FruitTransaction;
 import service.FileReader;
 import service.FileReaderImpl;
 import service.FileWriter;
 import service.FileWriterImpl;
 import service.FruitStoreService;
+
+import java.util.List;
 
 public class FruitStoreMain {
     private static final String INPUT_FILE_NAME = "src/main/resources/storage.csv";
@@ -14,7 +16,7 @@ public class FruitStoreMain {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        FruitTransactionStorage fruitTransactionStorage = fileReader.read(INPUT_FILE_NAME);
+        List<FruitTransaction> fruitTransactionStorage = fileReader.read(INPUT_FILE_NAME);
 
         FruitStoreService fruitStoreService = new FruitStoreService();
         FruitStorage fruitStorage = fruitStoreService.processTransactions(fruitTransactionStorage);

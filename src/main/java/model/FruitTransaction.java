@@ -51,7 +51,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new IllegalArgumentException("No enum constant model.FruitTransaction.Operation."
+            throw new IllegalArgumentException("There is no such enum constant: "
                     + code);
         }
     }

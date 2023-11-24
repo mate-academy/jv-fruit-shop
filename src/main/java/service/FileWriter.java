@@ -1,6 +1,6 @@
 package service;
 
-import model.FruitStorage;
+import db.FruitStorage;
 
 public interface FileWriter {
     void write(FruitStorage fruitInventory, String reportFileName);

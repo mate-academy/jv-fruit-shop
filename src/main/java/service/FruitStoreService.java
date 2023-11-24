@@ -1,10 +1,9 @@
 package service;
 
-import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import model.FruitStorage;
+import db.FruitStorage;
 import model.FruitTransaction;
-import model.FruitTransactionStorage;
 import strategy.BalanceStrategy;
 import strategy.PurchaseStrategy;
 import strategy.ReturnStrategy;
@@ -15,17 +14,16 @@ public class FruitStoreService {
     private Map<FruitTransaction.Operation, TransactionStrategy> strategyMap;
 
     public FruitStoreService() {
-        strategyMap = new HashMap<>();
-        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceStrategy());
-        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyStrategy());
-        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseStrategy());
-        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnStrategy());
+        strategyMap = Map.of(FruitTransaction.Operation.BALANCE, new BalanceStrategy(),
+                FruitTransaction.Operation.SUPPLY, new SupplyStrategy(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
+                FruitTransaction.Operation.RETURN, new ReturnStrategy());
     }
 
-    public FruitStorage processTransactions(FruitTransactionStorage transactions) {
+    public FruitStorage processTransactions(List<FruitTransaction> transactions) {
         FruitStorage fruitStorage = new FruitStorage();
 
-        for (FruitTransaction transaction : transactions.getFruitTransactionList()) {
+        for (FruitTransaction transaction : transactions) {
             TransactionStrategy strategy = strategyMap.get(transaction.getOperation());
             if (strategy != null) {
                 strategy.apply(fruitStorage, transaction);
