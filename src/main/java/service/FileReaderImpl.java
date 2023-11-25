@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
+import util.ValidationDataException;
 
 public class FileReaderImpl implements FileReader {
     private static final String SPLIT_REGEX = ",";

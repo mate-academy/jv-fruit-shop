@@ -2,7 +2,7 @@ package strategy;
 
 import db.FruitStorage;
 import model.FruitTransaction;
-import service.InsufficientInventoryException;
+import util.InsufficientInventoryException;
 
 public class PurchaseStrategy implements TransactionStrategy {
     @Override
