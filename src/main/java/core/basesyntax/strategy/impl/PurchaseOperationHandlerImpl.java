@@ -15,6 +15,11 @@ public class PurchaseOperationHandlerImpl implements OperationHandler {
     public void operate(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantityUpdated = fruitTransactionDao.get(fruit);
+        if (fruitTransaction.getQuantity() > quantityUpdated) {
+            throw new RuntimeException("Quantity of " + fruit + "in stock is " + quantityUpdated
+                    + ", less than quantity expected to be purchased "
+                    + fruitTransaction.getQuantity());
+        }
         quantityUpdated -= fruitTransaction.getQuantity();
         fruitTransactionDao.put(fruit, quantityUpdated);
     }

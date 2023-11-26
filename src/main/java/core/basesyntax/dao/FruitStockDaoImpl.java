@@ -11,16 +11,10 @@ public class FruitStockDaoImpl implements FruitStockDao {
 
     @Override
     public void put(String fruit, Integer quantity) {
-        storage.getFruitStorage().remove(fruit);
         storage.getFruitStorage().put(fruit, quantity);
     }
 
     public int get(String fruit) {
-        return storage.getFruitStorage().entrySet().stream()
-                .filter(entry -> entry.getKey().equals(fruit))
-                .map(java.util.Map.Entry::getValue)
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Fruit " + fruit
-                        + " record not found"));
+        return storage.getFruitStorage().getOrDefault(fruit, 0);
     }
 }
