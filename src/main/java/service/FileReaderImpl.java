@@ -21,34 +21,7 @@ public class FileReaderImpl implements FileReader {
             reader.readLine();
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(SPLIT_REGEX);
-
-                if (parts.length != 3) {
-                    throw new ValidationDataException(
-                            "Invalid input format in file: " + inputFileName);
-                }
-
-                FruitTransaction transaction = new FruitTransaction();
-
-                try {
-                    transaction.setOperation(
-                            FruitTransaction.Operation.fromCode(
-                                    parts[OPERATION_INDEX].trim()));
-                } catch (IllegalArgumentException e) {
-                    throw new ValidationDataException(
-                            "Invalid operation code in file: " + inputFileName);
-                }
-
-                transaction.setFruit(parts[FRUIT_INDEX]);
-
-                try {
-                    transaction.setQuantity(Integer.parseInt(
-                            parts[QUANTITY_INDEX].trim()));
-                } catch (NumberFormatException e) {
-                    throw new ValidationDataException(
-                            "Invalid quantity format in file: " + inputFileName);
-                }
-
+                FruitTransaction transaction = extractTransaction(line);
                 transactions.add(transaction);
             }
         } catch (IOException e) {
@@ -56,5 +29,37 @@ public class FileReaderImpl implements FileReader {
         }
 
         return transactions;
+    }
+
+    private FruitTransaction extractTransaction(String line) {
+        String[] parts = line.split(SPLIT_REGEX);
+
+        if (parts.length != 3) {
+            throw new ValidationDataException(
+                    "Invalid input format in file");
+        }
+
+        FruitTransaction transaction = new FruitTransaction();
+
+        try {
+            transaction.setOperation(
+                    FruitTransaction.Operation.fromCode(
+                            parts[OPERATION_INDEX].trim()));
+        } catch (IllegalArgumentException e) {
+            throw new ValidationDataException(
+                    "Invalid operation code in file");
+        }
+
+        transaction.setFruit(parts[FRUIT_INDEX]);
+
+        try {
+            transaction.setQuantity(Integer.parseInt(
+                    parts[QUANTITY_INDEX].trim()));
+        } catch (NumberFormatException e) {
+            throw new ValidationDataException(
+                    "Invalid quantity format in file");
+        }
+
+        return transaction;
     }
 }

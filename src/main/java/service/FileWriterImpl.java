@@ -13,9 +13,12 @@ public class FileWriterImpl implements FileWriter {
         try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(reportFileName))) {
             writer.write(REPORT_FIRST_ROW);
             for (Map.Entry<String, Integer> entry : fruitInventory.getAllFruitEntries()) {
-                writer.write(entry.getKey() + SPLIT_REGEX
-                        + entry.getValue()
-                        + System.lineSeparator());
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(entry.getKey())
+                                .append(SPLIT_REGEX)
+                                .append(entry.getValue())
+                                .append(System.lineSeparator());
+                writer.write(stringBuilder.toString());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file: " + reportFileName, e);
