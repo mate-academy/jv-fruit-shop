@@ -8,7 +8,10 @@ import service.FileReader;
 import service.FileReaderImpl;
 import service.FileWriter;
 import service.FileWriterImpl;
+import service.FruitStoreService;
 import service.FruitStoreServiceImpl;
+import service.FruitTransactionService;
+import service.FruitTransactionServiceImpl;
 import strategy.BalanceStrategy;
 import strategy.PurchaseStrategy;
 import strategy.ReturnStrategy;
@@ -26,9 +29,13 @@ public class FruitStoreMain {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<FruitTransaction> fruitTransactionStorage = fileReader.read(INPUT_FILE_NAME);
+        List<String> fruitTransactionStorageStrings = fileReader.read(INPUT_FILE_NAME);
 
-        FruitStoreServiceImpl fruitStoreService = new FruitStoreServiceImpl(strategyMap);
+        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl();
+        List<FruitTransaction> fruitTransactionStorage = fruitTransactionService
+                .parseTransactions(fruitTransactionStorageStrings);
+
+        FruitStoreService fruitStoreService = new FruitStoreServiceImpl(strategyMap);
         FruitStorage fruitStorage = fruitStoreService.processTransactions(fruitTransactionStorage);
 
         FileWriter fileWriter = new FileWriterImpl();
