@@ -1,4 +1,4 @@
-package main.service.Impl;
+package main.service.impl;
 
 import main.dao.ReportDao;
 import main.service.ReportGenerator;
@@ -24,13 +24,11 @@ public class ReportGeneratorCsvImpl implements ReportGenerator {
             .append(TITLE_ROW)
             .append(LINE_SEPARATOR);
 
-        for (Map.Entry<String, Integer> entry: reportData.entrySet()) {
-            builder
-                .append(entry.getKey())
-                .append(FIELD_SEPARATOR)
-                .append(entry.getValue())
-                .append(LINE_SEPARATOR);
-        }
+        reportData.forEach((key, value) -> builder
+            .append(key)
+            .append(FIELD_SEPARATOR)
+            .append(value)
+            .append(LINE_SEPARATOR));
 
         return builder.toString();
     }
