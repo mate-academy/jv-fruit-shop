@@ -25,7 +25,7 @@ public class  FruitBalance {
     }
 
     public boolean writeBalance() throws IOException { //method for writing a balance to file balance.csv
-        File csvFile = new File("balance.csv");
+        File csvFile = new File("src/main/resources/balance.csv");
         FileWriter fileWriter = new FileWriter(csvFile);
         StringBuilder line = new StringBuilder();
 

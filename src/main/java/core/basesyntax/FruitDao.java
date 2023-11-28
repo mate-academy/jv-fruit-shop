@@ -9,7 +9,7 @@ public class FruitDao {
 
     public boolean readCSV() { //method for reading data from file && change fruit balance
         try {
-            File report = new File("report.csv");
+            File report = new File("src/main/resources/report.csv");
             Scanner scanner = new Scanner(report);
 
             if (scanner.hasNextLine()) {    //skip the header line
