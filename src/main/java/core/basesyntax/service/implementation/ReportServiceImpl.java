@@ -1,7 +1,7 @@
 package core.basesyntax.service.implementation;
 
-import core.basesyntax.action.ActionHandler;
 import core.basesyntax.action.Action;
+import core.basesyntax.action.ActionHandler;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.ActionStrategy;
 import core.basesyntax.strategy.ActionStrategyImpl;
@@ -62,7 +62,7 @@ public class ReportServiceImpl implements ReportService {
             String action = string.split(COMMA)[ACTION_INDEX];
             int value = Integer.parseInt(string.split(COMMA)[AMOUNT_INDEX]);
             amount += actionStrategy
-                    .get(Action.valueOf(action))
+                    .get(Action.getAction(action))
                     .performAction(value);
         }
         reportValidator.validate(amount);

@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.action.ActionHandler;
 import core.basesyntax.action.Action;
+import core.basesyntax.action.ActionHandler;
 import core.basesyntax.action.BalanceHandler;
 import core.basesyntax.action.PurchaseHandler;
 import core.basesyntax.action.ReturnHandler;

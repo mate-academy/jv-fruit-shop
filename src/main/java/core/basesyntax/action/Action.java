@@ -6,8 +6,18 @@ public enum Action {
     RETURN("r"),
     SUPPLY("s");
 
-    private String code;
+    private final String code;
+
     Action(String code) {
         this.code = code;
+    }
+
+    public static Action getAction(String value) {
+        for (Action action : Action.values()) {
+            if (action.code.equals(value)) {
+                return action;
+            }
+        }
+        return null;
     }
 }
