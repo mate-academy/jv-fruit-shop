@@ -7,12 +7,12 @@ import java.util.Scanner;
 public class FruitDao {
     FruitBalance fruitBalance = new FruitBalance();
 
-    public boolean readCSV() { //method for reading data from file && change fruit balance
+    public boolean readCSV() {
         try {
             File report = new File("src/main/resources/report.csv");
             Scanner scanner = new Scanner(report);
 
-            if (scanner.hasNextLine()) {    //skip the header line
+            if (scanner.hasNextLine()) {
                 scanner.nextLine();
             }
 
@@ -23,7 +23,6 @@ public class FruitDao {
                 FruitTransaction transaction = new FruitTransaction(operation, data[1], Integer.parseInt(data[2]));
                 updateBalance(transaction);
             }
-            //System.out.println(fruitBalance.getAppleBalance() + "\n" + fruitBalance.getBananaBalance());
             scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
