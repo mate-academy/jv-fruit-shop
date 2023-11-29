@@ -7,7 +7,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FileServiceImpl implements FileService {
     private static final String TO_FILE_PATH = "src/main/resources/Report.csv";
