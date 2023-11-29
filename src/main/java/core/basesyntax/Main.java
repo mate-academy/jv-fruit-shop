@@ -6,10 +6,10 @@ import core.basesyntax.action.BalanceHandler;
 import core.basesyntax.action.PurchaseHandler;
 import core.basesyntax.action.ReturnHandler;
 import core.basesyntax.action.SupplyHandler;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.DataService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.implementation.FileServiceImpl;
-import core.basesyntax.service.implementation.FruitServiceImpl;
+import core.basesyntax.service.implementation.DataServiceImpl;
 import core.basesyntax.service.implementation.ReportServiceImpl;
 import java.util.List;
 import java.util.Map;
@@ -27,13 +27,15 @@ public class Main {
             Action.SUPPLY, supplyHandler);
     public static final FileServiceImpl fileService = new FileServiceImpl();
     public static final ReportService reportService = new ReportServiceImpl(actionHandlersMap);
-    public static final FruitService fruitService = new FruitServiceImpl();
+    public static final DataService dataService = new DataServiceImpl();
 
     public static void main(String[] args) {
         List<String> dataFromFile = fileService
                 .readFromFile(FROM_FILE_PATH);
-        fruitService.fillFruitStorage(dataFromFile);
-        String report = reportService.getReport(dataFromFile);
-        fileService.createReportFile(report);
+        List<String> formattedData = dataService
+                .formatAndCheckData(dataFromFile);
+        dataService.fillFruitStorage(formattedData);
+        String report = reportService.getReport(formattedData);
+        fileService.writeDataToFile(report);
     }
 }

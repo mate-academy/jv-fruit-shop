@@ -21,21 +21,14 @@ public class FileServiceImpl implements FileService {
     public List<String> readFromFile(String fromFileName) {
         File newFile = new File(fromFileName);
         try {
-            List<String> dataFromFile = Files.readAllLines(newFile.toPath())
-                    .stream()
-                    .skip(1)
-                    .map(string -> string
-                            .replaceAll("\\s", ""))
-                    .collect(Collectors.toList());
-            dataValidator.validate(dataFromFile);
-            return dataFromFile;
+            return Files.readAllLines(newFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException("File doesn't exist " + e);
         }
     }
 
     @Override
-    public void createReportFile(String report) {
+    public void writeDataToFile(String report) {
         File toFile = new File(TO_FILE_PATH);
         try (FileWriter fileWriter = new FileWriter(toFile)) {
             fileWriter.write(report);

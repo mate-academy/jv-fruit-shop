@@ -1,39 +1,33 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     private static final Storage storage = new Storage();
 
     @Override
-    public void add(Fruit fruit) {
-        storage.getListOfFruits().add(fruit);
+    public boolean contains(String fruitName) {
+        return storage.getMapOfFruits().containsKey(fruitName);
     }
 
     @Override
-    public Fruit get(String fruitName) {
-        return storage.getListOfFruits().stream()
-                .filter(fruit -> fruit.getName().equals(fruitName))
-                .findFirst()
-                .orElse(null);
+    public void add(String fruitName) {
+        storage.getMapOfFruits().put(fruitName, 0);
     }
 
     @Override
-    public List<Fruit> getList() {
-        return storage.getListOfFruits();
+    public Integer get(String fruitName) {
+        return storage.getMapOfFruits().get(fruitName);
     }
 
     @Override
-    public void update(Fruit fruit) {
-        Fruit fruitFromDb = get(fruit.getName());
-        storage.getListOfFruits().remove(fruitFromDb);
-        add(fruit);
+    public Map<String, Integer> getMap() {
+        return storage.getMapOfFruits();
     }
 
     @Override
-    public int size() {
-        return storage.getListOfFruits().size();
+    public void update(String fruitName, Integer newAmount) {
+        storage.getMapOfFruits().put(fruitName, newAmount);
     }
 }

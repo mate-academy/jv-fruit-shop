@@ -1,10 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
 import java.util.List;
 
-public interface FruitService {
-    Fruit createNewFruit(String fruitName);
-
+public interface DataService {
     void fillFruitStorage(List<String> dataFromFile);
+
+    List<String> formatAndCheckData(List<String> dataFromFile);
 }
