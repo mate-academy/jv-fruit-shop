@@ -23,6 +23,7 @@ public class FileServiceImpl implements FileService {
         try {
             List<String> dataFromFile = Files.readAllLines(newFile.toPath())
                     .stream()
+                    .skip(1)
                     .map(string -> string
                             .replaceAll("\\s", ""))
                     .collect(Collectors.toList());

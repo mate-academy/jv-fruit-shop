@@ -9,11 +9,11 @@ public class Fruit {
         this.amount = 0;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
