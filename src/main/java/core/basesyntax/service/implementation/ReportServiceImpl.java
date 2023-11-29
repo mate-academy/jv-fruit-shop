@@ -1,11 +1,11 @@
-package core.basesyntax.servise.implementations;
+package core.basesyntax.service.implementation;
 
 import core.basesyntax.action.ActionHandler;
-import core.basesyntax.action.Actions;
-import core.basesyntax.servise.ReportService;
+import core.basesyntax.action.Action;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.ActionStrategy;
 import core.basesyntax.strategy.ActionStrategyImpl;
-import core.basesyntax.validators.ReportValidator;
+import core.basesyntax.validator.ReportValidator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,7 +20,7 @@ public class ReportServiceImpl implements ReportService {
     private static ReportValidator reportValidator;
     private final ActionStrategy actionStrategy;
 
-    public ReportServiceImpl(Map<Actions, ActionHandler> actionHandlersMap) {
+    public ReportServiceImpl(Map<Action, ActionHandler> actionHandlersMap) {
         reportValidator = new ReportValidator();
         actionStrategy = new ActionStrategyImpl(actionHandlersMap);
     }
@@ -59,10 +59,10 @@ public class ReportServiceImpl implements ReportService {
     private int getAmount(List<String> listOfFields) {
         int amount = 0;
         for (String string : listOfFields) {
-            String action = string.split(COMMA)[ACTION_INDEX].toUpperCase();
+            String action = string.split(COMMA)[ACTION_INDEX];
             int value = Integer.parseInt(string.split(COMMA)[AMOUNT_INDEX]);
             amount += actionStrategy
-                    .get(Actions.valueOf(action))
+                    .get(Action.valueOf(action))
                     .performAction(value);
         }
         reportValidator.validate(amount);

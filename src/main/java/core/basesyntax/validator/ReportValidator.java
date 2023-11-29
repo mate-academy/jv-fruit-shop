@@ -1,4 +1,4 @@
-package core.basesyntax.validators;
+package core.basesyntax.validator;
 
 public class ReportValidator {
     public void validate(int amount) {

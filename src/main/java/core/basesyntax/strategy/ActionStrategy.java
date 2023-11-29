@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.action.ActionHandler;
-import core.basesyntax.action.Actions;
+import core.basesyntax.action.Action;
 
 public interface ActionStrategy {
-    ActionHandler get(Actions action);
+    ActionHandler get(Action action);
 }

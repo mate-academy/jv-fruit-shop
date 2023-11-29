@@ -1,7 +1,7 @@
-package core.basesyntax.servise.implementations;
+package core.basesyntax.service.implementation;
 
-import core.basesyntax.servise.FileService;
-import core.basesyntax.validators.DataValidator;
+import core.basesyntax.service.FileService;
+import core.basesyntax.validator.DataValidator;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class FileServiceImpl implements FileService {
-    private static final String TO_FILE_PATH = "src/main/resources/Report";
+    private static final String TO_FILE_PATH = "src/main/resources/Report.csv";
     private static DataValidator dataValidator;
 
     public FileServiceImpl() {

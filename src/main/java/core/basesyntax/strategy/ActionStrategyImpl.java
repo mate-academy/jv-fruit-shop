@@ -1,18 +1,18 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.action.ActionHandler;
-import core.basesyntax.action.Actions;
+import core.basesyntax.action.Action;
 import java.util.Map;
 
 public class ActionStrategyImpl implements ActionStrategy {
-    private final Map<Actions, ActionHandler> actionHandlersMap;
+    private final Map<Action, ActionHandler> actionHandlersMap;
 
-    public ActionStrategyImpl(Map<Actions, ActionHandler> actionHandlersMap) {
+    public ActionStrategyImpl(Map<Action, ActionHandler> actionHandlersMap) {
         this.actionHandlersMap = actionHandlersMap;
     }
 
     @Override
-    public ActionHandler get(Actions action) {
+    public ActionHandler get(Action action) {
         return actionHandlersMap.get(action);
     }
 }
