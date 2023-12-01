@@ -1,10 +1,9 @@
 package strategy.impl;
 
+import java.util.Map;
 import model.Transaction;
 import service.transaction.HandlerTransaction;
 import strategy.StrategyTransaction;
-
-import java.util.Map;
 
 public class StrategyTransactionImpl implements StrategyTransaction {
     private Map<Transaction, HandlerTransaction> transactionHandlerTransactionMap;

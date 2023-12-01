@@ -1,9 +1,8 @@
 package dao;
 
 import db.Storage;
-import model.Fruit;
-
 import java.util.Map;
+import model.Fruit;
 
 public class ReportDaoImpl implements ReportDao {
     private Storage storage = new Storage();

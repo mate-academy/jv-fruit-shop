@@ -1,9 +1,8 @@
 package service.impl;
 
 import dao.ReportDao;
-import service.ReportGenerator;
-
 import java.util.Map;
+import service.ReportGenerator;
 
 public class ReportGenerateImpl implements ReportGenerator {
     private static final String TITLE_REPORT = "fruit,quantity";

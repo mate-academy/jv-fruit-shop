@@ -1,10 +1,9 @@
 package service.impl;
 
-import service.ReportSender;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import service.ReportSender;
 
 public class ReportSenderImpl implements ReportSender {
     private final String filePath;

@@ -1,7 +1,6 @@
 package dao;
 
 import java.util.Map;
-
 import model.Fruit;
 
 public interface ReportDao {

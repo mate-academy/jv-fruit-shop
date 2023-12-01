@@ -4,6 +4,9 @@ import dao.FruitDao;
 import dao.FruitDaoImpl;
 import dao.ReportDao;
 import dao.ReportDaoImpl;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.Fruit;
 import model.Transaction;
 import service.BalanceSetter;
@@ -20,10 +23,6 @@ import service.transaction.impl.ReturnTransaction;
 import service.transaction.impl.SupplyTransaction;
 import strategy.StrategyTransaction;
 import strategy.impl.StrategyTransactionImpl;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class Application {
     private static final String TRANSACTION_FILE_NAME_PATH

@@ -1,11 +1,10 @@
 package service.impl;
 
 import dao.ReportDao;
+import java.util.List;
 import model.Fruit;
 import model.Transaction;
 import service.BalanceSetter;
-
-import java.util.List;
 
 public class BalanceSetterImpl implements BalanceSetter {
     private ReportDao reportDao;
