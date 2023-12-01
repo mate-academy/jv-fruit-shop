@@ -30,7 +30,7 @@ public class ReaderServiceImpl implements ReaderService{
                 Operation operation = Operation.getOperationFromCode(array[TYPE_INDEX]);
                 String food = array[FRUIT_INDEX];
                 int quantity = Integer.parseInt(array[QUANTITY_INDEX]);
-                if (quantity <= 0) {
+                if (quantity < 0) {
                     throw new RuntimeException("Quantity can't be less then 0!");
                 }
                 fruitTransactionList.add(new FruitTransaction(operation, food, quantity));
