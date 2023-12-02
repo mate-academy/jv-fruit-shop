@@ -1,17 +1,17 @@
 package core.basesyntax.action;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.implementation.FruitDaoImpl;
 
 public class PurchaseHandler implements ActionHandler {
-    private final StorageDao storageDao;
+    private final FruitDao fruitDao;
 
     public PurchaseHandler() {
-        this.storageDao = new StorageDaoImpl();
+        this.fruitDao = new FruitDaoImpl();
     }
 
     @Override
     public int performAction(String fruitName, int amount) {
-        return storageDao.get(fruitName) - amount;
+        return fruitDao.get(fruitName) - amount;
     }
 }

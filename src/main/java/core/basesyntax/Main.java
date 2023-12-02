@@ -30,12 +30,10 @@ public class Main {
     public static final DataService dataService = new DataServiceImpl();
 
     public static void main(String[] args) {
-        List<String> dataFromFile = fileService
-                .readFromFile(FROM_FILE_PATH);
-        List<String> formattedData = dataService
-                .formatAndCheckData(dataFromFile);
-        dataService.fillFruitStorage(formattedData);
-        String report = reportService.getReport(formattedData);
+        List<String> dataFromFile = fileService.readFromFile(FROM_FILE_PATH);
+        dataService.fillDataStorage(dataFromFile);
+        dataService.fillFruitStorage();
+        String report = reportService.getReport();
         fileService.writeDataToFile(report);
     }
 }

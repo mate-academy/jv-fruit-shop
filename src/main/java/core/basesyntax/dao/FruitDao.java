@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import java.util.Map;
 
-public interface StorageDao {
+public interface FruitDao {
     boolean contains(String fruitName);
 
     void add(String fruitName);

@@ -2,12 +2,13 @@ package core.basesyntax.service.implementation;
 
 import core.basesyntax.action.Action;
 import core.basesyntax.action.ActionHandler;
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.dao.DataDao;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.implementation.DataDaoImpl;
+import core.basesyntax.dao.implementation.FruitDaoImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.ActionStrategy;
 import core.basesyntax.strategy.ActionStrategyImpl;
-import java.util.List;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
@@ -17,26 +18,28 @@ public class ReportServiceImpl implements ReportService {
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
     private final ActionStrategy actionStrategy;
-    private final StorageDao storageDao;
+    private final FruitDao fruitDao;
+    private final DataDao dataDao;
 
     public ReportServiceImpl(Map<Action, ActionHandler> actionHandlersMap) {
         actionStrategy = new ActionStrategyImpl(actionHandlersMap);
-        storageDao = new StorageDaoImpl();
+        fruitDao = new FruitDaoImpl();
+        dataDao = new DataDaoImpl();
     }
 
     @Override
-    public String getReport(List<String> data) {
-        processData(data);
+    public String getReport() {
+        processData();
         return createReport();
     }
 
-    private void processData(List<String> data) {
-        for (String string : data) {
+    private void processData() {
+        for (String string : dataDao.getData()) {
             int newAmount = actionStrategy
                     .get(getAction(string))
                     .performAction(getFruitName(string),
                             getAmount(string));
-            storageDao.update(getFruitName(string), newAmount);
+            fruitDao.update(getFruitName(string), newAmount);
         }
     }
 
@@ -44,7 +47,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder stringBuilder = new StringBuilder()
                 .append(HEADER)
                 .append(System.lineSeparator());
-        storageDao.getMap().forEach((fruitName, amount) -> {
+        fruitDao.getMap().forEach((fruitName, amount) -> {
             stringBuilder
                     .append(fruitName)
                     .append(COMMA)
