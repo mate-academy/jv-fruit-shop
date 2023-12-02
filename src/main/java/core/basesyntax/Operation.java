@@ -1,5 +1,7 @@
 package core.basesyntax;
-
+/*
+Operations enum
+*/
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),

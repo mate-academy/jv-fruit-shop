@@ -3,7 +3,9 @@ package core.basesyntax;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
+/*
+    Data Base
+*/
 public class  FruitBalance {
     private int appleBalance = 0;
     private int bananaBalance = 0;

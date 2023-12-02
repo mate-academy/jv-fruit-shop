@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/*
+    Reading and data processing
+ */
 public class FruitDao {
     FruitBalance fruitBalance = new FruitBalance();
 

@@ -1,5 +1,7 @@
 package core.basesyntax;
-
+/*
+    Java objects
+ */
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
