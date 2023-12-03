@@ -16,12 +16,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_FROM = "src/main/java/core/basesyntax/resourses/inputData.csv";
-    private static final String WRITE_TO = "report.csv";
+    private static final String INPUT_FILE =
+            "src/main/java/core/basesyntax/resourses/inputData.csv";
+    private static final String OUTPUT_FILE = "report.csv";
 
     public static void main(String[] args) {
         FileReader fileReader = new CsvFileReader();
-        List<String> linesFromFile = fileReader.read(READ_FROM);
+        List<String> linesFromFile = fileReader.read(INPUT_FILE);
         FruitTransactionMapper fruitMapper = new FruitTransactionMapper();
         List<FruitTransaction> fruitTransactions = fruitMapper.mapData(linesFromFile);
         OperationStrategy operationStrategy = new OperationStrategy(Map.of(
@@ -37,6 +38,6 @@ public class Main {
         ReportCreator reportCreator = new ReportCreator();
         String report = reportCreator.createReport();
         FileWriter fileWriter = new CsvFileWriter();
-        fileWriter.write(report, WRITE_TO);
+        fileWriter.write(report, OUTPUT_FILE);
     }
 }

@@ -6,7 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 public class CsvFileWriter implements FileWriter {
-
     @Override
     public boolean write(String fileContent, String toFileName) {
         try {
