@@ -17,7 +17,7 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE =
-            "src/main/java/core/basesyntax/resourses/inputData.csv";
+            "src/main/resources/inputData.csv";
     private static final String OUTPUT_FILE = "report.csv";
 
     public static void main(String[] args) {
