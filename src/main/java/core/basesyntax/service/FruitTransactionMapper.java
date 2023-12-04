@@ -17,17 +17,17 @@ public class FruitTransactionMapper {
             throw new RuntimeException("Invalid data!");
         }
         for (int i = OFFSET; i < lines.size(); i++) {
-        String[] elements = lines.get(i).split(SEPARATOR);
-        FruitTransaction.Operation operation =
-                FruitTransaction.Operation.findOperationByCode(elements[OPERATION_INDEX]);
-        String fruitName = elements[FRUIT_INDEX];
+            String[] elements = lines.get(i).split(SEPARATOR);
+            FruitTransaction.Operation operation =
+                    FruitTransaction.Operation.findOperationByCode(elements[OPERATION_INDEX]);
+            String fruitName = elements[FRUIT_INDEX];
 
-        int quantity = Integer.parseInt(elements[QUANTITY_INDEX]);
+            int quantity = Integer.parseInt(elements[QUANTITY_INDEX]);
 
-                FruitTransaction fruitTransaction =
+            FruitTransaction fruitTransaction =
                         new FruitTransaction(operation, fruitName, quantity);
-                fruitTransactions.add(fruitTransaction);
-            }
-            return fruitTransactions;
+            fruitTransactions.add(fruitTransaction);
         }
+        return fruitTransactions;
     }
+}
