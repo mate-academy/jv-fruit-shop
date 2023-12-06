@@ -1,22 +1,22 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ActivityManager;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
 
-public class ActivityManagerImpl implements ActivityManager {
+public class TransactionServiceImpl implements TransactionService {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public ActivityManagerImpl(Map<FruitTransaction.Operation,
+    public TransactionServiceImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public void activateManager(List<FruitTransaction> fruitTransactions) {
+    public void executeTransaction(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(t -> operationHandlerMap.get(t.getOperation())
-                .executeOperation(t));
+                .handleOperation(t));
     }
 }

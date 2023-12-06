@@ -12,7 +12,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public Integer getFruitQuantity(String fruitName) {
-        return Storage.storage.get(fruitName);
+        return Storage.storage.getOrDefault(fruitName, 0);
     }
 
     @Override

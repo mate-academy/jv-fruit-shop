@@ -3,8 +3,6 @@ package core.basesyntax.model;
 import java.util.stream.Stream;
 
 public class FruitTransaction {
-    private static final String INCORRECT_QUANTITY_EXCEPTION_MESSAGE
-            = "Quantity can't be less than zero.";
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -25,7 +23,7 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException(INCORRECT_QUANTITY_EXCEPTION_MESSAGE);
+            throw new RuntimeException("Quantity can't be less than zero.");
         }
         this.quantity = quantity;
     }
@@ -61,8 +59,8 @@ public class FruitTransaction {
         public static Operation of(String code) {
             return Stream.of(values())
                     .filter(o -> o.getCode().equals(code))
-                    .findFirst()
-                    .orElse(null);
+                    .findAny()
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid operation code."));
         }
     }
 }

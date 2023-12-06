@@ -4,18 +4,18 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
-public class FruitsReturner implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private FruitStorageDao fruitStorageDao;
 
-    public FruitsReturner(FruitStorageDao fruitStorageDao) {
+    public SupplyOperationHandler(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
 
     @Override
-    public void executeOperation(FruitTransaction fruitTransaction) {
+    public void handleOperation(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
-        int quantity = fruitTransaction.getQuantity();
         int quantityOfStorage = fruitStorageDao.getFruitQuantity(fruit);
+        int quantity = fruitTransaction.getQuantity();
         fruitStorageDao.updateFruitQuantity(fruit, quantityOfStorage + quantity);
     }
 }

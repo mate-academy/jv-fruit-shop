@@ -1,8 +1,0 @@
-package core.basesyntax.service;
-
-import core.basesyntax.model.FruitTransaction;
-import java.util.List;
-
-public interface ActivityManager {
-    void activateManager(List<FruitTransaction> fruitTransactions);
-}
