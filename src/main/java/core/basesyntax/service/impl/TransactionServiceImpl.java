@@ -15,7 +15,7 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public void executeTransaction(List<FruitTransaction> fruitTransactions) {
+    public void executeTransactions(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(t -> operationHandlerMap.get(t.getOperation())
                 .handleOperation(t));
     }

@@ -37,19 +37,18 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler(FRUIT_STORAGE_DAO));
 
-        FileService readerFunction = new FileServiceImpl();
-        List<String> lines = readerFunction.readFile(INPUT_PATH);
+        FileService fileService = new FileServiceImpl();
+        List<String> lines = fileService.readFile(INPUT_PATH);
 
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> fruitTransactions = transactionParser.parse(lines);
 
         TransactionService transactionService = new TransactionServiceImpl(operationHandlers);
-        transactionService.executeTransaction(fruitTransactions);
+        transactionService.executeTransactions(fruitTransactions);
 
         ReportGenerator reportService = new ReportGeneratorImpl(FRUIT_STORAGE_DAO);
         String report = reportService.generateReport();
 
-        FileService writerService = new FileServiceImpl();
-        writerService.writeFile(OUTPUT_PATH, report);
+        fileService.writeFile(OUTPUT_PATH, report);
     }
 }
