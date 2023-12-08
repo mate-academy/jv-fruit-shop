@@ -4,12 +4,13 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
 public record PurchaseOperation(FruitDao fruitDao) implements OperationsHandler {
-    private static final String PURSE_OPERATION_CANT_GIVE_NEGATIVE_RESULT = "Smthing went wrong!" +
-            "Purse operation can't give negative result";
+    private static final String PURSE_OPERATION_CANT_GIVE_NEGATIVE_RESULT = "Smthing went wrong!"
+            + "Purse operation can't give negative result";
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        Integer newBalance = calculateNewBalance(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        Integer newBalance = calculateNewBalance(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity());
         fruitDao.putToStorage(fruitTransaction.getFruit(), newBalance);
     }
 

@@ -1,4 +1,4 @@
-package core.basesyntax.service.CV;
+package core.basesyntax.service.cv;
 
 public interface CVcreation {
     String createCV();

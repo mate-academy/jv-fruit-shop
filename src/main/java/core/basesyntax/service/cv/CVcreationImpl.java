@@ -1,10 +1,9 @@
-package core.basesyntax.service.CV;
+package core.basesyntax.service.cv;
 
 import core.basesyntax.dao.FruitDao;
-
 import java.util.Map;
 
-public class CVcreationImpl implements CVcreation{
+public class CVcreationImpl implements CVcreation {
     private static final String HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
     private final FruitDao fruitDao;

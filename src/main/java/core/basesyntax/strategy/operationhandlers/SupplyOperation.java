@@ -8,7 +8,7 @@ public record SupplyOperation(FruitDao fruitDao) implements OperationsHandler {
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        if(fruitTransaction.getQuantity() == 0 ) {
+        if (fruitTransaction.getQuantity() == 0) {
             throw new RuntimeException(SUPPLY_CANT_BE_ZERO);
         }
         fruitDao.putToStorage(fruitTransaction.getFruit(), fruitTransaction.getQuantity());

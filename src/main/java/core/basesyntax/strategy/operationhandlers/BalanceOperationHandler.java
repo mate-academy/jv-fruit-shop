@@ -8,7 +8,7 @@ public record BalanceOperationHandler(FruitDao fruitDao) implements OperationsHa
 
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        if(fruitTransaction.getQuantity() < 0 ) {
+        if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException(QUALITY_CANT_BE_NEGATIVE);
         }
         fruitDao.putToStorage(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
