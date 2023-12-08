@@ -35,8 +35,6 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    // Конструктор, гетери, сетери...
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -53,5 +51,13 @@ public class FruitTransaction {
             return code;
         }
     }
-}
 
+    public static Operation fromCode(String code) {
+        for (Operation operation : Operation.values()) {
+            if (operation.getCode().equalsIgnoreCase(code)) {
+                return operation;
+            }
+        }
+        throw new IllegalArgumentException("Unknown operation code: " + code);
+    }
+}

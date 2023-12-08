@@ -14,29 +14,16 @@ public class FileParseServiceImpl implements FileParseService {
     @Override
     public List<FruitTransaction> parseDataFromCV(List<String> dataFromFile) {
         return dataFromFile.stream()
-                .map(line -> {
-                    String[] parts = line.split(SEPARATOR);
-                    String operationCode = parts[OPERATION_INDEX];
-                    FruitTransaction.Operation operation = getOperation(operationCode);
-                    String fruit = parts[FRUIT_INDEX];
-                    int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
-                    return new FruitTransaction(operation, fruit, quantity);
-                })
+                .map(this::parseFruitTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction.Operation getOperation(String code) {
-        switch (code) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "r":
-                return FruitTransaction.Operation.RETURN;
-            default:
-                throw new IllegalArgumentException("Unknown operation code: " + code);
-        }
+    private FruitTransaction parseFruitTransaction(String line) {
+        String[] parts = line.split(SEPARATOR);
+        String operationCode = parts[OPERATION_INDEX];
+        FruitTransaction.Operation operation = FruitTransaction.fromCode(operationCode);
+        String fruit = parts[FRUIT_INDEX];
+        int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }

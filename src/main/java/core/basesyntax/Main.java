@@ -24,15 +24,13 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        // Ініціалізація DAO
+
         FruitDao fruitDao = new FruitDaoImpl();
 
-        // Ініціалізація сервісів для роботи з файлами
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         FileParseService fileParseService = new FileParseServiceImpl();
 
-        // Ініціалізація сервісу для роботи з CV
         CVcreation cvCreationService = new CVcreationImpl(fruitDao);
 
         // Ініціалізація стратегії операцій
@@ -43,25 +41,19 @@ public class Main {
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitDao)
         ));
 
-        // Ініціалізація сервісу для виконання транзакцій
         TransactionsActivitiesService transactionsActivitiesService =
                 new TransactionsActivitiesServiceImpl(operationOption);
 
-        // Читання даних з файлу
         List<String> dataFromFile = fileReaderService
                 .readFromFile("src/main/resources/input_file.csv");
 
-        // Розбір даних з файлу до транзакцій
         List<FruitTransaction> transactions = fileParseService
                 .parseDataFromCV(dataFromFile);
 
-        // Виконання транзакцій
         transactionsActivitiesService.activityOfTransaction(transactions);
 
-        // Створення CV
         String cvContent = cvCreationService.createCV();
 
-        // Запис CV у файл
         fileWriterService
         .writeToFile(cvContent, "src/main/resources/output_file.csv");
     }
