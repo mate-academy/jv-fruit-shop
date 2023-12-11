@@ -4,35 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvTransactionParser implements TransactionParser {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_NAME_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> parseTransactions(List<String> transactionLines) {
         List<FruitTransaction> transactions = new ArrayList<>();
-
         for (String transactionLine : transactionLines) {
             String[] transactionData = transactionLine.split(",");
-            Operation operation = getOperationByCode(transactionData[0]);
-            String fruitName = transactionData[1];
-            int quantity = Integer.parseInt(transactionData[2]);
-            transactions.add(new FruitTransaction(fruitName, quantity, operation));
+            String operation = transactionData[OPERATION_INDEX];
+            String fruitName = transactionData[FRUIT_NAME_INDEX];
+            int quantity = Integer.parseInt(transactionData[QUANTITY_INDEX]);
+            transactions.add(new FruitTransaction(operation, fruitName, quantity));
         }
-
         return transactions;
-    }
-
-
-    private Operation getOperationByCode(String operationCode) {
-        switch (operationCode) {
-            case "b":
-                return Operation.BALANCE;
-            case "s":
-                return Operation.SUPPLY;
-            case "p":
-                return Operation.PURCHASE;
-            case "r":
-                return Operation.RETURN;
-            default:
-                throw new RuntimeException("Unknown operation code: " + operationCode);
-        }
     }
 }

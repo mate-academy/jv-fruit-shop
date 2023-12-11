@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class TransactionProcessor {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public TransactionProcessor(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -15,7 +15,7 @@ public class TransactionProcessor {
     public void processTransactions(List<FruitTransaction> transactions, FruitStore fruitStore) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            handler.handleOperation(fruitStore, transaction);
+            handler.handleOperation(fruitStore, transaction, transaction.getOperation());
         }
     }
 }
