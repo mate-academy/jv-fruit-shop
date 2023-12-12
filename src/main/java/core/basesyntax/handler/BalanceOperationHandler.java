@@ -1,4 +1,4 @@
-package core.basesyntax.strategy;
+package core.basesyntax.handler;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;

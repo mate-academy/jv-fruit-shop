@@ -1,7 +1,6 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.reader;
 
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.ReadFileService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ReadFileServiceImpl implements ReadFileService {
-    private static final int INDEX_OPERATION = 0;
-    private static final int INDEX_FRUIT = 1;
-    private static final int INDEX_QUANTITY = 2;
+public class FileReaderServiceImpl implements FileReaderService {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<Fruit> readFile(String path) {
@@ -31,10 +30,10 @@ public class ReadFileServiceImpl implements ReadFileService {
     private Fruit getFromCsv(String line) {
         String[] fields = line.split(",");
         Fruit fruit = new Fruit();
-        if (fields[INDEX_OPERATION].length() == 1) {
-            fruit.setTypeOperation(Fruit.Operation.valueOfCode(fields[INDEX_OPERATION]));
-            fruit.setTypeFruit(fields[INDEX_FRUIT]);
-            fruit.setQuantity(Integer.parseInt(fields[INDEX_QUANTITY]));
+        if (fields[OPERATION_INDEX].length() == 1) {
+            fruit.setTypeOperation(Fruit.Operation.valueOfCode(fields[OPERATION_INDEX]));
+            fruit.setTypeFruit(fields[FRUIT_INDEX]);
+            fruit.setQuantity(Integer.parseInt(fields[QUANTITY_INDEX]));
         }
         return fruit;
     }

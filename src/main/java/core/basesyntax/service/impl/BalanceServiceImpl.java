@@ -16,7 +16,6 @@ public class BalanceServiceImpl implements BalanceService {
     public void calculation(List<Fruit> fruits) {
         for (Fruit fruit : fruits) {
             dataOperationsStrategy.get(fruit.getTypeOperation()).fruitOperation(fruit);
-
         }
     }
 }

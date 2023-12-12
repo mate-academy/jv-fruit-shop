@@ -60,7 +60,7 @@ public class Fruit {
                     return operation;
                 }
             }
-            throw new RuntimeException("Such an operation does not exist: " + code);
+            throw new IllegalArgumentException("Such an operation does not exist: " + code);
         }
     }
 }
