@@ -20,7 +20,6 @@ import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -28,9 +27,6 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        ReadFileService fileService = new ReadFileServiceImpl();
-        List<Fruit> fruitList = fileService.readFile(INPUT_FILE_PATH);
-
         FruitDao fruitDao = new FruitDaoImpl();
         Map<Fruit.Operation, DataOperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Fruit.Operation.BALANCE, new BalanceOperationHandler(fruitDao));
@@ -40,8 +36,9 @@ public class Main {
 
         OperationsStrategy dataOperationsStrategy = new OperationsStrategyImpl(operationHandlerMap);
 
+        ReadFileService fileService = new ReadFileServiceImpl();
         BalanceService balanceService = new BalanceServiceImpl(dataOperationsStrategy);
-        balanceService.calculation(fruitList);
+        balanceService.calculation(fileService.readFile(INPUT_FILE_PATH));
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.getReport(Storage.report);
