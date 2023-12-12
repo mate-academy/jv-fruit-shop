@@ -1,4 +1,4 @@
-# Fruit shop
+# core.basesyntax.Fruit shop
 Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
@@ -18,7 +18,7 @@ There are four activities at the store:
 ```
 
 Let's check details of all types of activities:
-1. Balance. Fruit balance at the beginning of the work shift. The following line in the file will look like:
+1. Balance. core.basesyntax.Fruit balance at the beginning of the work shift. The following line in the file will look like:
     
     ```text
        b,banana,100  
@@ -57,13 +57,13 @@ Let's check details of all types of activities:
 ```
 
 ### Expecting report file example
-We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
+We are expecting to see how many fruits are available today after the work shift in your core.basesyntax.Fruit store. 
 ```text
     fruit,quantity
     banana,152
     apple,90
 ```
-The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
+The line above means you have 152 bananas, and 90 apples in your core.basesyntax.Fruit store after the work shift.
 
 **Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes/approaches to solve this task at your discretion):**
@@ -105,7 +105,7 @@ You are presented with a diagram describing an algorithm for the creation of a p
 
 While carrying out this task, please pay attention to the following points:
 
-All services should be invoked from the main() method. In each service, you should have a method that returns a specific type of data and passes this data to the method of the next service. In this way, your services will be independent of each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
+All services should be invoked from the main() method. In each core.basesyntax.service, you should have a method that returns a specific type of data and passes this data to the method of the next core.basesyntax.service. In this way, your services will be independent of each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
 Remember the SOLID principles, think about which ones you might not be adhering to and how to fix this:
 - Single Responsibility - does each class/method perform one function?
 - Open/Closed - think about it, if there is a need to add functionality, will you need to change the logic of the class/methods?
