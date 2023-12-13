@@ -13,6 +13,7 @@ public class FileReaderServiceImpl implements FileReaderService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final long OFFSET = 1;
 
     @Override
     public List<Fruit> readFile(String path) {
@@ -27,7 +28,7 @@ public class FileReaderServiceImpl implements FileReaderService {
         }
         return informationAboutFruits
                 .stream()
-                .skip(1)
+                .skip(OFFSET)
                 .map(line -> parseDataLine(line))
                 .collect(Collectors.toList());
     }

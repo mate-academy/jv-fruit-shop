@@ -19,6 +19,5 @@ public class PurchaseOperationHandler implements DataOperationHandler {
         }
         fruitDao.add(fruit.getTypeFruit(),
                 fruitDao.get(fruit.getTypeFruit()) - fruit.getQuantity());
-
     }
 }

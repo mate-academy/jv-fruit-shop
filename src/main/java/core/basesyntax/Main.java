@@ -19,15 +19,19 @@ import core.basesyntax.service.impl.OperationsStrategyImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.writer.FileWriterService;
 import core.basesyntax.writer.FileWriterServiceImp;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/textInput.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
+    private static Map<Fruit.Operation, DataOperationHandler>
+            operationHandlerMap = new HashMap<>();
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<Fruit.Operation, DataOperationHandler> operationHandlerMap = Map.of(
+
+        operationHandlerMap = Map.of(
                 Fruit.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
                 Fruit.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
                 Fruit.Operation.RETURN, new ReturnOperationHandler(fruitDao),
@@ -41,7 +45,8 @@ public class Main {
         balanceService.calculation(fileService.readFile(INPUT_FILE_PATH));
 
         ReportService reportService = new ReportServiceImpl();
-        String report = reportService.getReport(Storage.report);
+        Storage storage = new Storage();
+        String report = reportService.getReport(storage.getReportMap());
 
         FileWriterService writeFileService = new FileWriterServiceImp();
         writeFileService.writeFile(report, OUTPUT_FILE_PATH);
