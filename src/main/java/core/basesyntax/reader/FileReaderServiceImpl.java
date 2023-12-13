@@ -28,11 +28,11 @@ public class FileReaderServiceImpl implements FileReaderService {
         return informationAboutFruits
                 .stream()
                 .skip(1)
-                .map(line -> getFromCsv(line))
+                .map(line -> parseDataLine(line))
                 .collect(Collectors.toList());
     }
 
-    private Fruit getFromCsv(String line) {
+    private Fruit parseDataLine(String line) {
         String[] fields = line.split(COMMA_SEPARATOR);
         Fruit fruit = new Fruit();
         try {
