@@ -1,49 +1,52 @@
 package core.basesyntax;
 
-import core.basesyntax.strategy.DefaultOperationStrategy;
+import core.basesyntax.fileRider.CsvFileReader;
+import core.basesyntax.fileWriter.FileWriterService;
+
+import core.basesyntax.reportCreator.ReportCreator;
+import core.basesyntax.transactionParser.CsvTransactionParser;
 
 import java.util.List;
 
 public class Main {
+
     public static void main(String[] args) {
-        // Ініціалізація магазину фруктів
-        FruitStore fruitStore = new FruitStore();
-        fruitStore.supplyFruit("banana", 100);
-        fruitStore.supplyFruit("apple", 200);
-        fruitStore.supplyFruit("orange", 300);
-        fruitStore.supplyFruit("lemon", 400);
+//        добавить фрукты в хранилище
 
-        fruitStore.supplyFruit("banana", 50);
-        fruitStore.supplyFruit("apple", 100);
-
-        fruitStore.sellFruit("banana", 50);
-        fruitStore.sellFruit("apple", 100);
-
-        fruitStore.sellFruit("lemon", 100);
-
-        fruitStore.returnFruit("lemon", 100);
-
-        fruitStore.sellFruit("lemon", 100);
-        fruitStore.sellFruit("lemon", 100);
-        fruitStore.sellFruit("lemon", 100);
-
-        fruitStore.returnFruit("lemon", 100);
+        Storage storage = new Storage();
+        storage.supplyFruit("banana", 10);
+        storage.supplyFruit("banana", 20);
+        storage.supplyFruit("apple", 30);
 
 
-        fruitStore.balanceFruit();
+        storage.returnFruit("banana", 10);
+
+        storage.supplyFruit("banana", 10);
 
 
-        CsvFileReader csvFileReader = new CsvFileReader();
-        List<String> transactionLines = csvFileReader.readTransactions("src/main/java/core/basesyntax/transactions.csv");
 
-        CsvTransactionParser csvTransactionParser = new CsvTransactionParser();
-        List<FruitTransaction> transactions = csvTransactionParser.parseTransactions(transactionLines);
+        storage.purchaseFruit("banana", 10);
+        storage.returnFruit("banana", 10);
+        storage.getBalance("banana");
 
-        TransactionProcessor transactionProcessor = new TransactionProcessor(new DefaultOperationStrategy());
-        transactionProcessor.processTransactions(transactions, fruitStore);
 
-        ReportCreator reportCreator = new CsvReportCreator(new TextFileWriter());
-        reportCreator.createReport(fruitStore, "src/main/java/core/basesyntax/report.csv");
+
+
+
+        CsvFileReader fileReader = new CsvFileReader();
+        CsvTransactionParser transactionParser = new CsvTransactionParser();
+//        Storage storage = new Storage();
+        TransactionProcessor transactionProcessor = new TransactionProcessor(storage);
+        ReportCreator reportCreator = new ReportCreator();
+        FileWriterService fileWriter = new FileWriterService();
+
+        List<String> lines = fileReader.readData("src/main/resources/input.csv");
+        List<FruitTransaction> transactions = transactionParser.parseTransactions(lines);
+        transactionProcessor.processTransactions(transactions);
+
+
+        String report = reportCreator.generateReport(storage);
+        fileWriter.writeToFile(report, "src/main/resources/report.csv");
 
     }
 }

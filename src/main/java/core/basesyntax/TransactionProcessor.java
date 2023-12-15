@@ -1,21 +1,21 @@
 package core.basesyntax;
 
-import core.basesyntax.operationHandler.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.operationStrategy.OperationStrategy;
 
 import java.util.List;
 
 public class TransactionProcessor {
     private final OperationStrategy operationStrategy;
+    private final Storage storage;
 
-    public TransactionProcessor(OperationStrategy operationStrategy) {
-        this.operationStrategy = operationStrategy;
+    public TransactionProcessor(Storage storage) {
+        this.storage = storage;
+        this.operationStrategy = new OperationStrategy();
     }
 
-    public void processTransactions(List<FruitTransaction> transactions, FruitStore fruitStore) {
+    public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            handler.handleOperation(fruitStore, transaction, transaction.getOperation());
+            operationStrategy.getHandler(transaction.getOperation()).handleOperation(transaction, storage);
         }
     }
 }

@@ -1,14 +1,22 @@
 package core.basesyntax;
 
 public class FruitTransaction {
+    private Operation operation;
     private String fruit;
     private int quantity;
-    private final Operation operation;
 
-    public FruitTransaction(String fruit, String quantity, int operation) {
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
-        this.quantity = Integer.parseInt(quantity);
-        this.operation = Operation.values()[operation];
+        this.quantity = quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
@@ -27,16 +35,12 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
-        return operation;
-    }
-
     @Override
     public String toString() {
-        return "FruitTransaction{"
-                + "fruitName='" + fruit + '\''
-                + ", quantity=" + quantity
-                + ", operation='" + operation + '\''
-                + '}';
+        return "FruitTransaction{" +
+                "operation=" + operation +
+                ", fruit='" + fruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
     }
 }

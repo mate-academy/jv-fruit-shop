@@ -1,15 +1,14 @@
 package core.basesyntax.operationHandler;
 
-import core.basesyntax.FruitStore;
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.Operation;
+import core.basesyntax.Storage;
 
 public class SupplyHandler implements OperationHandler{
-
     @Override
-    public void handleOperation(FruitStore fruitStore, FruitTransaction transaction, Operation operation) {
-        String fruit = transaction.getFruit();
-        int quantity = transaction.getQuantity();
-        fruitStore.supplyFruit(fruit, quantity);
+    public void handleOperation(FruitTransaction transaction, Storage storage) {
+        storage.supplyFruit(transaction.getFruit(), transaction.getQuantity());
+
     }
+
+
 }
