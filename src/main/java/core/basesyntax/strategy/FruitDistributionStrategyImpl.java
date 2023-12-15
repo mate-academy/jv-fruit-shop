@@ -1,18 +1,18 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 import java.util.Map;
 
 public class FruitDistributionStrategyImpl implements FruitDistributionStrategy {
-    private final Map<FruitTransition.Operation, ShopActivities> shopActivitiesMap;
+    private final Map<FruitTransaction.Operation, ShopActivities> shopActivitiesMap;
 
-    public FruitDistributionStrategyImpl(Map<FruitTransition.Operation,
+    public FruitDistributionStrategyImpl(Map<FruitTransaction.Operation,
             ShopActivities> shopActivitiesMap) {
         this.shopActivitiesMap = shopActivitiesMap;
     }
 
     @Override
-    public ShopActivities getActivity(FruitTransition.Operation operationType) {
+    public ShopActivities getActivity(FruitTransaction.Operation operationType) {
         return shopActivitiesMap.get(operationType);
     }
 }

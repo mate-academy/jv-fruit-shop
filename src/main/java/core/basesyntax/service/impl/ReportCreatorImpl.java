@@ -7,7 +7,7 @@ public class ReportCreatorImpl implements ReportCreator {
     private static final String HEADER = "fruit,quantity";
 
     @Override
-    public String ctreateRoport() {
+    public String createReport() {
         StringBuilder builder = new StringBuilder(HEADER);
         FruitStorage.fruits.forEach((fruit, quantity) -> {
             builder.append(System.lineSeparator());

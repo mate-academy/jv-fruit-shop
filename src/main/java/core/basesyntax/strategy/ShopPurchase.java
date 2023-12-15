@@ -1,11 +1,11 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 
 public class ShopPurchase implements ShopActivities {
     @Override
-    public void updateStorageData(FruitTransition transition) {
+    public void updateStorageData(FruitTransaction transition) {
         if (FruitStorage.fruits.containsKey(transition.getFruitType())) {
             int amount;
             if (transition.getFruitAmount()

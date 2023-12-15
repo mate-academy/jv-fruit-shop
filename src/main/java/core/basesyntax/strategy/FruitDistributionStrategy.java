@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 
 public interface FruitDistributionStrategy {
-    ShopActivities getActivity(FruitTransition.Operation operationType);
+    ShopActivities getActivity(FruitTransaction.Operation operationType);
 }

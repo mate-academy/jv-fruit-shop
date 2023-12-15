@@ -5,17 +5,18 @@ import core.basesyntax.service.FruitParser;
 import core.basesyntax.strategy.FruitDistributionStrategy;
 import java.util.List;
 
-public class FruitDistributionServiceImpl implements FruitDistributionService<String> {
+public class FruitDistributionServiceImpl implements FruitDistributionService {
     private static final int HEADER = 1;
     private final FruitDistributionStrategy distributionStrategy;
+    private final FruitParser fruitParser;
 
     public FruitDistributionServiceImpl(FruitDistributionStrategy distributionStrategy) {
         this.distributionStrategy = distributionStrategy;
+        this.fruitParser = new FruitParserImpl();
     }
 
     @Override
     public void countFruitDistribution(List<String> inputData) {
-        FruitParser fruitParser = new FruitParserImpl();
         inputData.stream()
                 .skip(HEADER)
                 .map(fruitParser::parseString)

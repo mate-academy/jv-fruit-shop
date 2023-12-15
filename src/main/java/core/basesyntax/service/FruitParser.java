@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 
 public interface FruitParser {
-    FruitTransition parseString(String string);
+    FruitTransaction parseString(String string);
 }

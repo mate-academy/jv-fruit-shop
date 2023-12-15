@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FruitDistributionService;
@@ -26,24 +26,24 @@ public class Main {
     private static final String REPORT_FILE_LOCATION = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransition.Operation, ShopActivities> shopActivitiesMap = new HashMap<>();
-        shopActivitiesMap.put(FruitTransition.Operation.BALANCE, new ShopBalance());
-        shopActivitiesMap.put(FruitTransition.Operation.SUPPLY, new ShopSupply());
-        shopActivitiesMap.put(FruitTransition.Operation.PURCHASE, new ShopPurchase());
-        shopActivitiesMap.put(FruitTransition.Operation.RETURN, new ShopReturn());
+        Map<FruitTransaction.Operation, ShopActivities> shopActivitiesMap = new HashMap<>();
+        shopActivitiesMap.put(FruitTransaction.Operation.BALANCE, new ShopBalance());
+        shopActivitiesMap.put(FruitTransaction.Operation.SUPPLY, new ShopSupply());
+        shopActivitiesMap.put(FruitTransaction.Operation.PURCHASE, new ShopPurchase());
+        shopActivitiesMap.put(FruitTransaction.Operation.RETURN, new ShopReturn());
 
-        FileReader<String> fileReader = new CsvFileReader();
-        List<String> inputData = fileReader.parseDataFrom(DATA_FILE_LOCATION);
+        FileReader fileReader = new CsvFileReader();
+        List<String> inputData = fileReader.readDataFrom(DATA_FILE_LOCATION);
 
         FruitDistributionStrategy distributionStrategy
                 = new FruitDistributionStrategyImpl(shopActivitiesMap);
 
-        FruitDistributionService<String> distributionService
+        FruitDistributionService distributionService
                 = new FruitDistributionServiceImpl(distributionStrategy);
         distributionService.countFruitDistribution(inputData);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
-        String report = reportCreator.ctreateRoport();
+        String report = reportCreator.createReport();
 
         File reportFile = new File(REPORT_FILE_LOCATION);
         FileWriter fileWriter = new CsvFileWriter();

@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.models.FruitTransition;
+import core.basesyntax.models.FruitTransaction;
 
 public interface ShopActivities {
-    void updateStorageData(FruitTransition transition);
+    void updateStorageData(FruitTransaction transition);
 }

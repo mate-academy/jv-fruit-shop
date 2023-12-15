@@ -2,16 +2,16 @@ package core.basesyntax.models;
 
 import java.util.Objects;
 
-public class FruitTransition {
+public class FruitTransaction {
     private Operation operation;
-    private Fruit.Type fruitType;
+    private String fruitType;
     private int fruitAmount;
 
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
 
-    public void setFruitType(Fruit.Type fruitType) {
+    public void setFruitType(String fruitType) {
         this.fruitType = fruitType;
     }
 
@@ -23,7 +23,7 @@ public class FruitTransition {
         return operation;
     }
 
-    public Fruit.Type getFruitType() {
+    public String getFruitType() {
         return fruitType;
     }
 
@@ -39,9 +39,9 @@ public class FruitTransition {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        FruitTransition that = (FruitTransition) o;
+        FruitTransaction that = (FruitTransaction) o;
         return fruitAmount == that.fruitAmount && operation == that.operation
-                && fruitType == that.fruitType;
+                && fruitType.equals(that.fruitType);
     }
 
     @Override
@@ -60,11 +60,11 @@ public class FruitTransition {
             this.code = code;
         }
 
-        public String getCode() {
+        public String getOperation() {
             return code;
         }
 
-        public static Operation setCode(String code) {
+        public static Operation getOperation(String code) {
             for (Operation operation : values()) {
                 if (operation.code.equals(code)) {
                     return operation;
