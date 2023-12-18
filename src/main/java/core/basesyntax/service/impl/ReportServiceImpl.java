@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String TITLE = "fruit,quantity";
-    private static final String INDENTATION = "    ";
+    private static final String INDENTATION = "\t";
     private static final String SEPARATOR = ",";
 
     @Override
