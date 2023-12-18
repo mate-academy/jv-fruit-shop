@@ -17,7 +17,7 @@ public class CsvReaderService implements ReaderService {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading from file", e);
+            throw new RuntimeException("Error reading from file " + filePath, e);
         }
         return lines;
     }

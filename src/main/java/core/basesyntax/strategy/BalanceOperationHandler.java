@@ -3,15 +3,15 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 
-public class BalanceOperation implements Operation {
+public class BalanceOperationHandler implements OperationHandler {
     private final FruitStorage fruitStorage;
 
-    public BalanceOperation(FruitStorage fruitStorage) {
+    public BalanceOperationHandler(FruitStorage fruitStorage) {
         this.fruitStorage = fruitStorage;
     }
 
     @Override
-    public void performOperation(FruitTransaction transaction, FruitStorage fruitStorage) {
+    public void performOperation(FruitTransaction transaction) {
         int currentBalance = this.fruitStorage.getFruitInventory()
                 .getOrDefault(transaction.getFruit(), 0);
         this.fruitStorage.addFruit(transaction.getFruit(), transaction.getQuantity());
@@ -24,3 +24,4 @@ public class BalanceOperation implements Operation {
                 + transaction.getQuantity());
     }
 }
+

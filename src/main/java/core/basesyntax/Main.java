@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.context.OperationContext;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.report.ReportService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.WriterService;
@@ -10,39 +11,32 @@ import core.basesyntax.service.impl.CsvParserService;
 import core.basesyntax.service.impl.CsvReaderService;
 import core.basesyntax.service.impl.CsvWriterService;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final String inputFilePath = "C:\\Users\\Kali\\IdeaProjects\\"
-                + "jv-fruit-shop\\src\\main\\resources\\input.csv";
-
         ReaderService readerService = new CsvReaderService();
-        List<String> lines = readerService.readFromFile(inputFilePath);
+        List<String> lines = readerService.readFromFile("src/main/resources/input.csv");
         ParserService parserService = new CsvParserService();
         List<FruitTransaction> transactions = parserService.parseCsv(lines);
 
         FruitStorage fruitStorage = new FruitStorage();
-        Map<String, Integer> report = fruitStorage.getFruitInventory();
+        ReportService reportService = new ReportService(fruitStorage);
 
-        System.out.println("Report before processing transactions: " + report);
+        System.out.print("Report before processing transactions: "
+                + reportService.generateReport());
 
         OperationContext operationContext = new OperationContext(fruitStorage);
         for (FruitTransaction transaction : transactions) {
             if (transaction != null) {
                 operationContext.getOperation(transaction.getOperation())
-                        .performOperation(transaction, fruitStorage);
+                        .performOperation(transaction);
             }
         }
 
-        final String outputFilePath = "C:\\Users\\Kali\\IdeaProjects\\"
-                + "jv-fruit-shop\\src\\main\\resources\\output.csv";
-
-        report = fruitStorage.getFruitInventory();
+        String report = reportService.generateReport();
         System.out.println("Report after processing transactions: " + report);
 
         WriterService writerService = new CsvWriterService();
-        writerService.writeReportToCsv(report, outputFilePath);
-
+        writerService.writeReportToCsv(report, "src/main/resources/output.csv");
     }
 }

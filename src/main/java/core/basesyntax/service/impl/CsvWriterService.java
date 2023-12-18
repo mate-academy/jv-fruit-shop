@@ -4,19 +4,12 @@ import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 public class CsvWriterService implements WriterService {
     @Override
-    public void writeReportToCsv(Map<String, Integer> report, String outputPath) {
+    public void writeReportToCsv(String content, String outputPath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath))) {
-            writer.write("fruit,quantity");
-            writer.newLine();
-
-            for (Map.Entry<String, Integer> entry : report.entrySet()) {
-                writer.write(entry.getKey() + "," + entry.getValue());
-                writer.newLine();
-            }
+            writer.write(content);
         } catch (IOException e) {
             throw new RuntimeException("Error writing to file", e);
         }
