@@ -4,6 +4,7 @@ import core.basesyntax.Operation;
 import core.basesyntax.Storage;
 import core.basesyntax.operationStrategy.OperationStrategy;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import core.basesyntax.FruitTransaction;
@@ -11,11 +12,17 @@ import core.basesyntax.FruitTransaction;
 
 public class ReportCreator {
     public String generateReport(Storage storage) {
-        StringBuilder report = new StringBuilder("fruit,quantity\n");
-        for (Map.Entry<String, Integer> entry : storage.getFruits().entrySet()) {
-            report.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
-        }
+        StringBuilder report = new StringBuilder("type,fruit,quantity\n");
+        for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
+            report.append(Arrays.stream(Operation.values()).map(Operation::toString).findFirst().get())
+                    .append(",")
+                    .append(entry.getKey())
+                    .append(",")
+                    .append(entry.getValue())
+                    .append("\n"
+                    );}
         return report.toString();
+
     }
 
 }

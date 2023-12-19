@@ -7,7 +7,7 @@ import core.basesyntax.Storage;
 public class  BalanceHandler  implements OperationHandler {
     @Override
     public void handleOperation(FruitTransaction transaction, Storage storage) {
-        storage.getBalance(transaction.getFruit());
+        Storage.fruits.get(transaction.getFruit());
 
     }
 

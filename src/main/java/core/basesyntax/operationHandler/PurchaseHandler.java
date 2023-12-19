@@ -7,7 +7,7 @@ public class PurchaseHandler implements OperationHandler{
 
     @Override
     public void handleOperation(FruitTransaction transaction, Storage storage) {
-        storage.purchaseFruit(transaction.getFruit(), transaction.getQuantity());
+        Storage.fruits.remove(transaction.getFruit(), transaction.getQuantity());
     }
 
 
