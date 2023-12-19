@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import java.util.Map;
 
 public interface FruitDao {
-    void addData(Map<String, Integer> statistics);
+    void addFruit(String fruit, Integer quantity);
 
-    Map<String, Integer> getData();
+    Map<String, Integer> getBalance();
 }

@@ -4,13 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<String, Integer> shiftStatistics = new HashMap<>();
+    private static Map<String, Integer> stock = new HashMap<>();
 
-    public static Map<String, Integer> getShiftStatistics() {
-        return shiftStatistics;
-    }
-
-    public static void setShiftStatistics(Map<String, Integer> shiftStatistics) {
-        Storage.shiftStatistics = shiftStatistics;
+    public static Map<String, Integer> getStock() {
+        return stock;
     }
 }

@@ -10,7 +10,7 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
 
     @Override
     public String createReport() {
-        Map<String, Integer> data = fruitDao.getData();
+        Map<String, Integer> data = fruitDao.getBalance();
         StringBuilder builder = new StringBuilder();
         builder.append("fruit,quantity").append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : data.entrySet()) {
