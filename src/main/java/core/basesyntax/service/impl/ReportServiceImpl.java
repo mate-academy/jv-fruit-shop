@@ -7,13 +7,14 @@ import java.util.Map;
 public class ReportServiceImpl implements ReportService {
     @Override
     public String report() {
-        StringBuilder report = new StringBuilder(HEADER).append(System.lineSeparator());
+        StringBuilder report = new StringBuilder("fruit,quantity").append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : FruitStorage.fruitQuantities.entrySet()) {
             report.append(entry.getKey())
-                    .append(SEPARATOR);
-                                .append(entry.getValue())
+                    .append(",")
+                    .append(entry.getValue())
                     .append(System.lineSeparator());
         }
         return report.toString();
     }
 }
+
