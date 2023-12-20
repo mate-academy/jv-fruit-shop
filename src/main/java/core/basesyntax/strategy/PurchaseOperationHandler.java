@@ -17,21 +17,14 @@ public class PurchaseOperationHandler implements OperationHandler {
 
         if (currentInventory >= transaction.getQuantity()) {
             fruitStorage.substractFruit(transaction.getFruit(), transaction.getQuantity());
-
             int newBalance = currentInventory - transaction.getQuantity();
-            if (newBalance >= 0) {
-                System.out.println("Processed Purchase Operation for " + transaction.getFruit()
-                        + ". Current Inventory: "
-                        + currentInventory
-                        + ". Purchased: "
-                        + transaction.getQuantity());
-            } else {
-                throw new RuntimeException("Negative balance after purchase operation");
-            }
+            System.out.println("Processed Purchase Operation for " + transaction.getFruit()
+                    + ". Current Inventory: "
+                    + currentInventory
+                    + ". Purchased: "
+                    + transaction.getQuantity());
         } else {
-            System.out.println("Not enough "
-                    + transaction.getFruit()
-                    + " in the inventory. Skipping purchase.");
+            throw new RuntimeException("Negative balance after purchase operation");
         }
     }
 }

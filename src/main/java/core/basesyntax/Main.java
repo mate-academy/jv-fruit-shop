@@ -13,9 +13,12 @@ import core.basesyntax.service.impl.CsvWriterService;
 import java.util.List;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
         ReaderService readerService = new CsvReaderService();
-        List<String> lines = readerService.readFromFile("src/main/resources/input.csv");
+        List<String> lines = readerService.readFromFile(INPUT_FILE_PATH);
         ParserService parserService = new CsvParserService();
         List<FruitTransaction> transactions = parserService.parseCsv(lines);
 
@@ -37,6 +40,6 @@ public class Main {
         System.out.println("Report after processing transactions: " + report);
 
         WriterService writerService = new CsvWriterService();
-        writerService.writeReportToCsv(report, "src/main/resources/output.csv");
+        writerService.writeToCsv(report, OUTPUT_FILE_PATH);
     }
 }

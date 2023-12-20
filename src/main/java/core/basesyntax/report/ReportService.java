@@ -12,7 +12,7 @@ public class ReportService {
 
     public String generateReport() {
         Map<String, Integer> fruitInventory = fruitStorage.getFruitInventory();
-        StringBuilder report = new StringBuilder("fruit,quantity\n");
+        StringBuilder report = new StringBuilder("fruit,quantity").append(System.lineSeparator());
 
         for (Map.Entry<String, Integer> entry : fruitInventory.entrySet()) {
             report.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");

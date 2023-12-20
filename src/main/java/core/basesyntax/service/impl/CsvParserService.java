@@ -6,9 +6,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvParserService implements ParserService {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final int ARRAY_LENGTH_REQUIRED = 3;
+
     @Override
     public List<FruitTransaction> parseCsv(List<String> lines) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
+
+        if (lines.size() > 0) {
+            if (lines.get(0).toLowerCase().contains("type,fruit,quantity")) {
+                lines = lines.subList(1, lines.size());
+            }
+        }
 
         for (String line : lines) {
             FruitTransaction transaction = parseCsvLine(line);
@@ -21,14 +32,16 @@ public class CsvParserService implements ParserService {
     private FruitTransaction parseCsvLine(String line) {
         String[] parsedArray = line.split(",");
 
-        if (parsedArray.length == 3 && !parsedArray[0].equalsIgnoreCase("type")) {
-            String operationCode = parsedArray[0].trim();
-            String fruit = parsedArray[1].trim();
+        if (parsedArray.length == ARRAY_LENGTH_REQUIRED
+                && !parsedArray[OPERATION_INDEX].equalsIgnoreCase("type")) {
+            String operationCode = parsedArray[OPERATION_INDEX].trim();
+            String fruit = parsedArray[FRUIT_INDEX].trim();
 
             try {
-                int quantity = Integer.parseInt(parsedArray[2].trim());
+                int quantity = Integer.parseInt(parsedArray[QUANTITY_INDEX].trim());
 
-                FruitTransaction.Operation operation = mapOperation(operationCode);
+                FruitTransaction.Operation operation
+                        = FruitTransaction.Operation.getByCode(operationCode);
 
                 FruitTransaction transaction = new FruitTransaction();
                 transaction.setOperation(operation);
@@ -37,26 +50,10 @@ public class CsvParserService implements ParserService {
 
                 return transaction;
             } catch (NumberFormatException e) {
-                System.out.println("Invalid quantity format in line: " + line);
-                return null;
+                throw new RuntimeException("Invalid quantity format in line: " + line);
             }
         } else {
-            return null;
-        }
-    }
-
-    private FruitTransaction.Operation mapOperation(String code) {
-        switch (code) {
-            case "b":
-                return FruitTransaction.Operation.BALANCE;
-            case "s":
-                return FruitTransaction.Operation.SUPPLY;
-            case "p":
-                return FruitTransaction.Operation.PURCHASE;
-            case "r":
-                return FruitTransaction.Operation.RETURN;
-            default:
-                throw new RuntimeException("Unknown operation code: " + code);
+            throw new RuntimeException("Invalid line format: " + line);
         }
     }
 }
