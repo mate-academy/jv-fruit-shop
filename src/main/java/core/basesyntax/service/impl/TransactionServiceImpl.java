@@ -25,6 +25,9 @@ public class TransactionServiceImpl implements TransactionService {
                                 operationStrategy.get(fruit.getOperation())
                                         .calculate(fruit))));
         for (Map.Entry<String, Integer> entry : transactions.entrySet()) {
+            if (entry.getValue() < 0) {
+                throw new RuntimeException("Negative balance");
+            }
             fruitDao.addFruit(entry.getKey(), entry.getValue());
         }
     }

@@ -14,18 +14,23 @@ public class ParserServiceImpl implements ParserService {
     public List<FruitTransaction> parseData(List<String> fruits) {
         return fruits.stream()
                 .skip(1)
-                .map(fruit -> fruit.split(","))
-                .map(splitted -> {
-                    String fruitOpCode = splitted[OPERATION_INDEX];
-                    FruitTransaction.Operation operation = FruitTransaction.Operation
-                                    .getByCode(fruitOpCode);
-                    String fruitName = splitted[FRUIT_NAME_INDEX];
-                    int fruitQuantity = Integer.parseInt(splitted[FRUIT_QUANTITY_INDEX].trim());
-                    if (fruitQuantity < 0) {
-                        throw new RuntimeException("Wrong quantity input");
-                    }
-                    return new FruitTransaction(operation, fruitName, fruitQuantity);
-                })
+                .map(this::getFruitTransaction)
                 .collect(Collectors.toList());
+    }
+
+    private FruitTransaction getFruitTransaction(String fruitRow) {
+        String[] splittedRow = fruitRow.split(",");
+        String operationCode = splittedRow[OPERATION_INDEX];
+        FruitTransaction.Operation operation = FruitTransaction.Operation.getByCode(operationCode);
+        String fruitName = splittedRow[FRUIT_NAME_INDEX];
+        int fruitQuantity = Integer.parseInt(splittedRow[FRUIT_QUANTITY_INDEX].trim());
+        validateFruitQuantity(fruitQuantity);
+        return new FruitTransaction(operation, fruitName, fruitQuantity);
+    }
+
+    private void validateFruitQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Wrong quantity input");
+        }
     }
 }
