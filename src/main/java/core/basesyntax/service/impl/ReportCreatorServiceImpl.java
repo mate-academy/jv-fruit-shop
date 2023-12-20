@@ -8,6 +8,7 @@ import java.util.Map;
 public class ReportCreatorServiceImpl implements ReportCreatorService {
     private static final String FRUIT_HEADER = "fruit";
     private static final String QUANTITY_HEADER = "quantity";
+    private static final String DELIMITER = ",";
     private final FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
@@ -15,11 +16,13 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
         Map<String, Integer> data = fruitDao.getBalance();
         StringBuilder builder = new StringBuilder();
         builder.append(FRUIT_HEADER)
-                        .append(",")
+                        .append(DELIMITER)
                         .append(QUANTITY_HEADER)
                         .append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : data.entrySet()) {
-            builder.append(entry.getKey()).append(",").append(entry.getValue())
+            builder.append(entry.getKey())
+                    .append(DELIMITER)
+                    .append(entry.getValue())
                     .append(System.lineSeparator());
         }
         return builder.toString();
