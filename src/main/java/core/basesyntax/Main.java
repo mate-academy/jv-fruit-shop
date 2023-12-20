@@ -40,13 +40,18 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> inputData = readerService.readFromFile(INPUT_FILE_PATH);
 
-        ParseOperationService transactionService = new ParseOperationServiceImpl();
+        ParseOperationService transactionService = new ParseOperationServiceImpl() {
+            @Override
+            public List<FruitTransaction> parseTransactions(List<String> inputData) {
+                return null;
+            }
+        };
         List<FruitTransaction> fruitTransactions =
                 transactionService.parseContentForOperations(inputData);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitShopService transactionHandler = new FruitShopServiceImpl(operationStrategy);
-        transactionHandler.processOfOperations(fruitTransactions);
+        transactionHandler.processTransactions(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.report();
