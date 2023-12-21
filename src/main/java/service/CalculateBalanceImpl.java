@@ -8,8 +8,11 @@ import model.FruitTransaction;
 import strategy.CalculateStrategy;
 
 public class CalculateBalanceImpl implements CalculateBalance {
+    private static Storage storage;
 
-    public static Storage storage;
+    public CalculateBalanceImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public Map<String, Integer> calculateBalance(List<FruitTransaction> fruitTransactionList) {
@@ -21,4 +24,3 @@ public class CalculateBalanceImpl implements CalculateBalance {
         return fruitQuantities;
     }
 }
-

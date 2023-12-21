@@ -20,8 +20,7 @@ public class Main {
         CsvDataReader csvDataReader = new CsvDataReaderImpl();
         List<FruitTransaction> fruitTransactions = csvDataReader.readDataFromFile(inputFilePath);
 
-        CalculateBalance calculateBalanceOfFruits = new CalculateBalanceImpl();
-        CalculateBalanceImpl.storage = new Storage();
+        CalculateBalance calculateBalanceOfFruits = new CalculateBalanceImpl(new Storage());
         Map<String, Integer> fruitQuantities = calculateBalanceOfFruits
                 .calculateBalance(fruitTransactions);
 
