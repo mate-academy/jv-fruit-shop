@@ -4,7 +4,9 @@ import core.basesyntax.fileRider.CsvFileReader;
 import core.basesyntax.fileWriter.FileWriterService;
 
 import core.basesyntax.operationHandler.BalanceHandler;
+import core.basesyntax.operationHandler.PurchaseHandler;
 import core.basesyntax.operationHandler.ReturnHandler;
+import core.basesyntax.operationHandler.SupplyHandler;
 import core.basesyntax.reportCreator.ReportCreator;
 import core.basesyntax.transactionParser.CsvTransactionParser;
 
@@ -13,36 +15,29 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-//        добавить фрукты в хранилище
+
         Storage storage = new Storage();
-        Storage.fruits.put("banana", 10);
-        Storage.fruits.put("apple", 30);
-        Storage.fruits.put("orange", 50);
-        Storage.fruits.put("lemon", 40);
-Storage.fruits.put("pineapple", 70);
-Storage.fruits.put("peach", 20);
-Storage.fruits.put("pear", 30);
-Storage.fruits.put("mango", 40);
-Storage.fruits.put("grape", 50);
-Storage.fruits.put("kiwi", 60);
-Storage.fruits.put("cherry", 70);
-Storage.fruits.put("apricot", 80);
-Storage.fruits.put("plum", 90);
+        SupplyHandler supplyHandler = new SupplyHandler();
+        supplyHandler.handleOperation(new FruitTransaction( Operation.SUPPLY, "banana", 10), storage);
+        supplyHandler.handleOperation(new FruitTransaction( Operation.SUPPLY, "apple", 20), storage);
+        supplyHandler.handleOperation(new FruitTransaction( Operation.SUPPLY, "banana", 30), storage);
+        supplyHandler.handleOperation(new FruitTransaction( Operation.SUPPLY, "apple", 40), storage);
+        supplyHandler.handleOperation(new FruitTransaction( Operation.SUPPLY, "banana", 50), storage);
 
-Storage.fruits.get("banana");
-Storage.fruits.get("apple");
-Storage.fruits.get("orange");
+        PurchaseHandler purchaseHandler = new PurchaseHandler();
+        purchaseHandler.handleOperation(new FruitTransaction( Operation.PURCHASE, "banana", 10), storage);
+        purchaseHandler.handleOperation(new FruitTransaction( Operation.PURCHASE, "apple", 20), storage);
 
-Storage.fruits.remove("banana", 10);
-Storage.fruits.remove("apple", 10);
+        BalanceHandler balanceHandler = new BalanceHandler();
+        balanceHandler.handleOperation(new FruitTransaction( Operation.BALANCE, "banana", 10), storage);
 
+        ReturnHandler returnHandler = new ReturnHandler();
+        returnHandler.handleOperation(new FruitTransaction( Operation.RETURN, "banana", 10), storage);
 
         CsvFileReader fileReader = new CsvFileReader();
         CsvTransactionParser transactionParser = new CsvTransactionParser();
         List<String> lines = fileReader.readData("src/main/resources/input.csv");
         List<FruitTransaction> transactions = transactionParser.parseTransactions(lines);
-        BalanceHandler balanceHandler = new BalanceHandler();
-        ReturnHandler returnHandler = new ReturnHandler();
         ReportCreator reportCreator = new ReportCreator();
         FileWriterService fileWriter = new FileWriterService();
         for (FruitTransaction transaction : transactions) {

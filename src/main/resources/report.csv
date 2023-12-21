@@ -1,13 +1,3 @@
 type,fruit,quantity
-BALANCE,plum,90
-BALANCE,cherry,70
-BALANCE,kiwi,60
-BALANCE,peach,20
-BALANCE,grape,50
-BALANCE,mango,40
-BALANCE,orange,50
-BALANCE,apricot,80
-BALANCE,apple,30
-BALANCE,lemon,40
-BALANCE,pear,30
-BALANCE,pineapple,70
+BALANCE,banana,90
+BALANCE,apple,40

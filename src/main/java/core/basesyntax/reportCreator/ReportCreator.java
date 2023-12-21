@@ -11,6 +11,7 @@ import core.basesyntax.FruitTransaction;
 
 
 public class ReportCreator {
+
     public String generateReport(Storage storage) {
         StringBuilder report = new StringBuilder("type,fruit,quantity\n");
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
@@ -24,10 +25,7 @@ public class ReportCreator {
         return report.toString();
 
     }
-
 }
-
-
 //type,fruit,quantity
 //        b,banana,20
 //        b,apple,100

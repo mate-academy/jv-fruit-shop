@@ -19,3 +19,5 @@ public class TransactionProcessor {
         }
     }
 }
+
+//TransactionProcessor is a service that should accept list of transactions and process them all

@@ -7,16 +7,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy{
-    private final Map<Operation, OperationHandler> operationHandlers;
+    private final Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
 
     public OperationStrategy() {
-        this.operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceHandler());
-        operationHandlers.put(Operation.SUPPLY, new SupplyHandler());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseHandler());
-        operationHandlers.put(Operation.RETURN, new ReturnHandler());
+        operationHandlerMap.put(Operation.BALANCE, new BalanceHandler());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyHandler());
+        operationHandlerMap.put(Operation.RETURN, new ReturnHandler());
+        operationHandlerMap.put(Operation.PURCHASE, new PurchaseHandler());
     }
 
     public OperationHandler getHandler(Operation operation) {
-        return operationHandlers.get(operation);
-    }}
+        return operationHandlerMap.get(operation);
+    }
+}
+
+
+//OperationStrategy that should have a map of handlers, and should return a handler by operation type
