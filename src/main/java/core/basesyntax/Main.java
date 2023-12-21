@@ -29,9 +29,12 @@ public class Main {
         purchaseHandler.handleOperation(new FruitTransaction( Operation.PURCHASE, "apple", 20), storage);
 
         BalanceHandler balanceHandler = new BalanceHandler();
-        balanceHandler.handleOperation(new FruitTransaction( Operation.BALANCE, "banana", 10), storage);
+
+
 
         ReturnHandler returnHandler = new ReturnHandler();
+        returnHandler.handleOperation(new FruitTransaction( Operation.RETURN, "banana", 10), storage);
+        returnHandler.handleOperation(new FruitTransaction( Operation.RETURN, "banana", 10), storage);
         returnHandler.handleOperation(new FruitTransaction( Operation.RETURN, "banana", 10), storage);
 
         CsvFileReader fileReader = new CsvFileReader();
