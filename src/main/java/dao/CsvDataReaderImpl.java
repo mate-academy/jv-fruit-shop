@@ -1,7 +1,6 @@
 package dao;
 
 import static model.FruitTransaction.Operation.fromCode;
-import static model.FruitTransaction.Operation.valueOf;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
