@@ -17,13 +17,13 @@ public class Main {
 
         Storage storage = new Storage();
 
-        OperationHandler purchaseHandler = new PurchaseHandler();
+        final OperationHandler purchaseHandler = new PurchaseHandler();
 
-        OperationHandler returnHandler = new ReturnHandler();
+        final OperationHandler returnHandler = new ReturnHandler();
 
-        OperationHandler supplyHandler = new SupplyHandler();
+        final OperationHandler supplyHandler = new SupplyHandler();
 
-        OperationHandler balanceHandler = new BalanceHandler();
+        final OperationHandler balanceHandler = new BalanceHandler();
 
         supplyHandler.handleOperation(new FruitTransaction(Operation
                 .SUPPLY,"Orange", 20), storage);
