@@ -1,3 +1,4 @@
 type,fruit,quantity
-BALANCE,banana,50
-BALANCE,apple,40
+BALANCE,Apple,15
+BALANCE,Pea,40
+BALANCE,Orange,60

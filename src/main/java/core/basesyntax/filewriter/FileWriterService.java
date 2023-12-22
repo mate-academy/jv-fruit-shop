@@ -1,6 +1,7 @@
-package core.basesyntax.fileWriter;
+package core.basesyntax.filewriter;
 
 import java.io.FileWriter;
+
 public class FileWriterService {
     public void writeToFile(String report, String filePath) {
         try {
@@ -10,6 +11,5 @@ public class FileWriterService {
         } catch (Exception e) {
             throw new RuntimeException("Can't write to file " + filePath, e);
         }
-
     }
 }

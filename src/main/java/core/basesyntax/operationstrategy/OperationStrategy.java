@@ -1,12 +1,15 @@
-package core.basesyntax.operationStrategy;
+package core.basesyntax.operationstrategy;
 
 import core.basesyntax.Operation;
-import core.basesyntax.operationHandler.*;
-
+import core.basesyntax.operationhandler.BalanceHandler;
+import core.basesyntax.operationhandler.OperationHandler;
+import core.basesyntax.operationhandler.PurchaseHandler;
+import core.basesyntax.operationhandler.ReturnHandler;
+import core.basesyntax.operationhandler.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OperationStrategy{
+public class OperationStrategy {
     private final Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
 
     public OperationStrategy() {
@@ -20,6 +23,3 @@ public class OperationStrategy{
         return operationHandlerMap.get(operation);
     }
 }
-
-
-//OperationStrategy that should have a map of handlers, and should return a handler by operation type

@@ -1,7 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.operationStrategy.OperationStrategy;
-
+import core.basesyntax.operationstrategy.OperationStrategy;
 import java.util.List;
 
 public class TransactionProcessor {
@@ -15,9 +14,8 @@ public class TransactionProcessor {
 
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            operationStrategy.getHandler(transaction.getOperation()).handleOperation(transaction, storage);
+            operationStrategy.getHandler(transaction.getOperation())
+                    .handleOperation(transaction, storage);
         }
     }
 }
-
-//TransactionProcessor is a service that should accept list of transactions and process them all
