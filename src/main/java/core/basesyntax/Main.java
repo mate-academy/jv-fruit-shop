@@ -35,8 +35,6 @@ public class Main {
         String report = new ReportGeneratorImpl().getReportFromDB();
         new WriterImpl().write(report, fileWithReport);
 
-        // check final file content:
-        System.out.println(new ReaderImpl().read(fileWithReport));
     }
 }
 
