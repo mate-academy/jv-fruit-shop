@@ -11,6 +11,11 @@ public class TransactionStrategy {
     }
 
     public TransactionService getTransactionService(FruitTransaction.Operation operation) {
-        return operationMap.get(operation);
+        TransactionService transactionService = operationMap.get(operation);
+        if (transactionService == null) {
+            throw new RuntimeException("No implementation for operation: "
+                    + operation);
+        }
+        return transactionService;
     }
 }

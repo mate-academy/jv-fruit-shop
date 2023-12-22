@@ -5,11 +5,6 @@ import java.util.List;
 import model.FruitTransaction;
 import service.Parser;
 
-//Report example:
-//type,fruit,quantity
-//b,banana,20
-//b,apple,100
-//s,banana,100
 public class ParserImpl implements Parser {
     private static final int COLUMN_WITH_OPERATION_CODE = 0;
     private static final int COLUMN_WITH_FRUIT = 1;

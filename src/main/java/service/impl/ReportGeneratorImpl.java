@@ -4,10 +4,6 @@ import db.FruitStorage;
 import java.util.Map;
 import service.ReportGenerator;
 
-//Report example:
-//fruit,quantity
-//banana,152
-//apple,90
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReportFromDB() {

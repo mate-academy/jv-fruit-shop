@@ -10,6 +10,7 @@ import service.impl.ReaderImpl;
 import service.impl.ReportGeneratorImpl;
 import service.impl.WriterImpl;
 import strategy.TransactionService;
+import strategy.TransactionStrategy;
 import strategy.impl.TransactionServiceBalance;
 import strategy.impl.TransactionServicePurchase;
 import strategy.impl.TransactionServiceReturn;
@@ -28,7 +29,8 @@ public class Main {
 
         String transactionsData = new ReaderImpl().read(fileWithTransactions);
         List<FruitTransaction> transactions = new ParserImpl().getTransactions(transactionsData);
-        DataCollector dataCollector = new DataCollector(operationMap);
+        TransactionStrategy strategy = new TransactionStrategy(operationMap);
+        DataCollector dataCollector = new DataCollector(strategy);
         dataCollector.applyTransactionsToDatabase(transactions);
         String report = new ReportGeneratorImpl().getReportFromDB();
         new WriterImpl().write(report, fileWithReport);
