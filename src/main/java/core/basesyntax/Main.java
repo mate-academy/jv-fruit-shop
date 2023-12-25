@@ -30,7 +30,7 @@ public class Main {
         activityHandlerMap.put(Operation.PURCHASE, new PurchaseActivityHandler(fruitDao));
         activityHandlerMap.put(Operation.RETURN, new ReturnActivityHandler(fruitDao));
         List<String[]> list = getStock();
-        try(CSVWriter csvFile = fileService.createCsvFile("stock.csv")) {
+        try (CSVWriter csvFile = fileService.createCsvFile("stock.csv")) {
             csvFile.writeAll(list);
         } catch (IOException e) {
             throw new RuntimeException("Can't close file " + e);
