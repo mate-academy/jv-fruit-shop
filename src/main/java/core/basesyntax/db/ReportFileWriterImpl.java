@@ -6,13 +6,14 @@ import java.util.Map;
 
 public class ReportFileWriterImpl implements ReportFileWriter {
     private static final String SEPARATOR = ",";
+    private static final String HEADER = "fruit,quantity";
 
     @Override
     public void writeToFile(Map<String, Integer> fruitsStorage, String filePath) {
         FileWriter writer;
         try {
             writer = new FileWriter(filePath);
-            writer.write("fruit,quantity" + System.lineSeparator());
+            writer.write(HEADER + System.lineSeparator());
             for (String fruitName : fruitsStorage.keySet()) {
                 if (fruitsStorage.get(fruitName) < 0) {
                     throw new RuntimeException("Quantity value can't be negative");
