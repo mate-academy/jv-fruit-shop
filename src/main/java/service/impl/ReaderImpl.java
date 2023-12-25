@@ -1,9 +1,7 @@
 package service.impl;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import service.Reader;
 
 public class ReaderImpl implements Reader {
@@ -17,10 +15,8 @@ public class ReaderImpl implements Reader {
                 line = bufferedReader.readLine();
             }
             return builder.toString();
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException("Can't find a file " + fileName, e);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read a file " + fileName, e);
         }
     }
 }
