@@ -1,6 +1,6 @@
 package dao;
 
-import static model.FruitTransaction.Operation.fromCode;
+import static model.Operation.fromCode;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
+import model.Operation;
 
 public class CsvDataReaderImpl implements CsvDataReader {
     @Override
@@ -18,7 +19,7 @@ public class CsvDataReaderImpl implements CsvDataReader {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 String[] row = line.split(",");
-                FruitTransaction.Operation type = fromCode(row[0]);
+                Operation type = fromCode(row[0]);
                 String fruit = row[1];
                 int quantity = Integer.parseInt(row[2]);
 

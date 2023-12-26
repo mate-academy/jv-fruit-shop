@@ -1,48 +1,34 @@
 package strategy;
 
 import db.Storage;
+import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
+import model.Operation;
 
 public class CalculateStrategy {
     private final Storage storage;
     private final Map<String, Integer> fruitQuantities;
+    private final Map<Operation, FruitOperation> operationMap;
 
     public CalculateStrategy(Storage storage, Map<String, Integer> fruitQuantities) {
         this.storage = storage;
         this.fruitQuantities = fruitQuantities;
+
+        operationMap = new HashMap<>();
+        operationMap.put(Operation.BALANCE, new BalanceOperation());
+        operationMap.put(Operation.SUPPLY, new SupplyReturnOperation());
+        operationMap.put(Operation.RETURN, new SupplyReturnOperation());
+        operationMap.put(Operation.PURCHASE, new PurchaseOperation());
     }
 
     public void setOperation(FruitTransaction fruitTransaction) {
-        int storageValue = 0;
 
-        switch (fruitTransaction.getOperation()) {
-            case BALANCE -> {
-                storage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-                break;
-            }
-            case SUPPLY, RETURN -> {
-                Integer currentQuantity = storage.get(fruitTransaction.getFruit());
-                if (currentQuantity != null) {
-                    storageValue = currentQuantity;
-                }
-                storage.put(fruitTransaction.getFruit(),
-                        storageValue + fruitTransaction.getQuantity());
-                break;
-            }
-            case PURCHASE -> {
-                Integer currentQuantity = storage.get(fruitTransaction.getFruit());
-                if (currentQuantity != null) {
-                    storageValue = currentQuantity;
-                }
-                storage.put(fruitTransaction.getFruit(),
-                        storageValue - fruitTransaction.getQuantity());
-                break;
-            }
-            default -> throw new IllegalArgumentException("Unexpected operation: "
-                        + fruitTransaction.getOperation());
+        FruitOperation operation = operationMap.get(fruitTransaction.getOperation());
+        if (operation == null) {
+            throw new IllegalArgumentException("Unexpected operation: "
+                    + fruitTransaction.getOperation());
         }
-        fruitQuantities.put(fruitTransaction.getFruit(),
-                storage.get(fruitTransaction.getFruit()));
+        operation.execute(storage, fruitQuantities, fruitTransaction);
     }
 }
