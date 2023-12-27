@@ -28,5 +28,4 @@ public enum Operation {
         }
         throw new IllegalArgumentException("Invalid operation code: " + str);
     }
-
 }

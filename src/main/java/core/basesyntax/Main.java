@@ -6,10 +6,10 @@ import dao.CsvDataWriter;
 import dao.CsvDataWriterImpl;
 import db.Storage;
 import java.util.List;
-import java.util.Map;
 import model.FruitTransaction;
 import service.CalculateBalance;
 import service.CalculateBalanceImpl;
+import service.ReportGenerator;
 import service.ReportGeneratorImpl;
 
 public class Main {
@@ -20,12 +20,12 @@ public class Main {
         CsvDataReader csvDataReader = new CsvDataReaderImpl();
         List<FruitTransaction> fruitTransactions = csvDataReader.readDataFromFile(inputFilePath);
 
-        CalculateBalance calculateBalanceOfFruits = new CalculateBalanceImpl(new Storage());
-        Map<String, Integer> fruitQuantities = calculateBalanceOfFruits
-                .calculateBalance(fruitTransactions);
+        Storage storage = new Storage();
+        CalculateBalance calculateBalanceOfFruits = new CalculateBalanceImpl(storage);
+        calculateBalanceOfFruits.calculateBalance(fruitTransactions);
 
-        ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl();
-        String report = reportGenerator.generateReport(fruitQuantities);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        String report = reportGenerator.generateReport(storage.getAllFruitsWithQuantity());
 
         CsvDataWriter csvDataWriter = new CsvDataWriterImpl();
         csvDataWriter.writeToFile(outputFilePath, report);

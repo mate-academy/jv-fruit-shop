@@ -1,7 +1,6 @@
 package db;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Storage {
@@ -15,11 +14,7 @@ public class Storage {
         return storage.getOrDefault(fruit, 0);
     }
 
-    public List<String> getFruits() {
-        return storage.keySet().stream().toList();
-    }
-
-    public int getTotalQuantity() {
-        return storage.values().stream().reduce(0, Integer::sum);
+    public Map<String, Integer> getAllFruitsWithQuantity() {
+        return new HashMap<>(storage);
     }
 }
