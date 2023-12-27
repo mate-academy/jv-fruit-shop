@@ -1,5 +1,5 @@
 package core.basesyntax.constants;
 
-public enum Products {
+public enum Product {
     APPLE, BANANA
 }

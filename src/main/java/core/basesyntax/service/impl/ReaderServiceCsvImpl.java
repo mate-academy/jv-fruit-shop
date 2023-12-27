@@ -10,10 +10,10 @@ public class ReaderServiceCsvImpl implements ReaderService {
     public String readData(String filePath) {
         StringBuilder csvData = new StringBuilder();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                csvData.append(line).append("\n");
+            while ((line = bufferedReader.readLine()) != null) {
+                csvData.append(line).append(System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can`t find file " + filePath, e);

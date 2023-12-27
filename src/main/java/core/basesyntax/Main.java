@@ -13,19 +13,20 @@ import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
+    public static final String CSV_FILE_TO_READ = "src/grocery.csv";
+    public static final String CSV_FILE_TO_WRITE = "src/report.csv";
+
     public static void main(String[] args) {
-        String csvFileToRead = "src/grocery.csv";
-        String csvFileToWrite = "src/report.csv";
         ReaderService reader = new ReaderServiceCsvImpl();
         ConvertDataService converter = new ConvertDataServiceCsvImpl();
         ProcessService processService = new ProcessServiceCsvImpl();
         ReportCreationService reportCreationService = new ReportCreationServiceImpl();
         WriterService writerService = new WriterServiceImpl();
 
-        String readedData = reader.readData(csvFileToRead);
+        String readedData = reader.readData(CSV_FILE_TO_READ);
         List<String> convertedData = converter.convert(readedData);
         processService.processInfo(convertedData);
         String report = reportCreationService.createReport();
-        writerService.writeReport(report, csvFileToWrite);
+        writerService.writeReport(report, CSV_FILE_TO_WRITE);
     }
 }

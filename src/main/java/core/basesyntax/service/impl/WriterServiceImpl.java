@@ -10,7 +10,6 @@ public class WriterServiceImpl implements WriterService {
     public void writeReport(String report, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(report);
-            System.out.println("Report successfully written to file " + filePath + "\n" + report);
         } catch (IOException e) {
             throw new RuntimeException("Can`t write data to file " + filePath + e);
         }

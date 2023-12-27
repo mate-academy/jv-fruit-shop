@@ -1,15 +1,17 @@
 package core.basesyntax.service;
 
-import core.basesyntax.constants.Products;
-import core.basesyntax.products.Product;
+import core.basesyntax.constants.Product;
+import core.basesyntax.products.Goods;
 import java.util.List;
 
 public interface DatabaseDaoService {
-    public void put(Products product, Integer amount);
+    public void put(Product product, Integer amount);
 
-    public void reduceAmount(Products products, Integer amount);
+    public void reduceAmount(Product product, Integer amount);
 
-    public void increaseAmount(Products products, Integer amount);
+    public void increaseAmount(Product product, Integer amount);
 
-    public List<Product> getAll();
+    public List<Goods> getAll();
+
+    public Goods getProduct(Product product);
 }

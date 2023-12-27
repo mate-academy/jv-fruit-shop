@@ -1,11 +1,11 @@
 package core.basesyntax.strategy.handlers.impl;
 
-import core.basesyntax.constants.Products;
+import core.basesyntax.constants.Product;
 import core.basesyntax.service.DatabaseDaoService;
 import core.basesyntax.service.impl.DatabaseDaoServiceImpl;
-import core.basesyntax.strategy.handlers.ActivitiesHandler;
+import core.basesyntax.strategy.handlers.ActivityHandler;
 
-public class SupplyActivityHandler implements ActivitiesHandler {
+public class SupplyActivityHandler implements ActivityHandler {
     private final DatabaseDaoService databaseDao;
 
     public SupplyActivityHandler() {
@@ -13,7 +13,7 @@ public class SupplyActivityHandler implements ActivitiesHandler {
     }
 
     @Override
-    public void updateProductInfo(Products product, Integer amount) {
+    public void updateProductInfo(Product product, Integer amount) {
         databaseDao.increaseAmount(product, amount);
     }
 }

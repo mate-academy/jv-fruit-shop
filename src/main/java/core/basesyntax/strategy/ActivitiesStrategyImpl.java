@@ -1,29 +1,18 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.constants.Activities;
-import core.basesyntax.strategy.handlers.ActivitiesHandler;
-import core.basesyntax.strategy.handlers.impl.BalanceActivityHandler;
-import core.basesyntax.strategy.handlers.impl.PurchaseActivityHandler;
-import core.basesyntax.strategy.handlers.impl.ReturnActivityHandler;
-import core.basesyntax.strategy.handlers.impl.SupplyActivityHandler;
+import core.basesyntax.constants.Activity;
+import core.basesyntax.strategy.handlers.ActivityHandler;
+import java.util.Map;
 
 public class ActivitiesStrategyImpl implements ActivitiesStrategy {
+    private final Map<Activity, ActivityHandler> strategyMap;
+
+    public ActivitiesStrategyImpl(Map<Activity, ActivityHandler> strategyMap) {
+        this.strategyMap = strategyMap;
+    }
+
     @Override
-    public ActivitiesHandler get(Activities activity) {
-        switch (activity) {
-            case RETURN -> {
-                return new ReturnActivityHandler();
-            }
-            case SUPPLY -> {
-                return new SupplyActivityHandler();
-            }
-            case BALANCE -> {
-                return new BalanceActivityHandler();
-            }
-            case PURCHASE -> {
-                return new PurchaseActivityHandler();
-            }
-            default -> throw new RuntimeException("Incorrect query");
-        }
+    public ActivityHandler get(Activity activity) {
+        return strategyMap.get(activity);
     }
 }

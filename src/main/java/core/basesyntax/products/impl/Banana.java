@@ -1,10 +1,10 @@
 package core.basesyntax.products.impl;
 
-import core.basesyntax.constants.Products;
-import core.basesyntax.products.Product;
+import core.basesyntax.constants.Product;
+import core.basesyntax.products.Goods;
 
-public class Banana implements Product {
-    private int amount = 0;
+public class Banana implements Goods {
+    private int amount;
 
     @Override
     public void addAmount(int amount) {
@@ -32,7 +32,7 @@ public class Banana implements Product {
     }
 
     @Override
-    public Products getType() {
-        return Products.BANANA;
+    public Product getType() {
+        return Product.BANANA;
     }
 }

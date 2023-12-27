@@ -1,14 +1,14 @@
 package core.basesyntax.products;
 
-import core.basesyntax.constants.Products;
+import core.basesyntax.constants.Product;
 import core.basesyntax.products.impl.Apple;
 import core.basesyntax.products.impl.Banana;
 import java.util.Collections;
 import java.util.Map;
 
-public interface Product {
-    public static final Map<Products, Product> productsMap = Collections.unmodifiableMap(
-            Map.of(Products.APPLE, new Apple(), Products.BANANA, new Banana()));
+public interface Goods {
+    public static final Map<Product, Goods> productsMap = Collections.unmodifiableMap(
+            Map.of(Product.APPLE, new Apple(), Product.BANANA, new Banana()));
 
     public void addAmount(int amount);
 
@@ -20,5 +20,5 @@ public interface Product {
 
     public String getName();
 
-    public Products getType();
+    public Product getType();
 }

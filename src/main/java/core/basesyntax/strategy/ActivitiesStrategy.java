@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.constants.Activities;
-import core.basesyntax.strategy.handlers.ActivitiesHandler;
+import core.basesyntax.constants.Activity;
+import core.basesyntax.strategy.handlers.ActivityHandler;
 
 public interface ActivitiesStrategy {
-    public ActivitiesHandler get(Activities activity);
+    public ActivityHandler get(Activity activity);
 }

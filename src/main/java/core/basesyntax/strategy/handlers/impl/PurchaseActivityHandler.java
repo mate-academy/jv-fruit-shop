@@ -1,11 +1,11 @@
 package core.basesyntax.strategy.handlers.impl;
 
-import core.basesyntax.constants.Products;
+import core.basesyntax.constants.Product;
 import core.basesyntax.service.DatabaseDaoService;
 import core.basesyntax.service.impl.DatabaseDaoServiceImpl;
-import core.basesyntax.strategy.handlers.ActivitiesHandler;
+import core.basesyntax.strategy.handlers.ActivityHandler;
 
-public class PurchaseActivityHandler implements ActivitiesHandler {
+public class PurchaseActivityHandler implements ActivityHandler {
     private final DatabaseDaoService databaseDao;
 
     public PurchaseActivityHandler() {
@@ -13,7 +13,11 @@ public class PurchaseActivityHandler implements ActivitiesHandler {
     }
 
     @Override
-    public void updateProductInfo(Products product, Integer amount) {
-        databaseDao.reduceAmount(product, amount);
+    public void updateProductInfo(Product product, Integer amount) {
+        if (databaseDao.getProduct(product).getAmount() >= amount) {
+            databaseDao.reduceAmount(product, amount);
+        } else {
+            throw new RuntimeException("Not enough product " + product + " to sell");
+        }
     }
 }

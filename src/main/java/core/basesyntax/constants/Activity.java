@@ -1,6 +1,6 @@
 package core.basesyntax.constants;
 
-public enum Activities {
+public enum Activity {
     BALANCE,
     SUPPLY,
     PURCHASE,

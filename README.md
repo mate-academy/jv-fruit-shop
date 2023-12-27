@@ -1,5 +1,5 @@
 # Fruit shop
-Let's imagine that we have a product store. Every day in the store there are a number of activities, 
+Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
