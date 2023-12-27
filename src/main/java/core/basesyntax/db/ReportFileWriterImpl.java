@@ -10,23 +10,21 @@ public class ReportFileWriterImpl implements ReportFileWriter {
 
     @Override
     public void writeToFile(Map<String, Integer> fruitsStorage, String filePath) {
-        FileWriter writer;
-        try {
-            writer = new FileWriter(filePath);
+        try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(HEADER + System.lineSeparator());
             for (String fruitName : fruitsStorage.keySet()) {
                 if (fruitsStorage.get(fruitName) < 0) {
-                    throw new RuntimeException("Quantity value can't be negative");
+                    throw new RuntimeException("Total quantity for "
+                            + fruitName + " is " + fruitsStorage.get(fruitName)
+                    + " it can't be negative!");
                 }
                 if (fruitsStorage.get(fruitName) > 0) {
                     writer.write(fruitName + SEPARATOR
                             + fruitsStorage.get(fruitName) + System.lineSeparator());
                 }
             }
-            writer.close();
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file", e);
+            throw new RuntimeException("Can't access the file " + "\"" + filePath + "\"", e);
         }
     }
 }
-

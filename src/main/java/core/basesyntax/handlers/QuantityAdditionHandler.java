@@ -12,4 +12,3 @@ public class QuantityAdditionHandler implements OperationHandler {
         }
     }
 }
-

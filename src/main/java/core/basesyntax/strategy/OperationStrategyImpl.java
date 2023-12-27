@@ -30,7 +30,7 @@ public class OperationStrategyImpl implements OperationStrategy {
                             .calculateResult(fruitType, quantity);
                 }
             } catch (RuntimeException e) {
-                throw new RuntimeException("Wrong data format", e);
+                throw new RuntimeException("Wrong data format: " + "\"" + dataLine + "\"", e);
             }
         }
     }
