@@ -13,11 +13,10 @@ public class ReturnActivityHandler implements ActivityHandler {
 
     @Override
     public void accept(FruitTransaction fruitTransaction) {
-        Fruit fruit = fruitDao.getFruit(fruitTransaction.getFruit());
+        Fruit fruit = fruitTransaction.getFruit();
         if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("Wrong quantity: " + fruitTransaction.getQuantity());
         }
-        fruitDao.updateQuantity(fruit, fruitDao.getQuantityFromFruit(fruit)
-                + fruitTransaction.getQuantity());
+        fruitDao.updateFruitQuantity(fruit, fruitTransaction.getQuantity());
     }
 }

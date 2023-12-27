@@ -1,6 +1,11 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
+
 public interface FruitService {
 
-    void toProcessActivities(String fileName);
+    void processTransactions(List<FruitTransaction> fruitTransactions);
+
+    String createReport();
 }

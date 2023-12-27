@@ -1,13 +1,10 @@
 package core.basesyntax.service;
 
-import com.opencsv.CSVWriter;
 import java.util.List;
 
 public interface FileCsvService {
 
-    List<String> readAllLines(String fileName);
+    List<String> readFile(String path);
 
-    void createReport(String fileName);
-
-    CSVWriter createCsvFile(String fileName);
+    void writeToFile(String path, String data);
 }

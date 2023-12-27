@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
 import com.opencsv.CSVWriter;
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.service.FileCsvService;
 import java.io.File;
 import java.io.FileWriter;
@@ -11,16 +9,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class FileCsvServiceImpl implements FileCsvService {
-    private static final String RESOURCES = "src/main/resources/";
-    private static final String FRUIT_COLUMN_NAME = "Fruit";
-    private static final String QUANTITY_COLUMN_NAME = "Quantity";
+    private static final String COMA = ",";
+    private static final String NEW_LINE = "\n";
 
     @Override
-    public List<String> readAllLines(String fileName) {
-        File file = new File(RESOURCES + fileName);
+    public List<String> readFile(String path) {
+        File file = new File(path);
         List<String> allLines;
         try {
             allLines = Files.readAllLines(Path.of(file.toURI()));
@@ -31,30 +27,21 @@ public class FileCsvServiceImpl implements FileCsvService {
     }
 
     @Override
-    public void createReport(String fileName) {
-        List<String[]> data = new ArrayList<>();
-        data.add(new String[]{FRUIT_COLUMN_NAME, QUANTITY_COLUMN_NAME});
-        for (Map.Entry<Fruit, Integer> entry : Storage.getFruits().entrySet()) {
-            String[] rowFromDB = new String[]{entry.getKey().getName(),
-                    String.valueOf(entry.getValue())};
-            data.add(rowFromDB);
-        }
-        try (CSVWriter csvWriter = new CSVWriter(
-                new FileWriter(RESOURCES + fileName))) {
-            csvWriter.writeAll(data);
+    public void writeToFile(String path, String data) {
+        try (CSVWriter csvWriter = new CSVWriter(new FileWriter(path))) {
+            List<String[]> records = convertStringToListStringsArray(data);
+            csvWriter.writeAll(records, false);
         } catch (IOException e) {
             throw new RuntimeException("Can't create CSV file " + e);
         }
     }
 
-    @Override
-    public CSVWriter createCsvFile(String fileName) {
-        CSVWriter csvWriter;
-        try {
-            csvWriter = new CSVWriter(new FileWriter(RESOURCES + fileName));
-        } catch (IOException e) {
-            throw new RuntimeException("Can't create CSV file " + e);
+    private List<String[]> convertStringToListStringsArray(String data) {
+        List<String[]> result = new ArrayList<>();
+        String[] records = data.split(NEW_LINE);
+        for (String record : records) {
+            result.add(record.split(COMA));
         }
-        return csvWriter;
+        return result;
     }
 }
