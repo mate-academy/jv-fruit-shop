@@ -7,8 +7,7 @@ public class BalanceHandler implements OperationHandler {
     public void calculateResult(String fruit, int quantity) {
         if (quantity < 0) {
             throw new RuntimeException("Balance value can't be negative");
-        } else {
-            FruitStorage.storageData.put(fruit,quantity);
         }
+        FruitStorage.storageData.put(fruit,quantity);
     }
 }

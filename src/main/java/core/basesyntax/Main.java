@@ -5,10 +5,10 @@ import core.basesyntax.db.InputFileHandlerImpl;
 import core.basesyntax.db.InputFileReaderImpl;
 import core.basesyntax.db.ReportFileWriter;
 import core.basesyntax.db.ReportFileWriterImpl;
-import core.basesyntax.handlers.AddFruitQuantity;
 import core.basesyntax.handlers.BalanceHandler;
 import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.handlers.PurchaseHandler;
+import core.basesyntax.handlers.QuantityAdditionHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
@@ -23,8 +23,10 @@ public class Main {
         Map<String, OperationHandler> operationHandlerMap = Map.of(
                 OperationStrategyImpl.Operation.BALANCE.getOperationCode(), new BalanceHandler(),
                 OperationStrategyImpl.Operation.PURCHASE.getOperationCode(), new PurchaseHandler(),
-                OperationStrategyImpl.Operation.RETURN.getOperationCode(), new AddFruitQuantity(),
-                OperationStrategyImpl.Operation.SUPPLY.getOperationCode(), new AddFruitQuantity());
+                OperationStrategyImpl.Operation.RETURN.getOperationCode(),
+                new QuantityAdditionHandler(),
+                OperationStrategyImpl.Operation.SUPPLY.getOperationCode(),
+                new QuantityAdditionHandler());
 
         InputFileReaderImpl storageFileReader = new InputFileReaderImpl();
         Scanner scanner = storageFileReader.readFromFile(INPUT_FILE_PATH);

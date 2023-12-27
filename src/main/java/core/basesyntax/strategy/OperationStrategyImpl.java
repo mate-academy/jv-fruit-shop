@@ -20,12 +20,14 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public void operationPerform(List<String> inputData) {
         for (String dataLine : inputData) {
+            String[] splitDataLine = dataLine.split(SEPARATOR);
+            String operationType = splitDataLine[OPERATION_INDEX];
             try {
-                String[] splitDataLine = dataLine.split(SEPARATOR);
-                if (!Objects.equals(splitDataLine[OPERATION_INDEX], HEADER_FIRST_VALUE)) {
-                    operationHandlerMap.get(splitDataLine[OPERATION_INDEX])
-                            .calculateResult(splitDataLine[FRUIT_INDEX],
-                                    Integer.parseInt(splitDataLine[QUANTITY_INDEX]));
+                if (!Objects.equals(operationType, HEADER_FIRST_VALUE)) {
+                    String fruitType = splitDataLine[FRUIT_INDEX];
+                    int quantity = Integer.parseInt(splitDataLine[QUANTITY_INDEX]);
+                    operationHandlerMap.get(operationType)
+                            .calculateResult(fruitType, quantity);
                 }
             } catch (RuntimeException e) {
                 throw new RuntimeException("Wrong data format", e);
