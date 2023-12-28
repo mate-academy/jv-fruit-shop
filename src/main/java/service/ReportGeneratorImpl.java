@@ -4,6 +4,7 @@ import db.Storage;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String FRUIT_QUANTITY_LABEL = "fruitQuantity";
     private final Storage storage;
 
     public ReportGeneratorImpl(Storage storage) {
@@ -15,11 +16,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
         Map<String, Integer> fruitQuantitiesFromStorage = storage.getAllFruitsWithQuantity();
 
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity\n");
+        report.append(FRUIT_QUANTITY_LABEL + System.lineSeparator());
         fruitQuantitiesFromStorage.forEach((fruit, quantity) -> report.append(fruit)
-                .append(",")
+                .append(", ")
                 .append(quantity)
-                .append("\n"));
+                .append(System.lineSeparator()));
         return report.toString();
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import dao.CsvDataParser;
+import dao.CsvDataParserImpl;
 import dao.CsvDataReader;
 import dao.CsvDataReaderImpl;
 import dao.CsvDataWriter;
@@ -18,7 +20,9 @@ public class Main {
         String outputFilePath = "src/main/resources/Report.csv";
 
         CsvDataReader csvDataReader = new CsvDataReaderImpl();
-        List<FruitTransaction> fruitTransactions = csvDataReader.readDataFromFile(inputFilePath);
+        CsvDataParser csvDataParser = new CsvDataParserImpl(csvDataReader);
+
+        List<FruitTransaction> fruitTransactions = csvDataParser.parseData(inputFilePath);
 
         Storage storage = new Storage();
         CalculateBalance calculateBalanceOfFruits = new CalculateBalanceImpl(storage);

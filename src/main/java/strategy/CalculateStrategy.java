@@ -1,10 +1,10 @@
 package strategy;
 
 import db.Storage;
-import java.util.HashMap;
-import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
+
+import java.util.Map;
 
 public class CalculateStrategy {
     private final Storage storage;
@@ -15,19 +15,18 @@ public class CalculateStrategy {
         this.storage = storage;
         this.fruitTransaction = fruitTransaction;
 
-        operationMap = new HashMap<>();
-        operationMap.put(Operation.BALANCE, new BalanceOperation(fruitTransaction, storage));
-        operationMap.put(Operation.SUPPLY, new SupplyReturnOperation(fruitTransaction, storage));
-        operationMap.put(Operation.RETURN, new SupplyReturnOperation(fruitTransaction, storage));
-        operationMap.put(Operation.PURCHASE, new PurchaseOperation(fruitTransaction, storage));
+        operationMap = Map.of(
+                Operation.BALANCE, new BalanceOperation(fruitTransaction, storage),
+                Operation.SUPPLY, new SupplyReturnOperation(fruitTransaction, storage),
+                Operation.RETURN, new SupplyReturnOperation(fruitTransaction, storage),
+                Operation.PURCHASE, new PurchaseOperation(fruitTransaction, storage)
+        );
     }
 
     public void processTransaction(FruitTransaction fruitTransaction) {
-
         FruitOperation operation = operationMap.get(fruitTransaction.getOperation());
         if (operation == null) {
-            throw new IllegalArgumentException("Unexpected operation: "
-                    + fruitTransaction.getOperation());
+            throw new IllegalArgumentException("Unexpected operation: " + fruitTransaction.getOperation());
         }
         operation.execute(storage, fruitTransaction);
     }
