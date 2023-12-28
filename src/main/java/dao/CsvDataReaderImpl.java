@@ -12,7 +12,7 @@ public class CsvDataReaderImpl implements CsvDataReader {
         List<String[]> data = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            reader.readLine();
+            reader.readLine(); // Skip header line
             while ((line = reader.readLine()) != null) {
                 String[] row = line.split(",");
                 data.add(row);

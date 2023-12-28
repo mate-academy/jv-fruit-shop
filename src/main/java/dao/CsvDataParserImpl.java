@@ -13,15 +13,12 @@ public class CsvDataParserImpl implements CsvDataParser {
     }
 
     @Override
-    public List<FruitTransaction> parseData(String filePath) {
+    public List<FruitTransaction> parseData(List<String[]> data) {
         List<FruitTransaction> parsedData = new ArrayList<>();
-        List<String[]> data = csvDataReader.readDataFromFile(filePath);
-
         for (String[] row : data) {
             Operation type = Operation.fromCode(row[0]);
             String fruit = row[1];
             int quantity = Integer.parseInt(row[2]);
-
             parsedData.add(new FruitTransaction(type, fruit, quantity));
         }
         return parsedData;

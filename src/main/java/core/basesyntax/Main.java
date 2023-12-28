@@ -13,6 +13,7 @@ import service.CalculateBalance;
 import service.CalculateBalanceImpl;
 import service.ReportGenerator;
 import service.ReportGeneratorImpl;
+import strategy.CalculateStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,11 +23,13 @@ public class Main {
         CsvDataReader csvDataReader = new CsvDataReaderImpl();
         CsvDataParser csvDataParser = new CsvDataParserImpl(csvDataReader);
 
-        List<FruitTransaction> fruitTransactions = csvDataParser.parseData(inputFilePath);
+        List<String[]> dataFromFile = csvDataReader.readDataFromFile(inputFilePath);
+        List<FruitTransaction> fruitTransactions = csvDataParser.parseData(dataFromFile);
 
         Storage storage = new Storage();
-        CalculateBalance calculateBalanceOfFruits = new CalculateBalanceImpl(storage);
-        calculateBalanceOfFruits.calculateBalance(fruitTransactions);
+        CalculateBalance fruitBalanceCalculator = new CalculateBalanceImpl(storage,
+                new CalculateStrategy(storage));
+        fruitBalanceCalculator.calculateBalance(fruitTransactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String report = reportGenerator.generateReport(storage.getAllFruitsWithQuantity());

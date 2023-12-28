@@ -7,16 +7,17 @@ import strategy.CalculateStrategy;
 
 public class CalculateBalanceImpl implements CalculateBalance {
     private final Storage storage;
+    private final CalculateStrategy calculationStrategy;
 
-    public CalculateBalanceImpl(Storage storage) {
+    public CalculateBalanceImpl(Storage storage, CalculateStrategy calculationStrategy) {
         this.storage = storage;
+        this.calculationStrategy = calculationStrategy;
     }
 
     @Override
     public void calculateBalance(List<FruitTransaction> fruitTransactionList) {
-        CalculateStrategy calculateStrategy = new CalculateStrategy(storage);
         for (FruitTransaction transaction : fruitTransactionList) {
-            calculateStrategy.processTransaction(transaction);
+            this.calculationStrategy.processTransaction(transaction);
         }
     }
 }
