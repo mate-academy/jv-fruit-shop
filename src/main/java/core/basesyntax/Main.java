@@ -23,8 +23,8 @@ public class Main {
         ReportCreationService reportCreationService = new ReportCreationServiceImpl();
         WriterService writerService = new WriterServiceImpl();
 
-        String readedData = reader.readData(CSV_FILE_TO_READ);
-        List<String> convertedData = converter.convert(readedData);
+        String readData = reader.readData(CSV_FILE_TO_READ);
+        List<String> convertedData = converter.convert(readData);
         processService.processInfo(convertedData);
         String report = reportCreationService.createReport();
         writerService.writeReport(report, CSV_FILE_TO_WRITE);

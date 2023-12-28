@@ -1,9 +1,8 @@
 package core.basesyntax.db;
 
-import core.basesyntax.products.Goods;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Database {
-    public static final List<Goods> database = new ArrayList<>();
+    public static final Map<String, Integer> database = new HashMap<>();
 }
