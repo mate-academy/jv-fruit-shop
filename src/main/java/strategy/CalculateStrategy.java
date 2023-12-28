@@ -1,10 +1,9 @@
 package strategy;
 
 import db.Storage;
+import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
-
-import java.util.Map;
 
 public class CalculateStrategy {
     private final Storage storage;
@@ -26,7 +25,8 @@ public class CalculateStrategy {
     public void processTransaction(FruitTransaction fruitTransaction) {
         FruitOperation operation = operationMap.get(fruitTransaction.getOperation());
         if (operation == null) {
-            throw new IllegalArgumentException("Unexpected operation: " + fruitTransaction.getOperation());
+            throw new IllegalArgumentException("Unexpected operation: "
+                    + fruitTransaction.getOperation());
         }
         operation.execute(storage, fruitTransaction);
     }
