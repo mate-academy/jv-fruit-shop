@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class InputFileHandlerImpl implements InputFileHandler {
-    private final List<String> inputList = new ArrayList<>();
 
     @Override
     public List<String> inputData(String filePath) {
+        List<String> inputList = new ArrayList<>();
         Scanner scanner;
         try {
             scanner = new Scanner(new File(filePath));
