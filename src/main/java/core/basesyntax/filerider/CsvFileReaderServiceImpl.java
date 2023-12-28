@@ -6,7 +6,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CsvFileReader {
+public class CsvFileReaderServiceImpl implements ReaderService {
+    @Override
     public List<String> readData(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
@@ -15,7 +16,7 @@ public class CsvFileReader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + filePath, e);
+            throw new RuntimeException("Can't read file by path: " + filePath, e);
         }
         return lines;
     }

@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.filerider.CsvFileReader;
+import core.basesyntax.filerider.CsvFileReaderServiceImpl;
 import core.basesyntax.filewriter.FileWriterService;
 import core.basesyntax.operationhandler.BalanceHandler;
 import core.basesyntax.operationhandler.OperationHandler;
@@ -45,10 +45,12 @@ public class Main {
                 .RETURN,"Apple", 5), storage);
         returnHandler.handleOperation(new FruitTransaction(Operation
                 .RETURN,"Apple", 10), storage);
+        supplyHandler.handleOperation(new FruitTransaction(Operation
+                .SUPPLY, "Kiwi", 20), storage);
 
         balanceHandler.handleOperation(null, storage);
 
-        CsvFileReader fileReader = new CsvFileReader();
+        CsvFileReaderServiceImpl fileReader = new CsvFileReaderServiceImpl();
         CsvTransactionParser transactionParser = new CsvTransactionParser();
         List<String> lines = fileReader.readData("src/main/resources/input.csv");
         List<FruitTransaction> transactions = transactionParser.parseTransactions(lines);
@@ -61,7 +63,7 @@ public class Main {
                 returnHandler.handleOperation(transaction, storage);
             }
         }
-        String report = reportCreator.generateReport(storage);
+        String report = reportCreator.generateReport();
         fileWriter.writeToFile(report, "src/main/resources/report.csv");
     }
 }
