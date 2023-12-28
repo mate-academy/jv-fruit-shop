@@ -3,6 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.constants.Activity;
 import core.basesyntax.constants.Product;
 import core.basesyntax.service.ProcessService;
+import core.basesyntax.service.strategy.ActivityTypeStrategy;
+import core.basesyntax.service.strategy.ActivityTypeStrategyImpl;
 import core.basesyntax.strategy.ActivitiesStrategy;
 import core.basesyntax.strategy.ActivitiesStrategyImpl;
 import core.basesyntax.strategy.handlers.ActivityHandler;
@@ -10,30 +12,35 @@ import core.basesyntax.strategy.handlers.impl.BalanceActivityHandler;
 import core.basesyntax.strategy.handlers.impl.PurchaseActivityHandler;
 import core.basesyntax.strategy.handlers.impl.ReturnActivityHandler;
 import core.basesyntax.strategy.handlers.impl.SupplyActivityHandler;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 
 public class ProcessServiceCsvImpl implements ProcessService {
-    private static final String BALANCE_CSV_TYPE = "b";
-    private static final String SUPPLY_CSV_TYPE = "s";
-    private static final String PURCHASE_CSV_TYPE = "p";
-    private static final String RETURN_CSV_TYPE = "r";
     private static final String APPLE_CSV_TYPE = "apple";
     private static final String BANANA_CSV_TYPE = "banana";
     private static final String CSV_PUNCTUATION_MARK = ",";
     private static final Integer ACTIVITY_CSV_TYPE = 0;
     private static final Integer PRODUCT_CSV_TYPE = 1;
     private static final Integer AMOUNT_CSV_TYPE = 2;
-    private static final Map<Activity, ActivityHandler> strategyMap =
-            new HashMap<Activity, ActivityHandler>() {{
-                    put(Activity.BALANCE, new BalanceActivityHandler());
-                    put(Activity.RETURN, new ReturnActivityHandler());
-                    put(Activity.SUPPLY, new SupplyActivityHandler());
-                    put(Activity.PURCHASE, new PurchaseActivityHandler());
-                }};
-    private final ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl(strategyMap);
+    private static final String BALANCE_CSV_TYPE = "b";
+    private static final String SUPPLY_CSV_TYPE = "s";
+    private static final String PURCHASE_CSV_TYPE = "p";
+    private static final String RETURN_CSV_TYPE = "r";
+    private static final Map<Activity, ActivityHandler> strategyMap = Map.of(
+            Activity.BALANCE, new BalanceActivityHandler(),
+            Activity.PURCHASE, new PurchaseActivityHandler(),
+            Activity.RETURN, new ReturnActivityHandler(),
+            Activity.SUPPLY, new SupplyActivityHandler());
+    private static final Map<String, Activity> strategyActivityTypeMap = Map.of(
+            BALANCE_CSV_TYPE, Activity.BALANCE,
+            SUPPLY_CSV_TYPE, Activity.SUPPLY,
+            PURCHASE_CSV_TYPE, Activity.PURCHASE,
+            RETURN_CSV_TYPE, Activity.RETURN);
+    private final ActivitiesStrategy activitiesStrategy
+            = new ActivitiesStrategyImpl(strategyMap);
+    private final ActivityTypeStrategy activityTypeStrategy
+            = new ActivityTypeStrategyImpl(strategyActivityTypeMap);
 
     @Override
     public void processInfo(List<String> dataList) {
@@ -44,21 +51,7 @@ public class ProcessServiceCsvImpl implements ProcessService {
     }
 
     private Activity getActivityType(String operation) {
-        switch (operation) {
-            case BALANCE_CSV_TYPE -> {
-                return Activity.BALANCE;
-            }
-            case SUPPLY_CSV_TYPE -> {
-                return Activity.SUPPLY;
-            }
-            case PURCHASE_CSV_TYPE -> {
-                return Activity.PURCHASE;
-            }
-            case RETURN_CSV_TYPE -> {
-                return Activity.RETURN;
-            }
-            default -> throw new RuntimeException("Invalid operation: " + operation);
-        }
+        return activityTypeStrategy.get(operation);
     }
 
     private Product getProductType(String productName) {

@@ -45,7 +45,7 @@ Let's check details of all types of activities:
 
 ### Input file example
 ```text
-    type,product,quantity
+    type,fruit,quantity
     b,banana,20
     b,apple,100
     s,banana,100

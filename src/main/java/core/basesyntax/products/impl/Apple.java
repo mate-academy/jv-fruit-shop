@@ -4,6 +4,7 @@ import core.basesyntax.constants.Product;
 import core.basesyntax.products.Goods;
 
 public class Apple implements Goods {
+    private static final String NAME = "apple";
     private int amount;
 
     @Override
@@ -28,7 +29,7 @@ public class Apple implements Goods {
 
     @Override
     public String getName() {
-        return "apple";
+        return NAME;
     }
 
     @Override
