@@ -16,17 +16,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class CsvFileReportWriterServiceTest {
-    private static final String filename = "src/test/resources/output.csv";
+    private static final String FILENAME = "src/test/resources/output.csv";
     private ReportWriterService writerService;
 
     @BeforeEach
     void setUp() {
-        writerService = new CsvFileReportWriterService(filename);
+        writerService = new CsvFileReportWriterService(FILENAME);
     }
 
     @AfterEach
     void tearDown() {
-        new File(filename).delete();
+        new File(FILENAME).delete();
     }
 
     @Test
@@ -47,16 +47,16 @@ public class CsvFileReportWriterServiceTest {
     private List<String> readFile() {
         List<String> list = new ArrayList<>();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILENAME))) {
             String line;
 
             while ((line = reader.readLine()) != null) {
                 list.add(line);
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File '" + filename + "' not found.", e);
+            throw new RuntimeException("File '" + FILENAME + "' not found.", e);
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file '" + filename + "'.", e);
+            throw new RuntimeException("Error reading file '" + FILENAME + "'.", e);
         }
 
         return list;
