@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String PATH_TO_FILE_WITH_ACTIVITIES = "src/main/resources/activities.csv";
+    private static final String PATH_TO_REPORT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
@@ -35,11 +37,11 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(activityHandlerMap);
 
         List<String> activities = fileService
-                .readFile("src/main/resources/activities.csv"); // read data from file
+                .readFile(PATH_TO_FILE_WITH_ACTIVITIES);
         List<FruitTransaction> allTransactions = fruitTransactionService
-                .getFruitTransactionsFromData(activities); // convert data from file to java objects
-        fruitService.processTransactions(allTransactions); // proccess java objects
-        String report = fruitService.createReport(); // create report
-        fileService.writeToFile("src/main/resources/report.csv", report); // write report to file
+                .getFruitTransactionsFromData(activities);
+        fruitService.processTransactions(allTransactions);
+        List<String> report = fruitService.createReport();
+        fileService.writeToFile(PATH_TO_REPORT, report);
     }
 }

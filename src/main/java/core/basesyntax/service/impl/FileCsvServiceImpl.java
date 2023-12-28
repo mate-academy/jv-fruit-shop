@@ -12,7 +12,6 @@ import java.util.List;
 
 public class FileCsvServiceImpl implements FileCsvService {
     private static final String COMA = ",";
-    private static final String NEW_LINE = "\n";
 
     @Override
     public List<String> readFile(String path) {
@@ -27,21 +26,15 @@ public class FileCsvServiceImpl implements FileCsvService {
     }
 
     @Override
-    public void writeToFile(String path, String data) {
+    public void writeToFile(String path, List<String> data) {
         try (CSVWriter csvWriter = new CSVWriter(new FileWriter(path))) {
-            List<String[]> records = convertStringToListStringsArray(data);
+            List<String[]> records = new ArrayList<>();
+            for (String record : data) {
+                records.add(record.split(COMA));
+            }
             csvWriter.writeAll(records, false);
         } catch (IOException e) {
             throw new RuntimeException("Can't create CSV file " + e);
         }
-    }
-
-    private List<String[]> convertStringToListStringsArray(String data) {
-        List<String[]> result = new ArrayList<>();
-        String[] records = data.split(NEW_LINE);
-        for (String record : records) {
-            result.add(record.split(COMA));
-        }
-        return result;
     }
 }

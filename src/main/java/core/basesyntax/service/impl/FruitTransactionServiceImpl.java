@@ -21,6 +21,9 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
             String activity = activities.get(i);
             activity = activity.replaceAll(BRACKETS, "");
             FruitTransaction fruitTransaction = createFruitTransaction(activity);
+            if (fruitTransaction.getQuantity() < 0) {
+                throw new RuntimeException("Wrong quantity: " + fruitTransaction.getQuantity());
+            }
             allTransactions.add(fruitTransaction);
         }
         return allTransactions;

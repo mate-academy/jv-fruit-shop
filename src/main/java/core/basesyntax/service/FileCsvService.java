@@ -6,5 +6,5 @@ public interface FileCsvService {
 
     List<String> readFile(String path);
 
-    void writeToFile(String path, String data);
+    void writeToFile(String path, List<String> data);
 }

@@ -7,5 +7,5 @@ public interface FruitService {
 
     void processTransactions(List<FruitTransaction> fruitTransactions);
 
-    String createReport();
+    List<String> createReport();
 }

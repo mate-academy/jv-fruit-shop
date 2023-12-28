@@ -6,5 +6,9 @@ public interface FruitDao {
 
     Integer getFruitQuantity(Fruit fruit);
 
-    void updateFruitQuantity(Fruit fruit, Integer quantity);
+    void addFruitQuantity(Fruit fruit, Integer quantity);
+
+    void setFruitQuantity(Fruit fruit, Integer quantity);
+
+    void subtractFruitQuantity(Fruit fruit, Integer quantity);
 }
