@@ -3,7 +3,7 @@ package core.basesyntax.db;
 import java.util.Map;
 import java.util.Set;
 
-public interface FruitDB {
+public interface FruitDb {
     int getQuantity(String fruit);
 
     void setQuantity(String fruit, int quantity);

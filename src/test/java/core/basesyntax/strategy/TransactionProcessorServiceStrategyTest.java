@@ -3,13 +3,13 @@ package core.basesyntax.strategy;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import core.basesyntax.db.FruitDB;
-import core.basesyntax.db.HashMapFruitDB;
+import core.basesyntax.db.FruitDb;
+import core.basesyntax.db.HashMapFruitDb;
 import core.basesyntax.model.Transaction.Operation;
 import org.junit.jupiter.api.Test;
 
 public class TransactionProcessorServiceStrategyTest {
-    private final FruitDB db = new HashMapFruitDB();
+    private final FruitDb db = new HashMapFruitDb();
     private final TransactionProcessorServiceStrategy strategy
             = new TransactionProcessorServiceStrategy(db);
 

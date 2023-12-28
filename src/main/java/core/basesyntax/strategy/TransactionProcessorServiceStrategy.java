@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.FruitDB;
+import core.basesyntax.db.FruitDb;
 import core.basesyntax.model.Transaction.Operation;
 import core.basesyntax.service.TransactionProcessorService;
 import core.basesyntax.service.impl.IncomingTransactionProcessorService;
@@ -11,7 +11,7 @@ import java.util.Map;
 public class TransactionProcessorServiceStrategy {
     private final Map<Operation, TransactionProcessorService> map = new HashMap<>();
 
-    public TransactionProcessorServiceStrategy(FruitDB db) {
+    public TransactionProcessorServiceStrategy(FruitDb db) {
         TransactionProcessorService incoming = new IncomingTransactionProcessorService(db);
 
         map.put(Operation.BALANCE, incoming);

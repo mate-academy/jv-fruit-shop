@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.db.FruitDB;
-import core.basesyntax.db.HashMapFruitDB;
+import core.basesyntax.db.FruitDb;
+import core.basesyntax.db.HashMapFruitDb;
 import core.basesyntax.model.ReportRecord;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.ReportService;
@@ -26,7 +26,7 @@ public class Main {
     private final ReportWriterService reportWriterService;
 
     public Main() {
-        FruitDB db = new HashMapFruitDB();
+        FruitDb db = new HashMapFruitDb();
         transactionReaderService = new CsvFileTransactionReaderService(INPUT_FILENAME);
         transactionParserService = new TransactionParserServiceImpl();
         transactionProcessorServiceStrategy = new TransactionProcessorServiceStrategy(db);

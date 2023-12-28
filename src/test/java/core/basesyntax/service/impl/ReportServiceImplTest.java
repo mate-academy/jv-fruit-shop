@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.db.FruitDB;
-import core.basesyntax.db.HashMapFruitDB;
+import core.basesyntax.db.FruitDb;
+import core.basesyntax.db.HashMapFruitDb;
 import core.basesyntax.model.ReportRecord;
 import core.basesyntax.service.ReportService;
 import java.util.List;
@@ -13,12 +13,12 @@ import org.junit.jupiter.api.Test;
 public class ReportServiceImplTest {
     private static final String APPLE = "apple";
     private static final String BANANA = "banana";
-    private FruitDB db;
+    private FruitDb db;
     private ReportService reportService;
 
     @BeforeEach
     void setUp() {
-        db = new HashMapFruitDB();
+        db = new HashMapFruitDb();
         reportService = new ReportServiceImpl(db);
     }
 

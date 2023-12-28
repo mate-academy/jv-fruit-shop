@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitDB;
+import core.basesyntax.db.FruitDb;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.TransactionProcessorService;
 
 public class OutgoingTransactionProcessorService implements TransactionProcessorService {
-    private final FruitDB db;
+    private final FruitDb db;
 
-    public OutgoingTransactionProcessorService(FruitDB db) {
+    public OutgoingTransactionProcessorService(FruitDb db) {
         this.db = db;
     }
 

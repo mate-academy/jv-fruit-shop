@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitDB;
+import core.basesyntax.db.FruitDb;
 import core.basesyntax.model.ReportRecord;
 import core.basesyntax.service.ReportService;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportServiceImpl implements ReportService {
-    private final FruitDB db;
+    private final FruitDb db;
 
-    public ReportServiceImpl(FruitDB db) {
+    public ReportServiceImpl(FruitDb db) {
         this.db = db;
     }
 

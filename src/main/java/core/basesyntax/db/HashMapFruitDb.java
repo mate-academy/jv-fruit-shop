@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-public class HashMapFruitDB implements FruitDB {
+public class HashMapFruitDb implements FruitDb {
     private final Map<String, Integer> map = new HashMap<>();
 
     @Override

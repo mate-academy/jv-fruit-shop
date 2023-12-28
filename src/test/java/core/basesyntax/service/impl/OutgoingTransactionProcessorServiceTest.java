@@ -2,8 +2,8 @@ package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.db.FruitDB;
-import core.basesyntax.db.HashMapFruitDB;
+import core.basesyntax.db.FruitDb;
+import core.basesyntax.db.HashMapFruitDb;
 import core.basesyntax.model.Transaction;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,12 +11,12 @@ import org.junit.jupiter.api.Test;
 public class OutgoingTransactionProcessorServiceTest {
     private static final String APPLE = "apple";
     private static final Transaction.Operation OPERATION = Transaction.Operation.PURCHASE;
-    private FruitDB db;
+    private FruitDb db;
     private OutgoingTransactionProcessorService processorService;
 
     @BeforeEach
     void setUp() {
-        db = new HashMapFruitDB();
+        db = new HashMapFruitDb();
         processorService = new OutgoingTransactionProcessorService(db);
     }
 
