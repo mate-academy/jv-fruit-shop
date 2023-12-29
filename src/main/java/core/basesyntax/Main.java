@@ -14,9 +14,6 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     public static void main(String[] args) {
         CsvFileReader csvFileReader = new CsvFileReaderImpl();
