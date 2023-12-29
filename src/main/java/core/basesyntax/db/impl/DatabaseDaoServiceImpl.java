@@ -1,4 +1,7 @@
-package core.basesyntax.db;
+package core.basesyntax.db.impl;
+
+import core.basesyntax.db.Database;
+import core.basesyntax.db.DatabaseDaoService;
 
 import java.util.Map;
 

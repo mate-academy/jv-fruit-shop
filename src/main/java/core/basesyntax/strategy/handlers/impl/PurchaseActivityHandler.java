@@ -1,14 +1,13 @@
 package core.basesyntax.strategy.handlers.impl;
 
 import core.basesyntax.db.DatabaseDaoService;
-import core.basesyntax.db.DatabaseDaoServiceImpl;
 import core.basesyntax.strategy.handlers.ActivityHandler;
 
 public class PurchaseActivityHandler implements ActivityHandler {
     private final DatabaseDaoService databaseDao;
 
-    public PurchaseActivityHandler() {
-        databaseDao = new DatabaseDaoServiceImpl();
+    public PurchaseActivityHandler(DatabaseDaoService databaseDao) {
+        this.databaseDao = databaseDao;
     }
 
     @Override
