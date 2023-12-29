@@ -3,8 +3,16 @@ package core.basesyntax;
 import core.basesyntax.constants.Activity;
 import core.basesyntax.db.DatabaseDaoService;
 import core.basesyntax.db.impl.DatabaseDaoServiceImpl;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
+import core.basesyntax.service.ConvertDataService;
+import core.basesyntax.service.ProcessService;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportCreationService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.ConvertDataServiceCsvImpl;
+import core.basesyntax.service.impl.ProcessServiceCsvImpl;
+import core.basesyntax.service.impl.ReaderServiceCsvImpl;
+import core.basesyntax.service.impl.ReportCreationServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.ActivitiesStrategy;
 import core.basesyntax.strategy.ActivitiesStrategyImpl;
 import core.basesyntax.strategy.handlers.ActivityHandler;
@@ -12,7 +20,6 @@ import core.basesyntax.strategy.handlers.impl.BalanceActivityHandler;
 import core.basesyntax.strategy.handlers.impl.PurchaseActivityHandler;
 import core.basesyntax.strategy.handlers.impl.ReturnActivityHandler;
 import core.basesyntax.strategy.handlers.impl.SupplyActivityHandler;
-
 import java.util.List;
 import java.util.Map;
 
@@ -33,12 +40,13 @@ public class Main {
             new ProcessServiceCsvImpl.DataLineProcessService();
     private static final StringBuilder reportStringBuilder = new StringBuilder(CSV_FIRST_LINE);
 
-
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceCsvImpl();
         ConvertDataService converter = new ConvertDataServiceCsvImpl();
-        ProcessService processService = new ProcessServiceCsvImpl(activitiesStrategy, dataLineProcessService);
-        ReportCreationService reportCreationService = new ReportCreationServiceImpl(databaseDaoService, reportStringBuilder);
+        ProcessService processService =
+                new ProcessServiceCsvImpl(activitiesStrategy, dataLineProcessService);
+        ReportCreationService reportCreationService =
+                new ReportCreationServiceImpl(databaseDaoService, reportStringBuilder);
         WriterService writerService = new WriterServiceImpl();
 
         String readData = reader.readData(CSV_FILE_TO_READ);

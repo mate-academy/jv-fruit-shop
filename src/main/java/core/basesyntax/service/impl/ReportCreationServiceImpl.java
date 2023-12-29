@@ -9,7 +9,8 @@ public class ReportCreationServiceImpl implements ReportCreationService {
     private final DatabaseDaoService databaseDao;
     private final StringBuilder reportStringBuilder;
 
-    public ReportCreationServiceImpl(DatabaseDaoService databaseDao, StringBuilder reportStringBuilder) {
+    public ReportCreationServiceImpl(DatabaseDaoService databaseDao,
+                                     StringBuilder reportStringBuilder) {
         this.databaseDao = databaseDao;
         this.reportStringBuilder = reportStringBuilder;
     }

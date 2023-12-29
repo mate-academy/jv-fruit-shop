@@ -13,7 +13,8 @@ public class ProcessServiceCsvImpl implements ProcessService {
     private static ActivitiesStrategy activitiesStrategy;
     private static DataLineProcessService dataLineProcessService;
 
-    public ProcessServiceCsvImpl(ActivitiesStrategy activitiesStrategy, DataLineProcessService dataLineProcessService) {
+    public ProcessServiceCsvImpl(ActivitiesStrategy activitiesStrategy,
+                                 DataLineProcessService dataLineProcessService) {
         this.activitiesStrategy = activitiesStrategy;
         this.dataLineProcessService = dataLineProcessService;
     }
