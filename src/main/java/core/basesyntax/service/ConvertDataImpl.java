@@ -2,28 +2,21 @@ package core.basesyntax.service;
 
 import core.basesyntax.Operation;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class ConvertDataImpl implements ConvertData {
+    final int OPERATION_NUMBER = 0;
+    final int TRANSACTION_NUMBER = 1;
+    final int QUNTITY_FRUIT = 2;
     @Override
     public ArrayList<FruitTransaction> convert(String data) {
-        ArrayList<FruitTransaction> fruitTransactionList = new ArrayList<FruitTransaction>();
-        try {
-            Scanner scanner = new Scanner(data);
-            if (scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-            while (scanner.hasNextLine()) {
-                String record = scanner.nextLine();
-                String[] line = record.split(",");
-                Operation operation = Operation.getOperationFromCode(line[0]);
-                FruitTransaction transaction = new FruitTransaction(operation, line[1], Integer.parseInt(line[2]));
-                fruitTransactionList.add(transaction);
-            }
-            scanner.close();
-        } catch (NullPointerException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+        ArrayList<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        String[] lines = data.split("\\n");
+        for (String record : lines) {
+            String[] line = record.split(",");
+            Operation operation = Operation.getOperationFromCode(line[OPERATION_NUMBER]);
+            FruitTransaction transaction = new FruitTransaction(operation, line[TRANSACTION_NUMBER],
+                    Integer.parseInt(line[QUNTITY_FRUIT]));
+            fruitTransactionList.add(transaction);
         }
         return fruitTransactionList;
     }

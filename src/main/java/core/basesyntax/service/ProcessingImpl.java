@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class ProcessingImpl implements Processing {
     @Override
-    public boolean makeTransaction(ArrayList<FruitTransaction> fruitTransactions) {
+    public void makeTransaction(ArrayList<FruitTransaction> fruitTransactions) {
         for (FruitTransaction fruit : fruitTransactions) {
             int quantity = fruit.getQuantity();
             String fruitName = fruit.getFruit();
@@ -27,6 +27,5 @@ public class ProcessingImpl implements Processing {
             }
             Storage.storage.replace(fruit.getFruit(), actualQuantity);
         }
-        return true;
     }
 }

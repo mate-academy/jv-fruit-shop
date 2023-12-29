@@ -6,11 +6,12 @@ import java.io.IOException;
 
 public class WriteBalanceImpl implements WriteBalance {
     @Override
-    public boolean write(String balance) throws IOException {
-            File csvFile = new File("src/main/resources/balance.csv");
-            FileWriter fileWriter = new FileWriter(csvFile);
+    public void write(String balance) {
+        File csvFile = new File("src/main/resources/balance.csv");
+        try (FileWriter fileWriter = new FileWriter(csvFile)) {
             fileWriter.write(balance);
-            fileWriter.close();
-        return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

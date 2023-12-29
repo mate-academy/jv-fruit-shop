@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface ConvertData {
-    public ArrayList<FruitTransaction> convert(String data);
+    List<FruitTransaction> convert(String data);
 }

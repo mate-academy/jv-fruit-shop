@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface CreateBalance {    //most likely, unnecessary
+public interface CreateBalance {
     public String createReport();
 }
