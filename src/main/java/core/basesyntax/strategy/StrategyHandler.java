@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import java.util.Map;
 
 public class StrategyHandler {
-    private Strategy strategy;
+    private final Strategy strategy;
 
     public StrategyHandler(Strategy strategy) {
         this.strategy = strategy;
