@@ -1,10 +1,10 @@
 package service;
 
-import db.Storage;
+import dao.Storage;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String FRUIT_QUANTITY_LABEL = "fruitQuantity";
+    private static final String FRUIT_QUANTITY_LABEL = "Fruit, Quantity";
     private final Storage storage;
 
     public ReportGeneratorImpl(Storage storage) {
@@ -16,7 +16,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         Map<String, Integer> fruitQuantitiesFromStorage = storage.getAllFruitsWithQuantity();
 
         StringBuilder report = new StringBuilder();
-        report.append(FRUIT_QUANTITY_LABEL + System.lineSeparator());
+        report.append(FRUIT_QUANTITY_LABEL).append(System.lineSeparator());
         fruitQuantitiesFromStorage.forEach((fruit, quantity) -> report.append(fruit)
                 .append(", ")
                 .append(quantity)

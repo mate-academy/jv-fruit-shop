@@ -7,14 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvDataReaderImpl implements CsvDataReader {
+    private static final String LINE_SEPARATOR = ",";
+
     @Override
     public List<String[]> readDataFromFile(String filePath) {
         List<String[]> data = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            reader.readLine(); // Skip header line
+            reader.readLine();
             while ((line = reader.readLine()) != null) {
-                String[] row = line.split(",");
+                String[] row = line.split(LINE_SEPARATOR);
                 data.add(row);
             }
         } catch (IOException e) {

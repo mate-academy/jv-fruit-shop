@@ -1,6 +1,6 @@
 package strategy;
 
-import db.Storage;
+import dao.Storage;
 import model.FruitTransaction;
 
 public interface FruitOperation {

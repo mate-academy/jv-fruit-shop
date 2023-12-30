@@ -1,14 +1,12 @@
 package strategy;
 
-import db.Storage;
+import dao.Storage;
 import model.FruitTransaction;
 
 public class BalanceOperation implements FruitOperation {
-    private FruitTransaction fruitTransaction;
     private Storage storage;
 
-    public BalanceOperation(FruitTransaction fruitTransaction, Storage storage) {
-        this.fruitTransaction = fruitTransaction;
+    public BalanceOperation(Storage storage) {
         this.storage = storage;
     }
 

@@ -1,6 +1,6 @@
 package service;
 
-import db.Storage;
+import dao.Storage;
 import java.util.List;
 import model.FruitTransaction;
 import strategy.CalculateStrategy;

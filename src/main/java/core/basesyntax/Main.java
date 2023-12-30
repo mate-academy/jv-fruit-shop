@@ -6,7 +6,7 @@ import dao.CsvDataReader;
 import dao.CsvDataReaderImpl;
 import dao.CsvDataWriter;
 import dao.CsvDataWriterImpl;
-import db.Storage;
+import dao.Storage;
 import java.util.List;
 import model.FruitTransaction;
 import service.CalculateBalance;
@@ -21,7 +21,7 @@ public class Main {
         String outputFilePath = "src/main/resources/Report.csv";
 
         CsvDataReader csvDataReader = new CsvDataReaderImpl();
-        CsvDataParser csvDataParser = new CsvDataParserImpl(csvDataReader);
+        CsvDataParser csvDataParser = new CsvDataParserImpl();
 
         List<String[]> dataFromFile = csvDataReader.readDataFromFile(inputFilePath);
         List<FruitTransaction> fruitTransactions = csvDataParser.parseData(dataFromFile);
