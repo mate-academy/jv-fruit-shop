@@ -1,6 +1,6 @@
-package core.basesyntax.services.impl;
+package core.basesyntax.services.work_with_files.impl;
 
-import core.basesyntax.services.DataProcessor;
+import core.basesyntax.services.work_with_files.DataProcessor;
 
 public class DataProcessorImpl implements DataProcessor {
   @Override
