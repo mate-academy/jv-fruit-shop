@@ -4,16 +4,18 @@ import core.basesyntax.services.work_with_files.DataReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataReaderCSVImpl implements DataReader {
 
   @Override
-  public StringBuilder readFromFileAndHoldData(String fromFileName) {
-    StringBuilder rawData = new StringBuilder();
+  public List<String> readFromFileAndHoldData(String fromFileName) {
+    List<String> rawData = new ArrayList<>();
     try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFileName))) {
       String line = bufferedReader.readLine();
       while (line != null) {
-        rawData.append(line).append(",");
+        rawData.add(line);
         line = bufferedReader.readLine();
       }
     } catch (IOException e) {
