@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String PATH_TO_RAW_REPORT = "src/main/resources/SampleSourceCSV.csv";
     private static DbBalancePutter dbBalancePutter;
     private static FileDataReader fileDataReader;
     private static List<String> rawData;
@@ -46,7 +47,7 @@ public class Main {
     private static void initVars() {
         dbBalancePutter = new DbBalancePutterImpl();
         fileDataReader = new FileDataReaderCsvImpl();
-        rawData = fileDataReader.readFromFileAndHoldData("src/main/resources/SampleSourceCSV.csv");
+        rawData = fileDataReader.readFromFileAndHoldData(PATH_TO_RAW_REPORT);
         fruitService = new FruitServiceImpl();
         otherOperationsGetter = new OtherOperationsGetterImpl();
         operationHandlerMap = new HashMap<>();
