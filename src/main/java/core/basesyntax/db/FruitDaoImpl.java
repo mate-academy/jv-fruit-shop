@@ -7,25 +7,6 @@ public class FruitDaoImpl implements FruitDao {
     private static final int ZERO = 0;
 
     @Override
-    public Integer setFruitBalance(String fruitName, int quantity) {
-        String fruitKey = fruitName.toLowerCase();
-
-        if (!FruitDB.getFruitDataBase().containsKey(fruitKey)) {
-            addFruit(fruitKey, quantity);
-        } else {
-            FruitDB.getFruitDataBase().put(fruitKey, quantity);
-        }
-        return FruitDB.getFruitDataBase().get(fruitKey);
-    }
-
-    @Override
-    public Integer addFruit(String fruitName, int quantity) {
-        String fruitKey = fruitName.toLowerCase();
-
-        return FruitDB.getFruitDataBase().put(fruitKey, quantity);
-    }
-
-    @Override
     public Integer getFruitBalance(String fruitName) {
         String fruitKey = fruitName.toLowerCase();
 
@@ -33,20 +14,19 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Integer addFruitsToBalance(String fruitName, int quantity) {
+    public Integer addFruits(String fruitName, int quantity) {
         String fruitKey = fruitName.toLowerCase();
 
         if (!FruitDB.getFruitDataBase().containsKey(fruitKey)) {
-            addFruit(fruitKey, quantity);
+            FruitDB.getFruitDataBase().put(fruitKey, quantity);
         } else {
-            FruitDB.getFruitDataBase().put(fruitKey, FruitDB.getFruitDataBase()
-                    .get(fruitKey) + quantity);
+            FruitDB.getFruitDataBase().put(fruitKey, getFruitBalance(fruitKey) + quantity);
         }
-        return FruitDB.getFruitDataBase().get(fruitKey);
+        return getFruitBalance(fruitKey);
     }
 
     @Override
-    public Integer getFruitsFromBalance(String fruitName, int quantity) {
+    public Integer subtractFruits(String fruitName, int quantity) {
         String fruitKey = fruitName.toLowerCase();
 
         if (!FruitDB.getFruitDataBase().containsKey(fruitKey)) {
@@ -54,7 +34,7 @@ public class FruitDaoImpl implements FruitDao {
                     + fruitName);
         } else {
             return FruitDB.getFruitDataBase().put(fruitKey,
-                    FruitDB.getFruitDataBase().get(fruitKey) - quantity);
+                    getFruitBalance(fruitKey) - quantity);
         }
     }
 

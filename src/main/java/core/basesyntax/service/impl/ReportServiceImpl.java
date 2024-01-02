@@ -14,7 +14,7 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public void createReport() {
         List<String> collect = fruitDao.getDataBaseContent().entrySet().stream()
-                .map(e -> new StringBuilder(e.getKey()).append(",").append(e.getValue()).toString())
+                .map(e -> e.getKey() + "," + e.getValue())
                 .sorted()
                 .collect(Collectors.toList());
 

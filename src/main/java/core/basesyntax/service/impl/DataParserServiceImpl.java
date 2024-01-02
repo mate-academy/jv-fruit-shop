@@ -6,7 +6,7 @@ import core.basesyntax.service.DataParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataParserServiceImpl implements DataParserService {
+public class DataParserServiceImpl implements DataParserService<FruitTransaction> {
     private static final String REGEX = ",";
     private static final int NUMBER_OF_MISSING_LINES = 1;
     private static final int FIRST_ELEMENT_INDEX = 0;

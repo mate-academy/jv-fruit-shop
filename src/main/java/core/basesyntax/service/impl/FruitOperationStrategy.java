@@ -9,7 +9,7 @@ import core.basesyntax.service.impl.strategy.ReturnOperationServiceImpl;
 import core.basesyntax.service.impl.strategy.SupplyOperationServiceImpl;
 
 public class FruitOperationStrategy {
-    public OperationService getOperationService(FruitTransaction transaction) {
+    public OperationService<FruitTransaction> getOperationService(FruitTransaction transaction) {
         switch (transaction.getOperation()) {
             case BALANCE -> {
                 return new BalanceOperationServiceImpl();

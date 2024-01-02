@@ -4,12 +4,12 @@ import core.basesyntax.db.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationService;
 
-public class ReturnOperationServiceImpl implements OperationService {
+public class ReturnOperationServiceImpl implements OperationService<FruitTransaction> {
     private final FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
     public int processOperation(FruitTransaction fruitTransaction) {
-        return fruitDao.addFruitsToBalance(fruitTransaction.getFruitName(),
+        return fruitDao.addFruits(fruitTransaction.getFruitName(),
                 fruitTransaction.getQuantity());
     }
 }

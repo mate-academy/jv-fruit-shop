@@ -31,11 +31,7 @@ public class Main {
                     s,pineapple,50""";
 
     public static void main(String[] args) {
-        CsvReadServiceImpl readerService = new CsvReadServiceImpl();
-        DataParserServiceImpl parserService = new DataParserServiceImpl();
-        FruitOperationStrategy strategy = new FruitOperationStrategy();
-        ReportServiceImpl reportService = new ReportServiceImpl();
-
+        //створюємо тестовий файл
         File file = new File(INPUT_FILE_NAME);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
@@ -43,6 +39,11 @@ public class Main {
         } catch (IOException e) {
             throw new RuntimeException("Can't write a file");
         }
+
+        CsvReadServiceImpl readerService = new CsvReadServiceImpl();
+        DataParserServiceImpl parserService = new DataParserServiceImpl();
+        FruitOperationStrategy strategy = new FruitOperationStrategy();
+        ReportServiceImpl reportService = new ReportServiceImpl();
 
         parserService.parse(readerService.read(INPUT_FILE_NAME))
                 .forEach(t -> strategy.getOperationService(t).processOperation(t));
