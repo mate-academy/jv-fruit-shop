@@ -1,32 +1,22 @@
 package core.basesyntax;
-
-import core.basesyntax.dao.ReadReportImpl;
-import core.basesyntax.dao.WriteBalanceImpl;
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.ConvertDataImpl;
-import core.basesyntax.service.CreateBalanceImpl;
-import core.basesyntax.service.FruitTransaction;
-import core.basesyntax.service.ProcessingImpl;
+import core.basesyntax.service.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
+    private static String INPUT_FILE = "src/main/resources/report.csv";
+    private static String REPORT_FILE = "src/main/resources/balance.csv";
 
     public static void main(String[] args) throws IOException {
-        Storage.storage.put("apple", 0);
-        Storage.storage.put("banana", 0);
-
-        ReadReportImpl readData = new ReadReportImpl();
-
-        ConvertDataImpl convertData = new ConvertDataImpl();
-        ArrayList<FruitTransaction> fruitTransactionList = convertData.convert(readData.read());
-        ProcessingImpl processing = new ProcessingImpl();
-        processing.makeTransaction(fruitTransactionList);
-        CreateBalanceImpl createBalance = new CreateBalanceImpl();
-        String balance = createBalance.createReport();
-
-        WriteBalanceImpl writeBalance = new WriteBalanceImpl();
-        writeBalance.write(balance);
+        FileService fileService = new FileServiceImpl();
+        TransactionConverter transactionConverter = new TransactionConverterImpl();
+        List<String> fileData = fileService.readFile(INPUT_FILE);
+        List<FruitTransaction> fruitTransactions = transactionConverter.convert(fileData);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
+        transactionProcessor.processTransactions(fruitTransactions);
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport();
+        fileService.writeToFile(REPORT_FILE, report);
     }
 }

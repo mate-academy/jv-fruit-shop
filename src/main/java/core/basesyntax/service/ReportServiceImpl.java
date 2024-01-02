@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class CreateBalanceImpl implements CreateBalance {
+public class ReportServiceImpl implements ReportService {
     @Override
     public String createReport() {
         StringBuilder line = new StringBuilder();

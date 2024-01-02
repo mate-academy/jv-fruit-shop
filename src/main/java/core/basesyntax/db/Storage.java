@@ -1,6 +1,5 @@
 package core.basesyntax.db;
 
-import core.basesyntax.service.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
 
