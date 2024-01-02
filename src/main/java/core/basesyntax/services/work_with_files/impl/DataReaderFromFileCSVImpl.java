@@ -1,13 +1,13 @@
 package core.basesyntax.services.work_with_files.impl;
 
-import core.basesyntax.services.work_with_files.DataReader;
+import core.basesyntax.services.work_with_files.DataReaderFromFile;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataReaderCSVImpl implements DataReader {
+public class DataReaderFromFileCSVImpl implements DataReaderFromFile {
 
   @Override
   public List<String> readFromFileAndHoldData(String fromFileName) {
