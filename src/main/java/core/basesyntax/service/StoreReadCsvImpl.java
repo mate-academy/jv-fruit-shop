@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.Store;
-import core.basesyntax.service.StoreReadCsv;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,7 +16,7 @@ public class StoreReadCsvImpl implements StoreReadCsv {
             fruits = Files.readAllLines(Path.of(fileName));
 
         } catch (IOException e) {
-            throw  new RuntimeException("Can't find file");
+            throw new RuntimeException("Can't find file");
         }
         return fruits
                 .stream()

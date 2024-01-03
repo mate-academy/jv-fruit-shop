@@ -7,12 +7,17 @@ import core.basesyntax.service.StoreWriteToFileCsv;
 import core.basesyntax.service.StoreWriteToFileCsvImpl;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
-import core.basesyntax.strategy.operation.*;
+import core.basesyntax.strategy.operation.Handler;
+import core.basesyntax.strategy.operation.PurchaseOperation;
+import core.basesyntax.strategy.operation.QuantityOperation;
+import core.basesyntax.strategy.operation.ReturnOperation;
+import core.basesyntax.strategy.operation.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
     private static final String FILE_NAME = "FILE_NAME";
+
     public static void main(String[] args) {
 
         StoreReadCsv reader = new StoreReadCsvImpl();
@@ -23,15 +28,9 @@ public class Main {
         operationHandlerMap.put(Store.Operation.PURCHASE, new PurchaseOperation());
         operationHandlerMap.put(Store.Operation.RETURN, new ReturnOperation());
         operationHandlerMap.put(Store.Operation.SUPPLY, new SupplyOperation());
-
         Strategy storeStrategy = new StrategyImpl(operationHandlerMap);
 
-
         StoreWriteToFileCsv write = new StoreWriteToFileCsvImpl();
-
-
-
-
 
     }
 }
