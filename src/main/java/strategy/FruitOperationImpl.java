@@ -3,16 +3,16 @@ package strategy;
 import dao.Storage;
 import model.FruitTransaction;
 
-public class PurchaseOperation implements FruitOperation {
+public class FruitOperationImpl implements FruitOperation {
     private static final int ZERO_VALUE = 0;
-    private Storage storage;
+    private final Storage storage;
 
-    public PurchaseOperation(Storage storage) {
+    public FruitOperationImpl(Storage storage) {
         this.storage = storage;
     }
 
     @Override
-    public void execute(Storage storage, FruitTransaction fruitTransaction) {
+    public void execute(FruitTransaction fruitTransaction) {
         Integer currentQuantity = storage.get(fruitTransaction.getFruit());
         int storageValue = (currentQuantity != null) ? currentQuantity : ZERO_VALUE;
         storage.put(fruitTransaction.getFruit(),
