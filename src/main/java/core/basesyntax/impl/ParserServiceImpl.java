@@ -15,6 +15,7 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parseTransactions(List<String> lines) {
         List<FruitTransaction> transactions = new ArrayList<>();
+
         for (String line : lines) {
             String[] transaction = line.split(CSV_SEPARATOR);
             transactions.add(new FruitTransaction(Operation
