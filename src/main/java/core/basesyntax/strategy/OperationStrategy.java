@@ -10,13 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private final Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+    private Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
 
     public OperationStrategy() {
-        operationHandlerMap.put(Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyHandler());
-        operationHandlerMap.put(Operation.RETURN, new ReturnHandler());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseHandler());
+        this.operationHandlerMap = Map.of(
+                Operation.BALANCE, new BalanceHandler(),
+                Operation.SUPPLY, new SupplyHandler(),
+                Operation.RETURN, new ReturnHandler(),
+                Operation.PURCHASE, new PurchaseHandler());
     }
 
     public OperationHandler getHandler(Operation operation) {

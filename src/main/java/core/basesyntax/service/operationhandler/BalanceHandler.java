@@ -6,18 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 public class BalanceHandler implements OperationHandler {
     @Override
     public void handleOperation(FruitTransaction transaction, Storage storage) {
-        if (transaction == null) {
-            System.out.println("Balance operation requires a valid transaction.");
-            return;
+        Integer currentQuantity = Storage.fruits.get(transaction.getFruit());
+        if (currentQuantity != null) {
+            System.out.println(currentQuantity);
+        } else {
+            System.out.println("No such fruit in storage");
         }
-
-        String fruitType = transaction.getFruit();
-        int currentQuantity = storage.fruits.getOrDefault(fruitType, 0);
-        int newQuantity = transaction.getQuantity() + currentQuantity;
-
-        storage.fruits.put(fruitType, newQuantity);
-
-        System.out.println("Balance operation successful for " + fruitType
-                + ". New quantity: " + newQuantity);
     }
 }

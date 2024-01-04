@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new RuntimeException("There is no operation with code: " + code);
+        throw new IllegalArgumentException("There is no operation with code: " + code);
     }
 }
