@@ -6,7 +6,7 @@ import core.basesyntax.impl.ReaderServiceImpl;
 import core.basesyntax.impl.WriterServiceImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.operationhandler.OperationHandler;
+import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.strategy.OperationStrategy;

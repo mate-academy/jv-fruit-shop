@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operationhandler.OperationHandler;
+import core.basesyntax.service.operationhandler.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
