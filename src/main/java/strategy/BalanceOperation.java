@@ -3,7 +3,7 @@ package strategy;
 import dao.Storage;
 import model.FruitTransaction;
 
-public class BalanceOperation implements FruitOperation {
+public class BalanceOperation implements ExecuteFruitOperation {
     private final Storage storage;
 
     public BalanceOperation(Storage storage) {

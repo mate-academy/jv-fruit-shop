@@ -2,6 +2,7 @@ package dao;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.BiFunction;
 
 public class Storage {
     private static int DEFAULT_VALUE = 0;
@@ -17,5 +18,11 @@ public class Storage {
 
     public Map<String, Integer> getAllFruitsWithQuantity() {
         return new HashMap<>(storage);
+    }
+
+    public void merge(String fruit, int quantity,
+                      BiFunction<? super Integer,
+                              ? super Integer, ? extends Integer> remappingFunction) {
+        storage.merge(fruit, quantity, remappingFunction);
     }
 }

@@ -3,11 +3,11 @@ package strategy;
 import dao.Storage;
 import model.FruitTransaction;
 
-public class FruitOperationImpl implements FruitOperation {
+public class ExecuteFruitOperationImpl implements ExecuteFruitOperation {
     private static final int ZERO_VALUE = 0;
     private final Storage storage;
 
-    public FruitOperationImpl(Storage storage) {
+    public ExecuteFruitOperationImpl(Storage storage) {
         this.storage = storage;
     }
 

@@ -7,15 +7,15 @@ import model.Operation;
 
 public class CalculateStrategy implements Strategy {
     private final Storage storage;
-    private final Map<Operation, FruitOperation> operationMap;
+    private final Map<Operation, ExecuteFruitOperation> operationMap;
 
-    public CalculateStrategy(Storage storage, Map<Operation, FruitOperation> operationMap) {
+    public CalculateStrategy(Storage storage, Map<Operation, ExecuteFruitOperation> operationMap) {
         this.storage = storage;
         this.operationMap = operationMap;
     }
 
     public void processTransaction(FruitTransaction fruitTransaction) {
-        FruitOperation operation = operationMap.get(fruitTransaction.getOperation());
+        ExecuteFruitOperation operation = operationMap.get(fruitTransaction.getOperation());
         if (operation == null) {
             throw new IllegalArgumentException("Unexpected operation: "
                     + fruitTransaction.getOperation());

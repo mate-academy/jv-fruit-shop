@@ -2,6 +2,6 @@ package strategy;
 
 import model.FruitTransaction;
 
-public interface FruitOperation {
+public interface ExecuteFruitOperation {
     void execute(FruitTransaction fruitTransaction);
 }

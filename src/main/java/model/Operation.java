@@ -20,12 +20,12 @@ public enum Operation {
         return this;
     }
 
-    public static Operation fromCode(String str) {
+    public static Operation fromCode(String code) {
         for (Operation value : values()) {
-            if (value.code.equalsIgnoreCase(str)) {
+            if (value.code.equalsIgnoreCase(code)) {
                 return value;
             }
         }
-        throw new IllegalArgumentException("Invalid operation code: " + str);
+        throw new IllegalArgumentException("Invalid operation code: " + code);
     }
 }

@@ -16,24 +16,24 @@ import service.ReportGenerator;
 import service.ReportGeneratorImpl;
 import strategy.BalanceOperation;
 import strategy.CalculateStrategy;
-import strategy.FruitOperation;
-import strategy.FruitOperationImpl;
+import strategy.ExecuteFruitOperation;
+import strategy.ExecuteFruitOperationImpl;
 import strategy.SupplyReturnOperation;
 
 public class Main {
-    public static void main(String[] args) {
-        String inputFilePath = "src/main/resources/Fruits Data.csv";
-        String outputFilePath = "src/main/resources/Report.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/Fruits Data.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/Report.csv";
 
+    public static void main(String[] args) {
         CsvDataReader csvDataReader = new CsvDataReaderImpl();
         CsvDataParser csvDataParser = new CsvDataParserImpl();
 
-        List<String[]> dataFromFile = csvDataReader.readDataFromFile(inputFilePath);
+        List<String[]> dataFromFile = csvDataReader.readDataFromFile(INPUT_FILE_PATH);
         List<FruitTransaction> fruitTransactions = csvDataParser.parseData(dataFromFile);
 
         Storage storage = new Storage();
 
-        Map<Operation, FruitOperation> operationMap = initializeOperationMap(storage);
+        Map<Operation, ExecuteFruitOperation> operationMap = initializeOperationMap(storage);
 
         CalculateStrategy calculateStrategy = new CalculateStrategy(storage, operationMap);
 
@@ -43,15 +43,15 @@ public class Main {
         String report = reportGenerator.generateReport(storage.getAllFruitsWithQuantity());
 
         CsvDataWriter csvDataWriter = new CsvDataWriterImpl();
-        csvDataWriter.writeToFile(outputFilePath, report);
+        csvDataWriter.writeToFile(OUTPUT_FILE_PATH, report);
     }
 
-    private static Map<Operation, FruitOperation> initializeOperationMap(Storage storage) {
-        Map<Operation, FruitOperation> map = new EnumMap<>(Operation.class);
+    private static Map<Operation, ExecuteFruitOperation> initializeOperationMap(Storage storage) {
+        Map<Operation, ExecuteFruitOperation> map = new EnumMap<>(Operation.class);
         map.put(Operation.BALANCE, new BalanceOperation(storage));
         map.put(Operation.SUPPLY, new SupplyReturnOperation(storage));
         map.put(Operation.RETURN, new SupplyReturnOperation(storage));
-        map.put(Operation.PURCHASE, new FruitOperationImpl(storage));
+        map.put(Operation.PURCHASE, new ExecuteFruitOperationImpl(storage));
         return map;
     }
 }
