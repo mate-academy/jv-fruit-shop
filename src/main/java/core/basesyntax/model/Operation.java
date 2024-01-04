@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 public enum Operation {
     BALANCE("b"),
@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        return null;
+        throw new RuntimeException("There is no operation with code: " + code);
     }
 }

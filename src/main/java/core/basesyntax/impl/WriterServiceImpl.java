@@ -1,8 +1,9 @@
-package core.basesyntax.filewriter;
+package core.basesyntax.impl;
 
+import core.basesyntax.service.WriterService;
 import java.io.FileWriter;
 
-public class FileWriterService implements WriterService {
+public class WriterServiceImpl implements WriterService {
     @Override
     public void writeToFile(String report, String filePath) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {

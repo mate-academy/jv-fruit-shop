@@ -1,69 +1,44 @@
 package core.basesyntax;
 
-import core.basesyntax.filerider.CsvFileReaderServiceImpl;
-import core.basesyntax.filewriter.FileWriterService;
-import core.basesyntax.operationhandler.BalanceHandler;
+import core.basesyntax.db.Storage;
+import core.basesyntax.impl.ParserServiceImpl;
+import core.basesyntax.impl.ReaderServiceImpl;
+import core.basesyntax.impl.WriterServiceImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.operationhandler.OperationHandler;
-import core.basesyntax.operationhandler.PurchaseHandler;
-import core.basesyntax.operationhandler.ReturnHandler;
-import core.basesyntax.operationhandler.SupplyHandler;
-import core.basesyntax.reportcreator.ReportCreator;
-import core.basesyntax.transactionparser.CsvTransactionParser;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class Main {
 
     public static void main(String[] args) {
-
         Storage storage = new Storage();
 
-        final OperationHandler purchaseHandler = new PurchaseHandler();
+        FruitShopService fruitShopService = new FruitShopService(new OperationStrategy());
+        fruitShopService.processTransactions(List.of(
+                new FruitTransaction(Operation.SUPPLY, "banana", 10),
+                new FruitTransaction(Operation.PURCHASE, "banana", 3),
+                new FruitTransaction(Operation.RETURN, "banana", 5),
+                new FruitTransaction(Operation.SUPPLY, "apple", 5),
+                new FruitTransaction(Operation.SUPPLY, "apple", 2),
+                new FruitTransaction(Operation.PURCHASE, "apple", 1)
+        ));
 
-        final OperationHandler returnHandler = new ReturnHandler();
-
-        final OperationHandler supplyHandler = new SupplyHandler();
-
-        final OperationHandler balanceHandler = new BalanceHandler();
-
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Orange", 20), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Orange", 20), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Orange", 20), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Apple", 20), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Apple", 20), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Pea", 20), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY,"Pea", 20), storage);
-        purchaseHandler.handleOperation(new FruitTransaction(Operation
-                .PURCHASE,"Apple", 10), storage);
-        returnHandler.handleOperation(new FruitTransaction(Operation
-                .RETURN,"Apple", 5), storage);
-        returnHandler.handleOperation(new FruitTransaction(Operation
-                .RETURN,"Apple", 10), storage);
-        supplyHandler.handleOperation(new FruitTransaction(Operation
-                .SUPPLY, "Kiwi", 20), storage);
-
-        balanceHandler.handleOperation(null, storage);
-
-        CsvFileReaderServiceImpl fileReader = new CsvFileReaderServiceImpl();
-        CsvTransactionParser transactionParser = new CsvTransactionParser();
+        ReaderServiceImpl fileReader = new ReaderServiceImpl();
+        ParserServiceImpl transactionParser = new ParserServiceImpl();
         List<String> lines = fileReader.readData("src/main/resources/input.csv");
         List<FruitTransaction> transactions = transactionParser.parseTransactions(lines);
-        ReportCreator reportCreator = new ReportCreator();
-        FileWriterService fileWriter = new FileWriterService();
+        OperationStrategy operationStrategy = new OperationStrategy();
         for (FruitTransaction transaction : transactions) {
-            if (transaction.getOperation().equals(Operation.BALANCE)) {
-                balanceHandler.handleOperation(transaction, storage);
-            } else {
-                returnHandler.handleOperation(transaction, storage);
-            }
+            OperationHandler operationHandler = operationStrategy
+                    .getHandler(transaction.getOperation());
+            operationHandler.handleOperation(transaction, storage);
         }
-        String report = reportCreator.generateReport();
-        fileWriter.writeToFile(report, "src/main/resources/report.csv");
+        ReportService reportCreator = new ReportService();
+        WriterServiceImpl fileWriter = new WriterServiceImpl();
+        fileWriter.writeToFile(reportCreator.generateReport(), "src/main/resources/report.csv");
     }
 }

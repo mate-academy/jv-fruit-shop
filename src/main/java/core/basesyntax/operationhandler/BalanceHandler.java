@@ -1,14 +1,23 @@
 package core.basesyntax.operationhandler;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 
 public class BalanceHandler implements OperationHandler {
     @Override
     public void handleOperation(FruitTransaction transaction, Storage storage) {
-        System.out.println("Current balance:");
-        for (String fruit : Storage.fruits.keySet()) {
-            System.out.println(fruit + ": " + Storage.fruits.get(fruit));
+        if (transaction == null) {
+            System.out.println("Balance operation requires a valid transaction.");
+            return;
         }
+
+        String fruitType = transaction.getFruit();
+        int currentQuantity = storage.fruits.getOrDefault(fruitType, 0);
+        int newQuantity = transaction.getQuantity() + currentQuantity;
+
+        storage.fruits.put(fruitType, newQuantity);
+
+        System.out.println("Balance operation successful for " + fruitType
+                + ". New quantity: " + newQuantity);
     }
 }

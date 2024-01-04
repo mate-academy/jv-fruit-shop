@@ -1,6 +1,6 @@
-package core.basesyntax.operationstrategy;
+package core.basesyntax.strategy;
 
-import core.basesyntax.Operation;
+import core.basesyntax.model.Operation;
 import core.basesyntax.operationhandler.BalanceHandler;
 import core.basesyntax.operationhandler.OperationHandler;
 import core.basesyntax.operationhandler.PurchaseHandler;
