@@ -26,8 +26,8 @@ public class ParserServiceImpl implements ParserService {
                 transactions.add(new FruitTransaction(Operation
                         .getOperationByCode(transaction[OPERATION_INDEX]),
                         transaction[FRUIT_INDEX], Integer.parseInt(transaction[QUANTITY_INDEX])));
-            } catch (Exception e) {
-                throw new RuntimeException("Error parsing transaction: " + e.getMessage());
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Error parsing transaction: " + line, e);
             }
         }
         return transactions;

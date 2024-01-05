@@ -13,7 +13,6 @@ public class FruitShopService {
     }
 
     public void processTransactions(List<FruitTransaction> transactions) {
-
         for (FruitTransaction transaction : transactions) {
             OperationHandler operationHandler = operationStrategy
                     .getHandler(transaction.getOperation());

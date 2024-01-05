@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Operation;
-import java.util.Arrays;
 import java.util.Map;
 
 public class ReportService {
@@ -13,9 +11,7 @@ public class ReportService {
     public String generateReport() {
         StringBuilder report = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
-
-            report.append(Arrays.stream(Operation.values()).findAny().get().getCode())
-                    .append(CSV_SEPARATOR)
+            report
                     .append(entry.getKey())
                     .append(CSV_SEPARATOR)
                     .append(entry.getValue())

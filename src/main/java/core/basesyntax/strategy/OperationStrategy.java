@@ -1,23 +1,14 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.operationhandler.BalanceHandler;
 import core.basesyntax.service.operationhandler.OperationHandler;
-import core.basesyntax.service.operationhandler.PurchaseHandler;
-import core.basesyntax.service.operationhandler.ReturnHandler;
-import core.basesyntax.service.operationhandler.SupplyHandler;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategy {
-    private Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+    private Map<Operation, OperationHandler> operationHandlerMap;
 
-    public OperationStrategy() {
-        this.operationHandlerMap = Map.of(
-                Operation.BALANCE, new BalanceHandler(),
-                Operation.SUPPLY, new SupplyHandler(),
-                Operation.RETURN, new ReturnHandler(),
-                Operation.PURCHASE, new PurchaseHandler());
+    public OperationStrategy(Map<Operation, OperationHandler> operationHandlerMap) {
+        this.operationHandlerMap = operationHandlerMap;
     }
 
     public OperationHandler getHandler(Operation operation) {

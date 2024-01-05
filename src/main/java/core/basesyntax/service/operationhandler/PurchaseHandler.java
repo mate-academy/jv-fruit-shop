@@ -12,7 +12,8 @@ public class PurchaseHandler implements OperationHandler {
         if (currentQuantity != null && currentQuantity >= transaction.getQuantity()) {
             Storage.fruits.put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
         } else {
-            System.out.println("Not enough quantity for sold" + transaction.getFruit());
+            System.out.println("Not enough in stock to sell "
+                    + transaction.getQuantity() + " of" + transaction.getFruit());
         }
     }
 }
