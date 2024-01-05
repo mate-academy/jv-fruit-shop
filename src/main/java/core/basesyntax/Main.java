@@ -22,7 +22,6 @@ import core.basesyntax.service.operation.ReturnInputOperation;
 import core.basesyntax.service.operation.SupplyInputOperation;
 import core.basesyntax.strategy.InputOperationStrategyImpl;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
