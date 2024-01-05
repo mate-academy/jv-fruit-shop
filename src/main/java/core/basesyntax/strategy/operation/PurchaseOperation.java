@@ -1,10 +1,10 @@
 package core.basesyntax.strategy.operation;
 
-import core.basesyntax.model.Store;
+import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseOperation implements Handler {
+public class PurchaseOperation implements OperationHandler {
     @Override
-    public int get(Store fruit) {
+    public int handle(FruitTransaction fruit) {
         return -fruit.getAmount();
     }
 }

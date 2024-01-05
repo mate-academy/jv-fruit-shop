@@ -1,18 +1,19 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.Store;
-import core.basesyntax.strategy.operation.Handler;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.operation.OperationHandler;
 import java.util.Map;
 
 public class StrategyImpl implements Strategy {
-    private Map<Store.Operation, Handler> operationHandlerMap;
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public StrategyImpl(Map<Store.Operation, Handler> operationHandlerMap) {
+    public StrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public Handler getOperation(Store.Operation operation) {
-        return operationHandlerMap.get(operation);
+    public void getOperation(FruitTransaction fruitTransaction) {
+        OperationHandler operationHandler = operationHandlerMap.get(fruitTransaction.getType());
+        operationHandler.handle(fruitTransaction);
     }
 }
