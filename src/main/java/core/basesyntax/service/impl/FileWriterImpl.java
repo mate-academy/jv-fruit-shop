@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriteService;
+import core.basesyntax.service.FileWriterOwn;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class WriteServiceImpl implements WriteService<String> {
+public class FileWriterImpl implements FileWriterOwn<String> {
     private static final String REPORT_FILE_NAME = "report.csv";
 
     @Override

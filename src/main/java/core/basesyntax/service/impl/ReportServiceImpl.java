@@ -9,7 +9,7 @@ public class ReportServiceImpl implements ReportService {
     private static final int FIRST_ELEMENT_INDEX = 0;
     private static final String TABLE_HEADER = "fruits,quantity";
     private final FruitDaoImpl fruitDao = new FruitDaoImpl();
-    private final WriteServiceImpl writeService = new WriteServiceImpl();
+    private final FileWriterImpl writeService = new FileWriterImpl();
 
     @Override
     public void createReport() {

@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReadService;
+import core.basesyntax.service.FileReaderOwn;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class CsvReadServiceImpl implements ReadService<String> {
+public class CsvReadServiceImpl implements FileReaderOwn<String> {
     @Override
     public List<String> read(String filePath) {
         try {

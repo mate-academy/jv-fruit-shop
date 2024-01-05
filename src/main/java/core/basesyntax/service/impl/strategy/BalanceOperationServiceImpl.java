@@ -9,7 +9,7 @@ public class BalanceOperationServiceImpl implements OperationService<FruitTransa
 
     @Override
     public int processOperation(FruitTransaction fruitTransaction) {
-        return fruitDao.addFruits(fruitTransaction.getFruitName(),
+        return fruitDao.setFruitBalance(fruitTransaction.getFruitName(),
                 fruitTransaction.getQuantity());
     }
 }

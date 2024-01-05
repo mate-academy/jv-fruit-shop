@@ -7,6 +7,13 @@ public class FruitDaoImpl implements FruitDao {
     private static final int ZERO = 0;
 
     @Override
+    public Integer setFruitBalance(String fruitName, int quantity) {
+        String fruitKey = fruitName.toLowerCase();
+
+        return FruitDB.getFruitDataBase().merge(fruitKey, quantity, (oldV, newV) -> newV);
+    }
+
+    @Override
     public Integer getFruitBalance(String fruitName) {
         String fruitKey = fruitName.toLowerCase();
 
@@ -17,12 +24,7 @@ public class FruitDaoImpl implements FruitDao {
     public Integer addFruits(String fruitName, int quantity) {
         String fruitKey = fruitName.toLowerCase();
 
-        if (!FruitDB.getFruitDataBase().containsKey(fruitKey)) {
-            FruitDB.getFruitDataBase().put(fruitKey, quantity);
-        } else {
-            FruitDB.getFruitDataBase().put(fruitKey, getFruitBalance(fruitKey) + quantity);
-        }
-        return getFruitBalance(fruitKey);
+        return FruitDB.getFruitDataBase().merge(fruitKey, quantity, Integer::sum);
     }
 
     @Override
@@ -33,8 +35,8 @@ public class FruitDaoImpl implements FruitDao {
             throw new InvalidFruitDataException("There is no such fruit in the database: "
                     + fruitName);
         } else {
-            return FruitDB.getFruitDataBase().put(fruitKey,
-                    getFruitBalance(fruitKey) - quantity);
+            return FruitDB.getFruitDataBase()
+                    .merge(fruitKey, quantity, (oldV, newV) -> oldV - newV);
         }
     }
 
