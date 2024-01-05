@@ -14,8 +14,7 @@ public class ReturnInputOperation implements InputTransaction {
     public void process(FruitTransaction fruitOperation) {
         Integer quantity = fruitTransactionDao.get(fruitOperation);
         if (quantity != null) {
-            int newQuantity = quantity + fruitOperation.getQuantity();
-            fruitOperation.setQuantity(newQuantity);
+            fruitOperation.setQuantity(quantity + fruitOperation.getQuantity());
             fruitTransactionDao.add(fruitOperation);
         }
     }

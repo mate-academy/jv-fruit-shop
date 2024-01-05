@@ -15,8 +15,7 @@ public class BalanceInputOperation implements InputTransaction {
     public void process(FruitTransaction fruitTransaction) {
         Integer quantity = fruitTransactionDao.get(fruitTransaction);
         if (quantity != null) {
-            int newQuantity = quantity + fruitTransaction.getQuantity();
-            fruitTransaction.setQuantity(newQuantity);
+            fruitTransaction.setQuantity(quantity + fruitTransaction.getQuantity());
         }
         fruitTransactionDao.add(fruitTransaction);
     }
