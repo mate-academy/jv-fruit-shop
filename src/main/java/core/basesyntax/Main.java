@@ -24,7 +24,6 @@ public class Main {
     private static final String FILE_TO = "src/main/java/resources/recorded.csv";
 
     public static void main(String[] args) {
-
         FileRead reader = new FileReadImpl();
         List<String> dataFromFile = reader.read(FILE_FROM);
 

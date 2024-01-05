@@ -13,7 +13,6 @@ public class ParseDataImpl implements ParseData {
 
     @Override
     public List<FruitTransaction> parser(List<String> fruitsData) {
-        FruitTransaction fruitTransaction = new FruitTransaction();
         return fruitsData
                 .stream()
                 .map(row -> row.split(SEPARATOR))
