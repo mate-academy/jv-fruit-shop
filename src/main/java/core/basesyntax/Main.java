@@ -33,15 +33,16 @@ public class Main {
     public static void main(String[] args) {
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoImpl();
         Mapper<FruitTransaction> fruitTransactionMapper = new FruitTransactionMapper();
-        Map<FruitTransaction.Operation, InputTransaction> strategyMap = new HashMap<>();
-        strategyMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceInputOperation(fruitTransactionDao));
-        strategyMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyInputOperation(fruitTransactionDao));
-        strategyMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseInputOperation(fruitTransactionDao));
-        strategyMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnInputOperation(fruitTransactionDao));
+        Map<FruitTransaction.Operation, InputTransaction> strategyMap = Map.of(
+                FruitTransaction.Operation.BALANCE,
+                new BalanceInputOperation(fruitTransactionDao),
+                FruitTransaction.Operation.SUPPLY,
+                new SupplyInputOperation(fruitTransactionDao),
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseInputOperation(fruitTransactionDao),
+                FruitTransaction.Operation.RETURN,
+                new ReturnInputOperation(fruitTransactionDao)
+        );
 
         Reader csvReader = new CsvReader();
         List<String> rawData = csvReader.readFile(PATH_TO_INPUT_FILE);
