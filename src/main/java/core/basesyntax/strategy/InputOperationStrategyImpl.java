@@ -1,19 +1,19 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitOperation;
-import core.basesyntax.service.operation.InputOperation;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.operation.InputTransaction;
 import java.util.Map;
 
 public class InputOperationStrategyImpl implements OperationStrategy {
-    private Map<FruitOperation.Operation, InputOperation> inputOperationMap;
+    private final Map<FruitTransaction.Operation, InputTransaction> inputOperationMap;
 
     public InputOperationStrategyImpl(
-            Map<FruitOperation.Operation, InputOperation> inputOperationMap) {
+            Map<FruitTransaction.Operation, InputTransaction> inputOperationMap) {
         this.inputOperationMap = inputOperationMap;
     }
 
     @Override
-    public InputOperation get(FruitOperation.Operation operation) {
+    public InputTransaction get(FruitTransaction.Operation operation) {
         return inputOperationMap.get(operation);
     }
 }

@@ -1,19 +1,23 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitOperation;
+import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.model.FruitTransaction;
 
-public class BalanceInputOperation implements InputOperation {
-    private FruitDao fruitDao;
+public class BalanceInputOperation implements InputTransaction {
 
-    public BalanceInputOperation(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    private final FruitTransactionDao fruitTransactionDao;
+
+    public BalanceInputOperation(FruitTransactionDao fruitTransactionDao) {
+        this.fruitTransactionDao = fruitTransactionDao;
     }
 
     @Override
-    public void process(FruitOperation fruitOperation) {
-        Fruit fruit = fruitOperation.getFruit();
-        fruitDao.add(fruit);
+    public void process(FruitTransaction fruitTransaction) {
+        Integer quantity = fruitTransactionDao.get(fruitTransaction);
+        if (quantity != null) {
+            int newQuantity = quantity + fruitTransaction.getQuantity();
+            fruitTransaction.setQuantity(newQuantity);
+        }
+        fruitTransactionDao.add(fruitTransaction);
     }
 }

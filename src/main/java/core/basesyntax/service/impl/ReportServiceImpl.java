@@ -1,34 +1,31 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
+import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.service.ReportService;
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class ReportServiceImpl implements ReportService {
     private static final String HEADER_STRING = "fruit,quantity";
-    private final FruitDao fruitDao;
+    private final FruitTransactionDao fruitTransactionDao;
 
-    public ReportServiceImpl(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public ReportServiceImpl(FruitTransactionDao fruitTransactionDao) {
+        this.fruitTransactionDao = fruitTransactionDao;
     }
 
     @Override
-    public StringBuilder makeReport() {
+    public String makeReport() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(HEADER_STRING)
                 .append(System.lineSeparator());
-        List<Fruit> allFruits = fruitDao.getAll();
-        for (int i = 0; i < allFruits.size(); i++) {
-            stringBuilder.append(allFruits.get(i)
-                            .getName())
+        Set<Map.Entry<String, Integer>> transactionEntries = fruitTransactionDao.getAll()
+                .entrySet();
+        for (Map.Entry<String, Integer> transactionEntry : transactionEntries) {
+            stringBuilder.append(transactionEntry.getKey())
                     .append(",")
-                    .append(allFruits.get(i)
-                            .getQuantity());
-            if (i + 1 != allFruits.size()) {
-                stringBuilder.append(System.lineSeparator());
-            }
+                    .append(transactionEntry.getValue())
+                    .append(System.lineSeparator());
         }
-        return stringBuilder;
+        return stringBuilder.deleteCharAt(stringBuilder.length() - 1).toString();
     }
 }
