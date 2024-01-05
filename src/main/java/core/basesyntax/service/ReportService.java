@@ -6,9 +6,9 @@ import java.util.Arrays;
 import java.util.Map;
 
 public class ReportService {
-    private static final String HEADER = "type,fruit,quantity\n";
-    private static final String CSV_SEPARATOR = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
+    private static final String HEADER = "fruit,quantity" + NEW_LINE_SEPARATOR;
+    private static final String CSV_SEPARATOR = ",";
 
     public String generateReport() {
         StringBuilder report = new StringBuilder(HEADER);

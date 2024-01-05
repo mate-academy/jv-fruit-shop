@@ -26,7 +26,7 @@ public class Main {
         for (FruitTransaction transaction : transactions) {
             OperationHandler operationHandler = operationStrategy
                     .getHandler(transaction.getOperation());
-            operationHandler.handleOperation(transaction, storage);
+            operationHandler.handleOperation(transaction);
         }
         ReportService reportCreator = new ReportService();
         WriterServiceImpl fileWriter = new WriterServiceImpl();

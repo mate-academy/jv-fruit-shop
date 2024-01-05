@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseHandler implements OperationHandler {
 
     @Override
-    public void handleOperation(FruitTransaction transaction, Storage storage) {
+    public void handleOperation(FruitTransaction transaction) {
         Integer currentQuantity = Storage.fruits.get(transaction.getFruit());
 
         if (currentQuantity != null && currentQuantity >= transaction.getQuantity()) {
