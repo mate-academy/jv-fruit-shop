@@ -4,7 +4,7 @@ import core.basesyntax.services.fileprocessing.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String INITIAL_LINE_IN_REPORT = "fruit,quantity";
+    private static final String REPORT_HEADER = "fruit,quantity";
 
     @Override
     public StringBuilder generateReport(Map<String, Integer> fruitsTypeAndAmount) {
