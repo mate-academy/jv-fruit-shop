@@ -1,10 +1,10 @@
-package core.basesyntax.services.fileprocessing.impl;
+package core.basesyntax.services.impl;
 
-import core.basesyntax.services.FruitService;
+import core.basesyntax.services.FruitTransactionParser;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class FruitServiceImpl implements FruitService {
+public class FruitTransactionParserImpl implements FruitTransactionParser {
     @Override
     public void runOtherOperationsOverFruit(List<String[]> otherOperations,
                                             OperationStrategy operationStrategy) {

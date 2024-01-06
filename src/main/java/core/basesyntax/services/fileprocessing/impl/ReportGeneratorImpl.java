@@ -9,7 +9,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public StringBuilder generateReport(Map<String, Integer> fruitsTypeAndAmount) {
         StringBuilder builder = new StringBuilder();
-        builder.append(INITIAL_LINE_IN_REPORT);
+        builder.append(REPORT_HEADER);
         for (Map.Entry<String, Integer> entry : fruitsTypeAndAmount.entrySet()) {
             builder.append(System.lineSeparator()).append(entry.getKey()).append(",")
                     .append(entry.getValue());
