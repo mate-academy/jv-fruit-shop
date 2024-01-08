@@ -1,20 +1,15 @@
 package core.basesyntax.services.fileprocessing.impl;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.fileprocessing.OperationsGetter;
+import core.basesyntax.services.fileprocessing.TransactionGetter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OperationsGetterImpl implements OperationsGetter {
-    private static final String STRING_SPLITTER = ",";
-    private static final String SKIP_LINE_IF_CONTAINS_TYPE = "type";
-
+public class TransactionGetterImpl implements TransactionGetter {
     @Override
-    public List<FruitTransaction> getOperationsData(List<String> rawData) {
+    public List<FruitTransaction> getTransactionsData(List<String[]> dividedData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        List<String[]> dataDivided = rawData.stream().map(string -> string.split(STRING_SPLITTER))
-                .filter(strings -> !strings[0].equals(SKIP_LINE_IF_CONTAINS_TYPE)).toList();
-        for (String[] strings : dataDivided) {
+        for (String[] strings : dividedData) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(fruitTransaction.getOperationFromEnum(strings[0]));
             fruitTransaction.setFruit(strings[1]);
