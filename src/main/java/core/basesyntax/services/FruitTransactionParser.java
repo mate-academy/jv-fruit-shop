@@ -1,9 +1,10 @@
 package core.basesyntax.services;
 
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public interface FruitTransactionParser {
-    void runOtherOperationsOverFruit(List<String[]> otherOperations,
-                                     OperationStrategy operationStrategy);
+    void runOperationsOverFruit(List<FruitTransaction> operations,
+                                OperationStrategy operationStrategy);
 }

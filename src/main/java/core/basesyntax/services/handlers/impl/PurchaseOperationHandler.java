@@ -6,12 +6,12 @@ import java.util.Map;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public void getOperation(String fruit, int purchasedQuantity) {
-        for (Map.Entry<String, Integer> fruitTypeAndAmount : Storage.getFruitsTypeAndAmount()
+    public void handleOperation(String fruit, int purchasedQuantity) {
+        for (Map.Entry<String, Integer> fruitTypeAndAmount : Storage.fruitsTypeAndAmount
                 .entrySet()) {
             if (fruitTypeAndAmount.getKey().equals(fruit)) {
                 fruitTypeAndAmount.setValue(fruitTypeAndAmount.getValue() - purchasedQuantity);
-                break;
+                return;
             }
         }
     }
