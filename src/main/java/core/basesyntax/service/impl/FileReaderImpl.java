@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class CsvReadServiceImpl implements FileReaderOwn<String> {
+public class FileReaderImpl implements FileReaderOwn<String> {
     @Override
     public List<String> read(String filePath) {
         try {

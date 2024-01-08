@@ -13,13 +13,13 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public void createReport() {
-        List<String> collect = fruitDao.getDataBaseContent().entrySet().stream()
+        List<String> report = fruitDao.getDataBaseContent().entrySet().stream()
                 .map(e -> e.getKey() + "," + e.getValue())
                 .sorted()
                 .collect(Collectors.toList());
 
-        collect.add(FIRST_ELEMENT_INDEX, TABLE_HEADER);
+        report.add(FIRST_ELEMENT_INDEX, TABLE_HEADER);
 
-        writeService.write(collect);
+        writeService.write(report);
     }
 }

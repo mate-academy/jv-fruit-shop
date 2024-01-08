@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.InvalidFruitDataException;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.DataParser;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataParserImpl implements DataParserService<FruitTransaction> {
+public class DataParserImpl implements DataParser<FruitTransaction> {
     private static final String REGEX = ",";
     private static final int NUMBER_OF_MISSING_LINES = 1;
     private static final int FIRST_ELEMENT_INDEX = 0;

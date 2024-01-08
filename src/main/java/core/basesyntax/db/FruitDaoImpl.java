@@ -1,10 +1,12 @@
 package core.basesyntax.db;
 
 import core.basesyntax.exception.InvalidFruitDataException;
+import core.basesyntax.model.SubtractQuantityBiFunction;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     private static final int ZERO = 0;
+    private final SubtractQuantityBiFunction subtractFunction = new SubtractQuantityBiFunction();
 
     @Override
     public Integer setFruitBalance(String fruitName, int quantity) {
@@ -36,7 +38,7 @@ public class FruitDaoImpl implements FruitDao {
                     + fruitName);
         } else {
             return FruitDB.getFruitDataBase()
-                    .merge(fruitKey, quantity, (oldV, newV) -> oldV - newV);
+                    .merge(fruitKey, quantity, subtractFunction);
         }
     }
 
