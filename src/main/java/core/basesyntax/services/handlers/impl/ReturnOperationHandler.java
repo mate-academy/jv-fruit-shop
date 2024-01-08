@@ -1,16 +1,18 @@
 package core.basesyntax.services.handlers.impl;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.OperationHandler;
 import java.util.Map;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void handleOperation(String fruit, int returnedQuantity) {
+    public void handleOperation(FruitTransaction fruitTransaction) {
         for (Map.Entry<String, Integer> fruitTypeAndAmount : Storage.fruitsTypeAndAmount
                 .entrySet()) {
-            if (fruitTypeAndAmount.getKey().equals(fruit)) {
-                fruitTypeAndAmount.setValue(fruitTypeAndAmount.getValue() + returnedQuantity);
+            if (fruitTypeAndAmount.getKey().equals(fruitTransaction.getFruit())) {
+                fruitTypeAndAmount.setValue(
+                        fruitTypeAndAmount.getValue() + fruitTransaction.getQuantity());
                 return;
             }
         }

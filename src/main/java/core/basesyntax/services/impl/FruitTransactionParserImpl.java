@@ -10,7 +10,8 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     public void runOperationsOverFruit(List<FruitTransaction> transactions,
                                        OperationStrategy operationStrategy) {
         for (FruitTransaction fruitTransaction : transactions) {
-            operationStrategy.get(fruitTransaction.getOperation().);
+            operationStrategy.get(fruitTransaction.getOperation())
+                    .handleOperation(fruitTransaction);
         }
     }
 }

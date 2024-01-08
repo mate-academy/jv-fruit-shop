@@ -22,22 +22,21 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitService {
-    private static List<String> rawData;
-    private static Reader reader;
-    private static OperationsGetter operationsGetter;
-    private static FruitTransactionParser fruitTransactionParser;
-    private static OperationStrategy operationStrategy;
-    private static FileWriter fileWriter;
-    private static ReportGenerator reportGenerator;
     private static final String PATH_TO_RAW_REPORT = "src/main/resources/SampleSourceCSV.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap =
             Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
                     FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
                     FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
                     FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+    private static List<String> rawData;
+    private static OperationsGetter operationsGetter;
+    private static FruitTransactionParser fruitTransactionParser;
+    private static OperationStrategy operationStrategy;
+    private static FileWriter fileWriter;
+    private static ReportGenerator reportGenerator;
 
     public static void initVars() {
-        reader = new ReaderCsvImpl();
+        Reader reader = new ReaderCsvImpl();
         rawData = reader.readFile(PATH_TO_RAW_REPORT);
         operationsGetter = new OperationsGetterImpl();
         fruitTransactionParser = new FruitTransactionParserImpl();
@@ -47,8 +46,8 @@ public class FruitService {
     }
 
     public static void processReport() {
-        fruitTransactionParser.runOperationsOverFruit(
-                operationsGetter.getOperationsData(rawData), operationStrategy);
+        fruitTransactionParser.runOperationsOverFruit(operationsGetter.getOperationsData(rawData),
+                operationStrategy);
         fileWriter.writeToFile(reportGenerator.generateReport(Storage.fruitsTypeAndAmount));
     }
 }
