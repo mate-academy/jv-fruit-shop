@@ -54,13 +54,13 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getOperation(String operation) {
-            for (Operation operation1 : Operation.values()) {
-                if (operation1.getCode().equals(operation)) {
-                    return operation1;
+        public static Operation getOperation(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
                 }
             }
-            throw new RuntimeException();
+            throw new RuntimeException("No operation found for this code: " + code);
         }
     }
 }

@@ -11,10 +11,8 @@ public class FileReadImpl implements FileRead {
     public List<String> read(String fileName) {
         try {
             return Files.readAllLines(Path.of(fileName));
-
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file" + fileName, e);
+            throw new RuntimeException("Can't find file: " + fileName, e);
         }
     }
-
 }

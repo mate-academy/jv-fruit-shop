@@ -5,18 +5,18 @@ import java.util.Map;
 
 public class RecordDataImpl implements RecordData {
     private static final String SEPARATOR = ",";
+    private static final String HEADER = "fruit, quantity";
 
     @Override
     public String recorder(Map<String, Integer> fruits) {
-        String header = "fruit, quantity";
-        StringBuilder builder = new StringBuilder();
-        builder.append(header).append(System.lineSeparator());
+        StringBuilder record = new StringBuilder(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> items : fruits.entrySet()) {
-            builder.append(items.getKey())
+            record.append(items.getKey())
                     .append(SEPARATOR)
-                    .append(items.getValue());
+                    .append(items.getValue())
+                    .append(System.lineSeparator());
         }
-        return builder.toString();
+        return record.toString();
     }
 }
 
