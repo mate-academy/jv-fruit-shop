@@ -22,7 +22,7 @@ public class PurchaseOperationHandler implements OperationHandler {
             }
             fruit.setValue(fruitQuantityAfterOperation);
         } else {
-            throw new NoSuchFruitFoundException("Can't purchase...No such fruit found...");
+            throw new NoSuchFruitFoundException("Fruit was not found in the storage: " + fruitTransaction.getFruit());
         }
     }
 }
