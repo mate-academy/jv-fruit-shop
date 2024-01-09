@@ -13,14 +13,29 @@ public class TransactionGetterImpl implements TransactionGetter {
     @Override
     public List<FruitTransaction> getTransactionsData(List<String[]> dividedData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        setTransactionsValues(fruitTransactions, dividedData);
+        return fruitTransactions;
+    }
+
+    private void setTransactionsValues(List<FruitTransaction> fruitTransactions,
+                                       List<String[]> dividedData) {
         for (String[] strings : dividedData) {
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(fruitTransaction
-                    .getOperationFromEnum(strings[OPERATION_INDEX]));
+            try {
+                fruitTransaction.setOperation(
+                        FruitTransaction.Operation.getOperationFromCode(strings[OPERATION_INDEX]));
+            } catch (IllegalArgumentException iae) {
+                throw new RuntimeException(
+                        "Can't handle operation " + strings[OPERATION_INDEX]);
+            }
             fruitTransaction.setFruit(strings[FRUIT_INDEX]);
-            fruitTransaction.setQuantity(Integer.parseInt(strings[QUANTITY_INDEX]));
+            try {
+                fruitTransaction.setQuantity(Integer.parseInt(strings[QUANTITY_INDEX]));
+            } catch (NumberFormatException nfe) {
+                throw new RuntimeException("Can't parse integer for argument "
+                        + strings[QUANTITY_INDEX]);
+            }
             fruitTransactions.add(fruitTransaction);
         }
-        return fruitTransactions;
     }
 }
