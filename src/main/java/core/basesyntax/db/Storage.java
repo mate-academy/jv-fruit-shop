@@ -14,5 +14,4 @@ public class Storage {
     public static void updateFruit(String type, int amount) {
         fruits.put(type, amount);
     }
-
 }
