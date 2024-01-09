@@ -41,25 +41,29 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperationFromEnum(String code) throws OperationException {
-        switch (code) {
-            case "b" -> {
-                return Operation.BALANCE;
-            }
-            case "s" -> {
-                return Operation.SUPPLY;
-            }
-            case "p" -> {
-                return Operation.PURCHASE;
-            }
-            case "r" -> {
-                return Operation.RETURN;
-            }
-            default -> throw new OperationException("Can't handle an unknown operation");
-        }
-    }
-
     public enum Operation {
-        BALANCE, SUPPLY, PURCHASE, RETURN
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private String code;
+
+        Operation(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public static Operation getOperationFromCode(String code) throws OperationException {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new OperationException("Can't handle an unknown operation: " + code);
+        }
     }
 }
