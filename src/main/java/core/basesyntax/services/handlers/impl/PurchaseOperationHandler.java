@@ -15,7 +15,10 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (fruit != null) {
             int fruitQuantityAfterOperation = fruit.getValue() - fruitTransaction.getQuantity();
             if (fruitQuantityAfterOperation < 0) {
-                throw new NegativeResultException("Can't purchase more products than available");
+                throw new NegativeResultException("Insufficient stock for purchase: Requested " +
+                    fruitTransaction.getQuantity() + " but only " +
+                    storageEntry.getValue() + " available for " +
+                    fruitTransaction.getFruit());
             }
             fruit.setValue(fruitQuantityAfterOperation);
         } else {
