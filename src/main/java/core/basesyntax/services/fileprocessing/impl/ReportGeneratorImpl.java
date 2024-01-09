@@ -6,13 +6,14 @@ import java.util.Set;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_HEADER = "fruit,quantity";
+    private static final String DELIMITER = ",";
 
     @Override
     public StringBuilder generateReport(Set<Map.Entry<String, Integer>> fruitEntrySet) {
         StringBuilder builder = new StringBuilder();
         builder.append(REPORT_HEADER);
         for (Map.Entry<String, Integer> entry : fruitEntrySet) {
-            builder.append(System.lineSeparator()).append(entry.getKey()).append(",")
+            builder.append(System.lineSeparator()).append(entry.getKey()).append(DELIMITER)
                     .append(entry.getValue());
         }
         return builder;
