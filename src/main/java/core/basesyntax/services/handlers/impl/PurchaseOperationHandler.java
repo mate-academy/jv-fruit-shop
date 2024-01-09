@@ -2,27 +2,42 @@ package core.basesyntax.services.handlers.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeResultException;
-import core.basesyntax.exceptions.NoSuchFruitFoundException;
+import core.basesyntax.exceptions.NegativeValueForOperationException;
+import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.OperationHandler;
+import core.basesyntax.services.handlers.ValueValidator;
 import java.util.Map;
 
-public class PurchaseOperationHandler implements OperationHandler {
+public class PurchaseOperationHandler implements OperationHandler, ValueValidator {
+    private Map.Entry<String, Integer> storageEntry;
+
     @Override
     public void handleOperation(FruitTransaction fruitTransaction) {
-        Map.Entry<String, Integer> storageEntry =
-                Storage.iterateAndFindFruits(fruitTransaction.getFruit());
-        if (fruit != null) {
-            int fruitQuantityAfterOperation = fruit.getValue() - fruitTransaction.getQuantity();
-            if (fruitQuantityAfterOperation < 0) {
-                throw new NegativeResultException("Insufficient stock for purchase: Requested " +
-                    fruitTransaction.getQuantity() + " but only " +
-                    storageEntry.getValue() + " available for " +
-                    fruitTransaction.getFruit());
-            }
-            fruit.setValue(fruitQuantityAfterOperation);
+        storageEntry = Storage.iterateAndFindFruits(fruitTransaction.getFruit());
+        if (storageEntry != null) {
+            storageEntry.setValue(validateAndGetOperationValue(fruitTransaction));
         } else {
-            throw new NoSuchFruitFoundException("Fruit was not found in the storage: " + fruitTransaction.getFruit());
+            throw new NoSuchFruitException("Fruit was not found in the storage: "
+                    + fruitTransaction.getFruit());
         }
+    }
+
+    @Override
+    public int validateAndGetOperationValue(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new NegativeValueForOperationException("Purchase operation value for "
+                    + fruitTransaction.getFruit() + " should've "
+                    + "been positive but was " + fruitTransaction.getQuantity());
+        }
+        int fruitQuantityAfterOperation = storageEntry.getValue()
+                - fruitTransaction.getQuantity();
+        if (fruitQuantityAfterOperation < 0) {
+            throw new NegativeResultException("Insufficient stock for purchase: Requested "
+                    + fruitTransaction.getQuantity() + " but only "
+                    + storageEntry.getValue() + " available for "
+                    + fruitTransaction.getFruit());
+        }
+        return fruitQuantityAfterOperation;
     }
 }
