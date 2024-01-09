@@ -10,7 +10,7 @@ import java.util.Map;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handleOperation(FruitTransaction fruitTransaction) {
-        Map.Entry<String, Integer> fruit =
+        Map.Entry<String, Integer> storageEntry =
                 Storage.iterateAndFindFruits(fruitTransaction.getFruit());
         if (fruit != null) {
             int fruitQuantityAfterOperation = fruit.getValue() - fruitTransaction.getQuantity();
