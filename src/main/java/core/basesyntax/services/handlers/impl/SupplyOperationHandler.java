@@ -8,12 +8,15 @@ import java.util.Map;
 public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void handleOperation(FruitTransaction fruitTransaction) {
-        for (Map.Entry<String, Integer> fruitTypeAndAmount : Storage.getFruitsEntrySet()) {
-            if (fruitTypeAndAmount.getKey().equals(fruitTransaction.getFruit())) {
-                fruitTypeAndAmount.setValue(
-                        fruitTypeAndAmount.getValue() + fruitTransaction.getQuantity());
-                return;
-            }
+        Map.Entry<String, Integer> fruit =
+                Storage.iterateAndFindFruits(fruitTransaction.getFruit());
+        if (fruit != null) {
+            fruit.setValue(
+                    fruit.getValue() + fruitTransaction.getQuantity());
+        } else {
+            new BalanceOperationHandler().handleOperation(fruitTransaction);
+            //handle a situation when during a working day we are supplied
+            // with a product we didn't have in the morning;
         }
     }
 }
