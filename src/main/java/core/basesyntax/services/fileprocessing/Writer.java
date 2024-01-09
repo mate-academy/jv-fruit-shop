@@ -1,5 +1,5 @@
 package core.basesyntax.services.fileprocessing;
 
-public interface FileWriter {
+public interface Writer {
     void writeToFile(StringBuilder stringBuilder);
 }
