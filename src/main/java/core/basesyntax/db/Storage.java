@@ -15,4 +15,13 @@ public class Storage {
         fruits.put(type, amount);
     }
 
+    public static Map.Entry<String, Integer> iterateAndFindFruits(String fruit) {
+        Map.Entry<String, Integer> entry = null;
+        for (Map.Entry<String, Integer> entrySetElement : getFruitsEntrySet()) {
+            if (entrySetElement.getKey().equals(fruit)) {
+                entry = entrySetElement;
+            }
+        }
+        return entry;
+    }
 }
