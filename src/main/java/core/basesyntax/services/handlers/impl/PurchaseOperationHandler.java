@@ -6,17 +6,17 @@ import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.exceptions.NoSuchFruitException;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.OperationHandler;
-import core.basesyntax.services.handlers.ValueValidator;
+import core.basesyntax.services.handlers.OperationQuantityValidator;
 import java.util.Map;
 
-public class PurchaseOperationHandler implements OperationHandler, ValueValidator {
+public class PurchaseOperationHandler implements OperationHandler, OperationQuantityValidator {
     private Map.Entry<String, Integer> storageEntry;
 
     @Override
     public void handleOperation(FruitTransaction fruitTransaction) {
         storageEntry = Storage.iterateAndFindFruits(fruitTransaction.getFruit());
         if (storageEntry != null) {
-            storageEntry.setValue(validateAndGetOperationValue(fruitTransaction));
+            storageEntry.setValue(validateAndGetOperationQuantity(fruitTransaction));
         } else {
             throw new NoSuchFruitException("Fruit was not found in the storage: "
                     + fruitTransaction.getFruit());
@@ -24,7 +24,7 @@ public class PurchaseOperationHandler implements OperationHandler, ValueValidato
     }
 
     @Override
-    public int validateAndGetOperationValue(FruitTransaction fruitTransaction) {
+    public int validateAndGetOperationQuantity(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < 0) {
             throw new NegativeValueForOperationException("Purchase operation value for "
                     + fruitTransaction.getFruit() + " should've "

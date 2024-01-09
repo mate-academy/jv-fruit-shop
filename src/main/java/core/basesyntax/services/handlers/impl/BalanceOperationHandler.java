@@ -4,17 +4,17 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exceptions.NegativeValueForOperationException;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.handlers.OperationHandler;
-import core.basesyntax.services.handlers.ValueValidator;
+import core.basesyntax.services.handlers.OperationQuantityValidator;
 
-public class BalanceOperationHandler implements OperationHandler, ValueValidator {
+public class BalanceOperationHandler implements OperationHandler, OperationQuantityValidator {
     @Override
     public void handleOperation(FruitTransaction fruitTransaction) {
         Storage.updateFruit(fruitTransaction.getFruit(),
-                validateAndGetOperationValue(fruitTransaction));
+                validateAndGetOperationQuantity(fruitTransaction));
     }
 
     @Override
-    public int validateAndGetOperationValue(FruitTransaction fruitTransaction) {
+    public int validateAndGetOperationQuantity(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < 0) {
             throw new NegativeValueForOperationException("Balance operation value for "
                     + fruitTransaction.getFruit() + " should've "
