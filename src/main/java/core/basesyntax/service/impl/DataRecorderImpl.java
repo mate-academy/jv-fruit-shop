@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.RecordData;
+import core.basesyntax.service.DataRecorder;
 import java.util.Map;
 
-public class RecordDataImpl implements RecordData {
+public class DataRecorderImpl implements DataRecorder {
     private static final String SEPARATOR = ",";
     private static final String HEADER = "fruit, quantity";
 
@@ -19,4 +19,3 @@ public class RecordDataImpl implements RecordData {
         return record.toString();
     }
 }
-

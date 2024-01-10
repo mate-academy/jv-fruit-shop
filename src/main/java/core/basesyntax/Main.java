@@ -2,14 +2,15 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileRead;
-import core.basesyntax.service.FileWrite;
-import core.basesyntax.service.ParseData;
-import core.basesyntax.service.RecordData;
-import core.basesyntax.service.impl.FileReadImpl;
-import core.basesyntax.service.impl.FileWriteImpl;
-import core.basesyntax.service.impl.ParseDataImpl;
-import core.basesyntax.service.impl.RecordDataImpl;
+import core.basesyntax.service.DataParser;
+import core.basesyntax.service.DataRecorder;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.impl.DataParserImpl;
+import core.basesyntax.service.impl.DataRecorderImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.StrategyImpl;
 import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperation;
@@ -29,21 +30,21 @@ public class Main {
             FruitTransaction.Operation.SUPPLY, new SupplyOperation());
 
     public static void main(String[] args) {
-        FileRead reader = new FileReadImpl();
+        FileReader reader = new FileReaderImpl();
         List<String> dataFromFile = reader.read(FILE_FROM);
 
-        ParseData parseData = new ParseDataImpl();
-        List<FruitTransaction> parsedData = parseData.parser(dataFromFile);
+        DataParser parseData = new DataParserImpl();
+        List<FruitTransaction> parsedData = parseData.parse(dataFromFile);
 
-        StrategyImpl strategy = new StrategyImpl(operationMap);
+        Strategy strategy = new StrategyImpl(operationMap);
 
         for (FruitTransaction fruitTransaction : parsedData) {
             strategy.getOperation(fruitTransaction);
         }
 
-        RecordData recordData = new RecordDataImpl();
+        DataRecorder recordData = new DataRecorderImpl();
         String finalRecord = recordData.recorder(Storage.storage);
-        FileWrite writer = new FileWriteImpl();
+        FileWriter writer = new FileWriterImpl();
         writer.writeToCsv(finalRecord, FILE_TO);
     }
 }

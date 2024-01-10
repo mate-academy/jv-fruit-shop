@@ -7,6 +7,5 @@ public class QuantityOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruit) {
         Storage.storage.put(fruit.getName(), fruit.getAmount());
-
     }
 }
