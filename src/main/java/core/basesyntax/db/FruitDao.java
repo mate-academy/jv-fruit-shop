@@ -10,7 +10,5 @@ public interface FruitDao {
 
     Integer addFruits(String fruitName, int quantity);
 
-    Integer subtractFruits(String fruitName, int quantity);
-
     Map<String, Integer> getDataBaseContent();
 }

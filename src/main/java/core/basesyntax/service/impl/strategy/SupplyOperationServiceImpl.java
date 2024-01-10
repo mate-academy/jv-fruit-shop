@@ -8,8 +8,7 @@ public class SupplyOperationServiceImpl implements OperationService<FruitTransac
     private final FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
-    public int processOperation(FruitTransaction fruitTransaction) {
-
+    public Integer processOperation(FruitTransaction fruitTransaction) {
         return fruitDao.addFruits(fruitTransaction.getFruitName(),
                 fruitTransaction.getQuantity());
     }

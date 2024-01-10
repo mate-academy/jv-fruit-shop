@@ -22,8 +22,9 @@ public class DataParserImpl implements DataParser<FruitTransaction> {
                     .map(s -> new FruitTransaction(s[FIRST_ELEMENT_INDEX], s[SECOND_ELEMENT_INDEX],
                             Integer.parseInt(s[THIRD_ELEMENT_INDEX])))
                     .collect(Collectors.toList());
-        } catch (NullPointerException e) {
-            throw new InvalidFruitDataException("The file must not contain null values");
+        } catch (RuntimeException e) {
+            throw new InvalidFruitDataException("The input file has an incorrect format"
+                    + " or contains invalid characters");
         }
     }
 }

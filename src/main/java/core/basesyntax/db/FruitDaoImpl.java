@@ -1,6 +1,5 @@
 package core.basesyntax.db;
 
-import core.basesyntax.exception.InvalidFruitDataException;
 import java.util.Map;
 import java.util.function.BiFunction;
 
@@ -20,7 +19,7 @@ public class FruitDaoImpl implements FruitDao {
     public Integer setFruitBalance(String fruitName, int quantity) {
         String fruitKey = fruitName.toLowerCase();
 
-        return FruitDB.getFruitDataBase().merge(fruitKey, quantity, (oldV, newV) -> newV);
+        return FruitDB.getFruitDataBase().put(fruitKey, quantity);
     }
 
     @Override
@@ -35,19 +34,6 @@ public class FruitDaoImpl implements FruitDao {
         String fruitKey = fruitName.toLowerCase();
 
         return FruitDB.getFruitDataBase().merge(fruitKey, quantity, Integer::sum);
-    }
-
-    @Override
-    public Integer subtractFruits(String fruitName, int quantity) {
-        String fruitKey = fruitName.toLowerCase();
-
-        if (!FruitDB.getFruitDataBase().containsKey(fruitKey)) {
-            throw new InvalidFruitDataException("There is no such fruit in the database: "
-                    + fruitName);
-        } else {
-            return FruitDB.getFruitDataBase()
-                    .merge(fruitKey, quantity, subtractFunction);
-        }
     }
 
     @Override

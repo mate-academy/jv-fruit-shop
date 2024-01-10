@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.List;
+
 public interface ReportService {
-    void createReport();
+    List<String> createReport();
 }

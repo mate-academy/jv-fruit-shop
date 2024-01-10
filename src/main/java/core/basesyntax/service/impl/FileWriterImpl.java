@@ -8,11 +8,10 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileWriterImpl implements FileWriterOwn<String> {
-    private static final String REPORT_FILE_NAME = "report.csv";
 
     @Override
-    public void write(List<String> data) {
-        File file = new File(REPORT_FILE_NAME);
+    public void write(List<String> data, String fileName) {
+        File file = new File(fileName);
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (String line : data) {
