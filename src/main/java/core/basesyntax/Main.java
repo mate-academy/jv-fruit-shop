@@ -43,7 +43,7 @@ public class Main {
         }
 
         DataRecorder recordData = new DataRecorderImpl();
-        String finalRecord = recordData.recorder(Storage.storage);
+        String finalRecord = recordData.recordData(Storage.storage);
         FileWriter writer = new FileWriterImpl();
         writer.writeToCsv(finalRecord, FILE_TO);
     }

@@ -8,8 +8,13 @@ public class PurchaseOperation implements OperationHandler {
     public void handle(FruitTransaction fruit) {
         String fruitFromStorage = fruit.getName();
         Integer amountBefore = Storage.storage.get(fruitFromStorage);
-        if (amountBefore == null || amountBefore < fruit.getAmount()) {
-            throw new RuntimeException("Something is wrong with amount");
+        if (amountBefore == null) {
+            throw new RuntimeException(fruit.getName() + " is finished.");
+        }
+        if (amountBefore < fruit.getAmount()) {
+            throw new RuntimeException("We have run out of "
+                    + fruit.getName() + ". Only "
+                    + amountBefore + " amount is left.");
         }
         Integer amountAfter = amountBefore - fruit.getAmount();
         Storage.storage.put(fruitFromStorage, amountAfter);

@@ -8,7 +8,7 @@ public class DataRecorderImpl implements DataRecorder {
     private static final String HEADER = "fruit, quantity";
 
     @Override
-    public String recorder(Map<String, Integer> fruits) {
+    public String recordData(Map<String, Integer> fruits) {
         StringBuilder record = new StringBuilder(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> items : fruits.entrySet()) {
             record.append(items.getKey())

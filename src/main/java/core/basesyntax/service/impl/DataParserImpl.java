@@ -27,13 +27,11 @@ public class DataParserImpl implements DataParser {
             FruitTransaction.Operation operation = FruitTransaction.Operation
                     .getOperation(data[OPERATION_INDEX].trim());
             String fruit = data[FRUIT_INDEX];
-            int quantity;
-            try {
-                quantity = Integer.parseInt(data[QUANTITY_INDEX]);
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Bad quantity index: " + data[QUANTITY_INDEX]);
-            }
+            int quantity = Integer.parseInt(data[QUANTITY_INDEX]);
             return new FruitTransaction(operation, fruit, quantity);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Fruit quantity couldn't be parsed: "
+                    + data[QUANTITY_INDEX]);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Illegal data: " + Arrays.toString(data), e);
         }
