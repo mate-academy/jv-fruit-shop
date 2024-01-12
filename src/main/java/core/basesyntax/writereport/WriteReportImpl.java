@@ -1,12 +1,13 @@
-package core.basesyntax.writeReport;
+package core.basesyntax.writereport;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteReportImpl implements WriteReport{
+public class WriteReportImpl implements WriteReport {
     private static final String PATH = "src/main/resources/report.txt";
+
     @Override
     public void writeReportToFile(String report) {
         File file = new File(PATH);

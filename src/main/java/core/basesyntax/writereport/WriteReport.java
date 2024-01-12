@@ -1,4 +1,4 @@
-package core.basesyntax.writeReport;
+package core.basesyntax.writereport;
 
 public interface WriteReport {
     void writeReportToFile(String report);

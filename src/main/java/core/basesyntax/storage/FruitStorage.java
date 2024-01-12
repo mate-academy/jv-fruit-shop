@@ -13,6 +13,7 @@ public class FruitStorage {
     public Map<String, Integer> getStorage() {
         return fruitStorage;
     }
+
     public void addData(String fruit, Integer quantity) {
         fruitStorage.put(fruit, quantity);
     }

@@ -2,9 +2,8 @@ package core.basesyntax.process;
 
 import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.storage.FruitTransaction;
-import core.basesyntax.strategyHandler.StrategyHandlerImpl;
 import core.basesyntax.strategy.ShopStrategy;
-
+import core.basesyntax.strategyhandler.StrategyHandlerImpl;
 import java.util.List;
 
 public class DataProcess {
