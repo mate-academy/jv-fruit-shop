@@ -1,19 +1,9 @@
 package core.basesyntax.db;
 
 import java.util.Map;
-import java.util.function.BiFunction;
 
 public class FruitDaoImpl implements FruitDao {
     private static final int ZERO = 0;
-
-    private static class SubtractQuantityFunction implements BiFunction<Integer, Integer, Integer> {
-        @Override
-        public Integer apply(Integer oldQuantity, Integer newQuantity) {
-            return oldQuantity - newQuantity;
-        }
-    }
-
-    private final SubtractQuantityFunction subtractFunction = new SubtractQuantityFunction();
 
     @Override
     public Integer setFruitBalance(String fruitName, int quantity) {

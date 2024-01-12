@@ -9,7 +9,8 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import java.util.List;
 
 public class Main {
-    private static final String REPORT_FILE_PATH = ".\\src\\main\\resourse\\report.csv";
+    private static final String REPORT_FILE_NAME = "src/main/resource/report.csv";
+    private static final String READ_FILE_NAME = "src/main/resource/fruits.csv";
 
     public static void main(String[] args) {
         FileReaderImpl fileReader = new FileReaderImpl();
@@ -18,14 +19,14 @@ public class Main {
         FruitOperationStrategy strategy = new FruitOperationStrategy();
         ReportServiceImpl reportService = new ReportServiceImpl();
 
-        List<String> readData = fileReader.read(".\\src\\main\\resourse\\fruits.csv");
+        List<String> readData = fileReader.read(READ_FILE_NAME);
 
-        List<FruitTransaction> parsed = parserService.parse(readData);
+        List<FruitTransaction> transactions = parserService.parse(readData);
 
-        parsed.forEach(t -> strategy.getOperationService(t).processOperation(t));
+        transactions.forEach(t -> strategy.getOperationService(t).processOperation(t));
 
         List<String> report = reportService.createReport();
 
-        fileWriter.write(report, REPORT_FILE_PATH);
+        fileWriter.write(report, REPORT_FILE_NAME);
     }
 }

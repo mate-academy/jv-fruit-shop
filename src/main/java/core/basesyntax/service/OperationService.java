@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
-public interface OperationService<T> {
-    Integer processOperation(T operation);
+import core.basesyntax.model.FruitTransaction;
+
+public interface OperationService {
+    void processOperation(FruitTransaction operation);
 }
