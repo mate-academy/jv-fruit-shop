@@ -1,6 +1,8 @@
 package core.basesyntax.service.convertator;
 
 import core.basesyntax.model.FruitTransaction;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataConvertorImpl implements DataConvertor {
     private static final int INDEX_TYPE_OPERATION = 0;
@@ -9,10 +11,15 @@ public class DataConvertorImpl implements DataConvertor {
     private static final String SPLIT_REGEX = ",";
 
     @Override
-    public FruitTransaction convertData(String data) {
-        return new FruitTransaction(convertOperation(data.split(SPLIT_REGEX)[INDEX_TYPE_OPERATION]),
-                data.split(SPLIT_REGEX)[INDEX_FRUIT_NAME],
-                Integer.parseInt(data.split(SPLIT_REGEX)[INDEX_QUANTITY]));
+    public List<FruitTransaction> convertData(String data) {
+        List<FruitTransaction> convertedData = new ArrayList<>();
+        for (String fruit : data.split(System.lineSeparator())) {
+            convertedData.add(new FruitTransaction(convertOperation(fruit
+                    .split(SPLIT_REGEX)[INDEX_TYPE_OPERATION]),
+                    fruit.split(SPLIT_REGEX)[INDEX_FRUIT_NAME],
+                    Integer.parseInt(fruit.split(SPLIT_REGEX)[INDEX_QUANTITY])));
+        }
+        return convertedData;
     }
 
     private FruitTransaction.Operation convertOperation(String operation) {

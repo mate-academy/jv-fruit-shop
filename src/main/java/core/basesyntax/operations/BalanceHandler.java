@@ -9,7 +9,11 @@ public class BalanceHandler implements OperationHandler {
 
     @Override
     public Integer getHandler(FruitTransaction fruitTransaction) {
-        return storageDao.getBalance(fruitTransaction).getQuantity();
+        if (fruitTransaction.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
+            storageDao.add(fruitTransaction);
+            return fruitTransaction.getQuantity();
+        }
+        throw new RuntimeException("Can' find balance " + fruitTransaction);
     }
 
 }

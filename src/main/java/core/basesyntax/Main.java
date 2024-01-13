@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operations.BalanceHandler;
 import core.basesyntax.operations.OperationHandler;
@@ -9,8 +7,8 @@ import core.basesyntax.operations.PurchaseHandler;
 import core.basesyntax.operations.ReturnHandler;
 import core.basesyntax.operations.SupplyHandler;
 import core.basesyntax.service.RapportCreator;
-import core.basesyntax.service.StorageService;
-import core.basesyntax.service.StorageServiceImpl;
+import core.basesyntax.service.convertator.DataConvertor;
+import core.basesyntax.service.convertator.DataConvertorImpl;
 import core.basesyntax.service.file.FileReader;
 import core.basesyntax.service.file.FileReaderImpl;
 import core.basesyntax.service.processor.DataProcessor;
@@ -18,17 +16,17 @@ import core.basesyntax.service.processor.DataProcessorImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
 
         FileReader fileReader = new FileReaderImpl();
+        String fileToString = fileReader.readFromFile("src/main/resources/fruitsRapport.csv");
 
-        StorageDao storageDao = new StorageDaoImpl();
-
-        StorageService service = new StorageServiceImpl(storageDao);
-        service.createNewFruitTransaction(fileReader.readFromFile("fruitsRapport.csv"));
+        DataConvertor dataConvertor = new DataConvertorImpl();
+        List<FruitTransaction> convertedData = dataConvertor.convertData(fileToString);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
@@ -39,9 +37,10 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         DataProcessor dataProcessor = new DataProcessorImpl(operationStrategy);
+        String result = dataProcessor.calculateData(convertedData);
 
         RapportCreator rapportCreator = new RapportCreator();
-        rapportCreator.createRapport("rapport.csv", dataProcessor.calculateData());
+        rapportCreator.createRapport("src/main/resources/rapport.csv", result);
 
     }
 
