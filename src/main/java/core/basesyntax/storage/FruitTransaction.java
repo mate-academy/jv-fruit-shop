@@ -53,14 +53,13 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getByCode(String character) {
+        public static Operation getByCode(String code) {
             for (Operation operation : values()) {
-                if (operation.getCode().equals(character)) {
+                if (operation.getCode().equals(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation :" + character);
+            throw new IllegalArgumentException("Unknown operation :" + code);
         }
     }
-
 }

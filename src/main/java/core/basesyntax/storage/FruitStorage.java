@@ -18,14 +18,12 @@ public class FruitStorage {
         fruitStorage.put(fruit, quantity);
     }
 
-    public void editQuantity(String fruit, Integer quantity) {
+    public void reduceQuantity(String fruit, Integer quantity) {
         int anotherQuantity = fruitStorage.get(fruit) - quantity;
         fruitStorage.put(fruit, anotherQuantity);
     }
 
     public void addQuantity(String fruit, Integer quantity) {
-        int anotherQuantity = fruitStorage.get(fruit) + quantity;
-        fruitStorage.put(fruit, anotherQuantity);
+        fruitStorage.merge(fruit, quantity, Integer::sum);
     }
-
 }

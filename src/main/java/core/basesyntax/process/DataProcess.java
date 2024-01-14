@@ -1,27 +1,32 @@
 package core.basesyntax.process;
 
+import core.basesyntax.processhandler.ProcessHandler;
 import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.storage.FruitTransaction;
-import core.basesyntax.strategy.ShopStrategy;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategyhandler.StrategyHandlerImpl;
 import java.util.List;
+import java.util.Map;
 
 public class DataProcess {
-    private static final int INDEX_OPERATION_TYPE = 0;
-    private static final int INDEX_FRUIT_TYPE = 1;
-    private static final int INDEX_QUANTITY = 2;
+    private static final int OPERATION_TYPE_INDEX = 0;
+    private static final int FRUIT_TYPE_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
-    public void addDataToStorage(List<String> list, FruitStorage fruitStorage) {
-        StrategyHandlerImpl cps = new StrategyHandlerImpl();
+    public void addDataToStorage(List<String> list, FruitStorage fruitStorage,
+                                 Map<FruitTransaction.Operation, OperationHandler> strategyMap) {
+        StrategyHandlerImpl strategyHandler = new StrategyHandlerImpl();
         list.stream()
-                .map(l -> l.split(","))
+                .map(element -> element.split(","))
                 .forEach(arr -> {
                     FruitTransaction.Operation operation
-                            = FruitTransaction.Operation.getByCode(arr[INDEX_OPERATION_TYPE]);
-                    ShopStrategy shopStrategy = cps.strategyHandler(operation);
-                    shopStrategy.editFruitStorageData(fruitStorage, arr[INDEX_FRUIT_TYPE],
-                            Integer.parseInt(arr[INDEX_QUANTITY]));
+                            = FruitTransaction.Operation.getByCode(arr[OPERATION_TYPE_INDEX]);
+                    OperationHandler shopStrategy
+                            = strategyHandler.strategyHandler(operation, strategyMap);
+                    ProcessHandler processHandler = new ProcessHandler();
+                    shopStrategy.editFruitStorageData(fruitStorage,
+                            processHandler.fruitTypeHandler(arr[FRUIT_TYPE_INDEX]),
+                            processHandler.quantityHandler(arr[QUANTITY_INDEX]));
                 });
     }
-
 }

@@ -1,8 +1,10 @@
 package core.basesyntax.strategyhandler;
 
 import core.basesyntax.storage.FruitTransaction;
-import core.basesyntax.strategy.ShopStrategy;
+import core.basesyntax.strategy.OperationHandler;
+import java.util.Map;
 
 public interface StrategyHandler {
-    ShopStrategy strategyHandler(FruitTransaction.Operation operation);
+    OperationHandler strategyHandler(FruitTransaction.Operation operation,
+                                     Map<FruitTransaction.Operation, OperationHandler> strategyMap);
 }
