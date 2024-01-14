@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReaderCsv;
+import core.basesyntax.service.Reader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderCsvImpl implements FileReaderCsv {
+public class FileReaderCsvImpl implements Reader {
     private static final int COLUMN_NAMES_INDEX = 0;
 
     @Override

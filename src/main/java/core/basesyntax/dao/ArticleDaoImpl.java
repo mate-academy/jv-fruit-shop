@@ -10,7 +10,6 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public void addArticle(String article) {
         Storage.storage.put(article, DEFAULT_FRUIT_QUANTITY);
-        System.out.println("Article '" + article + "' was added to the storage");
     }
 
     @Override
@@ -31,10 +30,9 @@ public class ArticleDaoImpl implements ArticleDao {
     @Override
     public void removeArticle(String article) {
         if (Storage.storage.get(article) == null) {
-            System.out.println("Storage doesn't contain article '" + article + "'");
+            throw new RuntimeException("Storage doesn't contain article '" + article + "'");
         } else {
             Storage.storage.remove(article);
-            System.out.println("Article '" + article + "' was removed from the storage");
         }
     }
 }

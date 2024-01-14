@@ -56,9 +56,7 @@ public class FruitTransactionServiceImpl implements TransactionService {
         } catch (NumberFormatException e) {
             throw new NumberFormatException("Wrong format of quantity field in line: '" + line
                     + "'\n The field should be a number");
-
         }
-
     }
 
     private FruitTransaction.Operation validateOperationField(String operationField, String line) {
@@ -69,5 +67,4 @@ public class FruitTransactionServiceImpl implements TransactionService {
         }
         throw new RuntimeException("Incorrect transaction index in line: '" + line + "'");
     }
-
 }

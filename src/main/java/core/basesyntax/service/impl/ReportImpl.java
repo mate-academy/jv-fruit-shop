@@ -9,7 +9,6 @@ public class ReportImpl implements Report {
     private static final String COLUMN_NAMES = "fruit,quantity";
     private static final String ROW_SEPARATOR = ",";
     private static final int STARTED_ROW_LENGTH = 0;
-    private final List<String> report = new ArrayList<>();
     private ArticleDao articleDao;
 
     public ReportImpl(ArticleDao fruitTransactionDao) {
@@ -18,21 +17,18 @@ public class ReportImpl implements Report {
 
     @Override
     public List<String> create() {
+        List<String> report = new ArrayList<>();
         report.add(COLUMN_NAMES);
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder newRow = new StringBuilder();
         String article;
         int quantity;
         List<String> articles = articleDao.getArticles();
         for (String articleFromStorage : articles) {
             article = articleFromStorage;
             quantity = articleDao.getQuantity(article);
-            stringBuilder.append(article).append(ROW_SEPARATOR).append(quantity);
-            report.add(stringBuilder.toString());
-            stringBuilder.setLength(STARTED_ROW_LENGTH);
-        }
-        System.out.println("Report: ");
-        for (String string : report) {
-            System.out.println(string);
+            newRow.append(article).append(ROW_SEPARATOR).append(quantity);
+            report.add(newRow.toString());
+            newRow.setLength(STARTED_ROW_LENGTH);
         }
         return report;
     }

@@ -5,5 +5,4 @@ import java.util.Map;
 
 public interface TransactionHandler {
     void proceed(Map<String, Integer> map, FruitTransaction transaction);
-
 }

@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface FileWriterCsv {
+public interface Writer {
     void write(String fileName, List<String> report);
 }

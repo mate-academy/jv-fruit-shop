@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface FileReaderCsv {
+public interface Reader {
     List<String> read(String fileName);
 }

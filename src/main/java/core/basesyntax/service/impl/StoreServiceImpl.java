@@ -38,6 +38,5 @@ public class StoreServiceImpl implements StoreService {
                         + fruit + ": " + quantity);
             }
         }
-        System.out.println("Storage was successfully updated");
     }
 }
