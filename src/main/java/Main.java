@@ -1,12 +1,12 @@
 import core.basesyntax.dao.ArticleDao;
 import core.basesyntax.dao.ArticleDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReaderCsv;
-import core.basesyntax.service.FileWriterCsv;
+import core.basesyntax.service.Reader;
 import core.basesyntax.service.Report;
 import core.basesyntax.service.StoreService;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.FileReaderCsvImpl;
 import core.basesyntax.service.impl.FileWriterCsvImpl;
 import core.basesyntax.service.impl.FruitTransactionServiceImpl;
@@ -42,7 +42,7 @@ public class Main {
         }
         TransactionStrategy strategy = new TransactionStrategyImpl(strategyMap);
 
-        FileReaderCsv fileReader = new FileReaderCsvImpl();
+        Reader fileReader = new FileReaderCsvImpl();
         List<String> fruitTransactionsFromCsv = fileReader.read(sourceFile);
 
         TransactionService transactionService = new FruitTransactionServiceImpl(articleDao);
@@ -56,7 +56,7 @@ public class Main {
         Report report = new ReportImpl(articleDao);
         List<String> fruitsReport = report.create();
 
-        FileWriterCsv fileWriterCsv = new FileWriterCsvImpl();
+        Writer fileWriterCsv = new FileWriterCsvImpl();
         fileWriterCsv.write(reportFile, fruitsReport);
     }
 }
