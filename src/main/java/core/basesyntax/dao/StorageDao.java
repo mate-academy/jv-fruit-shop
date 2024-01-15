@@ -1,12 +1,12 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.List;
+import java.util.Map;
 
 public interface StorageDao {
     void add(FruitTransaction fruit);
 
-    List<FruitTransaction> getAll();
+    Integer getValue(String fruit);
 
-    FruitTransaction getBalance(FruitTransaction fruitTransaction);
+    Map<String, Integer> getStorage();
 }

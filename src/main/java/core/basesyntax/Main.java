@@ -19,10 +19,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
 
         FileReader fileReader = new FileReaderImpl();
-        String fileToString = fileReader.readFromFile("src/main/resources/fruitsRapport.csv");
+        String fileToString = fileReader.readFromFile(INPUT_PATH);
 
         DataConvertor dataConvertor = new DataConvertorImpl();
         List<FruitTransaction> convertedData = dataConvertor.convertData(fileToString);
@@ -39,6 +42,6 @@ public class Main {
         String result = dataProcessor.calculateData(convertedData);
 
         RapportCreator rapportCreator = new RapportCreator();
-        rapportCreator.createRapport("src/main/resources/rapport.csv", result);
+        rapportCreator.createRapport(OUTPUT_PATH, result);
     }
 }

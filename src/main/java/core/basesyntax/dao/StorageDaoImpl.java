@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.List;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     @Override
@@ -11,25 +11,19 @@ public class StorageDaoImpl implements StorageDao {
             throw new RuntimeException("Can't add information to storage, information is empty: "
                     + fruit);
         }
-        Storage.getDataStorage().add(fruit);
+        Storage.getDataStorage().put(fruit.getFruit(), fruit.getQuantity());
     }
 
     @Override
-    public List<FruitTransaction> getAll() {
+    public Integer getValue(String fruit) {
         if (Storage.getDataStorage().isEmpty()) {
             throw new RuntimeException("Storage is empty");
         }
-        return Storage.getDataStorage();
+        return Storage.getDataStorage().get(fruit);
     }
 
     @Override
-    public FruitTransaction getBalance(FruitTransaction fruitTransaction) {
-        return Storage.getDataStorage().stream()
-                .filter(fruit -> fruit.getFruit()
-                        .equals(fruitTransaction.getFruit())
-                        && fruit.getOperation()
-                        .equals(FruitTransaction.Operation.BALANCE))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("Can't find any of balance"));
+    public Map<String, Integer> getStorage() {
+        return Storage.getDataStorage();
     }
 }

@@ -10,16 +10,18 @@ public class PurchaseHandler implements OperationHandler {
     @Override
     public Integer getHandler(FruitTransaction fruitTransaction) {
         int newQuantity;
-        if (storageDao.getBalance(fruitTransaction).getQuantity()
+        if (storageDao.getValue(fruitTransaction.getFruit())
                 < fruitTransaction.getQuantity()) {
             throw new RuntimeException("Balance of "
                     + fruitTransaction.getFruit()
                     + " is less then "
                     + fruitTransaction.getQuantity());
         }
-        newQuantity = storageDao.getBalance(fruitTransaction).getQuantity()
+        newQuantity = storageDao.getValue(fruitTransaction.getFruit())
                 - fruitTransaction.getQuantity();
-        storageDao.getBalance(fruitTransaction).setQuantity(newQuantity);
+        storageDao.add(new FruitTransaction(fruitTransaction.getOperation(),
+                fruitTransaction.getFruit(),
+                newQuantity));
         return newQuantity;
     }
 }
