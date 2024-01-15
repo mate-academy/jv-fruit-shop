@@ -7,20 +7,19 @@ import java.util.List;
 public class StorageDaoImpl implements StorageDao {
     @Override
     public void add(FruitTransaction fruit) {
-        if (fruit != null) {
-            Storage.getDataStorage().add(fruit);
-            return;
+        if (fruit == null) {
+            throw new RuntimeException("Can't add information to storage, information is empty: "
+                    + fruit);
         }
-        throw new RuntimeException("Can't add information to storage, information is empty: "
-                + fruit);
+        Storage.getDataStorage().add(fruit);
     }
 
     @Override
     public List<FruitTransaction> getAll() {
-        if (!Storage.getDataStorage().isEmpty()) {
-            return Storage.getDataStorage();
+        if (Storage.getDataStorage().isEmpty()) {
+            throw new RuntimeException("Storage is empty");
         }
-        throw new RuntimeException("Storage is empty");
+        return Storage.getDataStorage();
     }
 
     @Override
@@ -33,5 +32,4 @@ public class StorageDaoImpl implements StorageDao {
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Can't find any of balance"));
     }
-
 }

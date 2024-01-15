@@ -12,5 +12,4 @@ public class RapportCreator {
             throw new RuntimeException("Can't write to file", e);
         }
     }
-
 }

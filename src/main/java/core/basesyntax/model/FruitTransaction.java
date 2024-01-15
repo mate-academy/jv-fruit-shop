@@ -50,6 +50,5 @@ public class FruitTransaction {
         public String getNameOperation() {
             return operation;
         }
-
     }
 }

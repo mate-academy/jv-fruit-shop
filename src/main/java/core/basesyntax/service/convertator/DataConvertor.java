@@ -5,5 +5,4 @@ import java.util.List;
 
 public interface DataConvertor {
     List<FruitTransaction> convertData(String data);
-
 }

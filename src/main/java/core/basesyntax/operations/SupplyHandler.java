@@ -11,16 +11,15 @@ public class SupplyHandler implements OperationHandler {
     @Override
     public Integer getHandler(FruitTransaction fruitTransaction) {
         int newQuantity;
-        if (storageDao.getBalance(fruitTransaction).getQuantity() >= MIN_OPERATION_QUANTITY) {
-            newQuantity = storageDao.getBalance(fruitTransaction).getQuantity()
-                    + fruitTransaction.getQuantity();
-            storageDao.getBalance(fruitTransaction).setQuantity(newQuantity);
-            return newQuantity;
+        if (storageDao.getBalance(fruitTransaction).getQuantity() < MIN_OPERATION_QUANTITY) {
+            throw new RuntimeException("Balance of "
+                    + fruitTransaction.getFruit()
+                    + " is less then "
+                    + fruitTransaction.getQuantity());
         }
-        throw new RuntimeException("Balance of "
-                + fruitTransaction.getFruit()
-                + " is less then "
-                + fruitTransaction.getQuantity());
+        newQuantity = storageDao.getBalance(fruitTransaction).getQuantity()
+                + fruitTransaction.getQuantity();
+        storageDao.getBalance(fruitTransaction).setQuantity(newQuantity);
+        return newQuantity;
     }
-
 }

@@ -5,5 +5,4 @@ import core.basesyntax.operations.OperationHandler;
 
 public interface OperationStrategy {
     OperationHandler get(FruitTransaction.Operation operation);
-
 }

@@ -31,5 +31,4 @@ public class DataConvertorImpl implements DataConvertor {
             default -> throw new RuntimeException("Convertation is failed: " + operation);
         };
     }
-
 }

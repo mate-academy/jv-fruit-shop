@@ -15,7 +15,6 @@ import core.basesyntax.service.processor.DataProcessor;
 import core.basesyntax.service.processor.DataProcessorImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.OperationStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,11 +27,11 @@ public class Main {
         DataConvertor dataConvertor = new DataConvertorImpl();
         List<FruitTransaction> convertedData = dataConvertor.convertData(fileToString);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
@@ -41,7 +40,5 @@ public class Main {
 
         RapportCreator rapportCreator = new RapportCreator();
         rapportCreator.createRapport("src/main/resources/rapport.csv", result);
-
     }
-
 }

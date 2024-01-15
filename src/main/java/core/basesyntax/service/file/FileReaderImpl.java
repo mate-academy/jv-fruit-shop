@@ -29,5 +29,4 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("Can't read from file " + path);
         }
     }
-
 }
