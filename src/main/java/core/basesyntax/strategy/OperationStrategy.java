@@ -1,7 +1,12 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
 
-public interface OperationStrategy {
-    void apply(String fruit, int quantity, Storage storage);
+public record OperationStrategy(
+        Map<FruitTransaction.Operation, OperationsHandler> handlers) {
+
+    public OperationsHandler getHandler(FruitTransaction fruitTransaction) {
+        return handlers.get(fruitTransaction.getOperation());
+    }
 }
