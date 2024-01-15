@@ -2,9 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.Operation;
 
-/*
-    Java objects
- */
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
