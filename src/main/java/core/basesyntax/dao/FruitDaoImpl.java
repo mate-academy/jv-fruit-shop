@@ -1,31 +1,16 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.model.Fruit;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
+import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void addFruit(Fruit fruit) {
-        FruitStorage.getFruits().add(fruit);
+    public void addFruit(String fruitName, int quantity) {
+        FruitStorage.getFruits().put(fruitName, quantity);
     }
 
     @Override
-    public Fruit findByFruitName(String fruitName) {
-        return get(fruitName).orElseThrow(() -> new NoSuchElementException("Fruit with name "
-                + fruitName + " not found."));
-    }
-
-    @Override
-    public Set<Fruit> getAllFruits() {
+    public Map<String, Integer> getAllFruits() {
         return FruitStorage.getFruits();
-    }
-
-    private Optional<Fruit> get(String fruitName) {
-        return FruitStorage.getFruits().stream()
-                .filter(fruit -> fruit.getFruitName().equals(fruitName))
-                .findFirst();
     }
 }

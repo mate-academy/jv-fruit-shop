@@ -11,7 +11,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(data);
         } catch (IOException e) {
-            System.err.println("Can not write to file " + fileName);
+            throw new RuntimeException("Can not write to file " + fileName);
         }
     }
 }

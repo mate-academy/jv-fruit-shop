@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.Parser;
@@ -13,10 +12,14 @@ public class ParserImpl implements Parser {
 
     @Override
     public FruitTransaction parse(String data) {
+        if (!data.matches("^[brsp],.*")) {
+            return null;
+        }
         String[] strings = data.split(DELIMITER);
-        Fruit newFruit = new Fruit(strings[NAME_INDEX], Integer.parseInt(strings[QUANTITY_INDEX]));
+        String fruitName = strings[NAME_INDEX];
+        int quantity = Integer.parseInt(strings[QUANTITY_INDEX]);
         Operation operation = Operation
                 .fromCode(strings[OPERATION_INDEX]);
-        return new FruitTransaction(operation, newFruit);
+        return new FruitTransaction(operation, fruitName, quantity);
     }
 }

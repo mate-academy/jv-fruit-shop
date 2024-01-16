@@ -1,7 +1,6 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitOperationStrategy;
 
@@ -14,9 +13,10 @@ public class IncreaseQuantityStrategy implements FruitOperationStrategy {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        Fruit fruit = fruitDao.findByFruitName(transaction.getFruit().getFruitName());
-        int increase = transaction.getFruit().getQuantity();
-        int newQuantity = fruit.getQuantity() + increase;
-        fruit.setQuantity(newQuantity);
+        String fruitName = transaction.getFruitName();
+        int oldQuantity = fruitDao.getAllFruits().get(fruitName);
+        int increase = transaction.getQuantity();
+        int newQuantity = oldQuantity + increase;
+        fruitDao.getAllFruits().put(fruitName, newQuantity);
     }
 }

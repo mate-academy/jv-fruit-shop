@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    private static final int FIRST_LINE_INDEX = 0;
-
     @Override
     public List<String> readFromFile(String fileName) {
         File file = new File(fileName);
@@ -24,13 +22,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + fileName);
         }
-        removeFirstLine(result);
         return result;
-    }
-
-    private void removeFirstLine(List<String> list) {
-        if (!list.get(FIRST_LINE_INDEX).startsWith("[brsp],")) {
-            list.remove(FIRST_LINE_INDEX);
-        }
     }
 }

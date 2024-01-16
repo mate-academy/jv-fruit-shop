@@ -13,6 +13,6 @@ public class BalanceOperationStrategy implements FruitOperationStrategy {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        fruitDao.addFruit(transaction.getFruit());
+        fruitDao.addFruit(transaction.getFruitName(), transaction.getQuantity());
     }
 }
