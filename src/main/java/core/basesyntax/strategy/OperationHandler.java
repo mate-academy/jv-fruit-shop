@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.storage.FruitStorage;
+import core.basesyntax.storage.FruitTransaction;
 
 public interface OperationHandler {
-    void editFruitStorageData(FruitStorage fruitStorage, String fruit, Integer quantity);
+    void handleTransaction(FruitTransaction transaction);
 }

@@ -1,14 +1,18 @@
 package core.basesyntax.report;
 
-import java.util.Map;
+import static core.basesyntax.storage.FruitStorage.fruitStorage;
 
 public class ReportCreator {
     private static final String REPORT_HEADER = "fruit,quantity";
 
-    public String createReport(Map<String, Integer> storage) {
+    public ReportCreator() {
+        createReport();
+    }
+
+    public String createReport() {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER).append(System.lineSeparator());
-        storage.forEach((key, value) -> {
+        fruitStorage.forEach((key, value) -> {
             report.append(key)
                     .append(",")
                     .append(value)
