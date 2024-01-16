@@ -6,4 +6,6 @@ public interface FruitDao {
     void addFruit(String fruitName, int quantity);
 
     Map<String, Integer> getAllFruits();
+
+    int getQuantityByFruitName(String fruitName);
 }

@@ -14,12 +14,12 @@ public class DecreaseQuantityStrategy implements FruitOperationStrategy {
     @Override
     public void apply(FruitTransaction transaction) {
         String fruitName = transaction.getFruitName();
-        int oldQuantity = fruitDao.getAllFruits().get(fruitName);
+        int oldQuantity = fruitDao.getQuantityByFruitName(fruitName);
         int decrease = transaction.getQuantity();
         int newQuantity = oldQuantity - decrease;
         if (newQuantity < 0) {
             throw new RuntimeException("Quantity (" + newQuantity + ") < 0.");
         }
-        fruitDao.getAllFruits().put(fruitName, newQuantity);
+        fruitDao.addFruit(fruitName, newQuantity);
     }
 }

@@ -13,4 +13,9 @@ public class FruitDaoImpl implements FruitDao {
     public Map<String, Integer> getAllFruits() {
         return FruitStorage.getFruits();
     }
+
+    @Override
+    public int getQuantityByFruitName(String fruitName) {
+        return FruitStorage.getFruits().get(fruitName);
+    }
 }

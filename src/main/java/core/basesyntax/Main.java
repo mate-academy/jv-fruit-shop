@@ -18,35 +18,28 @@ import core.basesyntax.strategy.FruitOperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationStrategy;
 import core.basesyntax.strategy.impl.DecreaseQuantityStrategy;
 import core.basesyntax.strategy.impl.IncreaseQuantityStrategy;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        final String storeFileName = "src/main/resources/store.csv";
-        final String reportFileName = "src/main/resources/report.csv";
+    private static Map<Operation, FruitOperationStrategy> strategyMap;
+    private static final String inputFileName = "src/main/resources/store.csv";
+    private static final String reportFileName = "src/main/resources/report.csv";
 
+    public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        final List<String> fruitData = fileReaderService.readFromFile(storeFileName);
+        final List<String> fruitData = fileReaderService.readFromFile(inputFileName);
 
         Parser parser = new ParserImpl();
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        for (String data : fruitData) {
-            FruitTransaction fruitTransaction = parser.parse(data);
-            if (fruitTransaction != null) {
-                fruitTransactions.add(fruitTransaction);
-            }
-        }
+        List<FruitTransaction> fruitTransactions =
+                parser.convertFruitDataToTransactions(fruitData);
 
         FruitDao fruitDao = new FruitDaoImpl();
-        
-        Map<Operation, FruitOperationStrategy> strategyMap = new HashMap<>();
-        strategyMap.put(Operation.BALANCE, new BalanceOperationStrategy(fruitDao));
-        strategyMap.put(Operation.SUPPLY, new IncreaseQuantityStrategy(fruitDao));
-        strategyMap.put(Operation.RETURN, new IncreaseQuantityStrategy(fruitDao));
-        strategyMap.put(Operation.PURCHASE, new DecreaseQuantityStrategy(fruitDao));
+
+        strategyMap = Map.of(Operation.BALANCE, new BalanceOperationStrategy(fruitDao),
+                Operation.SUPPLY, new IncreaseQuantityStrategy(fruitDao),
+                Operation.RETURN, new IncreaseQuantityStrategy(fruitDao),
+                Operation.PURCHASE, new DecreaseQuantityStrategy(fruitDao));
 
         FruitService fruitService = new FruitServiceImpl(strategyMap);
         fruitService.processTransactions(fruitTransactions);

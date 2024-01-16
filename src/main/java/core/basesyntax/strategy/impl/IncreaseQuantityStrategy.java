@@ -14,9 +14,9 @@ public class IncreaseQuantityStrategy implements FruitOperationStrategy {
     @Override
     public void apply(FruitTransaction transaction) {
         String fruitName = transaction.getFruitName();
-        int oldQuantity = fruitDao.getAllFruits().get(fruitName);
+        int oldQuantity = fruitDao.getQuantityByFruitName(fruitName);
         int increase = transaction.getQuantity();
         int newQuantity = oldQuantity + increase;
-        fruitDao.getAllFruits().put(fruitName, newQuantity);
+        fruitDao.addFruit(fruitName, newQuantity);
     }
 }
