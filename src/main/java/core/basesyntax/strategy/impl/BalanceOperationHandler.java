@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationsHandler;
 
 public record BalanceOperationHandler(FruitDao fruitDao) implements OperationsHandler {
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() < 0) {
             throw new RuntimeException("Balance quantity has incorrect value: "
                     + fruitTransaction.getQuantity());

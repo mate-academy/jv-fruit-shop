@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationsHandler;
 
 public record ReturnOperationHandler(FruitDao fruitDao) implements OperationsHandler {
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         Integer newBalance = calculateReturnResult(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity());
         fruitDao.putToStorage(fruitTransaction.getFruit(), newBalance);
@@ -14,10 +14,6 @@ public record ReturnOperationHandler(FruitDao fruitDao) implements OperationsHan
 
     private int calculateReturnResult(String fruit, int quantity) {
         int currentBalance = fruitDao.getQualityByItemType(fruit);
-        int newBalance = currentBalance + quantity;
-        if (newBalance < 0) {
-            throw new RuntimeException("Insufficient quantity for purchase: " + fruit);
-        }
-        return newBalance;
+        return currentBalance + quantity;
     }
 }

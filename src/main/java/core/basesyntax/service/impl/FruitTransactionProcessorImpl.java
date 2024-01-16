@@ -18,7 +18,7 @@ public record FruitTransactionProcessorImpl(
     public void processTransactions(List<FruitTransaction> transactions) {
         transactions.forEach(transaction -> {
             OperationsHandler operationHandler = operationStrategy.getHandler(transaction);
-            operationHandler.handler(transaction);
+            operationHandler.handle(transaction);
         });
     }
 

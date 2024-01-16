@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationsHandler;
 
 public record PurchaseOperationHandler(FruitDao fruitDao) implements OperationsHandler {
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         Integer newBalance = calculateNewBalance(fruitTransaction.getFruit(),
                 fruitTransaction.getQuantity());
         fruitDao.putToStorage(fruitTransaction.getFruit(), newBalance);

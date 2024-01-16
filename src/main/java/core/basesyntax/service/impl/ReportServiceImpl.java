@@ -1,17 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.service.FileContentCreator;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public record FileContentCreatorImpl(FruitDao fruitDao) implements
-        FileContentCreator {
+public record ReportServiceImpl(FruitDao fruitDao) implements
+        ReportService {
 
     private static final String HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
     @Override
-    public String createFileContent() {
+    public String createReport() {
         Map<String, Integer> storage = fruitDao.getStorage();
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());
