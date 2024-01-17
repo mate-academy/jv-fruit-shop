@@ -1,7 +1,28 @@
 package core.basesyntax.model;
 
-public record FruitTransaction(Operation operation,
-                               String fruit, int quantity) {
+public class FruitTransaction {
+    private Operation operation;
+    private String fruit;
+    private int quantity;
+
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
     public enum Operation {
       BALANCE("b"),
       SUPPLY("s"),
@@ -16,6 +37,16 @@ public record FruitTransaction(Operation operation,
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation fromString(String strategy) {
+            for (Operation op : values()) {
+                if (strategy.equals(op.getCode())) {
+                    return op;
+                }
+            }
+            throw new IllegalArgumentException(
+                    "no such strategy found " + "(" + strategy + ")");
         }
     }
 }
