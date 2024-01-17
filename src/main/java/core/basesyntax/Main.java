@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CalculationService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.CalculationServiceImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriterServiceImpl;
 import core.basesyntax.service.impl.DataParsedImpl;
@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String SOURCE = "src/main/java/core/basesyntax/source.csv";
-    private static final String TARGET = "src/main/java/core/basesyntax/target.csv";
+    private static final String SOURCE = "src/main/resources/source.csv";
+    private static final String TARGET = "src/main/resources/target.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationMap =
@@ -40,14 +40,14 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
 
-        CalculationService calculationService = new CalculationServiceImpl(operationStrategy);
-        calculationService.calculateTransactions(fruitTransactions);
+        TransactionService calculationService = new TransactionServiceImpl(operationStrategy);
+        calculationService.processTransactions(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
 
         WriterService writerService = new CsvWriterServiceImpl();
-        writerService.writeReportToFile(TARGET, report);
+        writerService.writeToFile(TARGET, report);
 
     }
 }

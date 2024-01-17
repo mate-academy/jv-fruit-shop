@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
-public interface CalculationService {
-    void calculateTransactions(List<FruitTransaction> transactions);
+public interface TransactionService {
+    void processTransactions(List<FruitTransaction> transactions);
 }
