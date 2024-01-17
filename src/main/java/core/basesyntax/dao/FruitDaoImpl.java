@@ -2,8 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 
-import java.util.NoSuchElementException;
-
 public class FruitDaoImpl implements FruitDao {
 
     @Override
