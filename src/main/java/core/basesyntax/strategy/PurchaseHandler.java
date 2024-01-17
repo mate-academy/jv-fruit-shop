@@ -8,9 +8,6 @@ public class PurchaseHandler implements OperationHandler {
     @Override
     public void handleTransaction(FruitTransaction transaction) {
         if (fruitStorage.containsKey(transaction.getFruit())) {
-            if (transaction.getQuantity() < 0) {
-                throw new RuntimeException("Can't sell a negative amount of fruit");
-            }
             int stockNewValue = fruitStorage.get(transaction.getFruit())
                     - transaction.getQuantity();
             if (stockNewValue < 0) {

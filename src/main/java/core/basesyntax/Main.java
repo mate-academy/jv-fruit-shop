@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.ReadFile;
 import core.basesyntax.dao.ReadFileImpl;
-import core.basesyntax.process.DataProcess;
+import core.basesyntax.process.RawDataHandler;
 import core.basesyntax.report.ReportCreator;
 import core.basesyntax.storage.FruitTransaction;
 import core.basesyntax.strategy.BalanceHandler;
@@ -14,6 +14,7 @@ import core.basesyntax.strategyhandler.StrategyHandler;
 import core.basesyntax.strategyhandler.StrategyHandlerImpl;
 import core.basesyntax.writereport.FileWriter;
 import core.basesyntax.writereport.WriteReportImpl;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,9 +31,9 @@ public class Main {
         );
         ReadFile readFile = new ReadFileImpl();
 
-        DataProcess dataProcess = new DataProcess();
-        List<FruitTransaction> fruitTransactions
-                = dataProcess.addDataToStorage(readFile.readFromFile(READ_FILE_PATH));
+        RawDataHandler rawDataHandler = new RawDataHandler();
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        fruitTransactions = rawDataHandler.parseRawData(readFile.readFromFile(READ_FILE_PATH));
         StrategyHandler strategyHandler = new StrategyHandlerImpl();
         strategyHandler.strategyHandler(strategyMap, fruitTransactions);
         ReportCreator reportCreator = new ReportCreator();

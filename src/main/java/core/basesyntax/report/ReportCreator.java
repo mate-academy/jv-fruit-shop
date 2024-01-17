@@ -5,10 +5,6 @@ import static core.basesyntax.storage.FruitStorage.fruitStorage;
 public class ReportCreator {
     private static final String REPORT_HEADER = "fruit,quantity";
 
-    public ReportCreator() {
-        createReport();
-    }
-
     public String createReport() {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER).append(System.lineSeparator());
