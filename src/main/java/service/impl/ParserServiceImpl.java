@@ -1,8 +1,8 @@
 package service.impl;
 
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import model.FruitTransaction;
 import service.ParserService;
 
 public class ParserServiceImpl implements ParserService {
@@ -11,23 +11,17 @@ public class ParserServiceImpl implements ParserService {
     public static final int QUANTITY_INDEX = 2;
 
     @Override
-    public Map<String, Integer> parseData(List<String> dataFromFile) {
-        Map<String, Integer> fruitQuantities = new HashMap<>();
+    public List<FruitTransaction> parseOperations(List<String> dataFromFile) {
+        List<FruitTransaction> transactionsList = new ArrayList<>();
         for (String str : dataFromFile) {
             String[] parts = str.split(",");
             String activity = parts[ACTIVITY_INDEX];
             String fruit = parts[FRUIT_INDEX];
             int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
-            switch (activity) {
-                case "b" -> fruitQuantities.put(fruit, quantity);
-                case "s", "r" -> fruitQuantities
-                        .put(fruit, fruitQuantities.getOrDefault(fruit, 0) + quantity);
-                case "p" -> fruitQuantities
-                        .put(fruit, fruitQuantities.getOrDefault(fruit, 0) - quantity);
-                default -> {
-                }
-            }
+            transactionsList.add(new FruitTransaction(FruitTransaction
+                    .getOperationByCode(activity), fruit, quantity));
+
         }
-        return fruitQuantities;
+        return transactionsList;
     }
 }

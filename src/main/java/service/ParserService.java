@@ -1,8 +1,8 @@
 package service;
 
 import java.util.List;
-import java.util.Map;
+import model.FruitTransaction;
 
 public interface ParserService {
-    Map<String, Integer> parseData(List<String> dataFromFile);
+    List<FruitTransaction> parseOperations(List<String> dataFromFile);
 }
