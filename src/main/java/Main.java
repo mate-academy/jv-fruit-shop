@@ -13,7 +13,7 @@ import service.impl.ReportServiceImpl;
 import service.impl.StrategyServiceImpl;
 import service.impl.TransactionServiceImpl;
 import service.impl.WriterServiceImpl;
-import strategy.Balance;
+import strategy.BalanceOperation;
 import strategy.OperationHandler;
 import strategy.PurchaseOperation;
 import strategy.ReturnOperation;
@@ -25,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> operationMap =
-                Map.of(FruitTransaction.Operation.BALANCE, new Balance(),
+                Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                         FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
                         FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
                         FruitTransaction.Operation.RETURN, new ReturnOperation());
