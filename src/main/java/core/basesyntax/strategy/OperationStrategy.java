@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy;
 
 import core.basesyntax.Operation;
 import java.util.HashMap;
@@ -13,7 +13,6 @@ public class OperationStrategy {
         operationStrategyrMap.put(Operation.RETURN, new ReturnHandler());
         operationStrategyrMap.put(Operation.SUPPLY, new SupplyHandler());
     }
-
     public OperationHandler getOperationHandler(Operation operation) {
         return operationStrategyrMap.get(operation);
     }

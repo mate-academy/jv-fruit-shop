@@ -21,6 +21,6 @@ public enum Operation {
                 return operation;
             }
         }
-        return null;
+        throw new RuntimeException("The entered code does not match any operation.");
     }
 }
