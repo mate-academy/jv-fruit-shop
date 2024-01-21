@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_FROM = "src/main/java/resources/input.csv";
-    private static final String FILE_TO = "src/main/java/resources/output.csv";
+    private static final String FILE_FROM = "src/main/resources/input.csv";
+    private static final String FILE_TO = "src/main/resources/output.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationMap = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceOperation(),
             FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
@@ -43,9 +43,9 @@ public class Main {
         processService.process(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();
-        String data = reportService.createReport();
+        String report = reportService.createReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeFile(FILE_TO, data);
+        fileWriter.writeFile(FILE_TO, report);
     }
 }
