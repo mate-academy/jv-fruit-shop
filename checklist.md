@@ -9,7 +9,7 @@ In this case you will save a lot of time when you need to add/modify existing fu
 
 #### Make your services independent and call them in main() method
 All services should be independent. 
-We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
+We shouldn't have strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the strategy class.
 
 Let's create `Main` class with `main()` method to show how the program works.
 Make all services independent and call them in the right order in `main()` method step by step (the result of previous service method should be the input for next one)
@@ -19,11 +19,11 @@ You can use packages to make the structure of the code better, so let's do it. G
 purpose/common logic in a corresponding package.
 
 Your project structure should consist the following packages:
-- `db` for holding Storage
+- `db` for holding storage
 - `model` for holding models like Fruit (if necessary)
 - `service` for holding services, like Writer, Reader, Parser and so on
 - `service.impl` for holding implementations of services
-- `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
+- `strategy` for holding handlers for different operations (you are expected to apply strategy pattern)
 
 #### VCS usage
 Remember about the informative commit and PR naming. Person that is outside of context of your work progress should understand
@@ -87,7 +87,7 @@ Please provide the relative path to a resource instead.
     readerService.readFromFile("src/main/resources/file.txt");
     ```
       
-#### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
+#### Avoid using switch-cases and if-else constructions. It is recommended to use the strategy pattern instead. 
 In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
 
 - Example:  
@@ -101,4 +101,4 @@ In the `main()` method you can pass the strategy map into the service that choos
 #### Be attentive with [class](https://mate-academy.github.io/style-guides/java/java.html#s5.2.2-class-names) and [method](https://mate-academy.github.io/style-guides/java/java.html#s5.2.3-method-names) naming. 
 
 #### Handling Purchase operation.
-Check result balance before saving it in the Storage - it should be positive. Throw `RuntimeException` in case the balance is negative.
+Check result balance before saving it in the storage - it should be positive. Throw `RuntimeException` in case the balance is negative.
