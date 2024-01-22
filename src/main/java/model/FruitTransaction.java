@@ -2,13 +2,12 @@ package model;
 
 import java.util.Objects;
 
-public class Fruit {
-
+public class FruitTransaction {
     private String operation;
     private String name;
     private int quantity;
 
-    public Fruit(String operation, String name, int quantity) {
+    public FruitTransaction(String operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
@@ -51,7 +50,7 @@ public class Fruit {
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Fruit other = (Fruit) obj;
+        FruitTransaction other = (FruitTransaction) obj;
         return quantity == other.quantity
                 && Objects.equals(operation, other.operation)
                 && Objects.equals(name, other.name);

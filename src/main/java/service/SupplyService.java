@@ -1,11 +1,12 @@
 package service;
 
+import model.FruitTransaction;
 import storage.Storage;
 
-public class SupplyService implements OperationService {
-
+public class SupplyService implements OperationHandler {
     @Override
-    public void dataProcessing(String key, int value) {
-        Storage.getFruitsStorage().merge(key, value, Integer::sum);
+    public void handleTransaction(FruitTransaction transaction) {
+        Storage.getFruitsStorage().merge(transaction.getName(),
+                transaction.getQuantity(), Integer::sum);
     }
 }

@@ -1,18 +1,15 @@
 package service;
 
+import model.FruitTransaction;
 import storage.Storage;
 
-public class PurchaseService implements OperationService {
-
+public class PurchaseService implements OperationHandler {
     @Override
-    public void dataProcessing(String fruitName, int value) {
-        Storage.getFruitsStorage().compute(fruitName, (key, existValue) -> {
-            if (existValue != null && existValue >= value) {
-                return existValue - value;
-            } else {
-                throw new RuntimeException("You can't sell because"
-                        + " there isn't enough");
-            }
-        });
+    public void handleTransaction(FruitTransaction transaction) {
+        int currentValue = Storage.getFruitQuantity(transaction);
+        if (currentValue >= transaction.getQuantity()) {
+            Storage.getFruitsStorage().put(transaction.getName(),
+                    currentValue - transaction.getQuantity());
+        }
     }
 }

@@ -2,7 +2,7 @@ package impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.Fruit;
+import model.FruitTransaction;
 import service.ParseDataService;
 
 public class ParseDataServiceImpl implements ParseDataService {
@@ -13,12 +13,12 @@ public class ParseDataServiceImpl implements ParseDataService {
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<Fruit> parseData(List<String> list) {
+    public List<FruitTransaction> parseData(List<String> list) {
         validDataFromFile(list);
-        List<Fruit> fruits = new ArrayList<>();
+        List<FruitTransaction> fruits = new ArrayList<>();
         for (String data : list) {
             String[] result = data.split(SEPARATOR);
-            Fruit fruit = new Fruit(result[INDEX_OPERATION],
+            FruitTransaction fruit = new FruitTransaction(result[INDEX_OPERATION],
                     result[INDEX_OF_FRUIT_NAME],
                     Integer.parseInt(result[INDEX_OF_QUANTITY]));
             fruits.add(fruit);

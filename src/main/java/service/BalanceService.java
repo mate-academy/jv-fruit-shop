@@ -1,11 +1,11 @@
 package service;
 
+import model.FruitTransaction;
 import storage.Storage;
 
-public class BalanceService implements OperationService {
-
+public class BalanceService implements OperationHandler {
     @Override
-    public void dataProcessing(String key, int value) {
-        Storage.getFruitsStorage().put(key, value);
+    public void handleTransaction(FruitTransaction transaction) {
+        Storage.getFruitsStorage().put(transaction.getName(), transaction.getQuantity());
     }
 }
