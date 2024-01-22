@@ -1,32 +1,27 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.service.strategy.BalanceHandler;
-import core.basesyntax.service.strategy.OperationHandler;
-import core.basesyntax.service.strategy.PurchaseHandler;
-import core.basesyntax.service.strategy.ReturnHandler;
-import core.basesyntax.service.strategy.SupplyHandler;
-import java.util.HashMap;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OperationReportImp implements OperationReport {
+public class DailyReportImp implements DailyReport {
+    private static final String FILE_REPORT = "C:\\Users\\IdeaProjects\\jv-fruit-shop"
+            + "\\src\\main\\java\\core\\basesyntax\\db\\report.csv";
     private static final String SEPARATOR = ",";
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;
     private static final int QUANTITY = 2;
     private final FruitDao fruitDao;
-    private final Map<Fruit.Operation, OperationHandler> operationHandlers;
 
-    public OperationReportImp(FruitDao fruitDao) {
+    public DailyReportImp(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
-        this.operationHandlers = initializeHandlers();
     }
 
     @Override
-    public void report() {
+    public List<String> report() {
         List<String> csvData = fruitDao.getCsv();
 
         Map<String, Integer> resultMap = csvData.stream()
@@ -42,16 +37,16 @@ public class OperationReportImp implements OperationReport {
         List<String> newCsvData = resultMap.entrySet().stream()
                 .map(entry -> entry.getKey() + SEPARATOR + entry.getValue())
                 .collect(Collectors.toList());
+        try (FileWriter fileWriter = new FileWriter(FILE_REPORT)) {
 
-        fruitDao.createReportCsv(newCsvData);
-    }
+            fileWriter.append("fruit,quantity").append(System.lineSeparator());
 
-    private Map<Fruit.Operation, OperationHandler> initializeHandlers() {
-        Map<Fruit.Operation, OperationHandler> handlers = new HashMap<>();
-        handlers.put(Fruit.Operation.BALANCE, new BalanceHandler());
-        handlers.put(Fruit.Operation.SUPPLY, new SupplyHandler());
-        handlers.put(Fruit.Operation.PURCHASE, new PurchaseHandler());
-        handlers.put(Fruit.Operation.RETURN, new ReturnHandler());
-        return handlers;
+            for (String transaction : newCsvData) {
+                fileWriter.append(transaction).append(System.lineSeparator());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to create new CSV file " + FILE_REPORT, e);
+        }
+        return newCsvData;
     }
 }

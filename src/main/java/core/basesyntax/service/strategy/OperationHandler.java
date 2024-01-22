@@ -1,8 +1,8 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.dao.FruitDao;
+import java.util.List;
 
 public interface OperationHandler {
 
-    void getOperation(FruitDao fruitDao, String fruit, int quantity);
+    List<String> processOperation();
 }

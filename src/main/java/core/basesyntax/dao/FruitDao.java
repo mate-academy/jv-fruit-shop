@@ -8,7 +8,5 @@ public interface FruitDao {
 
     List<String> getCsv();
 
-    void createReportCsv(List<String> transactions);
-
-    public List<String> getReportCsv();
+    void updateCsv(List<String> updatedCsvData);
 }

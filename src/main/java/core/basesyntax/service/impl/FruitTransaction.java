@@ -1,12 +1,14 @@
 package core.basesyntax.service.impl;
 
+import java.util.List;
+
 public interface FruitTransaction {
 
-    void balance(String fruit, int quantity);
+    List<String> processBalance();
 
-    void supply(String fruit, int quantity);
+    List<String> processPurchase();
 
-    void purchase(String fruit, int quantity);
+    List<String> processReturn();
 
-    void returnFruits(String fruit, int quantity);
+    List<String> processSupply();
 }
