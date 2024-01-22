@@ -31,7 +31,7 @@ public class FruitTransactionImpl implements FruitTransaction {
         if (handler != null) {
             return handler.processOperation();
         } else {
-            throw new IllegalArgumentException("Unsupported operation type: BALANCE");
+            throw new IllegalArgumentException("Unsupported operation type: PURCHASE");
         }
     }
 
@@ -41,7 +41,7 @@ public class FruitTransactionImpl implements FruitTransaction {
         if (handler != null) {
             return handler.processOperation();
         } else {
-            throw new IllegalArgumentException("Unsupported operation type: BALANCE");
+            throw new IllegalArgumentException("Unsupported operation type: RETURN");
         }
     }
 
@@ -51,7 +51,7 @@ public class FruitTransactionImpl implements FruitTransaction {
         if (handler != null) {
             return handler.processOperation();
         } else {
-            throw new IllegalArgumentException("Unsupported operation type: BALANCE");
+            throw new IllegalArgumentException("Unsupported operation type: SUPPLY");
         }
     }
 }
