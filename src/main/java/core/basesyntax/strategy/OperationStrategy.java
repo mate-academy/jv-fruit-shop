@@ -7,8 +7,10 @@ public class OperationStrategy {
     Map<Operation, OperationHandler> operationStrategyrMap;
 
     public OperationStrategy() {
-        this.operationStrategyrMap = Map.of(Operation.BALANCE, new BalanceOperationHandler(),
-                Operation.PURCHASE, new PurchaseHandler(), Operation.RETURN, new ReturnHandler(),
+        this.operationStrategyrMap = Map.of(
+                Operation.BALANCE, new BalanceOperationHandler(),
+                Operation.PURCHASE, new PurchaseHandler(),
+                Operation.RETURN, new ReturnHandler(),
                 Operation.SUPPLY, new SupplyHandler());
     }
 

@@ -6,12 +6,7 @@ import core.basesyntax.transaction.FruitTransaction;
 public class ReturnHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        int currentQuantity;
-        try {
-            currentQuantity = Storage.storage.get(transaction.getFruit());
-        } catch (NullPointerException e) {
-            throw new RuntimeException("This fruit is not available");
-        }
+        int currentQuantity = Storage.storage.getOrDefault(transaction.getFruit(), 0);
         Storage.storage.put(transaction.getFruit(), currentQuantity + transaction.getQuantity());
     }
 }
