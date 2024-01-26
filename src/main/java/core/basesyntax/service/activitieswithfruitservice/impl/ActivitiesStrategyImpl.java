@@ -5,19 +5,19 @@ import core.basesyntax.service.activitieswithfruitservice.ActivitiesStrategy;
 
 public class ActivitiesStrategyImpl implements ActivitiesStrategy {
     @Override
-    public void getActivitiesWithFruit(String code, FruitTransaction fruitTransaction) {
+    public void performTransaction(String code, FruitTransaction fruitTransaction) {
         switch (code) {
             case "b":
-                new BalanceFruitActivitiesServiceImpl().activitiesWithFruit(fruitTransaction);
+                new BalanceFruitActivitiesServiceImpl().performTransaction(fruitTransaction);
                 break;
             case "p":
-                new PurchaseFruitActivitiesServiceImpl().activitiesWithFruit(fruitTransaction);
+                new PurchaseFruitActivitiesServiceImpl().performTransaction(fruitTransaction);
                 break;
             case "r":
-                new ReturnFruitActivitiesServiceImpl().activitiesWithFruit(fruitTransaction);
+                new ReturnFruitActivitiesServiceImpl().performTransaction(fruitTransaction);
                 break;
             case "s":
-                new SupplyFruitActivitiesServiceImpl().activitiesWithFruit(fruitTransaction);
+                new SupplyFruitActivitiesServiceImpl().performTransaction(fruitTransaction);
                 break;
             default:
                 throw new RuntimeException("Input code is not correct");

@@ -44,5 +44,15 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getValueByCode(String code) {
+            return switch (code) {
+                case "b" -> BALANCE;
+                case "s" -> SUPPLY;
+                case "p" -> PURCHASE;
+                case "r" -> RETURN;
+                default -> throw new RuntimeException("Enum by this code does not exist");
+            };
+        }
     }
 }

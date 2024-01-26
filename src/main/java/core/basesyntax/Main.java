@@ -4,6 +4,8 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.activitieswithfruitservice.ActivitiesStrategy;
 import core.basesyntax.service.activitieswithfruitservice.impl.ActivitiesStrategyImpl;
+import core.basesyntax.service.createreportservice.CreateReportService;
+import core.basesyntax.service.createreportservice.impl.CreateReportServiceImpl;
 import core.basesyntax.service.readfromfileservice.ReadFromFileService;
 import core.basesyntax.service.readfromfileservice.impl.ReadFromFileCsvServiceImpl;
 import core.basesyntax.service.writetofileservice.WriteToFileService;
@@ -11,21 +13,23 @@ import core.basesyntax.service.writetofileservice.impl.WriteToCsvFileServiceImpl
 import java.util.List;
 
 public class Main {
-    private static final ReadFromFileService CSV_FILE_READER_SERVICE
+    private static final ReadFromFileService csvFileReader
                 = new ReadFromFileCsvServiceImpl();
-    private static final WriteToFileService CVS_FILE_WRITER_SERVICE
+    private static final WriteToFileService csvFileWriter
             = new WriteToCsvFileServiceImpl();
-    private static final ActivitiesStrategy ACTIVITIES_STRATEGY = new ActivitiesStrategyImpl();
+    private static final ActivitiesStrategy activitiesStrategy = new ActivitiesStrategyImpl();
+    private static final CreateReportService createReportService = new CreateReportServiceImpl();
 
     public static void main(String[] args) {
         String filePath
                 = "src/main/resources/information_about_activities_in_store.csv";
         List<FruitTransaction> fruitTransactionsList
-                = CSV_FILE_READER_SERVICE.readFromCsvFile(filePath);
+                = csvFileReader.readFromCsvFile(filePath);
         for (FruitTransaction fruitTransaction : fruitTransactionsList) {
-            ACTIVITIES_STRATEGY.getActivitiesWithFruit(fruitTransaction.getOperation().getCode(),
+            activitiesStrategy.performTransaction(fruitTransaction.getOperation().getCode(),
                     fruitTransaction);
         }
-        CVS_FILE_WRITER_SERVICE.writeDataToFile(Storage.fruitStorage);
+        String report = createReportService.getReport(Storage.fruitStorage);
+        csvFileWriter.writeDataToFile(report);
     }
 }

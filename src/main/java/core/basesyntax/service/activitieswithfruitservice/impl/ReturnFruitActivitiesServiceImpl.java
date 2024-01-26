@@ -6,7 +6,7 @@ import core.basesyntax.service.activitieswithfruitservice.ActivitiesWithFruitSer
 
 public class ReturnFruitActivitiesServiceImpl implements ActivitiesWithFruitService {
     @Override
-    public void activitiesWithFruit(FruitTransaction fruitTransaction) {
+    public void performTransaction(FruitTransaction fruitTransaction) {
         Integer totalFruitInStorage = Storage.fruitStorage.get(fruitTransaction.getFruit());
         Integer returnPlusInStorageFruits = totalFruitInStorage + fruitTransaction.getQuantity();
         Storage.fruitStorage.replace(fruitTransaction.getFruit(), returnPlusInStorageFruits);

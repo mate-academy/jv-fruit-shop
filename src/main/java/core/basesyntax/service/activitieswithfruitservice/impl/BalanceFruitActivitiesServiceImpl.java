@@ -6,7 +6,7 @@ import core.basesyntax.service.activitieswithfruitservice.ActivitiesWithFruitSer
 
 public class BalanceFruitActivitiesServiceImpl implements ActivitiesWithFruitService {
     @Override
-    public void activitiesWithFruit(FruitTransaction fruitTransaction) {
+    public void performTransaction(FruitTransaction fruitTransaction) {
         Storage.fruitStorage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }
