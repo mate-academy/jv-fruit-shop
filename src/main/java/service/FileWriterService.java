@@ -8,7 +8,7 @@ public class FileWriterService {
     public void writeToFile(List<String> lines, String filePath) {
         try (FileWriter writer = new FileWriter(filePath)) {
             for (String line : lines) {
-                writer.write(line + "\n");
+                writer.write(line + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Error writing to file: " + filePath, e);

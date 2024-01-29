@@ -9,12 +9,4 @@ public class Storage {
     public Storage() {
         this.fruitQuantities = new HashMap<>();
     }
-
-    public Map<String, Integer> getFruitQuantities() {
-        return fruitQuantities;
-    }
-
-    public void updateQuantity(String fruit, int quantity) {
-        fruitQuantities.put(fruit, quantity);
-    }
 }
