@@ -1,21 +1,19 @@
 package core.basesyntax.fruitshop;
 
-import core.basesyntax.fruitshop.impl.BalanceHandler;
-import core.basesyntax.fruitshop.impl.FruitShopServiceImpl;
-import core.basesyntax.fruitshop.impl.ParserServiceImpl;
-import core.basesyntax.fruitshop.impl.PurchaseHandler;
-import core.basesyntax.fruitshop.impl.ReaderServiceImpl;
-import core.basesyntax.fruitshop.impl.ReturnHandler;
-import core.basesyntax.fruitshop.impl.SupplyHandler;
-import core.basesyntax.fruitshop.impl.WriterServiceImpl;
 import core.basesyntax.fruitshop.model.FruitTransaction;
 import core.basesyntax.fruitshop.service.ParserService;
 import core.basesyntax.fruitshop.service.ReaderService;
 import core.basesyntax.fruitshop.service.WriterService;
+import core.basesyntax.fruitshop.service.impl.FruitShopServiceImpl;
+import core.basesyntax.fruitshop.service.impl.ParserServiceImpl;
+import core.basesyntax.fruitshop.service.impl.ReaderServiceImpl;
+import core.basesyntax.fruitshop.service.impl.WriterServiceImpl;
 import core.basesyntax.fruitshop.strategy.OperationHandler;
 import core.basesyntax.fruitshop.strategy.OperationStrategy;
-import java.io.IOException;
-import java.util.HashMap;
+import core.basesyntax.fruitshop.strategy.impl.BalanceHandler;
+import core.basesyntax.fruitshop.strategy.impl.PurchaseHandler;
+import core.basesyntax.fruitshop.strategy.impl.ReturnHandler;
+import core.basesyntax.fruitshop.strategy.impl.SupplyHandler;
 import java.util.List;
 import java.util.Map;
 
@@ -32,23 +30,20 @@ public class Main {
         FruitShopServiceImpl fruitShopService =
                 new FruitShopServiceImpl(parserService, operationStrategy);
 
-        try {
-            List<String> lines = readerService.readLines(INPUT_FILE_PATH);
-            List<FruitTransaction> transactions = fruitShopService.parseTransactions(lines);
-            Map<String, Integer> fruitInventory
-                    = fruitShopService.processTransactions(transactions);
-            writerService.writeReport(fruitInventory, OUTPUT_FILE_PATH);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        List<String> lines = readerService.readLines(INPUT_FILE_PATH);
+        List<FruitTransaction> transactions = fruitShopService.parseTransactions(lines);
+        Map<String, Integer> fruitInventory
+                = fruitShopService.processTransactions(transactions);
+        writerService.writeReport(fruitInventory, OUTPUT_FILE_PATH);
     }
 
     private static OperationStrategy initializeOperationStrategy() {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler()
+        );
 
         return operationHandlers::get;
     }

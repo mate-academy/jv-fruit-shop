@@ -1,11 +1,6 @@
 package core.basesyntax.fruitshop.model;
 
 public class FruitTransaction {
-    public static final String CODE_B = "b";
-    public static final String CODE_S = "s";
-    public static final String CODE_P = "p";
-    public static final String CODE_R = "r";
-
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -29,10 +24,10 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-        BALANCE(CODE_B),
-        SUPPLY(CODE_S),
-        PURCHASE(CODE_P),
-        RETURN(CODE_R);
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
         private final String code;
 
@@ -44,13 +39,13 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation fromString(String text) {
-            for (Operation op : Operation.values()) {
-                if (op.code.equalsIgnoreCase(text)) {
-                    return op;
+        public static Operation fromString(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.code.equalsIgnoreCase(code)) {
+                    return operation;
                 }
             }
-            throw new IllegalArgumentException("No constant with text " + text + " found");
+            throw new IllegalArgumentException("No constant with text " + code + " found");
         }
     }
 }

@@ -1,4 +1,4 @@
-package core.basesyntax.fruitshop.impl;
+package core.basesyntax.fruitshop.service.impl;
 
 import core.basesyntax.fruitshop.db.Storage;
 import core.basesyntax.fruitshop.model.FruitTransaction;
