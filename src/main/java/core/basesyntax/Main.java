@@ -19,12 +19,13 @@ public class Main {
             = new WriteToCsvFileServiceImpl();
     private static final TransactionStrategy transactionStrategy = new TransactionStrategyImpl();
     private static final CreateReportService createReportService = new CreateReportServiceImpl();
+    private static final String FILEPATH
+            = "src/main/resources/information_about_activities_in_store.csv";
 
     public static void main(String[] args) {
-        final String FilePath
-                = "src/main/java/resources/information_about_activities_in_store.csv";
+
         List<FruitTransaction> fruitTransactionsList
-                = csvFileReader.readFromCsvFile(FilePath);
+                = csvFileReader.readFromCsvFile(FILEPATH);
         for (FruitTransaction fruitTransaction : fruitTransactionsList) {
             transactionStrategy.getTransactionHandler(fruitTransaction)
                     .performTransaction(fruitTransaction);

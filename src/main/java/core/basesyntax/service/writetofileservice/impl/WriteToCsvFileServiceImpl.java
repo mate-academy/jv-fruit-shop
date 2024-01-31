@@ -18,7 +18,6 @@ public class WriteToCsvFileServiceImpl implements WriteToFileService {
         }
         try {
             Files.write(reportFile.toPath(), report.getBytes(StandardCharsets.UTF_8));
-
         } catch (IOException exception) {
             throw new RuntimeException("Cant write data to file", exception);
         }
