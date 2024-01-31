@@ -46,13 +46,12 @@ public class FruitTransaction {
         }
 
         public static Operation getValueByCode(String code) {
-            return switch (code) {
-                case "b" -> BALANCE;
-                case "s" -> SUPPLY;
-                case "p" -> PURCHASE;
-                case "r" -> RETURN;
-                default -> throw new RuntimeException("Enum by this code does not exist");
-            };
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equalsIgnoreCase(code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Enum by this code does not exist");
         }
     }
 }
