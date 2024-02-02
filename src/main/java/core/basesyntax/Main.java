@@ -25,6 +25,7 @@ public class Main {
     private static Reader reader = new ReaderImpl();
     private static Parser parser = new ParserImpl();
     private static Writer writer = new WriterImpl();
+    private static ReportCreator report = new ReportCreatorImpl();
     private static final String INPUT_FILE_PATH = "src/main/resources/fruits.csv";
     private static final String OUTPUT_FILE_PATH = "src/main/resources/report.csv";
 
@@ -43,8 +44,6 @@ public class Main {
         for (FruitTransaction ft : fruitTransactions) {
             operationStrategy.get(ft.getOperation()).doOperation(ft);
         }
-
-        ReportCreator report = new ReportCreatorImpl();
 
         writer.writeToFile(report.createReport(Storage.fruits), OUTPUT_FILE_PATH);
     }

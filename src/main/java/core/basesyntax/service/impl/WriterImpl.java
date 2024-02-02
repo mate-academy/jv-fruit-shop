@@ -11,7 +11,7 @@ public class WriterImpl implements Writer {
     public void writeToFile(String report, String filePath) {
         File file = new File(filePath);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            bufferedWriter.write(String.valueOf(report));
+            bufferedWriter.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to the file" + filePath, e);
         }
