@@ -1,5 +1,6 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.DbManagerFactory;
 import core.basesyntax.db.DbManagerImpl;
 import core.basesyntax.model.FruitResultingRow;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.Map;
 public class ReportSaverImpl implements ReportSaver {
     @Override
     public void saveReport(Map<String, Integer> report) {
-        DbManagerImpl.getInstance().putAll(convertReportMapToListOfCsvRows(report));
+        DbManagerFactory.getInstance().putAll(convertReportMapToListOfCsvRows(report));
     }
 
     private List<FruitResultingRow> convertReportMapToListOfCsvRows(Map<String, Integer> report) {

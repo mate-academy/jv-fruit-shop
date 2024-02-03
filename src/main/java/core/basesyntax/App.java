@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.db.DbManagerImpl;
+import core.basesyntax.db.DbManagerFactory;
 import core.basesyntax.db.csv.Reader;
 import core.basesyntax.db.csv.Writer;
 import core.basesyntax.db.csv.impl.CsvReaderImpl;
@@ -25,13 +25,15 @@ public class App {
         Reader<FruitTransactionRow> reader = new CsvReaderImpl(INPUT_FILE_PATH);
         Writer<FruitResultingRow> writer =
                 new CsvWriterImpl(OUTPUT_FILE_PATH, OUTPUT_FILE_HEADER_COLUMN_NAMES);
-        DbManagerImpl.initInstance(reader, writer);
+
+        DbManagerFactory.initInstance(reader, writer);
+        var db = DbManagerFactory.getInstance();
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         ReportSaver reportSaver = new ReportSaverImpl();
-        Map<String, Integer> reportAboutLeftFruits =
-             reportGenerator.calcFruitsLeftAfterTransactions(DbManagerImpl.getInstance().getAll());
+        Map<String, Integer> reportLeftFruits =
+                reportGenerator.calcFruitsLeftAfterTransactions(db.getAll());
 
-        reportSaver.saveReport(reportAboutLeftFruits);
+        reportSaver.saveReport(reportLeftFruits);
     }
 }
