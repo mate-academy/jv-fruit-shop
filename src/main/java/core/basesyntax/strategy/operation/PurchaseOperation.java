@@ -8,18 +8,22 @@ public class PurchaseOperation implements OperationHandler {
     public void handle(FruitTransaction fruit) {
         String getFruitFromStorage = fruit.getName();
         Integer quantityBefore = Storage.fruitStorage.get(getFruitFromStorage);
+
+        validateTransaction(fruit, quantityBefore);
+
+        Integer quantityAfter = quantityBefore - fruit.getQuantity();
+        Storage.fruitStorage.put(getFruitFromStorage, quantityAfter);
+    }
+
+    private void validateTransaction(FruitTransaction fruit, Integer quantityBefore) {
         if (quantityBefore == null) {
             throw new RuntimeException(fruit.getName()
-                + "completed.");
+                    + "completed.");
         }
         if (quantityBefore < fruit.getQuantity()) {
             throw new RuntimeException("We have run out of"
-                + fruit.getName()
-                            + ". Only"
-                + quantityBefore
-                            + "amount is left.");
+                    + fruit.getName() + ". Only"
+                    + quantityBefore + "amount is left.");
         }
-        Integer quantityAfter = quantityBefore - fruit.getQuantity();
-        Storage.fruitStorage.put(getFruitFromStorage, quantityAfter);
     }
 }
