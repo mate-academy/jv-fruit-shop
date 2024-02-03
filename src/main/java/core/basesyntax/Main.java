@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_PATH_TO = "";
-    private static final String FILE_PATH_FROM = "";
+    private static final String FILE_PATH_TO = "src/main/java/resources/input.csv";
+    private static final String FILE_PATH_FROM = "src/main/java/resources/recorded.csv";
     private static final Map<FruitTransaction.Operation, OperationHandler> operationMap = Map
             .of(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
                     FruitTransaction.Operation.BALANCE, new QuantityOperation(),
