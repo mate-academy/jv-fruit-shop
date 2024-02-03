@@ -29,8 +29,9 @@ public class App {
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         ReportSaver reportSaver = new ReportSaverImpl();
-        Map<String, Integer> reportAboutFruits =
-                reportGenerator.calcFruitsLeftAfterTransactions(DbManagerImpl.getInstance().getAll());
-        reportSaver.saveReport(reportAboutFruits);
+        Map<String, Integer> reportAboutLeftFruits =
+             reportGenerator.calcFruitsLeftAfterTransactions(DbManagerImpl.getInstance().getAll());
+
+        reportSaver.saveReport(reportAboutLeftFruits);
     }
 }
