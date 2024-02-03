@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void putFruitToStorage(String fruitName, int fruitQuantity) {
+    public void putFruitToStorage(String fruitName, Integer fruitQuantity) {
         Storage.fruitStorage.put(fruitName, fruitQuantity);
     }
 
