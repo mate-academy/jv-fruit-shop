@@ -15,9 +15,9 @@ public class FruitResultingRow {
 
     @Override
     public String toString() {
-        return "FruitResultingRow{" +
-                "fruitName='" + fruitName + '\'' +
-                ", fruitCount=" + fruitCount +
-                '}';
+        return "FruitResultingRow{"
+                + "fruitName='" + fruitName
+                + ", fruitCount=" + fruitCount
+                + '}';
     }
 }
