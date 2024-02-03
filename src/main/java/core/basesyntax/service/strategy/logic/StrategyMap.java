@@ -1,12 +1,12 @@
 package core.basesyntax.service.strategy.logic;
 
-import java.util.HashMap;
-import java.util.Map;
 import core.basesyntax.service.strategy.BalanceStrategy;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.service.strategy.PurchaseStrategy;
 import core.basesyntax.service.strategy.ReturnStrategy;
 import core.basesyntax.service.strategy.SupplyStrategy;
+import java.util.HashMap;
+import java.util.Map;
 
 public class StrategyMap {
     private static final Map<Operation, OperationStrategy> strategyMap = new HashMap<>();
