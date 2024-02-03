@@ -17,13 +17,9 @@ public class DbManagerImpl implements DbManager<FruitTransactionRow, FruitResult
         this.writer = writer;
     }
 
-    public static void createInstance(Reader<FruitTransactionRow> reader,
-                                      Writer<FruitResultingRow> writer) {
-        if (dbManager == null) {
-            dbManager = new DbManagerImpl(reader, writer);
-        } else {
-            throw new RuntimeException("Illegal action. Cannot initialize DbManager second time");
-        }
+    public static void initInstance(Reader<FruitTransactionRow> reader,
+                                    Writer<FruitResultingRow> writer) {
+        dbManager = new DbManagerImpl(reader, writer);
     }
 
     public static DbManager<FruitTransactionRow, FruitResultingRow> getInstance() {

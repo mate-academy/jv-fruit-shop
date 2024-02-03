@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CsvWriterImpl implements Writer<FruitResultingRow> {
+    private static final int POSITION_OF_CSV_HEADER_STRING = 0;
     private final Path pathToCsv;
     private final String columnNames;
 
@@ -22,14 +23,11 @@ public class CsvWriterImpl implements Writer<FruitResultingRow> {
         List<String> recordsInCsv = records
                 .stream()
                 .map(FruitResultingRow::toCsv)
-                .collect(Collectors.toList()); // Collect stream elements into a list
-        // Add string at the beginning of array, so it will be added to the start of file
-        // That string contains informative column names for CSV files
-        recordsInCsv.add(0, columnNames);
+                .collect(Collectors.toList());
+        recordsInCsv.add(POSITION_OF_CSV_HEADER_STRING, columnNames);
 
         try {
-            // The File will be rewritten every time a user asks for stat
-            Files.write(pathToCsv, recordsInCsv);
+            Files.write(pathToCsv, recordsInCsv); // rewrites, not appends
         } catch (IOException e) {
             throw new RuntimeException("Problems while writing data to CSV file: ", e);
         }

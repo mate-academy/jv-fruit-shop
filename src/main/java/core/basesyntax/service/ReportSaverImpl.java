@@ -9,10 +9,10 @@ import java.util.Map;
 public class ReportSaverImpl implements ReportSaver {
     @Override
     public void saveReport(Map<String, Integer> report) {
-        DbManagerImpl.getInstance().putAll(convertReportToListOfCsvRows(report));
+        DbManagerImpl.getInstance().putAll(convertReportMapToListOfCsvRows(report));
     }
 
-    private List<FruitResultingRow> convertReportToListOfCsvRows(Map<String, Integer> report) {
+    private List<FruitResultingRow> convertReportMapToListOfCsvRows(Map<String, Integer> report) {
         List<FruitResultingRow> listOfResultingStrings = new ArrayList<>();
         for (var entity : report.entrySet()) {
             listOfResultingStrings.add(new FruitResultingRow(entity.getKey(), entity.getValue()));

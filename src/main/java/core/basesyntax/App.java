@@ -19,18 +19,18 @@ public class App {
             "src/main/resources" + File.separator + "input.csv";
     private static final String OUTPUT_FILE_PATH =
             "src/main/resources" + File.separator + "output.csv";
-    private static final String OUTPUT_FILE_COLUMN_NAMES = "fruit,quantity";
+    private static final String OUTPUT_FILE_HEADER_COLUMN_NAMES = "fruit,quantity";
 
     public static void main(String[] args) {
         Reader<FruitTransactionRow> reader = new CsvReaderImpl(INPUT_FILE_PATH);
         Writer<FruitResultingRow> writer =
-                new CsvWriterImpl(OUTPUT_FILE_PATH, OUTPUT_FILE_COLUMN_NAMES);
-        DbManagerImpl.createInstance(reader, writer);
+                new CsvWriterImpl(OUTPUT_FILE_PATH, OUTPUT_FILE_HEADER_COLUMN_NAMES);
+        DbManagerImpl.initInstance(reader, writer);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         ReportSaver reportSaver = new ReportSaverImpl();
         Map<String, Integer> reportAboutFruits =
-                reportGenerator.generate(DbManagerImpl.getInstance().getAll());
+                reportGenerator.calcFruitsLeftAfterTransactions(DbManagerImpl.getInstance().getAll());
         reportSaver.saveReport(reportAboutFruits);
     }
 }
