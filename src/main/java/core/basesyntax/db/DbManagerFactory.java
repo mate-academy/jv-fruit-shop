@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitResultingRow;
 import core.basesyntax.model.FruitTransactionRow;
 
 public class DbManagerFactory {
-    static DbManager<FruitTransactionRow, FruitResultingRow> dbManager;
+    private static DbManager<FruitTransactionRow, FruitResultingRow> dbManager;
 
     public static void initInstance(Reader<FruitTransactionRow> reader,
                              Writer<FruitResultingRow> writer) {
