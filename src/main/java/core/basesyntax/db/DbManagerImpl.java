@@ -4,7 +4,6 @@ import core.basesyntax.db.csv.Reader;
 import core.basesyntax.db.csv.Writer;
 import core.basesyntax.model.FruitResultingRow;
 import core.basesyntax.model.FruitTransactionRow;
-
 import java.util.List;
 
 public class DbManagerImpl implements DbManager<FruitTransactionRow, FruitResultingRow> {

@@ -39,10 +39,10 @@ public final class FruitTransactionRow {
 
     @Override
     public String toString() {
-        return "FruitTransactionRow{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitTransactionRow{"
+                + "operation=" + operation
+                + ", fruit='" + fruit
+                + ", quantity=" + quantity
+                + '}';
     }
 }

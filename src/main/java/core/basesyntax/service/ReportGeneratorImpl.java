@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransactionRow;
 import core.basesyntax.service.strategy.logic.StrategyMap;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

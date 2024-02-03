@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.DbManagerImpl;
 import core.basesyntax.model.FruitResultingRow;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
