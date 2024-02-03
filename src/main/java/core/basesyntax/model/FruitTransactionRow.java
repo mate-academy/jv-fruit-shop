@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.service.strategy.logic.StrategyMap.Operation;
+
 public final class FruitTransactionRow {
     private static final String DATA_ROW_SEPARATOR = ",";
     private static final int DATA_ROW_OPERATION_INDEX = 0;
@@ -23,8 +25,16 @@ public final class FruitTransactionRow {
                 dataRowSplit[DATA_ROW_FRUIT_NAME_INDEX], fruitQuantity);
     }
 
-    public String toCsv() {
-        return operation + "," + fruit + "," + quantity;
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getFruitName() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     @Override
@@ -34,31 +44,5 @@ public final class FruitTransactionRow {
                 ", fruit='" + fruit + '\'' +
                 ", quantity=" + quantity +
                 '}';
-    }
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public static Operation of(String letter) {
-            for (Operation action : Operation.values()) {
-                if (action.getCode().equalsIgnoreCase(letter)) {
-                    return action;
-                }
-            }
-            throw new IllegalArgumentException("No operation with letter " + letter + " in enum");
-        }
-
-        public String getCode() {
-            return code;
-        }
     }
 }

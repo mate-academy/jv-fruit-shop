@@ -6,19 +6,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class CsvWriterImpl implements Writer<FruitResultingRow> {
-    private static final String columnNames = "fruit,quantity";
     private final Path pathToCsv;
+    private final String columnNames;
 
-    public CsvWriterImpl(String pathToCsv) {
+    public CsvWriterImpl(String pathToCsv, String columnNames) {
+        this.columnNames = columnNames;
         this.pathToCsv = Path.of(pathToCsv);
-    }
-
-    private void createFileWithColumnInfoIfNotPresent() throws IOException {
-        if (!Files.exists(pathToCsv)) {
-            Files.write(pathToCsv, columnNames.getBytes());
-        }
     }
 
     @Override
@@ -26,10 +22,13 @@ public class CsvWriterImpl implements Writer<FruitResultingRow> {
         List<String> recordsInCsv = records
                 .stream()
                 .map(FruitResultingRow::toCsv)
-                .toList();
+                .collect(Collectors.toList()); // Collect stream elements into a list
+        // Add string at the beginning of array, so it will be added to the start of file
+        // That string contains informative column names for CSV files
+        recordsInCsv.add(0, columnNames);
 
         try {
-            createFileWithColumnInfoIfNotPresent();
+            // The File will be rewritten every time a user asks for stat
             Files.write(pathToCsv, recordsInCsv);
         } catch (IOException e) {
             throw new RuntimeException("Problems while writing data to CSV file: ", e);
