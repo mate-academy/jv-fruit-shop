@@ -1,39 +1,29 @@
 package core.basesyntax;
 
-import core.basesyntax.db.DbManagerFactory;
-import core.basesyntax.db.csv.Reader;
-import core.basesyntax.db.csv.Writer;
-import core.basesyntax.db.csv.impl.CsvReaderImpl;
-import core.basesyntax.db.csv.impl.CsvWriterImpl;
-import core.basesyntax.model.FruitResultingRow;
-import core.basesyntax.model.FruitTransactionRow;
+import core.basesyntax.data.FileService;
+import core.basesyntax.data.FileServiceImpl;
+import core.basesyntax.data.csv.FileReader;
+import core.basesyntax.data.csv.FileWriter;
+import core.basesyntax.data.csv.impl.CsvFileReaderImpl;
+import core.basesyntax.data.csv.impl.CsvFileWriterImpl;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
-import core.basesyntax.service.ReportSaver;
-import core.basesyntax.service.ReportSaverImpl;
-import java.io.File;
-import java.util.Map;
 
 public class App {
-    private static final String INPUT_FILE_PATH =
-            "src/main/resources" + File.separator + "input.csv";
-    private static final String OUTPUT_FILE_PATH =
-            "src/main/resources" + File.separator + "output.csv";
-    private static final String OUTPUT_FILE_HEADER_COLUMN_NAMES = "fruit,quantity";
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
+    private static final String OUTPUT_FILE_HEADER_ROW = "fruit,quantity";
 
     public static void main(String[] args) {
-        Reader<FruitTransactionRow> reader = new CsvReaderImpl(INPUT_FILE_PATH);
-        Writer<FruitResultingRow> writer =
-                new CsvWriterImpl(OUTPUT_FILE_PATH, OUTPUT_FILE_HEADER_COLUMN_NAMES);
-
-        DbManagerFactory.initInstance(reader, writer);
-        var db = DbManagerFactory.getInstance();
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        ReportSaver reportSaver = new ReportSaverImpl();
-        Map<String, Integer> reportLeftFruits =
-                reportGenerator.calcFruitsLeftAfterTransactions(db.getAll());
 
-        reportSaver.saveReport(reportLeftFruits);
+        FileWriter csvWriter = new CsvFileWriterImpl(OUTPUT_FILE_PATH, OUTPUT_FILE_HEADER_ROW);
+        FileReader csvReader = new CsvFileReaderImpl(INPUT_FILE_PATH);
+        FileService fileService = new FileServiceImpl(csvWriter, csvReader);
+
+        var transactionHistory = fileService.getTransactions();
+        var report = reportGenerator.generateReport(transactionHistory);
+
+        fileService.saveReport(report);
     }
 }

@@ -1,10 +1,7 @@
 package core.basesyntax.service.strategy.logic;
 
-import core.basesyntax.service.strategy.BalanceStrategy;
-import core.basesyntax.service.strategy.OperationStrategy;
-import core.basesyntax.service.strategy.PurchaseStrategy;
-import core.basesyntax.service.strategy.ReturnStrategy;
-import core.basesyntax.service.strategy.SupplyStrategy;
+import core.basesyntax.service.strategy.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +11,9 @@ public class StrategyMap {
     static {
         strategyMap.put(Operation.BALANCE, new BalanceStrategy());
         strategyMap.put(Operation.SUPPLY, new SupplyStrategy());
-        strategyMap.put(Operation.RETURN, new ReturnStrategy());
         strategyMap.put(Operation.PURCHASE, new PurchaseStrategy());
+        strategyMap.put(Operation.DEFECTIVE, new DefectiveStrategy());
+        strategyMap.put(Operation.RETURN, new ReturnStrategy());
     }
 
     public static Map<Operation, OperationStrategy> getInstance() {
@@ -26,6 +24,7 @@ public class StrategyMap {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
+        DEFECTIVE("d"),
         RETURN("r");
 
         private final String code;
