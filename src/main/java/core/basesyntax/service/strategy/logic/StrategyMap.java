@@ -1,7 +1,11 @@
 package core.basesyntax.service.strategy.logic;
 
-import core.basesyntax.service.strategy.*;
-
+import core.basesyntax.service.strategy.BalanceStrategy;
+import core.basesyntax.service.strategy.DefectiveStrategy;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.PurchaseStrategy;
+import core.basesyntax.service.strategy.ReturnStrategy;
+import core.basesyntax.service.strategy.SupplyStrategy;
 import java.util.HashMap;
 import java.util.Map;
 

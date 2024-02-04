@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransactionRow;
 import core.basesyntax.model.FruitResultingRow;
+import core.basesyntax.model.FruitTransactionRow;
 import core.basesyntax.service.strategy.logic.StrategyMap;
 import java.util.ArrayList;
 import java.util.List;
