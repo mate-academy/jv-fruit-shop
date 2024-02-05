@@ -1,7 +1,6 @@
 package core.basesyntax.data.file.impl;
 
 import core.basesyntax.data.file.FileReader;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

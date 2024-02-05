@@ -26,6 +26,4 @@ public class ReportGeneratorImpl implements ReportGenerator {
         }
         return reportAsResultingRowsArray;
     }
-
-
 }

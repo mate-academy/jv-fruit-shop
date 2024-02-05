@@ -1,7 +1,6 @@
 package core.basesyntax.data.storage;
 
 import core.basesyntax.model.FruitTransactionRow;
-
 import java.util.List;
 
 public class StorageImpl implements Storage<FruitTransactionRow> {

@@ -1,6 +1,5 @@
 package core.basesyntax.model;
 
-
 import core.basesyntax.service.strategy.Operation;
 
 public final class FruitTransactionRow {

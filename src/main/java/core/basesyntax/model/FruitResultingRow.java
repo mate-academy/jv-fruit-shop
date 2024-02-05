@@ -22,7 +22,7 @@ public class FruitResultingRow {
         Arrays.stream(fields)
                 .forEach(f -> b.append(f.getName()).append(","));
 
-        b.deleteCharAt(b.length()-1); // remove last comma, dont need  it
+        b.deleteCharAt(b.length() - 1); // remove last comma, dont need  it
         return b.toString();
     }
 
