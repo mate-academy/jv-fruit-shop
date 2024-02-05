@@ -1,4 +1,4 @@
-package core.basesyntax.data.csv;
+package core.basesyntax.data.file;
 
 import java.util.List;
 

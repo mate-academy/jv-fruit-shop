@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.strategy.logic.StrategyMap.Operation;
+
+import core.basesyntax.service.strategy.Operation;
 
 public final class FruitTransactionRow {
     private static final String DATA_ROW_SEPARATOR = ",";

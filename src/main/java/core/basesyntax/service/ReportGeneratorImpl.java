@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitResultingRow;
 import core.basesyntax.model.FruitTransactionRow;
-import core.basesyntax.service.strategy.logic.StrategyMap;
+import core.basesyntax.service.strategy.StrategyService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,14 +17,15 @@ public class ReportGeneratorImpl implements ReportGenerator {
                 .collect(Collectors.groupingBy(FruitTransactionRow::getFruitName));
 
         List<FruitResultingRow> reportAsResultingRowsArray = new ArrayList<>();
+        StrategyService service = new StrategyService();
         for (var entry : transactionsGroupedByFruit.entrySet()) {
-            int finalNumOfFruit = 0;
-            for (FruitTransactionRow fruitTransactionRow : entry.getValue()) {
-                finalNumOfFruit = StrategyMap.getInstance().get(fruitTransactionRow.getOperation())
-                        .apply(finalNumOfFruit, fruitTransactionRow.getQuantity());
-            }
-            reportAsResultingRowsArray.add(new FruitResultingRow(entry.getKey(), finalNumOfFruit));
+            List<FruitTransactionRow> transactionsOfCertainFruit = entry.getValue();
+            int quantity = service.getFinalQuantityOfFruit(transactionsOfCertainFruit);
+            var fruitResultingRow = new FruitResultingRow(entry.getKey(), quantity);
+            reportAsResultingRowsArray.add(fruitResultingRow);
         }
         return reportAsResultingRowsArray;
     }
+
+
 }
