@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.Map;
 
 public interface FruitStorageDao {

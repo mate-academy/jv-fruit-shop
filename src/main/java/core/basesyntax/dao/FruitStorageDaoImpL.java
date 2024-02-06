@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
-
 import java.util.Map;
 
 public class FruitStorageDaoImpL implements FruitStorageDao {
