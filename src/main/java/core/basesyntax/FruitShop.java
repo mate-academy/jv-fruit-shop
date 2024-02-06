@@ -1,13 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.DAO.FruitStorageDao;
-import core.basesyntax.DAO.FruitStorageDaoImpL;
-import core.basesyntax.DB.FruitsStorage;
+import core.basesyntax.dao.FruitStorageDao;
+import core.basesyntax.dao.FruitStorageDaoImpL;
 import core.basesyntax.converter.StringTransactionConverterImpl;
-import core.basesyntax.fileServise.CsvFileReader;
-import core.basesyntax.fileServise.CsvFileReaderImpl;
-import core.basesyntax.fileServise.CsvFileWriter;
-import core.basesyntax.fileServise.CsvFileWriterImpl;
+import core.basesyntax.fileservise.CsvFileReader;
+import core.basesyntax.fileservise.CsvFileReaderImpl;
+import core.basesyntax.fileservise.CsvFileWriter;
+import core.basesyntax.fileservise.CsvFileWriterImpl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.report.ReportGenerator;
 import core.basesyntax.report.ReportGeneratorImpl;

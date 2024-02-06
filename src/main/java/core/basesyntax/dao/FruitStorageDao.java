@@ -1,4 +1,4 @@
-package core.basesyntax.DAO;
+package core.basesyntax.dao;
 
 import core.basesyntax.model.Fruit;
 

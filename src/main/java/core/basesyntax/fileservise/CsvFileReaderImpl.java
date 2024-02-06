@@ -1,4 +1,4 @@
-package core.basesyntax.fileServise;
+package core.basesyntax.fileservise;
 
 import java.io.IOException;
 import java.nio.file.Files;

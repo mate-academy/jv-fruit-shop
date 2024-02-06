@@ -1,6 +1,6 @@
-package core.basesyntax.DAO;
+package core.basesyntax.dao;
 
-import core.basesyntax.DB.FruitsStorage;
+import core.basesyntax.db.FruitsStorage;
 import core.basesyntax.model.Fruit;
 
 import java.util.Map;

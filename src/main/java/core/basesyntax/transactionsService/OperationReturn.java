@@ -1,6 +1,6 @@
 package core.basesyntax.transactionsService;
 
-import core.basesyntax.DAO.FruitStorageDao;
+import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Transaction;
 
 public class OperationReturn implements OperationHandler {

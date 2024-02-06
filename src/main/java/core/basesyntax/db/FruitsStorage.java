@@ -1,4 +1,4 @@
-package core.basesyntax.DB;
+package core.basesyntax.db;
 
 import core.basesyntax.model.Fruit;
 
