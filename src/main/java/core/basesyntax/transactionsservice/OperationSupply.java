@@ -1,4 +1,4 @@
-package core.basesyntax.transactionsService;
+package core.basesyntax.transactionsservice;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Transaction;

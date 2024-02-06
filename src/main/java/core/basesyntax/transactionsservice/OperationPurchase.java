@@ -1,4 +1,4 @@
-package core.basesyntax.transactionsService;
+package core.basesyntax.transactionsservice;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Transaction;
@@ -12,12 +12,14 @@ public class OperationPurchase implements OperationHandler {
 
     @Override
     public void proceed(Transaction transaction) {
-        if (fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit()) < transaction.getAmount()) {
+        if (fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit())
+                < transaction.getAmount()) {
             throw new RuntimeException("Not enough " + transaction.getFruit().getFruitName()
                     + " in storage to purchase " + transaction.getAmount());
         } else {
             fruitStorageDao.addFruitToStorage(transaction.getFruit(),
-                    fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit()) - transaction.getAmount());
+                    fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit())
+                            - transaction.getAmount());
         }
     }
 

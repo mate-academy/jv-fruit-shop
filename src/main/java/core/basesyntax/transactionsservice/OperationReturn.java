@@ -1,4 +1,4 @@
-package core.basesyntax.transactionsService;
+package core.basesyntax.transactionsservice;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Transaction;
@@ -12,7 +12,7 @@ public class OperationReturn implements OperationHandler {
 
     @Override
     public void proceed(Transaction transaction) {
-        fruitStorageDao.addFruitToStorage(transaction.getFruit(),
-                transaction.getAmount() + fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit()));
+        fruitStorageDao.addFruitToStorage(transaction.getFruit(),transaction.getAmount()
+                + fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit()));
     }
 }
