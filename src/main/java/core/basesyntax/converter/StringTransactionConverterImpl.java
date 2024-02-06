@@ -2,7 +2,6 @@ package core.basesyntax.converter;
 
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Transaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,16 +9,17 @@ public class StringTransactionConverterImpl implements StringTransactionConverte
     private static final String COMA = ",";
 
     @Override
-    public List<Transaction> convert(List<String> StringTransactions) {
+    public List<Transaction> convert(List<String> stringTransactions) {
         List<Transaction> transactions = new ArrayList<>();
         String[] fields;
 
-        for (int i = 1; i < StringTransactions.size(); i++) {
+        for (int i = 1; i < stringTransactions.size(); i++) {
             Transaction transaction = new Transaction();
             Fruit fruit = new Fruit();
-            fields = StringTransactions.get(i).split(COMA);
+            fields = stringTransactions.get(i).split(COMA);
 
-            transaction.setTransactionType(Transaction.TransactionType.getTransactionTypeByCode(fields[0]));
+            transaction.setTransactionType(Transaction.TransactionType
+                    .getTransactionTypeByCode(fields[0]));
             fruit.setFruitName(fields[1]);
             transaction.setFruit(fruit);
             transaction.setAmount(Integer.parseInt(fields[2]));
