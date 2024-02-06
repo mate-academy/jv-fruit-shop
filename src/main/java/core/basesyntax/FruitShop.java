@@ -27,10 +27,14 @@ public class FruitShop {
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpL();
 
         Map<Transaction.TransactionType, OperationHandler> transactionMap = new HashMap<>();
-        transactionMap.put(Transaction.TransactionType.BALANCE, new OperationBalance(fruitStorageDao));
-        transactionMap.put(Transaction.TransactionType.PURCHASE, new OperationPurchase(fruitStorageDao));
-        transactionMap.put(Transaction.TransactionType.RETURN, new OperationReturn(fruitStorageDao));
-        transactionMap.put(Transaction.TransactionType.SUPPLY, new OperationSupply(fruitStorageDao));
+        transactionMap.put(Transaction.TransactionType.BALANCE,
+                new OperationBalance(fruitStorageDao));
+        transactionMap.put(Transaction.TransactionType.PURCHASE,
+                new OperationPurchase(fruitStorageDao));
+        transactionMap.put(Transaction.TransactionType.RETURN,
+                new OperationReturn(fruitStorageDao));
+        transactionMap.put(Transaction.TransactionType.SUPPLY,
+                new OperationSupply(fruitStorageDao));
 
         CsvFileReader csvReader = new CsvFileReaderImpl();
         List<String> stringTransactions = csvReader.getTransactionsFromFile(fileName);
