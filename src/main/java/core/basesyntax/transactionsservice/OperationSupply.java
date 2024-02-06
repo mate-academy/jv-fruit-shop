@@ -13,6 +13,7 @@ public class OperationSupply implements OperationHandler {
     @Override
     public void proceed(Transaction transaction) {
         fruitStorageDao.addFruitToStorage(transaction.getFruit(),
-                fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit())+ transaction.getAmount());
+                fruitStorageDao.getFruitQuantityInStorage(transaction.getFruit())
+                        + transaction.getAmount());
     }
 }

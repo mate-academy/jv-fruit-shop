@@ -1,8 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.converter.StringTransactionConverterImpl;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpL;
-import core.basesyntax.converter.StringTransactionConverterImpl;
 import core.basesyntax.fileservise.CsvFileReader;
 import core.basesyntax.fileservise.CsvFileReaderImpl;
 import core.basesyntax.fileservise.CsvFileWriter;
@@ -12,17 +12,17 @@ import core.basesyntax.report.ReportGenerator;
 import core.basesyntax.report.ReportGeneratorImpl;
 import core.basesyntax.strategy.OperationGetter;
 import core.basesyntax.strategy.OperationGetterIpml;
-import core.basesyntax.transactionsservice.*;
-
+import core.basesyntax.transactionsservice.OperationBalance;
+import core.basesyntax.transactionsservice.OperationHandler;
+import core.basesyntax.transactionsservice.OperationPurchase;
+import core.basesyntax.transactionsservice.OperationReturn;
+import core.basesyntax.transactionsservice.OperationSupply;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitShop {
     public static void main(String[] args) {
-
-        String fileName = "src/main/java/core/basesyntax/csvFiles/data.csv";
-        String reportFileName = "src/main/java/core/basesyntax/csvFiles/report.csv";
 
         FruitStorageDao fruitStorageDao = new FruitStorageDaoImpL();
 
@@ -36,10 +36,14 @@ public class FruitShop {
         transactionMap.put(Transaction.TransactionType.SUPPLY,
                 new OperationSupply(fruitStorageDao));
 
+        String fileName = "src/main/java/core/basesyntax/csvFiles/data.csv";
+        String reportFileName = "src/main/java/core/basesyntax/csvFiles/report.csv";
+
         CsvFileReader csvReader = new CsvFileReaderImpl();
         List<String> stringTransactions = csvReader.getTransactionsFromFile(fileName);
 
-        StringTransactionConverterImpl stringToTransactionConverter = new StringTransactionConverterImpl();
+        StringTransactionConverterImpl stringToTransactionConverter
+                = new StringTransactionConverterImpl();
         List<Transaction> transactions = stringToTransactionConverter.convert(stringTransactions);
 
         OperationGetter operationGetter = new OperationGetterIpml(transactionMap);

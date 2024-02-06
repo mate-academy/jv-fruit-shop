@@ -29,25 +29,20 @@ public class Transaction {
         this.amount = amount;
     }
 
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "transactionType=" + transactionType +
-                ", fruit='" + fruit + '\'' +
-                ", amount=" + amount +
-                '}';
-    }
-
     public enum TransactionType {
         BALANCE("b"),
         PURCHASE("p"),
         RETURN("r"),
         SUPPLY("s");
 
-        public final String transactionName;
+        private final String transactionName;
 
         TransactionType(String transactionCode) {
             this.transactionName = transactionCode;
+        }
+
+        public String getTransactionName() {
+            return transactionName;
         }
 
         public static TransactionType getTransactionTypeByCode(String codeCharacter) {
