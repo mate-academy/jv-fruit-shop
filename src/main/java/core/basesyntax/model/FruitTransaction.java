@@ -7,15 +7,15 @@ import core.basesyntax.strategy.TransactionStrategyReturnImpl;
 import core.basesyntax.strategy.TransactionStrategySupplyImpl;
 
 public class FruitTransaction {
-    public TransactionStrategy getTransactionStrategy(String operation) {
+    public TransactionStrategy getStrategy(String operation) {
         switch (operation) {
-            case "    s":
+            case "s":
                 return new TransactionStrategySupplyImpl();
-            case "    r":
+            case "r":
                 return new TransactionStrategyReturnImpl();
-            case "    p":
+            case "p":
                 return new TransactionStrategyPurchaseImpl();
-            case "    b":
+            case "b":
             default:
                 return new TransactionStrategyImpl();
         }

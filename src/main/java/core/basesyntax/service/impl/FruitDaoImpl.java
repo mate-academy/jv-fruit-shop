@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
-    //private List<String>  fruits;
 
     @Override
     public List<String> getInputData(String fileName) {
