@@ -1,17 +1,13 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitTransaction;
-
-import java.util.Map;
-
-public class TransactionStrategyImpl implements TransactionStrategy{
-    private Map<FruitTransaction.Operation, FruitTransaction> fruitTransactionMap;
-
-    public TransactionStrategyImpl(Map<FruitTransaction.Operation, FruitTransaction> fruitTransactionMap) {
-        this.fruitTransactionMap = fruitTransactionMap;
-    }
+public class TransactionStrategyImpl implements TransactionStrategy {
     @Override
-    public TransactionStrategy balanceUpdater(FruitTransaction.Operation operation) {
-        return null;
+    public int balanceUpdater(int balance, String quantity) {
+        int result = balance + Integer.parseInt(quantity);
+        if (result < 0) {
+            throw new RuntimeException("Balance couldn't be less '0'.\n"
+                    + " Invalid data received from input file: balance = " + quantity);
+        }
+        return result;
     }
 }

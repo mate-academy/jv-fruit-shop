@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-
 public class FruitDaoImpl implements FruitDao {
     //private List<String>  fruits;
 
@@ -19,7 +18,7 @@ public class FruitDaoImpl implements FruitDao {
             throw new RuntimeException("Can't create file: " + inputDataFile, e);
         }
         try {
-           return Files.readAllLines(inputDataFile.toPath());
+            return Files.readAllLines(inputDataFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + fileName, e);
         }

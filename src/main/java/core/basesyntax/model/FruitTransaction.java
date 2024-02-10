@@ -1,40 +1,24 @@
 package core.basesyntax.model;
 
+import core.basesyntax.strategy.TransactionStrategy;
+import core.basesyntax.strategy.TransactionStrategyImpl;
+import core.basesyntax.strategy.TransactionStrategyPurchaseImpl;
+import core.basesyntax.strategy.TransactionStrategyReturnImpl;
+import core.basesyntax.strategy.TransactionStrategySupplyImpl;
+
 public class FruitTransaction {
-    private Operation operation;
-    private String fruitName;
-    private int quantity;
-
-    public String getFruitName() {
-        return fruitName;
-    }
-
-    public void setFruitName(String fruitName) {
-        this.fruitName = fruitName;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
+    public TransactionStrategy getTransactionStrategy(String operation) {
+        switch (operation) {
+            case "    s":
+                return new TransactionStrategySupplyImpl();
+            case "    r":
+                return new TransactionStrategyReturnImpl();
+            case "    p":
+                return new TransactionStrategyPurchaseImpl();
+            case "    b":
+            default:
+                return new TransactionStrategyImpl();
         }
     }
+
 }

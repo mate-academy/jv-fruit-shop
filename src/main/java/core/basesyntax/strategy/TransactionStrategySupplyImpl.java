@@ -1,14 +1,16 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitTransaction;
-
-import java.util.Map;
-
-public class TransactionStrategySupplyImpl implements TransactionStrategy{
-
-
+public class TransactionStrategySupplyImpl implements TransactionStrategy {
     @Override
-    public TransactionStrategy balanceUpdater(FruitTransaction.Operation operation) {
-        return null;
+    public int balanceUpdater(int balance, String quantity) {
+        int result = balance + Integer.parseInt(quantity);
+        if (result < 0) {
+            throw new RuntimeException("Balance couldn't be less '0'"
+                    + " after supple: balance = " + result);
+        } else if (Integer.parseInt(quantity) < 0) {
+            throw new RuntimeException("Supplied quantity couldn't be less '0'."
+                    + "Invalid data received from input file: supply = " + quantity);
+        }
+        return result;
     }
 }
