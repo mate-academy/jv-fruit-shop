@@ -1,13 +1,16 @@
 package strategy.operation;
 
-import strategy.FruitStorageHandler;
-import strategy.StorageHandler;
+import db.StorageDao;
 
 public class FruitBalanceOperation implements OperationHandler<String, Integer> {
-    private static StorageHandler<String, Integer> STORAGE_HANDLER = new FruitStorageHandler();
+    private final StorageDao<String, Integer> storageHandler;
+
+    public FruitBalanceOperation(StorageDao fruitStorageHandler) {
+        storageHandler = fruitStorageHandler;
+    }
 
     @Override
     public void doOperation(String fruit, Integer quantity) {
-        STORAGE_HANDLER.put(fruit, quantity);
+        storageHandler.put(fruit, quantity);
     }
 }

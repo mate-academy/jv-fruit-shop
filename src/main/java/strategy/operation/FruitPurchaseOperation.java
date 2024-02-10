@@ -1,15 +1,17 @@
 package strategy.operation;
 
-import strategy.FruitStorageHandler;
-import strategy.StorageHandler;
+import db.StorageDao;
 
 public class FruitPurchaseOperation implements OperationHandler<String, Integer> {
-    private static final StorageHandler<String, Integer> STORAGE_HANDLER
-            = new FruitStorageHandler();
+    private final StorageDao<String, Integer> storageHandler;
+
+    public FruitPurchaseOperation(StorageDao fruitStorageHandler) {
+        storageHandler = fruitStorageHandler;
+    }
 
     @Override
     public void doOperation(String fruit, Integer quantity) {
-        Integer currentValue = STORAGE_HANDLER.getValue(fruit);
+        Integer currentValue = storageHandler.getValue(fruit);
         if (currentValue == null) {
             throw new RuntimeException("Can't find this fruit: " + fruit);
         }
@@ -18,6 +20,6 @@ public class FruitPurchaseOperation implements OperationHandler<String, Integer>
                     + ". Avalible is: " + currentValue);
         }
         int newValue = currentValue - quantity;
-        STORAGE_HANDLER.put(fruit, newValue);
+        storageHandler.put(fruit, newValue);
     }
 }
