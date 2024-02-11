@@ -22,33 +22,3 @@ public class FruitProcessingImpl implements FruitProcessing {
 }
 
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        /*FileReader fileReader = new FileReaderImpl();
-        FileWriter fileWriter = new FileWriterImpl();
-        List<String> fruitsForProcessing = fileReader.getDataFromInputFile(fileName);
-        StringBuilder report = new StringBuilder("fruit,quantity" + System.lineSeparator());
-        while (fruitsForProcessing.size() != 1) {
-            String fruitName = Arrays
-                    .stream(fruitsForProcessing.get(1).trim().split(DELIMITER_REGEX))
-                    .skip(1)
-                    .limit(1)
-                    .collect(Collectors.joining());
-            int balance = 0;
-            List<String> oneTypeFruit = fruitsForProcessing.stream()
-                    .filter(fr -> fr.contains(fruitName.trim()))
-                    .toList();
-            for (String fruit : oneTypeFruit) {
-                String[] fruitTransQuantData = fruit.split(DELIMITER_REGEX);
-                /*balance = new FruitTransaction()
-                        .getStrategy(fruitTransQuantData[FRUIT_TRANSACTION_TYPE_INDEX].trim())
-                        .balanceUpdater(balance, fruitTransQuantData[FRUIT_QUANTITY_INDEX].trim());
-            }
-            fruitsForProcessing.removeAll(oneTypeFruit);
-            report.append(fruitName).append(",")
-                    .append(balance)
-                    .append(System.lineSeparator());
-        }
-        fileWriter.sendResultData(report.toString());
-    }
-}*/
-

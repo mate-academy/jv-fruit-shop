@@ -2,8 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
 
-import java.util.Map;
-
 public class TransactionStrategySupplyImpl implements TransactionStrategy {
     @Override
     public Integer balanceUpdater(String fruitName, int quantity) {
