@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import java.util.Map;
+
 public interface TransactionStrategy {
-    int balanceUpdater(int balance, String quantity);
+    Integer balanceUpdater(String fruitName, int quantity);
 }

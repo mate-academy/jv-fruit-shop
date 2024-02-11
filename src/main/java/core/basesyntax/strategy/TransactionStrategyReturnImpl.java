@@ -1,16 +1,21 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.db.Storage;
+
+import java.util.Map;
+
 public class TransactionStrategyReturnImpl implements TransactionStrategy {
     @Override
-    public int balanceUpdater(int balance, String quantity) {
-        int result = balance + Integer.parseInt(quantity);
+    public Integer balanceUpdater(String fruitName, int quantity) {
+        int result = Storage.fruitsTransactions.get(fruitName) + quantity;
         if (result < 0) {
             throw new RuntimeException("Balance couldn't be less '0' "
-                    + "after returned: balance = " + result);
-        } else if (Integer.parseInt(quantity) < 0) {
+                    + "after returned: balance " + fruitName + " = " + result);
+        } else if (quantity < 0) {
             throw new RuntimeException("Returned quantity couldn't be less '0'.\n"
-                    + "Invalid data received from input file: return = " + quantity);
+                    + "Invalid data received from input file: return " + fruitName + " = " + quantity);
         }
+        Storage.fruitsTransactions.put(fruitName, result);
         return result;
     }
 }
