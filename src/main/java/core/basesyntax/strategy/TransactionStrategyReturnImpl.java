@@ -5,7 +5,8 @@ import core.basesyntax.db.Storage;
 public class TransactionStrategyReturnImpl implements TransactionStrategy {
     @Override
     public Integer balanceUpdater(String fruitName, int quantity) {
-        int result = Storage.fruitsTransactions.get(fruitName) + quantity;
+        Storage storage = new Storage();
+        int result = storage.getFruitsTransactions().get(fruitName) + quantity;
         if (result < 0) {
             throw new RuntimeException("Balance couldn't be less '0' "
                     + "after returned: balance " + fruitName + " = " + result);
@@ -14,7 +15,7 @@ public class TransactionStrategyReturnImpl implements TransactionStrategy {
                     + "Invalid data received from input file: return "
                     + fruitName + " = " + quantity);
         }
-        Storage.fruitsTransactions.put(fruitName, result);
+        storage.getFruitsTransactions().put(fruitName, result);
         return result;
     }
 }

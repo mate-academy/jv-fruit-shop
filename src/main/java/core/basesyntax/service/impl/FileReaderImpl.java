@@ -9,10 +9,6 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     private List<String> dataFromFileReader;
 
-    public List<String> getDataFromFileReader() {
-        return this.dataFromFileReader;
-    }
-
     @Override
     public List<String> getDataFromInputFile(String fileName) {
         File inputDataFile = new File("src/main/resources/" + fileName);
