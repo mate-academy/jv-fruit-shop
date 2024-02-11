@@ -2,8 +2,6 @@ package core.basesyntax.service;
 
 import java.util.List;
 
-public interface FruitDao {
-    List<String> getInputData(String fileName);
-
+public interface FileWriter {
     void sendResultData(String report);
 }

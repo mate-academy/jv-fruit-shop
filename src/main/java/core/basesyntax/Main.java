@@ -1,11 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.service.FruitProcessing;
-import core.basesyntax.service.impl.FruitProcessingImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
+
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        FruitProcessing fruitProcessing = new FruitProcessingImpl();
-        fruitProcessing.fruitProcessing("inputData.csv");
+        FileReader fileReader = new FileReaderImpl();
+        List<String> dataFromInputFile = fileReader.getDataFromInputFile("inputData.csv");
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<FruitTransaction> fruitTransactions = transactionParser.parsOf(dataFromInputFile);
+        System.out.println(fruitTransactions);
     }
 }
