@@ -18,7 +18,7 @@ public class TransactionParserImpl implements TransactionParser {
                 .map(fruit -> new FruitTransaction(fruit.trim()
                         .substring(START_TRANSACTION_INDEX, END_TRANSACTION_INDEX),
                         fruit.trim().replaceAll("[\\d]", "")
-                                .substring(START_FRUIT_NAME_INDEX),
+                                .substring(START_FRUIT_NAME_INDEX).replaceAll("[^a-zA-Z]", ""),
                         Integer.parseInt(fruit.trim().replaceAll("[^\\d]", ""))))
                 .collect(Collectors.toList());
     }

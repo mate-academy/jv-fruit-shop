@@ -11,7 +11,8 @@ public class TransactionStrategyPurchaseImpl implements TransactionStrategy {
                     + " after purchase: balance " + fruitName + " = " + result);
         } else if (quantity < 0) {
             throw new RuntimeException("Purchased quantity couldn't be less '0'.\n"
-                    + "Invalid data received from input file: purchase " + fruitName + " = " + quantity);
+                    + "Invalid data received from input file: purchase "
+                    + fruitName + " = " + quantity);
         }
         Storage.fruitsTransactions.put(fruitName, result);
         return result;

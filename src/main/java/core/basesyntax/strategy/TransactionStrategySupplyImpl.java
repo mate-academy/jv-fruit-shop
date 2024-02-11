@@ -12,7 +12,8 @@ public class TransactionStrategySupplyImpl implements TransactionStrategy {
                         + "after returned: balance " + fruitName + " = " + result);
             } else if (quantity < 0) {
                 throw new RuntimeException("Returned quantity couldn't be less '0'.\n"
-                        + "Invalid data received from input file: return " + fruitName + " = " + quantity);
+                        + "Invalid data received from input file: return "
+                        + fruitName + " = " + quantity);
             }
             Storage.fruitsTransactions.put(fruitName, result);
             return result;
