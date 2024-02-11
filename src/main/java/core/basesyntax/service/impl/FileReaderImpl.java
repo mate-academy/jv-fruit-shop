@@ -7,7 +7,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private List<String> dataFromFileReader;
 
     @Override
     public List<String> getDataFromInputFile(String fileName) {
@@ -18,7 +17,7 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("Can't create file: " + inputDataFile, e);
         }
         try {
-            return dataFromFileReader = Files.readAllLines(inputDataFile.toPath());
+            return Files.readAllLines(inputDataFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + fileName, e);
         }
