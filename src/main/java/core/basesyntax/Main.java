@@ -9,7 +9,9 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.FruitDatabase;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategySupplier;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.OperationStrategySupplierImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.operation.OperationStrategy;
 import core.basesyntax.service.operation.impl.BalanceOperationStrategy;
 import core.basesyntax.service.operation.impl.PurchaseOperationStrategy;
@@ -56,7 +58,10 @@ public class Main {
         MapToStringListConverter toStringListConverter = new MapToStringListConverterImpl();
         List<String> reportStrings = toStringListConverter.parseMap(FruitDatabase.database);
 
+        ReportService reportService = new ReportServiceImpl();
+        List<String> report = reportService.generateReport(reportStrings);
+
         FileWriter fileWriter = new FileWriterImpl(pathToReport);
-        fileWriter.writeToFile(reportStrings);
+        fileWriter.writeToFile(report);
     }
 }

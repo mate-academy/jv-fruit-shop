@@ -8,7 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileWriterImpl implements FileWriter {
-    private String filePath;
+    private final String filePath;
 
     public FileWriterImpl(String filePath) {
         this.filePath = filePath;
@@ -17,12 +17,13 @@ public class FileWriterImpl implements FileWriter {
     @Override
     public void writeToFile(List<String> lines) {
         Path pathToFile = Path.of(filePath);
-        String firstLineReport = "fruit, quantity" + System.lineSeparator();
         try {
-            Files.write(pathToFile, (firstLineReport).getBytes());
-            for (String line : lines) {
-                Files.write(pathToFile, (line + System.lineSeparator()).getBytes(),
-                        StandardOpenOption.APPEND);
+            for (int i = 0; i < lines.size(); i++) {
+                if (i == 0) {
+                    Files.write(pathToFile, lines.get(i).getBytes());
+                    continue;
+                }
+                Files.write(pathToFile, lines.get(i).getBytes(), StandardOpenOption.APPEND);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file: " + pathToFile);
