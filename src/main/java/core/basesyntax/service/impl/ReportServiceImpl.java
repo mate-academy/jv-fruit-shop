@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportService;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-    public List<String> generateReport(List<String> lines) {
-        List<String> report = new ArrayList<>();
+    public String generateReport(List<String> lines) {
+        StringBuilder report = new StringBuilder();
         String firstLineReport = "fruit, quantity" + System.lineSeparator();
-        report.add(firstLineReport);
+        report.append(firstLineReport);
         for (String line : lines) {
-            report.add(line + System.lineSeparator());
+            report.append(line).append(System.lineSeparator());
         }
-        return report;
+        return report.toString();
     }
 }

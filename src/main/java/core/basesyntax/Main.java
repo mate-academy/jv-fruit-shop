@@ -1,15 +1,21 @@
 package core.basesyntax;
 
+import core.basesyntax.converter.FruitParser;
 import core.basesyntax.converter.MapToStringListConverter;
-import core.basesyntax.converter.StringListToFruitListConverter;
+import core.basesyntax.converter.impl.FruitParserImpl;
 import core.basesyntax.converter.impl.MapToStringListConverterImpl;
-import core.basesyntax.converter.impl.StringListToFruitListConverterImpl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.FruitDatabase;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FruitService;
 import core.basesyntax.service.OperationStrategySupplier;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
 import core.basesyntax.service.impl.OperationStrategySupplierImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.operation.OperationStrategy;
@@ -17,15 +23,14 @@ import core.basesyntax.service.operation.impl.BalanceOperationStrategy;
 import core.basesyntax.service.operation.impl.PurchaseOperationStrategy;
 import core.basesyntax.service.operation.impl.ReturnOperationStrategy;
 import core.basesyntax.service.operation.impl.SupplyOperationStrategy;
-import core.basesyntax.util.FileReader;
-import core.basesyntax.util.FileWriter;
-import core.basesyntax.util.impl.FileReaderImpl;
-import core.basesyntax.util.impl.FileWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String PATH_TO_INPUT_FILE = "src/main/java/core/basesyntax/csv/input.csv";
+    private static final String PATH_TO_REPORT = "src/main/java/core/basesyntax/csv/report.csv";
+
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationStrategy> strategies = new HashMap<>();
@@ -37,31 +42,24 @@ public class Main {
                 new PurchaseOperationStrategy(fruitDao));
         strategies.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationStrategy(fruitDao));
+        FileReader fileReader = new FileReaderImpl();
+        List<String> strings = fileReader.readLines(PATH_TO_INPUT_FILE);
 
-        String pathToInputFile = "src/main/java/core/basesyntax/csv/input.csv";
-        String pathToReport = "src/main/java/core/basesyntax/csv/report.csv";
-        FileReader fileReader = new FileReaderImpl(pathToInputFile);
-        List<String> strings = fileReader.readLines();
+        FruitParser fruitParser =
+                new FruitParserImpl();
+        List<FruitTransaction> fruitTransactions = fruitParser.parseList(strings);
 
-        StringListToFruitListConverter toFruitListConverter =
-                new StringListToFruitListConverterImpl();
-        List<FruitTransaction> fruitTransactions = toFruitListConverter.parseList(strings);
-
-        OperationStrategySupplier operationStrategySupplier =
-                new OperationStrategySupplierImpl(strategies);
-        for (FruitTransaction fruitTransaction : fruitTransactions) {
-            OperationStrategy fruitOperation =
-                    operationStrategySupplier.get(fruitTransaction.getOperation());
-            fruitOperation.performOperation(fruitTransaction);
-        }
+        OperationStrategySupplier supplier = new OperationStrategySupplierImpl(strategies);
+        FruitService fruitService = new FruitServiceImpl(supplier);
+        fruitService.performFruitsOperations(fruitTransactions);
 
         MapToStringListConverter toStringListConverter = new MapToStringListConverterImpl();
         List<String> reportStrings = toStringListConverter.parseMap(FruitDatabase.database);
 
         ReportService reportService = new ReportServiceImpl();
-        List<String> report = reportService.generateReport(reportStrings);
+        String report = reportService.generateReport(reportStrings);
 
-        FileWriter fileWriter = new FileWriterImpl(pathToReport);
-        fileWriter.writeToFile(report);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.writeToFile(report, PATH_TO_REPORT);
     }
 }
