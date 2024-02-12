@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface FileWriter {
-    void sendResultData(String report);
+    void writeToFile(String report);
 }

@@ -8,7 +8,7 @@ import java.nio.file.Files;
 public class FileWriterImpl implements FileWriter {
 
     @Override
-    public void sendResultData(String report) {
+    public void writeToFile(String report) {
         File resultFile = new File("src/main/resources/result.csv");
         try {
             resultFile.createNewFile();

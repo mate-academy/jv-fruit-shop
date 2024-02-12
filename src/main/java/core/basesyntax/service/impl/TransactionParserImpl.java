@@ -11,7 +11,7 @@ public class TransactionParserImpl implements TransactionParser {
     private static final int START_FRUIT_NAME_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parsOf(List<String> fruits) {
+    public List<FruitTransaction> parse(List<String> fruits) {
         return fruits.stream()
                 .skip(1)
                 .map(fruit -> new FruitTransaction(fruit.trim()

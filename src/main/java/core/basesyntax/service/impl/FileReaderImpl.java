@@ -9,7 +9,7 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
 
     @Override
-    public List<String> getDataFromInputFile(String fileName) {
+    public List<String> readFile(String fileName) {
         File inputDataFile = new File("src/main/resources/" + fileName);
         try {
             inputDataFile.createNewFile();

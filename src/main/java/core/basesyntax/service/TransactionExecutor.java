@@ -4,6 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.Map;
 
-public interface FruitProcessing {
-    Map<String, Integer> fruitProcessing(List<FruitTransaction> fruitTransactions);
+public interface TransactionExecutor {
+    Map<String, Integer> executeAll(List<FruitTransaction> fruitTransactions);
 }
