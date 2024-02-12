@@ -9,10 +9,8 @@ public class FruitCsvWriter implements Writer {
 
     @Override
     public void write(String file, String fileName) {
-        try {
-            FileWriter fileWriter = new FileWriter(PATH_TO_WRITE + fileName);
+        try (FileWriter fileWriter = new FileWriter(PATH_TO_WRITE + fileName)) {
             fileWriter.write(file);
-            fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException("Can't write this file " + file + " to " + fileName);
         }

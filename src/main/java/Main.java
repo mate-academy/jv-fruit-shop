@@ -1,7 +1,6 @@
 import db.FruitStorage;
 import db.FruitStorageDao;
 import db.StorageDao;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -24,24 +23,27 @@ import strategy.operation.FruitSupplyOperation;
 import strategy.operation.OperationHandler;
 
 public class Main {
+    private static final String INPUT_FILE_NAME = "Fruits.csv";
+    private static final String REPORT_FILE_NAME = "FruitReport.csv";
+
     public static void main(String[] args) {
-        String nameReadingFile = "Fruits.csv";
         FruitStorage fruitStorage = new FruitStorage();
         StorageDao<String,Integer> storageHandler = new FruitStorageDao(fruitStorage);
 
         Map<FruitTransaction.Operation,
-                OperationHandler<String, Integer>> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new FruitBalanceOperation(storageHandler));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new FruitPurchaseOperation(storageHandler));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new FruitSupplyOperation(storageHandler));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new FruitReturnOperation(storageHandler));
+                OperationHandler<String, Integer>> operationHandlerMap = Map.of(
+                        FruitTransaction.Operation.BALANCE,
+                            new FruitBalanceOperation(storageHandler),
+                        FruitTransaction.Operation.PURCHASE,
+                            new FruitPurchaseOperation(storageHandler),
+                        FruitTransaction.Operation.SUPPLY,
+                            new FruitSupplyOperation(storageHandler),
+                        FruitTransaction.Operation.RETURN,
+                            new FruitReturnOperation(storageHandler)
+                );
 
         Reader reader = new CsvFruitReader();
-        List<String> readFile = reader.read(nameReadingFile);
+        List<String> readFile = reader.read(INPUT_FILE_NAME);
 
         Parser parser = new FruitTransactionParser();
         List<FruitTransaction> transactions = parser.parse(readFile);
@@ -52,6 +54,6 @@ public class Main {
 
         Reporter reporter = new FruitReporter(fruitStorage);
         Writer writer = new FruitCsvWriter();
-        writer.write(reporter.getReport(), "FruitReport.csv");
+        writer.write(reporter.getReport(), REPORT_FILE_NAME);
     }
 }

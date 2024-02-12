@@ -7,3 +7,7 @@ type,fruit,quantity
     p,apple,20
     p,banana,5
     s,banana,50
+    b,pamelo,100
+    s,pamelo,54
+    p,pamelo,30
+    r,pamelo,6
