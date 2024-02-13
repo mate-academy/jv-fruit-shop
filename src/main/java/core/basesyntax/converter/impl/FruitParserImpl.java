@@ -18,32 +18,40 @@ public class FruitParserImpl implements FruitParser {
     public List<FruitTransaction> parseList(List<String> fruit) {
         fruit.remove(0);
         return fruit.stream()
-            .map(s -> s.split(CSV_DELIMITER))
-            .peek((array) -> {
-                if (array.length != CSV_ROW_ELEMENTS_COUNT) {
-                    throw new IllegalArgumentException("Some column in csv file is absent");
-                }
-                if (array[ACTIVITY_TYPE_POS].isEmpty()) {
-                    throw new IllegalArgumentException("Activity field can't be empty");
-                }
-                if (array[FRUIT_NAME_POS].isEmpty()) {
-                    throw new IllegalArgumentException("Fruit name field can't be empty");
-                }
-                if (array[QUANTITY_POS].isEmpty()) {
-                    throw new IllegalArgumentException("Quantity field can't be empty");
-                }
-                if (Integer.parseInt(array[QUANTITY_POS]) < 0) {
-                    throw new IllegalArgumentException("Quantity value can't be negative");
-                }
-            })
-            .map(array -> new FruitTransaction(
-                    Stream.of(FruitTransaction.Operation.values())
-                            .filter(operation ->
-                                    operation.getCode().equals(array[ACTIVITY_TYPE_POS]))
-                            .findFirst().orElseThrow(() ->
-                                    new NoSuchElementException("Wrong operation type")),
-                    array[FRUIT_NAME_POS],
-                    Integer.parseInt(array[QUANTITY_POS])))
+            .map(this::parseLine)
             .collect(Collectors.toList());
+    }
+
+    private FruitTransaction parseLine(String line) {
+        String[] splitLine = splitAndCheckLine(line);
+        FruitTransaction.Operation fruitOperation =
+                Stream.of(FruitTransaction.Operation.values())
+                        .filter(operation ->
+                                operation.getCode().equals(splitLine[ACTIVITY_TYPE_POS]))
+                        .findFirst().orElseThrow(() ->
+                                new NoSuchElementException("Wrong operation type"));
+        return new FruitTransaction(fruitOperation,
+                                    splitLine[FRUIT_NAME_POS],
+                                    Integer.parseInt(splitLine[QUANTITY_POS]));
+    }
+
+    private String[] splitAndCheckLine(String line) {
+        String[] splitLine = line.split(CSV_DELIMITER);
+        if (splitLine.length != CSV_ROW_ELEMENTS_COUNT) {
+            throw new IllegalArgumentException("Some column in csv file is absent");
+        }
+        if (splitLine[ACTIVITY_TYPE_POS].isEmpty()) {
+            throw new IllegalArgumentException("Activity field can't be empty");
+        }
+        if (splitLine[FRUIT_NAME_POS].isEmpty()) {
+            throw new IllegalArgumentException("Fruit name field can't be empty");
+        }
+        if (splitLine[QUANTITY_POS].isEmpty()) {
+            throw new IllegalArgumentException("Quantity field can't be empty");
+        }
+        if (Integer.parseInt(splitLine[QUANTITY_POS]) < 0) {
+            throw new IllegalArgumentException("Quantity value can't be negative");
+        }
+        return splitLine;
     }
 }

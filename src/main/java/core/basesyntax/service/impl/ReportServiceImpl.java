@@ -1,17 +1,20 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.FruitDatabase;
 import core.basesyntax.service.ReportService;
-import java.util.List;
+import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     @Override
-    public String generateReport(List<String> lines) {
+    public String generateReport() {
         StringBuilder report = new StringBuilder();
         String firstLineReport = "fruit, quantity" + System.lineSeparator();
         report.append(firstLineReport);
-        for (String line : lines) {
-            report.append(line).append(System.lineSeparator());
-        }
+        Map<String, Integer> databaseMap = FruitDatabase.database;
+        databaseMap.entrySet().stream()
+                .map(entry ->
+                        entry.getKey() + "," + entry.getValue() + System.lineSeparator())
+                .forEach(report::append);
         return report.toString();
     }
 }
