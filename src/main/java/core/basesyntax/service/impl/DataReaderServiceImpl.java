@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataAddService;
 import core.basesyntax.service.DataReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataReaderServiceImpl implements DataReaderService {
     private static final String SPLIT_SYMBOL = ",";
@@ -15,32 +15,30 @@ public class DataReaderServiceImpl implements DataReaderService {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-    private final DataAddService dataAddService = new DataAddServiceImpl();
+    public List<FruitTransaction> readDataFromFile(String fileName) {
+        List<FruitTransaction> transactions = new ArrayList<>();
 
-    @Override
-    public void readDataFromFile(String fileName) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
-            getLinesFromFile(reader);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                transactions.add(processLine(line));
+            }
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + fileName, e);
         }
+
+        return transactions;
     }
 
-    private void getLinesFromFile(BufferedReader reader) throws IOException {
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] parts = line.split(SPLIT_SYMBOL);
-            if (parts.length == MAX_PARTS) {
-                FruitTransaction.Operation operation = parseOperation(parts[OPERATION_INDEX]
-                        .trim());
-                String fruit = parts[FRUIT_INDEX].trim();
-                int quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
-                FruitTransaction fruitTransaction = new FruitTransaction(operation,
-                        fruit, quantity);
-                dataAddService.addData(Collections.singletonList(fruitTransaction));
-            } else {
-                throw new IOException("Invalid line format: " + line);
-            }
+    private FruitTransaction processLine(String line) throws IOException {
+        String[] parts = line.split(SPLIT_SYMBOL);
+        if (parts.length == MAX_PARTS) {
+            FruitTransaction.Operation operation = parseOperation(parts[OPERATION_INDEX].trim());
+            String fruit = parts[FRUIT_INDEX].trim();
+            int quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
+            return new FruitTransaction(operation, fruit, quantity);
+        } else {
+            throw new IOException("Invalid line format: " + line);
         }
     }
 

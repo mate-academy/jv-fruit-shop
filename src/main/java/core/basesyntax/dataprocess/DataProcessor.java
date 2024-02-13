@@ -45,7 +45,7 @@ public class DataProcessor {
         }
     }
 
-    public Map<String, Integer> generateReport() {
+    public Map<String, Integer> getFruitData() {
         return fruitData;
     }
 }
