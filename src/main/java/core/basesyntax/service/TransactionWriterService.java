@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.Map;
 
 public interface TransactionWriterService {
-    void writeToFile(Map<String, Integer> fruitReport);
+    void writeToFile(Map<String, Integer> fruitReport, String fileName);
 }

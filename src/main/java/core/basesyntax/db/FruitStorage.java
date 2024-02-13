@@ -12,7 +12,16 @@ public class FruitStorage {
 
     public void addFruit(String fruit, int quantity) {
         int currentQuantity = fruitInventory.getOrDefault(fruit, 0);
-        fruitInventory.put(fruit, quantity);
+        fruitInventory.put(fruit, currentQuantity + quantity);
+    }
+
+    public void removeFruit(String fruit, int quantity) {
+        int currentQuantity = fruitInventory.getOrDefault(fruit, 0);
+        if (currentQuantity < quantity) {
+            throw new RuntimeException("Invalid transaction:"
+                    + " quantity cannot be negative after purchase");
+        }
+        fruitInventory.put(fruit, currentQuantity - quantity);
     }
 
     public Map<String, Integer> getFruitInventory() {

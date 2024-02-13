@@ -1,5 +1,10 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.FruitStorage;
+import core.basesyntax.model.FruitTransaction;
+
 public interface FruitService {
-    int calculate(TransactionService transactionStrategy, int quantity, int count);
+    void calculate(TransactionService transactionStrategy,
+                   FruitTransaction fruitTransaction,
+                   FruitStorage fruitStorage);
 }
