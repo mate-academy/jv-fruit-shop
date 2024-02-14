@@ -14,7 +14,7 @@ public class TransactionHandlerImpl implements TransactionHandler {
                     + " Invalid data received from input file: balance "
                     + transaction.getFruitName() + " = " + transaction.getQuantity());
         }
-        Storage.fruits.put(transaction.getFruitName(), transaction.getQuantity());
+        Storage.getFruits().put(transaction.getFruitName(), transaction.getQuantity());
         return new TransactionStrategyImpl();
     }
 }

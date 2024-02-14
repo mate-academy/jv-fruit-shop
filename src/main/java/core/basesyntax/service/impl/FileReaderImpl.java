@@ -9,15 +9,15 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
 
     @Override
-    public List<String> readFile(String fileName) {
-        File inputDataFile = new File("src/main/resources/" + fileName);
+    public List<String> readFile(File fileName) {
+        //File inputDataFile = new File("src/main/resources/" + fileName);
         try {
-            inputDataFile.createNewFile();
+            fileName.createNewFile();
         } catch (IOException e) {
-            throw new RuntimeException("Can't create file: " + inputDataFile, e);
+            throw new RuntimeException("Can't create file: " + fileName, e);
         }
         try {
-            return Files.readAllLines(inputDataFile.toPath());
+            return Files.readAllLines(fileName.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file: " + fileName, e);
         }

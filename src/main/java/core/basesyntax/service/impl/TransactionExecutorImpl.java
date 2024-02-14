@@ -11,7 +11,7 @@ public class TransactionExecutorImpl implements TransactionExecutor {
     @Override
     public Map<String, Integer> executeAll(List<FruitTransaction> fruitTransactions) {
         TransactionStrategy transactionStrategy = new TransactionStrategyImpl();
-        Map<String, Integer> fruits = Storage.fruits;
+        Map<String, Integer> fruits = Storage.getFruits();
         for (FruitTransaction fruit : fruitTransactions) {
             transactionStrategy.getHandler(fruit).makeTransaction(fruit);
         }

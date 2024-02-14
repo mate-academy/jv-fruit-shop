@@ -8,7 +8,8 @@ import core.basesyntax.service.impl.TransactionStrategyImpl;
 public class TransactionHandlerPurchaseImpl implements TransactionHandler {
     @Override
     public TransactionStrategy makeTransaction(FruitTransaction transaction) {
-        int result = Storage.fruits.get(transaction.getFruitName()) - transaction.getQuantity();
+        int result = Storage.getFruits().get(transaction.getFruitName())
+                - transaction.getQuantity();
         if (result < 0) {
             throw new RuntimeException("Balance couldn't be less '0'"
                     + " after purchase: balance " + transaction.getFruitName() + " = " + result);
@@ -17,7 +18,7 @@ public class TransactionHandlerPurchaseImpl implements TransactionHandler {
                     + "Invalid data received from input file: purchase "
                     + transaction.getFruitName() + " = " + transaction.getQuantity());
         }
-        Storage.fruits.put(transaction.getFruitName(), result);
+        Storage.getFruits().put(transaction.getFruitName(), result);
         return new TransactionStrategyImpl();
     }
 }
