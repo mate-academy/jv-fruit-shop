@@ -16,14 +16,14 @@ public class ParserServiceImpl implements ParserService {
     private final ActionDao actionDao = new ActionDaoImpl();
 
     @Override
-    public ActionDao parseToObject(List<String> stringList) {
+    public List<FruitTransaction> parseTransactions(List<String> stringList) {
         if (stringList == null) {
             throw new RuntimeException("There isn't any information for parsing");
         }
         for (int i = START_DATA_LINE; i < stringList.size(); i++) {
             actionDao.addFruitTransaction(createAction(stringList.get(i)));
         }
-        return actionDao;
+        return actionDao.getListTransactions();
     }
 
     private FruitTransaction createAction(String line) {

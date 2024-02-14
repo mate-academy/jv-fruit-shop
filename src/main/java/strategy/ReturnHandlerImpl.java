@@ -1,8 +1,12 @@
 package strategy;
 
+import db.Storage;
+import model.FruitTransaction;
+
 public class ReturnHandlerImpl implements OperationHandler {
     @Override
-    public int getAmount(int quantity) {
-        return quantity;
+    public void processTransaction(FruitTransaction transaction) {
+        Integer oldQuantity = Storage.getStorage().get(transaction.getFruit());
+        Storage.getStorage().put(transaction.getFruit(), oldQuantity + transaction.getQuantity());
     }
 }

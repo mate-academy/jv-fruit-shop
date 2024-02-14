@@ -1,8 +1,8 @@
 package service;
 
-import dao.ActionDao;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface ParserService {
-    ActionDao parseToObject(List<String> stringList);
+    List<FruitTransaction> parseTransactions(List<String> stringList);
 }
