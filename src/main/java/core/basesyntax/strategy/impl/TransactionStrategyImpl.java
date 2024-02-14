@@ -1,12 +1,8 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionStrategy;
 import core.basesyntax.strategy.TransactionHandler;
-import core.basesyntax.strategy.TransactionHandlerImpl;
-import core.basesyntax.strategy.TransactionHandlerPurchaseImpl;
-import core.basesyntax.strategy.TransactionHandlerReturnImpl;
-import core.basesyntax.strategy.TransactionHandlerSupplyImpl;
+import core.basesyntax.strategy.TransactionStrategy;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
     @Override

@@ -10,7 +10,6 @@ public class FileReaderImpl implements FileReader {
 
     @Override
     public List<String> readFile(File fileName) {
-        //File inputDataFile = new File("src/main/resources/" + fileName);
         try {
             fileName.createNewFile();
         } catch (IOException e) {

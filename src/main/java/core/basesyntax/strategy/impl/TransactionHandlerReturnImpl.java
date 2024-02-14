@@ -1,15 +1,17 @@
-package core.basesyntax.strategy;
+package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.FruitsDao;
+import core.basesyntax.dao.impl.FruitsDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionStrategy;
-import core.basesyntax.service.impl.TransactionStrategyImpl;
+import core.basesyntax.strategy.TransactionHandler;
+import core.basesyntax.strategy.TransactionStrategy;
 
-public class TransactionHandlerSupplyImpl implements TransactionHandler {
+public class TransactionHandlerReturnImpl implements TransactionHandler {
     @Override
     public TransactionStrategy makeTransaction(FruitTransaction transaction) {
-        if (Storage.getFruits().get(transaction.getFruitName()) != null) {
-            int result = Storage.getFruits().get(transaction.getFruitName())
+        FruitsDao fruitsDao = new FruitsDaoImpl();
+        if (fruitsDao.storageAccess().get(transaction.getFruitName()) != null) {
+            int result = fruitsDao.storageAccess().get(transaction.getFruitName())
                     + transaction.getQuantity();
             if (result < 0) {
                 throw new RuntimeException("Balance couldn't be less '0' "
@@ -19,12 +21,10 @@ public class TransactionHandlerSupplyImpl implements TransactionHandler {
                         + "Invalid data received from input file: return "
                         + transaction.getFruitName() + " = " + transaction.getQuantity());
             }
-            Storage.getFruits().put(transaction.getFruitName(), result);
+            fruitsDao.storageAccess().put(transaction.getFruitName(), result);
             return new TransactionStrategyImpl();
         }
-        Storage.getFruits().put(transaction.getFruitName(), transaction.getQuantity());
-        return new TransactionStrategyImpl();
+        throw new RuntimeException("This fruit: " + transaction.getFruitName()
+                + " has not been sold and cannot be returned.");
     }
 }
-
-
