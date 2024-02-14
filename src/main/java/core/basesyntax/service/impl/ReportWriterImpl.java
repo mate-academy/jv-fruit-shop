@@ -1,23 +1,23 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.TransactionWriterService;
+import core.basesyntax.service.ReportWriter;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
-public class TransactionWriterServiceImpl implements TransactionWriterService {
+public class ReportWriterImpl implements ReportWriter {
     @Override
-    public void writeToFile(Map<String, Integer> fruitReport, String fileName) {
-        File report = new File(fileName);
+    public void writeToFile(List<String> report, String fileName) {
+        File fruitReport = new File(fileName);
         BufferedWriter writer = null;
         try {
-            writer = new BufferedWriter(new FileWriter(report));
+            writer = new BufferedWriter(new FileWriter(fruitReport));
             writer.write("fruit,quantity");
-            for (Map.Entry<String, Integer> entry : fruitReport.entrySet()) {
+            for (String line : report) {
                 writer.newLine();
-                writer.write(entry.getKey() + "," + entry.getValue());
+                writer.write(line);
             }
             writer.flush();
         } catch (IOException e) {
