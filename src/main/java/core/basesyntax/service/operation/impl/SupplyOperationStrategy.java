@@ -3,7 +3,6 @@ package core.basesyntax.service.operation.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationStrategy;
-import java.util.Optional;
 
 public class SupplyOperationStrategy implements OperationStrategy {
     private final FruitDao fruitDao;
