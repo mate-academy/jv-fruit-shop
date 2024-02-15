@@ -37,7 +37,7 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         FruitParser fruitParser = new FruitParserImpl();
         List<String> strings = fileReader.readLines(PATH_TO_INPUT_FILE);
-        List<FruitTransaction> fruitTransactions = fruitParser.parseList(strings);
+        List<FruitTransaction> fruitTransactions = fruitParser.parseFruitTransaction(strings);
 
         OperationStrategySupplier supplier = new OperationStrategySupplierImpl(strategies);
         FruitService fruitService = new FruitServiceImpl(supplier);

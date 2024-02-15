@@ -12,6 +12,11 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void addFruitQuantity(String name, Integer quantity) {
-        FruitDatabase.database.put(name, quantity);
+        FruitDatabase.database.merge(name, quantity, Integer::sum);
+    }
+
+    @Override
+    public void subtractFruitQuantity(String name, Integer quantity) {
+        FruitDatabase.database.merge(name, quantity, (oldVal, newVal) -> oldVal - newVal);
     }
 }

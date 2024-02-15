@@ -16,12 +16,6 @@ public class ReturnOperationStrategy implements OperationStrategy {
     public void performOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         Integer fruitQuantity = fruitTransaction.getQuantity();
-        Optional<Integer> fruitQuantityInStore = fruitDao.getFruitQuantityByName(fruitName);
-        if (fruitQuantityInStore.isEmpty()) {
-            fruitDao.addFruitQuantity(fruitName, fruitQuantity);
-            return;
-        }
-        int afterReturnQuantity = fruitQuantityInStore.get() + fruitQuantity;
-        fruitDao.addFruitQuantity(fruitName, afterReturnQuantity);
+        fruitDao.addFruitQuantity(fruitName, fruitQuantity);
     }
 }

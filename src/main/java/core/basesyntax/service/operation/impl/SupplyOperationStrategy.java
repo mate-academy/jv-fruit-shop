@@ -16,12 +16,6 @@ public class SupplyOperationStrategy implements OperationStrategy {
     public void performOperation(FruitTransaction fruitTransaction) {
         String fruitName = fruitTransaction.getFruitName();
         Integer fruitQuantity = fruitTransaction.getQuantity();
-        Optional<Integer> fruitQuantityInStore = fruitDao.getFruitQuantityByName(fruitName);
-        if (fruitQuantityInStore.isEmpty()) {
-            fruitDao.addFruitQuantity(fruitName, fruitQuantity);
-            return;
-        }
-        int afterSupplyQuantity = fruitQuantityInStore.get() + fruitQuantity;
-        fruitDao.addFruitQuantity(fruitName, afterSupplyQuantity);
+        fruitDao.addFruitQuantity(fruitName, fruitQuantity);
     }
 }

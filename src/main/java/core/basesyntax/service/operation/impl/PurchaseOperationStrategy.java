@@ -25,7 +25,6 @@ public class PurchaseOperationStrategy implements OperationStrategy {
             throw new IllegalArgumentException(
                     "Can't purchase more fruits than available in store");
         }
-        int afterPurchaseQuantity = fruitQuantityAvailable.get() - fruitToPurchaseQuantity;
-        fruitDao.addFruitQuantity(fruitTransaction.getFruitName(), afterPurchaseQuantity);
+        fruitDao.subtractFruitQuantity(fruitTransaction.getFruitName(), fruitToPurchaseQuantity);
     }
 }

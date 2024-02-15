@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.NoSuchElementException;
-
 public class FruitTransaction {
     private final Operation operation;
     private final String fruitName;
@@ -38,13 +36,12 @@ public class FruitTransaction {
         }
 
         public static Operation getOperationByCode(String code) {
-            switch (code) {
-                case "b" : return BALANCE;
-                case "s" : return SUPPLY;
-                case "p" : return PURCHASE;
-                case "r" : return RETURN;
-                default: throw new NoSuchElementException("Wrong operation type");
+            for (Operation operation : Operation.values()) {
+                if (operation.code.equals(code)) {
+                    return operation;
+                }
             }
+            throw new IllegalArgumentException("No such operation exists with code: " + code);
         }
     }
 }

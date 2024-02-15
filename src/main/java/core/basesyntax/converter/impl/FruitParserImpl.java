@@ -14,11 +14,11 @@ public class FruitParserImpl implements FruitParser {
     private static final int QUANTITY_POS = 2;
 
     @Override
-    public List<FruitTransaction> parseList(List<String> lines) {
+    public List<FruitTransaction> parseFruitTransaction(List<String> lines) {
         lines.remove(HEADER_OFFSET);
         return lines.stream()
-            .map(this::parseLine)
-            .collect(Collectors.toList());
+                .map(this::parseLine)
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction parseLine(String line) {
