@@ -5,6 +5,7 @@ import core.basesyntax.service.OperationStrategySupplier;
 import core.basesyntax.service.operation.OperationStrategy;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class OperationStrategySupplierImpl implements OperationStrategySupplier {
     private final Map<FruitTransaction.Operation, OperationStrategy> strategies;
@@ -16,10 +17,9 @@ public class OperationStrategySupplierImpl implements OperationStrategySupplier 
 
     @Override
     public OperationStrategy get(FruitTransaction.Operation operation) {
-        OperationStrategy operationStrategy = strategies.get(operation);
-        if (operationStrategy == null) {
-            throw new NoSuchElementException("There is no such operation: " + operation.name());
-        }
-        return operationStrategy;
+        return Optional.ofNullable(strategies.get(operation))
+                .orElseThrow(() ->
+                        new NoSuchElementException(
+                                "There is no such operation: " + operation.name()));
     }
 }

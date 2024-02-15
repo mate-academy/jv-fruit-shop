@@ -3,21 +3,20 @@ package core.basesyntax.converter.impl;
 import core.basesyntax.converter.FruitParser;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class FruitParserImpl implements FruitParser {
     private static final String CSV_DELIMITER = ",";
+    private static final int HEADER_OFFSET = 0;
     private static final int CSV_ROW_ELEMENTS_COUNT = 3;
     private static final int ACTIVITY_TYPE_POS = 0;
     private static final int FRUIT_NAME_POS = 1;
     private static final int QUANTITY_POS = 2;
 
     @Override
-    public List<FruitTransaction> parseList(List<String> fruit) {
-        fruit.remove(0);
-        return fruit.stream()
+    public List<FruitTransaction> parseList(List<String> lines) {
+        lines.remove(HEADER_OFFSET);
+        return lines.stream()
             .map(this::parseLine)
             .collect(Collectors.toList());
     }
@@ -25,14 +24,10 @@ public class FruitParserImpl implements FruitParser {
     private FruitTransaction parseLine(String line) {
         String[] splitLine = splitAndCheckLine(line);
         FruitTransaction.Operation fruitOperation =
-                Stream.of(FruitTransaction.Operation.values())
-                        .filter(operation ->
-                                operation.getCode().equals(splitLine[ACTIVITY_TYPE_POS]))
-                        .findFirst().orElseThrow(() ->
-                                new NoSuchElementException("Wrong operation type"));
+                FruitTransaction.Operation.getOperationByCode(splitLine[ACTIVITY_TYPE_POS]);
         return new FruitTransaction(fruitOperation,
-                                    splitLine[FRUIT_NAME_POS],
-                                    Integer.parseInt(splitLine[QUANTITY_POS]));
+                splitLine[FRUIT_NAME_POS],
+                Integer.parseInt(splitLine[QUANTITY_POS]));
     }
 
     private String[] splitAndCheckLine(String line) {

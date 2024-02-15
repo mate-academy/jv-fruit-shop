@@ -26,9 +26,9 @@ import java.util.Map;
 
 public class Main {
     private static final String PATH_TO_INPUT_FILE =
-            "src/main/java/core/basesyntax/resources/input.csv";
+            "src/main/resources/input.csv";
     private static final String PATH_TO_REPORT =
-            "src/main/java/core/basesyntax/resources/report.csv";
+            "src/main/resources/report.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationStrategy> strategies = new HashMap<>();
