@@ -10,6 +10,6 @@ public class FruitServiceImpl implements FruitService {
     public void calculate(TransactionService transactionStrategy,
                           FruitTransaction fruitTransaction,
                           FruitStorage fruitStorage) {
-        transactionStrategy.executeTransaction(fruitTransaction, fruitStorage);
+        transactionStrategy.executeTransaction(fruitTransaction);
     }
 }

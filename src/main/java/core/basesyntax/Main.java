@@ -39,7 +39,7 @@ public class Main {
         List<FruitTransaction> fruitTransactions =
                 parseTransactionService.parseTransactions(dataFromFile);
         calculateReport(fruitTransactions);
-        List<String> report = reportCreator.createReport(fruitStorage.getFruitInventory());
+        String report = reportCreator.createReport(fruitStorage.getFruitInventory());
         reportWriter.writeToFile(report, REPORT_FILE_NAME);
     }
 
@@ -51,5 +51,9 @@ public class Main {
                     fruitStorage
             );
         });
+    }
+
+    public static FruitStorage getFruitStorage() {
+        return fruitStorage;
     }
 }
