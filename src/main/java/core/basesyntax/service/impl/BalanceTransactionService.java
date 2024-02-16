@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.Main;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionService;
+import core.basesyntax.service.TransactionStrategyService;
 
-public class BalanceTransactionService implements TransactionService {
+public class BalanceTransactionService implements TransactionStrategyService {
     @Override
-    public void executeTransaction(FruitTransaction fruitTransaction) {
+    public void calculateTransaction(FruitTransaction fruitTransaction) {
         Main.getFruitStorage().addFruit(fruitTransaction.getFruit(), fruitTransaction.getCount());
     }
 }
