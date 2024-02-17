@@ -34,14 +34,12 @@ public class DataReaderServiceImpl implements DataReaderService {
 
     private FruitTransaction processLine(String line) throws IOException {
         String[] parts = line.split(SPLIT_SYMBOL);
-        if (parts.length == MAX_PARTS) {
-            FruitTransaction.Operation operation = parseOperation(parts[OPERATION_INDEX].trim());
-            String fruit = parts[FRUIT_INDEX].trim();
-            int quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
-            return new FruitTransaction(operation, fruit, quantity);
-        } else {
+        if (parts.length != MAX_PARTS) {
             throw new IOException("Invalid line format: " + line);
         }
+        FruitTransaction.Operation operation = parseOperation(parts[OPERATION_INDEX].trim());
+        String fruit = parts[FRUIT_INDEX].trim();
+        int quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
+        return new FruitTransaction(operation, fruit, quantity);
     }
-
 }

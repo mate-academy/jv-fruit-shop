@@ -1,6 +1,10 @@
 package core.basesyntax.dataprocess;
 
 import static core.basesyntax.db.Storage.fruitData;
+import static core.basesyntax.model.FruitTransaction.Operation.BALANCE;
+import static core.basesyntax.model.FruitTransaction.Operation.PURCHASE;
+import static core.basesyntax.model.FruitTransaction.Operation.RETURN;
+import static core.basesyntax.model.FruitTransaction.Operation.SUPPLY;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Strategy;
@@ -20,10 +24,10 @@ public class DataProcessor {
 
     private Map<String, Strategy> initializeStrategyMap() {
         return Map.of(
-                "b", new BalanceService(),
-                "s", new SupplyService(),
-                "p", new PurchaseService(),
-                "r", new ReturnService()
+                BALANCE.getCode(), new BalanceService(),
+                SUPPLY.getCode(), new SupplyService(),
+                PURCHASE.getCode(), new PurchaseService(),
+                RETURN.getCode(), new ReturnService()
         );
     }
 
