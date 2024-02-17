@@ -47,6 +47,15 @@ public class FruitTransaction {
             this.code = code;
         }
 
+        public static Operation parseOperation(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.code.equalsIgnoreCase(code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("No such operation with code: " + code);
+        }
+
         public String getCode() {
             return code;
         }

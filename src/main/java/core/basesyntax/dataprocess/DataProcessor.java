@@ -1,36 +1,34 @@
 package core.basesyntax.dataprocess;
 
+import static core.basesyntax.db.Storage.fruitData;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.Strategy;
 import core.basesyntax.strategy.impl.BalanceService;
 import core.basesyntax.strategy.impl.PurchaseService;
 import core.basesyntax.strategy.impl.ReturnService;
 import core.basesyntax.strategy.impl.SupplyService;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class DataProcessor {
-    private final List<FruitTransaction> fruitTransactions;
-    private final Map<String, Integer> fruitData;
     private final Map<String, Strategy> strategyMap;
 
-    public DataProcessor(List<FruitTransaction> fruitTransactions, Map<String, Integer> fruitData) {
-        this.fruitTransactions = fruitTransactions;
-        this.fruitData = fruitData;
+    public DataProcessor() {
         this.strategyMap = initializeStrategyMap();
     }
 
     private Map<String, Strategy> initializeStrategyMap() {
-        Map<String, Strategy> map = new HashMap<>();
-        map.put("b", new BalanceService());
-        map.put("s", new SupplyService());
-        map.put("p", new PurchaseService());
-        map.put("r", new ReturnService());
-        return map;
+        return Map.of(
+                "b", new BalanceService(),
+                "s", new SupplyService(),
+                "p", new PurchaseService(),
+                "r", new ReturnService()
+        );
     }
 
-    public void processTransactions() {
+    public void processTransactions(List<FruitTransaction> fruitTransactions,
+                                    Map<String, Integer> fruitData) {
         for (FruitTransaction transaction : fruitTransactions) {
             String operation = transaction.getOperation().getCode();
             String fruit = transaction.getFruit();

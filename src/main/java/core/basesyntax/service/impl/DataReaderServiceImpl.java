@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation.parseOperation;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataReaderService;
 import java.io.BufferedReader;
@@ -42,12 +44,4 @@ public class DataReaderServiceImpl implements DataReaderService {
         }
     }
 
-    private FruitTransaction.Operation parseOperation(String operationCode) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equalsIgnoreCase(operationCode)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Invalid operation code: " + operationCode);
-    }
 }
