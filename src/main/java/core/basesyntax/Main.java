@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.ParseTransactionService;
@@ -20,8 +19,6 @@ public class Main {
 
     private static FileReader fileReader =
             new FileReaderImpl();
-    private static FruitStorage fruitStorage =
-            new FruitStorage();
     private static ReportWriter reportWriter =
             new ReportWriterImpl();
     private static ParseTransactionService parseTransactionService =
@@ -40,7 +37,4 @@ public class Main {
         reportWriter.writeToFile(report, REPORT_FILE_NAME);
     }
 
-    public static FruitStorage getFruitStorage() {
-        return fruitStorage;
-    }
 }

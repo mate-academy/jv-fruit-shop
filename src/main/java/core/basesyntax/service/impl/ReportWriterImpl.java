@@ -1,26 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportWriter;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class ReportWriterImpl implements ReportWriter {
-    private static final String HEADER = "fruit,quantity";
-
     @Override
     public void writeToFile(String report, String fileName) {
-        File fruitReport = new File(fileName);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fruitReport))) {
-            writer.write(HEADER);
-            for (String line : report.split(";")) {
-                writer.newLine();
-                writer.write(line);
-            }
-            writer.flush();
+        try {
+            Files.writeString(Path.of(fileName), report);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot write to file: " + fileName);
         }
     }
 }
