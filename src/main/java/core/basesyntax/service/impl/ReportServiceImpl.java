@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dataprocess.DataProcessor;
+import static core.basesyntax.db.Storage.fruitData;
+
 import core.basesyntax.service.ReportService;
-import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String CSV_HEADER = "fruit,quantity";
     private static final String SEPARATOR = ",";
 
-    public String generateReport(DataProcessor dataProcessor) {
-        Map<String, Integer> fruitData = dataProcessor.getFruitData();
+    public String generateReport() {
+
         StringBuilder reportBuilder = new StringBuilder(CSV_HEADER)
                 .append(System.lineSeparator());
 

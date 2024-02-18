@@ -14,38 +14,28 @@ import core.basesyntax.strategy.impl.ReturnService;
 import core.basesyntax.strategy.impl.SupplyService;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 public class DataProcessor {
-    private final Map<String, Strategy> strategyMap;
+    private final Map<FruitTransaction.Operation, Strategy> strategyMap;
 
     public DataProcessor() {
         this.strategyMap = initializeStrategyMap();
     }
 
-    private Map<String, Strategy> initializeStrategyMap() {
+    private Map<FruitTransaction.Operation, Strategy> initializeStrategyMap() {
         return Map.of(
-                BALANCE.getCode(), new BalanceService(),
-                SUPPLY.getCode(), new SupplyService(),
-                PURCHASE.getCode(), new PurchaseService(),
-                RETURN.getCode(), new ReturnService()
+                BALANCE, new BalanceService(),
+                SUPPLY, new SupplyService(),
+                PURCHASE, new PurchaseService(),
+                RETURN, new ReturnService()
         );
     }
 
-    public void processTransactions(List<FruitTransaction> fruitTransactions,
-                                    Map<String, Integer> fruitData) {
+    public void processTransactions(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
-            String operation = transaction.getOperation().getCode();
-            String fruit = transaction.getFruit();
-            int quantity = transaction.getQuantity();
-
-            Optional.ofNullable(strategyMap.get(operation))
-                    .ifPresentOrElse(strategy -> strategy
-                                    .processData(fruitData, fruit, quantity),
-                            () -> {
-                                throw new IllegalArgumentException("Unknown operation: "
-                                        + operation);
-                            });
+            FruitTransaction.Operation operation = transaction.getOperation();
+            strategyMap.get(operation).processData(fruitData,
+                    transaction.getFruit(), transaction.getQuantity());
         }
     }
 
