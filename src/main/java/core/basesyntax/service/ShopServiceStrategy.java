@@ -37,21 +37,21 @@ public class ShopServiceStrategy {
     public void handleData(String dataFromFile) {
         StorageDaoImpl.clear();
         Arrays.stream(dataFromFile.split(System.lineSeparator()))
-                .map(line -> line.split(","))
+                .map(line -> line.replaceAll("\\s", "").split(","))
                 .forEach(values -> {
-                    if (Objects.equals(values[0].trim(), Operation.SUPPLY.getCode())) {
+                    if (Objects.equals(values[0], Operation.SUPPLY.getCode())) {
                         get(Operation.SUPPLY).handle(values[1], Integer.parseInt(values[2]));
                     }
 
-                    if (Objects.equals(values[0].trim(), Operation.PURCHASE.getCode())) {
+                    if (Objects.equals(values[0], Operation.PURCHASE.getCode())) {
                         get(Operation.PURCHASE).handle(values[1], Integer.parseInt(values[2]));
                     }
 
-                    if (Objects.equals(values[0].trim(), Operation.RETURN.getCode())) {
+                    if (Objects.equals(values[0], Operation.RETURN.getCode())) {
                         get(Operation.RETURN).handle(values[1], Integer.parseInt(values[2]));
                     }
 
-                    if (Objects.equals(values[0].trim(), Operation.BALANCE.getCode())) {
+                    if (Objects.equals(values[0], Operation.BALANCE.getCode())) {
                         get(Operation.BALANCE).handle(values[1], Integer.parseInt(values[2]));
                     }
                 });
