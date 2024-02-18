@@ -19,7 +19,6 @@ public class DataReaderServiceImpl implements DataReaderService {
 
     public List<FruitTransaction> readDataFromFile(String fileName) {
         List<FruitTransaction> transactions = new ArrayList<>();
-
         try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -28,7 +27,6 @@ public class DataReaderServiceImpl implements DataReaderService {
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file " + fileName, e);
         }
-
         return transactions;
     }
 

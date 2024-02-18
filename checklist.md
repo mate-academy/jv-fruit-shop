@@ -12,7 +12,7 @@ All services should be independent.
 We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
 
 Let's create `Main` class with `main()` method to show how the program works.
-Make all services independent and call them in the right order in `main()` method step by step (the result of previous core.basesyntax.db.service method should be the input for next one)
+Make all services independent and call them in the right order in `main()` method step by step (the result of previous method should be the input for next one)
 
 #### Don't keep all logic in a single package
 You can use packages to make the structure of the code better, so let's do it. Gather classes with same 

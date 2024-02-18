@@ -14,6 +14,7 @@ import core.basesyntax.strategy.impl.ReturnService;
 import core.basesyntax.strategy.impl.SupplyService;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class DataProcessor {
     private final Map<String, Strategy> strategyMap;
@@ -38,12 +39,13 @@ public class DataProcessor {
             String fruit = transaction.getFruit();
             int quantity = transaction.getQuantity();
 
-            Strategy strategy = strategyMap.get(operation);
-            if (strategy != null) {
-                strategy.processData(fruitData, fruit, quantity);
-            } else {
-                throw new IllegalArgumentException("Unknown operation: " + operation);
-            }
+            Optional.ofNullable(strategyMap.get(operation))
+                    .ifPresentOrElse(strategy -> strategy
+                                    .processData(fruitData, fruit, quantity),
+                            () -> {
+                                throw new IllegalArgumentException("Unknown operation: "
+                                        + operation);
+                            });
         }
     }
 
