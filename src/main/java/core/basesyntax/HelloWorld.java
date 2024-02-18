@@ -1,6 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.CSVReader;
 import core.basesyntax.service.Operation.*;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.ShopServiceStrategy;
@@ -23,16 +25,13 @@ public class HelloWorld {
         OpHandlerMap.put(ShopServiceStrategy.Operation.SUPPLY, new SupplyHandler());
         OpHandlerMap.put(ShopServiceStrategy.Operation.PURCHASE, new PurchaseHandler());
         OpHandlerMap.put(ShopServiceStrategy.Operation.RETURN, new ReturnHandler());
-
-        ShopServiceImpl try1 = new ShopServiceImpl(new ShopServiceStrategy(OpHandlerMap), new StorageDaoImpl());
-        String fromFile = "C:\\Users\\admin\\IdeaProjects\\jv-fruit-shop\\src\\main\\java\\core\\basesyntax\\service\\Operation\\try.csv";
+        ShopServiceImpl try1 = new ShopServiceImpl(new ShopServiceStrategy(OpHandlerMap),
+                new StorageDaoImpl(), new CSVReader());
+        String fromFile = "src/main/java/core/basesyntax/service/Operation/try.csv";
         try (BufferedReader reader = new BufferedReader(new FileReader(try1.report(fromFile)))) {
             StringBuilder data = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("type,fruit,")) {
-                    continue;
-                }
                 data.append(line).append(System.lineSeparator());
             }
 
