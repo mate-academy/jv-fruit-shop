@@ -3,7 +3,7 @@ package core.basesyntax.service;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-public class CSVReader extends FileReader {
+public class CSvReader extends FileReader {
     @Override
     public String readFile(String fromFileName) {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fromFileName))) {
@@ -17,5 +17,4 @@ public class CSVReader extends FileReader {
             throw new RuntimeException("Error reading from file", e);
         }
     }
-
 }

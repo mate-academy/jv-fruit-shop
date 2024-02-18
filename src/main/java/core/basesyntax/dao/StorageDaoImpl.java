@@ -22,16 +22,13 @@ public class StorageDaoImpl implements StorageDao {
 
         if (currentValue != null && currentValue >= minuend) {
             Storage.foodStorage.put(fruit, currentValue - minuend);
-        } else throw new RuntimeException("Not enough " + fruit + " in the storage to remove from");
+        } else {
+            throw new RuntimeException("Not enough " + fruit + " in the storage to remove from");
+        }
     }
 
     public static void addProduct(String fruit, int addend) {
-        Integer currentValue = Storage.foodStorage.get(fruit);
-        if (currentValue != null) {
-            Storage.foodStorage.put(fruit, currentValue + addend);
-        } else {
-            Storage.foodStorage.put(fruit, addend);
-        }
+        Storage.foodStorage.merge(fruit, addend, Integer::sum);
     }
 
     public static void clear() {
@@ -40,12 +37,13 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void addFile() {
-        File entries = new File("src" + File.separator + "main" + File.separator + "java" + File.separator
+        File serviceInput = new File("src" + File.separator
+                + "main" + File.separator + "java" + File.separator
                 + "core" + File.separator + "basesyntax" + File.separator + "db" + File.separator
                 + "input_" + LocalDateTime.now().format(formatter) + ".csv");
         try {
-            entries.createNewFile();
-            savedEntryTime = entries.toPath().toString();
+            serviceInput.createNewFile();
+            savedEntryTime = serviceInput.toPath().toString();
         } catch (IOException e) {
             throw new RuntimeException("Cannot create a new file", e);
         }
@@ -54,9 +52,11 @@ public class StorageDaoImpl implements StorageDao {
     @Override
     public File writeReport() {
         try {
-            Files.writeString(Path.of(getSavedEntryTime()), "fruit,quantity\n", StandardOpenOption.APPEND);
+            Files.writeString(Path.of(getSavedEntryTime()),
+                    "fruit,quantity\n", StandardOpenOption.APPEND);
         } catch (IOException e) {
-            throw new RuntimeException("Error writing header to file for the timestamp " + getSavedEntryTime(), e);
+            throw new RuntimeException(
+                    "Error writing header to file for the timestamp " + getSavedEntryTime(), e);
         }
 
         Storage.foodStorage.entrySet().stream().forEach(e -> {
@@ -64,7 +64,8 @@ public class StorageDaoImpl implements StorageDao {
                 String entry = e.getKey() + "," + e.getValue() + System.lineSeparator();
                 Files.writeString(Path.of(getSavedEntryTime()), entry, StandardOpenOption.APPEND);
             } catch (IOException ex) {
-                throw new RuntimeException("Can't write data to file for the timestamp " + getSavedEntryTime(), ex);
+                throw new RuntimeException(
+                        "Can't write data to file for the timestamp " + getSavedEntryTime(), ex);
             }
         });
 

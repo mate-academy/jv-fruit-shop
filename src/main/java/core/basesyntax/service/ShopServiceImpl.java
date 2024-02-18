@@ -3,13 +3,13 @@ package core.basesyntax.service;
 import core.basesyntax.dao.StorageDaoImpl;
 import java.io.File;
 
-
-public class ShopServiceImpl implements ShopService{
+public class ShopServiceImpl implements ShopService {
     private ShopServiceStrategy strategy;
     private StorageDaoImpl stDao;
-    private CSVReader csvReader;
+    private CSvReader csvReader;
 
-    public ShopServiceImpl(ShopServiceStrategy strategy, StorageDaoImpl stDao, CSVReader csvReader) {
+    public ShopServiceImpl(ShopServiceStrategy strategy,
+                           StorageDaoImpl stDao, CSvReader csvReader) {
         this.strategy = strategy;
         this.stDao = stDao;
         this.csvReader = csvReader;
