@@ -3,5 +3,11 @@ package core.basesyntax.service;
 import java.io.File;
 
 public interface ShopService {
-    File report(String fromFileName);
+    public String readAndConvert(String fromFileName);
+
+    public void processData(String inputData);
+
+    public String createReport(String fromFileName);
+
+    public File writeReport(String outputPath);
 }

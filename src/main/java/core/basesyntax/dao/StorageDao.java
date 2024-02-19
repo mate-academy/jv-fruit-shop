@@ -3,7 +3,7 @@ package core.basesyntax.dao;
 import java.io.File;
 
 public interface StorageDao {
-    void addFile();
+    String addFile(String sourceFilePath);
 
-    File writeReport();
+    File writeReport(String path);
 }

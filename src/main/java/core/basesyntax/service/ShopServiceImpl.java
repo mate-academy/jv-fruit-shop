@@ -15,11 +15,19 @@ public class ShopServiceImpl implements ShopService {
         this.csvReader = csvReader;
     }
 
-    @Override
-    public File report(String fromFileName) {
-        stDao.addFile();
-        String readData = csvReader.readFile(fromFileName);
-        strategy.handleData(readData);
-        return stDao.writeReport();
+    public String readAndConvert(String fromFileName) {
+        return csvReader.readFile(fromFileName);
+    }
+
+    public void processData(String inputData) {
+        strategy.handleData(inputData);
+    }
+
+    public String createReport(String fromFileName) {
+        return stDao.addFile(fromFileName);
+    }
+
+    public File writeReport(String outputPath) {
+        return stDao.writeReport(outputPath);
     }
 }

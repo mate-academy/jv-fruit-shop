@@ -37,7 +37,7 @@ public class ShopServiceStrategy {
     public void handleData(String dataFromFile) {
         StorageDaoImpl.clear();
         Arrays.stream(dataFromFile.split(System.lineSeparator()))
-                .map(line -> line.replaceAll("\\s", "").split(","))
+                .map(line -> line.split(","))
                 .forEach(values -> {
                     if (Objects.equals(values[0], Operation.SUPPLY.getCode())) {
                         get(Operation.SUPPLY).handle(values[1], Integer.parseInt(values[2]));
