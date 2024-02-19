@@ -7,32 +7,38 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataParserImpl implements DataParser {
+    private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
-    private static final int AMOUNT_INDEX = 2;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> parse(List<String> fruitsData) {
-        return fruitsData.stream()
-                .map(row -> row.split(","))
-                .filter(data -> data[OPERATION_INDEX].trim().length() == 1)
-                .map(this::createTransactionFromData)
+        return fruitsData
+                .stream()
+                .map(row -> row
+                        .split(SEPARATOR))
+                .filter(data -> data.length > OPERATION_INDEX
+                        && data[OPERATION_INDEX].trim().length() == 1)
+                .flatMap(this::createTransactionFromDataRow)
                 .collect(Collectors.toList());
     }
 
-    public FruitTransaction createTransactionFromData(String[] data) {
+    public FruitTransaction createTransactionFromDataRow(String[] data) {
         try {
             FruitTransaction.Operation operation = FruitTransaction.Operation
-                    .getOperation(data[OPERATION_INDEX].trim());
+                    .getOperation(data[OPERATION_INDEX]
+                            .trim());
             String fruit = data[FRUIT_INDEX];
-            int quantity = Integer.parseInt(data[AMOUNT_INDEX]);
-            return new FruitTransaction(fruit, operation, quantity);
+            int quantity = Integer
+                    .parseInt(data[QUANTITY_INDEX]);
+            return new FruitTransaction(operation, fruit, quantity);
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Amount of fruits could not be parsed : "
-                + data[AMOUNT_INDEX]);
+            throw new RuntimeException("Fruit quantity wasn't inserted :"
+                + data[QUANTITY_INDEX]);
         } catch (IllegalArgumentException e) {
-            throw new RuntimeException("Data is not according to requirements : "
-                    + Arrays.toString(data), e);
+            throw new IllegalArgumentException("Fruit data is illegal" +
+                    Arrays.toString(data), e);
         }
     }
 }

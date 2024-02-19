@@ -1,11 +1,12 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void putFruitToStorage(String fruitName, Integer fruitQuantity) {
-        Storage.fruitStorage.put(fruitName, fruitQuantity);
+    public void addFruit(String fruitName, int fruitAmount) {
+        Storage.fruitStorage.put(fruitName, fruitAmount);
     }
 
     @Override

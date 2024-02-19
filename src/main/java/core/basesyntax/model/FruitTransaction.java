@@ -1,41 +1,38 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
+    private Operation type;
     private String name;
-    private Operation operation;
-    private int quantity;
+    private int amount;
 
-    public FruitTransaction() {
+    public FruitTransaction(Operation type, String name, int amount) {
+        this.type = type;
+        this.name = name;
+        this.amount = amount;
     }
 
-    public FruitTransaction(String name, Operation operation, int quantity) {
-        this.name = name;
-        this.operation = operation;
-        this.quantity = quantity;
+    public Operation getType() {
+        return type;
+    }
+
+    public void setType(Operation type) {
+        this.type = type;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String fruit) {
         this.name = name;
     }
 
-    public Operation getOperation() {
-        return operation;
+    public int getAmount() {
+        return amount;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public enum Operation {
@@ -44,7 +41,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
@@ -56,11 +53,11 @@ public class FruitTransaction {
 
         public static Operation getOperation(String code) {
             for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(code)) {
+                if (operation.getCode().equalsIgnoreCase(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation was found for this code :" + code);
+            throw new IllegalArgumentException("No operation found for this code :" + code);
         }
     }
 }

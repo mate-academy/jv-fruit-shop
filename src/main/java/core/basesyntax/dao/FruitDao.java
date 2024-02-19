@@ -1,7 +1,9 @@
 package core.basesyntax.dao;
 
-public interface FruitDao {
-    void putFruitToStorage(String fruitName, Integer fruitQuantity);
+import java.util.Map;
 
-    Integer getFruit(String fruitName);
+public interface FruitDao {
+    void addFruit(String fruitName, int fruitAmount);
+
+    Integer getFruit(String fruit);
 }
