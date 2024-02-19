@@ -12,9 +12,9 @@ import core.basesyntax.service.operation.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
-
 public class HelloWorld {
-    private static final String FROM_FILE_1 = "src/main/java/core/basesyntax/service/Operation/TryMe.csv";
+    private static final String FILE_TO_REPORT1 = "src/main/resources/TryMe.csv";
+
     public static void main(String[] args) {
         Map<ShopServiceStrategy.Operation, OperationHandler> opHandlerMap = new HashMap<>();
         opHandlerMap.put(ShopServiceStrategy.Operation.BALANCE, new BalanceHandler());
@@ -22,14 +22,13 @@ public class HelloWorld {
         opHandlerMap.put(ShopServiceStrategy.Operation.PURCHASE, new PurchaseHandler());
         opHandlerMap.put(ShopServiceStrategy.Operation.RETURN, new ReturnHandler());
 
-
-        ShopServiceImpl customShopService = new ShopServiceImpl(new ShopServiceStrategy(opHandlerMap),
+        ShopServiceImpl customShopService = new ShopServiceImpl(
+                new ShopServiceStrategy(opHandlerMap),
                 new StorageDaoImpl(), new CSvReader());
 
-        String dataToProcess = customShopService.readAndConvert(FROM_FILE_1);
+        String dataToProcess = customShopService.readAndConvert(FILE_TO_REPORT1);
         customShopService.processData(dataToProcess);
-        String outputPath = customShopService.createReport(FROM_FILE_1);
-        customShopService.writeReport(outputPath);
-
+        String outputPath = customShopService.createReport(FILE_TO_REPORT1);
+        customShopService.writeReportToFile(outputPath);
     }
 }

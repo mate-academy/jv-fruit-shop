@@ -9,5 +9,5 @@ public interface ShopService {
 
     public String createReport(String fromFileName);
 
-    public File writeReport(String outputPath);
+    public File writeReportToFile(String outputPath);
 }

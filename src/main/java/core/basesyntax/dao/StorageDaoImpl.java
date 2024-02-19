@@ -52,6 +52,7 @@ public class StorageDaoImpl implements StorageDao {
             throw new RuntimeException("Cannot create a new file", e);
         }
     }
+
     @Override
     public File writeReport(String destinationPath) {
         String timeStamp = destinationPath.substring(destinationPath.indexOf('_') + 1,

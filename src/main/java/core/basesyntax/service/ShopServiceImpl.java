@@ -27,7 +27,7 @@ public class ShopServiceImpl implements ShopService {
         return stDao.addFile(fromFileName);
     }
 
-    public File writeReport(String outputPath) {
+    public File writeReportToFile(String outputPath) {
         return stDao.writeReport(outputPath);
     }
 }
