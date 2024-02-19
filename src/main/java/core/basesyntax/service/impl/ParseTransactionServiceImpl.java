@@ -18,7 +18,7 @@ public class ParseTransactionServiceImpl implements ParseTransactionService {
             transactionDetails = linesFromFile.get(i).split(",");
             transactionsFromFile.add(
                     new FruitTransaction(
-                            FruitTransaction.Operation.fromCode(
+                            FruitTransaction.Operation.getOperation(
                                     transactionDetails[INDEX_OF_OPERATION]
                             ),
                             transactionDetails[INDEX_OF_FRUIT],
