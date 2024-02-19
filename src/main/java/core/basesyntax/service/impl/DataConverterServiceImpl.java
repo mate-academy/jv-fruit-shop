@@ -18,13 +18,8 @@ public class DataConverterServiceImpl implements DataConverterService {
 
     @Override
     public List<FruitTransaction> getListOfTransactions(List<String> lines) {
-        Predicate<String> startsWithValidCode = new Predicate<>() {
-            @Override
-            public boolean test(String line) {
-                return getSetOfPossibleCodes()
-                        .contains(String.valueOf(line.charAt(FIRST_INDEX)));
-            }
-        };
+        Predicate<String> startsWithValidCode = s -> getSetOfPossibleCodes()
+                .contains(String.valueOf(s.charAt(FIRST_INDEX)));
 
         return lines.stream()
            .filter(startsWithValidCode)
