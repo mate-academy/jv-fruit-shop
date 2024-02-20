@@ -29,7 +29,7 @@ public class ShopServiceStrategy {
                     if (Objects.equals(values[OPERATION_HANDLER_INDEX],
                             Operation.SUPPLY.getCode())) {
                         get(Operation.SUPPLY).handle(values[FRUIT_TYPE_INDEX],
-                                Integer.parseInt(values[2]));
+                                Integer.parseInt(values[FRUIT_AMOUNT_INDEX]));
                     }
 
                     if (Objects.equals(values[OPERATION_HANDLER_INDEX],
