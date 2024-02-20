@@ -7,24 +7,11 @@ import java.util.Map;
 import java.util.Objects;
 
 public class ShopServiceStrategy {
+    private static final int OPERATION_HANDLER_INDEX = 0;
+    private static final int FRUIT_TYPE_INDEX = 1;
+    private static final int FRUIT_AMOUNT_INDEX = 2;
+
     private Map<Operation, OperationHandler> opHandlerMap;
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-    }
 
     public ShopServiceStrategy(Map<Operation, OperationHandler> opHandlerMap) {
         this.opHandlerMap = opHandlerMap;
@@ -39,20 +26,28 @@ public class ShopServiceStrategy {
         Arrays.stream(dataFromFile.split(System.lineSeparator()))
                 .map(line -> line.split(","))
                 .forEach(values -> {
-                    if (Objects.equals(values[0], Operation.SUPPLY.getCode())) {
-                        get(Operation.SUPPLY).handle(values[1], Integer.parseInt(values[2]));
+                    if (Objects.equals(values[OPERATION_HANDLER_INDEX],
+                            Operation.SUPPLY.getCode())) {
+                        get(Operation.SUPPLY).handle(values[FRUIT_TYPE_INDEX],
+                                Integer.parseInt(values[2]));
                     }
 
-                    if (Objects.equals(values[0], Operation.PURCHASE.getCode())) {
-                        get(Operation.PURCHASE).handle(values[1], Integer.parseInt(values[2]));
+                    if (Objects.equals(values[OPERATION_HANDLER_INDEX],
+                            Operation.PURCHASE.getCode())) {
+                        get(Operation.PURCHASE).handle(values[FRUIT_TYPE_INDEX],
+                                Integer.parseInt(values[FRUIT_AMOUNT_INDEX]));
                     }
 
-                    if (Objects.equals(values[0], Operation.RETURN.getCode())) {
-                        get(Operation.RETURN).handle(values[1], Integer.parseInt(values[2]));
+                    if (Objects.equals(values[OPERATION_HANDLER_INDEX],
+                            Operation.RETURN.getCode())) {
+                        get(Operation.RETURN).handle(values[FRUIT_TYPE_INDEX],
+                                Integer.parseInt(values[FRUIT_AMOUNT_INDEX]));
                     }
 
-                    if (Objects.equals(values[0], Operation.BALANCE.getCode())) {
-                        get(Operation.BALANCE).handle(values[1], Integer.parseInt(values[2]));
+                    if (Objects.equals(values[OPERATION_HANDLER_INDEX],
+                            Operation.BALANCE.getCode())) {
+                        get(Operation.BALANCE).handle(values[FRUIT_TYPE_INDEX],
+                                Integer.parseInt(values[FRUIT_AMOUNT_INDEX]));
                     }
                 });
     }

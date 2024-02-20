@@ -1,22 +1,25 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.StorageDaoImpl;
 import java.io.File;
 
 public class ShopServiceImpl implements ShopService {
     private ShopServiceStrategy strategy;
-    private StorageDaoImpl stDao;
-    private CSvReader csvReader;
+    private CsvReader csvReader;
+    private CsvConverter csvConverter;
+    private FileMaster fileMaster;
 
     public ShopServiceImpl(ShopServiceStrategy strategy,
-                           StorageDaoImpl stDao, CSvReader csvReader) {
+                           CsvReader csvReader, CsvConverter csvConverter,
+                           FileMaster fileMaster) {
         this.strategy = strategy;
-        this.stDao = stDao;
         this.csvReader = csvReader;
+        this.csvConverter = csvConverter;
+        this.fileMaster = fileMaster;
     }
 
     public String readAndConvert(String fromFileName) {
-        return csvReader.readFile(fromFileName);
+        String dataToConvert = csvReader.readFile(fromFileName);
+        return csvConverter.convertCsv(dataToConvert);
     }
 
     public void processData(String inputData) {
@@ -24,10 +27,10 @@ public class ShopServiceImpl implements ShopService {
     }
 
     public String createReport(String fromFileName) {
-        return stDao.addFile(fromFileName);
+        return fileMaster.addFile(fromFileName);
     }
 
     public File writeReportToFile(String outputPath) {
-        return stDao.writeReport(outputPath);
+        return fileMaster.writeReport(outputPath);
     }
 }
