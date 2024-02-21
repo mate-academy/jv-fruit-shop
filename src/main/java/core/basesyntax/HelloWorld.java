@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.CsvConverter;
-import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileMaster;
+import core.basesyntax.service.FileReader;
 import core.basesyntax.service.Operation;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.ShopServiceStrategy;
@@ -12,7 +12,6 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseHandler;
 import core.basesyntax.service.operation.ReturnHandler;
 import core.basesyntax.service.operation.SupplyHandler;
-
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;

@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.db.Storage;
-
 import java.io.File;
 
 public class ShopServiceImpl implements ShopService {
