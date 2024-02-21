@@ -1,24 +1,29 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.db.Storage;
+
 import java.io.File;
 
 public class ShopServiceImpl implements ShopService {
     private ShopServiceStrategy strategy;
-    private CsvReader csvReader;
+    private FileReader fileReader;
     private CsvConverter csvConverter;
     private FileMaster fileMaster;
+    private StorageDao stDao;
 
     public ShopServiceImpl(ShopServiceStrategy strategy,
-                           CsvReader csvReader, CsvConverter csvConverter,
-                           FileMaster fileMaster) {
+                           FileReader fileReader, CsvConverter csvConverter,
+                           FileMaster fileMaster, StorageDao stDao) {
         this.strategy = strategy;
-        this.csvReader = csvReader;
+        this.fileReader = fileReader;
         this.csvConverter = csvConverter;
         this.fileMaster = fileMaster;
+        this.stDao = stDao;
     }
 
-    public String readAndConvert(String fromFileName) {
-        String dataToConvert = csvReader.readFile(fromFileName);
+    public String readAndConvert(File fromFile) {
+        String dataToConvert = fileReader.readFile(fromFile);
         return csvConverter.convertCsv(dataToConvert);
     }
 
@@ -26,11 +31,13 @@ public class ShopServiceImpl implements ShopService {
         strategy.handleData(inputData);
     }
 
-    public String createReport(String fromFileName) {
-        return fileMaster.addFile(fromFileName);
+    public File createReport(File fromFile) {
+        return fileMaster.addFile(fromFile);
     }
 
-    public File writeReportToFile(String outputPath) {
-        return fileMaster.writeReport(outputPath);
+    public File writeReportToFile(File blankDestinationFile) {
+        String contentToWrite = stDao.checkStorage();
+        String outputPath = blankDestinationFile.getPath();
+        return fileMaster.writeReport(outputPath, contentToWrite);
     }
 }

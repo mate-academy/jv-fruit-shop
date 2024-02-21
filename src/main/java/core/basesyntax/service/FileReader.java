@@ -1,13 +1,14 @@
 package core.basesyntax.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 
-public class CsvReader implements Readable {
+public class FileReader implements Readable {
 
     @Override
-    public String readFile(String fromFileName) {
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fromFileName))) {
+    public String readFile(File fromFile) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fromFile))) {
             StringBuilder data = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -16,7 +17,7 @@ public class CsvReader implements Readable {
 
             return data.toString();
         } catch (IOException e) {
-            throw new RuntimeException("Error reading from file", e);
+            throw new RuntimeException("Error reading from file " + fromFile.getName(), e);
         }
     }
 }

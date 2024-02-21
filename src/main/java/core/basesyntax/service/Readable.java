@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.io.File;
+
 public interface Readable {
-    String readFile(String path);
+    String readFile(File fromFile);
 }

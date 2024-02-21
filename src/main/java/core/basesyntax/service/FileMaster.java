@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.Storage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +13,7 @@ public class FileMaster {
     private static final DateTimeFormatter FORMATTED = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd_HH-mm-ss");
 
-    public String addFile(String sourceFilePath) {
+    public File addFile(File fromFile) {
         File reportFolder = new File("src" + File.separator
                 + "main" + File.separator
                 + "resources" + File.separator
@@ -28,19 +27,19 @@ public class FileMaster {
         try {
             reportFolder.mkdir();
             serviceInput.createNewFile();
-            Files.write(serviceInput.toPath(), Files.readAllLines(Path.of(sourceFilePath)));
+            Files.write(serviceInput.toPath(), Files.readAllLines(fromFile.toPath()));
             serviceOutput.createNewFile();
-            return serviceOutput.toPath().toString();
+            return serviceOutput;
         } catch (IOException e) {
             throw new RuntimeException("Cannot create a new file", e);
         }
     }
 
-    public File writeReport(String destinationPath) {
-        Path filePath = Paths.get(destinationPath);
+    public File writeReport(String outputPath, String contentToWrite) {
+        Path filePath = Paths.get(outputPath);
 
-        String timeStamp = destinationPath.substring(destinationPath.indexOf('_') + 1,
-                destinationPath.indexOf('.'));
+        String timeStamp = outputPath.substring(outputPath.indexOf('_') + 1,
+                outputPath.indexOf('.'));
         try {
             Files.writeString(filePath,
                     "fruit,quantity\n", StandardOpenOption.APPEND);
@@ -49,17 +48,13 @@ public class FileMaster {
                     "Error writing header to file for the timestamp " + timeStamp, e);
         }
 
-        Storage.foodStorage.entrySet().stream().forEach(e -> {
-            try {
-                String entry = e.getKey() + "," + e.getValue() + System.lineSeparator();
-                Files.writeString(filePath, entry, StandardOpenOption.APPEND);
-            } catch (IOException ex) {
-                throw new RuntimeException(
-                        "Can't write data to file for the timestamp " + timeStamp, ex);
-            }
-        });
+        try {
+            Files.writeString(filePath, contentToWrite, StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            throw new RuntimeException(
+                    "Error writing body to file for the timestamp " + timeStamp, e);
+        }
 
         return filePath.toFile();
     }
 }
-
