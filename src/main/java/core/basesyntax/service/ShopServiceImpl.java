@@ -7,35 +7,26 @@ public class ShopServiceImpl implements ShopService {
     private ShopServiceStrategy strategy;
     private FileReader fileReader;
     private CsvConverter csvConverter;
-    private FileMaster fileMaster;
+    private FileServise fileServise;
     private StorageDao stDao;
 
     public ShopServiceImpl(ShopServiceStrategy strategy,
                            FileReader fileReader, CsvConverter csvConverter,
-                           FileMaster fileMaster, StorageDao stDao) {
+                           FileServise fileServise, StorageDao stDao) {
         this.strategy = strategy;
         this.fileReader = fileReader;
         this.csvConverter = csvConverter;
-        this.fileMaster = fileMaster;
+        this.fileServise = fileServise;
         this.stDao = stDao;
     }
 
-    public String readAndConvert(File fromFile) {
-        String dataToConvert = fileReader.readFile(fromFile);
-        return csvConverter.convertCsv(dataToConvert);
-    }
-
-    public void processData(String inputData) {
-        strategy.handleData(inputData);
-    }
-
-    public File createReport(File fromFile) {
-        return fileMaster.addFile(fromFile);
-    }
-
-    public File writeReportToFile(File blankDestinationFile) {
+    public File report(String inputPath, String outputPath) {
+        String dataToConvert = fileReader.readFile(inputPath);
+        String dataToProcess = csvConverter.convertCsv(dataToConvert);
+        strategy.handleData(dataToProcess);
         String contentToWrite = stDao.checkStorage();
-        String outputPath = blankDestinationFile.getPath();
-        return fileMaster.writeReport(outputPath, contentToWrite);
+
+        return fileServise.writeReport(outputPath, contentToWrite);
     }
 }
+

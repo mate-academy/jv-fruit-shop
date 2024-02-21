@@ -1,14 +1,14 @@
 package core.basesyntax.service;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 
 public class FileReader implements Readable {
 
     @Override
-    public String readFile(File fromFile) {
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(fromFile))) {
+    public String readFile(String path) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(path))) {
             StringBuilder data = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
@@ -17,7 +17,7 @@ public class FileReader implements Readable {
 
             return data.toString();
         } catch (IOException e) {
-            throw new RuntimeException("Error reading from file " + fromFile.getName(), e);
+            throw new RuntimeException("Error reading from file " + Path.of(path).toFile(), e);
         }
     }
 }

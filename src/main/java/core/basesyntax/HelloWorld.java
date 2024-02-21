@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.CsvConverter;
-import core.basesyntax.service.FileMaster;
 import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileServise;
 import core.basesyntax.service.Operation;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.ShopServiceStrategy;
@@ -13,12 +13,20 @@ import core.basesyntax.service.operation.PurchaseHandler;
 import core.basesyntax.service.operation.ReturnHandler;
 import core.basesyntax.service.operation.SupplyHandler;
 import java.io.File;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HelloWorld {
-    private static final File DATA_FROM = new File("src/main/resources/TryMe.csv");
-    private static File dataTo; //not  a constant path, changes in time based on my localDateTime
+    private static final DateTimeFormatter FORMATTED = DateTimeFormatter.ofPattern(
+            "yyyy-MM-dd_HH-mm-ss");
+    private static final String INPUT_DATA_FILE = "src/main/resources/TryMe.csv";
+    private static final String OUTPUT_DATA_FILE = "src" + File.separator
+                + "main" + File.separator
+                + "resources" + File.separator
+                + "report_" + LocalDateTime.now().format(FORMATTED)
+            + ".csv";
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> opHandlerMap = new HashMap<>();
@@ -29,12 +37,8 @@ public class HelloWorld {
 
         ShopServiceImpl customShopService = new ShopServiceImpl(
                 new ShopServiceStrategy(opHandlerMap), new FileReader(), new CsvConverter(),
-                new FileMaster(), new StorageDaoImpl());
+                new FileServise(), new StorageDaoImpl());
 
-        String dataToProcess = customShopService.readAndConvert(DATA_FROM);
-        customShopService.processData(dataToProcess);
-        File blankReportDestinationFile = customShopService.createReport(DATA_FROM);
-        File report = customShopService.writeReportToFile(blankReportDestinationFile);
-        dataTo = new File("" + report.toPath());
+        customShopService.report(INPUT_DATA_FILE, OUTPUT_DATA_FILE);
     }
 }
