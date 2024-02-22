@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.io.File;
 
 public interface ShopService {
-    public File report(String inputPath, String outputPath);
+    public void report(String inputPath, String outputPath);
 }

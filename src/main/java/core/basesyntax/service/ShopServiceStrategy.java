@@ -4,7 +4,6 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.operation.OperationHandler;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 public class ShopServiceStrategy {
     private Map<Operation, OperationHandler> opHandlerMap;
@@ -20,22 +19,15 @@ public class ShopServiceStrategy {
     public void processDataFromObj(List<CsvConverter.OperationData> convertedDataList) {
         StorageDaoImpl.clear();
 
-        convertedDataList.forEach(operationData -> {
-            if (Objects.equals(operationData.operation(), Operation.BALANCE.getCode())) {
-                get(Operation.BALANCE).handle(operationData.fruitType(), operationData.quantity());
-            }
-
-            if (Objects.equals(operationData.operation(), Operation.PURCHASE.getCode())) {
-                get(Operation.PURCHASE).handle(operationData.fruitType(), operationData.quantity());
-            }
-
-            if (Objects.equals(operationData.operation(), Operation.SUPPLY.getCode())) {
-                get(Operation.SUPPLY).handle(operationData.fruitType(), operationData.quantity());
-            }
-
-            if (Objects.equals(operationData.operation(), Operation.RETURN.getCode())) {
-                get(Operation.RETURN).handle(operationData.fruitType(), operationData.quantity());
-            }
-        });
+        convertedDataList
+                .forEach(operationData -> {
+                    OperationHandler handler =
+                            opHandlerMap.get(Operation.getByCode(operationData.operation()));
+                    if (handler != null) {
+                        handler.handle(operationData.fruitType(), operationData.quantity());
+                    } else {
+                        System.out.println("No handler found for operation: " + operationData.operation());
+                    }
+                });
     }
 }

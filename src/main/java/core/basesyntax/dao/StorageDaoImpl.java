@@ -21,7 +21,7 @@ public class StorageDaoImpl implements StorageDao {
         Storage.foodStorage.clear();
     }
 
-    public String checkStorage() {
+    public String getStorageContents() {
         StringBuilder sb = new StringBuilder();
         Storage.foodStorage.entrySet().stream().forEach(e -> {
             sb.append(e.getKey() + "," + e.getValue() + System.lineSeparator());
