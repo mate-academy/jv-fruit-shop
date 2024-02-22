@@ -2,8 +2,9 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.CsvConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileServise;
+import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Operation;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.ShopServiceStrategy;
@@ -21,7 +22,7 @@ import java.util.Map;
 public class HelloWorld {
     private static final DateTimeFormatter FORMATTED = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd_HH-mm-ss");
-    private static final String INPUT_DATA_FILE = "src/main/resources/TryMe.csv";
+    private static final String INPUT_DATA_FILE = "src.main.resources.TryMe.csv";
     private static final String OUTPUT_DATA_FILE = "src" + File.separator
                 + "main" + File.separator
                 + "resources" + File.separator
@@ -36,8 +37,8 @@ public class HelloWorld {
         opHandlerMap.put(Operation.RETURN, new ReturnHandler());
 
         ShopServiceImpl customShopService = new ShopServiceImpl(
-                new ShopServiceStrategy(opHandlerMap), new FileReader(), new CsvConverter(),
-                new FileServise(), new StorageDaoImpl());
+                new ShopServiceStrategy(opHandlerMap), new CsvFileReader(), new CsvConverter(),
+                new FileWriter(), new StorageDaoImpl(), new FileService());
 
         customShopService.report(INPUT_DATA_FILE, OUTPUT_DATA_FILE);
     }
