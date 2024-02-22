@@ -26,7 +26,8 @@ public class ShopServiceStrategy {
                     if (handler != null) {
                         handler.handle(operationData.fruitType(), operationData.quantity());
                     } else {
-                        System.out.println("No handler found for operation: " + operationData.operation());
+                        System.out.println("No handler found for operation: "
+                                + operationData.operation());
                     }
                 });
     }
