@@ -1,31 +1,28 @@
 package core.basesyntax.service;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class CsvConverter implements Convertable {
+public class TransactionConverterImpl implements TransactionConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int FRUIT_AMOUNT_INDEX = 2;
     private static final String EXP_HEADER = "type,fruit,quantity";
     private static final String EXP_FORMAT = "b,";
 
-    public List<OperationData> convertToRecord(String dataFromFile) {
-        String cleanText = dataFromFile.replaceAll(" +", "");
+    public List<FruitTransaction> convertLines(List<String> lines) {
+        Optional<String> firstLine = lines.stream().findFirst();
 
-        if (!cleanText.startsWith(EXP_HEADER
-                + System.lineSeparator() + EXP_FORMAT)) {
+        if (firstLine.isPresent() && !firstLine.get().startsWith(EXP_HEADER)) {
             throw new RuntimeException("Input file must start with: " + System.lineSeparator()
                     + "\"" + EXP_HEADER + "\"" + System.lineSeparator()
                     + "\"" + EXP_FORMAT + "\" for current balance");
         }
 
-        return Arrays.stream(cleanText.replaceAll(" +", "")
-                        .split(System.lineSeparator()))
-                .skip(1)
+        return lines.stream().skip(1)
                 .map(line -> line.split(","))
-                .map(values -> new OperationData(
+                .map(values -> new FruitTransaction(
                         values[OPERATION_INDEX],
                         values[FRUIT_TYPE_INDEX],
                         Integer.parseInt(values[FRUIT_AMOUNT_INDEX].trim())
@@ -33,6 +30,6 @@ public class CsvConverter implements Convertable {
                 .collect(Collectors.toList());
     }
 
-    public record OperationData(String operation, String fruitType, int quantity) {
+    public record FruitTransaction(String operation, String fruitType, int quantity) {
     }
 }

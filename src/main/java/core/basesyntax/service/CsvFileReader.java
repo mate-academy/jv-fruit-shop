@@ -1,23 +1,16 @@
 package core.basesyntax.service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 
 public class CsvFileReader implements FileReader {
-
-    @Override
-    public String readFile(String path) {
-        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(path))) {
-            StringBuilder data = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                data.append(line).append(System.lineSeparator());
-            }
-
-            return data.toString();
+    public List<String> readFile(String path) {
+        try {
+            return Files.readAllLines(Path.of(path));
         } catch (IOException e) {
-            throw new RuntimeException("Error reading from file " + Path.of(path).toFile(), e);
+            throw new RuntimeException("Error reading from file " + path, e);
         }
     }
 }

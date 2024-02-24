@@ -2,8 +2,11 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class StorageDaoImpl implements StorageDao {
-    public static void removeProduct(String fruit, int minuend) {
+    public void subtractFruit(String fruit, int minuend) {
         Integer currentValue = Storage.foodStorage.get(fruit);
 
         if (currentValue != null && currentValue >= minuend) {
@@ -13,20 +16,11 @@ public class StorageDaoImpl implements StorageDao {
         }
     }
 
-    public static void addProduct(String fruit, int addend) {
+    public void addFruit(String fruit, int addend) {
         Storage.foodStorage.merge(fruit, addend, Integer::sum);
     }
 
-    public static void clear() {
-        Storage.foodStorage.clear();
-    }
-
-    public String getStorageContents() {
-        StringBuilder sb = new StringBuilder();
-        Storage.foodStorage.entrySet().stream().forEach(e -> {
-            sb.append(e.getKey() + "," + e.getValue() + System.lineSeparator());
-        });
-
-        return sb.toString();
+    public Map<String, Integer> getAllFruits() {
+        return new HashMap<>(Storage.foodStorage);
     }
 }
