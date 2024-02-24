@@ -6,7 +6,6 @@ import core.basesyntax.strategy.ActivityStrategy;
 import java.util.List;
 
 public class FruitService {
-
     private ActivityStrategy activityStrategy;
 
     public FruitService(ActivityStrategy activityStrategy) {
