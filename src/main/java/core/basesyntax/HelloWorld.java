@@ -17,17 +17,17 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
-
     private static final String INPUT_DATA_FILE = "src/main/resources/TryMe.csv";
     private static final String OUTPUT_DATA_FILE = "src/main/resources/report_";
 
     public static void main(String[] args) {
         StorageDaoImpl storageDao = new StorageDaoImpl();
-        Map<Operation, OperationHandler> opHandlerMap = new HashMap<>();
-        opHandlerMap.put(Operation.BALANCE, new BalanceHandler(storageDao));
-        opHandlerMap.put(Operation.SUPPLY, new SupplyHandler(storageDao));
-        opHandlerMap.put(Operation.PURCHASE, new PurchaseHandler(storageDao));
-        opHandlerMap.put(Operation.RETURN, new ReturnHandler(storageDao));
+        Map<Operation, OperationHandler> opHandlerMap = new HashMap<>(Map.of(
+                Operation.BALANCE, new BalanceHandler(storageDao),
+                Operation.SUPPLY, new SupplyHandler(storageDao),
+                Operation.PURCHASE, new PurchaseHandler(storageDao),
+                Operation.RETURN, new ReturnHandler(storageDao)
+        ));
 
         CsvFileReader csvFileReader = new CsvFileReader();
         TransactionConverterImpl transactionConverter = new TransactionConverterImpl();

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
+    @Override
     public void subtractFruit(String fruit, int minuend) {
         Integer currentValue = Storage.foodStorage.get(fruit);
 
@@ -15,10 +16,12 @@ public class StorageDaoImpl implements StorageDao {
         }
     }
 
+    @Override
     public void addFruit(String fruit, int addend) {
         Storage.foodStorage.merge(fruit, addend, Integer::sum);
     }
 
+    @Override
     public Map<String, Integer> getAllFruits() {
         return new HashMap<>(Storage.foodStorage);
     }

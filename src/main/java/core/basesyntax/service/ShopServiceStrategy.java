@@ -22,7 +22,7 @@ public class ShopServiceStrategy {
             if (handler != null) {
                 handler.handle(fruitTransaction.fruitType(), fruitTransaction.quantity());
             } else {
-                System.out.println("No handler found for operation: "
+                throw new RuntimeException("No handler found for operation: "
                         + fruitTransaction.operation());
             }
         });
