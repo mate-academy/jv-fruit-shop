@@ -11,6 +11,7 @@ import java.time.format.DateTimeFormatter;
 public class CsvWriter {
     private static final DateTimeFormatter FORMATTED = DateTimeFormatter.ofPattern(
             "yyyy-MM-dd_HH-mm-ss");
+
     public void writeToFile(String outputPath, String report) {
         outputPath += LocalDateTime.now().format(FORMATTED) + ".csv";
         File fileWithReport = new File(outputPath);

@@ -1,8 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.service.*;
+import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.CsvWriter;
+import core.basesyntax.service.Operation;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ShopServiceStrategy;
+import core.basesyntax.service.TransactionConverterImpl;
 import core.basesyntax.service.operation.BalanceHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseHandler;
@@ -33,8 +37,8 @@ public class HelloWorld {
 
         List<String> inputFileData = csvFileReader.readFile(INPUT_DATA_FILE);
         List<TransactionConverterImpl.FruitTransaction> transactions
-                =  transactionConverter.convertLines(inputFileData);
-        shopStrategy.processTransactions (transactions);
+                = transactionConverter.convertLines(inputFileData);
+        shopStrategy.processTransactions(transactions);
         String report = reportService.createReport(storageDao);
         csvWriter.writeToFile(OUTPUT_DATA_FILE, report);
     }
