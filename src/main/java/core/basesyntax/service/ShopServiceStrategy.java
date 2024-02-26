@@ -8,22 +8,23 @@ import java.util.Map;
 public class ShopServiceStrategy {
     private Map<Operation, OperationHandler> opHandlerMap;
 
-    public ShopServiceStrategy(Map<Operation, OperationHandler> opHandlerMap) {
+    public ShopServiceStrategy(
+            Map<Operation, OperationHandler> opHandlerMap) {
         this.opHandlerMap = opHandlerMap;
     }
 
     public void processTransactions(
-            List<TransactionConverterImpl.FruitTransaction> convertedDataList) {
+            List<FruitTransaction> convertedDataList) {
         Storage.foodStorage.clear();
 
         convertedDataList.forEach(fruitTransaction -> {
             OperationHandler handler =
-                    opHandlerMap.get(Operation.getByCode(fruitTransaction.operation()));
+                    opHandlerMap.get(fruitTransaction.getOperation());
             if (handler != null) {
-                handler.handle(fruitTransaction.fruitType(), fruitTransaction.quantity());
+                handler.handle(fruitTransaction.getFruitType(), fruitTransaction.getQuantity());
             } else {
                 throw new RuntimeException("No handler found for operation: "
-                        + fruitTransaction.operation());
+                        + fruitTransaction.getOperation());
             }
         });
     }

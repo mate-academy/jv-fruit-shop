@@ -21,13 +21,10 @@ public class TransactionConverterImpl implements TransactionConverter {
         return lines.stream().skip(1)
                 .map(line -> line.split(","))
                 .map(values -> new FruitTransaction(
-                        values[OPERATION_INDEX],
+                        Operation.getByCode(values[OPERATION_INDEX]),
                         values[FRUIT_TYPE_INDEX],
                         Integer.parseInt(values[FRUIT_AMOUNT_INDEX].trim())
                 ))
                 .collect(Collectors.toList());
-    }
-
-    public record FruitTransaction(String operation, String fruitType, int quantity) {
     }
 }

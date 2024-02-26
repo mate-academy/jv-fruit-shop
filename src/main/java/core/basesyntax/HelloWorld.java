@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.CsvFileReader;
 import core.basesyntax.service.CsvWriter;
+import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.Operation;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ShopServiceStrategy;
@@ -22,7 +23,8 @@ public class HelloWorld {
 
     public static void main(String[] args) {
         StorageDaoImpl storageDao = new StorageDaoImpl();
-        Map<Operation, OperationHandler> opHandlerMap = new HashMap<>(Map.of(
+        Map<Operation, OperationHandler> opHandlerMap = new HashMap<>(
+                Map.of(
                 Operation.BALANCE, new BalanceHandler(storageDao),
                 Operation.SUPPLY, new SupplyHandler(storageDao),
                 Operation.PURCHASE, new PurchaseHandler(storageDao),
@@ -33,13 +35,13 @@ public class HelloWorld {
         TransactionConverterImpl transactionConverter = new TransactionConverterImpl();
         CsvWriter csvWriter = new CsvWriter();
         ShopServiceStrategy shopStrategy = new ShopServiceStrategy(opHandlerMap);
-        ReportService reportService = new ReportService();
+        ReportService reportService = new ReportService(storageDao);
 
         List<String> inputFileData = csvFileReader.readFile(INPUT_DATA_FILE);
-        List<TransactionConverterImpl.FruitTransaction> transactions
+        List<FruitTransaction> transactions
                 = transactionConverter.convertLines(inputFileData);
         shopStrategy.processTransactions(transactions);
-        String report = reportService.createReport(storageDao);
+        String report = reportService.createReport();
         csvWriter.writeToFile(OUTPUT_DATA_FILE, report);
     }
 }

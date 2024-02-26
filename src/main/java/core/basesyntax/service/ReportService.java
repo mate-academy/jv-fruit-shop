@@ -4,10 +4,15 @@ import core.basesyntax.dao.StorageDaoImpl;
 
 public class ReportService {
     private static final String HEADER = "fruit,quantity";
+    private StorageDaoImpl storageDao;
 
-    public String createReport(StorageDaoImpl stDao) {
+    public ReportService(StorageDaoImpl storageDao) {
+        this.storageDao = storageDao;
+    }
+
+    public String createReport() {
         StringBuilder sb = new StringBuilder(HEADER + System.lineSeparator());
-        stDao.getAllFruits().entrySet()
+        storageDao.getAllFruits().entrySet()
                 .stream()
                 .forEach(entry -> sb.append(entry.getKey() + "," + entry.getValue()
                         + System.lineSeparator()));

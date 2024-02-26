@@ -12,10 +12,6 @@ public enum Operation {
         this.code = code;
     }
 
-    public String getCode() {
-        return code;
-    }
-
     public static Operation getByCode(String code) {
         for (Operation operation : values()) {
             if (operation.code.equals(code)) {
