@@ -1,12 +1,9 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Fruit;
-import java.util.Optional;
-
 public interface FruitDao {
-    Optional<Fruit> get(String fruitName);
+    Integer add(String fruitName, int amount);
 
-    boolean update(String fruitName, int amount);
+    boolean writeReportToFile(String fileName, String report);
 
-    boolean writeReportToFile(String fileName);
+    String createReport();
 }

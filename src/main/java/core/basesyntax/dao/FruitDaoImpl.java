@@ -1,36 +1,26 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Optional;
+import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
+
     @Override
-    public Optional<Fruit> get(String fruitName) {
-        return Storage.fruits.stream().filter(f -> f.getName().equals(fruitName)).findFirst();
+    public Integer add(String fruitName, int amount) {
+        return Storage.fruits.containsKey(fruitName)
+                ? Storage.fruits.replace(fruitName, Storage.fruits.get(fruitName) + amount)
+                : Storage.fruits.put(fruitName, amount);
+
     }
 
     @Override
-    public boolean update(String fruitName, int amount) {
-        Optional<Fruit> fruit = get(fruitName);
-        if (fruit.isEmpty()) {
-            return createFruit(fruitName, amount);
-        }
-        Storage.fruits.remove(fruit.get());
-        return Storage.fruits.add(new Fruit(fruitName, fruit.get().getAmount() + amount));
-    }
-
-    @Override
-    public boolean writeReportToFile(String fileName) {
+    public boolean writeReportToFile(String fileName, String report) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            writer.append("type,fruit\n");
-            for (Fruit fruit : Storage.fruits) {
-                writer.append(fruit.getName() + "," + fruit.getAmount() + "\n");
-            }
+            writer.append(report);
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -38,8 +28,14 @@ public class FruitDaoImpl implements FruitDao {
         return true;
     }
 
-    private static boolean createFruit(String fruitName, int amount) {
-        return Storage.fruits.add(new Fruit(fruitName, amount));
+    @Override
+    public String createReport() {
+        StringBuilder report = new StringBuilder();
+        report.append("type,fruit\n");
+        for (Map.Entry<String, Integer> fruit : Storage.fruits.entrySet()) {
+            report.append(fruit.getKey() + "," + fruit.getValue() + "\n");
+        }
+        return report.toString();
     }
 
 }

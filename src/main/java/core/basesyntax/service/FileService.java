@@ -22,7 +22,8 @@ public class FileService {
         return fruitTransactionDao.getAllTransactions(INPUT_FILE_NAME);
     }
 
-    public void writeReport() {
-        fruitDao.writeReportToFile(OUTPUT_FILE_NAME);
+    public void writeReport(String report) {
+        fruitDao.writeReportToFile(OUTPUT_FILE_NAME, report);
     }
+
 }

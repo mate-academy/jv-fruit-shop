@@ -21,13 +21,17 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
             List<String[]> lines = stringList.stream()
                     .map(f -> f.split(","))
                     .toList();
-            return lines.stream()
-                    .map(f -> new FruitTransaction(OperationStrategy.getOperation(f[TYPE]),
-                            f[FRUIT],
-                            Integer.parseInt(f[QUANTITY])))
-                    .collect(Collectors.toList());
+            return convertToTransactionsList(lines);
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file", e);
         }
+    }
+
+    private static List<FruitTransaction> convertToTransactionsList(List<String[]> lines) {
+        return lines.stream()
+                .map(f -> new FruitTransaction(OperationStrategy.getOperation(f[TYPE]),
+                        f[FRUIT],
+                        Integer.parseInt(f[QUANTITY])))
+                .collect(Collectors.toList());
     }
 }

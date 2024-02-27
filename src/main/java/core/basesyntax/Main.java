@@ -24,7 +24,7 @@ public class Main {
         ReportService reportService = new ReportService(
                 new ActivityStrategyImpl(activityHandlerMap));
         FileService fileService = new FileService();
-        reportService.makeReport(fileService.readFromFile());
-        fileService.writeReport();
+        reportService.executeOperations(fileService.readFromFile());
+        fileService.writeReport(reportService.generateReport());
     }
 }

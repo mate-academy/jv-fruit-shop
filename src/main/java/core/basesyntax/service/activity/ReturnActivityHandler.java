@@ -5,6 +5,6 @@ import core.basesyntax.model.FruitTransaction;
 public class ReturnActivityHandler implements ActivityHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction) {
-        fruitDao.update(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
+        fruitDao.add(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
     }
 }
