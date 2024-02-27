@@ -8,8 +8,8 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class FileService {
-    private static final String INPUT_FILE_NAME = "input.csv";
-    private static final String OUTPUT_FILE_NAME = "output.csv";
+    private static final String INPUT_FILE_NAME = "src/input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/output.csv";
     private FruitDao fruitDao;
     private FruitTransactionDao fruitTransactionDao;
 

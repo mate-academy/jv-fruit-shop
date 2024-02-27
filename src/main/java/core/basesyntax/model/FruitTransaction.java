@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Map;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -31,22 +29,10 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private static Map<String, Operation> operationMap;
         private String code;
-
-        static {
-            operationMap = Map.of("b", Operation.BALANCE,
-                    "s", Operation.SUPPLY,
-                    "p", Operation.PURCHASE,
-                    "r", Operation.RETURN);
-        }
 
         Operation(String code) {
             this.code = code;
-        }
-
-        public static Operation getOperation(String operation) {
-            return operationMap.get(operation);
         }
     }
 }

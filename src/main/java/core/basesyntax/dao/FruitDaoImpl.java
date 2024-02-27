@@ -26,7 +26,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public boolean writeReportToFile(String fileName) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter("src/" + fileName));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
             writer.append("type,fruit\n");
             for (Fruit fruit : Storage.fruits) {
                 writer.append(fruit.getName() + "," + fruit.getAmount() + "\n");

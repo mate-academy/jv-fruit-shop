@@ -5,10 +5,10 @@ import core.basesyntax.service.activity.ActivityHandler;
 import core.basesyntax.strategy.ActivityStrategy;
 import java.util.List;
 
-public class FruitService {
+public class ReportService {
     private ActivityStrategy activityStrategy;
 
-    public FruitService(ActivityStrategy activityStrategy) {
+    public ReportService(ActivityStrategy activityStrategy) {
         this.activityStrategy = activityStrategy;
     }
 

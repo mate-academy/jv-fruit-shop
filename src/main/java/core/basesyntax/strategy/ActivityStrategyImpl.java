@@ -5,7 +5,6 @@ import core.basesyntax.service.activity.ActivityHandler;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
-
     private Map<FruitTransaction.Operation, ActivityHandler> activityHandlerMap;
 
     public ActivityStrategyImpl(Map<FruitTransaction.Operation,

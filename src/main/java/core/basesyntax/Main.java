@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
-import core.basesyntax.service.FruitService;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.activity.ActivityHandler;
 import core.basesyntax.service.activity.BalanceActivityHandler;
 import core.basesyntax.service.activity.PurchaseActivityHandler;
@@ -21,9 +21,10 @@ public class Main {
                         FruitTransaction.Operation.PURCHASE, new PurchaseActivityHandler(),
                         FruitTransaction.Operation.RETURN, new ReturnActivityHandler(),
                         FruitTransaction.Operation.SUPPLY, new SupplyActivityHandler());
-        FruitService fruitService = new FruitService(new ActivityStrategyImpl(activityHandlerMap));
+        ReportService reportService = new ReportService(
+                new ActivityStrategyImpl(activityHandlerMap));
         FileService fileService = new FileService();
-        fruitService.makeReport(fileService.readFromFile());
+        reportService.makeReport(fileService.readFromFile());
         fileService.writeReport();
     }
 }

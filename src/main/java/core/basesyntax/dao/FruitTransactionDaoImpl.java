@@ -1,6 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationStrategy;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -15,11 +16,13 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
     @Override
     public List<FruitTransaction> getAllTransactions(String fileName) {
         try {
-            List<String> stringList = Files.readAllLines(Path.of("src/" + fileName));
+            List<String> stringList = Files.readAllLines(Path.of(fileName));
             stringList.remove(0);
-            return stringList.stream()
+            List<String[]> lines = stringList.stream()
                     .map(f -> f.split(","))
-                    .map(f -> new FruitTransaction(FruitTransaction.Operation.getOperation(f[TYPE]),
+                    .toList();
+            return lines.stream()
+                    .map(f -> new FruitTransaction(OperationStrategy.getOperation(f[TYPE]),
                             f[FRUIT],
                             Integer.parseInt(f[QUANTITY])))
                     .collect(Collectors.toList());
