@@ -16,11 +16,12 @@ public class ReportService {
         fruitDao = new FruitDaoImpl();
     }
 
-    public void executeOperations(List<FruitTransaction> fruitTransactionList) {
+    public boolean executeOperations(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             ActivityHandler activityHandler = activityStrategy.get(fruitTransaction.getOperation());
             activityHandler.operate(fruitTransaction);
         }
+        return true;
     }
 
     public String generateReport() {
