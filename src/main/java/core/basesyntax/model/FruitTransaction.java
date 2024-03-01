@@ -1,5 +1,8 @@
 package core.basesyntax.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -28,11 +31,23 @@ public class FruitTransaction {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
-
+        private static final Map<String, Operation> operationMap;
         private String code;
+
+        static {
+            operationMap = new HashMap<>();
+            operationMap.put("b", FruitTransaction.Operation.BALANCE);
+            operationMap.put("s", FruitTransaction.Operation.SUPPLY);
+            operationMap.put("p", FruitTransaction.Operation.PURCHASE);
+            operationMap.put("r", FruitTransaction.Operation.RETURN);
+        }
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static FruitTransaction.Operation getOperation(String operationCode) {
+            return operationMap.get(operationCode);
         }
     }
 }
