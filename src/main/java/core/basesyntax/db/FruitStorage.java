@@ -2,13 +2,13 @@ package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class FruitStorage {
     private static final Map<String, Integer> fruitInventory = new HashMap<>();
 
     public static void addFruit(String fruit, int quantity) {
-        int currentQuantity = fruitInventory.getOrDefault(fruit, 0);
-        fruitInventory.put(fruit, currentQuantity + quantity);
+        fruitInventory.merge(fruit, quantity, Integer::sum);
     }
 
     public static void removeFruit(String fruit, int quantity) {
@@ -19,7 +19,7 @@ public class FruitStorage {
         fruitInventory.put(fruit, currentQuantity - quantity);
     }
 
-    public static Map<String, Integer> getFruitInventory() {
-        return new HashMap<>(fruitInventory);
+    public static Set<Map.Entry<String, Integer>> getFruitInventoryEntries() {
+        return fruitInventory.entrySet();
     }
 }

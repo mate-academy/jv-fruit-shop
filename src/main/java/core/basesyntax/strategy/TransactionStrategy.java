@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class TransactionStrategy {
     private static final Map<Operation, TransactionStrategyService>
-            currentTransaction = Map.of(
+            operationToStrategyServiceMap = Map.of(
                     Operation.BALANCE, new BalanceTransactionService(),
             Operation.SUPPLY, new SupplyTransactionService(),
             Operation.PURCHASE, new PurchaseTransactionService(),
@@ -18,6 +18,6 @@ public class TransactionStrategy {
     );
 
     public static TransactionStrategyService getTransactionService(Operation operation) {
-        return currentTransaction.get(operation);
+        return operationToStrategyServiceMap.get(operation);
     }
 }
