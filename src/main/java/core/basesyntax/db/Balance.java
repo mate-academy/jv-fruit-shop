@@ -1,8 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitType;
-
-import java.util.HashMap;
 import java.util.Map;
 
 public class Balance {

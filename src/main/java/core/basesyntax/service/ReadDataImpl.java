@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class ReadDataImpl implements ReadData{
+public class ReadDataImpl implements ReadData {
     @Override
     public List<String> readDataFromFile() {
         try {

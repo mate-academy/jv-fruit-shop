@@ -1,6 +1,5 @@
 package core.basesyntax.model;
 
-import java.lang.reflect.Type;
 import java.util.Objects;
 
 public class FruitInfo {
@@ -34,18 +33,23 @@ public class FruitInfo {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof FruitInfo fruitInfo)) return false;
-        return quantity == fruitInfo.quantity && fruitType == fruitInfo.fruitType && Objects.equals(activities, fruitInfo.activities);
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof FruitInfo fruitInfo)) {
+            return false;
+        }
+        return quantity == fruitInfo.quantity && fruitType == fruitInfo.fruitType
+                && Objects.equals(activities, fruitInfo.activities);
     }
 
     @Override
     public String toString() {
-        return "FruitInfo{" +
-                "fruitType=" + fruitType +
-                ", quantity=" + quantity +
-                ", activities='" + activities + '\'' +
-                '}';
+        return "FruitInfo{"
+                + "fruitType=" + fruitType
+                + ", quantity=" + quantity
+                + ", activities='"
+                + activities + '\'' + '}';
     }
 
     @Override

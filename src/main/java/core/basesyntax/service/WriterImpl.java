@@ -1,15 +1,15 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitType;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class WriterImpl implements Writer{
+public class WriterImpl implements Writer {
+
     @Override
-    public void writeRepo (Map<FruitType, Integer> fruitServiceMap) {
+    public void writeRepo(Map<FruitType, Integer> fruitServiceMap) {
         String fileName = "src/main/java/Result.csv";
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write("fruit,quantity");

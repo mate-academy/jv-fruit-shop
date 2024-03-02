@@ -2,7 +2,6 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitInfo;
 import core.basesyntax.model.FruitType;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

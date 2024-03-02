@@ -4,7 +4,6 @@ import core.basesyntax.db.AllFruitInfo;
 import core.basesyntax.db.Balance;
 import core.basesyntax.model.FruitInfo;
 import core.basesyntax.model.FruitType;
-
 import java.util.List;
 import java.util.Map;
 
@@ -32,6 +31,5 @@ public class DaoImpl implements Dao {
     public List<FruitInfo> getInfoFromAllFruit() {
         return allFruitInfo.getFruitInfoList();
     }
-
 
 }

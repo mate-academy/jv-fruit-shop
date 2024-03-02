@@ -1,7 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.model.FruitInfo;
-
 import java.util.ArrayList;
 import java.util.List;
 
