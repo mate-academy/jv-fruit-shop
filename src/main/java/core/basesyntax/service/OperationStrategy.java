@@ -1,8 +1,9 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.quantity.OperationHandler;
+import core.basesyntax.entity.Operation;
+import core.basesyntax.service.quantity.handlers.OperationHandler;
 
 public interface OperationStrategy {
 
-    OperationHandler operate(String codeOperation);
+    OperationHandler operate(Operation operation);
 }

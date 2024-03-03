@@ -6,8 +6,7 @@ public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
-    RETURN("r"),
-    UTILIZATION("u");
+    RETURN("r");
 
     private String code;
 
