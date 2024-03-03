@@ -4,9 +4,9 @@ import core.basesyntax.dao.StoreCsvDao;
 import core.basesyntax.dao.StoreCsvDaoImpl;
 import core.basesyntax.entity.Operation;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.quantity.handlers.*;
 
 import java.util.HashMap;

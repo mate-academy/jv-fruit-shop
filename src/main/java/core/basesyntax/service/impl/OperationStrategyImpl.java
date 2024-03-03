@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.entity.Operation;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.quantity.handlers.OperationHandler;
 
 import java.util.Map;

@@ -1,14 +1,16 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StoreCsvDao;
 import core.basesyntax.entity.FruitTransaction;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportService;
 import core.basesyntax.service.quantity.handlers.OperationHandler;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ReportServiceImpl implements ReportService{
+public class ReportServiceImpl implements ReportService {
 
     private static final String REPORT_FILE_NAME = "resources\\finalreport.csv";
     private StoreCsvDao storeCsvDao;
