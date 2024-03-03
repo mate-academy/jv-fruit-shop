@@ -4,11 +4,14 @@ import core.basesyntax.dao.StoreCsvDao;
 import core.basesyntax.dao.StoreCsvDaoImpl;
 import core.basesyntax.entity.Operation;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.quantity.handlers.*;
-
+import core.basesyntax.service.quantity.handlers.BalanceHandler;
+import core.basesyntax.service.quantity.handlers.OperationHandler;
+import core.basesyntax.service.quantity.handlers.PurchaseHandler;
+import core.basesyntax.service.quantity.handlers.ReturnHandler;
+import core.basesyntax.service.quantity.handlers.SupplyHandler;
 import java.util.HashMap;
 import java.util.Map;
 
