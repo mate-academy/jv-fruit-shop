@@ -1,6 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FruitTransaction {
@@ -31,16 +30,12 @@ public class FruitTransaction {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
-        private static final Map<String, Operation> operationMap;
+        private static final Map<String, Operation> operationMap = Map.of(
+                "b", FruitTransaction.Operation.BALANCE,
+                "s", FruitTransaction.Operation.SUPPLY,
+                "p", FruitTransaction.Operation.PURCHASE,
+                "r", FruitTransaction.Operation.RETURN);
         private String code;
-
-        static {
-            operationMap = new HashMap<>();
-            operationMap.put("b", FruitTransaction.Operation.BALANCE);
-            operationMap.put("s", FruitTransaction.Operation.SUPPLY);
-            operationMap.put("p", FruitTransaction.Operation.PURCHASE);
-            operationMap.put("r", FruitTransaction.Operation.RETURN);
-        }
 
         Operation(String code) {
             this.code = code;

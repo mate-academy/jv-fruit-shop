@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileService;
+import core.basesyntax.service.OperationService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.activity.ActivityHandler;
 import core.basesyntax.service.activity.BalanceActivityHandler;
@@ -20,10 +21,12 @@ public class Main {
                 FruitTransaction.Operation.PURCHASE, new PurchaseActivityHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnActivityHandler(),
                 FruitTransaction.Operation.SUPPLY, new SupplyActivityHandler());
-        ReportService reportService = new ReportService(
-                new ActivityStrategyImpl(activityHandlerMap), new FruitDaoImpl());
+        FruitDaoImpl fruitDao = new FruitDaoImpl();
+        ReportService reportService = new ReportService(fruitDao);
+        OperationService operationService = new OperationService(
+                new ActivityStrategyImpl(activityHandlerMap), fruitDao);
         FileService fileService = new FileService();
-        reportService.executeOperations(FileService
+        operationService.executeOperations(FileService
                 .convertToTransactionsList(fileService.readFromFile()));
         fileService.writeReport(reportService.generateReport());
     }

@@ -26,7 +26,7 @@ public class FileService {
     }
 
     public boolean writeReport(String report) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE_NAME));) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(OUTPUT_FILE_NAME))) {
             writer.append(report);
         } catch (IOException e) {
             throw new RuntimeException(e);
