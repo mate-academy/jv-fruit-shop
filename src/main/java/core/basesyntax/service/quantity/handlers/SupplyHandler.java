@@ -1,7 +1,6 @@
 package core.basesyntax.service.quantity.handlers;
 
 import core.basesyntax.entity.FruitTransaction;
-
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,7 +11,8 @@ public class SupplyHandler implements OperationHandler {
             = "Transaction that was passed in the argument is null";
 
     @Override
-    public void handleTransaction(FruitTransaction fruitTransaction, Map<String, Integer> fruitMap) {
+    public void handleTransaction(FruitTransaction fruitTransaction,
+                                  Map<String, Integer> fruitMap) {
         Optional.ofNullable(fruitTransaction)
                 .orElseThrow(() -> new IllegalArgumentException(TRANSACTION_IS_NULL_ERROR_MESSAGE));
         String fruit = fruitTransaction.getFruit();
