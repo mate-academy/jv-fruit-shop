@@ -19,8 +19,18 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class StoreCsvDaoImpl implements StoreCsvDao {
+public class FruitTransactionDaoCsvImpl implements FruitTransactionDao {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String SEPARATOR = ",";
 
+    private static final String TYPE_COLUMN = "type,";
+
+    private static final String FRUIT_COLUMN = "fruit,";
+    private static final String QUANTITY_COLUMN = "quantity";
+    private static final String CANNOT_READ_FILE_MESSAGE = "Cannot read the file: ";
+    private static final String CANNOT_WRITE_FILE_MESSAGE = "Cannot write the data to file: ";
     private static final String PATH_TO_DAILY_ACTIVITY_FILE
             = "src/main/resources/dailyactivities.csv";
     private static final String PATH_TO_REPORT_FILE
@@ -31,17 +41,14 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
     private static final String STRING_ARGUMENT_ERROR
             = "The string was passed in the argument is null";
 
-    public StoreCsvDaoImpl() {
-    }
-
     @Override
-    public void addLine(FruitTransaction fruitTransaction) {
+    public void addTransaction(FruitTransaction fruitTransaction) {
         addColumnNames();
         StringBuilder lineBuilder = new StringBuilder();
         lineBuilder.append(fruitTransaction.getOperation().getCode());
-        lineBuilder.append(",");
+        lineBuilder.append(SEPARATOR);
         lineBuilder.append(fruitTransaction.getFruit());
-        lineBuilder.append(",");
+        lineBuilder.append(SEPARATOR);
         lineBuilder.append(fruitTransaction.getQuantity());
         lineBuilder.append(System.lineSeparator());
         String transactionLine = lineBuilder.toString();
@@ -49,7 +56,7 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
     }
 
     @Override
-    public List<FruitTransaction> getAll() {
+    public List<FruitTransaction> getAllTransactions() {
         List<String> allLines = readLines();
         return allLines.stream()
                 .map(this::getTransactionFromCsv)
@@ -57,14 +64,14 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
     }
 
     @Override
-    public void saveReportToFile(Map<String, Integer> report) {
+    public void fetchTransactionSummaryData(Map<String, Integer> summaryData) {
         StringBuilder lineBuilder = new StringBuilder();
-        lineBuilder.append("fruit,");
-        lineBuilder.append("quantity");
+        lineBuilder.append(FRUIT_COLUMN);
+        lineBuilder.append(QUANTITY_COLUMN);
         lineBuilder.append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : report.entrySet()) {
+        for (Map.Entry<String, Integer> entry : summaryData.entrySet()) {
             lineBuilder.append(entry.getKey());
-            lineBuilder.append(",");
+            lineBuilder.append(SEPARATOR);
             lineBuilder.append(entry.getValue());
             lineBuilder.append(System.lineSeparator());
         }
@@ -88,7 +95,7 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read file"
+            throw new RuntimeException(CANNOT_READ_FILE_MESSAGE
                     + PATH_TO_DAILY_ACTIVITY_FILE, e);
         }
         return lines;
@@ -97,14 +104,12 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
     private void addColumnNames() {
         if (isEmptyFile()) {
             StringBuilder columnNamesBuilder = new StringBuilder();
-            columnNamesBuilder.append("type,");
-            columnNamesBuilder.append("fruit,");
-            columnNamesBuilder.append("quantity");
+            columnNamesBuilder.append(TYPE_COLUMN);
+            columnNamesBuilder.append(FRUIT_COLUMN);
+            columnNamesBuilder.append(QUANTITY_COLUMN);
             columnNamesBuilder.append(System.lineSeparator());
             String columnNames = columnNamesBuilder.toString();
-            writeLinesToFile(columnNames, StoreCsvDaoImpl.PATH_TO_DAILY_ACTIVITY_FILE);
-            System.out.println("Columns was added successfully to file: "
-                    + PATH_TO_DAILY_ACTIVITY_FILE);
+            writeLinesToFile(columnNames, FruitTransactionDaoCsvImpl.PATH_TO_DAILY_ACTIVITY_FILE);
         }
     }
 
@@ -116,7 +121,7 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
                 BufferedReader reader = new BufferedReader(inputStreamReader)) {
             isEmptyFile = reader.readLine() == null;
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read file" + PATH_TO_DAILY_ACTIVITY_FILE, e);
+            throw new RuntimeException(CANNOT_READ_FILE_MESSAGE + PATH_TO_DAILY_ACTIVITY_FILE, e);
         }
         return isEmptyFile;
     }
@@ -124,12 +129,12 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
     private FruitTransaction getTransactionFromCsv(String line) {
         Optional.ofNullable(line)
                 .orElseThrow(() -> new IllegalArgumentException(STRING_ARGUMENT_ERROR));
-        String[] row = line.split(",");
-        Operation operation = Operation.chooseOperation(row[0]);
+        String[] row = line.split(SEPARATOR);
+        Operation operation = Operation.chooseOperation(row[OPERATION_INDEX]);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(operation);
-        fruitTransaction.setFruit(row[1]);
-        fruitTransaction.setQuantity(Integer.parseInt(row[2]));
+        fruitTransaction.setFruit(row[FRUIT_INDEX]);
+        fruitTransaction.setQuantity(Integer.parseInt(row[QUANTITY_INDEX]));
         return fruitTransaction;
     }
 
@@ -141,9 +146,8 @@ public class StoreCsvDaoImpl implements StoreCsvDao {
                 BufferedWriter writer = new BufferedWriter(outputStreamWriter)) {
             writer.write(lines);
             writer.flush();
-            System.out.println("Report data was written successfully!");
         } catch (IOException e) {
-            throw new RuntimeException("Cannot write the data to file :" + pathToFile, e);
+            throw new RuntimeException(CANNOT_WRITE_FILE_MESSAGE + pathToFile, e);
         }
     }
 }
