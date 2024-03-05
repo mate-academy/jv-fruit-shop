@@ -1,9 +1,9 @@
-package service.ipml;
+package java.core.basesyntax.service.impl;
 
+import java.core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import service.FileWriterService;
 
 public class FileWriterServiceImpl implements FileWriterService {
     @Override

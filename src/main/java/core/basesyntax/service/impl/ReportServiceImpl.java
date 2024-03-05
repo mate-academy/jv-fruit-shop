@@ -1,7 +1,7 @@
-package service.ipml;
+package java.core.basesyntax.service.impl;
 
 import java.util.Map;
-import service.ReportService;
+import java.core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
