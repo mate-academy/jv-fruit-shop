@@ -6,9 +6,9 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.FruitService;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReportService;
+import core.basesyntax.service.TrasactionExecutor;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitServiceImpl;
@@ -32,7 +32,7 @@ public class Main {
 
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitTransactions =
-                parser.convertFruitDataToTransactions(fruitData);
+                parser.parseAll(fruitData);
 
         FruitDao fruitDao = new FruitDaoImpl();
 
@@ -41,7 +41,7 @@ public class Main {
                 Operation.RETURN, new IncreaseQuantityStrategy(fruitDao),
                 Operation.PURCHASE, new DecreaseQuantityStrategy(fruitDao));
 
-        FruitService fruitService = new FruitServiceImpl(strategyMap);
+        TrasactionExecutor fruitService = new FruitServiceImpl(strategyMap);
         fruitService.processTransactions(fruitTransactions);
 
         ReportService reportService = new ReportServiceImpl();

@@ -31,7 +31,7 @@ public class ParserImpl implements Parser {
     }
 
     @Override
-    public List<FruitTransaction> convertFruitDataToTransactions(List<String> fruitData) {
+    public List<FruitTransaction> parseAll(List<String> fruitData) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String data : fruitData) {
             if (!data.equals(STORE_HEADER)) {

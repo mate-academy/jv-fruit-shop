@@ -6,5 +6,5 @@ import java.util.List;
 public interface Parser {
     FruitTransaction parse(String data);
 
-    List<FruitTransaction> convertFruitDataToTransactions(List<String> fruitData);
+    List<FruitTransaction> parseAll(List<String> fruitData);
 }
