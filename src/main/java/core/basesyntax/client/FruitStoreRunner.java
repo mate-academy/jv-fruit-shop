@@ -18,10 +18,10 @@ public class FruitStoreRunner {
 
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationHandlerMap = Map.of(
-                Operation.BALANCE, new BalanceHandler(),
+                Operation.RETURN, new ReturnHandler(),
                 Operation.SUPPLY, new SupplyHandler(),
                 Operation.PURCHASE, new PurchaseHandler(),
-                Operation.RETURN, new ReturnHandler());
+                Operation.BALANCE, new BalanceHandler());
         FruitTransactionDao fruitTransactionDao = new FruitTransactionDaoCsvImpl();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ReportService reportService = new ReportServiceImpl(fruitTransactionDao, operationStrategy);
