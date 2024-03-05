@@ -47,7 +47,7 @@ Remember, if you are using classes that implement an AutoCloseable interface, we
 Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
 
 #### Use data structures from the Collection framework
-In order to represent fruit storage you may use already existing data structures, think of the one that will be 
+In order to represent fruit db you may use already existing data structures, think of the one that will be 
 the most suitable for your needs.
 
 #### Place the input and output files into the `src/main/resources` folder.
