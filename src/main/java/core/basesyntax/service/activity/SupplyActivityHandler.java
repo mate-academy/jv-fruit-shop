@@ -6,6 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyActivityHandler implements ActivityHandler {
     @Override
     public void operate(FruitTransaction fruitTransaction, FruitDao fruitDao) {
-        fruitDao.add(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
+        Integer balance = fruitDao.add(fruitTransaction.getFruitName(),
+                fruitTransaction.getQuantity());
+        if (balance < 0) {
+            throw new RuntimeException("Balance is negative after activity in class "
+                    + this.getClass().getSimpleName());
+        }
     }
 }
