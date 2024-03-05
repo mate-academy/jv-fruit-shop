@@ -1,4 +1,4 @@
-package java.core.basesyntax.service;
+package core.basesyntax.service;
 
 import java.util.Map;
 

@@ -1,8 +1,8 @@
-package java.core.basesyntax.strategy.impl;
+package core.basesyntax.strategy.impl;
 
-import java.core.basesyntax.dao.FruitDao;
-import java.core.basesyntax.model.FruitTransaction;
-import java.core.basesyntax.strategy.FruitOperationStrategy;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.FruitOperationStrategy;
 
 public class DecreaseQuantityStrategy implements FruitOperationStrategy {
     private final FruitDao fruitDao;

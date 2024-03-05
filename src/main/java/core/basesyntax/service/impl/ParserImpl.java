@@ -1,10 +1,10 @@
-package java.core.basesyntax.service.impl;
+package core.basesyntax.service.impl;
 
-import java.core.basesyntax.model.Operation;
-import java.core.basesyntax.service.Parser;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.List;
-import java.core.basesyntax.model.FruitTransaction;
 
 public class ParserImpl implements Parser {
     private static final String DELIMITER = ",";

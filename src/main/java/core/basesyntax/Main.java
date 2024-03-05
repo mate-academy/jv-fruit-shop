@@ -1,25 +1,25 @@
-package java.core.basesyntax;
+package core.basesyntax;
 
-import java.core.basesyntax.dao.FruitDao;
-import java.core.basesyntax.dao.FruitDaoImpl;
-import java.core.basesyntax.model.Operation;
-import java.core.basesyntax.service.ReportService;
-import java.core.basesyntax.service.impl.FruitServiceImpl;
-import java.core.basesyntax.service.impl.ReportServiceImpl;
-import java.core.basesyntax.strategy.FruitOperationStrategy;
-import java.core.basesyntax.strategy.impl.BalanceOperationStrategy;
-import java.core.basesyntax.strategy.impl.DecreaseQuantityStrategy;
-import java.core.basesyntax.strategy.impl.IncreaseQuantityStrategy;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.Parser;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitServiceImpl;
+import core.basesyntax.service.impl.ParserImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.strategy.FruitOperationStrategy;
+import core.basesyntax.strategy.impl.BalanceOperationStrategy;
+import core.basesyntax.strategy.impl.DecreaseQuantityStrategy;
+import core.basesyntax.strategy.impl.IncreaseQuantityStrategy;
 import java.util.List;
 import java.util.Map;
-import java.core.basesyntax.model.FruitTransaction;
-import java.core.basesyntax.service.FileReaderService;
-import java.core.basesyntax.service.FileWriterService;
-import java.core.basesyntax.service.FruitService;
-import java.core.basesyntax.service.Parser;
-import java.core.basesyntax.service.impl.FileReaderServiceImpl;
-import java.core.basesyntax.service.impl.FileWriterServiceImpl;
-import java.core.basesyntax.service.impl.ParserImpl;
 
 public class Main {
     private static Map<Operation, FruitOperationStrategy> strategyMap;

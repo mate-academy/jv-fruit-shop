@@ -1,7 +1,7 @@
-package java.core.basesyntax.service.impl;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReportService;
 import java.util.Map;
-import java.core.basesyntax.service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
