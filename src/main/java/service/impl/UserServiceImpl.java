@@ -1,19 +1,16 @@
 package service.impl;
 
-import com.sun.tools.javac.Main;
 import dao.FruitDao;
-import dao.FruitDaoImpl;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
-import service.FruitTransactionService;
 import service.ParserService;
 import service.ReaderService;
 import service.UserService;
 import service.WriterService;
 import strategy.OperationService;
 import strategy.impl.FruitStrategy;
-import java.util.List;
-import java.util.Map;
 
 public class UserServiceImpl implements UserService {
     private final FruitDao fruitDao;
@@ -26,13 +23,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void formReport(Map<Operation, OperationService> operationServiceMap, String fromFile, String toFile) {
-        FruitStrategy fruitStrategy = new FruitStrategy(operationServiceMap);
+    public void formReport(Map<Operation, OperationService> operationMap,
+                           String fromFile, String toFile) {
+        FruitStrategy fruitStrategy = new FruitStrategy(operationMap);
         List<String> commands = readerService.readFromFile(fromFile);
         List<FruitTransaction> fruitTransactions = parserService.parse(commands);
-        FruitTransactionService fruitTransactionService = new FruitTransactionServiceImpl(fruitDao);
-        List<FruitTransaction> processedCommands = fruitTransactionService.processFruitTransaction(fruitTransactions);
-        fruitStrategy.executeOperationServiceByOperation(processedCommands);
+        fruitStrategy.executeOperationServiceByOperation(fruitTransactions);
         writerService.writeToFile(toFile, fruitDao.getAll());
     }
 }

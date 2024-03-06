@@ -1,9 +1,9 @@
 package strategy.impl;
 
-import exception.InsufficientFruitsException;
-import strategy.OperationService;
 import dao.FruitDao;
+import exception.InsufficientFruitsException;
 import model.Fruit;
+import strategy.OperationService;
 
 public class ReturnOperationService implements OperationService {
     private final FruitDao fruitDao;
@@ -21,7 +21,8 @@ public class ReturnOperationService implements OperationService {
             fruit.setSold(fruit.getSold() - quantity);
             fruitDao.update(fruit);
         } else {
-            throw new InsufficientFruitsException("Not enough fruits were sold to fulfill the request");
+            throw new InsufficientFruitsException("Not enough fruits were sold to "
+                    + "fulfill the request");
         }
     }
 }

@@ -1,15 +1,16 @@
 package service.impl;
 
-import model.Fruit;
-import service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import model.Fruit;
+import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {
     private static final String HEADER_FRUIT = "fruit";
     private static final String HEADER_QUANTITY = "quantity";
+
     @Override
     public void writeToFile(String pathToFile, List<Fruit> fruits) {
         StringBuilder builder = new StringBuilder();

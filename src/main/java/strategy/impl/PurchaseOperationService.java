@@ -1,9 +1,9 @@
 package strategy.impl;
 
-import exception.OutOfStockException;
-import strategy.OperationService;
 import dao.FruitDao;
+import exception.OutOfStockException;
 import model.Fruit;
+import strategy.OperationService;
 
 public class PurchaseOperationService implements OperationService {
     private final FruitDao fruitDao;

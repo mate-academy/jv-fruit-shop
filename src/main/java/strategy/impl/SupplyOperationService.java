@@ -1,8 +1,8 @@
 package strategy.impl;
 
-import strategy.OperationService;
 import dao.FruitDao;
 import model.Fruit;
+import strategy.OperationService;
 
 public class SupplyOperationService implements OperationService {
     private final FruitDao fruitDao;

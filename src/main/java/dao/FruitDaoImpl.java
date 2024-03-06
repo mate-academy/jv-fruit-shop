@@ -1,9 +1,9 @@
 package dao;
 
 import db.Storage;
-import model.Fruit;
 import java.util.ArrayList;
 import java.util.List;
+import model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override

@@ -1,7 +1,7 @@
 package service;
 
-import model.Fruit;
 import java.util.List;
+import model.Fruit;
 
 public interface WriterService {
     void writeToFile(String pathToFile, List<Fruit> fruits);
