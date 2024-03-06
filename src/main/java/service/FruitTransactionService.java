@@ -1,8 +1,9 @@
 package service;
 
-import java.util.List;
 import model.FruitTransaction;
+import model.Operation;
+import java.util.List;
 
 public interface FruitTransactionService {
-    void makeOperation(List<FruitTransaction> fruitTransaction);
+    List<FruitTransaction> processFruitTransaction(List<FruitTransaction> fruitTransactions);
 }

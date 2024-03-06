@@ -5,7 +5,7 @@ import dao.FruitDao;
 import model.Fruit;
 
 public class SupplyOperationService implements OperationService {
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public SupplyOperationService(FruitDao fruitDao) {
         this.fruitDao = fruitDao;

@@ -2,6 +2,8 @@ package dao;
 
 import db.Storage;
 import model.Fruit;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -22,5 +24,10 @@ public class FruitDaoImpl implements FruitDao {
         Fruit fruitFromDB = get(fruit.getFruitName());
         Storage.fruits.remove(fruitFromDB);
         add(fruit);
+    }
+
+    @Override
+    public List<Fruit> getAll() {
+        return new ArrayList<>(Storage.fruits);
     }
 }

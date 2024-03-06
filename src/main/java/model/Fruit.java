@@ -2,8 +2,8 @@ package model;
 
 public class Fruit {
     private String fruitName;
-
     private int quantity;
+    private int sold;
 
     public Fruit(String fruitName, int quantity) {
         this.fruitName = fruitName;
@@ -24,5 +24,13 @@ public class Fruit {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
     }
 }
