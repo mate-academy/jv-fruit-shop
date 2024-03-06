@@ -1,10 +1,9 @@
 package service.impl;
 
+import java.util.List;
 import dao.FruitDao;
-import dao.FruitDaoImpl;
-import model.Fruit;
-import model.FruitTransaction;
 import service.FruitTransactionService;
+import model.FruitTransaction;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
     private FruitDao fruitDao;
@@ -14,14 +13,7 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
     }
 
     @Override
-    public void makeOperation(FruitTransaction.Operation operation, String fruitName, int quantity) {
-        Fruit fruit = fruitDao.get(fruitName);
-        int newQuantity = fruit.getQuantity();
-        switch (operation) {
-            case BALANCE -> fruit.setQuantity(quantity);
-            case PURCHASE -> fruit.setQuantity(newQuantity -= quantity);
-            case RETURN, SUPPLY -> fruit.setQuantity(newQuantity += quantity);
-        }
-        fruitDao.update(fruit);
+    public void makeOperation(List<FruitTransaction> commands) {
+
     }
 }

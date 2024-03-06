@@ -1,7 +1,7 @@
 package dao;
 
-import model.Fruit;
 import db.Storage;
+import model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
@@ -12,14 +12,14 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public Fruit get(String fruitName) {
         return Storage.fruits.stream()
-                .filter(f -> f.getName().equals(fruitName))
+                .filter(f -> f.getFruitName().equals(fruitName))
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     @Override
     public void update(Fruit fruit) {
-        Fruit fruitFromDB = get(fruit.getName());
+        Fruit fruitFromDB = get(fruit.getFruitName());
         Storage.fruits.remove(fruitFromDB);
         add(fruit);
     }

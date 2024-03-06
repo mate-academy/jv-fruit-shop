@@ -1,15 +1,21 @@
 package model;
 
 public class Fruit {
-    private String name;
+    private String fruitName;
+
     private int quantity;
 
-    public String getName() {
-        return name;
+    public Fruit(String fruitName, int quantity) {
+        this.fruitName = fruitName;
+        this.quantity = quantity;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFruitName() {
+        return fruitName;
+    }
+
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public int getQuantity() {
