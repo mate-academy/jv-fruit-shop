@@ -14,12 +14,18 @@ import strategy.impl.FruitStrategy;
 
 public class UserServiceImpl implements UserService {
     private final FruitDao fruitDao;
-    private final ReaderService readerService = new ReaderServiceImpl();
-    private final ParserService parserService = new ParserServiceImpl();
-    private final WriterService writerService = new WriterServiceImpl();
+    private final ReaderService readerService;
+    private final ParserService parserService;
+    private final WriterService writerService;
 
-    public UserServiceImpl(FruitDao fruitDao) {
+    public UserServiceImpl(FruitDao fruitDao,
+                           ReaderService readerService,
+                           ParserService parserService,
+                           WriterService writerService) {
         this.fruitDao = fruitDao;
+        this.readerService = readerService;
+        this.parserService = parserService;
+        this.writerService = writerService;
     }
 
     @Override
