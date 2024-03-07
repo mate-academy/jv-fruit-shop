@@ -44,5 +44,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation fromString(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            return null;
+        }
     }
 }

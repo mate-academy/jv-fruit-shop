@@ -1,20 +1,20 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionProcessorService;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
-public class FruitTransactionProcessorService implements TransactionProcessorService {
+public class FruitTransactionProcessor implements TransactionProcessor {
     private final OperationStrategy operationStrategy;
 
-    public FruitTransactionProcessorService(OperationStrategy operationStrategy) {
+    public FruitTransactionProcessor(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     @Override
-    public void processTransactions(List<FruitTransaction> transactions) {
+    public void processAll(List<FruitTransaction> transactions) {
         if (transactions.isEmpty()) {
             throw new RuntimeException("No transactions to process. Transaction list is empty!");
         }

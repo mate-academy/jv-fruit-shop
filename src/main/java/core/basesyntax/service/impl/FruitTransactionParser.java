@@ -1,11 +1,12 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.TransactionParserService;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class FruitTransactionParserService implements TransactionParserService {
+public class FruitTransactionParser implements TransactionParser {
     private static final int HEADER_LINE = 0;
     private static final String SEPARATOR = ",";
     private static final int TRANSACTION_PARAMS_COUNT = 3;
@@ -14,7 +15,7 @@ public class FruitTransactionParserService implements TransactionParserService {
     private static final int FRUIT_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> parseTransactions(List<String> lines) {
+    public List<FruitTransaction> parseAll(List<String> lines) {
         if (lines.isEmpty()) {
             throw new RuntimeException("Can't parse transactions. Transaction list is empty!");
         }
@@ -25,34 +26,41 @@ public class FruitTransactionParserService implements TransactionParserService {
                 continue;
             }
             String[] parsedLine = line.split(SEPARATOR);
-            if (parsedLine.length != TRANSACTION_PARAMS_COUNT) {
-                throw new RuntimeException("Error parsing transactions. Invalid transaction: "
-                        + line);
-            }
-            for (int i = 0; i < parsedLine.length; i++) {
-                parsedLine[i] = parsedLine[i].strip().toLowerCase();
-            }
+            validate(parsedLine);
             FruitTransaction transaction = new FruitTransaction();
             transaction.setOperation(parseOperation(parsedLine[OPERATION_TYPE]));
-            if (parsedLine[FRUIT_NAME].isEmpty()) {
-                throw new RuntimeException("Can't parse transactions. Name can't be empty: "
-                        + line);
-            }
-            transaction.setFruit(parsedLine[FRUIT_NAME]);
+            transaction.setFruit(parseFruitName(parsedLine[FRUIT_NAME]));
             transaction.setQuantity(parseQuantity(parsedLine[FRUIT_QUANTITY]));
             transactions.add(transaction);
         }
         return transactions;
     }
 
-    private FruitTransaction.Operation parseOperation(String operationType) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(operationType)) {
-                return operation;
-            }
+    private void validate(String[] parsedLine) {
+        if (parsedLine.length != TRANSACTION_PARAMS_COUNT) {
+            throw new RuntimeException("Error parsing transactions. Invalid transaction: "
+                    + Arrays.toString(parsedLine));
         }
-        throw new RuntimeException("Can't parse transactions. Unknown operation: '"
-                + operationType + "'");
+        for (int i = 0; i < parsedLine.length; i++) {
+            parsedLine[i] = parsedLine[i].strip().toLowerCase();
+        }
+    }
+
+    private FruitTransaction.Operation parseOperation(String operationType) {
+        FruitTransaction.Operation operation = FruitTransaction.Operation
+                .fromString(operationType);
+        if (operation == null) {
+            throw new RuntimeException("Can't parse transactions. Unknown operation: '"
+                    + operationType + "'");
+        }
+        return operation;
+    }
+
+    private String parseFruitName(String fruitName) {
+        if (fruitName.isBlank()) {
+            throw new RuntimeException("Can't parse transactions. Name can't be empty!");
+        }
+        return fruitName;
     }
 
     private int parseQuantity(String quantity) {
@@ -69,5 +77,4 @@ public class FruitTransactionParserService implements TransactionParserService {
         }
         return result;
     }
-
 }

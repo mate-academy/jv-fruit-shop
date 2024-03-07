@@ -1,16 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.ReportGeneratorService;
-import core.basesyntax.service.TransactionParserService;
-import core.basesyntax.service.TransactionProcessorService;
-import core.basesyntax.service.impl.CsvFileReaderService;
-import core.basesyntax.service.impl.CsvFileWriterService;
-import core.basesyntax.service.impl.FruitReportGeneratorService;
-import core.basesyntax.service.impl.FruitTransactionParserService;
-import core.basesyntax.service.impl.FruitTransactionProcessorService;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.FruitReportGenerator;
+import core.basesyntax.service.impl.FruitTransactionParser;
+import core.basesyntax.service.impl.FruitTransactionProcessor;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceOperationHandler;
@@ -31,20 +31,20 @@ public class FruitShop {
         operationStrategies.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         OperationStrategy fruitOperationStrategy = new OperationStrategy(operationStrategies);
 
-        FileReaderService fileCsvReader = new CsvFileReaderService();
+        FileReader fileCsvReader = new FileReaderImpl();
         List<String> linesFromFile = fileCsvReader.readFromFile("src/main/resources/data.csv");
 
-        TransactionParserService transactionParser = new FruitTransactionParserService();
-        List<FruitTransaction> transactions = transactionParser.parseTransactions(linesFromFile);
+        TransactionParser transactionParser = new FruitTransactionParser();
+        List<FruitTransaction> transactions = transactionParser.parseAll(linesFromFile);
 
-        TransactionProcessorService transactionProcessor =
-                new FruitTransactionProcessorService(fruitOperationStrategy);
-        transactionProcessor.processTransactions(transactions);
+        TransactionProcessor transactionProcessor =
+                new FruitTransactionProcessor(fruitOperationStrategy);
+        transactionProcessor.processAll(transactions);
 
-        ReportGeneratorService reportGenerator = new FruitReportGeneratorService();
+        ReportGenerator reportGenerator = new FruitReportGenerator();
         String report = reportGenerator.generateReport();
 
-        FileWriterService reportCsvWriter = new CsvFileWriterService();
+        FileWriter reportCsvWriter = new FileWriterImpl();
         reportCsvWriter.writeToFile("src/main/resources/report.csv", report);
     }
 }
