@@ -12,9 +12,9 @@ public class ReportService {
 
     public String generateReport() {
         StringBuilder report = new StringBuilder();
-        report.append("type,fruit\n");
+        report.append("type,fruit");
         for (Map.Entry<String, Integer> fruit : fruitDao.getFruits()) {
-            report.append(fruit.getKey() + "," + fruit.getValue() + System.lineSeparator());
+            report.append(System.lineSeparator() + fruit.getKey() + "," + fruit.getValue());
         }
         return report.toString();
     }

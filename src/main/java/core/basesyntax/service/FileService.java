@@ -12,17 +12,17 @@ public class FileService {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Cannot read file from "
-                    + this.getClass().getSimpleName(), e);
+            throw new RuntimeException("Cannot find file: "
+                    + fileName, e);
         }
     }
 
-    public boolean writeReport(String fileName, String content) {
+    public void writeToFile(String fileName, String content) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.append(content);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cannot write to file: "
+                    + fileName, e);
         }
-        return true;
     }
 }

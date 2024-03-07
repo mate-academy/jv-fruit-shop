@@ -1,29 +1,25 @@
 package core.basesyntax.service;
 
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.activity.TransactionHandler;
+import core.basesyntax.strategy.ActivityStrategy;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TransactionService {
-    private static final int TYPE_INDEX = 0;
-    private static final int ONE = 1;
-    private static final int FRUIT_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
-    private static String SEPARATOR = ",";
+    private ActivityStrategy activityStrategy;
+    private FruitDao fruitDao;
 
-    public static List<FruitTransaction> convertToTransactionsList(List<String> lines) {
-        List<String[]> splitLines = getStrings(lines);
-        return splitLines.stream()
-                .map(line -> new FruitTransaction(FruitTransaction.Operation
-                        .getOperation(line[TYPE_INDEX]),
-                        line[FRUIT_INDEX],
-                        Integer.parseInt(line[QUANTITY_INDEX])))
-                .collect(Collectors.toList());
+    public TransactionService(ActivityStrategy activityStrategy, FruitDao fruitDao) {
+        this.activityStrategy = activityStrategy;
+        this.fruitDao = fruitDao;
     }
 
-    private static List<String[]> getStrings(List<String> lines) {
-        return lines.stream()
-                .skip(ONE)
-                .map(line -> line.split(SEPARATOR)).toList();
+    public void executeTransactions(List<FruitTransaction> fruitTransactions) {
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            TransactionHandler transactionHandler = activityStrategy
+                    .get(fruitTransaction.getOperation());
+            transactionHandler.handleTransaction(fruitTransaction);
+        }
     }
 }

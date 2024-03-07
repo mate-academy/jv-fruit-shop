@@ -3,9 +3,15 @@ package core.basesyntax.service.activity;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
-public class BalanceActivityHandler implements ActivityHandler {
+public class SupplyTransactionHandler implements TransactionHandler {
+    private FruitDao fruitDao;
+
+    public SupplyTransactionHandler(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
+
     @Override
-    public void operate(FruitTransaction fruitTransaction, FruitDao fruitDao) {
+    public void handleTransaction(FruitTransaction fruitTransaction) {
         Integer balance = fruitDao.add(fruitTransaction.getFruitName(),
                 fruitTransaction.getQuantity());
         if (balance < 0) {

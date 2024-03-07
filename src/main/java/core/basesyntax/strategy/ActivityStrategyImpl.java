@@ -1,19 +1,19 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.activity.ActivityHandler;
+import core.basesyntax.service.activity.TransactionHandler;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
-    private Map<FruitTransaction.Operation, ActivityHandler> activityHandlerMap;
+    private Map<FruitTransaction.Operation, TransactionHandler> activityHandlerMap;
 
     public ActivityStrategyImpl(Map<FruitTransaction.Operation,
-            ActivityHandler> activityHandlerMap) {
+            TransactionHandler> activityHandlerMap) {
         this.activityHandlerMap = activityHandlerMap;
     }
 
     @Override
-    public ActivityHandler get(FruitTransaction.Operation operation) {
+    public TransactionHandler get(FruitTransaction.Operation operation) {
         return activityHandlerMap.get(operation);
     }
 }
