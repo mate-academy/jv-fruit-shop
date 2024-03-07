@@ -11,7 +11,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int LENGTH_OF_COMMAND_PATTERN = 3;
-    private static final String CSV_SEPARATOR= ",";
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> commands) {
