@@ -11,6 +11,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int LENGTH_OF_COMMAND_PATTERN = 3;
+    private static final String CSV_SEPARATOR= ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> commands) {
@@ -18,7 +19,7 @@ public class ParserServiceImpl implements ParserService {
         String[] fruitTransactionPattern;
         FruitTransaction fruitTransaction;
         for (String command : commands) {
-            fruitTransactionPattern = command.trim().split(",");
+            fruitTransactionPattern = command.trim().split(CSV_SEPARATOR);
             if (fruitTransactionPattern.length != LENGTH_OF_COMMAND_PATTERN) {
                 throw new RuntimeException("Invalid data in file");
             }
