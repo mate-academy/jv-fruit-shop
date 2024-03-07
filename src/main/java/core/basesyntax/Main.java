@@ -2,8 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import java.util.HashMap;
-import java.util.Map;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
@@ -18,6 +16,8 @@ import core.basesyntax.strategy.impl.BalanceOperationService;
 import core.basesyntax.strategy.impl.PurchaseOperationService;
 import core.basesyntax.strategy.impl.ReturnOperationService;
 import core.basesyntax.strategy.impl.SupplyOperationService;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     private static final String fromFile = "src/main/resources/fruits.csv";

@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
-import java.util.List;
 import core.basesyntax.model.Fruit;
+import java.util.List;
 
 public interface FruitDao {
     void add(Fruit fruit);

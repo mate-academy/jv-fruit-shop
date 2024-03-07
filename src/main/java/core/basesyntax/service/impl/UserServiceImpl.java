@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.FruitDao;
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
@@ -11,6 +9,8 @@ import core.basesyntax.service.UserService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.strategy.OperationService;
 import core.basesyntax.strategy.impl.FruitStrategy;
+import java.util.List;
+import java.util.Map;
 
 public class UserServiceImpl implements UserService {
     private final FruitDao fruitDao;

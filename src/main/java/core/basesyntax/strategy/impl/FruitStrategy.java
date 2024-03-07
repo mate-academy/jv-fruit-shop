@@ -1,10 +1,10 @@
 package core.basesyntax.strategy.impl;
 
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationService;
+import java.util.List;
+import java.util.Map;
 
 public class FruitStrategy {
     private final Map<Operation, OperationService> operationMap;

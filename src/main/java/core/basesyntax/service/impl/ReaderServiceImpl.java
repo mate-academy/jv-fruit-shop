@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import core.basesyntax.service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
     private static final String HEADER = "type";
