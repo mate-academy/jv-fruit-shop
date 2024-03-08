@@ -14,15 +14,11 @@ public class SupplyOperationService implements OperationService {
     @Override
     public void execute(String fruitName, int quantity) {
         Fruit fruit = fruitDao.get(fruitName);
-        if (fruitDao == null) {
-            new BalanceOperationService(fruitDao).execute(fruitName, quantity);
-        } else {
-            if (quantity < 0) {
-                throw new RuntimeException("Supply value can`t be negative");
-            }
-            int newQuantity = fruit.getQuantity() + quantity;
-            fruit.setQuantity(newQuantity);
-            fruitDao.update(fruit);
+        if (quantity < 0) {
+            throw new RuntimeException("Supply value can`t be negative");
         }
+        int newQuantity = fruit.getQuantity() + quantity;
+        fruit.setQuantity(newQuantity);
+        fruitDao.update(fruit);
     }
 }
