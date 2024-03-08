@@ -5,9 +5,10 @@ public class Fruit {
     private int quantity;
     private int sold;
 
-    public Fruit(String fruitName, int quantity) {
+    public Fruit(String fruitName, int quantity, int sold) {
         this.fruitName = fruitName;
         this.quantity = quantity;
+        this.sold = sold;
     }
 
     public String getFruitName() {

@@ -18,7 +18,7 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("No enum constant with code: " + code);
+        throw new IllegalArgumentException("No operation with code: " + code);
     }
 
 }

@@ -15,9 +15,9 @@ public class FruitStrategy {
 
     public void executeOperationServiceByOperation(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            if (transaction.getOperation() != null) {
-                OperationService operationService = operationMap.get(transaction.getOperation());
-                operationService.execute(transaction.getFruit(), transaction.getQuantity());
+            if (transaction.operation() != null) {
+                OperationService operationService = operationMap.get(transaction.operation());
+                operationService.execute(transaction.fruit(), transaction.quantity());
             } else {
                 throw new RuntimeException("No such strategy");
             }
