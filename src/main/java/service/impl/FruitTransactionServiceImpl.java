@@ -2,15 +2,15 @@ package service.impl;
 
 import dao.FruitDao;
 import model.FruitTransaction;
-import service.ProcessDataService;
+import service.FruitTransactionService;
 import service.operation.OperationHandler;
 import strategy.OperationStrategy;
 
-public class ProcessDataServiceImpl implements ProcessDataService {
+public class FruitTransactionServiceImpl implements FruitTransactionService {
     private FruitDao dao;
     private OperationStrategy operationStrategy;
 
-    public ProcessDataServiceImpl(FruitDao dao, OperationStrategy operationStrategy) {
+    public FruitTransactionServiceImpl(FruitDao dao, OperationStrategy operationStrategy) {
         this.dao = dao;
         this.operationStrategy = operationStrategy;
     }

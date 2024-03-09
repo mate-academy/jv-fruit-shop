@@ -2,6 +2,6 @@ package service;
 
 import model.FruitTransaction;
 
-public interface ProcessDataService {
+public interface FruitTransactionService {
     void processData(FruitTransaction[] transactions);
 }

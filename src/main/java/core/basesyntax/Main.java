@@ -5,16 +5,16 @@ import dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
-import service.FileConverter;
 import service.FileReader;
-import service.ProcessDataService;
+import service.FileWriter;
+import service.FruitTransactionMapper;
+import service.FruitTransactionService;
 import service.ReportCreator;
-import service.ReportWriter;
-import service.impl.FileConverterImpl;
 import service.impl.FileReaderImpl;
-import service.impl.ProcessDataServiceImpl;
+import service.impl.FileWriterImpl;
+import service.impl.FruitTransactionMapperImpl;
+import service.impl.FruitTransactionServiceImpl;
 import service.impl.ReportCreatorImpl;
-import service.impl.ReportWriterImpl;
 import service.operation.BalanceOperationHandler;
 import service.operation.OperationHandler;
 import service.operation.PurchaseOperationHandler;
@@ -36,16 +36,17 @@ public class Main {
         FileReader reader = new FileReaderImpl();
         String fileData = reader.readFile(FRUIT_SHOP_FILE_NAME);
 
-        FileConverter converter = new FileConverterImpl();
-        FruitTransaction[] fruitTransactions = converter.convertToFruitTransactions(fileData);
+        FruitTransactionMapper converter = new FruitTransactionMapperImpl();
+        FruitTransaction[] fruitTransactions = converter.toFruitTransactions(fileData);
 
-        ProcessDataService processDataService = new ProcessDataServiceImpl(dao, operationStrategy);
-        processDataService.processData(fruitTransactions);
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl(dao, operationStrategy);
+        fruitTransactionService.processData(fruitTransactions);
 
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.createReport();
 
-        ReportWriter writer = new ReportWriterImpl();
+        FileWriter writer = new FileWriterImpl();
         writer.write(report, REPORT_FILE_NAME);
     }
 

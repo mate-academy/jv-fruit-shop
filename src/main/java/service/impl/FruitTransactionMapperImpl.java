@@ -3,15 +3,15 @@ package service.impl;
 import static model.FruitTransaction.valueOfLabel;
 
 import model.FruitTransaction;
-import service.FileConverter;
+import service.FruitTransactionMapper;
 
-public class FileConverterImpl implements FileConverter {
+public class FruitTransactionMapperImpl implements FruitTransactionMapper {
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public FruitTransaction[] convertToFruitTransactions(String fileData) {
+    public FruitTransaction[] toFruitTransactions(String fileData) {
         String[] activitiesList = fileData.split(" ");
         FruitTransaction[] transactions = new FruitTransaction[activitiesList.length];
         String[] transactionParts;
