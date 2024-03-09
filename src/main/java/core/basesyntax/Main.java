@@ -2,21 +2,22 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
-import core.basesyntax.service.UserService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ParserServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
-import core.basesyntax.service.impl.UserServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.OperationService;
 import core.basesyntax.strategy.impl.BalanceOperationService;
+import core.basesyntax.strategy.impl.FruitStrategy;
 import core.basesyntax.strategy.impl.PurchaseOperationService;
 import core.basesyntax.strategy.impl.ReturnOperationService;
 import core.basesyntax.strategy.impl.SupplyOperationService;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -33,10 +34,10 @@ public class Main {
         ReaderService readerService = new ReaderServiceImpl();
         ParserService parserService = new ParserServiceImpl();
         WriterService writerService = new WriterServiceImpl();
-        UserService userService = new UserServiceImpl(fruitDao,
-                readerService,
-                parserService,
-                writerService);
-        userService.formReport(operationMap, fromFile, toFile);
+        FruitStrategy fruitStrategy = new FruitStrategy(operationMap);
+        List<String> commands = readerService.readFromFile(fromFile);
+        List<FruitTransaction> fruitTransactions = parserService.parse(commands);
+        fruitStrategy.executeOperationServiceByOperation(fruitTransactions);
+        writerService.writeToFile(toFile, fruitDao.getAll());
     }
 }
