@@ -10,9 +10,7 @@ public class PurchaseCodeService implements CodeService {
 
     @Override
     public void doOperation(FruitTransaction fruit) {
-        FruitTransaction fruitTransaction = fruitDao.get(fruit.getFruit());
-        fruitTransaction.setQuantity(fruitTransaction.getQuantity() - fruit.getQuantity());
-        fruitDao.remove(fruit);
-        fruitDao.add(fruitTransaction);
+        int oldQuantity = fruitDao.get(fruit.getFruit());
+        fruitDao.add(fruit.getFruit(), oldQuantity - fruit.getQuantity());
     }
 }

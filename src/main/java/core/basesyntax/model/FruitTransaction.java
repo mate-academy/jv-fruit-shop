@@ -1,11 +1,19 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
+import com.opencsv.bean.CsvBindByPosition;
 
 public class FruitTransaction {
+
+    @CsvBindByPosition(position = 0)
     private Operation operation;
+    @CsvBindByPosition(position = 1)
     private String fruit;
+    @CsvBindByPosition(position = 2)
     private int quantity;
+
+    public FruitTransaction() {
+
+    }
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
@@ -35,23 +43,6 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction that = (FruitTransaction) o;
-        return Objects.equals(fruit, that.fruit);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fruit);
     }
 
     public enum Operation {

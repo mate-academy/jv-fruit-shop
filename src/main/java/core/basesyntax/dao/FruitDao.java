@@ -1,14 +1,11 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.FruitTransaction;
-import java.util.List;
+import java.util.Map;
 
 public interface FruitDao {
-    void add(FruitTransaction fruitTransaction);
+    void add(String fruit, int quantity);
 
-    FruitTransaction get(String fruit);
+    int get(String fruit);
 
-    void remove(FruitTransaction fruitTransaction);
-
-    List<FruitTransaction> getAll();
+    Map<String, Integer> getAll();
 }

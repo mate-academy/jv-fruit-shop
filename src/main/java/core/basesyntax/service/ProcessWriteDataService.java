@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface ProcessWriteDataService {
-    List<String[]> prepareDataToWrite();
+    List<String[]> transactionDataToWrite();
 }

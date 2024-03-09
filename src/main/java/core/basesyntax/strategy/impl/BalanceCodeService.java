@@ -13,6 +13,11 @@ public class BalanceCodeService implements CodeService {
         if (fruit.getQuantity() < 0) {
             throw new RuntimeException("Fruits " + fruit.getFruit() + " less than 0");
         }
-        fruitDao.add(fruit);
+        if (fruitDao.getAll().containsKey(fruit.getFruit())) {
+            int oldQuantity = fruitDao.get(fruit.getFruit());
+            fruitDao.add(fruit.getFruit(), fruit.getQuantity() + oldQuantity);
+        } else {
+            fruitDao.add(fruit.getFruit(), fruit.getQuantity());
+        }
     }
 }

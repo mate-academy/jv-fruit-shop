@@ -16,6 +16,12 @@ public class CsvReaderServiceImpl implements CsvReaderService {
 
     @Override
     public List<FruitTransaction> readCsv(String pathFile) {
+//        try (FileReader reader = new FileReader(pathFile)) {
+//            return new CsvToBeanBuilder<FruitTransaction>(reader)
+//                    .withType(FruitTransaction.class)
+//                    .withSkipLines(1)
+//                    .build()
+//                    .parse();
         try (CSVReader reader =
                      new CSVReaderBuilder(new FileReader(pathFile)).withSkipLines(1).build()) {
             List<FruitTransaction> fruitTransactionList = new ArrayList<>();

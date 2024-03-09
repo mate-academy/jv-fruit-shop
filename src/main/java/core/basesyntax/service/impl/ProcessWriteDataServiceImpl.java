@@ -13,12 +13,12 @@ public class ProcessWriteDataServiceImpl implements ProcessWriteDataService {
     private FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public List<String[]> prepareDataToWrite() {
+    public List<String[]> transactionDataToWrite() {
         List<String[]> list = new ArrayList<>();
         list.add(new String[]{COLUMN_FRUIT, COLUMN_QUANTITY});
-        return fruitDao.getAll()
+        return fruitDao.getAll().entrySet()
                 .stream()
-                .map(f -> new String[]{f.getFruit(), String.valueOf(f.getQuantity())})
+                .map(f -> new String[]{f.getKey(), String.valueOf(f.getValue())})
                 .collect(Collectors.toCollection(() -> list));
     }
 }

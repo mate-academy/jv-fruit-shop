@@ -2,11 +2,14 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvReaderService;
-import core.basesyntax.service.CsvWriterService;
-import core.basesyntax.service.ProcessReadDataService;
+import core.basesyntax.service.CsvWriteService;
+import core.basesyntax.service.CsvWriterCreateService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
-import core.basesyntax.service.impl.CsvRriterServiceImpl;
-import core.basesyntax.service.impl.ProcessReadDataServiceImpl;
+import core.basesyntax.service.impl.CsvWriteServiceImpl;
+import core.basesyntax.service.impl.CsvWriterCreateServiceImpl;
+import core.basesyntax.service.impl.ProcessWriteDataServiceImpl;
+import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.CodeService;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -21,7 +24,9 @@ public class Main {
     private static String pathFileRead = "src/main/resources/text.csv";
     private static String pathFileWrite = "src/main/resources/textResult.csv";
     private static CsvReaderService csvReaderService = new CsvReaderServiceImpl();
-    private static CsvWriterService csvWriterService = new CsvRriterServiceImpl();
+    private static CsvWriteService csvWriteService = new CsvWriteServiceImpl();
+    private static CsvWriterCreateService csvWriterService =
+            new CsvWriterCreateServiceImpl(csvWriteService);
 
     private static Map<FruitTransaction.Operation, CodeService> codeServiceMap = Map.of(
             FruitTransaction.Operation.BALANCE, new BalanceCodeService(),
@@ -30,12 +35,13 @@ public class Main {
             FruitTransaction.Operation.SUPPLY, new SupplyCodeService()
     );
     private static OperationStrategy operationStrategy = new OperationStrategyImpl(codeServiceMap);
-    private static ProcessReadDataService processData =
-            new ProcessReadDataServiceImpl(operationStrategy);
+    private static TransactionService processData =
+            new TransactionServiceImpl(operationStrategy);
 
     public static void main(String[] args) {
         List<FruitTransaction> fruitTransactionList = csvReaderService.readCsv(pathFileRead);
-        processData.addToDB(fruitTransactionList);
-        csvWriterService.writeCsv(pathFileWrite);
+        processData.processTransactions(fruitTransactionList);
+        csvWriterService.createWriteCsv(pathFileWrite,
+                new ProcessWriteDataServiceImpl().transactionDataToWrite());
     }
 }
