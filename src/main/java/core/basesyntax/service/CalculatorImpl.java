@@ -8,9 +8,9 @@ public class CalculatorImpl implements Calculator {
     private static final Distributor DISTRIBUTOR = new DistributorImpl();
 
     @Override
-    public Map<String,Integer> calculate(List<String[]> notes) {
+    public Map<String, Integer> calculate(List<String> notes) {
         Map<String, Integer> result = new HashMap<>();
-        for (String[] note : notes) {
+        for (String note : notes) {
             DISTRIBUTOR.distribute(result, note);
         }
         return result;
