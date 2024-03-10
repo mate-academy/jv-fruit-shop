@@ -1,14 +1,8 @@
 package core.basesyntax.model;
 
-import com.opencsv.bean.CsvBindByPosition;
-
 public class FruitTransaction {
-
-    @CsvBindByPosition(position = 0)
     private Operation operation;
-    @CsvBindByPosition(position = 1)
     private String fruit;
-    @CsvBindByPosition(position = 2)
     private int quantity;
 
     public FruitTransaction() {
