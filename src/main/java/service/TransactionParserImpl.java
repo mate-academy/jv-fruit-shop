@@ -9,14 +9,15 @@ public class TransactionParserImpl implements TransactionParser {
     public static final int OPERATION_TYPE_INDEX = 0;
     public static final int FRUIT_TYPE_INDEX = 1;
     public static final int AMOUNT_INDEX = 2;
+    public static final int OFFSET = 1;
 
     @Override
     public List<Transaction> parse(List<String> lines) {
-        if (lines.size() <= 1) {
+        if (lines.size() <= OFFSET) {
             throw new RuntimeException("No operations available in list " + lines);
         }
         List<Transaction> transactions = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++) {
+        for (int i = OFFSET; i < lines.size(); i++) {
             String[] data = lines.get(i).split(COMMA);
             if (data.length != 3) {
                 throw new RuntimeException("Some data isn't available for the record "
