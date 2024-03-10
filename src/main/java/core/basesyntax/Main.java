@@ -8,7 +8,7 @@ import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.CsvReaderServiceImpl;
 import core.basesyntax.service.impl.CsvWriteServiceImpl;
 import core.basesyntax.service.impl.CsvWriterCreateServiceImpl;
-import core.basesyntax.service.impl.ProcessWriteDataServiceImpl;
+import core.basesyntax.service.impl.HandlerWriteDataServiceImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
 import core.basesyntax.strategy.CodeService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -42,6 +42,6 @@ public class Main {
         List<FruitTransaction> fruitTransactionList = csvReaderService.readCsv(pathFileRead);
         processData.processTransactions(fruitTransactionList);
         csvWriterService.createWriteCsv(pathFileWrite,
-                new ProcessWriteDataServiceImpl().transactionDataToWrite());
+                new HandlerWriteDataServiceImpl().handlerDataToWrite());
     }
 }
