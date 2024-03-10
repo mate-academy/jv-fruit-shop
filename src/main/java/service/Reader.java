@@ -1,5 +1,5 @@
 package service;
 
-public interface FileReader {
+public interface Reader {
     String readFile(String fromFileName);
 }

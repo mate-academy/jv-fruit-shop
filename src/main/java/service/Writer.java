@@ -1,5 +1,5 @@
 package service;
 
-public interface FileWriter {
+public interface Writer {
     void write(String report, String fileName);
 }

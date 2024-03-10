@@ -11,7 +11,7 @@ public class FruitTransactionMapperImpl implements FruitTransactionMapper {
     private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public FruitTransaction[] toFruitTransactions(String fileData) {
+    public FruitTransaction[] buildFruitTransactions(String fileData) {
         String[] activitiesList = fileData.split(" ");
         FruitTransaction[] transactions = new FruitTransaction[activitiesList.length];
         String[] transactionParts;

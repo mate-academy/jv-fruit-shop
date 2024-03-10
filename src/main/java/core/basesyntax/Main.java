@@ -2,19 +2,18 @@ package core.basesyntax;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
-import java.util.HashMap;
 import java.util.Map;
 import model.FruitTransaction;
-import service.FileReader;
-import service.FileWriter;
 import service.FruitTransactionMapper;
 import service.FruitTransactionService;
+import service.Reader;
 import service.ReportCreator;
+import service.Writer;
 import service.impl.FileReaderImpl;
-import service.impl.FileWriterImpl;
 import service.impl.FruitTransactionMapperImpl;
 import service.impl.FruitTransactionServiceImpl;
 import service.impl.ReportCreatorImpl;
+import service.impl.WriterImpl;
 import service.operation.BalanceOperationHandler;
 import service.operation.OperationHandler;
 import service.operation.PurchaseOperationHandler;
@@ -29,15 +28,19 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao dao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        initializeMap(operationHandlerMap);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler()
+        );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
-        FileReader reader = new FileReaderImpl();
+        Reader reader = new FileReaderImpl();
         String fileData = reader.readFile(FRUIT_SHOP_FILE_NAME);
 
         FruitTransactionMapper converter = new FruitTransactionMapperImpl();
-        FruitTransaction[] fruitTransactions = converter.toFruitTransactions(fileData);
+        FruitTransaction[] fruitTransactions = converter.buildFruitTransactions(fileData);
 
         FruitTransactionService fruitTransactionService =
                 new FruitTransactionServiceImpl(dao, operationStrategy);
@@ -46,14 +49,7 @@ public class Main {
         ReportCreator creator = new ReportCreatorImpl();
         String report = creator.createReport();
 
-        FileWriter writer = new FileWriterImpl();
+        Writer writer = new WriterImpl();
         writer.write(report, REPORT_FILE_NAME);
-    }
-
-    public static void initializeMap(Map<FruitTransaction.Operation, OperationHandler> map) {
-        map.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        map.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        map.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        map.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
     }
 }
