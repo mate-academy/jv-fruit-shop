@@ -10,9 +10,6 @@ public class BalanceCodeService implements CodeService {
 
     @Override
     public void doOperation(FruitTransaction fruit) {
-        if (fruit.getQuantity() < 0) {
-            throw new RuntimeException("Fruits " + fruit.getFruit() + " less than 0");
-        }
         if (fruitDao.getAll().containsKey(fruit.getFruit())) {
             int oldQuantity = fruitDao.get(fruit.getFruit());
             fruitDao.add(fruit.getFruit(), fruit.getQuantity() + oldQuantity);

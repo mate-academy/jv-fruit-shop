@@ -1,8 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
-import java.util.List;
-
 public interface CsvReaderService {
-    List<FruitTransaction> readCsv(String path);
+    String readCsv(String path);
 }
