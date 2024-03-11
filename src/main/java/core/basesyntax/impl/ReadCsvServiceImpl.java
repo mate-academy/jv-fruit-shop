@@ -1,13 +1,12 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.HandleErrorsService;
 import core.basesyntax.service.ReadCsvService;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadCsvErrorsServiceImpl implements ReadCsvService, HandleErrorsService {
+public class ReadCsvServiceImpl implements ReadCsvService {
 
     @Override
     public List<String> readFromFile(String filePath) {
@@ -19,13 +18,12 @@ public class ReadCsvErrorsServiceImpl implements ReadCsvService, HandleErrorsSer
         try {
             fruitTransactions = Files.readAllLines(path);
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file", e);
+            throw new RuntimeException("Can't get data from file " + filePath, e);
         }
         return fruitTransactions;
     }
 
-    @Override
-    public void handleErrors(String data) {
+    private void handleErrors(String data) {
         if (data == null) {
             throw new IllegalArgumentException("File path cannot be null");
         }

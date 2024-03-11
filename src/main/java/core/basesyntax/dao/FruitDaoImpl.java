@@ -1,26 +1,28 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.Fruit;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void add(Fruit fruit) {
-        Storage.fruitDB.add(fruit);
+    public void add(String fruitName) {
+        Storage.fruitDB.put(fruitName, 0);
     }
 
     @Override
-    public Fruit get(String fruit) {
-        return Storage.fruitDB.stream()
-                .filter(item -> item.getFruit().equals(fruit))
-                .findFirst()
-                .get();
+    public Integer get(String fruitName) {
+        handleErrors(fruitName);
+        return Storage.fruitDB.get(fruitName);
     }
 
     @Override
-    public void update(Fruit fruit) {
-        Fruit fruitFromDb = get(fruit.getFruit());
-        Storage.fruitDB.remove(fruitFromDb);
-        Storage.fruitDB.add(fruit);
+    public void update(String fruitName, int quantity) {
+        handleErrors(fruitName);
+        Storage.fruitDB.put(fruitName, quantity);
+    }
+
+    private void handleErrors(String fruitName) {
+        if (Storage.fruitDB.get(fruitName) == null) {
+            throw new RuntimeException(fruitName + " isn't exist in fruitDB");
+        }
     }
 }
