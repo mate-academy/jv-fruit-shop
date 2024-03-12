@@ -40,9 +40,6 @@ public class Main {
     public static final String OUTPUT_PATH = "src/main/resources/dayReport.csv";
 
     public static void main(String[] args) {
-        FRUIT_DAO.add("banana");
-        FRUIT_DAO.add("apple");
-
         List<String> dataCsv = READ_CSV_SERVICE.readFromFile(INPUT_PATH);
 
         List<FruitTransaction> fruitTransactions = INPUT_DATA_SERVICE.convertDataToObj(dataCsv);

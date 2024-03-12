@@ -10,19 +10,12 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public Integer get(String fruitName) {
-        handleErrors(fruitName);
-        return Storage.fruitDB.get(fruitName);
+        return Storage.fruitDB.getOrDefault(fruitName, 0);
     }
 
     @Override
     public void update(String fruitName, int quantity) {
-        handleErrors(fruitName);
         Storage.fruitDB.put(fruitName, quantity);
     }
 
-    private void handleErrors(String fruitName) {
-        if (Storage.fruitDB.get(fruitName) == null) {
-            throw new RuntimeException(fruitName + " isn't exist in fruitDB");
-        }
-    }
 }

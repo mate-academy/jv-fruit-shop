@@ -10,7 +10,7 @@ public class DataProcessingServiceImpl implements DataProcessingService {
     private final TransactionStrategy transactionStrategy;
     private final FruitDao fruitDao;
 
-    public DataProcessingServiceImpl(FruitDao fruitDao,TransactionStrategy transactionStrategy) {
+    public DataProcessingServiceImpl(FruitDao fruitDao, TransactionStrategy transactionStrategy) {
         this.transactionStrategy = transactionStrategy;
         this.fruitDao = fruitDao;
     }
@@ -24,7 +24,7 @@ public class DataProcessingServiceImpl implements DataProcessingService {
             int oldQuantity = fruitDao.get(fruitName);
 
             int newQuantity = transactionStrategy.get(fruitTransaction.getOperation())
-                    .getTransaction(oldQuantity, transactionQuantity);
+                    .getTransactionResult(oldQuantity, transactionQuantity);
 
             if (newQuantity < 0) {
                 throw new RuntimeException("Quantity " + fruitName + " is negative");
