@@ -1,4 +1,4 @@
-package service.activities;
+package strategy.activities;
 
 public class BalanceHandler implements OperationHandler {
     @Override

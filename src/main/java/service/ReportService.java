@@ -2,6 +2,6 @@ package service;
 
 import java.util.Map;
 
-public interface CreateReportService {
+public interface ReportService {
     String generateReport(Map<String, Integer> processedData);
 }

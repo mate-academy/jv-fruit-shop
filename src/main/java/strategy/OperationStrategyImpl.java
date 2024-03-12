@@ -1,8 +1,8 @@
-package service;
+package strategy;
 
 import java.util.Map;
 import model.FruitTransaction;
-import service.activities.OperationHandler;
+import strategy.activities.OperationHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;

@@ -6,38 +6,43 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.CreateReportService;
-import service.CreateReportServiceImpl;
 import service.FruitService;
 import service.FruitServiceImpl;
-import service.OperationStrategy;
-import service.OperationStrategyImpl;
-import service.activities.BalanceHandler;
-import service.activities.OperationHandler;
-import service.activities.PurchaseHandler;
-import service.activities.ReturnHandler;
-import service.activities.SupplyHandler;
+import service.ReportService;
+import service.ReportServiceImpl;
+import strategy.OperationStrategy;
+import strategy.OperationStrategyImpl;
+import strategy.activities.BalanceHandler;
+import strategy.activities.OperationHandler;
+import strategy.activities.PurchaseHandler;
+import strategy.activities.ReturnHandler;
+import strategy.activities.SupplyHandler;
 
 public class Main {
-    private static final String filePath =
-            "/Users/nazar5n/IdeaProjects/jv-fruit-shop/src/main/java/storage/file.csv";
+    private static final String filePath = "src/main/resources/file.csv"; // data from file
     private static final TransactionReader readFile = new TransactionReaderImpl();
-    private static final FileWriter writeToFile = new FileWriterImpl();
-    private static final CreateReportService createReport = new CreateReportServiceImpl();
+    private static final FileWriter fileWriter = new FileWriterImpl();
+    private static final ReportService reportService = new ReportServiceImpl();
 
     public static void main(String[] args) {
+        // read and convert data
+        List<FruitTransaction> dataFromCsv = readFile.readTransactionsFromFile(filePath);
+
+        // process
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
-
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
 
-        List<FruitTransaction> dataFromCsv = readFile.readTransactionsFromFile(filePath);
+        // create report
+        String report = reportService.generateReport(fruitService.processData(dataFromCsv));
 
-        String report = createReport.generateReport(fruitService.processData(dataFromCsv));
-        writeToFile.writeToFile(report);
+        // write report to file
+        fileWriter.writeToFile(report);
     }
 }

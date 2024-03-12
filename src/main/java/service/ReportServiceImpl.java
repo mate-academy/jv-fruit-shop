@@ -2,7 +2,7 @@ package service;
 
 import java.util.Map;
 
-public class CreateReportServiceImpl implements CreateReportService {
+public class ReportServiceImpl implements ReportService {
     @Override
     public String generateReport(Map<String, Integer> processedData) {
         StringBuilder report = new StringBuilder("fruit,quantity\n");
