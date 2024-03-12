@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class ReadCsvServiceImpl implements ReadCsvService {
-
     @Override
     public List<String> readFromFile(String filePath) {
         handleErrors(filePath);
