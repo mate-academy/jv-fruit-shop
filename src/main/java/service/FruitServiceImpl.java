@@ -1,14 +1,15 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 
 public class FruitServiceImpl implements FruitService {
-    private OperationStrategyImpl operationStrategy;
+    private OperationStrategy operationStrategy;
 
-    public FruitServiceImpl(OperationStrategyImpl operationStrategy) {
+    public FruitServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
@@ -19,38 +20,37 @@ public class FruitServiceImpl implements FruitService {
                 .distinct()
                 .toList();
 
-        int[] quantityOfFruits = getListOfQuantity(fruits, dataFromCsv);
+        List<Integer> quantityOfFruits = getListOfQuantity(fruits, dataFromCsv);
 
         Map<String, Integer> resultList = new HashMap<>();
-        int counter = 0;
-        for (String fruit : fruits) {
-            resultList.put(fruit, quantityOfFruits[counter]);
+        for (int i = 0; i < fruits.size(); i++) {
+            resultList.put(fruits.get(i), quantityOfFruits.get(i));
         }
 
         return resultList;
     }
 
-    private int[] getListOfQuantity(List<String> fruits, List<FruitTransaction> dataFromCsv) {
+    private List<Integer> getListOfQuantity(List<String> fruits,
+                                            List<FruitTransaction> dataFromCsv) {
         Map<String, Integer> resultList = new HashMap<>();
         for (String fruit : fruits) {
             resultList.put(fruit, 0);
         }
 
-        int[] quantityOfFruits = new int[resultList.size()];
-        int counter = 0;
+        List<Integer> quantityOfFruits = new ArrayList<>();
 
         for (String fruit : fruits) {
             int wholeQuantity = 0;
-
+            int quantity = 0;
             for (FruitTransaction line : dataFromCsv) {
                 if (fruit.equals(line.getFruit())) {
-                    quantityOfFruits[counter] = operationStrategy.get(line.getOperation())
+                    quantity = operationStrategy.get(line.getOperation())
                             .executionOfOperation(line.getQuantity(), wholeQuantity);
 
-                    wholeQuantity = quantityOfFruits[counter];
+                    wholeQuantity = quantity;
                 }
             }
-            counter++;
+            quantityOfFruits.add(quantity);
         }
         return quantityOfFruits;
     }

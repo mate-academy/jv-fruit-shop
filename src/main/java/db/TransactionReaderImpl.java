@@ -1,4 +1,4 @@
-package dao;
+package db;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,14 +9,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
 
-public class ReadFileImpl implements ReadFile {
+public class TransactionReaderImpl implements TransactionReader {
     @Override
     public List<FruitTransaction> readTransactionsFromFile(String fileName) {
         String receivedData = readFile(fileName);
         return Arrays.stream(receivedData.split("\n"))
                 .map(str -> {
                     String[] parts = str.split(",");
-                    return new FruitTransaction(parts[0], parts[1], Integer.valueOf(parts[2]));
+                    return new FruitTransaction(convertToOperation(parts[0]),
+                            parts[1],
+                            Integer.valueOf(parts[2]));
                 })
                 .collect(Collectors.toList());
     }
@@ -35,5 +37,14 @@ public class ReadFileImpl implements ReadFile {
             throw new RuntimeException("Can't read file", e);
         }
         return stringBuilder.toString();
+    }
+
+    private FruitTransaction.Operation convertToOperation(String operationLetter) {
+        return switch (operationLetter) {
+            case "b" -> FruitTransaction.Operation.BALANCE;
+            case "s" -> FruitTransaction.Operation.SUPPLY;
+            case "p" -> FruitTransaction.Operation.PURCHASE;
+            default -> FruitTransaction.Operation.RETURN;
+        };
     }
 }

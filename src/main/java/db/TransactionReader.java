@@ -1,8 +1,8 @@
-package dao;
+package db;
 
 import java.util.List;
 import model.FruitTransaction;
 
-public interface ReadFile {
+public interface TransactionReader {
     List<FruitTransaction> readTransactionsFromFile(String fileName);
 }
