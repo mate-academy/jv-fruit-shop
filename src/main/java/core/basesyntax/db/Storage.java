@@ -6,7 +6,6 @@ import java.util.List;
 
 public class Storage {
     private static Storage instance;
-
     private final List<Fruit> fruits;
 
     private Storage() {
