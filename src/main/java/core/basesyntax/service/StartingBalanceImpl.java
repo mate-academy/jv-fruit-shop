@@ -1,19 +1,19 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitInfo;
-import core.basesyntax.model.FruitType;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.model.TypeOfFruit;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class StartingBalanceImpl implements StartingBalance {
-
     @Override
-    public Map<FruitType, Integer> getStartingBalance(List<FruitInfo> fruitServiceList) {
-        Map<FruitType, Integer> map = new HashMap<>();
-        for (FruitInfo fruitInfo : fruitServiceList) {
-            if (fruitInfo.getActivities().equals("b")) {
-                map.put(fruitInfo.getFruitType(), fruitInfo.getQuantity());
+    public Map<TypeOfFruit, Integer> getStartingBalance(List<FruitTransaction> fruitServiceList) {
+        Map<TypeOfFruit, Integer> map = new HashMap<>();
+        for (FruitTransaction fruitInfo : fruitServiceList) {
+            if (fruitInfo.getOperation().equals(Operation.BALANCE)) {
+                map.put(fruitInfo.getTypeOfFruit(), fruitInfo.getQuantity());
             }
         }
         return map;

@@ -1,44 +1,54 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.Dao;
-import core.basesyntax.dao.DaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.Convert;
 import core.basesyntax.service.ConvertImpl;
 import core.basesyntax.service.ReadData;
 import core.basesyntax.service.ReadDataImpl;
+import core.basesyntax.service.ReportContent;
+import core.basesyntax.service.ReportContentImpl;
 import core.basesyntax.service.StartingBalance;
 import core.basesyntax.service.StartingBalanceImpl;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.WriterImpl;
-import core.basesyntax.service.strategy.Activities;
-import core.basesyntax.service.strategy.Purchase;
-import core.basesyntax.service.strategy.Return;
-import core.basesyntax.service.strategy.Supply;
+import core.basesyntax.service.strategy.OperationProcessor;
+import core.basesyntax.service.strategy.OperationProcessorImpl;
+import core.basesyntax.service.strategy.PurchaseHandler;
+import core.basesyntax.service.strategy.ReturnHandler;
+import core.basesyntax.service.strategy.SupplyHandler;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
-    private static final Activities sup = new Supply();
-    private static final Activities ret = new Return();
-    private static final Activities pur = new Purchase();
+    private static final FruitDao dao = new FruitDaoImpl();
+    private static final OperationProcessor processor = new OperationProcessorImpl();
     private static final ReadData readData = new ReadDataImpl();
     private static final Convert convert = new ConvertImpl();
+    private static final ReportContent reportContent = new ReportContentImpl();
     private static final Writer writer = new WriterImpl();
-    private static final Dao transferDao = new DaoImpl();
     private static final StartingBalance startingBalance = new StartingBalanceImpl();
+    private static final List<FruitTransaction> infoFromAllFruit = new ArrayList<>();
 
     public static void main(String[] args) {
-        Main.start();
-    }
+        processor.addOperationHandler(Operation.PURCHASE, new PurchaseHandler(dao));
+        processor.addOperationHandler(Operation.SUPPLY, new SupplyHandler(dao));
+        processor.addOperationHandler(Operation.RETURN, new ReturnHandler(dao));
 
-    private static void start() {
-        transferDao.transferToAllFruit(convert.convertToJavaObject(readData.readDataFromFile()));
-        transferDao.transferToBalance(startingBalance.getStartingBalance(transferDao
-                .getInfoFromAllFruit()));
-        transferDao.transferToBalance(sup.calculateBalanceAfterActivities(transferDao
-                .getInfoFromAllFruit(), transferDao.getInfoFromBalance()));
-        transferDao.transferToBalance(ret.calculateBalanceAfterActivities(transferDao
-                .getInfoFromAllFruit(), transferDao.getInfoFromBalance()));
-        transferDao.transferToBalance(pur.calculateBalanceAfterActivities(transferDao
-                .getInfoFromAllFruit(), transferDao.getInfoFromBalance()));
-        writer.writeRepo(transferDao.getInfoFromBalance());
+        infoFromAllFruit.addAll(convert.convertToJavaObject(
+                readData.readDataFromFile(
+                        "src/main/resources/StartInfo.csv")));
+
+        dao.transferStartBalance(startingBalance.getStartingBalance(
+                infoFromAllFruit), infoFromAllFruit);
+
+        for (Operation operation : Operation.values()) {
+            processor.processOperation(operation);
+        }
+
+        writer.writeRepo(reportContent.generateReportContent(dao.getInfoFromBalance()),
+                "src/main/resources/Result.csv");
     }
 }

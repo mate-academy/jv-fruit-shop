@@ -1,5 +1,5 @@
 package core.basesyntax.model;
 
-public enum FruitType {
+public enum TypeOfFruit {
     BANANA, APPLE
 }

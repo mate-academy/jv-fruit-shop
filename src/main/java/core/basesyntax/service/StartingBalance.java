@@ -1,11 +1,10 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitInfo;
-import core.basesyntax.model.FruitType;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.TypeOfFruit;
 import java.util.List;
 import java.util.Map;
 
 public interface StartingBalance {
-
-    Map<FruitType, Integer> getStartingBalance(List<FruitInfo> fruitServiceList);
+    Map<TypeOfFruit, Integer> getStartingBalance(List<FruitTransaction> fruitServiceList);
 }

@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitInfo;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface Convert {
-    List<FruitInfo> convertToJavaObject(List<String> dataFileList);
+    List<FruitTransaction> convertToJavaObject(List<String> dataFileList);
 }
