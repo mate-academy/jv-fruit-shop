@@ -25,7 +25,7 @@ public class WriterServiceImpl implements WriterService {
                         .append(fruit.getQuantity())
                         .append(System.lineSeparator());
             }
-            writer.write(builder.toString().trim());
+            writer.write(builder.toString());
         } catch (IOException e) {
             throw new RuntimeException("Can`t write to file " + pathToFile, e);
         }

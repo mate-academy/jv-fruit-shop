@@ -17,6 +17,9 @@ public class SupplyOperationService implements OperationService {
         if (quantity < 0) {
             throw new RuntimeException("Supply value can`t be negative");
         }
+        if (fruit == null) {
+            new BalanceOperationService(fruitDao).execute(fruitName, quantity);
+        }
         int newQuantity = fruit.getQuantity() + quantity;
         fruit.setQuantity(newQuantity);
         fruitDao.update(fruit);
