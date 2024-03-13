@@ -2,9 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.TransactionService;
-import core.basesyntax.strategy.CodeService;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.Arrays;
+import core.basesyntax.strategy.TransactionProcessor;
 import java.util.List;
 
 public class TransactionServiceImpl implements TransactionService {
@@ -15,25 +14,11 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public boolean processTransactions(List<FruitTransaction> transactions) {
+    public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
-            if (fruitTransaction.getFruit().isBlank()) {
-                throw new RuntimeException("Fruit name is empty");
-            }
-            if (fruitTransaction.getQuantity() < 0) {
-                throw new RuntimeException("Fruits "
-                        + fruitTransaction.getFruit() + " less than 0");
-            }
-            if (!Arrays.stream(FruitTransaction.Operation.values()).toList()
-                    .contains(fruitTransaction.getOperation())) {
-                throw new RuntimeException("Operation isn`t correct: "
-                        + fruitTransaction.getOperation());
-            }
-
-            CodeService codeService =
-                    operationStrategy.getCodeService(fruitTransaction.getOperation());
-            codeService.doOperation(fruitTransaction);
+            TransactionProcessor codeService =
+                    operationStrategy.getTransactionProcessor(fruitTransaction.getOperation());
+            codeService.processTransaction(fruitTransaction);
         }
-        return true;
     }
 }

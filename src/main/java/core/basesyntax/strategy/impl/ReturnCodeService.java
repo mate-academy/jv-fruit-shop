@@ -3,14 +3,14 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.impl.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.strategy.CodeService;
+import core.basesyntax.strategy.TransactionProcessor;
 
-public class ReturnCodeService implements CodeService {
+public class ReturnCodeService implements TransactionProcessor {
     private FruitDao fruitDao = new FruitDaoImpl();
 
     @Override
-    public void doOperation(FruitTransaction fruit) {
-        int oldQuantity = fruitDao.get(fruit.getFruit());
-        fruitDao.add(fruit.getFruit(), fruit.getQuantity() + oldQuantity);
+    public void processTransaction(FruitTransaction transaction) {
+        int oldQuantity = fruitDao.get(transaction.getFruit());
+        fruitDao.add(transaction.getFruit(), transaction.getQuantity() + oldQuantity);
     }
 }

@@ -7,9 +7,14 @@ import java.util.Map;
 public class GenerateReportServiceImpl implements GenerateReportService {
     private static final String COLUMN_FRUIT = "fruit";
     private static final String COLUMN_QUANTITY = "quantity";
+    private FruitDao fruitDao;
+
+    public GenerateReportServiceImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
-    public String generateReport(FruitDao fruitDao) {
+    public String generateReport() {
         StringBuilder builder = new StringBuilder(COLUMN_FRUIT.concat(",")
                 .concat(COLUMN_QUANTITY).concat(System.lineSeparator()));
         for (Map.Entry<String, Integer> pair : fruitDao.getAll().entrySet()) {

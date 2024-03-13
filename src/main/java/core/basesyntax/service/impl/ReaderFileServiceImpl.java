@@ -16,7 +16,7 @@ public class ReaderFileServiceImpl implements ReaderFileService {
             }
             return builder.toString().strip();
         } catch (IOException e) {
-            throw new RuntimeException("Can`t find file by this " + pathFile + " " + e);
+            throw new RuntimeException("Can`t find file by path " + pathFile, e);
         }
     }
 }
