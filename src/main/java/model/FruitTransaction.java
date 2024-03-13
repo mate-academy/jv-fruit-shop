@@ -47,7 +47,7 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getCode() {
+        public String getOperationByCode() {
             return code;
         }
     }

@@ -25,7 +25,7 @@ public class FruitServiceImpl implements FruitService {
 
         Map<String, Integer> resultList = new HashMap<>();
         for (int i = 0; i < fruits.size(); i++) {
-            resultList.put(fruits.get(i), quantityOfFruits.get(i));
+            resultList.merge(fruits.get(i), quantityOfFruits.get(i), Integer::sum);
         }
 
         return resultList;
