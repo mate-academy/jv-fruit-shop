@@ -1,11 +1,10 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.service.FileWriter;
-
 import java.io.IOException;
 import java.nio.file.Path;
 
-public class csvFileWriter implements FileWriter {
+public class CsvFileWriter implements FileWriter {
     @Override
     public void write(String report, String filePath) {
         Path path = Path.of(filePath);

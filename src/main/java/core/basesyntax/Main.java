@@ -1,17 +1,17 @@
 package core.basesyntax;
 
 import core.basesyntax.db.FruitStorage;
+import core.basesyntax.impl.CsvFileReader;
+import core.basesyntax.impl.CsvFileWriter;
 import core.basesyntax.impl.FruitTransactionParserImpl;
 import core.basesyntax.impl.FruitTransactionProcessorImpl;
-import core.basesyntax.impl.csvFileReader;
 import core.basesyntax.impl.ReportCreatorImpl;
-import core.basesyntax.impl.csvFileWriter;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionProcessor;
-import core.basesyntax.service.FileWriter;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -28,7 +28,7 @@ public class Main {
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
-        FileReader readerFromFile = new csvFileReader();
+        FileReader readerFromFile = new CsvFileReader();
 
         List<String> dataFromFile = readerFromFile
                 .read("src\\main\\resources\\inputFile.csv");
@@ -42,7 +42,7 @@ public class Main {
         ReportCreator report = new ReportCreatorImpl();
         String string = report.reportCreator(FruitStorage.fruitTransactionStorage);
 
-        FileWriter writerService = new csvFileWriter();
+        FileWriter writerService = new CsvFileWriter();
         writerService.write(string, "src\\main\\resources\\outputFile.csv");
     }
 }
