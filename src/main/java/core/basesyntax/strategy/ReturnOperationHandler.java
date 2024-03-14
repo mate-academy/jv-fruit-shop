@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public void fruitTransactionHandler(FruitTransaction transaction) {
+    public void handlerOperation(FruitTransaction transaction) {
         int quantityInTransaction = transaction.getQuantity();
         FruitStorage.fruitTransactionStorage.put(transaction.getFruit(),
                 FruitStorage.getQuantity(transaction.getFruit())

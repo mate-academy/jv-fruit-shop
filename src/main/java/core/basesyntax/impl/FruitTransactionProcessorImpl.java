@@ -19,7 +19,7 @@ public class FruitTransactionProcessorImpl implements TransactionProcessor {
         for (FruitTransaction transaction : fruitTransactionsList) {
             OperationHandler operation = operationHandlerStrategy
                     .getOperationFromFruitTransaction(transaction.getOperation());
-            operation.fruitTransactionHandler(transaction);
+            operation.handlerOperation(transaction);
         }
     }
 }
