@@ -1,8 +1,7 @@
+import db.FileReader;
+import db.FileReaderImpl;
 import db.FileWriter;
 import db.FileWriterImpl;
-import db.TransactionReader;
-import db.TransactionReaderImpl;
-import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.FruitService;
@@ -19,13 +18,13 @@ import strategy.activities.SupplyHandler;
 
 public class Main {
     private static final String filePath = "src/main/resources/file.csv"; // data from file
-    private static final TransactionReader readFile = new TransactionReaderImpl();
+    private static final FileReader readFile = new FileReaderImpl();
     private static final FileWriter fileWriter = new FileWriterImpl();
     private static final ReportService reportService = new ReportServiceImpl();
 
     public static void main(String[] args) {
         // read and convert data
-        List<FruitTransaction> dataFromCsv = readFile.readTransactionsFromFile(filePath);
+        String dataFromCsv = readFile.read(filePath);
 
         // process
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
@@ -37,9 +36,9 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-
+        Map<String, Integer> doneData = fruitService.processData(dataFromCsv);
         // create report
-        String report = reportService.generateReport(fruitService.processData(dataFromCsv));
+        String report = reportService.generateReport(doneData);
 
         // write report to file
         fileWriter.writeToFile(report);
