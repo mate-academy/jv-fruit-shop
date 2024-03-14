@@ -2,14 +2,14 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
 import java.util.Map;
 
 public class FruitStrategy {
-    private final Map<Operation, OperationService> operationMap;
+    private final Map<Operation, OperationHandler> operationMap;
 
-    public FruitStrategy(Map<Operation, OperationService> operationMap) {
+    public FruitStrategy(Map<Operation, OperationHandler> operationMap) {
         this.operationMap = operationMap;
     }
 
@@ -18,8 +18,8 @@ public class FruitStrategy {
             if (transaction.operation() == null) {
                 throw new RuntimeException("No such strategy");
             }
-            OperationService operationService = operationMap.get(transaction.operation());
-            operationService.execute(transaction.fruit(), transaction.quantity());
+            OperationHandler operationHandler = operationMap.get(transaction.operation());
+            operationHandler.execute(transaction.fruit(), transaction.quantity());
         }
     }
 }

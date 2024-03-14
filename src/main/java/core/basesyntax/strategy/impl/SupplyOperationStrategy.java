@@ -2,12 +2,12 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationHandler;
 
-public class SupplyOperationService implements OperationService {
+public class SupplyOperationStrategy implements OperationHandler {
     private final FruitDao fruitDao;
 
-    public SupplyOperationService(FruitDao fruitDao) {
+    public SupplyOperationStrategy(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
@@ -18,7 +18,7 @@ public class SupplyOperationService implements OperationService {
             throw new RuntimeException("Supply value can`t be negative");
         }
         if (fruit == null) {
-            new BalanceOperationService(fruitDao).execute(fruitName, quantity);
+            new BalanceOperationStrategy(fruitDao).execute(fruitName, quantity);
         }
         int newQuantity = fruit.getQuantity() + quantity;
         fruit.setQuantity(newQuantity);

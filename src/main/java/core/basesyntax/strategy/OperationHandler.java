@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface OperationService {
+public interface OperationHandler {
     void execute(String fruitName, int quantity);
 }

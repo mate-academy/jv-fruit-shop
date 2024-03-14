@@ -6,7 +6,7 @@ import core.basesyntax.service.ParserService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserServiceImpl implements ParserService {
+public class FruitParserServiceImpl implements ParserService {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
