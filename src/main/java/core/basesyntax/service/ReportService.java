@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface ReportFromData {
+public interface ReportService {
     String storageToString();
 }

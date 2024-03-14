@@ -1,16 +1,31 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertLineToObject;
+import core.basesyntax.service.TransactionConverter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
-public class ConvertLineToObjectImpl implements ConvertLineToObject {
-    public static final String LINE_SEPARATOR = ";";
+public class TransactionConverterImpl implements TransactionConverter {
+    public static final String LINE_SEPARATOR = ",";
     public static final int INDEX_OF_OPERATION = 0;
     public static final int INDEX_OF_FRUIT = 1;
     public static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public FruitTransaction getData(String line) {
+    public List<FruitTransaction> convert(List<String> list) {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        for (String line : list) {
+            if (Objects.equals(line, list.get(0))) {
+                continue;
+            }
+            FruitTransaction data = convertLine(line);
+            fruitTransactions.add(data);
+        }
+        return fruitTransactions;
+    }
+
+    private FruitTransaction convertLine(String line) {
         if (line == null) {
             throw new RuntimeException("Line is empty");
         }

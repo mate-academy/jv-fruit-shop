@@ -9,11 +9,6 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     }
 
     @Override
-    public void replace(String fruit, Integer quantity) {
-        FruitStorage.FRUIT_STORAGE.replace(fruit, quantity);
-    }
-
-    @Override
     public int get(String fruit) {
         return FruitStorage.FRUIT_STORAGE.get(fruit);
     }
