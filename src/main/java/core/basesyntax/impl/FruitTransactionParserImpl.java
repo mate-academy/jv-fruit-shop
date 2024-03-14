@@ -18,7 +18,7 @@ public class FruitTransactionParserImpl implements TransactionParser {
                 .map(s -> s.split(SPLIT_DELIMITER))
                 .toList();
 
-        List<FruitTransaction> convertList = new ArrayList<>();
+        List<FruitTransaction> transactionList = new ArrayList<>();
         FruitTransaction fruitTransaction;
         for (String[] strings : collect) {
             String fruitName = strings[INDEX_FOR_NAME];
@@ -27,7 +27,7 @@ public class FruitTransactionParserImpl implements TransactionParser {
                     .substring(strings[INDEX_FOR_OPERATION].length() - 1);
             fruitTransaction =
                     new FruitTransaction(fruitName, quantity, getOperationType(operationType));
-            convertList.add(fruitTransaction);
+            transactionList.add(fruitTransaction);
             if (quantity < 0) {
                 throw new RuntimeException("Quantity of fruit can not be less zero: "
                         + "\""
@@ -35,7 +35,7 @@ public class FruitTransactionParserImpl implements TransactionParser {
                         + "\"");
             }
         }
-        return convertList;
+        return transactionList;
     }
 
     private FruitTransaction.Operation getOperationType(String operationType) {
