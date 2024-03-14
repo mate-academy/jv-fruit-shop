@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
-import java.util.Map;
+import core.basesyntax.model.Report;
+import java.util.List;
 
 public interface ReportGenerator {
-    Map<String, String> generate();
+    List<Report> generate();
 }

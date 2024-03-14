@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.RecordDao;
 import core.basesyntax.dao.RecordDaoImpl;
 import core.basesyntax.model.Product;
+import core.basesyntax.model.Report;
 import core.basesyntax.service.ReportGenerator;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class CommonReportGenerator implements ReportGenerator {
     private final RecordDao recordDao = RecordDaoImpl.getInstance();
 
     @Override
-    public Map<String, String> generate() {
+    public List<Report> generate() {
         List<Product> products = recordDao.getAll();
         if (products.isEmpty()) {
             throw new RuntimeException("DB is empty");
@@ -29,21 +30,16 @@ public class CommonReportGenerator implements ReportGenerator {
                 .collect(Collectors.groupingBy(p -> p.getClass().getSimpleName() + REPORT_CSV));
     }
 
-    private Map<String, String> generateReports(Map<String, List<Product>> groupedProducts) {
+    private List<Report> generateReports(Map<String, List<Product>> groupedProducts) {
         return groupedProducts.entrySet().stream()
-                .collect(Collectors.toMap(
-                        Map.Entry::getKey,
-                        entry -> getReport(entry.getValue())));
+                .map(e -> new Report(e.getKey(),
+                        e.getKey() + COMMA + QUANTITY,
+                        getBodyReport(e.getValue())))
+                .toList();
     }
 
-    private String getReport(List<Product> products) {
-        String header = products.stream()
-                .findFirst()
-                .orElseThrow()
-                .getClass()
-                .getSimpleName()
-                .toLowerCase() + COMMA + QUANTITY;
-        StringBuilder report = new StringBuilder(header);
+    private String getBodyReport(List<Product> products) {
+        StringBuilder report = new StringBuilder();
         for (Product product : products) {
             report.append(System.lineSeparator())
                     .append(product.getName())
