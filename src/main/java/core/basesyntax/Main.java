@@ -3,11 +3,11 @@ package core.basesyntax;
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.impl.FruitTransactionParserImpl;
 import core.basesyntax.impl.FruitTransactionProcessorImpl;
-import core.basesyntax.impl.ReaderServiceImplFromCsv;
+import core.basesyntax.impl.csvFileReader;
 import core.basesyntax.impl.ReportCreatorImpl;
 import core.basesyntax.impl.WriterServiceImplToCsv;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.FileReader;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionProcessor;
@@ -28,10 +28,10 @@ public class Main {
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
-        ReaderService readerFromFile = new ReaderServiceImplFromCsv();
+        FileReader readerFromFile = new csvFileReader();
 
         List<String> dataFromFile = readerFromFile
-                .readFromFile("src\\main\\resources\\inputFile.csv");
+                .read("src\\main\\resources\\inputFile.csv");
 
         TransactionParser parser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactions = parser.converterToTransactions(dataFromFile);
