@@ -8,6 +8,7 @@ public class SupplyOperationHandler implements OperationHandler {
     public void fruitTransactionHandler(FruitTransaction transaction) {
         int quantityInTransaction = transaction.getQuantity();
         FruitStorage.fruitTransactionStorage.put(transaction.getFruit(),
-                FruitStorage.getQuantity(transaction) + quantityInTransaction);
+                FruitStorage.getQuantity(transaction.getFruit())
+                        + quantityInTransaction);
     }
 }

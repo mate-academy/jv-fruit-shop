@@ -7,9 +7,10 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void fruitTransactionHandler(FruitTransaction transaction) {
         int quantityInTransaction = transaction.getQuantity();
-        if (quantityInTransaction <= FruitStorage.getQuantity(transaction)) {
+        if (quantityInTransaction <= FruitStorage.getQuantity(transaction.getFruit())) {
             FruitStorage.fruitTransactionStorage.put(transaction.getFruit(),
-                    FruitStorage.getQuantity(transaction) - quantityInTransaction);
+                    FruitStorage.getQuantity(transaction.getFruit())
+                            - quantityInTransaction);
         } else {
             throw new RuntimeException("Not enough quantity for sell: fruit - "
                     + transaction.getFruit()
