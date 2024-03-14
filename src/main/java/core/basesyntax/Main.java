@@ -5,13 +5,13 @@ import core.basesyntax.impl.FruitTransactionParserImpl;
 import core.basesyntax.impl.FruitTransactionProcessorImpl;
 import core.basesyntax.impl.csvFileReader;
 import core.basesyntax.impl.ReportCreatorImpl;
-import core.basesyntax.impl.WriterServiceImplToCsv;
+import core.basesyntax.impl.csvFileWriter;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionProcessor;
-import core.basesyntax.service.WriterService;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.PurchaseOperationHandler;
@@ -42,7 +42,7 @@ public class Main {
         ReportCreator report = new ReportCreatorImpl();
         String string = report.reportCreator(FruitStorage.fruitTransactionStorage);
 
-        WriterService writerService = new WriterServiceImplToCsv();
-        writerService.writeToFile(string, "src\\main\\resources\\outputFile.csv");
+        FileWriter writerService = new csvFileWriter();
+        writerService.write(string, "src\\main\\resources\\outputFile.csv");
     }
 }
