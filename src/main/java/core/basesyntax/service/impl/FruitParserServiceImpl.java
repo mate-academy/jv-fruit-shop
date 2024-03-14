@@ -17,26 +17,29 @@ public class FruitParserServiceImpl implements ParserService {
     public List<FruitTransaction> parse(List<String> commands) {
         List<FruitTransaction> listOfFruitTransactions = new ArrayList<>();
         String[] fruitTransactionPattern;
-        FruitTransaction fruitTransaction;
         for (String command : commands) {
             fruitTransactionPattern = command.trim().split(CSV_SEPARATOR);
-            if (fruitTransactionPattern.length != LENGTH_OF_COMMAND_PATTERN) {
-                throw new RuntimeException("Invalid data in file");
-            }
-            Operation operation = Operation.fromCode(fruitTransactionPattern[OPERATION_INDEX]);
-            String fruitName = fruitTransactionPattern[FRUIT_NAME_INDEX];
-            int quantity;
-            try {
-                quantity = Integer.parseInt(fruitTransactionPattern[QUANTITY_INDEX]);
-                if (quantity < 0) {
-                    throw new NumberFormatException("Quantity can`t be less than 0");
-                }
-            } catch (NumberFormatException e) {
-                throw new NumberFormatException("Invalid type of number");
-            }
-            fruitTransaction = new FruitTransaction(operation, fruitName, quantity);
+            FruitTransaction fruitTransaction = formFruitTransaction(fruitTransactionPattern);
             listOfFruitTransactions.add(fruitTransaction);
         }
         return listOfFruitTransactions;
+    }
+
+    private FruitTransaction formFruitTransaction(String[] fruitTransactionPattern) {
+        if (fruitTransactionPattern.length != LENGTH_OF_COMMAND_PATTERN) {
+            throw new RuntimeException("Invalid data in file");
+        }
+        Operation operation = Operation.fromCode(fruitTransactionPattern[OPERATION_INDEX]);
+        String fruitName = fruitTransactionPattern[FRUIT_NAME_INDEX];
+        int quantity;
+        try {
+            quantity = Integer.parseInt(fruitTransactionPattern[QUANTITY_INDEX]);
+            if (quantity < 0) {
+                throw new NumberFormatException("Quantity can`t be less than 0");
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("Invalid type of number");
+        }
+        return new FruitTransaction(operation, fruitName, quantity);
     }
 }

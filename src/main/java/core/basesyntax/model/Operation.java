@@ -20,5 +20,4 @@ public enum Operation {
         }
         throw new IllegalArgumentException("No operation with code: " + code);
     }
-
 }

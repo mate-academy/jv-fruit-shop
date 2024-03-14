@@ -14,13 +14,8 @@ public class ReturnOperationStrategy implements OperationHandler {
     @Override
     public void execute(String fruitName, int quantity) {
         Fruit fruit = fruitDao.get(fruitName);
-        if (fruit.getSold() < quantity) {
-            throw new RuntimeException("Not enough fruits were sold to "
-                    + "fulfill the request");
-        }
         int newQuantity = fruit.getQuantity() + quantity;
         fruit.setQuantity(newQuantity);
-        fruit.setSold(fruit.getSold() - quantity);
         fruitDao.update(fruit);
     }
 }

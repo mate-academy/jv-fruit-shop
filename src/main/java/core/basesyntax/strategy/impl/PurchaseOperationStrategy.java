@@ -19,7 +19,6 @@ public class PurchaseOperationStrategy implements OperationHandler {
             throw new RuntimeException("You cannot sell more than you have in the store");
         }
         fruit.setQuantity(newQuantity);
-        fruit.setSold(fruit.getSold() + quantity);
         fruitDao.update(fruit);
     }
 }

@@ -17,9 +17,6 @@ public class SupplyOperationStrategy implements OperationHandler {
         if (quantity < 0) {
             throw new RuntimeException("Supply value can`t be negative");
         }
-        if (fruit == null) {
-            new BalanceOperationStrategy(fruitDao).execute(fruitName, quantity);
-        }
         int newQuantity = fruit.getQuantity() + quantity;
         fruit.setQuantity(newQuantity);
         fruitDao.update(fruit);
