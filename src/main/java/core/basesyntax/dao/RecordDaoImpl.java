@@ -6,7 +6,18 @@ import java.util.List;
 import java.util.Map;
 
 public class RecordDaoImpl implements RecordDao {
+    private static RecordDao instance;
     private final Map<String, Product> storage = Storage.getInstance().getStorage();
+
+    private RecordDaoImpl() {
+    }
+
+    public static RecordDao getInstance() {
+        if (instance == null) {
+            instance = new RecordDaoImpl();
+        }
+        return instance;
+    }
 
     @Override
     public void put(Product product) {
@@ -19,17 +30,12 @@ public class RecordDaoImpl implements RecordDao {
     }
 
     @Override
-    public List<Product> getAllFromDB() {
+    public List<Product> getAll() {
         return List.copyOf(storage.values());
     }
 
     @Override
     public boolean remove(Product product) {
         return storage.remove(product.getName(), product);
-    }
-
-    @Override
-    public void clear() {
-        storage.clear();
     }
 }

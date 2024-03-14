@@ -15,6 +15,9 @@ public class FruitRecordMapper implements RecordMapper {
             String[] record = line.split(COMMA);
             Operation operation = Operation.getByCode(record[OPERATION_INDEX]);
             int quantity = Integer.parseInt(record[QUANTITY_INDEX]);
+            if (quantity < 0) {
+                throw new IllegalArgumentException("Quantity cannot be negative. Params=" + line);
+            }
             Fruit fruit = new Fruit(record[PRODUCT_INDEX], quantity);
             records.add(new Record(operation, fruit));
         }

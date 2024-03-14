@@ -5,10 +5,13 @@ import core.basesyntax.strategy.RecordMapperStrategy;
 import java.util.Map;
 
 public class RecordMapperStrategyImpl implements RecordMapperStrategy {
-    private final Map<String, RecordMapper> recordMappers;
+    private static Map<String, RecordMapper> recordMappers;
+
+    public RecordMapperStrategyImpl() {
+    }
 
     public RecordMapperStrategyImpl(Map<String, RecordMapper> recordMappers) {
-        this.recordMappers = recordMappers;
+        RecordMapperStrategyImpl.recordMappers = recordMappers;
     }
 
     @Override

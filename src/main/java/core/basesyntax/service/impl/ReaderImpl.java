@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class ReaderImpl implements Reader {
     @Override
-    public List<String> getLinesFromFile(String pathToFile) {
+    public List<String> readFromFile(String pathToFile) {
         Path path = Path.of(pathToFile);
         try (Stream<String> stream = Files.lines(path)) {
             return stream.collect(Collectors.toList());

@@ -8,9 +8,7 @@ public interface RecordDao {
 
     Product get(Product product);
 
-    List<Product> getAllFromDB();
+    List<Product> getAll();
 
     boolean remove(Product product);
-
-    void clear();
 }
