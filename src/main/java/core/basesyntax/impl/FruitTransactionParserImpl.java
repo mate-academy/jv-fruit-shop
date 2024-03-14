@@ -12,7 +12,7 @@ public class FruitTransactionParserImpl implements TransactionParser {
     private static final int INDEX_FOR_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> dataConverter(List<String> readData) {
+    public List<FruitTransaction> converterToTransactions(List<String> readData) {
         List<String[]> collect = readData.stream()
                 .skip(1)
                 .map(s -> s.split(SPLIT_DELIMITER))

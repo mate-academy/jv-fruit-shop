@@ -34,7 +34,7 @@ public class Main {
                 .readFromFile("src\\main\\resources\\inputFile.csv");
 
         TransactionParser parser = new FruitTransactionParserImpl();
-        List<FruitTransaction> fruitTransactions = parser.dataConverter(dataFromFile);
+        List<FruitTransaction> fruitTransactions = parser.converterToTransactions(dataFromFile);
 
         TransactionProcessor processor = new FruitTransactionProcessorImpl();
         processor.transactionProcessor(fruitTransactions, strategy);
