@@ -1,11 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.db.FruitStorage;
-import core.basesyntax.impl.CsvFileReader;
-import core.basesyntax.impl.CsvFileWriter;
-import core.basesyntax.impl.FruitTransactionParserImpl;
-import core.basesyntax.impl.FruitTransactionProcessorImpl;
-import core.basesyntax.impl.ReportCreatorImpl;
+import core.basesyntax.service.impl.CsvFileReader;
+import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.FruitTransactionParserImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
