@@ -1,16 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.FruitParserServiceImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitParserServiceImpl;
 import core.basesyntax.service.impl.FruitReportGeneratorImpl;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperationStrategy;
@@ -18,6 +17,7 @@ import core.basesyntax.strategy.impl.FruitStrategy;
 import core.basesyntax.strategy.impl.PurchaseOperationStrategy;
 import core.basesyntax.strategy.impl.ReturnOperationStrategy;
 import core.basesyntax.strategy.impl.SupplyOperationStrategy;
+import core.basesyntax.dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
