@@ -36,6 +36,7 @@ public class TransactionConverterImpl implements TransactionConverter {
         return new FruitTransaction(
                 FruitTransaction.Operation.fromCode(dataFromLine[INDEX_OF_OPERATION]),
                 dataFromLine[INDEX_OF_FRUIT],
-                Integer.parseInt(dataFromLine[INDEX_OF_QUANTITY]));
+                Integer.parseInt(dataFromLine[INDEX_OF_QUANTITY]
+                        .substring(0,dataFromLine[INDEX_OF_QUANTITY].length() - 2)));
     }
 }
