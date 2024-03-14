@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class FruitTransactionProcessorImpl implements TransactionProcessor {
     @Override
-    public void transactionProcessor(List<FruitTransaction> fruitTransactionsList,
-                                     Map<FruitTransaction.Operation, OperationHandler> strategy) {
+    public void process(List<FruitTransaction> fruitTransactionsList,
+                        Map<FruitTransaction.Operation, OperationHandler> strategy) {
 
         OperationHandlerStrategy operationHandlerStrategy =
                 new OperationHandlerStrategyImpl(strategy);

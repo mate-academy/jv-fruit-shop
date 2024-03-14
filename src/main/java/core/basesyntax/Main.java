@@ -37,7 +37,7 @@ public class Main {
         List<FruitTransaction> fruitTransactions = parser.converterToTransactions(dataFromFile);
 
         TransactionProcessor processor = new FruitTransactionProcessorImpl();
-        processor.transactionProcessor(fruitTransactions, strategy);
+        processor.process(fruitTransactions, strategy);
 
         ReportCreator report = new ReportCreatorImpl();
         String string = report.reportCreator(FruitStorage.fruitTransactionStorage);
