@@ -1,9 +1,26 @@
 package core.basesyntax;
 
-/**
- * Feel free to remove this class and create your own.
- */
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 public class HelloWorld {
-    // HINT: In the `public static void main(String[] args)` it is better to create instances of your classes, 
-    // and call their methods, but do not write any business logic in the `main` method!
+    public static void main(String[] args) throws IOException {
+        FruitDao fruitDao = new FruitDaoImpl();
+        FruitService fruitService = new FruitServiceImpl();
+
+        File fileToRead = new File("read.csv");
+        File fileToWrite = new File("write.csv");
+
+        String data = fruitDao.readFromFile(fileToRead);
+
+        List<String[]> dataToFile = fruitService.report(data);
+
+        fruitDao.writeToFile(fileToWrite, dataToFile);
+    }
 }
