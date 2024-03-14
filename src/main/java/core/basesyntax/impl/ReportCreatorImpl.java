@@ -1,6 +1,6 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.servise.ReportCreator;
+import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {

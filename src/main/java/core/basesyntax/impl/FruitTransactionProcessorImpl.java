@@ -1,7 +1,7 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.servise.TransactionProcessor;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationHandlerStrategy;
 import core.basesyntax.strategy.OperationHandlerStrategyImpl;
