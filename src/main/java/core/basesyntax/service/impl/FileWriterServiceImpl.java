@@ -9,7 +9,6 @@ public class FileWriterServiceImpl implements WriterService {
 
     @Override
     public void writeToFile(String pathToFile, String report) {
-        StringBuilder builder = new StringBuilder();
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
             writer.write(report);
         } catch (IOException e) {
