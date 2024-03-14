@@ -4,7 +4,6 @@ import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.service.FruitService;
 import core.basesyntax.service.FruitServiceImpl;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
