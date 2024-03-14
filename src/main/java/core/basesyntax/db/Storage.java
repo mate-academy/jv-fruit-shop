@@ -18,7 +18,7 @@ public class Storage {
         return instance;
     }
 
-    public static void addElements(Map<String, Integer> products) {
+    public static void setElements(Map<String, Integer> products) {
         storage = products;
     }
 

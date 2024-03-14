@@ -1,13 +1,13 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.strategy.Strategy;
+import core.basesyntax.strategy.OperationHandler;
 import java.util.function.IntUnaryOperator;
 
-public class SupplyStrategyImpl implements Strategy {
+public class SupplyStrategyImpl implements OperationHandler {
     private final IntUnaryOperator operation = value -> value;
 
     @Override
-    public int calculation(int amount) {
+    public int calculate(int amount) {
         return operation.applyAsInt(amount);
     }
 }

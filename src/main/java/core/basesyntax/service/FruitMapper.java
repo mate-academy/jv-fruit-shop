@@ -3,6 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
-public interface ConvertService {
+public interface FruitMapper {
     List<Fruit> convert(List<String> data);
 }
