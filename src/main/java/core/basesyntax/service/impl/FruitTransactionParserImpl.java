@@ -25,6 +25,7 @@ public class FruitTransactionParserImpl implements TransactionParser {
             int quantity = Integer.parseInt(strings[INDEX_FOR_QUANTITY]);
             String operationType = strings[INDEX_FOR_OPERATION]
                     .substring(strings[INDEX_FOR_OPERATION].length() - 1);
+            // this is required to ignore the characters before the transaction code
             fruitTransaction =
                     new FruitTransaction(fruitName, quantity, getOperationType(operationType));
             transactionList.add(fruitTransaction);
@@ -39,16 +40,6 @@ public class FruitTransactionParserImpl implements TransactionParser {
     }
 
     private FruitTransaction.Operation getOperationType(String operationType) {
-        return switch (operationType) {
-            case "b" -> FruitTransaction.Operation.BALANCE;
-            case "r" -> FruitTransaction.Operation.RETURN;
-            case "p" -> FruitTransaction.Operation.PURCHASE;
-            case "s" -> FruitTransaction.Operation.SUPPLY;
-            default -> throw new RuntimeException("Operation type is not correct: "
-                    + "\""
-                    + operationType
-                    + "\"");
-        };
-    }
-
+        return FruitTransaction.Operation.fromCode(operationType);
+        }
 }
