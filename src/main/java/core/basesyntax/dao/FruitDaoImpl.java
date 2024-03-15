@@ -26,19 +26,14 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public void writeToFile(File file, List<String[]> data) {
+    public void writeToFile(File file, List<String> data) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String[] row : data) {
-                for (int i = 0; i < row.length; i++) {
-                    writer.write(row[i]);
-                    if (i < row.length - 1) {
-                        writer.write(",");
-                    }
-                }
+            for (String row : data) {
+                writer.write(row);
                 writer.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file");
+            throw new RuntimeException("Can't write to file", e);
         }
     }
 }
