@@ -11,14 +11,14 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String reportCreator(Map<String, Integer> inputData) {
-        StringBuilder builderReportRow = new StringBuilder(TITLE_ROW);
+        StringBuilder reportBuilder = new StringBuilder(TITLE_ROW);
         for (Map.Entry<String, Integer> inputDataEntry : inputData.entrySet()) {
-            builderReportRow.append("\t")
+            reportBuilder.append("\t")
                     .append(inputDataEntry.getKey())
                     .append(ROW_SEPARATOR)
                     .append(inputDataEntry.getValue())
                     .append(System.lineSeparator());
         }
-        return builderReportRow.toString();
+        return reportBuilder.toString();
     }
 }
