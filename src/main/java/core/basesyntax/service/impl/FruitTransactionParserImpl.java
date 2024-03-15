@@ -10,12 +10,13 @@ public class FruitTransactionParserImpl implements TransactionParser {
     private static final int INDEX_FOR_OPERATION = 0;
     private static final int INDEX_FOR_NAME = 1;
     private static final int INDEX_FOR_QUANTITY = 2;
+    private static final int OFFSET = 1;
 
     @Override
     public List<FruitTransaction> converterToTransactions(List<String> readData) {
         List<String[]> collect = readData.stream()
-                .skip(1)
-                .map(s -> s.split(SPLIT_DELIMITER))
+                .skip(OFFSET)
+                .map(line -> line.split(SPLIT_DELIMITER))
                 .toList();
 
         List<FruitTransaction> transactionList = new ArrayList<>();
