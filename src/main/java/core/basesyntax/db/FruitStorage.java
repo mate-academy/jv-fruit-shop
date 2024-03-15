@@ -16,6 +16,5 @@ public class FruitStorage {
                 .orElseThrow(() -> new RuntimeException("Can not find quantity of fruit :"
                         + fruit
                         + " in database"));
-
     }
 }

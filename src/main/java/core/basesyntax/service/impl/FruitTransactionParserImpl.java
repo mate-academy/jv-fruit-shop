@@ -41,5 +41,5 @@ public class FruitTransactionParserImpl implements TransactionParser {
 
     private FruitTransaction.Operation getOperationType(String operationType) {
         return FruitTransaction.Operation.fromCode(operationType);
-        }
+    }
 }

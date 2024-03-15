@@ -51,16 +51,16 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation fromCode (String code){
-            for(Operation element: values()){
-                if (element.getCode().equals(code)){
+        public static Operation fromCode(String code) {
+            for (Operation element : values()) {
+                if (element.getCode().equals(code)) {
                     return element;
                 }
             }
             throw new IllegalArgumentException("Can't find enum for code type operation: "
                     + "\""
                     + code
-                    +"\"");
+                    + "\"");
         }
     }
 
