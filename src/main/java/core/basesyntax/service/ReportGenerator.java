@@ -3,8 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.CsvReaderService;
 import core.basesyntax.service.impl.CsvWriterService;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
 public class ReportGenerator {
@@ -21,9 +19,6 @@ public class ReportGenerator {
     }
 
     public void generateReport(String filePath, String reportName) {
-        if (Files.exists(Paths.get(reportName + ".csv"))) {
-            throw new RuntimeException("A file with this name already exists");
-        }
         StringBuilder builder = new StringBuilder("fruit,quantity" + System.lineSeparator());
         readerService.readFromFile(filePath)
                 .map(transactionMapper)
