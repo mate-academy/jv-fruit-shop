@@ -2,6 +2,7 @@ package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.stream.IntStream;
 
 public class FruitStorage {
@@ -9,11 +10,11 @@ public class FruitStorage {
 
     public static int getQuantity(String fruit) {
         return fruitTransactionStorage.entrySet().stream()
-                .filter(k -> k.getKey().equals(fruit))
-                .flatMapToInt(v ->
-                        IntStream.of(v.getValue()))
+                .filter(fruitKey -> fruitKey.getKey().equals(fruit))
+                .flatMapToInt(quantity ->
+                        IntStream.of(quantity.getValue()))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Can not find quantity of fruit :"
+                .orElseThrow(() -> new NoSuchElementException("Can not find quantity of fruit :"
                         + fruit
                         + " in database"));
     }
