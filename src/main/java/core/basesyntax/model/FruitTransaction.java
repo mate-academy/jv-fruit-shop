@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import java.util.Objects;
-
 public class FruitTransaction {
     private String fruit;
     private int quantity;
@@ -52,25 +50,18 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
-    }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+        public static Operation fromCode (String code){
+            for(Operation element: values()){
+                if (element.getCode().equals(code)){
+                    return element;
+                }
+            }
+            throw new IllegalArgumentException("Can't find enum for code type operation: "
+                    + "\""
+                    + code
+                    +"\"");
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        FruitTransaction that = (FruitTransaction) o;
-        return quantity == that.quantity
-                && Objects.equals(fruit, that.fruit)
-                && operation == that.operation;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fruit, quantity, operation);
     }
 
     @Override
