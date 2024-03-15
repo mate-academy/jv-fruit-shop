@@ -1,7 +1,6 @@
-package core.basesyntax.strategy.dataProcessor;
+package core.basesyntax.strategy.dataprocessor;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +15,8 @@ public class DataProcessorImpl implements DataProcessor {
         List<String[]> dataToWork = convertData(data);
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String[] transactionData : dataToWork) {
-            FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(transactionData[OPERATION_INDEX]);
+            FruitTransaction.Operation operation = FruitTransaction.Operation
+                    .fromCode(transactionData[OPERATION_INDEX]);
             String fruit = transactionData[FRUIT_INDEX];
             int quantity = Integer.parseInt(transactionData[QUANTITY_INDEX]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));

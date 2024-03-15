@@ -1,7 +1,6 @@
-package core.basesyntax.strategy.reportProvider;
+package core.basesyntax.strategy.reportprovider;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.List;
 import java.util.Map;
 

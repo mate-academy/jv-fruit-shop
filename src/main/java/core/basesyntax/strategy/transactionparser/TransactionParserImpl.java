@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.transactionParser;
+package core.basesyntax.strategy.transactionparser;
 
 import java.util.ArrayList;
 import java.util.List;
