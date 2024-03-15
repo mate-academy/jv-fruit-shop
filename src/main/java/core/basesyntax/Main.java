@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src\\main\\resources\\inputFile.csv";
+    private static final String OUTPUT_FILE_PATH = "src\\main\\resources\\outputFile.csv";
+
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, OperationHandler> strategy =
                 Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
@@ -31,7 +34,7 @@ public class Main {
         FileReader readerFromFile = new CsvFileReader();
 
         List<String> dataFromFile = readerFromFile
-                .read("src\\main\\resources\\inputFile.csv");
+                .read(INPUT_FILE_PATH);
 
         TransactionParser parser = new FruitTransactionParserImpl();
         List<FruitTransaction> fruitTransactions = parser.converterToTransactions(dataFromFile);
@@ -43,6 +46,6 @@ public class Main {
         String string = report.reportCreator(FruitStorage.fruitTransactionStorage);
 
         FileWriter writerService = new CsvFileWriter();
-        writerService.write(string, "src\\main\\resources\\outputFile.csv");
+        writerService.write(string, OUTPUT_FILE_PATH);
     }
 }
