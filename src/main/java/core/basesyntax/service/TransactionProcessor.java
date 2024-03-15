@@ -6,6 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 public interface TransactionProcessor {
-    void process(List<FruitTransaction> fruitTransactionsList,
+    void process(List<FruitTransaction> fruitTransactions,
                  Map<FruitTransaction.Operation, OperationHandler> strategy);
 }

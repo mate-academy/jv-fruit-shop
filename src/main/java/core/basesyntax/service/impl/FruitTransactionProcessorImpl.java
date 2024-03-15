@@ -10,13 +10,13 @@ import java.util.Map;
 
 public class FruitTransactionProcessorImpl implements TransactionProcessor {
     @Override
-    public void process(List<FruitTransaction> fruitTransactionsList,
+    public void process(List<FruitTransaction> fruitTransactions,
                         Map<FruitTransaction.Operation, OperationHandler> strategy) {
 
         OperationHandlerStrategy operationHandlerStrategy =
                 new OperationHandlerStrategyImpl(strategy);
 
-        for (FruitTransaction transaction : fruitTransactionsList) {
+        for (FruitTransaction transaction : fruitTransactions) {
             OperationHandler operation = operationHandlerStrategy
                     .getOperationHandler(transaction.getOperation());
             operation.handlerOperation(transaction);
