@@ -4,7 +4,9 @@ import core.basesyntax.service.ReportCreator;
 import java.util.Map;
 
 public class ReportCreatorImpl implements ReportCreator {
-    private static final String TITLE_ROW = "\t" + "fruit,quantity" + "\n";
+    private static final String TITLE_ROW = "\t"
+            + "fruit,quantity"
+            + System.lineSeparator();
     private static final String ROW_SEPARATOR = ",";
 
     @Override
