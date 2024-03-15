@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.FileReaderServ;
+import core.basesyntax.service.FileWriterServ;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionProcessor;
@@ -31,7 +31,7 @@ public class Main {
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
-        FileReader readerFromFile = new CsvFileReader();
+        FileReaderServ readerFromFile = new CsvFileReader();
 
         List<String> dataFromFile = readerFromFile
                 .read(INPUT_FILE_PATH);
@@ -45,7 +45,7 @@ public class Main {
         ReportCreator report = new ReportCreatorImpl();
         String string = report.reportCreator(FruitStorage.fruitTransactionStorage);
 
-        FileWriter writerService = new CsvFileWriter();
+        FileWriterServ writerService = new CsvFileWriter();
         writerService.write(string, OUTPUT_FILE_PATH);
     }
 }
