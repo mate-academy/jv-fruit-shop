@@ -11,11 +11,11 @@ public class PurchaseOperationHandler implements OperationHandler {
             FruitStorage.fruitTransactionStorage.put(transaction.getFruit(),
                     FruitStorage.getQuantity(transaction.getFruit())
                             - quantityInTransaction);
-        } else {
-            throw new RuntimeException("Not enough quantity for sell: fruit - "
-                    + transaction.getFruit()
-                    + " | quantity - "
-                    + transaction.getQuantity());
         }
+        throw new RuntimeException("Not enough quantity for sell: fruit - "
+                + transaction.getFruit()
+                + " | quantity - "
+                + transaction.getQuantity());
+
     }
 }
