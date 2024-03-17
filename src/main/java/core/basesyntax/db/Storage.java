@@ -3,5 +3,5 @@ package core.basesyntax.db;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> storageMap;
+    public static Map<String, Integer> storageMap;
 }
