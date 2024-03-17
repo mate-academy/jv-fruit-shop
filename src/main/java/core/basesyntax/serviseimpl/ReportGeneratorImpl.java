@@ -1,5 +1,6 @@
-package core.basesyntax.servise;
+package core.basesyntax.serviseimpl;
 
+import core.basesyntax.servise.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

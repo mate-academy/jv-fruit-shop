@@ -1,6 +1,7 @@
-package core.basesyntax.readandwritefile;
+package core.basesyntax.readandwriteimpl;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.readandwritefile.CsvReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

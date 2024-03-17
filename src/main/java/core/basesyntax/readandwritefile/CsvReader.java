@@ -1,6 +1,6 @@
 package core.basesyntax.readandwritefile;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface CsvReader {
