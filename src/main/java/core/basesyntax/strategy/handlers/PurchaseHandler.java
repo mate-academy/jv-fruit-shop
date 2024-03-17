@@ -4,14 +4,14 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
-    private final StorageDao storage;
+    private final StorageDao storageDao;
 
     public PurchaseHandler(StorageDao storage) {
-        this.storage = storage;
+        this.storageDao = storage;
     }
 
     @Override
     public void handleOperation(String productType, int amount) {
-
+        storageDao.decreaseAmount(productType, amount);
     }
 }

@@ -2,13 +2,17 @@ package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operationType;
-    private String productType;
+    private String productName;
     private int amount;
-    public FruitTransaction(){};
+
+    public FruitTransaction() {
+    }
+
+    ;
 
     public FruitTransaction(Operation operationType, String productType, int amount) {
         this.operationType = operationType;
-        this.productType = productType;
+        this.productName = productType;
         this.amount = amount;
     }
 
@@ -20,12 +24,12 @@ public class FruitTransaction {
         this.operationType = operationType;
     }
 
-    public String getProductType() {
-        return productType;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setProductType(String productType) {
-        this.productType = productType;
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public int getAmount() {
@@ -46,6 +50,15 @@ public class FruitTransaction {
 
         Operation(String code) {
             this.code = code;
+        }
+
+        public static Operation fromCode(String code) {
+            for (Operation operationType : Operation.values()) {
+                if (operationType.getCode().equals(code)) {
+                    return operationType;
+                }
+            }
+            throw new IllegalArgumentException("Invalid Operation code: " + code);
         }
 
         public String getCode() {

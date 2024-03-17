@@ -10,7 +10,7 @@ public class CsvReportGenerator implements ReportGenerator {
 
     @Override
     public String generateReport(Map<String, Integer> storageMap) {
-        StringBuilder stringBuilder = new StringBuilder(REPORT_FIRST_LINE);
+        StringBuilder stringBuilder = new StringBuilder(REPORT_FIRST_LINE + "\n");
         for (Entry<String, Integer> entry : storageMap.entrySet()) {
             stringBuilder.append(entry.getKey()).append(COMA).append(entry.getValue());
             stringBuilder.append(System.lineSeparator());
