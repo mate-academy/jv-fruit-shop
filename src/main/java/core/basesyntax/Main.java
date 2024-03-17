@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
-import core.basesyntax.service.OperationProcessor;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.ReadDataParser;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.CsvDataParser;
@@ -19,7 +19,6 @@ import core.basesyntax.strategy.handlers.BalanceHandler;
 import core.basesyntax.strategy.handlers.PurchaseHandler;
 import core.basesyntax.strategy.handlers.ReturnHandler;
 import core.basesyntax.strategy.handlers.SupplyHandler;
-import java.util.HashMap;
 import java.util.List;
 
 public class Main {
@@ -28,11 +27,12 @@ public class Main {
 
     public static void main(String[] args) {
         final StorageDao storageDao = new StorageDaoImpl();
-        HandlerStrategy handlerStrategy = new HandlerStrategy(new HashMap<>());
-        handlerStrategy.getStrategyMap().put(Operation.BALANCE, new BalanceHandler(storageDao));
-        handlerStrategy.getStrategyMap().put(Operation.PURCHASE, new PurchaseHandler(storageDao));
-        handlerStrategy.getStrategyMap().put(Operation.RETURN, new ReturnHandler(storageDao));
-        handlerStrategy.getStrategyMap().put(Operation.SUPPLY, new SupplyHandler(storageDao));
+        HandlerStrategy handlerStrategy = new HandlerStrategy();
+        var strategyMap =handlerStrategy.getStrategyMap();
+        strategyMap.put(Operation.BALANCE, new BalanceHandler(storageDao));
+        strategyMap.put(Operation.PURCHASE, new PurchaseHandler(storageDao));
+        strategyMap.put(Operation.RETURN, new ReturnHandler(storageDao));
+        strategyMap.put(Operation.SUPPLY, new SupplyHandler(storageDao));
 
         DataReader dataReader = new CsvReader();
         List<String> readData = dataReader.read(INPUT_FILE);
@@ -40,9 +40,9 @@ public class Main {
         ReadDataParser parser = new CsvDataParser();
         List<FruitTransaction> transactionList = parser.parseToTransactionList(readData);
 
-        OperationProcessor operationProcessor = new OperationProcessorImpl();
+        TransactionProcessor transactionProcessor = new OperationProcessorImpl();
         for (FruitTransaction transaction : transactionList) {
-            operationProcessor.processTransaction(transaction, handlerStrategy);
+            transactionProcessor.processTransaction(transaction, handlerStrategy);
         }
 
         ReportGenerator reportGenerator = new CsvReportGenerator();

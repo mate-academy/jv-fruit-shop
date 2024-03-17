@@ -20,24 +20,12 @@ public class FruitTransaction {
         return operationType;
     }
 
-    public void setOperationType(Operation operationType) {
-        this.operationType = operationType;
-    }
-
     public String getProductName() {
         return productName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public int getAmount() {
         return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     public enum Operation {
@@ -46,7 +34,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;

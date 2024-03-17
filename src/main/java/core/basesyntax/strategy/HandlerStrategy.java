@@ -7,7 +7,7 @@ import java.util.Map;
 public class HandlerStrategy {
     private static Map<Operation, OperationHandler> strategyMap;
 
-    public HandlerStrategy(Map<Operation, OperationHandler> strategyMap) {
+    public HandlerStrategy() {
         HandlerStrategy.strategyMap = new HashMap<>();
     }
 
