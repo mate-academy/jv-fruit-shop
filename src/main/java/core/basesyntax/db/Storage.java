@@ -1,4 +1,4 @@
-package core.basesyntax.storage;
+package core.basesyntax.db;
 
 import java.util.Map;
 
