@@ -6,9 +6,9 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
-import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.ReadDataParser;
 import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.impl.CsvDataParser;
 import core.basesyntax.service.impl.CsvReader;
 import core.basesyntax.service.impl.CsvReportGenerator;
@@ -28,7 +28,7 @@ public class Main {
     public static void main(String[] args) {
         final StorageDao storageDao = new StorageDaoImpl();
         HandlerStrategy handlerStrategy = new HandlerStrategy();
-        var strategyMap =handlerStrategy.getStrategyMap();
+        var strategyMap = handlerStrategy.getStrategyMap();
         strategyMap.put(Operation.BALANCE, new BalanceHandler(storageDao));
         strategyMap.put(Operation.PURCHASE, new PurchaseHandler(storageDao));
         strategyMap.put(Operation.RETURN, new ReturnHandler(storageDao));
