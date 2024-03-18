@@ -34,7 +34,7 @@ public class DataParserImpl implements DataParser {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
         for (String line : data) {
-            if (!line.equals("type,fruitName,quantity")) {
+            if (!line.equals("type,fruit,quantity")) {
                 fruitTransactionList.add(processLine(line));
             }
         }

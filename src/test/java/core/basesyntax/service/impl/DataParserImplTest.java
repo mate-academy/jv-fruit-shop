@@ -30,7 +30,7 @@ public class DataParserImplTest {
 
     @Test
     void processAll_validLongInput_ok() {
-        List<String> data = List.of("type,fruitName,quantity",
+        List<String> data = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -38,7 +38,9 @@ public class DataParserImplTest {
                 "r,apple,10",
                 "p,apple,20",
                 "p,banana,5",
-                "s,banana,50");
+                "s,banana,50"
+        );
+
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20),
                 new FruitTransaction(Operation.BALANCE, "apple", 100),
@@ -49,6 +51,7 @@ public class DataParserImplTest {
                 new FruitTransaction(Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(Operation.SUPPLY, "banana", 50)
         );
+
         List<FruitTransaction> actual = dataParser.processAll(data);
         assertEquals(expected, actual);
     }

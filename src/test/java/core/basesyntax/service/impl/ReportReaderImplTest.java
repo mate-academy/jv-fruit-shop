@@ -24,7 +24,7 @@ public class ReportReaderImplTest {
     @Test
     void readFile_validFile_ok() {
         List<String> actual = reportReader.readFile(FILE_EXIST_PATH);
-        List<String> expected = List.of("type,fruitName,quantity",
+        List<String> expected = List.of("type,fruit,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
