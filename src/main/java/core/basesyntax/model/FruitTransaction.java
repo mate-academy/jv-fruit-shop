@@ -25,6 +25,15 @@ public class FruitTransaction {
         return quantity;
     }
 
+    @Override
+    public String toString() {
+        return "FruitTransaction{" +
+                "operation=" + operation +
+                ", fruit='" + fruit + '\'' +
+                ", quantity=" + quantity +
+                '}';
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
