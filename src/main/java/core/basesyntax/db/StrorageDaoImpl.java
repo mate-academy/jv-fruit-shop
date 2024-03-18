@@ -4,10 +4,10 @@ import core.basesyntax.db.dao.Storage;
 import core.basesyntax.model.FruitItem;
 
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class StrorageDaoImpl implements StorageDao {
-    private static Long index = 0L;
 
     @Override
     public HashMap<String, Integer> add(FruitItem fruit) {
@@ -16,13 +16,12 @@ public class StrorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public HashMap<String, Integer> get(String fruitName) {
-        for (StorageDao) {
-            if (fruit.getFruitName().equals(fruitName)) {
-                Storage.fruitsQuantity;
+    public HashMap<String, Integer> get(FruitItem fruitName) {
+        for (Map.Entry<String, Integer> fruit : Storage.fruitsQuantity.entrySet()) {
+            if (fruit.getKey().equals(fruitName)) {
+                return Storage.fruitsQuantity;
             }
         }
         return null;
     }
-
 }

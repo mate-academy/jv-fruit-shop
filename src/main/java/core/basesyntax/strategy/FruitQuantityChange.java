@@ -7,5 +7,5 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface FruitQuantityChange {
-    ArrayList<FruitItem> changeFruitQuantity(Item_Operation operation, FruitItem fruit);
+    HashMap<String, Integer> changeFruitQuantity(Item_Operation operation, FruitItem fruit);
 }
