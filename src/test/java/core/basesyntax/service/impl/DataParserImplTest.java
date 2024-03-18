@@ -24,7 +24,7 @@ public class DataParserImplTest {
         List<String> data = List.of("b,banana,20");
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20));
-        List<FruitTransaction> actual = dataParser.processAll(data);
+        List<FruitTransaction> actual = dataParser.parseAll(data);
         assertEquals(expected, actual);
     }
 
@@ -52,7 +52,7 @@ public class DataParserImplTest {
                 new FruitTransaction(Operation.SUPPLY, "banana", 50)
         );
 
-        List<FruitTransaction> actual = dataParser.processAll(data);
+        List<FruitTransaction> actual = dataParser.parseAll(data);
         assertEquals(expected, actual);
     }
 
@@ -60,19 +60,19 @@ public class DataParserImplTest {
     void processAll_wrongInput_notOk() {
         List<String> data = List.of("wrong");
         assertThrows(RuntimeException.class, () ->
-                dataParser.processAll(data), "Can't process data: wrong");
+                dataParser.parseAll(data), "Can't process data: wrong");
     }
 
     @Test
     void processAll_emptyInput_notOk() {
         assertThrows(RuntimeException.class, () ->
-                dataParser.processAll(null));
+                dataParser.parseAll(null));
     }
 
     @Test
     void processAll_negativeQuantity_notOk() {
         List<String> data = List.of("b,banana,-5");
         assertThrows(NumberFormatException.class, () ->
-                dataParser.processAll(data), "Quantity can't be less than 0, but was: -5");
+                dataParser.parseAll(data), "Quantity can't be less than 0, but was: -5");
     }
 }

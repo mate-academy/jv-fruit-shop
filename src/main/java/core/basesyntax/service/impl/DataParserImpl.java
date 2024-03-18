@@ -12,7 +12,20 @@ public class DataParserImpl implements DataParser {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
-    private FruitTransaction processLine(String data) {
+    @Override
+    public List<FruitTransaction> parseAll(List<String> data) {
+        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+
+        for (String line : data) {
+            if (!line.equals("type,fruit,quantity")) {
+                fruitTransactionList.add(parseLine(line));
+            }
+        }
+
+        return fruitTransactionList;
+    }
+
+    private FruitTransaction parseLine(String data) {
         if (!data.contains(COMMA)) {
             throw new RuntimeException("Can't process data: " + data);
         }
@@ -27,18 +40,5 @@ public class DataParserImpl implements DataParser {
         }
 
         return new FruitTransaction(operation, fruitName, quantity);
-    }
-
-    @Override
-    public List<FruitTransaction> processAll(List<String> data) {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-
-        for (String line : data) {
-            if (!line.equals("type,fruit,quantity")) {
-                fruitTransactionList.add(processLine(line));
-            }
-        }
-
-        return fruitTransactionList;
     }
 }

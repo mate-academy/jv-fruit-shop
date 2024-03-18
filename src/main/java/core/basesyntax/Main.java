@@ -30,7 +30,7 @@ public class Main {
         List<String> readFile = reportReader.readFile(INPUT_PATHNAME);
 
         DataParser dataParser = new DataParserImpl();
-        List<FruitTransaction> fruitTransactions = dataParser.processAll(readFile);
+        List<FruitTransaction> fruitTransactions = dataParser.parseAll(readFile);
 
         FruitDao fruitDao = new FruitDaoImpl();
         mapBuilder(fruitDao);
