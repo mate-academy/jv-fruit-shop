@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.Storage;
+import core.basesyntax.model.StorageDao;
 import core.basesyntax.service.ReportProvider;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-public class CsvReportProvider implements ReportProvider {
+public class ReportProviderImpl implements ReportProvider {
     public static final String REPORT_TITLE = "fruit,quantity";
     public static final String COLUMN_SEPARATOR = ",";
     public static final String ROW_SEPARATOR = System.lineSeparator();
@@ -19,7 +19,7 @@ public class CsvReportProvider implements ReportProvider {
     @Override
     public String provide() {
         String header = REPORT_TITLE + ROW_SEPARATOR;
-        return header + Storage.stream()
+        return header + StorageDao.storage.entrySet().stream()
                 .peek(trans -> positiveValueCheck.accept(trans.getValue()))
                 .map(trans -> trans.getKey() + COLUMN_SEPARATOR + trans.getValue())
                 .collect(Collectors.joining(ROW_SEPARATOR));

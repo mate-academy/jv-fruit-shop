@@ -22,7 +22,7 @@ public enum OperationType {
                 return operationType;
             }
         }
-        throw new RuntimeException("Unknown code");
+        throw new RuntimeException("Unknown code: " + code);
     }
 
     public static String getAllCodes() {

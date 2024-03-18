@@ -8,6 +8,6 @@ public class CsvRowValidator {
             "[" + OPERATION_CODES + "]" + ",[a-zA-Z]+,\\d+" + "(\\n)?";
 
     public static boolean validate(String row) {
-        return row.matches(CSV_ROW_PATTERN);
+        return row != null && row.matches(CSV_ROW_PATTERN);
     }
 }

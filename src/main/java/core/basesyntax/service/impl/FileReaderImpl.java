@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class CsvFileReader implements FileReader {
+public class FileReaderImpl implements FileReader {
     private static final int MIN_NUMBER_OF_ROWS = 2;
     private static final int NUMBER_OF_TITLE_ROWS = 1;
 
