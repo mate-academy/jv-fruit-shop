@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import model.FruitTransaction;
 
 public class TransactionMapperService {
+    private static final String TITLE = "type,fruit,quantity";
     private static final String DATA_SEPARATOR = ",";
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;
@@ -20,6 +21,7 @@ public class TransactionMapperService {
 
     public List<FruitTransaction> stringToFruitTransaction(String takenData) {
         return Arrays.stream(takenData.split(System.lineSeparator()))
+                .filter(str -> !str.equals(TITLE))
                 .map(str -> {
                     String[] parts = str.split(DATA_SEPARATOR);
                     return new FruitTransaction(operationConverterMap.get(parts[OPERATION]),

@@ -19,20 +19,17 @@ import strategy.activities.ReturnHandler;
 import strategy.activities.SupplyHandler;
 
 public class Main {
-    private static final String filePath = "src/main/resources/file.csv"; // data from file
+    private static final String FILE_PATH = "src/main/resources/file.csv";
     private static final FileReader readFile = new FileReaderImpl();
     private static final FileWriter fileWriter = new FileWriterImpl();
     private static final ReportService reportService = new ReportServiceImpl();
 
     public static void main(String[] args) {
-        // read data
-        String transactions = readFile.read(filePath);
+        String transactions = readFile.read(FILE_PATH);
 
-        // convert data to FruitTransaction
         List<FruitTransaction> convertedData =
                 new TransactionMapperService().stringToFruitTransaction(transactions);
 
-        // process
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceHandler(),
                 FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
@@ -44,10 +41,8 @@ public class Main {
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
         Map<String, Integer> calculatedData = fruitService.processData(convertedData);
 
-        // create report
         String reportFile = reportService.generateReport(calculatedData);
 
-        // write report to file
         fileWriter.writeToFile(reportFile);
     }
 }
