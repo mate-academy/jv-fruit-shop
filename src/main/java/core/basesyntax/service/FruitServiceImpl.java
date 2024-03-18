@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitServiceImpl implements FruitService {
+    private DataProcessor dataProcessor = new DataProcessorImpl();
+    private ReportProvider reportProvider = new ReportProviderImpl();
+    private TransactionParser transactionParser = new TransactionParserImpl();
+    
     @Override
-    public List<String> report(String data) {
-        DataProcessor dataProcessor = new DataProcessorImpl();
-        ReportProvider reportProvider = new ReportProviderImpl();
-        TransactionParser transactionParser = new TransactionParserImpl();
-
+    public List<String> generateReport(String data) {
         List<FruitTransaction> transactions = dataProcessor.parseTransactions(data);
         Map<String, Integer> fruitQuantities = reportProvider.processData(transactions);
         return transactionParser.generateReport(fruitQuantities);

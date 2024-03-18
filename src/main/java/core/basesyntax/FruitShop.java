@@ -18,7 +18,7 @@ public class FruitShop {
 
         String data = fruitDao.readFromFile(fileToRead);
 
-        List<String> dataToFile = fruitService.report(data);
+        List<String> dataToFile = fruitService.generateReport(data);
 
         fruitDao.writeToFile(fileToWrite, dataToFile);
     }

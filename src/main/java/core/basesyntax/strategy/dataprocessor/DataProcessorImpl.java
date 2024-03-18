@@ -1,6 +1,7 @@
 package core.basesyntax.strategy.dataprocessor;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,11 +13,10 @@ public class DataProcessorImpl implements DataProcessor {
 
     @Override
     public List<FruitTransaction> parseTransactions(String data) {
-        List<String[]> dataToWork = convertData(data);
+        List<String[]> parsedData = parseDataRowComma(data);
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (String[] transactionData : dataToWork) {
-            FruitTransaction.Operation operation = FruitTransaction.Operation
-                    .fromCode(transactionData[OPERATION_INDEX]);
+        for (String[] transactionData : parsedData) {
+            Operation operation = Operation.fromCode(transactionData[OPERATION_INDEX]);
             String fruit = transactionData[FRUIT_INDEX];
             int quantity = Integer.parseInt(transactionData[QUANTITY_INDEX]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));
@@ -24,13 +24,13 @@ public class DataProcessorImpl implements DataProcessor {
         return transactions;
     }
 
-    private List<String[]> convertData(String data) {
+    private List<String[]> parseDataRowComma(String data) {
         String[] splitBySeparator = data.split("\n");
-        List<String[]> convert = new ArrayList<>();
+        List<String[]> listSeparatorComma = new ArrayList<>();
         for (String s : splitBySeparator) {
-            convert.add(s.split(","));
+            listSeparatorComma.add(s.split(","));
         }
-        convert.remove(REMOVE_NAMES_INDEX);
-        return convert;
+        listSeparatorComma.remove(REMOVE_NAMES_INDEX);
+        return listSeparatorComma;
     }
 }

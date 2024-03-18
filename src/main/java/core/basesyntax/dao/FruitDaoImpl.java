@@ -21,7 +21,7 @@ public class FruitDaoImpl implements FruitDao {
             }
             return stringBuilder.toString();
         } catch (IOException e) {
-            throw new RuntimeException("Can't read a file");
+            throw new RuntimeException("Can't read a file:" + file.getName(), e);
         }
     }
 
@@ -33,7 +33,7 @@ public class FruitDaoImpl implements FruitDao {
                 writer.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file", e);
+            throw new RuntimeException("Can't write to file" + file.getName(), e);
         }
     }
 }
