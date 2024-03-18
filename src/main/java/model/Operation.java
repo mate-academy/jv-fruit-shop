@@ -1,5 +1,7 @@
 package model;
 
+import java.util.NoSuchElementException;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -14,5 +16,14 @@ public enum Operation {
 
     public String getCode() {
         return code;
+    }
+
+    public static Operation getOperationType(String code) {
+        for (Operation operation : Operation.values()) {
+            if (operation.getCode().equals(code)) {
+                return operation;
+            }
+        }
+        throw new NoSuchElementException("Didn't find operation for that code" + code);
     }
 }

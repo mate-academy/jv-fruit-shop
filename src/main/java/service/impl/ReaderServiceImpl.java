@@ -13,7 +13,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             values = Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file with path" + filePath);
+            throw new RuntimeException("Can't find file with path" + filePath, e);
         }
         return values;
     }

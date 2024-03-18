@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.Operation;
-import service.FruitMapper;
+import service.FruitTransactionMapper;
 import service.ReaderService;
 import service.ReportService;
 import service.StrategyService;
@@ -24,7 +24,7 @@ public class Main {
     private static final String PATH_TO_FILE = "src/main/resources/fileToRead.csv";
     private static final String PATH_TO_REPORT_FILE = "src/main/resources/reportFile.csv";
     private static final ReaderService readerService = new ReaderServiceImpl();
-    private static final FruitMapper parseService = new FruitMapperImpl();
+    private static final FruitTransactionMapper parseService = new FruitMapperImpl();
     private static final ReportService reportService = new ReportServiceImpl();
     private static final WriterService writerService = new WriterServiceImpl();
 
@@ -38,15 +38,14 @@ public class Main {
                         Operation.SUPPLY, new SupplyOperation(),
                         Operation.RETURN, new ReturnOperation());
         List<String> dataFromFile = readerService.readFromFile(PATH_TO_FILE);
-        List<FruitTransaction> values = parseService.parseOperation(dataFromFile);
+        List<FruitTransaction> values = parseService.map(dataFromFile);
 
         strategyService = new StrategyServiceImpl(operationMap);
         transactionService = new TransactionProcessorImpl(strategyService);
 
-        transactionService.processTransactions(values);
+        transactionService.process(values);
         String report = reportService.createReport();
 
         writerService.writeToFile(PATH_TO_REPORT_FILE,report);
-
     }
 }
