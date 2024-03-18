@@ -1,4 +1,4 @@
 package core.basesyntax.service.impl;
 
-public class SaveToCvsFile {
+public class FruitFileSaverImpl {
 }
