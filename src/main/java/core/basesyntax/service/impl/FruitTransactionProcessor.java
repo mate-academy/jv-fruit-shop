@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.OperationType;
 import core.basesyntax.model.Storage;
 import core.basesyntax.model.impl.FruitTransaction;
 import core.basesyntax.service.TransactionProcessor;
@@ -18,11 +17,10 @@ public class FruitTransactionProcessor implements TransactionProcessor<FruitTran
     }
 
     private int strategy(FruitTransaction transaction) {
-        if (OperationType.PURCHASE.getCode().equals(transaction.getTransactionType())) {
-            return subtraction(transaction);
-        } else {
-            return add(transaction);
-        }
+        return switch (transaction.getTransactionType()) {
+            case PURCHASE -> subtraction(transaction);
+            case RETURN, BALANCE, SUPPLY -> add(transaction);
+        };
     }
 
     private int subtraction(FruitTransaction transaction) {

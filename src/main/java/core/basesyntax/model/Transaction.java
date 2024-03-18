@@ -1,18 +1,18 @@
 package core.basesyntax.model;
 
 public abstract class Transaction {
-    private String transactionType;
+    private OperationType operationType;
     private String productType;
     private int transactionValue;
 
-    public Transaction(String transactionType, String productType, int transactionValue) {
-        this.transactionType = transactionType;
+    public Transaction(OperationType operationType, String productType, int transactionValue) {
+        this.operationType = operationType;
         this.productType = productType;
         this.transactionValue = transactionValue;
     }
 
-    public String getTransactionType() {
-        return transactionType;
+    public OperationType getTransactionType() {
+        return operationType;
     }
 
     public String getProductType() {

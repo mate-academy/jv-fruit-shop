@@ -16,6 +16,15 @@ public enum OperationType {
         return code;
     }
 
+    public static OperationType getByCode(String code) {
+        for (var operationType : OperationType.values()) {
+            if (code != null && code.equals(operationType.getCode())) {
+                return operationType;
+            }
+        }
+        throw new RuntimeException("Unknown code");
+    }
+
     public static String getAllCodes() {
         StringBuilder codes = new StringBuilder();
         for (var operationType : OperationType.values()) {
