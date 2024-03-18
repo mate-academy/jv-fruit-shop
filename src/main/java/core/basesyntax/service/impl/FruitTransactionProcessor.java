@@ -5,18 +5,17 @@ import core.basesyntax.model.impl.FruitTransaction;
 import core.basesyntax.service.TransactionProcessor;
 
 public class FruitTransactionProcessor implements TransactionProcessor<FruitTransaction> {
-    private final Storage storage;
 
-    public FruitTransactionProcessor(Storage storage) {
-        this.storage = storage;
+    {
+        new Storage();
     }
 
     @Override
     public void process(FruitTransaction transaction) {
-        storage.add(transaction.getProductType(), strategy(transaction));
+        Storage.add(transaction.getProductType(), strategy(transaction));
     }
 
-    private int strategy(FruitTransaction transaction) {
+    public int strategy(FruitTransaction transaction) {
         return switch (transaction.getTransactionType()) {
             case PURCHASE -> subtraction(transaction);
             case RETURN, BALANCE, SUPPLY -> add(transaction);

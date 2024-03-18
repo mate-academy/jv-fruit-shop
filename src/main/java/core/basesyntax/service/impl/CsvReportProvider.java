@@ -2,27 +2,26 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Storage;
 import core.basesyntax.service.ReportProvider;
-import java.util.function.Predicate;
+import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class CsvReportProvider implements ReportProvider {
     public static final String REPORT_TITLE = "fruit,quantity";
     public static final String COLUMN_SEPARATOR = ",";
     public static final String ROW_SEPARATOR = System.lineSeparator();
 
-    private final Predicate<Integer> predicate = operationValue -> {
+    private final Consumer<Integer> positiveValueCheck = operationValue -> {
         if (operationValue < 0) {
             throw new RuntimeException("Operation value cannot be negative");
         }
-        return true;
     };
 
     @Override
-    public String make(Storage storage) {
-        StringBuilder builder = new StringBuilder(REPORT_TITLE + ROW_SEPARATOR);
-        storage.stream()
-                .filter(n -> predicate.test(n.getValue()))
+    public String provide() {
+        String header = REPORT_TITLE + ROW_SEPARATOR;
+        return header + Storage.stream()
+                .peek(n -> positiveValueCheck.accept(n.getValue()))
                 .map(n -> n.getKey() + COLUMN_SEPARATOR + n.getValue())
-                .forEach(n -> builder.append(n).append(ROW_SEPARATOR));
-        return builder.toString().trim();
+                .collect(Collectors.joining(ROW_SEPARATOR));
     }
 }

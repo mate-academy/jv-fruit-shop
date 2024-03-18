@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Storage;
 import core.basesyntax.model.impl.FruitTransaction;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -18,18 +17,18 @@ public class MainApp {
         generateReport("report.csv", "new-report");
     }
 
-    public static void generateReport(String sourceReportName, String newReportName) {
-        Storage storage = new Storage();
+    private static void generateReport(String sourceReportName, String newReportName) {
         FileReader fileReader = new CsvFileReader();
         TransactionParser<FruitTransaction> transactionParser
                 = new FruitTransactionParser();
         TransactionProcessor<FruitTransaction> transactionProcessor
-                = new FruitTransactionProcessor(storage);
+                = new FruitTransactionProcessor();
         fileReader.read(sourceReportName)
+                .stream()
                 .map(transactionParser::parse)
                 .forEach(transactionProcessor::process);
         ReportProvider provider = new CsvReportProvider();
         FileWriter writer = new CsvWriterService();
-        writer.write(provider.make(storage), newReportName);
+        writer.write(provider.provide(), newReportName);
     }
 }
