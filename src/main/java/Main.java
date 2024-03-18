@@ -2,12 +2,14 @@ import db.FileReader;
 import db.FileReaderImpl;
 import db.FileWriter;
 import db.FileWriterImpl;
+import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import service.FruitService;
 import service.FruitServiceImpl;
 import service.ReportService;
 import service.ReportServiceImpl;
+import service.TransactionMapperService;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 import strategy.activities.BalanceHandler;
@@ -23,8 +25,12 @@ public class Main {
     private static final ReportService reportService = new ReportServiceImpl();
 
     public static void main(String[] args) {
-        // read and convert data
-        String dataFromCsv = readFile.read(filePath);
+        // read data
+        String transactions = readFile.read(filePath);
+
+        // convert data to FruitTransaction
+        List<FruitTransaction> convertedData =
+                new TransactionMapperService().stringToFruitTransaction(transactions);
 
         // process
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
@@ -36,11 +42,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        Map<String, Integer> doneData = fruitService.processData(dataFromCsv);
+        Map<String, Integer> calculatedData = fruitService.processData(convertedData);
+
         // create report
-        String report = reportService.generateReport(doneData);
+        String reportFile = reportService.generateReport(calculatedData);
 
         // write report to file
-        fileWriter.writeToFile(report);
+        fileWriter.writeToFile(reportFile);
     }
 }

@@ -1,5 +1,6 @@
 package service;
 
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import model.FruitTransaction;
@@ -14,9 +15,8 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public Map<String, Integer> processData(String dataFromCsv) {
-        return new TransactionMapperService().stringToFruitTransaction(dataFromCsv)
-                .stream()
+    public Map<String, Integer> processData(List<FruitTransaction> dataFromCsv) {
+        return dataFromCsv.stream()
                 .collect(Collectors.groupingBy(FruitTransaction::getFruit,
                         Collectors.summingInt(line -> operationStrategy.get(line.getOperation())
                                 .executionOfOperation(line.getQuantity(), PRIMARY_QUANTITY))));
