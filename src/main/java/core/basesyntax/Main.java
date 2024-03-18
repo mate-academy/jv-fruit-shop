@@ -3,14 +3,21 @@ package core.basesyntax;
 
 import core.basesyntax.service.FruitFileReader;
 import core.basesyntax.service.impl.FruitFileReaderImpl;
+import core.basesyntax.strategy.FruitOperationProcessor;
 
 /**
  * Feel free to remove this class and create your own.
  */
 public class Main {
     public static void main(String[] args) {
-        FruitFileReader string = new FruitFileReaderImpl();
-        System.out.println(string.readFile("src/main/resources/fruitts.csv"));
+        FruitFileReader reader = new FruitFileReaderImpl();
+
+        String fileString = reader.readFile("src/main/resources/fruitts.csv");
+        System.out.println(fileString);
+        FruitOperationProcessor processor = new FruitOperationProcessor();
+        processor.processOperations(fileString);
+
+
         /* FileFruitReader (exception no file)  return string
         Class fruit.of(name, quantity)
         Parse (string) - return HashMap <operation, fruit> : Exeption quantity< 0 invalid data

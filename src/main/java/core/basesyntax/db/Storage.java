@@ -1,4 +1,4 @@
-package core.basesyntax.db.dao;
+package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
