@@ -2,8 +2,8 @@ package core.basesyntax.serviseimpl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
-import core.basesyntax.servise.DataProcessor;
-import core.basesyntax.servise.OperationStrategy;
+import core.basesyntax.service.DataProcessor;
+import core.basesyntax.service.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package core.basesyntax.serviseimpl;
 
-import core.basesyntax.servise.OperationStrategy;
+import core.basesyntax.service.OperationStrategy;
 
 public class BalanceSupplyReturnStrategy implements OperationStrategy {
     @Override
