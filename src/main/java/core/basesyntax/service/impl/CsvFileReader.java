@@ -25,7 +25,7 @@ public class CsvFileReader implements FileReader {
                 throw new RuntimeException("The file is too short or empty");
             }
         } catch (IOException e) {
-            throw new IllegalArgumentException("Can't read data from file");
+            throw new IllegalArgumentException("Can't read data from file " + filePath, e);
         }
     }
 }

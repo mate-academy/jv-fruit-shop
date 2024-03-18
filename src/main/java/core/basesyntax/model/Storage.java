@@ -5,11 +5,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 public class Storage {
-    private static Map<String, Integer> storage;
-
-    public Storage() {
-        storage = new HashMap<>();
-    }
+    private static Map<String, Integer> storage = new HashMap<>();
 
     public static void add(String key, Integer value) {
         if (storage.containsKey(key)) {
@@ -21,5 +17,9 @@ public class Storage {
 
     public static Stream<Map.Entry<String, Integer>> stream() {
         return storage.entrySet().stream();
+    }
+
+    public static void clear() {
+        storage.clear();
     }
 }

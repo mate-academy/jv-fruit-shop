@@ -15,7 +15,8 @@ public class CsvWriterService implements FileWriter {
         try {
             Files.write(Paths.get(newReportName + ".csv"), data.getBytes());
         } catch (IOException e) {
-            throw new IllegalArgumentException("Can't write data to the file", e);
+            throw new IllegalArgumentException("Can't write data to the file: "
+                    + newReportName, e);
         }
     }
 }

@@ -6,10 +6,6 @@ import core.basesyntax.service.TransactionProcessor;
 
 public class FruitTransactionProcessor implements TransactionProcessor<FruitTransaction> {
 
-    {
-        new Storage();
-    }
-
     @Override
     public void process(FruitTransaction transaction) {
         Storage.add(transaction.getProductType(), strategy(transaction));

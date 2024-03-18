@@ -20,8 +20,8 @@ public class CsvReportProvider implements ReportProvider {
     public String provide() {
         String header = REPORT_TITLE + ROW_SEPARATOR;
         return header + Storage.stream()
-                .peek(n -> positiveValueCheck.accept(n.getValue()))
-                .map(n -> n.getKey() + COLUMN_SEPARATOR + n.getValue())
+                .peek(trans -> positiveValueCheck.accept(trans.getValue()))
+                .map(trans -> trans.getKey() + COLUMN_SEPARATOR + trans.getValue())
                 .collect(Collectors.joining(ROW_SEPARATOR));
     }
 }
