@@ -16,7 +16,11 @@ public class Shop {
         return fruitsQuantityMap.keySet();
     }
 
-    public void supplyFruits(String fruitName, int quantity) {
+    public void fruitsBalance(String fruitName, int quantity) {
+        fruitsQuantityMap.put(fruitName, quantity);
+    }
+
+    public void addFruits(String fruitName, int quantity) {
         fruitsQuantityMap.compute(fruitName, (key, oldQuantity) ->
                 oldQuantity == null
                         ? quantity
@@ -25,5 +29,12 @@ public class Shop {
 
     public int getFruitsQuantity(String fruitName) {
         return fruitsQuantityMap.get(fruitName);
+    }
+
+    public void removeFruits(String fruitName, int quantity) {
+        fruitsQuantityMap.compute(fruitName, (key, oldQuantity) ->
+                oldQuantity == null
+                        ? quantity
+                        : oldQuantity - quantity);
     }
 }

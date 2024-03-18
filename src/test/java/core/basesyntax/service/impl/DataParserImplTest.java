@@ -5,18 +5,18 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.DataProcessor;
+import core.basesyntax.service.DataParser;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class DataProcessorImplTest {
+public class DataParserImplTest {
 
-    private static DataProcessor dataProcessor;
+    private static DataParser dataParser;
 
     @BeforeEach
     void setUp() {
-        dataProcessor = new DataProcessorImpl();
+        dataParser = new DataParserImpl();
     }
 
     @Test
@@ -24,13 +24,13 @@ public class DataProcessorImplTest {
         List<String> data = List.of("b,banana,20");
         List<FruitTransaction> expected = List.of(
                 new FruitTransaction(Operation.BALANCE, "banana", 20));
-        List<FruitTransaction> actual = dataProcessor.processAll(data);
+        List<FruitTransaction> actual = dataParser.processAll(data);
         assertEquals(expected, actual);
     }
 
     @Test
     void processAll_validLongInput_ok() {
-        List<String> data = List.of("type,fruit,quantity",
+        List<String> data = List.of("type,fruitName,quantity",
                 "b,banana,20",
                 "b,apple,100",
                 "s,banana,100",
@@ -49,7 +49,7 @@ public class DataProcessorImplTest {
                 new FruitTransaction(Operation.PURCHASE, "banana", 5),
                 new FruitTransaction(Operation.SUPPLY, "banana", 50)
         );
-        List<FruitTransaction> actual = dataProcessor.processAll(data);
+        List<FruitTransaction> actual = dataParser.processAll(data);
         assertEquals(expected, actual);
     }
 
@@ -57,19 +57,19 @@ public class DataProcessorImplTest {
     void processAll_wrongInput_notOk() {
         List<String> data = List.of("wrong");
         assertThrows(RuntimeException.class, () ->
-                dataProcessor.processAll(data), "Can't process data: wrong");
+                dataParser.processAll(data), "Can't process data: wrong");
     }
 
     @Test
     void processAll_emptyInput_notOk() {
         assertThrows(RuntimeException.class, () ->
-                dataProcessor.processAll(null));
+                dataParser.processAll(null));
     }
 
     @Test
     void processAll_negativeQuantity_notOk() {
         List<String> data = List.of("b,banana,-5");
         assertThrows(NumberFormatException.class, () ->
-                dataProcessor.processAll(data), "Quantity can't be less than 0, but was: -5");
+                dataParser.processAll(data), "Quantity can't be less than 0, but was: -5");
     }
 }
