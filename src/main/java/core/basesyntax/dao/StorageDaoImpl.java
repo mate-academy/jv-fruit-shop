@@ -1,22 +1,16 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
+    public Map<String, Integer> getStorageState() {
+        return Storage.STORAGE_MAP;
+    }
 
     @Override
-    public void setBalance(String productType, int amount) {
+    public void putToInventory(String productType, int amount) {
         Storage.STORAGE_MAP.put(productType, amount);
-    }
-
-    @Override
-    public void increaseAmount(String productType, int amount) {
-        Storage.STORAGE_MAP.put(productType, getAmountByProduct(productType) + amount);
-    }
-
-    @Override
-    public void decreaseAmount(String productType, int amount) {
-        Storage.STORAGE_MAP.put(productType, getAmountByProduct(productType) - amount);
     }
 
     @Override

@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.FruitTransaction.Operation;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.ReadDataParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,12 +13,12 @@ public class CsvDataParser implements ReadDataParser {
     private static final int AMOUNT_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseToTransactionList(List<String> readData) {
+    public List<FruitTransaction> parseToTransactionList(List<String> data) {
         int firsDataLineIndex = 1;
         List<FruitTransaction> resultList = new ArrayList<>();
 
-        for (int i = firsDataLineIndex; i < readData.size(); i++) {
-            String[] splitLine = readData.get(i).split(LINE_SPLIT_REGEX);
+        for (int i = firsDataLineIndex; i < data.size(); i++) {
+            String[] splitLine = data.get(i).split(LINE_SPLIT_REGEX);
             resultList.add(new FruitTransaction(parseOperationType(splitLine),
                     parseProductType(splitLine), parseAmount(splitLine)));
         }

@@ -12,6 +12,7 @@ public class ReturnHandler implements OperationHandler {
 
     @Override
     public void handleOperation(String productType, int amount) {
-        storageDao.increaseAmount(productType, amount);
+        int newAmount = storageDao.getAmountByProduct(productType) + amount;
+        storageDao.putToInventory(productType, newAmount);
     }
 }
