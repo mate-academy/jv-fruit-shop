@@ -11,13 +11,14 @@ public class DataParserImpl implements DataParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
+    private static final String TYPE_FRUIT_QUANTITY = "type,fruit,quantity";
 
     @Override
     public List<FruitTransaction> parseAll(List<String> data) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
 
         for (String line : data) {
-            if (!line.equals("type,fruit,quantity")) {
+            if (!line.equals(TYPE_FRUIT_QUANTITY)) {
                 fruitTransactionList.add(parseLine(line));
             }
         }
