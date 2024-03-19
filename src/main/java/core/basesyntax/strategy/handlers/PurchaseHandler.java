@@ -11,7 +11,7 @@ public class PurchaseHandler implements OperationHandler {
     }
 
     @Override
-    public void handleOperation(String productType, int amount) {
+    public void handle(String productType, int amount) {
         int newAmount = storageDao.getAmountByProduct(productType) - amount;
         storageDao.putToInventory(productType, newAmount);
     }

@@ -11,7 +11,7 @@ public class BalanceHandler implements OperationHandler {
     }
 
     @Override
-    public void handleOperation(String productType, int amount) {
+    public void handle(String productType, int amount) {
         storageDao.putToInventory(productType, amount);
     }
 }

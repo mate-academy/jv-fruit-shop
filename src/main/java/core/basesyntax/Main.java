@@ -11,7 +11,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
-import core.basesyntax.service.ReadDataParser;
+import core.basesyntax.service.FruitTransactionMapper;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.impl.CsvDataParser;
@@ -34,24 +34,21 @@ public class Main {
 
     public static void main(String[] args) {
         final StorageDao storageDao = new StorageDaoImpl();
-        HandlerStrategy strategy = new HandlerStrategy();
-        Map<Operation, OperationHandler> strategyMap = strategy.getStrategyMap();
-        strategyMap.put(BALANCE, new BalanceHandler(storageDao));
-        strategyMap.put(PURCHASE, new PurchaseHandler(storageDao));
-        strategyMap.put(RETURN, new ReturnHandler(storageDao));
-        strategyMap.put(SUPPLY, new SupplyHandler(storageDao));
+
+        HandlerStrategy strategy = new HandlerStrategy(storageDao);
+        strategy.fillStrategyMap();
 
         DataReader dataReader = new CsvReader();
         List<String> readData = dataReader.read(INPUT_FILE);
 
-        ReadDataParser parser = new CsvDataParser();
-        List<FruitTransaction> transactionList = parser.parseToTransactionList(readData);
+        FruitTransactionMapper mapper = new CsvDataParser();
+        List<FruitTransaction> transactionList = mapper.map(readData);
 
-        TransactionProcessor transactionProcessor = new OperationProcessorImpl();
-        transactionProcessor.processTransactionList(transactionList, strategy);
+        TransactionProcessor transactionProcessor = new OperationProcessorImpl(strategy);
+        transactionProcessor.process(transactionList);
 
-        ReportGenerator reportGenerator = new CsvReportGenerator();
-        String report = reportGenerator.generateReport(storageDao.getStorageState());
+        ReportGenerator reportGenerator = new CsvReportGenerator(storageDao);
+        String report = reportGenerator.generateReport();
 
         DataWriter writer = new CsvReportWriter();
         writer.writeReportToTheFile(report, OUTPUT_FILE);
