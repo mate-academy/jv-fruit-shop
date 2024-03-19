@@ -17,12 +17,9 @@ public class OperationContext {
     private final StorageRepository repository;
 
     public OperationContext(StorageRepository repository) {
-        strategies = new HashMap<>();
         this.repository = repository;
-        strategies.put(Operation.BALANCE, new BalanceOperation(this.repository));
-        strategies.put(Operation.SUPPLY, new SupplyOperation(this.repository));
-        strategies.put(Operation.PURCHASE, new PurchaseOperation(this.repository));
-        strategies.put(Operation.RETURN, new ReturnOperation(this.repository));
+        this.strategies = new HashMap<>();
+        initializeStrategies();
     }
 
     public void executeStrategy(List<Transaction> transactions) {
@@ -34,6 +31,28 @@ public class OperationContext {
             } else {
                 throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operation);
             }
+        }
+    }
+
+    private void initializeStrategies() {
+        strategies.put(Operation.BALANCE, createOperationStrategy(Operation.BALANCE));
+        strategies.put(Operation.SUPPLY, createOperationStrategy(Operation.SUPPLY));
+        strategies.put(Operation.PURCHASE, createOperationStrategy(Operation.PURCHASE));
+        strategies.put(Operation.RETURN, createOperationStrategy(Operation.RETURN));
+    }
+
+    private OperationStrategy createOperationStrategy(Operation operation) {
+        switch (operation) {
+            case BALANCE:
+                return new BalanceOperation(repository);
+            case PURCHASE:
+                return new PurchaseOperation(repository);
+            case SUPPLY:
+                return new SupplyOperation(repository);
+            case RETURN:
+                return new ReturnOperation(repository);
+            default:
+                throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operation);
         }
     }
 }

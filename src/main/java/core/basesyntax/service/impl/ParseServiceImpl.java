@@ -38,20 +38,17 @@ public class ParseServiceImpl implements ParseService {
     }
 
     private Operation parseOperation(String operationType) {
-        if (operationType.equals("b")) {
-            return Operation.BALANCE;
-        }
-        if (operationType.equals("s")) {
-            return Operation.SUPPLY;
-        }
-        if (operationType.equals("p")) {
-            return Operation.PURCHASE;
-        }
-        if (operationType.equals("r")) {
-            return Operation.RETURN;
-        } else {
-            throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE
-                    + operationType);
+        switch (operationType) {
+            case "b":
+                return Operation.BALANCE;
+            case "s":
+                return Operation.SUPPLY;
+            case "p":
+                return Operation.PURCHASE;
+            case "r":
+                return Operation.RETURN;
+            default:
+                throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operationType);
         }
     }
 }

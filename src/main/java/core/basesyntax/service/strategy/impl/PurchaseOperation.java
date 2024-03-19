@@ -17,6 +17,7 @@ public class PurchaseOperation implements OperationStrategy {
         Optional<Integer> actualAmount = Optional
                 .ofNullable(repository.getProducts().get(transaction.getProduct()));
         Integer newAmount = actualAmount.orElse(0) - transaction.getValue();
+        newAmount = newAmount >= 0 ? newAmount : 0;
         transaction.setValue(newAmount);
         repository.addProduct(transaction);
     }
