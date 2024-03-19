@@ -9,6 +9,10 @@ public class ReportCreatorImpl implements ReportCreator {
 
     @Override
     public String createReport(Map<String, Integer> map) {
+        if (map.values().stream().anyMatch(q -> q < 0)) {
+            throw new IllegalArgumentException("Quantity can't be negative!");
+        }
+
         StringBuilder builder = new StringBuilder();
         builder.append(HEADER)
                 .append(System.lineSeparator());
