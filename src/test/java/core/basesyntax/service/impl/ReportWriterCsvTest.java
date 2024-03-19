@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import core.basesyntax.service.ReportReader;
+import core.basesyntax.service.DataReader;
 import core.basesyntax.service.ReportWriter;
 import java.io.File;
 import java.io.IOException;
@@ -17,12 +17,12 @@ import org.junit.jupiter.api.Test;
 
 class ReportWriterCsvTest {
     private static final String REPORT_CSV = "src/test/resources/report.csv";
-    private ReportReader reportReader;
+    private DataReader dataReader;
     private ReportWriter reportWriter;
 
     @BeforeEach
     void setUp() {
-        reportReader = new ReportReaderCsv();
+        dataReader = new DataReaderCsv();
         reportWriter = new ReportWriterCsv();
     }
 
@@ -45,7 +45,7 @@ class ReportWriterCsvTest {
         reportWriter.writeReport(data, REPORT_CSV);
         File file = new File(REPORT_CSV);
         assertTrue(file.exists());
-        List<String> actual = reportReader.readFile(REPORT_CSV);
+        List<String> actual = dataReader.read(REPORT_CSV);
         List<String> expected = List.of("fruit,quantity", "apple,50", "banana,20");
         assertEquals(expected, actual);
     }

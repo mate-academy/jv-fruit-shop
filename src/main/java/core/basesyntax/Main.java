@@ -6,11 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.ReportReader;
+import core.basesyntax.service.DataReader;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.ReportReaderCsv;
+import core.basesyntax.service.impl.DataReaderCsv;
 import core.basesyntax.service.impl.ReportWriterCsv;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.DecreaseStrategy;
@@ -26,8 +26,8 @@ public class Main {
     private static Map<Operation, OperationHandler> strategyMap;
 
     public static void main(String[] args) {
-        ReportReader reportReader = new ReportReaderCsv();
-        List<String> readFile = reportReader.readFile(INPUT_PATHNAME);
+        DataReader dataReader = new DataReaderCsv();
+        List<String> readFile = dataReader.read(INPUT_PATHNAME);
 
         DataParser dataParser = new DataParserImpl();
         List<FruitTransaction> fruitTransactions = dataParser.parseAll(readFile);
