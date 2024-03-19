@@ -5,7 +5,7 @@ import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
-public class ReturnOperationHandler implements OperationHandler {
+public class PurchaseOperation implements OperationHandler {
     private StorageDaoImpl actionDB = new StorageDaoImpl();
 
     @Override
@@ -13,12 +13,12 @@ public class ReturnOperationHandler implements OperationHandler {
         HashMap<String,Integer> oldFrutitValue = actionDB.get(dto);
         FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
                 dto.fruitName(),
-                oldFrutitValue.get(dto.fruitName()) + dto.quantity());
+                oldFrutitValue.get(dto.fruitName()) - dto.quantity());
         return actionDB.change(newFruitValue);
     }
 
     @Override
     public boolean isApplicable(FruitTransactionDto dto) {
-        return "r".equals(dto.operationType());
+        return "p".equals(dto.operationType());
     }
 }

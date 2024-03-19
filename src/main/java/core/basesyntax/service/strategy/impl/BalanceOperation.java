@@ -5,20 +5,16 @@ import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
-public class PurchaseOperationHandler implements OperationHandler {
+public class BalanceOperation implements OperationHandler {
     private StorageDaoImpl actionDB = new StorageDaoImpl();
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
-        HashMap<String,Integer> oldFrutitValue = actionDB.get(dto);
-        FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
-                dto.fruitName(),
-                oldFrutitValue.get(dto.fruitName()) - dto.quantity());
-        return actionDB.change(newFruitValue);
+        return actionDB.add(dto);
     }
 
     @Override
     public boolean isApplicable(FruitTransactionDto dto) {
-        return "p".equals(dto.operationType());
+        return "b".equals(dto.operationType());
     }
 }

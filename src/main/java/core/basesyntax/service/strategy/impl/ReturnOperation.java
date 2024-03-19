@@ -5,7 +5,7 @@ import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
-public class SupplyOperationHandler implements OperationHandler {
+public class ReturnOperation implements OperationHandler {
     private StorageDaoImpl actionDB = new StorageDaoImpl();
 
     @Override
@@ -19,6 +19,6 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public boolean isApplicable(FruitTransactionDto dto) {
-        return "s".equals(dto.operationType());
+        return "r".equals(dto.operationType());
     }
 }

@@ -8,7 +8,7 @@ import java.util.Map;
 public class FruitReportCreateImpl implements FruitReportCreate {
     public String createReport(HashMap<String, Integer> fruitQuantity) {
         StringBuilder builder = new StringBuilder();
-        builder.append("fruit").append(",").append("quantity");
+        builder.append("fruit").append(",").append("quantity").append("\n");
         for (Map.Entry<String, Integer> fruits: fruitQuantity.entrySet()) {
             if (fruits.getValue() < 0) {
                 throw new NegativeBalanceException("Incorrect quantity,"
@@ -18,7 +18,7 @@ public class FruitReportCreateImpl implements FruitReportCreate {
                         + " is "
                         + fruits.getValue());
             }
-            builder.append("\n").append(fruits.getKey()).append(",").append(fruits.getValue());
+            builder.append(fruits.getKey()).append(",").append(fruits.getValue()).append("\n");
         }
         return builder.toString();
     }
