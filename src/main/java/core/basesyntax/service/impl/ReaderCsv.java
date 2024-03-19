@@ -6,37 +6,28 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReaderCsv implements Reader {
-    private final String filePath;
-
-    public ReaderCsv(String filePath) {
-        this.filePath = filePath;
-    }
 
     @Override
-    public List<String> readData() {
+    public List<String> readData(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
-            return DataProcessor.filterTitles(lines);
+            return filterTitles(lines);
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file");
         }
     }
 
-    static class DataProcessor {
-        private static final Set<String> TITLES_TO_REMOVE = Set.of("type,fruit,quantity");
-
-        public static List<String> filterTitles(List<String> data) {
-            return data.stream()
-                    .filter(row -> !TITLES_TO_REMOVE.contains(row))
-                    .collect(Collectors.toList());
-        }
+    private static List<String> filterTitles(List<String> data) {
+        return data.stream()
+                .skip(1)
+                .collect(Collectors.toList());
     }
+
 }

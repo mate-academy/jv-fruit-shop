@@ -7,20 +7,18 @@ import java.io.IOException;
 import java.util.Map;
 
 public class WriterCsv implements Writer {
-    private final String filePath;
+    private static final String COMMA = ",";
+    private static final String HEADER = "fruit,quantity";
 
-    public WriterCsv(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public void writeData() {
+    public void writeData(String filePath) {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
-            fileWriter.write("fruit,quantity" + System.lineSeparator());
-            for (Map.Entry<String, Integer> entry : Storage.data.entrySet()) {
-                fileWriter.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
+            fileWriter.write(HEADER + System.lineSeparator());
+            for (Map.Entry<String, Integer> entry : Storage.DATA.entrySet()) {
+                fileWriter.write(entry.getKey() + COMMA + entry.getValue()
+                        + System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write file.");
+            throw new RuntimeException("Can`t write file." + filePath);
         }
     }
 }

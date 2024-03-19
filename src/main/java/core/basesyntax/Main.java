@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Operation;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.Writer;
@@ -15,15 +15,15 @@ public class Main {
     private static final String READ_FILE_PATH = "src/files/fruits.csv";
 
     public static void main(String[] args) {
-        Reader reader = new ReaderCsv(READ_FILE_PATH);
-        List<String> lines = reader.readData();
+        Reader reader = new ReaderCsv();
+        List<String> lines = reader.readData(READ_FILE_PATH);
         Parser parser = new ParserImpl();
-        List<Operation> parsedData = parser.parseToOperations(lines);
+        List<FruitTransaction> parsedData = parser.parse(lines);
         OperationStrategy operationStrategy = new OperationStrategy();
         for (var pd : parsedData) {
             operationStrategy.processData(pd);
         }
-        Writer writer = new WriterCsv(WRITE_FILE_PATH);
-        writer.writeData();
+        Writer writer = new WriterCsv();
+        writer.writeData(WRITE_FILE_PATH);
     }
 }
