@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataFileCorrupted;
-import core.basesyntax.exception.NegativeBalanceException;
 import core.basesyntax.service.interfaces.FruitRawStringParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +16,8 @@ public class FruitRawStringParserImpl implements FruitRawStringParser {
 
     @Override
     public List<FruitTransactionDto> parsedFruitData(List<String> rawStrings) {
-        if (!checkFruitsInFile.checkFruitQuantity(rawStrings)){
-                throw new DataFileCorrupted("Some data in file is missing");
+        if (!checkFruitsInFile.checkFruitQuantity(rawStrings)) {
+            throw new DataFileCorrupted("Some data in file is missing");
         }
         var fruitDto = new ArrayList<FruitTransactionDto>(rawStrings.size() - FIRST_CVS_LINE);
         for (int i = FIRST_CVS_LINE; i < rawStrings.size(); i++) {
@@ -31,7 +30,9 @@ public class FruitRawStringParserImpl implements FruitRawStringParser {
                         fruitQuantity);
                 fruitDto.add(dto);
             } catch (IllegalArgumentException e) {
-                throw new DataFileCorrupted("Please check the quantity of the fruit it should be number(integer)" + e.getMessage());
+                throw new DataFileCorrupted("Please check the quantity of the fruit"
+                        + "it should be number(integer)"
+                        + e.getMessage());
             }
         }
         return fruitDto;

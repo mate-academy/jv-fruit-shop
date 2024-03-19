@@ -3,7 +3,6 @@ package core.basesyntax.dao;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.NegativeDataInFileException;
-
 import java.util.HashMap;
 import java.util.Map;
 

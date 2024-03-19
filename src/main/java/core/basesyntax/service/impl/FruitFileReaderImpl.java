@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.NoFileToReadException;
 import core.basesyntax.service.interfaces.FruitFileReader;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

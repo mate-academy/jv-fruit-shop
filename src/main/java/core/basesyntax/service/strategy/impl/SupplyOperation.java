@@ -2,7 +2,6 @@ package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.exception.DataFileCorrupted;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 

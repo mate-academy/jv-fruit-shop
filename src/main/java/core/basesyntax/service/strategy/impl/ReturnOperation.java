@@ -12,13 +12,14 @@ public class ReturnOperation implements OperationHandler {
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
         try {
-        HashMap<String,Integer> oldFrutitValue = actionDB.get(dto);
-        FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
-                dto.fruitName(),
-                oldFrutitValue.get(dto.fruitName()) + dto.quantity());
-        return actionDB.change(newFruitValue);
+            HashMap<String,Integer> oldFrutitValue = actionDB.get(dto);
+            FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
+                    dto.fruitName(),
+                    oldFrutitValue.get(dto.fruitName()) + dto.quantity());
+            return actionDB.change(newFruitValue);
         } catch (NullPointerException e) {
-            throw new DataFileCorrupted("Trying to return fruits but there was no fruit in balance or supply which were purchased");
+            throw new DataFileCorrupted("Trying to return fruits but"
+                    + " there was no fruit in balance or supply which were purchased");
         }
     }
 

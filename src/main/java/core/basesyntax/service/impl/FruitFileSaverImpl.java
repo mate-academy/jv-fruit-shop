@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exception.NoFileToReadException;
 import core.basesyntax.service.interfaces.FruitFileSaver;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
