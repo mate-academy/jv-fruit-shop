@@ -1,15 +1,14 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.InputDataParser;
 import java.util.List;
 
-public class FileInputDataParser implements InputDataParser {
-    private static final String REGEX_COMMA_SEPARATOR = ",";
-    private static final int OPERATION_INDEX = 0;
-    private static final int FRUIT_INDEX = 1;
-    private static final int QUANTITY_INDEX = 2;
+public class CsvFileDataParser implements core.basesyntax.service.FileDataParser {
     public static final int HEADERS_LINE_NUMBER = 1;
+    private static final int FRUIT_INDEX = 1;
+    private static final int OPERATION_INDEX = 0;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String REGEX_COMMA_SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> parseData(List<String> data) {

@@ -1,12 +1,12 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class FileReaderService implements ReaderService {
+public class CsvFileReader implements FileReader {
     @Override
     public List<String> readData(String filePath) {
         try {

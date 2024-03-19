@@ -1,26 +1,22 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriterService;
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.List;
 
-public class FileWriterService implements WriterService {
+public class CsvFileWriter implements FileWriter {
     @Override
-    public void writeData(String filePath, List<String> data) {
+    public void writeData(String filePath, String data) {
         try (var br = Files.newBufferedWriter(
                 Paths.get(filePath),
                 StandardCharsets.UTF_8)
         ) {
-            for (String datum : data) {
-                br.write(datum);
-                br.newLine();
-            }
+            br.write(data);
         } catch (IOException ex) {
             throw new RuntimeException(
-                    String.format("Can`t write data to the file ", filePath),
+                    String.format("Can`t write data to the file %s", filePath),
                     ex
             );
         }

@@ -25,15 +25,6 @@ public class FruitTransaction {
         return quantity;
     }
 
-    @Override
-    public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -50,7 +41,9 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(operation -> operation.code.equals(code))
                     .findFirst()
-                    .orElse(null);
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            String.format("Invalid operation code: %s", code)
+                    ));
         }
     }
 }
