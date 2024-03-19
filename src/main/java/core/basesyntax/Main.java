@@ -20,8 +20,8 @@ public class Main {
         Parser parser = new ParserImpl();
         List<FruitTransaction> parsedData = parser.parse(lines);
         OperationStrategy operationStrategy = new OperationStrategy();
-        for (var pd : parsedData) {
-            operationStrategy.processData(pd);
+        for (var data : parsedData) {
+            operationStrategy.processData(data);
         }
         Writer writer = new WriterCsv();
         writer.writeData(WRITE_FILE_PATH);
