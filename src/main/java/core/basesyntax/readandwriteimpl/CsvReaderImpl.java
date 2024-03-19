@@ -11,7 +11,7 @@ public class CsvReaderImpl implements CsvReader {
     private static final String csvFile = "filename.csv";
 
     @Override
-    public List<String> readDataFromDataBase() {
+    public List<String> readDataFromFile() {
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             String line;

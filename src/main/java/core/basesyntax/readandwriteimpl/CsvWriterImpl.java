@@ -7,7 +7,7 @@ import java.util.List;
 
 public class CsvWriterImpl implements CsvWriter {
     @Override
-    public void writeReportToFile(List<String> report, String filePath) {
+    public void writeLinesToFile(List<String> report, String filePath) {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             for (String line : report) {
                 writer.println(line);
