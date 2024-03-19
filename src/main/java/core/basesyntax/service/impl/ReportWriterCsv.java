@@ -6,7 +6,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReportWriterImpl implements ReportWriter {
+public class ReportWriterCsv implements ReportWriter {
     @Override
     public void writeReport(String report, String pathname) {
         if (report == null || report.isEmpty()) {

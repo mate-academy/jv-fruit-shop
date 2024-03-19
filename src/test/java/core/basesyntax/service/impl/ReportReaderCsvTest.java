@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class ReportReaderImplTest {
+public class ReportReaderCsvTest {
 
     private static final String FILE_EXIST_PATH = "src/test/resources/data.csv";
     private static final String FILE_DOES_NOT_EXIST_PATH = "src/test/resources/data_not_exist.csv";
@@ -18,7 +18,7 @@ public class ReportReaderImplTest {
 
     @BeforeEach
     void setUp() {
-        reportReader = new ReportReaderImpl();
+        reportReader = new ReportReaderCsv();
     }
 
     @Test

@@ -15,15 +15,15 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-class ReportWriterImplTest {
+class ReportWriterCsvTest {
     private static final String REPORT_CSV = "src/test/resources/report.csv";
     private ReportReader reportReader;
     private ReportWriter reportWriter;
 
     @BeforeEach
     void setUp() {
-        reportReader = new ReportReaderImpl();
-        reportWriter = new ReportWriterImpl();
+        reportReader = new ReportReaderCsv();
+        reportWriter = new ReportWriterCsv();
     }
 
     @AfterEach

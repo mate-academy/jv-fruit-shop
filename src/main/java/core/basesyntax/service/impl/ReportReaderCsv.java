@@ -6,7 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReportReaderImpl implements ReportReader {
+public class ReportReaderCsv implements ReportReader {
 
     @Override
     public List<String> readFile(String pathname) {

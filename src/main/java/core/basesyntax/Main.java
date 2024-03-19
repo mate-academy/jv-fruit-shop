@@ -10,8 +10,8 @@ import core.basesyntax.service.ReportReader;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.ReportReaderImpl;
-import core.basesyntax.service.impl.ReportWriterImpl;
+import core.basesyntax.service.impl.ReportReaderCsv;
+import core.basesyntax.service.impl.ReportWriterCsv;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.DecreaseStrategy;
 import core.basesyntax.strategy.FruitStrategy;
@@ -26,7 +26,7 @@ public class Main {
     private static Map<Operation, OperationHandler> strategyMap;
 
     public static void main(String[] args) {
-        ReportReader reportReader = new ReportReaderImpl();
+        ReportReader reportReader = new ReportReaderCsv();
         List<String> readFile = reportReader.readFile(INPUT_PATHNAME);
 
         DataParser dataParser = new DataParserImpl();
@@ -40,7 +40,7 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(fruitDao.getFruits());
 
-        ReportWriter reportWriter = new ReportWriterImpl();
+        ReportWriter reportWriter = new ReportWriterCsv();
         reportWriter.writeReport(report, REPORT_PATHNAME);
     }
 
