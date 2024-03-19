@@ -1,15 +1,13 @@
-package core.basesyntax.model.impl;
+package core.basesyntax.serviceImpl;
 
-import core.basesyntax.model.service.ReadFromFile;
+import core.basesyntax.service.ReadFromFileService;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
-public class ReadFromFileImpl implements ReadFromFile {
+public class ReadFromFileServiceImpl implements ReadFromFileService {
     @Override
     public List<String> readFile(String filePath) {
         try {
@@ -19,3 +17,4 @@ public class ReadFromFileImpl implements ReadFromFile {
         }
     }
 }
+// читаємо данні з файлу та повертаємо ліст стрінгів
