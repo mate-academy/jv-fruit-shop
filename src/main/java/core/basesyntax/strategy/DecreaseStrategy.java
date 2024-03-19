@@ -15,7 +15,7 @@ public class DecreaseStrategy implements OperationHandler {
         int oldQuantity = fruitDao.getFruitQuantity(transaction.fruitName());
         int newQuantity = oldQuantity - transaction.quantity();
         if (newQuantity < 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Quantity can't be less than 0!");
         }
         fruitDao.addFruit(transaction.fruitName(), newQuantity);
     }
