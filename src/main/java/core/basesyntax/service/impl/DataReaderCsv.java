@@ -16,7 +16,7 @@ public class DataReaderCsv implements DataReader {
             strings = Files.readAllLines(path);
         } catch (IOException e) {
             throw new RuntimeException(
-                    "Can't find the file with this pathname: " + pathname, e);
+                    "Can't find the file by path: " + pathname, e);
         }
 
         return strings;
