@@ -1,12 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReportWriterCsv implements ReportWriter {
+public class CsvWriter implements FileWriter {
     @Override
     public void write(String data, String pathname) {
         if (data == null || data.isEmpty()) {
@@ -15,7 +14,7 @@ public class ReportWriterCsv implements ReportWriter {
 
         File file = new File(pathname);
 
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
             bufferedWriter.write(data);
         } catch (IOException ex) {
             throw new RuntimeException("Can't write to file", ex);

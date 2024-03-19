@@ -7,11 +7,11 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.ReportWriter;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.DataReaderCsv;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.service.impl.ReportWriterCsv;
+import core.basesyntax.service.impl.CsvWriter;
 import core.basesyntax.strategy.BalanceStrategy;
 import core.basesyntax.strategy.DecreaseStrategy;
 import core.basesyntax.strategy.FruitStrategy;
@@ -40,8 +40,8 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(fruitDao.getFruits());
 
-        ReportWriter reportWriter = new ReportWriterCsv();
-        reportWriter.write(report, REPORT_PATHNAME);
+        FileWriter fileWriter = new CsvWriter();
+        fileWriter.write(report, REPORT_PATHNAME);
     }
 
     private static void mapBuilder(FruitDao fruitDao) {
