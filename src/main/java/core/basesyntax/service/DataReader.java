@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface DataReader {
-    List<String> read(String pathname);
+    List<String> read(String path);
 }
