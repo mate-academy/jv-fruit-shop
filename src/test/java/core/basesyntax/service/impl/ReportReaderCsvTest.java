@@ -10,7 +10,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ReportReaderCsvTest {
-
     private static final String FILE_EXIST_PATH = "src/test/resources/data.csv";
     private static final String FILE_DOES_NOT_EXIST_PATH = "src/test/resources/data_not_exist.csv";
     private static final String EMPTY_FILE_PATH = "src/test/resources/empty.csv";
