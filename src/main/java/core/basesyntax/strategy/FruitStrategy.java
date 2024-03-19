@@ -13,10 +13,9 @@ public class FruitStrategy {
     }
 
     public void processData(List<FruitTransaction> transactions) {
-        OperationHandler handler;
         for (FruitTransaction transaction : transactions) {
-            handler = map.get(transaction.operation());
-            handler.apply(transaction);
+            map.get(transaction.operation())
+                    .apply(transaction);
         }
     }
 }
