@@ -1,7 +1,6 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.dto.FruitTransactionDto;
-
 import java.util.List;
 
 public class OperationStrategy {
@@ -12,7 +11,7 @@ public class OperationStrategy {
     }
 
     public List<OperationHandler> getHandlers(FruitTransactionDto dto) {
-        return  handlers.stream()
+        return handlers.stream()
                 .filter(h -> h.isApplicable(dto))
                 .toList();
     }

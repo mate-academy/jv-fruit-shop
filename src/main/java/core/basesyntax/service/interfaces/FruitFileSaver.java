@@ -1,5 +1,5 @@
 package core.basesyntax.service.interfaces;
 
 public interface FruitFileSaver {
-    void saveToFile (String report, String toFileName);
+    void saveToFile(String report, String filePath);
 }
