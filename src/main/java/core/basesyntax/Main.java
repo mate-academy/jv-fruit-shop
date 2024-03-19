@@ -1,14 +1,8 @@
 package core.basesyntax;
 
-import static core.basesyntax.model.Operation.BALANCE;
-import static core.basesyntax.model.Operation.PURCHASE;
-import static core.basesyntax.model.Operation.RETURN;
-import static core.basesyntax.model.Operation.SUPPLY;
-
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
 import core.basesyntax.service.FruitTransactionMapper;
@@ -20,13 +14,7 @@ import core.basesyntax.service.impl.CsvReportGenerator;
 import core.basesyntax.service.impl.CsvReportWriter;
 import core.basesyntax.service.impl.OperationProcessorImpl;
 import core.basesyntax.strategy.HandlerStrategy;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.handlers.BalanceHandler;
-import core.basesyntax.strategy.handlers.PurchaseHandler;
-import core.basesyntax.strategy.handlers.ReturnHandler;
-import core.basesyntax.strategy.handlers.SupplyHandler;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/Input.csv";
