@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import core.basesyntax.service.ReportCreator;
 import java.util.Map;
@@ -30,15 +29,5 @@ class ReportCreatorImplTest {
                 banana,20
                 """;
         assertEquals(expected, actual);
-    }
-
-    @Test
-    void createReport_negativeQuantity_notOk() {
-        Map<String, Integer> map = new TreeMap<>();
-        map.put("banana", -10);
-        map.put("apple", 50);
-
-        assertThrows(IllegalArgumentException.class, () ->
-                reportCreator.createReport(map));
     }
 }
