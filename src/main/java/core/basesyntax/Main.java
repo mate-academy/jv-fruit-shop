@@ -11,8 +11,11 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class Main {
+    private static final String WRITE_FILE_PATH = "src/files/fruits_report.csv";
+    private static final String READ_FILE_PATH = "src/files/fruits.csv";
+
     public static void main(String[] args) {
-        Reader reader = new ReaderCsv();
+        Reader reader = new ReaderCsv(READ_FILE_PATH);
         List<String> lines = reader.readData();
         Parser parser = new ParserImpl();
         List<Operation> parsedData = parser.parseToOperations(lines);
@@ -20,7 +23,7 @@ public class Main {
         for (var pd : parsedData) {
             operationStrategy.processData(pd);
         }
-        Writer writer = new WriterCsv();
+        Writer writer = new WriterCsv(WRITE_FILE_PATH);
         writer.writeData();
     }
 }

@@ -10,12 +10,16 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class ReaderCsv implements Reader {
-    private static final String FILE_PATH = "src/files/fruits.csv";
+    private final String filePath;
+
+    public ReaderCsv(String filePath) {
+        this.filePath = filePath;
+    }
 
     @Override
     public List<String> readData() {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);

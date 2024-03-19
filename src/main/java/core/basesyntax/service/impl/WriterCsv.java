@@ -7,10 +7,14 @@ import java.io.IOException;
 import java.util.Map;
 
 public class WriterCsv implements Writer {
-    private static final String FILE_PATH = "src/files/fruits_report.csv";
+    private final String filePath;
+
+    public WriterCsv(String filePath) {
+        this.filePath = filePath;
+    }
 
     public void writeData() {
-        try (FileWriter fileWriter = new FileWriter(FILE_PATH)) {
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
             fileWriter.write("fruit,quantity" + System.lineSeparator());
             for (Map.Entry<String, Integer> entry : Storage.data.entrySet()) {
                 fileWriter.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
