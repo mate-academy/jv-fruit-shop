@@ -39,6 +39,6 @@ public class Main {
         String report = reportGenerator.generateReport();
 
         DataWriter writer = new CsvReportWriter();
-        writer.writeReportToTheFile(report, OUTPUT_FILE);
+        writer.write(report, OUTPUT_FILE);
     }
 }

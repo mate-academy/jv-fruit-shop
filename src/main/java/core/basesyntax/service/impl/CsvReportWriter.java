@@ -10,7 +10,7 @@ public class CsvReportWriter implements DataWriter {
     private static final String WRITING_FAILURE_MESSAGE = "Failed to write to the file";
 
     @Override
-    public void writeReportToTheFile(String data, String fileName) {
+    public void write(String data, String fileName) {
         byte[] reportToBytes = data.getBytes();
         try {
             Files.write(Paths.get(fileName), reportToBytes);
