@@ -2,13 +2,12 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.StorageService;
-import java.util.HashMap;
+import java.util.Map;
 
 public class StorageServiceImpl implements StorageService {
-    private final Storage storage;
+    private final Storage storage = new Storage();
 
     public StorageServiceImpl() {
-        storage = new Storage();
     }
 
     @Override
@@ -22,8 +21,8 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public HashMap<String, Integer> getAll() {
-        return new HashMap<>(storage.getProducts());
+    public Map<String, Integer> getAll() {
+        return storage.getProducts();
     }
 
     @Override
