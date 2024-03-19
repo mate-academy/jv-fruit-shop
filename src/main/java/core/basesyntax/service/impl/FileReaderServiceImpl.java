@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FileNotFoundException;
 import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,9 +12,8 @@ public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public List<String> readFromFile(String fileNameToRead) {
         List<String> listFromFile = new ArrayList<>();
-        File file = new File(fileNameToRead);
         String line;
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileNameToRead))) {
             bufferedReader.readLine();
             while (bufferedReader.ready()) {
                 line = bufferedReader.readLine();
@@ -23,7 +22,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file");
+            throw new FileNotFoundException("Can't find file" + fileNameToRead);
         }
         return listFromFile;
     }

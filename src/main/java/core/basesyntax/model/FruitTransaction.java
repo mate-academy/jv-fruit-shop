@@ -24,7 +24,7 @@ public record FruitTransaction(Operation operation, String fruit, int quantity) 
                     return operation;
                 }
             }
-            throw new RuntimeException("Incorrect operation code: " + code);
+            throw new IllegalArgumentException("Incorrect operation code: " + code);
         }
     }
 }
