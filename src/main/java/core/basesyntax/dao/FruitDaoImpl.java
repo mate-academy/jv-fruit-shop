@@ -4,7 +4,6 @@ import core.basesyntax.storage.Storage;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public Map<String, Integer> getFruits() {
         return Storage.STORAGE;
