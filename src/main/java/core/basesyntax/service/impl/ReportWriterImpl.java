@@ -9,6 +9,10 @@ import java.io.IOException;
 public class ReportWriterImpl implements ReportWriter {
     @Override
     public void writeReport(String report, String pathname) {
+        if (report == null || report.isEmpty()) {
+            throw new IllegalArgumentException("Data can't be null or 0!");
+        }
+
         File file = new File(pathname);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
