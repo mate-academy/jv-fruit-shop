@@ -13,9 +13,9 @@ public class TransactionProcessorImpl implements TransactionProcessor {
             OperationHandler operationHandler
     ) {
         for (FruitTransaction transaction : transactionList) {
-            OperationStrategy handler = operationHandler.getStrategy(transaction.getOperation());
-            String product = transaction.getFruit();
-            int quantity = transaction.getQuantity();
+            OperationStrategy handler = operationHandler.getStrategy(transaction.operation());
+            String product = transaction.fruit();
+            int quantity = transaction.quantity();
             handler.process(product, quantity);
         }
     }
