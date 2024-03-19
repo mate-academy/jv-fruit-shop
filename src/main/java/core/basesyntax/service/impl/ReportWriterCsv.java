@@ -10,7 +10,7 @@ public class ReportWriterCsv implements ReportWriter {
     @Override
     public void writeReport(String report, String pathname) {
         if (report == null || report.isEmpty()) {
-            throw new IllegalArgumentException("Data can't be null or 0!");
+            throw new IllegalArgumentException("Data can not be empty!");
         }
 
         File file = new File(pathname);
