@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportBuilder;
-
 import java.util.Map;
 
 public class ReportBuilderImpl implements ReportBuilder {
     private static final String SEPARATOR = ",";
+
     @Override
     public String create(Map<String, Integer> storage) {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity");

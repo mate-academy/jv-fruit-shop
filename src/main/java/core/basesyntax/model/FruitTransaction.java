@@ -10,6 +10,10 @@ public record FruitTransaction(Operation operation, String fruit, int quantity) 
 
         private final String code;
 
+        Operation(String code) {
+            this.code = code;
+        }
+
         public static Operation findByCode(String code) {
             for (Operation operation : values()) {
                 if (operation.code.equals(code)) {
@@ -17,10 +21,6 @@ public record FruitTransaction(Operation operation, String fruit, int quantity) 
                 }
             }
             throw new RuntimeException(" Wrong operation code from line: " + code);
-        }
-
-        Operation(String code) {
-            this.code = code;
         }
 
         public String getCode() {

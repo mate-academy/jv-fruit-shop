@@ -22,8 +22,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        String input_in_norm = "src/main/resources/input.csv";
-        String output_to_norm = "src/main/resources/output.csv";
+        String inputInNorm = "src/main/resources/input.csv";
+        String outputToNorm = "src/main/resources/output.csv";
         // operation handlers
         OperationHandler balance = new BalanceOperationHandler();
         OperationHandler supply = new SupplyOperationHandler();
@@ -32,7 +32,7 @@ public class Main {
         List<OperationHandler> operationList = List.of(balance, supply, purchase, returning);
         // reader
         CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
-        List<String> lineList = csvFileReaderService.readFromFile(input_in_norm);
+        List<String> lineList = csvFileReaderService.readFromFile(inputInNorm);
         // parser
         ParserService<String> parserService = new StringParseService();
         List<FruitTransaction> transactionsList = parserService.parse(lineList);
@@ -45,7 +45,7 @@ public class Main {
         String report = reportBuilder.create(Storage.dataBase);
         // write to file
         ReportFileWriter reportFileWriter = new CsvFileWriter();
-        reportFileWriter.write(report, output_to_norm);
+        reportFileWriter.write(report, outputToNorm);
 
     }
 }
