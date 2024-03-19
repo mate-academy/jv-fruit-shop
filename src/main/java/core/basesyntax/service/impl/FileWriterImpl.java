@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 
-public class CsvWriter implements FileWriter {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String data, String path) {
         if (data == null || data.isEmpty()) {

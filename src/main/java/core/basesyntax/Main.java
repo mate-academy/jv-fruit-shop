@@ -8,7 +8,7 @@ import core.basesyntax.service.DataParser;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
-import core.basesyntax.service.impl.CsvWriter;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.DataParserImpl;
 import core.basesyntax.service.impl.DataReaderCsv;
 import core.basesyntax.service.impl.ReportCreatorImpl;
@@ -40,7 +40,7 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport(fruitDao.getFruits());
 
-        FileWriter fileWriter = new CsvWriter();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(report, REPORT_PATHNAME);
     }
 
