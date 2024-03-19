@@ -8,15 +8,15 @@ import java.io.IOException;
 
 public class ReportWriterCsv implements ReportWriter {
     @Override
-    public void writeReport(String report, String pathname) {
-        if (report == null || report.isEmpty()) {
+    public void write(String data, String pathname) {
+        if (data == null || data.isEmpty()) {
             throw new IllegalArgumentException("Data can not be empty!");
         }
 
         File file = new File(pathname);
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            bufferedWriter.write(report);
+            bufferedWriter.write(data);
         } catch (IOException ex) {
             throw new RuntimeException("Can't write to file", ex);
         }

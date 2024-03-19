@@ -41,7 +41,7 @@ public class Main {
         String report = reportCreator.createReport(fruitDao.getFruits());
 
         ReportWriter reportWriter = new ReportWriterCsv();
-        reportWriter.writeReport(report, REPORT_PATHNAME);
+        reportWriter.write(report, REPORT_PATHNAME);
     }
 
     private static void mapBuilder(FruitDao fruitDao) {
