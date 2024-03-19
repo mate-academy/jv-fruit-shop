@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitItem;
+import core.basesyntax.dto.FruitTransactionDto;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,18 +10,27 @@ import java.util.Map;
 public class StorageDaoImpl implements StorageDao {
 
     @Override
-    public HashMap<String, Integer> add(FruitItem fruit) {
-        Storage.fruitsQuantity.putAll(fruit);
+    public HashMap<String, Integer> add(FruitTransactionDto dto) {
+        Storage.fruitsQuantity.put(dto.fruitName(), dto.quantity());
         return Storage.fruitsQuantity;
     }
 
     @Override
-    public HashMap<String, Integer> get(FruitItem fruitName) {
+    public HashMap<String, Integer> get(FruitTransactionDto dto) {
         for (Map.Entry<String, Integer> fruit : Storage.fruitsQuantity.entrySet()) {
-            if (fruit.getKey().equals(fruitName.getFruitName())) {
+            if (fruit.getKey().equals(dto.fruitName())) {
                 return Storage.fruitsQuantity;
             }
         }
         return null;
+    }
+
+    @Override
+    public HashMap<String, Integer> change(FruitTransactionDto dto) {
+        Integer existingQuantity = Storage.fruitsQuantity.get(dto.fruitName());
+        if (existingQuantity != null) {
+            Storage.fruitsQuantity.put(dto.fruitName(), dto.quantity());
+        }
+        return Storage.fruitsQuantity;
     }
 }

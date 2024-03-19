@@ -1,13 +1,16 @@
 package core.basesyntax.service.strategy.impl;
 
-import core.basesyntax.db.Storage;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.strategy.OperationHandler;
 
+import java.util.HashMap;
+
 public class BalanceOperationHandler implements OperationHandler {
+    private StorageDaoImpl actionDB = new StorageDaoImpl();
     @Override
-    public void apply(FruitTransactionDto dto) {
-        Storage.fruitsQuantity.put(dto.fruitName(), dto.quantity());
+    public HashMap<String, Integer> apply(FruitTransactionDto dto) {
+        return actionDB.add(dto);
     }
 
     @Override

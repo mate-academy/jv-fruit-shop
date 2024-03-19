@@ -12,14 +12,16 @@ public class FruitRawStringParserImpl implements FruitRawStringParser {
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
     @Override
-    List<FruitTransactionDto> parsedFruitData (List<String> rawStrings) {
-        var fruitToDB = new ArrayList<FruitTransactionDto>(rawStrings.size() - FIRST_CVS_LINE);
+    public List<FruitTransactionDto> parsedFruitData(List<String> rawStrings) {
+        var fruitDto = new ArrayList<FruitTransactionDto>(rawStrings.size() - FIRST_CVS_LINE);
         for (int i = FIRST_CVS_LINE; i < rawStrings.size(); i++) {
             String line = rawStrings.get(i);
             String[] columns = line.split(",");
-            var dto = new FruitTransactionDto(columns[OPERATION_NEXT_INDEX], columns[FRUIT_NAME_INDEX], Integer.parseInt(FRUIT_QUANTITY_INDEX));
-            fruitToDB.add(dto);
+            var dto = new FruitTransactionDto(columns[OPERATION_NEXT_INDEX],
+                    columns[FRUIT_NAME_INDEX],
+                    Integer.parseInt(columns[FRUIT_QUANTITY_INDEX]));
+            fruitDto.add(dto);
         }
-        return fruitToDB;
+        return fruitDto;
     }
 }
