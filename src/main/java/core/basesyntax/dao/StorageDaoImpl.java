@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
     public Map<String, Integer> getStorageState() {
-        return Storage.STORAGE_MAP;
+        return Storage.getStorageMap();
     }
 
     @Override
     public void putToInventory(String productType, int amount) {
-        Storage.STORAGE_MAP.put(productType, amount);
+        Storage.getStorageMap().put(productType, amount);
     }
 
     @Override
     public int getAmountByProduct(String product) {
-        return Storage.STORAGE_MAP.get(product);
+        return Storage.getStorageMap().get(product);
     }
 }

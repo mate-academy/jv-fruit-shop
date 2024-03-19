@@ -20,7 +20,7 @@ public class OperationProcessorImpl implements TransactionProcessor {
     }
 
     private void processSingleTransaction(FruitTransaction transaction) {
-        OperationHandler handler = strategy.getStrategy(transaction.getOperationType());
+        OperationHandler handler = strategy.getHandlerByOperation(transaction.getOperationType());
         String productType = transaction.getProductName();
         int amount = transaction.getAmount();
         handler.handle(productType, amount);

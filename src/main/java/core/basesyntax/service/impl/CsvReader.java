@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FileReadingFailureException;
 import core.basesyntax.service.DataReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,7 +15,7 @@ public class CsvReader implements DataReader {
         try {
             return Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
-            throw new RuntimeException(READING_FAILURE_MESSAGE + fileName, e);
+            throw new FileReadingFailureException(READING_FAILURE_MESSAGE + fileName, e);
         }
     }
 }

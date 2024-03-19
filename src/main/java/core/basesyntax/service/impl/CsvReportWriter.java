@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.FileWritingFailureException;
 import core.basesyntax.service.DataWriter;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -9,12 +10,12 @@ public class CsvReportWriter implements DataWriter {
     private static final String WRITING_FAILURE_MESSAGE = "Failed to write to the file";
 
     @Override
-    public void writeReportToTheFile(String report, String fileName) {
-        byte[] reportToBytes = report.getBytes();
+    public void writeReportToTheFile(String data, String fileName) {
+        byte[] reportToBytes = data.getBytes();
         try {
             Files.write(Paths.get(fileName), reportToBytes);
         } catch (IOException e) {
-            throw new RuntimeException(WRITING_FAILURE_MESSAGE + fileName, e);
+            throw new FileWritingFailureException(WRITING_FAILURE_MESSAGE + fileName, e);
         }
     }
 }

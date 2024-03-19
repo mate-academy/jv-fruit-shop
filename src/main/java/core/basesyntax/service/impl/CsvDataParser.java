@@ -11,13 +11,13 @@ public class CsvDataParser implements FruitTransactionMapper {
     private static final int OPERATION_TYPE_CODE_INDEX = 0;
     private static final int PRODUCT_TYPE_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
+    private static final int FIRS_DATA_LINE_INDEX = 1;
 
     @Override
     public List<FruitTransaction> map(List<String> data) {
-        int firsDataLineIndex = 1;
         List<FruitTransaction> resultList = new ArrayList<>();
 
-        for (int i = firsDataLineIndex; i < data.size(); i++) {
+        for (int i = FIRS_DATA_LINE_INDEX; i < data.size(); i++) {
             String[] splitLine = data.get(i).split(LINE_SPLIT_REGEX);
             Operation operationType = parseOperationType(splitLine);
             String productType = parseProductType(splitLine);

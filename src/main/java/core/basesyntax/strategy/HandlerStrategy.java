@@ -23,7 +23,7 @@ public class HandlerStrategy {
         HandlerStrategy.strategyMap = new HashMap<>();
     }
 
-    public OperationHandler getStrategy(Operation operationType) {
+    public OperationHandler getHandlerByOperation(Operation operationType) {
         return strategyMap.get(operationType);
     }
 
