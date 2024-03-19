@@ -10,22 +10,22 @@ import core.basesyntax.model.Supply;
 public class OperationStrategy {
 
     public void processData(Operation operation) {
-        switch (operation) {
-            case Balance balance -> {
-                Storage.data.put(balance.getProduct(), balance.getAmount());
-            }
-            case Purchase purchase -> {
-                int newAmount = Storage.data.get(purchase.getProduct()) - purchase.getAmount();
-                Storage.data.put(purchase.getProduct(), newAmount);
-            }
-            case Return opReturn -> {
-                int newAmount = Storage.data.get(opReturn.getProduct()) + opReturn.getAmount();
-                Storage.data.put(opReturn.getProduct(), newAmount);
-            }
-            case Supply supply -> {
-                int newAmount = Storage.data.get(supply.getProduct()) + supply.getAmount();
-                Storage.data.put(supply.getProduct(), newAmount);
-            }
+        if (operation == null) {
+            throw new RuntimeException("Operation is null");
+        }
+        if (operation instanceof Balance b) {
+            Storage.data.put(b.getProduct(), b.getAmount());
+        } else if (operation instanceof Purchase p) {
+            Storage.data.put(p.getProduct(),
+                    Storage.data.getOrDefault(p.getProduct(), 0) - p.getAmount());
+        } else if (operation instanceof Return r) {
+            Storage.data.put(r.getProduct(),
+                    Storage.data.getOrDefault(r.getProduct(), 0) + r.getAmount());
+        } else if (operation instanceof Supply s) {
+            Storage.data.put(s.getProduct(),
+                    Storage.data.getOrDefault(s.getProduct(), 0) + s.getAmount());
+        } else {
+            throw new IllegalArgumentException("Unknown operation type");
         }
     }
 }
