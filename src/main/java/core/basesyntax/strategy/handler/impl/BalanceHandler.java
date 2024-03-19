@@ -14,8 +14,8 @@ public class BalanceHandler extends OperationHandler {
     @Override
     public void handle(Fruit fruit, Integer quantity) {
         if (fruitStorage.storage().containsKey(fruit)) {
-            throw new BalanceReassigningException("Balance can`t be reassigned! " +
-                    "You have duplicate balance operation for fruit: " + fruit.fruitName());
+            throw new BalanceReassigningException("Balance can`t be reassigned! "
+                    + "You have duplicate balance operation for fruit: " + fruit.fruitName());
         }
         fruitStorage.storage().putIfAbsent(fruit, quantity);
     }

@@ -27,17 +27,21 @@ public class Main {
 
         FruitStorage fruitStorage = new FruitStorage(new TreeMap<>());
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler(fruitStorage));
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler(fruitStorage));
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler(fruitStorage));
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler(fruitStorage));
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceHandler(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseHandler(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnHandler(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyHandler(fruitStorage));
 
         Path readPath = Path.of("src/main/resources/input.csv");
         Path writePath = Path.of("src/main/resources/report.csv");
 
         FruitTransactionParser fruitTransactionParser = new CsvParser();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         List<String> data = fruitShopDao.loadDataFromFile(readPath);
         List<FruitTransaction> transactions = fruitTransactionParser.parseTransactions(data);
