@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.service.interfaces;
 
 import core.basesyntax.model.FruitItem;
 

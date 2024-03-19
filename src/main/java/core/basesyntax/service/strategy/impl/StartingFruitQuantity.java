@@ -1,8 +1,8 @@
-package core.basesyntax.strategy.impl;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitItem;
-import core.basesyntax.strategy.FruitQuantityChange;
+import core.basesyntax.service.strategy.FruitQuantityChange;
 
 import java.util.HashMap;
 

@@ -1,7 +1,9 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitItem;
 import core.basesyntax.model.Item_Operation;
+import core.basesyntax.service.strategy.FruitQuantityChange;
+import core.basesyntax.service.strategy.StrategyChooseFruit;
 
 public class FruitOperationProcessor {
     private static final int OPERATION_NEXT_INDEX = 3;

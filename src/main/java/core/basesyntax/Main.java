@@ -1,21 +1,23 @@
 package core.basesyntax;
 
 
-import core.basesyntax.service.FruitFileReader;
+import core.basesyntax.service.interfaces.FruitFileReader;
 import core.basesyntax.service.impl.FruitFileReaderImpl;
-import core.basesyntax.strategy.FruitOperationProcessor;
+
+import java.util.List;
 
 /**
  * Feel free to remove this class and create your own.
  */
 public class Main {
     public static void main(String[] args) {
-        FruitFileReader reader = new FruitFileReaderImpl();
+     FruitFileReader reader = new FruitFileReaderImpl();
 
-        String fileString = reader.readFile("src/main/resources/fruitts.csv");
-        System.out.println(fileString);
-        FruitOperationProcessor processor = new FruitOperationProcessor();
-        processor.processOperations(fileString);
+        List<String> fileString = reader.readFile("src/main/resources/fruitts.csv");
+       System.out.println(fileString);
+
+//        FruitOperationProcessor processor = new FruitOperationProcessor();
+//        processor.processOperations(fileString);
 
 
         /* FileFruitReader (exception no file)  return string

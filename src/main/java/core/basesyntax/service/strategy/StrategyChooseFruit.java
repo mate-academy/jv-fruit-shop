@@ -1,11 +1,10 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service.strategy;
 
-import core.basesyntax.model.FruitItem;
 import core.basesyntax.model.Item_Operation;
-import core.basesyntax.strategy.impl.RefundFruitQuantity;
-import core.basesyntax.strategy.impl.ResupplyFruitQuantity;
-import core.basesyntax.strategy.impl.SellFruitQuantity;
-import core.basesyntax.strategy.impl.StartingFruitQuantity;
+import core.basesyntax.service.strategy.impl.RefundFruitQuantity;
+import core.basesyntax.service.strategy.impl.ResupplyFruitQuantity;
+import core.basesyntax.service.strategy.impl.SellFruitQuantity;
+import core.basesyntax.service.strategy.impl.StartingFruitQuantity;
 
 public class StrategyChooseFruit {
     public FruitQuantityChange getOptionFruitQuantityChange (Item_Operation operation) {
