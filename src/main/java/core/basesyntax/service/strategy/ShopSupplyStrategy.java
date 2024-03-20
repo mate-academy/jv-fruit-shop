@@ -1,17 +1,17 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.db.ChangedData;
+import core.basesyntax.db.CurrentData;
 
 public class ShopSupplyStrategy implements ShopActivityStrategy {
-    private final ChangedData changedData;
+    private final CurrentData currentData;
 
-    public ShopSupplyStrategy(ChangedData changedData) {
-        this.changedData = changedData;
+    public ShopSupplyStrategy(CurrentData currentData) {
+        this.currentData = currentData;
     }
 
     @Override
     public void workWithActivities(String fruit, int quantity) {
-        int newQuantity = changedData.getChangedData().get(fruit) + quantity;
-        changedData.getChangedData().put(fruit, newQuantity);
+        int newQuantity = currentData.getChangedData().get(fruit) + quantity;
+        currentData.getChangedData().put(fruit, newQuantity);
     }
 }

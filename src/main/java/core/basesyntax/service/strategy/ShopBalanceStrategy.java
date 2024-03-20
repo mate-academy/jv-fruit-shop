@@ -1,16 +1,16 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.db.ChangedData;
+import core.basesyntax.db.CurrentData;
 
 public class ShopBalanceStrategy implements ShopActivityStrategy {
-    private final ChangedData changedData;
+    private final CurrentData currentData;
 
-    public ShopBalanceStrategy(ChangedData changedData) {
-        this.changedData = changedData;
+    public ShopBalanceStrategy(CurrentData currentData) {
+        this.currentData = currentData;
     }
 
     @Override
     public void workWithActivities(String fruit, int quantity) {
-        changedData.getChangedData().put(fruit,quantity);
+        currentData.getChangedData().put(fruit,quantity);
     }
 }

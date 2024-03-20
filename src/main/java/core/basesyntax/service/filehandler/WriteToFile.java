@@ -1,21 +1,21 @@
 package core.basesyntax.service.filehandler;
 
-import core.basesyntax.db.ChangedData;
+import core.basesyntax.db.CurrentData;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriteToFile {
-    private ChangedData changedData;
+    private final CurrentData currentData;
 
-    public WriteToFile(ChangedData changedData) {
-        this.changedData = changedData;
+    public WriteToFile(CurrentData currentData) {
+        this.currentData = currentData;
     }
 
     public void write(String filePath) {
-        Report report = new Report();
-        StringBuilder reportBuilder = new StringBuilder(report.createReport(changedData));
+        ReportGenerate reportGenerate = new ReportGenerate();
+        StringBuilder reportBuilder = new StringBuilder(reportGenerate.createReport(currentData));
 
         File writeFile = new File(filePath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(writeFile))) {
