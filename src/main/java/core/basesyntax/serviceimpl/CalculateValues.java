@@ -1,7 +1,6 @@
 package core.basesyntax.serviceimpl;
 
 import core.basesyntax.strategyimpl.StrategyImpl;
-
 import java.util.List;
 
 public class CalculateValues {
