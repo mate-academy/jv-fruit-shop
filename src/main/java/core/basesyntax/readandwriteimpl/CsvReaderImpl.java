@@ -8,12 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CsvReaderImpl implements CsvReader {
-    private static final String csvFile = "filename.csv";
+    private static final String CSV_FILE = "filename.csv";
 
     @Override
     public List<String> readDataFromFile() {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);

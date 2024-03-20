@@ -1,13 +1,15 @@
 package core.basesyntax;
 
+import core.basesyntax.handlers.BalanceHandler;
+import core.basesyntax.handlers.OperationHandler;
+import core.basesyntax.handlers.PurchaseHandler;
+import core.basesyntax.handlers.ReturnHandler;
+import core.basesyntax.handlers.SupplyHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.readandwriteimpl.CsvReaderImpl;
 import core.basesyntax.readandwriteimpl.CsvWriterImpl;
-import core.basesyntax.service.BalanceSupplyReturnHandler;
 import core.basesyntax.service.FruitTransactionParser;
-import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.PurchaseHandler;
 import core.basesyntax.serviseimpl.DataProcessorImpl;
 import core.basesyntax.serviseimpl.ReportGeneratorImpl;
 import java.util.Arrays;
@@ -15,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HelloWorld {
+public class Main {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/output_file.csv";
 
     public static void main(String[] args) {
@@ -28,10 +30,10 @@ public class HelloWorld {
         Map<String, Integer> fruitStore = new HashMap<>();
 
         Map<Operation, OperationHandler> operationStrategies = Map.of(
-                Operation.BALANCE, new BalanceSupplyReturnHandler(fruitStore),
-                Operation.SUPPLY, new BalanceSupplyReturnHandler(fruitStore),
-                Operation.RETURN, new BalanceSupplyReturnHandler(fruitStore),
-                Operation.PURCHASE, new PurchaseHandler(fruitStore));
+                Operation.BALANCE, new BalanceHandler(),
+                Operation.SUPPLY, new SupplyHandler(),
+                Operation.RETURN, new ReturnHandler(),
+                Operation.PURCHASE, new PurchaseHandler());
 
         DataProcessorImpl dataProcessor = new DataProcessorImpl(operationStrategies);
         fruitStore = dataProcessor.processTransactions(transactions);

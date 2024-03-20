@@ -20,9 +20,10 @@ public class FruitTransactionParser {
     private FruitTransaction parseLine(String line) {
         String[] parts = line.split(",");
         FruitTransaction transaction = new FruitTransaction();
-        transaction.setOperation(FruitTransaction.Operation.getOperationByCode(parts[0]));
-        transaction.setFruit(parts[1]);
-        transaction.setQuantity(Integer.parseInt(parts[2]));
+        transaction.setOperation(FruitTransaction.Operation
+                .getOperationByCode(parts[OPERATION_INDEX]));
+        transaction.setFruit(parts[FRUIT_INDEX]);
+        transaction.setQuantity(Integer.parseInt(parts[QUANTITY_INDEX]));
         return transaction;
     }
 }

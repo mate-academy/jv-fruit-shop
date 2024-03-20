@@ -1,17 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.handlers;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class PurchaseHandler implements OperationHandler {
-    private final Map<String, Integer> fruitStore;
-
-    public PurchaseHandler(Map<String, Integer> fruitStore) {
-        this.fruitStore = fruitStore;
-    }
-
     @Override
-    public void handleTransaction(FruitTransaction transaction) {
+    public void handleTransaction(FruitTransaction transaction, Map<String, Integer> fruitStore) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
 

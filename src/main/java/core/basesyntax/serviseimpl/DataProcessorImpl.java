@@ -1,9 +1,9 @@
 package core.basesyntax.serviseimpl;
 
+import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.DataProcessor;
-import core.basesyntax.service.OperationHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class DataProcessorImpl implements DataProcessor {
                 throw new RuntimeException("No handler for operation "
                         + transaction.getOperation());
             }
-            handler.handleTransaction(transaction);
+            handler.handleTransaction(transaction, fruitStore);
         }
         return fruitStore;
     }
