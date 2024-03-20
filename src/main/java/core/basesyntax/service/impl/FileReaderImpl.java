@@ -13,7 +13,7 @@ public class FileReaderImpl implements FileReader {
     public List<FruitTransactionDto> readFile(String filePath) {
         try {
             List<String> strings = Files.readAllLines(Paths.get(filePath));
-            return new DataParserImpl().pars(strings);
+            return new DataParserImpl().parse(strings);
         } catch (IOException e) {
             throw new RuntimeException("Can't read file: " + filePath, e);
         }

@@ -17,7 +17,7 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransactionDto dto) {
-        fruitService.manipulation(dto.getNameFruit(), dto.getQuantity());
+        fruitService.manipulate(dto.getNameFruit(), dto.getQuantity());
     }
 
     @Override

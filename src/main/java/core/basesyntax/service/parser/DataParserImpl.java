@@ -6,7 +6,7 @@ import java.util.List;
 
 public class DataParserImpl implements DataParser<FruitTransactionDto> {
     @Override
-    public List<FruitTransactionDto> pars(List<String> rawData) {
+    public List<FruitTransactionDto> parse(List<String> rawData) {
         var dtos = new ArrayList<FruitTransactionDto>(rawData.size() - 1);
         for (int i = 1; i < rawData.size(); i++) {
             String line = rawData.get(i);

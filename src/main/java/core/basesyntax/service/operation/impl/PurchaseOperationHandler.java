@@ -18,7 +18,7 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransactionDto dto) {
         int newFruitQuantity = storage.getFruitQuantity(dto.getNameFruit()) - dto.getQuantity();
-        fruitService.manipulation(dto.getNameFruit(), newFruitQuantity);
+        fruitService.manipulate(dto.getNameFruit(), newFruitQuantity);
 
     }
 

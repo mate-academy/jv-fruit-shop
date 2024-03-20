@@ -21,6 +21,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
+    private static final String FILE_PATH = "src/main/resources/file.csv";
+
     public static void main(String[] args) {
         Storage storage = new Storage();
         FruitService fruitService = new FruitServiceImpl(storage);
@@ -38,11 +40,10 @@ public class Main {
         OperationStategy operationStategy = new OperationStategyImpl(handlers);
 
         FileReaderImpl fileReader = new FileReaderImpl();
-        List<FruitTransactionDto> dtos = fileReader.readFile("src/main/resources/file.csv");
+        List<FruitTransactionDto> dtos = fileReader.readFile(FILE_PATH);
         for (var dto : dtos) {
             operationStategy.get(dto).forEach(oh -> oh.apply(dto));
         }
-        System.out.println(storage.getFruits());
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         List<String> report = reportGenerator.generate();
         File outputFile = Paths.get("src/main/resources/report.csv").toFile();
