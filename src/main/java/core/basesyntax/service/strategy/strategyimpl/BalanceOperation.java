@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy.impl;
+package core.basesyntax.service.strategy.strategyimpl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;

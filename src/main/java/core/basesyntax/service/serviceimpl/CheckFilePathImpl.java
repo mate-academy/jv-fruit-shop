@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.service.interfaces.CheckFilePath;
 
