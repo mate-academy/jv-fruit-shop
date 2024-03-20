@@ -1,46 +1,64 @@
 package core.basesyntax.model;
 
 public class FruitsTransaction {
-  private final Operation operation;
-  private final String fruit;
-  private final int quantity;
+    private Operation operation;
+    private String name;
+    private int quantity;
 
-  public FruitsTransaction(Operation operation, String fruit, int quantity) {
-    this.operation = operation;
-    this.fruit = fruit;
-    this.quantity = quantity;
-  }
-
-  public Operation getOperation() {
-    return operation;
-  }
-
-  public enum Operation {
-    BALANCE("b"),
-    SUPPLY("s"),
-    PURCHASE("p"),
-    RETURN("r");
-
-    private String code;
-
-    Operation(String code) {
-      this.code = code;
+    public FruitsTransaction(String operationCode, String name, int quantity) {
+        this.operation = Operation.getByCode(operationCode);
+        this.name = name;
+        this.quantity = quantity;
     }
 
-    public String getCode() {
-      return code;
+    public Operation getOperation() {
+        return operation;
     }
-  }
 
-  @Override
-  public String toString() {
-    return "FruitsTransaction{" +
-            "operation=" + operation +
-            ", fruit='" + fruit + '\'' +
-            ", quantity=" + quantity +
-            '}';
-  }
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private final String code;
+
+        Operation(String code) {
+            this.code = code;
+        }
+
+        public static Operation getByCode(String operationCode) {
+            for (Operation operation : Operation.values()) {
+                if (operation.code.equals(operationCode)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Invalid operation code: " + operationCode);
+        }
+
+        public String getCode() {
+            return code;
+        }
+    }
 }
 
-// цей клас буде зберігати данні з строки у вигляді
-// дія.ім'я . кількість

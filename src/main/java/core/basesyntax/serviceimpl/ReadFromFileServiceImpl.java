@@ -1,7 +1,7 @@
-package core.basesyntax.serviceImpl;
+package core.basesyntax.serviceimpl;
 
+import core.basesyntax.exceptions.InvalidFileException;
 import core.basesyntax.service.ReadFromFileService;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,8 +13,7 @@ public class ReadFromFileServiceImpl implements ReadFromFileService {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("can`t read file");
+            throw new InvalidFileException("can`t read content from the file");
         }
     }
 }
-// читаємо данні з файлу та повертаємо ліст стрінгів
