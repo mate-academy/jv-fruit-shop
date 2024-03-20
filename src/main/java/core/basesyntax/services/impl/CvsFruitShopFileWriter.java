@@ -1,5 +1,6 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.CvsFileOperationException;
 import core.basesyntax.services.FruitShopFileWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -11,7 +12,7 @@ public class CvsFruitShopFileWriter implements FruitShopFileWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file " + e);
+            throw new CvsFileOperationException("Can't write to file ", e);
         }
     }
 }

@@ -20,21 +20,28 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         String path = "src/main/resources/TestCSV.csv";
-        FileReader fileReader = new CvsFileReader();
-        List<String> data = fileReader.readFile(path);
-        FruitDataParser parser = new FruitDataParser();
-        List<FruitTransactionDto> dtos = parser.parse(data);
+        String newFilePath = "src/main/resources/NewCSV.csv";
+
         OperationHandler balance = new BalanceOperationHandler();
         OperationHandler purchase = new PurchaseOperationHandler();
         OperationHandler supply = new SupplyOperationHandler();
         OperationHandler returnHandler = new ReturnOperationHandler();
         List<OperationHandler> handlers = List.of(returnHandler, supply, balance, purchase);
+
+        FileReader fileReader = new CvsFileReader();
+        List<String> data = fileReader.readFile(path);
+
+        FruitDataParser parser = new FruitDataParser();
+        List<FruitTransactionDto> dtos = parser.parse(data);
+
         FruitOperationStrategy strategy = new FruitOperationStrategy(handlers);
         FruitInventoryService service = new FruitInventoryService(strategy);
+
         service.conductActivities(dtos);
+
         ReportGenerator generator = new FruitShopReportGenerator();
         String report = generator.generateReport();
-        String newFilePath = "src/main/resources/NewCSV.csv";
+
         FruitShopFileWriter writer = new CvsFruitShopFileWriter();
         writer.write(report, newFilePath);
     }

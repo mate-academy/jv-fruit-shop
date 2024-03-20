@@ -1,5 +1,6 @@
 package core.basesyntax.services.impl;
 
+import core.basesyntax.CvsFileOperationException;
 import core.basesyntax.services.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +13,7 @@ public class CvsFileReader implements FileReader {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read from file " + e);
+            throw new CvsFileOperationException("Can't read from file ", e);
         }
     }
 }
