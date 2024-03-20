@@ -14,9 +14,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
     }
 
     @Override
-    public void processTransactionList(
-            List<FruitTransaction> transactionList
-    ) {
+    public void processTransactionList(List<FruitTransaction> transactionList) {
         for (FruitTransaction transaction : transactionList) {
             OperationHandler handler = operationStrategy.getHandlerFor(transaction.operation());
             handler.handle(transaction);

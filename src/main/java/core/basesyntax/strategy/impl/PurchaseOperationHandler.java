@@ -17,17 +17,10 @@ public class PurchaseOperationHandler implements OperationHandler {
         int currentQuantity = storageDao.getAmountByProductName(transaction.fruit());
         if (currentQuantity < transaction.quantity()) {
             throw new NotEnoughProductAmountException(
-                    String.format(
-                            "No enough product %s amount: available - %d, needed - %d",
-                            transaction.fruit(),
-                            currentQuantity,
-                            transaction.quantity()
-                    )
+                    String.format("No enough product %s amount: available - %d, needed - %d",
+                            transaction.fruit(), currentQuantity, transaction.quantity())
             );
         }
-        storageDao.putProduct(
-                transaction.fruit(),
-                currentQuantity - transaction.quantity()
-        );
+        storageDao.putProduct(transaction.fruit(), currentQuantity - transaction.quantity());
     }
 }

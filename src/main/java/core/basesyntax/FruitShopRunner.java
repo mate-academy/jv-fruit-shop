@@ -29,33 +29,28 @@ public class FruitShopRunner {
     private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        runApplication();
+        execute();
     }
 
-    private static void runApplication() {
+    private static void execute() {
         StorageDao storageDao = new StorageDaoImpl();
-
         Map<Operation, OperationHandler> strategyMap = Map.of(
                 Operation.BALANCE, new BalanceOperationHandler(storageDao),
                 Operation.PURCHASE, new PurchaseOperationHandler(storageDao),
                 Operation.RETURN, new ReturnOperationHandler(storageDao),
                 Operation.SUPPLY, new SupplyOperationHandler(storageDao)
         );
-        OperationStrategy operationStrategy = new OperationStrategy(strategyMap);
-
         FileReader fileReader = new CsvFileReader();
-        List<String> inputData = fileReader.readData(INPUT_FILE_PATH);
-
         FileDataParser fileDataParser = new CsvFileDataParser();
-        List<FruitTransaction> fruitTransactionList = fileDataParser.parseData(inputData);
-
-        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(operationStrategy);
-        transactionProcessor.processTransactionList(fruitTransactionList);
-
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storageDao);
-        String report = reportGenerator.generateReport();
-
         FileWriter fileWriter = new CsvFileWriter();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storageDao);
+        OperationStrategy operationStrategy = new OperationStrategy(strategyMap);
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(operationStrategy);
+
+        List<String> inputData = fileReader.readData(INPUT_FILE_PATH);
+        List<FruitTransaction> fruitTransactionList = fileDataParser.parseData(inputData);
+        transactionProcessor.processTransactionList(fruitTransactionList);
+        String report = reportGenerator.generateReport();
         fileWriter.writeData(OUTPUT_FILE_PATH, report);
     }
 }

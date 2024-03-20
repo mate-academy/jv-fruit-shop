@@ -13,10 +13,8 @@ public class CsvFileReader implements FileReader {
         try {
             return Files.readAllLines(Paths.get(filePath));
         } catch (IOException ex) {
-            throw new ReadFromFileException(
-                    String.format("Can`t read data from the file %s", filePath),
-                    ex
-            );
+            throw new ReadFromFileException(String.format("Can`t read data from the file %s",
+                    filePath), ex);
         }
     }
 }

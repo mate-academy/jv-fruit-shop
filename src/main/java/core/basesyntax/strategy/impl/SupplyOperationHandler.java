@@ -14,9 +14,6 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         int currentQuantity = storageDao.getAmountByProductName(transaction.fruit());
-        storageDao.putProduct(
-                transaction.fruit(),
-                currentQuantity + transaction.quantity()
-        );
+        storageDao.putProduct(transaction.fruit(), currentQuantity + transaction.quantity());
     }
 }
