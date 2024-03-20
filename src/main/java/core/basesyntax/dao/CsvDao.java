@@ -8,11 +8,15 @@ import java.util.List;
 
 public class CsvDao implements FruitShopDao {
 
+    private static final int FIRST_LINE = 0;
+
     @Override
     public List<String> loadDataFromFile(Path readPath) {
         try {
             List<String> lines = Files.readAllLines(readPath);
-            lines.remove(0);
+            if (!lines.isEmpty() && lines.get(FIRST_LINE).matches("\\D+,\\D+,\\D+")) {
+                lines.remove(FIRST_LINE);
+            }
             return lines;
         } catch (IOException e) {
             throw new CsvFileException("Cant read from cvs file " + readPath, e);
