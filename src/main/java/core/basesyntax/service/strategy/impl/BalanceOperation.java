@@ -13,6 +13,6 @@ public class BalanceOperation implements OperationStrategy {
 
     @Override
     public void execute(Transaction transaction) {
-        repository.addProduct(transaction);
+        repository.add(transaction);
     }
 }

@@ -3,9 +3,9 @@ package core.basesyntax.service.strategy.impl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.repository.StorageRepository;
 import core.basesyntax.service.strategy.OperationStrategy;
-import java.util.Optional;
 
 public class PurchaseOperation implements OperationStrategy {
+    private static final String AMOUNT_EXCEED_MESSAGE = "Transaction value exceeds available amount";
     private StorageRepository repository;
 
     public PurchaseOperation(StorageRepository repository) {
@@ -14,11 +14,16 @@ public class PurchaseOperation implements OperationStrategy {
 
     @Override
     public void execute(Transaction transaction) {
-        Optional<Integer> actualAmount = Optional
-                .ofNullable(repository.getProducts().get(transaction.getProduct()));
-        Integer newAmount = actualAmount.orElse(0) - transaction.getValue();
-        newAmount = newAmount >= 0 ? newAmount : 0;
-        transaction.setValue(newAmount);
-        repository.addProduct(transaction);
+        Integer currentAmount = repository.getProducts().getOrDefault(transaction.getProduct(), 0);
+        int newValue = currentAmount - transaction.getValue();
+        validateValue(newValue);
+        transaction.setValue(newValue);
+        repository.add(transaction);
+    }
+
+    private void validateValue(int newValue) {
+        if (newValue < 0) {
+            throw new IllegalArgumentException(AMOUNT_EXCEED_MESSAGE);
+        }
     }
 }

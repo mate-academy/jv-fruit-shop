@@ -18,8 +18,8 @@ public class ParseServiceImpl implements ParseService {
     @Override
     public List<Transaction> parse(String data) {
         List<String> rowData = Arrays.stream(data.split(System.lineSeparator()))
+                .skip(1)
                 .collect(Collectors.toCollection(ArrayList::new));
-        rowData.remove(0);
         List<Transaction> transactions = new ArrayList<>();
         return buildTransactions(rowData, transactions);
     }
@@ -38,13 +38,12 @@ public class ParseServiceImpl implements ParseService {
     }
 
     private Operation determineOperationType(String operationType) {
-        return switch (operationType) {
-            case "b" -> Operation.BALANCE;
-            case "s" -> Operation.SUPPLY;
-            case "p" -> Operation.PURCHASE;
-            case "r" -> Operation.RETURN;
-            default -> throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE
-                    + operationType);
-        };
+        for (Operation operation : Operation.values()) {
+            if (operation.getCode().equals(operationType)) {
+                return operation;
+            }
+        }
+        throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE
+                + operationType);
     }
 }

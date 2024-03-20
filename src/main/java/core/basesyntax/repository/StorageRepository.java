@@ -11,7 +11,7 @@ public class StorageRepository {
         return products;
     }
 
-    public void addProduct(Transaction transaction) {
+    public void add(Transaction transaction) {
         products.put(transaction.getProduct(), transaction.getValue());
     }
 }

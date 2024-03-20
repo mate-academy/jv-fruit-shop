@@ -35,24 +35,9 @@ public class OperationHandler {
     }
 
     private void initializeStrategies() {
-        strategies.put(Operation.BALANCE, createOperationStrategy(Operation.BALANCE));
-        strategies.put(Operation.SUPPLY, createOperationStrategy(Operation.SUPPLY));
-        strategies.put(Operation.PURCHASE, createOperationStrategy(Operation.PURCHASE));
-        strategies.put(Operation.RETURN, createOperationStrategy(Operation.RETURN));
-    }
-
-    private OperationStrategy createOperationStrategy(Operation operation) {
-        switch (operation) {
-            case BALANCE:
-                return new BalanceOperation(repository);
-            case PURCHASE:
-                return new PurchaseOperation(repository);
-            case SUPPLY:
-                return new SupplyOperation(repository);
-            case RETURN:
-                return new ReturnOperation(repository);
-            default:
-                throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operation);
-        }
+        strategies.put(Operation.BALANCE, new BalanceOperation(repository));
+        strategies.put(Operation.SUPPLY, new SupplyOperation(repository));
+        strategies.put(Operation.PURCHASE, new PurchaseOperation(repository));
+        strategies.put(Operation.RETURN, new ReturnOperation(repository));
     }
 }
