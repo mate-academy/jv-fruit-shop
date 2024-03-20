@@ -6,8 +6,8 @@ import core.basesyntax.services.FileWriter;
 import core.basesyntax.services.ReportGenerator;
 import core.basesyntax.services.impl.CvsFileWriter;
 import core.basesyntax.services.impl.FruitDataParser;
-import core.basesyntax.services.impl.FruitInventoryService;
 import core.basesyntax.services.impl.FruitShopReportGenerator;
+import core.basesyntax.services.impl.FruitTransactionProcessorImpl;
 import core.basesyntax.services.impl.TextFileReader;
 import core.basesyntax.services.operations.BalanceOperationHandler;
 import core.basesyntax.services.operations.FruitOperationStrategy;
@@ -18,10 +18,11 @@ import core.basesyntax.services.operations.SupplyOperationHandler;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        String path = "src/main/resources/TestCSV.csv";
-        String newFilePath = "src/main/resources/NewCSV.csv";
 
+    private static final String NEW_FILE_PATH = "src/main/resources/result.csv";
+
+    public static void main(String[] args) {
+        String path = "src/main/resources/input.csv";
         OperationHandler balance = new BalanceOperationHandler();
         OperationHandler purchase = new PurchaseOperationHandler();
         OperationHandler supply = new SupplyOperationHandler();
@@ -32,17 +33,17 @@ public class Main {
         List<String> data = fileReader.readFile(path);
 
         FruitDataParser parser = new FruitDataParser();
-        List<FruitTransactionDto> dtos = parser.parse(data);
+        List<FruitTransactionDto> fruitTransactions = parser.parse(data);
 
         FruitOperationStrategy strategy = new FruitOperationStrategy(handlers);
-        FruitInventoryService service = new FruitInventoryService(strategy);
+        FruitTransactionProcessorImpl service = new FruitTransactionProcessorImpl(strategy);
 
-        service.conductActivities(dtos);
+        service.process(fruitTransactions);
 
         ReportGenerator generator = new FruitShopReportGenerator();
         String report = generator.generateReport();
 
         FileWriter writer = new CvsFileWriter();
-        writer.write(report, newFilePath);
+        writer.write(report, NEW_FILE_PATH);
     }
 }

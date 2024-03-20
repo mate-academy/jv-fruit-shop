@@ -11,7 +11,7 @@ public class CvsFileWriter implements FileWriter {
         try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(filePath))) {
             writer.write(data);
         } catch (IOException e) {
-            throw new FileOperationException("Can't write to file ", e);
+            throw new FileOperationException("Can't write to file " + filePath, e);
         }
     }
 }

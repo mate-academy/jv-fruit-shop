@@ -1,6 +1,6 @@
 package core.basesyntax.services.operations;
 
-import static core.basesyntax.db.StorageDao.fruitStorage;
+import static core.basesyntax.db.Storage.fruitStorage;
 
 import core.basesyntax.dto.FruitTransactionDto;
 

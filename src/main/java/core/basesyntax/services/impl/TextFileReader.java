@@ -13,7 +13,7 @@ public class TextFileReader implements FileReader {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new FileOperationException("Can't read from file ", e);
+            throw new FileOperationException("Can't read from file " + filePath, e);
         }
     }
 }

@@ -12,7 +12,7 @@ public class FruitOperationStrategy {
 
     public List<OperationHandler> getHandler(FruitTransactionDto dto) {
         return handlers.stream()
-                .filter((h -> h.isApplicable(dto)))
+                .filter((operationHandler -> operationHandler.isApplicable(dto)))
                 .toList();
     }
 }
