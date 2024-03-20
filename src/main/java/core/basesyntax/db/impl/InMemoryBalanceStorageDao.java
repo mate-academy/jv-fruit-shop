@@ -1,24 +1,24 @@
 package core.basesyntax.db.impl;
 
-import core.basesyntax.db.BalanceStorage;
+import core.basesyntax.db.BalanceStorageDao;
 import core.basesyntax.dto.BalanceDto;
 import core.basesyntax.model.Product;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class InMemoryBalanceStorage implements BalanceStorage {
-    private static BalanceStorage instance;
+public class InMemoryBalanceStorageDao implements BalanceStorageDao {
+    private static BalanceStorageDao instance;
 
     private final Map<Product, Integer> storage;
 
-    private InMemoryBalanceStorage() {
+    private InMemoryBalanceStorageDao() {
         this.storage = new HashMap<>();
     }
 
-    public static BalanceStorage getInstance() {
+    public static BalanceStorageDao getInstance() {
         if (instance == null) {
-            instance = new InMemoryBalanceStorage();
+            instance = new InMemoryBalanceStorageDao();
         }
         return instance;
     }

@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.BalanceStorage;
+import core.basesyntax.db.BalanceStorageDao;
 import core.basesyntax.dto.ActivityDto;
 import core.basesyntax.exception.NegativeQuantityException;
 import core.basesyntax.model.Product;
@@ -10,10 +10,10 @@ import core.basesyntax.strategy.ActivityStrategyHandler;
 import java.util.List;
 
 public class BalanceUpdaterImpl implements BalanceUpdater {
-    private final BalanceStorage balanceStorage;
+    private final BalanceStorageDao balanceStorage;
     private final ActivityStrategyHandler activityHandler;
 
-    public BalanceUpdaterImpl(BalanceStorage balanceStorage) {
+    public BalanceUpdaterImpl(BalanceStorageDao balanceStorage) {
         this.balanceStorage = balanceStorage;
         activityHandler = new ActivityStrategyHandler();
     }

@@ -4,7 +4,7 @@ import core.basesyntax.dto.BalanceDto;
 import core.basesyntax.model.Product;
 import java.util.List;
 
-public interface BalanceStorage {
+public interface BalanceStorageDao {
     void save(Product product, int quantity);
 
     int getQuantity(Product product);

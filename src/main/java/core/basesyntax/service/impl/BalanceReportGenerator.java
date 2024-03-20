@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.BalanceStorage;
+import core.basesyntax.db.BalanceStorageDao;
 import core.basesyntax.service.ReportGenerator;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,9 @@ import java.util.List;
 public class BalanceReportGenerator implements ReportGenerator {
     private static final String REPORT_HEADER = "fruit,quantity";
 
-    private final BalanceStorage balanceStorage;
+    private final BalanceStorageDao balanceStorage;
 
-    public BalanceReportGenerator(BalanceStorage balanceStorage) {
+    public BalanceReportGenerator(BalanceStorageDao balanceStorage) {
         this.balanceStorage = balanceStorage;
     }
 
