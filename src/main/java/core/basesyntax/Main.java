@@ -26,7 +26,6 @@ public class Main {
         List<String> fileString = reader.readFile(fileOpen);
         FruitRawStringParserImpl parser = new FruitRawStringParserImpl();
         var readerService = parser.parsedFruitData(fileString);
-        System.out.println(readerService);
         var balance = new BalanceOperation();
         var supply = new SupplyOperation();
         var returns = new ReturnOperation();
