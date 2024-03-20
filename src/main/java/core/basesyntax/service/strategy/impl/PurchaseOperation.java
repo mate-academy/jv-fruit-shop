@@ -7,7 +7,11 @@ import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
 public class PurchaseOperation implements OperationHandler {
-    private StorageDaoImpl actionDB = new StorageDaoImpl();
+    private StorageDaoImpl actionDB;
+
+    public PurchaseOperation(StorageDaoImpl actionDB) {
+        this.actionDB = actionDB;
+    }
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {

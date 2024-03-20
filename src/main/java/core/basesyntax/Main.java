@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.impl.FruitFileReaderImpl;
 import core.basesyntax.service.impl.FruitFileSaverImpl;
@@ -20,6 +21,7 @@ public class Main {
     private static String fileOpen = "src/main/resources/fruitts.csv";
     //    private static String fileOpen = "src/main/resources/fruitsWithNulls.csv";
     private static String fileSave = "src/main/resources/report.csv";
+    private static StorageDaoImpl actionDB = new StorageDaoImpl();
 
     public static void main(String[] args) {
         FruitFileReader reader = new FruitFileReaderImpl();
@@ -27,10 +29,10 @@ public class Main {
         FruitRawStringParser parser = new FruitRawStringParserImpl();
         var readerService = parser.parsedFruitData(fileString);
         System.out.println(readerService);
-        var balance = new BalanceOperation();
-        var supply = new SupplyOperation();
-        var returns = new ReturnOperation();
-        var purchase = new PurchaseOperation();
+        var balance = new BalanceOperation(actionDB);
+        var supply = new SupplyOperation(actionDB);
+        var returns = new ReturnOperation(actionDB);
+        var purchase = new PurchaseOperation(actionDB);
         List<OperationHandler> handlers = List.of(balance,returns,purchase,supply);
         FruitStrategy strategy = new FruitStrategy(handlers);
         for (var dto : readerService) {
