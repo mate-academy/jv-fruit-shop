@@ -3,6 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataFileCorrupted;
 import core.basesyntax.service.interfaces.FruitRawStringParser;
+import core.basesyntax.service.interfaces.FruitStringsCheck;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class FruitRawStringParserImpl implements FruitRawStringParser {
     private static final int FIRST_CVS_LINE = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
 
-    private FruitStringsCheckImpl checkFruitsInFile = new FruitStringsCheckImpl();
+    private final FruitStringsCheck checkFruitsInFile = new FruitStringsCheckImpl();
 
     @Override
     public List<FruitTransactionDto> parsedFruitData(List<String> rawStrings) {

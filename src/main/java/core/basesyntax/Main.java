@@ -1,12 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.impl.FruitFileReaderImpl;
 import core.basesyntax.service.impl.FruitFileSaverImpl;
 import core.basesyntax.service.impl.FruitRawStringParserImpl;
 import core.basesyntax.service.impl.FruitReportCreateImpl;
 import core.basesyntax.service.interfaces.FruitFileReader;
+import core.basesyntax.service.interfaces.FruitRawStringParser;
 import core.basesyntax.service.interfaces.FruitReportCreate;
 import core.basesyntax.service.strategy.FruitStrategy;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) {
         FruitFileReader reader = new FruitFileReaderImpl();
         List<String> fileString = reader.readFile(fileOpen);
-        FruitRawStringParserImpl parser = new FruitRawStringParserImpl();
+        FruitRawStringParser parser = new FruitRawStringParserImpl();
         var readerService = parser.parsedFruitData(fileString);
         System.out.println(readerService);
         var balance = new BalanceOperation();
@@ -33,13 +33,11 @@ public class Main {
         var purchase = new PurchaseOperation();
         List<OperationHandler> handlers = List.of(balance,returns,purchase,supply);
         FruitStrategy strategy = new FruitStrategy(handlers);
-        List<FruitTransactionDto> dtos = readerService;
-        for (var dto : dtos) {
+        for (var dto : readerService) {
             strategy.getHandlers(dto).forEach(oh -> oh.apply(dto));
         }
-        System.out.println(Storage.fruitsQuantity);
-        FruitReportCreate prapaireReport = new FruitReportCreateImpl();
-        String report = prapaireReport.createReport(Storage.fruitsQuantity);
+        FruitReportCreate prapareReport = new FruitReportCreateImpl();
+        String report = prapareReport.createReport(Storage.fruitsQuantity);
         System.out.println(report);
         FruitFileSaverImpl saver = new FruitFileSaverImpl();
         saver.saveToFile(report,fileSave);

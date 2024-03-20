@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
+
     @Override
     public HashMap<String, Integer> add(FruitTransactionDto dto) {
         Storage.fruitsQuantity.put(dto.fruitName(), dto.quantity());
