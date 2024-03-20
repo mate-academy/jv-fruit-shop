@@ -1,10 +1,12 @@
-package core.basesyntax.utility;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.utility.service.ParserService;
+import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.models.Operation;
+import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitDataParserImpl implements ParserService {
+public class TransactionParser implements Parser<FruitTransaction> {
     private static final String SEPARATOR = ",";
     private static final int OPERATION_TYPE = 0;
     private static final int FRUIT_TYPE = 1;
@@ -17,8 +19,7 @@ public class FruitDataParserImpl implements ParserService {
         for (var element : data) {
             String[] separatedData = element.split(SEPARATOR);
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction.Operation
-                    .fromCode(separatedData[OPERATION_TYPE]));
+            fruitTransaction.setOperation(Operation.fromCode(separatedData[OPERATION_TYPE]));
             fruitTransaction.setFruit(separatedData[FRUIT_TYPE]);
 
             int fruitAmount = Integer.parseInt(separatedData[FRUIT_AMOUNT]);

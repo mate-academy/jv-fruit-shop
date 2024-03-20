@@ -1,12 +1,12 @@
-package core.basesyntax.service.strategy.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
 import core.basesyntax.exceptions.NotEnoughFruitsException;
-import core.basesyntax.service.strategy.ActivityService;
-import core.basesyntax.utility.FruitTransaction;
+import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
 
-public class PurchaseService implements ActivityService {
+public class PurchaseService implements OperationHandler {
     private final ProductDao productDao;
 
     public PurchaseService() {
@@ -14,7 +14,7 @@ public class PurchaseService implements ActivityService {
     }
 
     @Override
-    public int execute(FruitTransaction transaction) {
+    public int handle(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int newFruitNumber = productDao.getValue(fruitName) - transaction.getQuantity();
 

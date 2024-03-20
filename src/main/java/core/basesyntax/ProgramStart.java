@@ -1,17 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.service.strategy.ActivityService;
-import core.basesyntax.service.strategy.ActivityStrategy;
-import core.basesyntax.service.strategy.impl.BalanceService;
-import core.basesyntax.service.strategy.impl.PurchaseService;
-import core.basesyntax.service.strategy.impl.ReturnService;
-import core.basesyntax.service.strategy.impl.SupplyService;
-import core.basesyntax.utility.FileServiceImpl;
-import core.basesyntax.utility.FruitDataParserImpl;
-import core.basesyntax.utility.FruitTransaction;
-import core.basesyntax.utility.ReportServiceImpl;
-import core.basesyntax.utility.service.FileService;
-import core.basesyntax.utility.service.ReportService;
+import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.Processor;
+import core.basesyntax.service.ReportProvider;
+import core.basesyntax.service.impl.BalanceService;
+import core.basesyntax.service.impl.FileServiceImpl;
+import core.basesyntax.service.impl.PurchaseService;
+import core.basesyntax.service.impl.ReportProviderImpl;
+import core.basesyntax.service.impl.ReturnService;
+import core.basesyntax.service.impl.SupplyService;
+import core.basesyntax.service.impl.TransactionParser;
+import core.basesyntax.service.impl.TransactionProcessor;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,21 +23,18 @@ public class ProgramStart {
 
     public static void main(String[] args) {
 
-        Map<String, ActivityService> services = new HashMap<>();
+        Map<String, OperationHandler> services = new HashMap<>();
         services.put("b", new BalanceService());
         services.put("s", new SupplyService());
         services.put("r", new ReturnService());
         services.put("p", new PurchaseService());
 
         FileService fileService = new FileServiceImpl();
-        List<FruitTransaction> fruitTransactions = new FruitDataParserImpl()
+        List<FruitTransaction> fruitTransactions = new TransactionParser()
                 .parseData(fileService.readFromFile(DATA_FILE));
-
-        ActivityStrategy activityStrategy = new ActivityStrategy(services);
-        for (var element : fruitTransactions) {
-            activityStrategy.getActivityService(element.getOperation()).execute(element);
-        }
-        ReportService reportService = new ReportServiceImpl();
-        fileService.writeToFile(REPORT_FILE, reportService.createReport());
+        Processor transactionProcessor = new TransactionProcessor(fruitTransactions, services);
+        transactionProcessor.process();
+        ReportProvider reportService = new ReportProviderImpl();
+        fileService.writeToFile(REPORT_FILE, reportService.provide());
     }
 }

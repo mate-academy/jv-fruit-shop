@@ -1,11 +1,11 @@
-package core.basesyntax.service.strategy.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ProductDao;
 import core.basesyntax.dao.ProductDaoImpl;
-import core.basesyntax.service.strategy.ActivityService;
-import core.basesyntax.utility.FruitTransaction;
+import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
 
-public class ReturnService implements ActivityService {
+public class ReturnService implements OperationHandler {
     private final ProductDao productDao;
 
     public ReturnService() {
@@ -13,7 +13,7 @@ public class ReturnService implements ActivityService {
     }
 
     @Override
-    public int execute(FruitTransaction transaction) {
+    public int handle(FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int newFruitNumber = productDao.getValue(fruitName) + transaction.getQuantity();
         return productDao.add(fruitName, newFruitNumber);

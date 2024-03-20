@@ -1,7 +1,7 @@
-package core.basesyntax.utility;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.FileNotExistsException;
-import core.basesyntax.utility.service.FileService;
+import core.basesyntax.exceptions.CouldNotWriteToFile;
+import core.basesyntax.service.FileService;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
@@ -22,21 +22,16 @@ public class FileServiceImpl implements FileService {
             }
             return result;
         } catch (IOException e) {
-            throw new FileNotExistsException("File: " + fileName + " Not Found!");
+            throw new CouldNotWriteToFile("File: " + fileName + " Not Found!");
         }
     }
 
     @Override
-    public void writeToFile(String fileName, List<Pair<String, Integer>> data) {
+    public void writeToFile(String fileName, String data) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
-            StringBuilder dataToWrite = new StringBuilder("fruit,quantity");
-            for (var element : data) {
-                dataToWrite.append("\n").append(element.getKey()).append(",")
-                          .append(element.getValue());
-            }
-            bufferedWriter.write(dataToWrite.toString());
+            bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new FileNotExistsException("File: " + fileName + " Not Found!");
+            throw new CouldNotWriteToFile("Could not write to file: " + fileName);
         }
     }
 }
