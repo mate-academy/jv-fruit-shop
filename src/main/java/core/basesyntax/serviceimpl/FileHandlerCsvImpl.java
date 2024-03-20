@@ -41,6 +41,7 @@ public class FileHandlerCsvImpl implements FileHandlerCsv {
         }
         throw new InvalidDataInFile("Operation is not exist");
     }
+
     private boolean validatorFruits(String info) {
         return info == null || info.isEmpty();
     }

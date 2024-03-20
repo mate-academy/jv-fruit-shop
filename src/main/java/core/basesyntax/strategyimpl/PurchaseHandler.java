@@ -2,7 +2,6 @@ package core.basesyntax.strategyimpl;
 
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.Map;
 
 public class PurchaseHandler implements OperationHandler {
