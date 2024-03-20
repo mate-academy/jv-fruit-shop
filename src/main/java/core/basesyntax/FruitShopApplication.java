@@ -14,9 +14,12 @@ import core.basesyntax.service.impl.FileWriterImpl;
 import java.util.List;
 
 public class FruitShopApplication {
+    private static final String INPUT_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
         ActivitiesFileParser reader = new CsvActivitiesFileParser();
-        List<ActivityDto> activities = reader.readFrom("src/main/resources/input.csv");
+        List<ActivityDto> activities = reader.readFrom(INPUT_PATH);
 
         BalanceStorage balanceStorage = InMemoryBalanceStorage.getInstance();
 
@@ -26,11 +29,7 @@ public class FruitShopApplication {
         ReportGenerator reportGenerator = new BalanceReportGenerator(balanceStorage);
         List<String> report = reportGenerator.getReport();
 
-        for (var row : report) {
-            System.out.println(row);
-        }
-
         FileWriter writer = new FileWriterImpl();
-        writer.writeTo("src/main/resources/output.csv", report);
+        writer.writeTo(OUTPUT_PATH, report);
     }
 }

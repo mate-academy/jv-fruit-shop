@@ -13,6 +13,7 @@ public class CsvActivitiesFileParser implements ActivitiesFileParser {
     private static final int CODE_INDEX = 0;
     private static final int TITLE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public List<ActivityDto> readFrom(String fileName) {
@@ -27,7 +28,7 @@ public class CsvActivitiesFileParser implements ActivitiesFileParser {
     }
 
     private ActivityDto mapToDto(String line) {
-        String[] columns = line.split(",");
+        String[] columns = line.split(CSV_SEPARATOR);
         if (columns.length < 3) {
             throw new CsvParseException("Incorrect number of columns in CSV file");
         }

@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BalanceReportGenerator implements ReportGenerator {
+    private static final String REPORT_HEADER = "fruit,quantity";
+
     private final BalanceStorage balanceStorage;
 
     public BalanceReportGenerator(BalanceStorage balanceStorage) {
@@ -15,7 +17,7 @@ public class BalanceReportGenerator implements ReportGenerator {
     @Override
     public List<String> getReport() {
         List<String> report = new ArrayList<>();
-        report.add("fruit,quantity");
+        report.add(REPORT_HEADER);
         List<String> balanceRows = balanceStorage.getAll().stream()
                 .map(item -> item.product().title() + "," + item.quantity())
                 .toList();
