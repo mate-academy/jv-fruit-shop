@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.ReadFromFileException;
 import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +13,7 @@ public class CsvFileReader implements FileReader {
         try {
             return Files.readAllLines(Paths.get(filePath));
         } catch (IOException ex) {
-            throw new RuntimeException(
+            throw new ReadFromFileException(
                     String.format("Can`t read data from the file %s", filePath),
                     ex
             );

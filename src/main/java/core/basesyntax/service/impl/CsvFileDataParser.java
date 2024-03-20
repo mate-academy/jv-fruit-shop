@@ -15,10 +15,15 @@ public class CsvFileDataParser implements core.basesyntax.service.FileDataParser
         return data.stream()
                 .skip(HEADERS_LINE_NUMBER)
                 .map(line -> line.split(REGEX_COMMA_SEPARATOR))
-                .map(splitLine -> new FruitTransaction(
-                        FruitTransaction.Operation.getOperationByCode(splitLine[OPERATION_INDEX]),
-                        splitLine[FRUIT_INDEX],
-                        Integer.parseInt(splitLine[QUANTITY_INDEX])
-                )).toList();
+                .map(this::create)
+                .toList();
+    }
+
+    private FruitTransaction create(String[] data) {
+        return new FruitTransaction(
+                FruitTransaction.Operation.getOperationByCode(data[OPERATION_INDEX]),
+                data[FRUIT_INDEX],
+                Integer.parseInt(data[QUANTITY_INDEX])
+        );
     }
 }

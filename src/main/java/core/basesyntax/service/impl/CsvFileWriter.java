@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.WriteToFileException;
 import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +16,7 @@ public class CsvFileWriter implements FileWriter {
         ) {
             br.write(data);
         } catch (IOException ex) {
-            throw new RuntimeException(
+            throw new WriteToFileException(
                     String.format("Can`t write data to the file %s", filePath),
                     ex
             );

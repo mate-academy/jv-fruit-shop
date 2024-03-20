@@ -7,16 +7,19 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
+    private final OperationStrategy operationStrategy;
+
+    public TransactionProcessorImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
     public void processTransactionList(
-            List<FruitTransaction> transactionList,
-            OperationHandler operationHandler
+            List<FruitTransaction> transactionList
     ) {
         for (FruitTransaction transaction : transactionList) {
-            OperationStrategy handler = operationHandler.getStrategy(transaction.getOperation());
-            String product = transaction.getFruit();
-            int quantity = transaction.getQuantity();
-            handler.process(product, quantity);
+            OperationHandler handler = operationStrategy.getHandlerFor(transaction.operation());
+            handler.handle(transaction);
         }
     }
 }
