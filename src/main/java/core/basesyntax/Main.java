@@ -2,15 +2,15 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ParserService;
 import core.basesyntax.service.ReportBuilder;
-import core.basesyntax.service.ReportFileWriter;
 import core.basesyntax.service.TransactionManager;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriter;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionMapper;
 import core.basesyntax.service.impl.ReportBuilderImpl;
-import core.basesyntax.service.impl.StringParseService;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -31,10 +31,10 @@ public class Main {
         OperationHandler returning = new ReturningOperationHandler();
         List<OperationHandler> operationList = List.of(balance, supply, purchase, returning);
         // reader
-        CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
+        FileReaderService csvFileReaderService = new FileReaderServiceImpl();
         List<String> lineList = csvFileReaderService.readFromFile(inputInNorm);
         // parser
-        ParserService<String> parserService = new StringParseService();
+        ParserService<String> parserService = new FruitTransactionMapper();
         List<FruitTransaction> transactionsList = parserService.parse(lineList);
         // transaction manager
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationList);
@@ -44,7 +44,7 @@ public class Main {
         ReportBuilder reportBuilder = new ReportBuilderImpl();
         String report = reportBuilder.create(Storage.dataBase);
         // write to file
-        ReportFileWriter reportFileWriter = new CsvFileWriter();
+        FileWriterService reportFileWriter = new CsvFileWriter();
         reportFileWriter.write(report, outputToNorm);
 
     }

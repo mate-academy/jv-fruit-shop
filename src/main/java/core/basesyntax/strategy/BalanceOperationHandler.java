@@ -2,6 +2,7 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.Operation;
 
 public class BalanceOperationHandler implements OperationHandler {
     @Override
@@ -11,6 +12,6 @@ public class BalanceOperationHandler implements OperationHandler {
 
     @Override
     public boolean isAplicable(FruitTransaction input) {
-        return "b".equals(input.operation().getCode());
+        return Operation.BALANCE == input.operation();
     }
 }
