@@ -35,6 +35,7 @@ public class Main {
         var purchase = new PurchaseOperation(actionDB);
         List<OperationHandler> handlers = List.of(balance,returns,purchase,supply);
         FruitStrategy strategy = new FruitStrategy(handlers);
+
         for (var dto : readerService) {
             strategy.getHandlers(dto).forEach(oh -> oh.apply(dto));
         }
