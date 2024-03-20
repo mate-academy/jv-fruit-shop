@@ -1,5 +1,6 @@
 package core.basesyntax.serviceimpl;
 
+import core.basesyntax.exception.InvalidDataInFile;
 import core.basesyntax.service.FileHandlerCsv;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,13 @@ public class FileHandlerCsvImpl implements FileHandlerCsv {
                 String[] data = operation.split(",");
                 FruitTransaction fruitBalance = new FruitTransaction();
                 fruitBalance.setOperation(getOperation(data[0]));
+                if (validatorFruits(data[1])) {
+                    throw new InvalidDataInFile("Fruit is not exist");
+                }
                 fruitBalance.setFruit(data[1]);
+                if (validatorQuantity(data[2])) {
+                    throw new InvalidDataInFile("Quantity is not valid");
+                }
                 fruitBalance.setQuantity(Integer.parseInt(data[2]));
                 fruitTransactions.add(fruitBalance);
             }
@@ -32,6 +39,13 @@ public class FileHandlerCsvImpl implements FileHandlerCsv {
         } else if (operation.equals(FruitTransaction.Operation.SUPPLY.getCode())) {
             return FruitTransaction.Operation.SUPPLY;
         }
-        return null;
+        throw new InvalidDataInFile("Operation is not exist");
+    }
+    private boolean validatorFruits(String info) {
+        return info == null || info.isEmpty();
+    }
+
+    private boolean validatorQuantity(String info) {
+        return info == null || Integer.parseInt(info) < 0;
     }
 }

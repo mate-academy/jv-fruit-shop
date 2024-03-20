@@ -12,6 +12,7 @@ public class ReadInfoCsv implements ReadInfo {
     public List<String> readInfo(String fromFileName) {
         List<String> result = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFileName))) {
+            bufferedReader.readLine();
             String value = bufferedReader.readLine();
             while (value != null) {
                 result.add(value);
