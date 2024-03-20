@@ -13,7 +13,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> parseFruitTransactions(List<String> line) {
+    public List<FruitTransaction> parse(List<String> line) {
         return line.stream()
                 .map(this::buildFruitTransaction)
                 .collect(Collectors.toList());
@@ -21,8 +21,10 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     private FruitTransaction buildFruitTransaction(String line) {
         String[] splitLine = line.split(COMMA_SPLITTER);
-        return new FruitTransaction(FruitOperation
-                .getByOperationCode(splitLine[COMMAND_INDEX]),
-                splitLine[FRUIT_INDEX], Integer.parseInt(splitLine[QUANTITY_INDEX]));
+        FruitOperation operation = FruitOperation
+                .getByOperationCode(splitLine[COMMAND_INDEX]);
+        String fruit = splitLine[FRUIT_INDEX];
+        int quantity = Integer.parseInt(splitLine[QUANTITY_INDEX]);
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }

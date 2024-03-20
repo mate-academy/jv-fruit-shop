@@ -38,14 +38,14 @@ public class FruitShop {
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParserImpl();
         FruitShopService fruitShopService
                 = new FruitShopServiceImpl(new FactoryStrategy(strategyType));
-        ReportService reportService = new ReportServiceImpl();
+        ReportService reportService = new ReportServiceImpl(Storage.fruits);
         FileWriterService fileWriterService = new FileWriterServiceImpl();
 
         List<String> stringFromFile = fileReaderService.readFromFile(SOURCE_FILE_PATH);
         List<FruitTransaction> fruitTransactionList
-                = fruitTransactionParser.parseFruitTransactions(stringFromFile);
-        fruitShopService.processFruitTransactions(fruitTransactionList);
-        String report = reportService.generateReport(Storage.fruits);
+                = fruitTransactionParser.parse(stringFromFile);
+        fruitShopService.process(fruitTransactionList);
+        String report = reportService.generateReport();
         fileWriterService.writeToFile(REPORT_FILE_PATH, report);
     }
 }

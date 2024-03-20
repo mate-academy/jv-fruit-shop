@@ -14,7 +14,7 @@ public class FruitShopServiceImpl implements FruitShopService {
     }
 
     @Override
-    public void processFruitTransactions(List<FruitTransaction> fruitTransactions) {
+    public void process(List<FruitTransaction> fruitTransactions) {
         OperationHandler operationHandler;
         for (FruitTransaction transaction: fruitTransactions) {
             operationHandler = factoryStrategy.getFruitService(transaction.operation());
