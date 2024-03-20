@@ -2,7 +2,7 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.FruitsTransaction;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.serviceimpl.StorageServiceImpl;
+import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.strategy.service.OperationHandler;
 
 public class PurchaseService implements OperationHandler {

@@ -1,4 +1,4 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.InvalidFileException;
 import core.basesyntax.service.ReadFromFileService;

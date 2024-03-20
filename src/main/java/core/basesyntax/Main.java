@@ -5,12 +5,12 @@ import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.serviceimpl.DataParseServiceImpl;
-import core.basesyntax.serviceimpl.ReadFromFileServiceImpl;
-import core.basesyntax.serviceimpl.ReportServiceImpl;
-import core.basesyntax.serviceimpl.StorageServiceImpl;
-import core.basesyntax.serviceimpl.TransactionProcessorImpl;
-import core.basesyntax.serviceimpl.WriterServiceImpl;
+import core.basesyntax.service.impl.DataParseServiceImpl;
+import core.basesyntax.service.impl.ReadFromFileServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.impl.StorageServiceImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
 import java.util.List;
 
 public class Main {
