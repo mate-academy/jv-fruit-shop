@@ -16,7 +16,7 @@ import core.basesyntax.service.strategy.impl.ReturnOperation;
 import core.basesyntax.service.strategy.impl.SupplyOperation;
 import java.util.List;
 
-public class Main {
+public class HelloWorld {
     private static String fileOpen = "src/main/resources/fruitts.csv";
     //    private static String fileOpen = "src/main/resources/fruitsWithNulls.csv";
     private static String fileSave = "src/main/resources/report.csv";
