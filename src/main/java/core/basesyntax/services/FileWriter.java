@@ -1,5 +1,5 @@
 package core.basesyntax.services;
 
-public interface FruitShopFileWriter {
+public interface FileWriter {
     void write(String data, String filePath);
 }

@@ -2,13 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.services.FileReader;
-import core.basesyntax.services.FruitShopFileWriter;
+import core.basesyntax.services.FileWriter;
 import core.basesyntax.services.ReportGenerator;
-import core.basesyntax.services.impl.CvsFileReader;
-import core.basesyntax.services.impl.CvsFruitShopFileWriter;
+import core.basesyntax.services.impl.CvsFileWriter;
 import core.basesyntax.services.impl.FruitDataParser;
 import core.basesyntax.services.impl.FruitInventoryService;
 import core.basesyntax.services.impl.FruitShopReportGenerator;
+import core.basesyntax.services.impl.TextFileReader;
 import core.basesyntax.services.operations.BalanceOperationHandler;
 import core.basesyntax.services.operations.FruitOperationStrategy;
 import core.basesyntax.services.operations.OperationHandler;
@@ -28,7 +28,7 @@ public class Main {
         OperationHandler returnHandler = new ReturnOperationHandler();
         List<OperationHandler> handlers = List.of(returnHandler, supply, balance, purchase);
 
-        FileReader fileReader = new CvsFileReader();
+        FileReader fileReader = new TextFileReader();
         List<String> data = fileReader.readFile(path);
 
         FruitDataParser parser = new FruitDataParser();
@@ -42,7 +42,7 @@ public class Main {
         ReportGenerator generator = new FruitShopReportGenerator();
         String report = generator.generateReport();
 
-        FruitShopFileWriter writer = new CvsFruitShopFileWriter();
+        FileWriter writer = new CvsFileWriter();
         writer.write(report, newFilePath);
     }
 }

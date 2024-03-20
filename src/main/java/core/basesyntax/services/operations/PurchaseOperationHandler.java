@@ -2,8 +2,8 @@ package core.basesyntax.services.operations;
 
 import static core.basesyntax.db.StorageDao.fruitStorage;
 
-import core.basesyntax.FruitStorageException;
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.exceptions.FruitStorageException;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
