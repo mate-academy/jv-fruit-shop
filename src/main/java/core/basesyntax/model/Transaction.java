@@ -2,12 +2,12 @@ package core.basesyntax.model;
 
 public class Transaction {
     private Operation operation;
-    private String name;
+    private String fruitName;
     private int quantity;
 
-    public Transaction(String operationCode, String name, int quantity) {
+    public Transaction(String operationCode, String fruitName, int quantity) {
         this.operation = Operation.getByCode(operationCode);
-        this.name = name;
+        this.fruitName = fruitName;
         this.quantity = quantity;
     }
 
@@ -19,12 +19,12 @@ public class Transaction {
         this.operation = operation;
     }
 
-    public String getName() {
-        return name;
+    public String getFruitName() {
+        return fruitName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFruitName(String fruitName) {
+        this.fruitName = fruitName;
     }
 
     public int getQuantity() {

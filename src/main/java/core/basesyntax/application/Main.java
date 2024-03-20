@@ -2,13 +2,13 @@ package core.basesyntax.application;
 
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.impl.FileDataParserImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.StorageServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.Operation;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperation;
@@ -24,7 +24,7 @@ public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
 
     public static void main(String[] args) {
-        Map<String, Operation> operations = new HashMap<>();
+        Map<String, OperationHandler> operations = new HashMap<>();
         operations.put("b", new BalanceOperation());
         operations.put("s", new SupplyOperation());
         operations.put("r", new ReturnOperation());
@@ -33,7 +33,7 @@ public class Main {
         var readerService = new ReaderServiceImpl();
         List<String> data = readerService.readFromFile(INPUT_FILE_PATH);
 
-        var fileDataParser = new FileDataParserImpl();
+        var fileDataParser = new TransactionParserImpl();
         List<Transaction> transactions = fileDataParser.parse(data);
 
         var operatingStrategy = new OperationStrategyImpl(operations);

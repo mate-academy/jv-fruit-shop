@@ -1,22 +1,23 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.service.FileDataParser;
+import core.basesyntax.service.TransactionParser;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FileDataParserImpl implements FileDataParser {
+public class TransactionParserImpl implements TransactionParser {
 
     private static final String DIVIDER = ",";
     private static final int REQUIRED_LENGTH = 3;
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final int HEADER = 1;
 
     @Override
     public List<Transaction> parse(List<String> data) {
         return data.stream()
-                .skip(1)
+                .skip(HEADER)
                 .map(this::parseTransaction)
                 .collect(Collectors.toList());
     }

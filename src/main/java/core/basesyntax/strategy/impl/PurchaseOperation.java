@@ -3,9 +3,9 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.Transaction;
 import core.basesyntax.service.StorageService;
 import core.basesyntax.service.impl.StorageServiceImpl;
-import core.basesyntax.strategy.Operation;
+import core.basesyntax.strategy.OperationHandler;
 
-public class PurchaseOperation implements Operation {
+public class PurchaseOperation implements OperationHandler {
     private final StorageService storageService;
 
     public PurchaseOperation() {
@@ -13,8 +13,8 @@ public class PurchaseOperation implements Operation {
     }
 
     @Override
-    public void execute(Transaction transaction) {
-        String name = transaction.getName();
+    public void handle(Transaction transaction) {
+        String name = transaction.getFruitName();
         int purchaseQuantity = transaction.getQuantity();
         int quantity = storageService.get(name);
 
@@ -23,6 +23,6 @@ public class PurchaseOperation implements Operation {
                     + purchaseQuantity + " items when only " + quantity + " items are available.");
         }
 
-        storageService.update(name, quantity - purchaseQuantity);
+        storageService.add(name, quantity - purchaseQuantity);
     }
 }

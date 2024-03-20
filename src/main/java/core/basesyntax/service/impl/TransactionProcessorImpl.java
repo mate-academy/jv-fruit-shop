@@ -14,6 +14,9 @@ public class TransactionProcessorImpl implements TransactionProcessor {
 
     @Override
     public void executeTransactions(List<Transaction> transactions) {
-        transactions.forEach(operationStrategy::executeOperation);
+        transactions.forEach(transaction -> {
+            var handler = operationStrategy.getHandler(transaction);
+            handler.handle(transaction);
+        });
     }
 }

@@ -7,11 +7,8 @@ import java.util.Map;
 public class StorageServiceImpl implements StorageService {
     private final Storage storage = new Storage();
 
-    public StorageServiceImpl() {
-    }
-
     @Override
-    public void save(String name, Integer quantity) {
+    public void add(String name, Integer quantity) {
         storage.getProducts().put(name, quantity);
     }
 
@@ -23,10 +20,5 @@ public class StorageServiceImpl implements StorageService {
     @Override
     public Map<String, Integer> getAll() {
         return storage.getProducts();
-    }
-
-    @Override
-    public void update(String name, Integer value) {
-        storage.getProducts().put(name, value);
     }
 }

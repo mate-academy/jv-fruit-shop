@@ -1,28 +1,24 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.model.Transaction;
-import core.basesyntax.strategy.Operation;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<String, Operation> operations;
+    private final Map<String, OperationHandler> operations;
 
-    public OperationStrategyImpl(Map<String, Operation> operations) {
+    public OperationStrategyImpl(Map<String, OperationHandler> operations) {
         this.operations = operations;
     }
 
-    public void executeOperation(Transaction transaction) {
+    public OperationHandler getHandler(Transaction transaction) {
         String operationCode = transaction.getOperation().getCode();
+        var handler = operations.get(operationCode);
 
-        operations.entrySet().stream()
-                .filter(entry -> entry.getKey().equals(operationCode))
-                .map(Map.Entry::getValue)
-                .findFirst()
-                .ifPresentOrElse(
-                        operation -> operation.execute(transaction),
-                        () -> {
-                            throw new RuntimeException("Unsupported operation: " + operationCode);
-                        });
+        if (handler == null) {
+            throw new UnsupportedOperationException("Unsupported operation: " + operationCode);
+        }
+        return handler;
     }
 }
