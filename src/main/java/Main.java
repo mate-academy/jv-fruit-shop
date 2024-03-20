@@ -16,6 +16,9 @@ import service.operations.report.ReportWriter;
 import strategy.OperationStrategy;
 
 public class Main {
+    private static final String reportPath = "src/main/java/resources/report.csv";
+    private static final String inuptPath = "src/main/java/resources/input";
+
     public static void main(String[] args) {
         Storage storage = new Storage();
         BalanceOperationHandler balanceOperationHandler = new BalanceOperationHandler(storage);
@@ -30,7 +33,7 @@ public class Main {
 
         DataParser<FruitTransactionDto> fruitDataParser = new FruitDataParser();
         var readerService = new CsvFruitDataReaderService(fruitDataParser);
-        List<FruitTransactionDto> dtos = readerService.read("src/main/java/resources/input");
+        List<FruitTransactionDto> dtos = readerService.read(inuptPath);
 
         for (var dto : dtos) {
             operationStrategy.getHandlers(dto).forEach(oh -> oh.apply(dto));
@@ -38,6 +41,6 @@ public class Main {
 
         Map<Fruit, Integer> storageData = storage.getFruits();
         String reportContent = ReportGenerator.generateReportContent(storageData);
-        ReportWriter.writeReportToFile(reportContent, "src/main/java/resources/report.csv");
+        ReportWriter.writeReportToFile(reportContent, reportPath);
     }
 }
