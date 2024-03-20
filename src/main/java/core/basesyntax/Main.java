@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.service.ReadInfo;
 import core.basesyntax.serviceimpl.*;
 import core.basesyntax.storage.Storage;
-import core.basesyntax.strategyimpl.StrategyImpl;
 import java.util.List;
 
 public class Main {
