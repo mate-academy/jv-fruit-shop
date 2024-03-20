@@ -1,8 +1,8 @@
 package core.basesyntax.model;
 
-public record FruitTransaction(Operation operation, String fruit, int quantity) {
+public record FruitTransaction(FruitOperation operation, String fruit, int quantity) {
 
-    public enum Operation {
+    /*public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -26,5 +26,5 @@ public record FruitTransaction(Operation operation, String fruit, int quantity) 
             }
             throw new IllegalArgumentException("Incorrect operation code: " + code);
         }
-    }
+    }*/
 }

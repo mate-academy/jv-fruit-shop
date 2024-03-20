@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.exception.NotEnoughFruitException;
 import core.basesyntax.strategy.OperationHandler;
 
-public class Purchase implements OperationHandler {
+public class PurchaseOperation implements OperationHandler {
     @Override
     public void handleFruitOperation(String fruit, Integer quantity) {
         if (Storage.fruits.get(fruit) < quantity) {

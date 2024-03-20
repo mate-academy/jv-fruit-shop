@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.FileNotFoundException;
+import core.basesyntax.exception.FileNotExistException;
 import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,7 +22,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 }
             }
         } catch (IOException e) {
-            throw new FileNotFoundException("Can't find file" + fileNameToRead);
+            throw new FileNotExistException("Can't find file" + fileNameToRead);
         }
         return listFromFile;
     }

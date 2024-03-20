@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exception.FileNotFoundException;
+import core.basesyntax.exception.FileNotExistException;
 import core.basesyntax.service.FileWriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,7 +12,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(toFile))) {
             bufferedWriter.write(infoToWrite);
         } catch (IOException e) {
-            throw new FileNotFoundException("Can't write to file:" + toFile);
+            throw new FileNotExistException("Can't write to file:" + toFile);
         }
     }
 }
