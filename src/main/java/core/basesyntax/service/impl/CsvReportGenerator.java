@@ -19,9 +19,9 @@ public class CsvReportGenerator implements ReportGenerator {
         Map<String, Integer> storageMap = storageDao.getStorageState();
         StringBuilder stringBuilder = new StringBuilder(REPORT_FIRST_LINE + "\n");
         for (Entry<String, Integer> entry : storageMap.entrySet()) {
-            stringBuilder.append(entry.getKey()).append(COMA).append(entry.getValue());
             stringBuilder.append(System.lineSeparator());
+            stringBuilder.append(entry.getKey()).append(COMA).append(entry.getValue());
         }
-        return stringBuilder.toString().trim();
+        return stringBuilder.toString();
     }
 }
