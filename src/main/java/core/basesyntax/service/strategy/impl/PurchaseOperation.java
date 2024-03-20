@@ -5,7 +5,7 @@ import core.basesyntax.repository.StorageRepository;
 import core.basesyntax.service.strategy.OperationStrategy;
 
 public class PurchaseOperation implements OperationStrategy {
-    private static final String AMOUNT_EXCEED_MESSAGE = "Transaction value exceeds available amount";
+    private static final String AVAILABLE_AMOUNT = "Transaction value exceeds available amount";
     private StorageRepository repository;
 
     public PurchaseOperation(StorageRepository repository) {
@@ -23,7 +23,7 @@ public class PurchaseOperation implements OperationStrategy {
 
     private void validateValue(int newValue) {
         if (newValue < 0) {
-            throw new IllegalArgumentException(AMOUNT_EXCEED_MESSAGE);
+            throw new IllegalArgumentException(AVAILABLE_AMOUNT);
         }
     }
 }
