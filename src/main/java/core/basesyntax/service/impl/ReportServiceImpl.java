@@ -5,9 +5,9 @@ import core.basesyntax.service.ReportService;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String HEADER = "fruit,quantity\n";
-    private static final String SPLITERATOR = ",";
-    private StorageRepository repository;
+    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
+    private static final String DELIMITER = ",";
+    private final StorageRepository repository;
 
     public ReportServiceImpl(StorageRepository repository) {
         this.repository = repository;
@@ -18,7 +18,7 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(HEADER);
         for (Map.Entry<String, Integer> entry : repository.getProducts().entrySet()) {
-            reportBuilder.append(entry.getKey()).append(SPLITERATOR)
+            reportBuilder.append(entry.getKey()).append(DELIMITER)
                     .append(entry.getValue()).append(System.lineSeparator());
         }
         return reportBuilder.toString();

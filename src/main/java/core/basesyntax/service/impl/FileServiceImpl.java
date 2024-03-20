@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.service.FileService;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -22,8 +21,6 @@ public class FileServiceImpl implements FileService {
                 read = reader.read();
             }
             return builder.toString();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(READ_EXCEPTION_MESSAGE + filePath, e);
         } catch (IOException e) {
             throw new RuntimeException(READ_EXCEPTION_MESSAGE + filePath, e);
         }

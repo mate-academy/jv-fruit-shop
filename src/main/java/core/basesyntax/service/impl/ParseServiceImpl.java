@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 public class ParseServiceImpl implements ParseService {
     private static final String WRONG_OPERATION_MESSAGE = "Wrong operation for this store ";
-    private static final String SPLIT_TO_LINES_REGEX = "\r\n";
     private static final String CSV_SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int PRODUCT_INDEX = 1;
@@ -18,37 +17,32 @@ public class ParseServiceImpl implements ParseService {
 
     @Override
     public List<Transaction> parse(String data) {
-        List<String> rowData = Arrays.stream(data.split(SPLIT_TO_LINES_REGEX))
+        List<String> rowData = Arrays.stream(data.split(System.lineSeparator()))
                 .collect(Collectors.toCollection(ArrayList::new));
         rowData.remove(0);
         List<Transaction> transactions = new ArrayList<>();
-        createTransactions(rowData, transactions);
-        return transactions;
+        return buildTransactions(rowData, transactions);
     }
 
-    private void createTransactions(List<String> parsedData, List<Transaction> transactions) {
+    private List<Transaction> buildTransactions(List<String> parsedData, List<Transaction> transactions) {
         for (String line : parsedData) {
             String[] split = line.trim().split(CSV_SEPARATOR);
             Transaction transaction = new Transaction();
-            transaction.setOperation(parseOperation(split[OPERATION_INDEX]));
+            transaction.setOperation(determineOperationType(split[OPERATION_INDEX]));
             transaction.setProduct(split[PRODUCT_INDEX]);
             transaction.setValue(Integer.parseInt(split[AMOUNT_INDEX]));
             transactions.add(transaction);
         }
+        return transactions;
     }
 
-    private Operation parseOperation(String operationType) {
-        switch (operationType) {
-            case "b":
-                return Operation.BALANCE;
-            case "s":
-                return Operation.SUPPLY;
-            case "p":
-                return Operation.PURCHASE;
-            case "r":
-                return Operation.RETURN;
-            default:
-                throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operationType);
-        }
+    private Operation determineOperationType(String operationType) {
+        return switch (operationType) {
+            case "b" -> Operation.BALANCE;
+            case "s" -> Operation.SUPPLY;
+            case "p" -> Operation.PURCHASE;
+            case "r" -> Operation.RETURN;
+            default -> throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operationType);
+        };
     }
 }

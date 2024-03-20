@@ -8,7 +8,7 @@ import core.basesyntax.service.ReportService;
 import core.basesyntax.service.impl.FileServiceImpl;
 import core.basesyntax.service.impl.ParseServiceImpl;
 import core.basesyntax.service.impl.ReportServiceImpl;
-import core.basesyntax.service.strategy.OperationContext;
+import core.basesyntax.service.strategy.OperationHandler;
 import java.util.List;
 
 public class Main {
@@ -20,11 +20,11 @@ public class Main {
         FileService fileService = new FileServiceImpl();
         ParseService parseService = new ParseServiceImpl();
         ReportService reportService = new ReportServiceImpl(repository);
-        OperationContext operationContext = new OperationContext(repository);
+        OperationHandler operationHandler = new OperationHandler(repository);
 
         String lines = fileService.readFromFile(READ_FROM);
         List<Transaction> transactions = parseService.parse(lines);
-        operationContext.executeStrategy(transactions);
+        operationHandler.executeStrategy(transactions);
         String report = reportService.generateReport();
         fileService.writeToFile(WRITE_TO, report);
     }

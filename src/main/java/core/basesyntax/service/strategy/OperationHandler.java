@@ -11,12 +11,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OperationContext {
+public class OperationHandler {
     private static final String WRONG_OPERATION_MESSAGE = "Wrong operation for this store ";
     private final Map<Operation, OperationStrategy> strategies;
     private final StorageRepository repository;
 
-    public OperationContext(StorageRepository repository) {
+    public OperationHandler(StorageRepository repository) {
         this.repository = repository;
         this.strategies = new HashMap<>();
         initializeStrategies();
