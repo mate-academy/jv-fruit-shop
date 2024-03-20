@@ -59,7 +59,7 @@ the most suitable for your needs.
     ```java
     public class ReaderServiceImpl implements ReaderService {
        public List<String> readFromFile() {
-          File file = new File("src/main/resources/file.txt");
+          File file = new File("src/main/resources/file.csv");
           ...
        }
     }
