@@ -1,13 +1,12 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
+import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.impl.FruitFileReaderImpl;
 import core.basesyntax.service.impl.FruitFileSaverImpl;
 import core.basesyntax.service.impl.FruitRawStringParserImpl;
 import core.basesyntax.service.impl.FruitReportCreateImpl;
 import core.basesyntax.service.interfaces.FruitFileReader;
-import core.basesyntax.service.interfaces.FruitRawStringParser;
 import core.basesyntax.service.interfaces.FruitReportCreate;
 import core.basesyntax.service.strategy.FruitStrategy;
 import core.basesyntax.service.strategy.OperationHandler;
