@@ -24,7 +24,8 @@ public class ParseServiceImpl implements ParseService {
         return buildTransactions(rowData, transactions);
     }
 
-    private List<Transaction> buildTransactions(List<String> parsedData, List<Transaction> transactions) {
+    private List<Transaction> buildTransactions(List<String> parsedData,
+                                                List<Transaction> transactions) {
         for (String line : parsedData) {
             String[] split = line.trim().split(CSV_SEPARATOR);
             Transaction transaction = new Transaction();
@@ -42,7 +43,8 @@ public class ParseServiceImpl implements ParseService {
             case "s" -> Operation.SUPPLY;
             case "p" -> Operation.PURCHASE;
             case "r" -> Operation.RETURN;
-            default -> throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE + operationType);
+            default -> throw new UnsupportedOperationException(WRONG_OPERATION_MESSAGE
+                    + operationType);
         };
     }
 }
