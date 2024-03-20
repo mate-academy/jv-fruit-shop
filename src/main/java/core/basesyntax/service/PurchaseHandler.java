@@ -19,7 +19,6 @@ public class PurchaseHandler implements OperationHandler {
         if (currentQuantity == null || currentQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruit + " in the store");
         }
-
-        fruitStore.put(fruit, currentQuantity - quantity);
+        fruitStore.merge(fruit, quantity, (oldQuantity, newQuantity) -> oldQuantity - newQuantity);
     }
 }

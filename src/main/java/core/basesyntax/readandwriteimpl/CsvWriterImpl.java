@@ -6,7 +6,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 public class CsvWriterImpl implements CsvWriter {
-    @Override
+    @Override // записуємо файл
     public void writeLinesToFile(List<String> report, String filePath) {
         try (PrintWriter writer = new PrintWriter(filePath)) {
             for (String line : report) {

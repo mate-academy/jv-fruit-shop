@@ -10,6 +10,7 @@ import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.PurchaseHandler;
 import core.basesyntax.serviseimpl.DataProcessorImpl;
 import core.basesyntax.serviseimpl.ReportGeneratorImpl;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,9 +38,9 @@ public class HelloWorld {
 
         ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl(fruitStore);
 
-        List<String> report = reportGenerator.generateReport();
+        String report = reportGenerator.generateReport();
 
         CsvWriterImpl csvWriter = new CsvWriterImpl();
-        csvWriter.writeLinesToFile(report, OUTPUT_FILE_PATH);
+        csvWriter.writeLinesToFile(Arrays.asList(report.split("\n")), OUTPUT_FILE_PATH);
     }
 }

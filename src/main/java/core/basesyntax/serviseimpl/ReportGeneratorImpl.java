@@ -1,8 +1,6 @@
 package core.basesyntax.serviseimpl;
 
 import core.basesyntax.service.ReportGenerator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -14,12 +12,12 @@ public class ReportGeneratorImpl implements ReportGenerator {
     }
 
     @Override
-    public List<String> generateReport() {
-        List<String> report = new ArrayList<>();
-        report.add(HEADER);
+    public String generateReport() {
+        StringBuilder report = new StringBuilder();
+        report.append(HEADER).append("\n");
         for (Map.Entry<String, Integer> entry : fruitStore.entrySet()) {
-            report.add(entry.getKey() + "," + entry.getValue());
+            report.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
         }
-        return report;
+        return report.toString();
     }
 }
