@@ -15,10 +15,4 @@ public class ReportGenerate {
         }
         return builder.toString();
     }
-    // append(SUPPLY).append(COMMA).append(totalSupply)
-    //                .append(System.lineSeparator())
-    //                .append(BUY).append(COMMA).append(totalBuy)
-    //                .append(System.lineSeparator())
-    //                .append(RESULT).append(COMMA)
-    //                .append(totalSupply - totalBuy);
 }

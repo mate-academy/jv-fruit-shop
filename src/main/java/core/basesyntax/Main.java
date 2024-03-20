@@ -17,10 +17,11 @@ public class Main {
         ReportGenerate reportGenerate = new ReportGenerate();
         ReportWriter reportWriter = new ReportWriter();
         CalculateValues calculateValues = new CalculateValues();
-        List<String> strings = readInfo.readInfo("example.csv");
+        List<String> strings = readInfo.readInfo("src/main/resources/example.csv");
         List<FruitTransaction> parsed = csvFileHandler.parse(strings);
         calculateValues.getFruitsAndValues(parsed);
-        reportWriter.writeReportInFile("report.csv",reportGenerate.generateReport(Storage.fruits));
+        reportWriter.writeReportInFile("src/main/resources/report.csv",
+                reportGenerate.generateReport(Storage.fruits));
     }
 }
 

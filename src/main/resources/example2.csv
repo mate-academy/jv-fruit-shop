@@ -1,0 +1,11 @@
+type,fruit,quantity
+b , banana, 204 - white spaces
+b,,24 - name null
+,kiwi, 1 - operation null
+r,kiwi, -quantiity null
+p,banana,1s3 - quantity with letter
+r,apple,10
+p,tomato,20 - purchase fruit that does not exist
+w,banana,5 - wtf operation (a little joke)
+s,banana,50
+p,banana,500000000 - negative balance in report
