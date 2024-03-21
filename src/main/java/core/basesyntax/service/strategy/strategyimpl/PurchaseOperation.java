@@ -3,7 +3,6 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.exception.DataFileCorrupted;
 import core.basesyntax.exception.WrongOperationException;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
@@ -24,7 +23,8 @@ public class PurchaseOperation implements OperationHandler {
                     oldFrutitValue.get(dto.fruitName()) - dto.quantity());
             return storageDao.change(newFruitValue);
         } catch (NullPointerException e) {
-            throw new WrongOperationException("Trying to purchase fruits that we dont have in Storage"
+            throw new WrongOperationException("Trying to purchase fruits that we "
+                    + "dont have in Storage"
                     + " this means there wasnt any supply or balance operations"
                     + "in the incoming file");
         }
