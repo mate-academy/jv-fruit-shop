@@ -26,7 +26,8 @@ public class FileHandlerCsvImpl implements FileHandlerCsv {
                 fruitBalance.setFruit(data[FRUIT_INDEX]);
                 try {
                     if (validatorQuantity(data[QUANTITY_INDEX])) {
-                        throw new InvalidDataInFile("Quantity is not valid: " + data[QUANTITY_INDEX]);
+                        throw new InvalidDataInFile("Quantity is not valid: "
+                                + data[QUANTITY_INDEX]);
                     }
                 } catch (ArrayIndexOutOfBoundsException e) {
                     throw new InvalidDataInFile("Quantity is not exist");
