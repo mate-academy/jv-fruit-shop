@@ -3,6 +3,7 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.exception.NegativeBalanceException;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
@@ -15,15 +16,11 @@ public class SupplyOperation implements OperationHandler {
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
-        try {
-            HashMap<String, Integer> oldFrutitValue = storageDao.get(dto);
-            FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
-                    dto.fruitName(),
-                    oldFrutitValue.get(dto.fruitName()) + dto.quantity());
-            return storageDao.change(newFruitValue);
-        } catch (NullPointerException e) {
-            return storageDao.add(dto);
-        }
+        HashMap<String, Integer> FruitValue = storageDao.get(dto.fruitName());
+        int quantityReturn;
+        quantityReturn = (FruitValue == null) ? (dto.quantity())
+                : (FruitValue.get(dto.fruitName()) + dto.quantity());
+        return storageDao.add(dto.fruitName(), quantityReturn);
     }
 
     @Override

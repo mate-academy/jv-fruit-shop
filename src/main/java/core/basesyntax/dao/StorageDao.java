@@ -4,9 +4,7 @@ import core.basesyntax.dto.FruitTransactionDto;
 import java.util.HashMap;
 
 public interface StorageDao {
-    HashMap<String, Integer> add(FruitTransactionDto dto);
+    HashMap<String, Integer> add(String fruitName, Integer quantity);
 
-    HashMap<String, Integer> get(FruitTransactionDto dto);
-
-    HashMap<String, Integer> change(FruitTransactionDto dto);
+    HashMap<String, Integer> get(String fruitName);
 }

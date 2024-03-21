@@ -16,20 +16,19 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
-        try {
-            HashMap<String,Integer> oldFrutitValue = storageDao.get(dto);
-            FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
-                    dto.fruitName(),
-                    oldFrutitValue.get(dto.fruitName()) - dto.quantity());
-            return storageDao.change(newFruitValue);
-        } catch (NullPointerException e) {
-            throw new WrongOperationException("Trying to purchase fruits that we "
-                    + "dont have in Storage"
-                    + " this means there wasnt any supply or balance operations"
-                    + "in the incoming file");
-        }
-
+            HashMap<String, Integer> FruitValue = storageDao.get(dto.fruitName());
+            if (FruitValue == null) {
+                throw new WrongOperationException("Trying to purchase fruits that we "
+                        + "dont have in Storage"
+                        + " this means there wasnt any supply or balance operations"
+                        + "in the incoming file");
+            }
+            int newQuantity = FruitValue.get(dto.fruitName()) - dto.quantity();
+            storageDao.add(dto.fruitName(), newQuantity);
+            return storageDao.add(dto.fruitName(), newQuantity);
     }
+
+
 
     @Override
     public boolean isApplicable(FruitTransactionDto dto) {

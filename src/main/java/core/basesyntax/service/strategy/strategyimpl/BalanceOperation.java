@@ -15,7 +15,7 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
-        return storageDao.add(dto);
+        return storageDao.add(dto.fruitName(), dto.quantity());
     }
 
     @Override
