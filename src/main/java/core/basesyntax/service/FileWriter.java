@@ -4,5 +4,5 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface FileWriter {
-    void saveDataToFile(Path path, List<String> data);
+    void writeToFile(Path path, List<String> data);
 }

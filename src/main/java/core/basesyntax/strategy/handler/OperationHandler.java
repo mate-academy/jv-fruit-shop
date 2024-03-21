@@ -1,7 +1,7 @@
 package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.ProductStorage;
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.ProductTransaction;
 
 public abstract class OperationHandler {
     protected final ProductStorage productStorage;
@@ -10,5 +10,5 @@ public abstract class OperationHandler {
         this.productStorage = productStorage;
     }
 
-    public abstract void handle(Transaction transaction);
+    public abstract void handle(ProductTransaction productTransaction);
 }

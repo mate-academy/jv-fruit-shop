@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.ProductTransaction;
 import java.util.List;
 
 public interface TransactionParser {
-    List<Transaction> parseTransactions(List<String> data);
+    List<ProductTransaction> parseTransactions(List<String> data);
 }

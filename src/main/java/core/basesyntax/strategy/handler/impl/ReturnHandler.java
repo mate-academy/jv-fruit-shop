@@ -1,8 +1,8 @@
 package core.basesyntax.strategy.handler.impl;
 
 import core.basesyntax.db.ProductStorage;
-import core.basesyntax.dto.Transaction;
-import core.basesyntax.exception.ReturnException;
+import core.basesyntax.dto.ProductTransaction;
+import core.basesyntax.exception.ReturnOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 
 public class ReturnHandler extends OperationHandler {
@@ -11,15 +11,15 @@ public class ReturnHandler extends OperationHandler {
     }
 
     @Override
-    public void handle(Transaction transaction) {
-        String product = transaction.product();
-        int quantity = transaction.quantity();
+    public void handle(ProductTransaction productTransaction) {
+        String product = productTransaction.product();
+        int quantity = productTransaction.quantity();
         Integer currentBalance = productStorage.getStorage().get(product);
         if (!productStorage.getStorage().containsKey(product)) {
-            throw new ReturnException("Can`t return absent product" + product);
+            throw new ReturnOperationException("Can`t return absent product" + product);
         }
         if (currentBalance < quantity) {
-            throw new ReturnException(
+            throw new ReturnOperationException(
                     "Cannot return more product: " + product
                             + " than were bought!" + System.lineSeparator()
                             + "Quantity to return: " + quantity + System.lineSeparator()

@@ -7,9 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CvsWriter implements FileWriter {
+public class CsvWriter implements FileWriter {
     @Override
-    public void saveDataToFile(Path writePath, List<String> data) {
+    public void writeToFile(Path writePath, List<String> data) {
         try {
             Files.write(writePath, data);
         } catch (IOException e) {

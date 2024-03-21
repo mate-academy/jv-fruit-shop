@@ -7,14 +7,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class CvsReader implements FileReader {
+public class CsvReader implements FileReader {
     @Override
-    public List<String> loadDataFromFile(Path readPath) {
+    public List<String> readFromFile(Path readPath) {
         try {
-            List<String> lines = Files.readAllLines(readPath);
-            return lines;
+            return Files.readAllLines(readPath);
         } catch (IOException e) {
-            throw new CsvFileException("Cant read from cvs file " + readPath, e);
+            throw new CsvFileException("Can't read from csv file " + readPath, e);
         }
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dto.Transaction;
+import core.basesyntax.dto.Operation;
+import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -9,18 +10,18 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-    private final Map<Transaction.Operation, OperationHandler> operationHandlers;
+    private final Map<Operation, OperationHandler> operationHandlers;
 
     public TransactionProcessorImpl(
-            Map<Transaction.Operation, OperationHandler> operationHandlers) {
+            Map<Operation, OperationHandler> operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 
     @Override
-    public void process(List<Transaction> transactions) {
+    public void process(List<ProductTransaction> productTransactions) {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         OperationHandler operationHandler;
-        for (var transaction : transactions) {
+        for (var transaction : productTransactions) {
             operationHandler = operationStrategy.findHandler(transaction.operation());
             operationHandler.handle(transaction);
         }

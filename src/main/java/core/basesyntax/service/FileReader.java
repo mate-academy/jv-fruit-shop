@@ -4,5 +4,5 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface FileReader {
-    List<String> loadDataFromFile(Path path);
+    List<String> readFromFile(Path path);
 }
