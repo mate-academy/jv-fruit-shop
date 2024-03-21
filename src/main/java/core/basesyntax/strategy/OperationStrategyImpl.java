@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public List<OperationHandler> getHandlers(FruitTransaction transaction) {
         return handlers.stream()
-                .filter(h -> h.isAplicable(transaction))
+                .filter(handler -> handler.isAplicable(transaction))
                 .toList();
     }
 }

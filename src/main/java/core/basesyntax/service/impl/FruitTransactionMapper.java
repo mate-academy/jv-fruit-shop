@@ -10,7 +10,7 @@ public class FruitTransactionMapper implements ParserService<String> {
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String DIVIDER = ",";
+    private static final String DELIMITER = ",";
     private final List<FruitTransaction> result = new ArrayList<>();
 
     @Override
@@ -18,7 +18,7 @@ public class FruitTransactionMapper implements ParserService<String> {
         FruitTransaction fruitTransaction;
         for (int i = 1; i < linesFromFile.size(); i++) {
             String line = linesFromFile.get(i);
-            String[] splitLine = line.trim().split(DIVIDER);
+            String[] splitLine = line.trim().split(DELIMITER);
             fruitTransaction = new FruitTransaction(
                     Operation.findByCode(splitLine[OPERATION_INDEX]),
                     splitLine[NAME_INDEX],

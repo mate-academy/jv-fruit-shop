@@ -21,9 +21,10 @@ import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
 
 public class Main {
+    public static final String VALID_FILE_PATH_READ = "src/main/resources/input.csv";
+    public static final String VALID_FILE_PATH_WRITE = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
-        String inputInNorm = "src/main/resources/input.csv";
-        String outputToNorm = "src/main/resources/output.csv";
         // operation handlers
         OperationHandler balance = new BalanceOperationHandler();
         OperationHandler supply = new SupplyOperationHandler();
@@ -32,7 +33,7 @@ public class Main {
         List<OperationHandler> operationList = List.of(balance, supply, purchase, returning);
         // reader
         FileReaderService csvFileReaderService = new FileReaderServiceImpl();
-        List<String> lineList = csvFileReaderService.readFromFile(inputInNorm);
+        List<String> lineList = csvFileReaderService.readFromFile(VALID_FILE_PATH_READ);
         // parser
         ParserService<String> parserService = new FruitTransactionMapper();
         List<FruitTransaction> transactionsList = parserService.parse(lineList);
@@ -42,10 +43,9 @@ public class Main {
         transactionManager.process(transactionsList);
         // create report
         ReportBuilder reportBuilder = new ReportBuilderImpl();
-        String report = reportBuilder.create(Storage.dataBase);
+        String report = reportBuilder.build(Storage.dataBase);
         // write to file
         FileWriterService reportFileWriter = new CsvFileWriter();
-        reportFileWriter.write(report, outputToNorm);
-
+        reportFileWriter.write(report, VALID_FILE_PATH_WRITE);
     }
 }

@@ -18,6 +18,6 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new UnsupportedOperationException(" Wrong operation code from line: " + code);
+        throw new UnsupportedOperationException("Wrong operation code: " + code);
     }
 }

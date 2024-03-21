@@ -20,7 +20,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 value = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file: " + processFile, e);
+            throw new RuntimeException("Can't read data from file: " + filePath, e);
         }
         return responseList;
     }
