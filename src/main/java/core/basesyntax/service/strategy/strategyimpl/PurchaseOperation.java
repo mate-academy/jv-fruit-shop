@@ -26,7 +26,6 @@ public class PurchaseOperation implements OperationHandler {
                     + "in the incoming file");
         }
         int newQuantity = fruitValue.get(dto.fruitName()) - dto.quantity();
-        storageDao.add(dto.fruitName(), newQuantity);
         return storageDao.add(dto.fruitName(), newQuantity);
     }
 
