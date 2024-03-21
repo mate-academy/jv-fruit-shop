@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.interfaces.FruitFileReader;
@@ -23,8 +22,6 @@ public class Main {
     private static final String SAVE_TO_FILE = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-
-
 
         FruitFileReader reader = new FruitFileReaderImpl();
         List<String> fileString = reader.readFile(OPEN_FROM_FILE);
@@ -51,7 +48,4 @@ public class Main {
         saver.saveToFile(report, SAVE_TO_FILE);
         System.out.println("Data succesfully saved fo file" + SAVE_TO_FILE);
     }
-
-
-
 }

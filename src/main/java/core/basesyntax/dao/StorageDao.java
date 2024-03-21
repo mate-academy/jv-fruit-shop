@@ -1,6 +1,5 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.dto.FruitTransactionDto;
 import java.util.HashMap;
 
 public interface StorageDao {
