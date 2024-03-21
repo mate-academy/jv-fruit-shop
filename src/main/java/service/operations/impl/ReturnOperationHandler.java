@@ -19,9 +19,4 @@ public class ReturnOperationHandler implements OperationHandler {
         int currentQuantity = storage.getFruits().getOrDefault(new Fruit(fruitName), 0);
         storage.addFruit(new Fruit(fruitName), currentQuantity + returnedQuantity);
     }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "r".equalsIgnoreCase(dto.operation());
-    }
 }

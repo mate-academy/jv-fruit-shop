@@ -17,11 +17,12 @@ public class PurchaseOperationHandler implements OperationHandler {
         String fruitName = dto.fruitName();
         int quantity = dto.quantity();
         int currentQuantity = storage.getFruits().getOrDefault(new Fruit(fruitName), 0);
-        storage.addFruit(new Fruit(fruitName), currentQuantity - quantity);
-    }
+        int newQuantity = currentQuantity - quantity;
 
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "p".equalsIgnoreCase(dto.operation());
+        if (newQuantity < 0) {
+            throw new RuntimeException("Negative balance after purchase: " + fruitName);
+        }
+
+        storage.addFruit(new Fruit(fruitName), newQuantity);
     }
 }

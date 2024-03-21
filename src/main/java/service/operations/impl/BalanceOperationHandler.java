@@ -18,9 +18,4 @@ public class BalanceOperationHandler implements OperationHandler {
         int quantity = dto.quantity();
         storage.addFruit(new Fruit(fruitName), quantity);
     }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "b".equalsIgnoreCase(dto.operation());
-    }
 }

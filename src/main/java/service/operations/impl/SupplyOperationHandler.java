@@ -19,9 +19,4 @@ public class SupplyOperationHandler implements OperationHandler {
         int currentQuantity = storage.getFruits().getOrDefault(new Fruit(fruitName), 0);
         storage.addFruit(new Fruit(fruitName), currentQuantity + suppliedQuantity);
     }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "s".equalsIgnoreCase(dto.operation());
-    }
 }
