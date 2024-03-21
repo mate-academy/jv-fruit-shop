@@ -1,17 +1,16 @@
 package core.basesyntax.serviceimpl;
 
-import core.basesyntax.service.ReadInfo;
+import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadInfoCsv implements ReadInfo {
+public class FileReaderCsv implements FileReader {
     @Override
-    public List<String> readInfo(String fromFileName) {
+    public List<String> read(String filePath) {
         List<String> result = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fromFileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(filePath))) {
             bufferedReader.readLine();
             String value = bufferedReader.readLine();
             while (value != null) {
@@ -19,7 +18,7 @@ public class ReadInfoCsv implements ReadInfo {
                 value = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file " + fromFileName, e);
+            throw new RuntimeException("Can't read file " + filePath, e);
         }
         return result;
     }

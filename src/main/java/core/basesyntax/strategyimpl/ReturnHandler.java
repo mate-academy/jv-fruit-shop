@@ -6,12 +6,8 @@ import java.util.Map;
 
 public class ReturnHandler implements OperationHandler {
     @Override
-    public Map<String, Integer> calculateValue(String fruit, int quantity) {
-        if (Storage.fruits.containsKey(fruit)) {
-            Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
-            return Storage.fruits;
-        }
-        Storage.fruits.put(fruit, quantity);
+    public Map<String, Integer> handle(String fruit, int quantity) {
+        Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
         return Storage.fruits;
     }
 }

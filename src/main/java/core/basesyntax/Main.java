@@ -1,27 +1,31 @@
 package core.basesyntax;
 
-import core.basesyntax.service.ReadInfo;
-import core.basesyntax.serviceimpl.CalculateValues;
-import core.basesyntax.serviceimpl.FileHandlerCsvImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.serviceimpl.ExecuteOperations;
+import core.basesyntax.serviceimpl.FileReaderCsv;
 import core.basesyntax.serviceimpl.FruitTransaction;
-import core.basesyntax.serviceimpl.ReadInfoCsv;
-import core.basesyntax.serviceimpl.ReportGenerate;
-import core.basesyntax.serviceimpl.ReportWriter;
+import core.basesyntax.serviceimpl.FruitTransactionParserImpl;
+import core.basesyntax.serviceimpl.ReportGenerator;
+import core.basesyntax.serviceimpl.Writer;
 import core.basesyntax.storage.Storage;
 import java.util.List;
 
 public class Main {
+    private static final String FILE_PATH_EXAMPLE = "src/main/resources/example.csv";
+    private static final String FILE_PATH_REPORT = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
-        ReadInfo readInfo = new ReadInfoCsv();
-        FileHandlerCsvImpl csvFileHandler = new FileHandlerCsvImpl();
-        ReportGenerate reportGenerate = new ReportGenerate();
-        ReportWriter reportWriter = new ReportWriter();
-        CalculateValues calculateValues = new CalculateValues();
-        List<String> strings = readInfo.readInfo("src/main/resources/example2.csv");
+        FileReader fileReader = new FileReaderCsv();
+        FruitTransactionParserImpl csvFileHandler = new FruitTransactionParserImpl();
+        ReportGenerator reportGenerator = new ReportGenerator();
+        Writer writer = new Writer();
+        ExecuteOperations executeOperations = new ExecuteOperations();
+
+        List<String> strings = fileReader.read(FILE_PATH_EXAMPLE);
         List<FruitTransaction> parsed = csvFileHandler.parse(strings);
-        calculateValues.getFruitsAndValues(parsed);
-        reportWriter.writeReportInFile("src/main/resources/report.csv",
-                reportGenerate.generateReport(Storage.fruits));
+
+        executeOperations.separateFruitsAndValues(parsed);
+        writer.writeInFile(FILE_PATH_REPORT,
+                reportGenerator.generateReport(Storage.fruits));
     }
 }
-

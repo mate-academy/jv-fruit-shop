@@ -7,13 +7,8 @@ import java.util.Map;
 public class SupplyHandler implements OperationHandler {
 
     @Override
-    public Map<String, Integer> calculateValue(String fruit, int quantity) {
-        if (Storage.fruits.containsKey(fruit)) {
-            Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
-            return Storage.fruits;
-        } else {
-            Storage.fruits.put(fruit, quantity);
-            return Storage.fruits;
-        }
+    public Map<String, Integer> handle(String fruit, int quantity) {
+        Storage.fruits.put(fruit, Storage.fruits.get(fruit) + quantity);
+        return Storage.fruits;
     }
 }
