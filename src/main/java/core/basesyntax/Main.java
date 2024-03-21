@@ -23,6 +23,8 @@ public class Main {
     private static final String OPEN_FROM_FILE = "src/main/resources/fruitts.csv";
     private static final String SAVE_TO_FILE = "src/main/resources/report.csv";
 
+    private static StorageDaoImpl storageDao = new StorageDaoImpl();
+
     public static void main(String[] args) {
         List<String> fileString = readFile(OPEN_FROM_FILE);
         var readerService = parse(fileString);
@@ -48,7 +50,6 @@ public class Main {
     }
 
     private static FruitStrategy initializeStrategy() {
-        StorageDaoImpl storageDao = new StorageDaoImpl();
         var balance = new BalanceOperation(storageDao);
         var supply = new SupplyOperation(storageDao);
         var returns = new ReturnOperation(storageDao);
@@ -58,8 +59,8 @@ public class Main {
     }
 
     private static String prepareReport() {
-        FruitReportCreate reportCreator = new FruitReportCreateImpl();
-        return reportCreator.createReport(Storage.fruitsQuantity);
+        FruitReportCreate reportCreator = new FruitReportCreateImpl(storageDao);
+        return reportCreator.createReport();
     }
 
     private static void writeDataToFile(String data) {
