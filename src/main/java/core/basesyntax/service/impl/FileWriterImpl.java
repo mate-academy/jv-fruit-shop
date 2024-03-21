@@ -14,9 +14,10 @@ public class FileWriterImpl implements FileWriterService {
     public boolean write(List<String> processedData, String fileName) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
             fileWriter.write(HEADER);
+            fileWriter.write(LINE_SEPARATOR);
             for (String data : processedData) {
-                fileWriter.write(LINE_SEPARATOR);
                 fileWriter.write(data);
+                fileWriter.write(LINE_SEPARATOR);
             }
         } catch (IOException e) {
             throw new CantWriteToFileException("Can't write data to file:" + processedData);

@@ -13,9 +13,9 @@ public class PurchaseOperation implements OperationHandler {
         Integer neededQuantity = fruitTransactionDto.quantity();
 
         if (neededQuantity > quantity) {
-            throw new InvalidQuantityException("Not enough " + fruit + "s" + " in storage, "
-                    + "(now " + quantity + ", required - " + neededQuantity
-                    + ") - can't do this operation");
+            throw new InvalidQuantityException(String.format("Not enough %ss in storage, "
+                            + "(now %d, required - %d) - can't do this operation",
+                    fruit, quantity, neededQuantity));
         }
         Storage.fruitStorage.put(fruit, quantity - neededQuantity);
     }

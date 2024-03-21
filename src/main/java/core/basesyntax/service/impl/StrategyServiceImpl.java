@@ -1,31 +1,38 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.exception.InvalidOperationException;
 import core.basesyntax.service.DataValidator;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.StrategyService;
-import core.basesyntax.service.impl.strategy.BalanceOperation;
-import core.basesyntax.service.impl.strategy.PurchaseOperation;
-import core.basesyntax.service.impl.strategy.ReturnOperation;
-import core.basesyntax.service.impl.strategy.SupplyOperation;
 import java.util.List;
+import java.util.Map;
 
-public class StrategyServiceImpl implements StrategyService {
+public class StrategyServiceImpl implements StrategyService, OperationStrategy {
     private static final DataValidator DATA_VALIDATOR = new DataValidatorImpl();
-    private static final BalanceOperation BALANCE_OPERATION = new BalanceOperation();
-    private static final PurchaseOperation PURCHASE_OPERATION = new PurchaseOperation();
-    private static final ReturnOperation RETURN_OPERATION = new ReturnOperation();
-    private static final SupplyOperation SUPPLY_OPERATION = new SupplyOperation();
+    private final Map<String, OperationHandler> operations;
+
+    public StrategyServiceImpl(Map<String, OperationHandler> operations) {
+        this.operations = operations;
+    }
 
     @Override
-    public void processData(List<FruitTransactionDto> fruitTransactionDtoList) {
+    public void processData(List<FruitTransactionDto> fruitTransactionDtoList,
+                            Map<String, OperationHandler> operationTypeList) {
         for (FruitTransactionDto fruitTransactionDto : fruitTransactionDtoList) {
             DATA_VALIDATOR.validate(fruitTransactionDto);
-            switch (fruitTransactionDto.operation()) {
-                case "b" -> BALANCE_OPERATION.handle(fruitTransactionDto);
-                case "p" -> PURCHASE_OPERATION.handle(fruitTransactionDto);
-                case "r" -> RETURN_OPERATION.handle(fruitTransactionDto);
-                default -> SUPPLY_OPERATION.handle(fruitTransactionDto);
-            }
+            getHandlers(fruitTransactionDto).handle(fruitTransactionDto);
         }
+    }
+
+    @Override
+    public OperationHandler getHandlers(FruitTransactionDto fruitTransactionDto) {
+        String code = fruitTransactionDto.operation();
+        var handler = operations.get(code);
+        if (handler == null) {
+            throw new InvalidOperationException("Invalid operation: " + code);
+        }
+        return operations.get(code);
     }
 }
