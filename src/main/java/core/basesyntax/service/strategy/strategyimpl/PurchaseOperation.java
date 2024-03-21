@@ -43,9 +43,4 @@ public class PurchaseOperation implements OperationHandler {
     public boolean isApplicable(FruitTransactionDto dto) {
         return dto.operationType() == Operation.PURCHASE;
     }
-
-    @Override
-    public Operation getOperation() {
-        return Operation.PURCHASE;
-    }
 }

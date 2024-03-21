@@ -22,9 +22,4 @@ public class BalanceOperation implements OperationHandler {
     public boolean isApplicable(FruitTransactionDto dto) {
         return dto.operationType() == Operation.BALANCE;
     }
-
-    @Override
-    public Operation getOperation() {
-        return Operation.BALANCE;
-    }
 }

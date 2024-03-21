@@ -31,9 +31,4 @@ public class ReturnOperation implements OperationHandler {
     public boolean isApplicable(FruitTransactionDto dto) {
         return dto.operationType() == Operation.RETURN;
     }
-
-    @Override
-    public Operation getOperation() {
-        return Operation.RETURN;
-    }
 }

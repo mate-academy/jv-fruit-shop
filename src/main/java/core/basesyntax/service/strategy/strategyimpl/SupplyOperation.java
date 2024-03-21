@@ -26,9 +26,4 @@ public class SupplyOperation implements OperationHandler {
     public boolean isApplicable(FruitTransactionDto dto) {
         return dto.operationType() == Operation.SUPPLY;
     }
-
-    @Override
-    public Operation getOperation() {
-        return Operation.SUPPLY;
-    }
 }
