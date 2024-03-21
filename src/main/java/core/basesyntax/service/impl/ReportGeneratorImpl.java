@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String SEPARATOR = ",";
+    private static final String TITLE = "fruit,quantity";
     private Storage storage;
 
     public ReportGeneratorImpl(Storage storage) {
@@ -15,8 +17,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public List<String> generate() {
         List<String> formattedList = new ArrayList<>();
-        formattedList.add("fruit,quantity");
-        storage.getFruits().forEach((fruit, quantity) -> formattedList.add(fruit + "," + quantity));
+        formattedList.add(TITLE);
+        storage.getFruits().forEach((fruit, quantity) -> formattedList.add(fruit + SEPARATOR + quantity));
         return formattedList;
     }
 }
