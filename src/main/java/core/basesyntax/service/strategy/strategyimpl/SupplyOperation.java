@@ -16,8 +16,7 @@ public class SupplyOperation implements OperationHandler {
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
         HashMap<String, Integer> fruitValue = storageDao.get(dto.fruitName());
-        int quantityReturn;
-        quantityReturn = (fruitValue == null) ? (dto.quantity())
+        int quantityReturn = (fruitValue == null) ? (dto.quantity())
                 : (fruitValue.get(dto.fruitName()) + dto.quantity());
         return storageDao.add(dto.fruitName(), quantityReturn);
     }
