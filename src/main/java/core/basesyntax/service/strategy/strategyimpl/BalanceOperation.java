@@ -7,15 +7,15 @@ import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
 public class BalanceOperation implements OperationHandler {
-    private final StorageDao actionDB;
+    private final StorageDao storageDao;
 
-    public BalanceOperation(StorageDaoImpl actionDB) {
-        this.actionDB = actionDB;
+    public BalanceOperation(StorageDaoImpl storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
-        return actionDB.add(dto);
+        return storageDao.add(dto);
     }
 
     @Override

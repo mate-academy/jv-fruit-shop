@@ -4,26 +4,27 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataFileCorrupted;
+import core.basesyntax.exception.WrongOperationException;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
 public class PurchaseOperation implements OperationHandler {
-    private final StorageDao actionDB;
+    private final StorageDao storageDao;
 
-    public PurchaseOperation(StorageDaoImpl actionDB) {
-        this.actionDB = actionDB;
+    public PurchaseOperation(StorageDaoImpl storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
         try {
-            HashMap<String,Integer> oldFrutitValue = actionDB.get(dto);
+            HashMap<String,Integer> oldFrutitValue = storageDao.get(dto);
             FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
                     dto.fruitName(),
                     oldFrutitValue.get(dto.fruitName()) - dto.quantity());
-            return actionDB.change(newFruitValue);
+            return storageDao.change(newFruitValue);
         } catch (NullPointerException e) {
-            throw new DataFileCorrupted("Trying to purchase fruits that we dont have in Storage"
+            throw new WrongOperationException("Trying to purchase fruits that we dont have in Storage"
                     + " this means there wasnt any supply or balance operations"
                     + "in the incoming file");
         }

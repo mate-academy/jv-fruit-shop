@@ -19,28 +19,31 @@ import java.util.List;
 
 public class Main {
     private static final String OPEN_FROM_FILE = "src/main/resources/fruitts.csv";
-    //    private static final String OPEN_FROM_FILE = "src/main/resources/fruitsWithNulls.csv";
     private static final String SAVE_TO_FILE = "src/main/resources/report.csv";
-    private static StorageDaoImpl actionDB = new StorageDaoImpl();
 
     public static void main(String[] args) {
         FruitFileReader reader = new FruitFileReaderImpl();
         List<String> fileString = reader.readFile(OPEN_FROM_FILE);
         FruitRawStringParser parser = new FruitRawStringParserImpl();
         var readerService = parser.parsedFruitData(fileString);
-        var balance = new BalanceOperation(actionDB);
-        var supply = new SupplyOperation(actionDB);
-        var returns = new ReturnOperation(actionDB);
-        var purchase = new PurchaseOperation(actionDB);
+
+        var storageDao = new StorageDaoImpl();
+        var balance = new BalanceOperation(storageDao);
+        var supply = new SupplyOperation(storageDao);
+        var returns = new ReturnOperation(storageDao);
+        var purchase = new PurchaseOperation(storageDao);
         List<OperationHandler> handlers = List.of(balance,returns,purchase,supply);
         FruitStrategy strategy = new FruitStrategy(handlers);
+
         for (var dto : readerService) {
             strategy.getHandlers(dto).forEach(oh -> oh.apply(dto));
         }
+
         FruitReportCreate prapareReport = new FruitReportCreateImpl();
-        String report = prapareReport.createReport(Storage.fruitsQuantity);
+        var report = prapareReport.createReport(Storage.fruitsQuantity);
         System.out.println(report);
-        FruitFileSaverImpl saver = new FruitFileSaverImpl();
+
+        var saver = new FruitFileSaverImpl();
         saver.saveToFile(report, SAVE_TO_FILE);
         System.out.println("Data succesfully saved fo file" + SAVE_TO_FILE);
     }

@@ -7,22 +7,22 @@ import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
 public class SupplyOperation implements OperationHandler {
-    private final StorageDao actionDB;
+    private final StorageDao storageDao;
 
-    public SupplyOperation(StorageDaoImpl actionDB) {
-        this.actionDB = actionDB;
+    public SupplyOperation(StorageDaoImpl storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
     public HashMap<String, Integer> apply(FruitTransactionDto dto) {
         try {
-            HashMap<String, Integer> oldFrutitValue = actionDB.get(dto);
+            HashMap<String, Integer> oldFrutitValue = storageDao.get(dto);
             FruitTransactionDto newFruitValue = new FruitTransactionDto(dto.operationType(),
                     dto.fruitName(),
                     oldFrutitValue.get(dto.fruitName()) + dto.quantity());
-            return actionDB.change(newFruitValue);
+            return storageDao.change(newFruitValue);
         } catch (NullPointerException e) {
-            return actionDB.add(dto);
+            return storageDao.add(dto);
         }
     }
 
