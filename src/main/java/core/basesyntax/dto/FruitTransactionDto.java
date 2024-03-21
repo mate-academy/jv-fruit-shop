@@ -1,7 +1,9 @@
 package core.basesyntax.dto;
 
+import core.basesyntax.model.Operation;
+
 public record FruitTransactionDto(
-            String operationType,
+            Operation operationType,
             String fruitName,
             int quantity
 ) {

@@ -2,8 +2,8 @@ package core.basesyntax.service.serviceimpl;
 
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.DataFileCorrupted;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.interfaces.TransactionParser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +24,8 @@ public class FruitTransactionParser implements TransactionParser<FruitTransactio
             String line = rawStrings.get(i);
             String[] columns = line.split(DIVIDER);
             validateRawData(columns);
-            String operation = columns[OPERATION_NEXT_INDEX].trim();
+            String operationCode = columns[OPERATION_NEXT_INDEX].trim();
+            Operation operation = Operation.findByCode(operationCode);
             String fruitName = columns[FRUIT_NAME_INDEX].trim();
             int fruitQuantity = Integer.parseInt(columns[FRUIT_QUANTITY_INDEX].trim());
             var dto = new FruitTransactionDto(operation, fruitName, fruitQuantity);

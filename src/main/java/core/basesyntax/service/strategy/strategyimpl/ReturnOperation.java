@@ -4,6 +4,7 @@ import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.NegativeBalanceException;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
@@ -28,6 +29,11 @@ public class ReturnOperation implements OperationHandler {
 
     @Override
     public boolean isApplicable(FruitTransactionDto dto) {
-        return "r".equals(dto.operationType());
+        return dto.operationType() == Operation.RETURN;
+    }
+
+    @Override
+    public Operation getOperation() {
+        return Operation.RETURN;
     }
 }

@@ -3,6 +3,7 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.OperationHandler;
 import java.util.HashMap;
 
@@ -23,6 +24,11 @@ public class SupplyOperation implements OperationHandler {
 
     @Override
     public boolean isApplicable(FruitTransactionDto dto) {
-        return "s".equals(dto.operationType());
+        return dto.operationType() == Operation.SUPPLY;
+    }
+
+    @Override
+    public Operation getOperation() {
+        return Operation.SUPPLY;
     }
 }

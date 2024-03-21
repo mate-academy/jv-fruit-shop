@@ -1,16 +1,15 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.service.interfaces.FileReader;
 import core.basesyntax.service.interfaces.FileWriter;
-import core.basesyntax.service.interfaces.TransactionParser;
 import core.basesyntax.service.interfaces.FruitReportCreate;
+import core.basesyntax.service.interfaces.TransactionParser;
 import core.basesyntax.service.serviceimpl.FileReaderImpl;
 import core.basesyntax.service.serviceimpl.FileWriterImpl;
-import core.basesyntax.service.serviceimpl.FruitTransactionParser;
 import core.basesyntax.service.serviceimpl.FruitReportCreateImpl;
+import core.basesyntax.service.serviceimpl.FruitTransactionParser;
 import core.basesyntax.service.strategy.FruitStrategy;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.strategyimpl.BalanceOperation;
@@ -27,10 +26,13 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> fileString = readFile(OPEN_FROM_FILE);
-        var readerService = parse(fileString);
+        var transactions = parse(fileString);
         FruitStrategy strategy = initializeStrategy();
 
-        readerService.forEach(dto -> strategy.getHandlers(dto).forEach(oh -> oh.handle(dto)));
+        transactions.forEach(dto -> {
+            OperationHandler handler = strategy.findHandlerFor(dto);
+            handler.handle(dto);
+        });
 
         var report = prepareReport();
         System.out.println(report);

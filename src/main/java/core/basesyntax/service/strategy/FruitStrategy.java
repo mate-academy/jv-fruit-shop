@@ -10,9 +10,12 @@ public class FruitStrategy {
         this.handlers = handlers;
     }
 
-    public List<OperationHandler> getHandlers(FruitTransactionDto dto) {
-        return handlers.stream()
-                .filter(h -> h.isApplicable(dto))
-                .toList();
+    public OperationHandler findHandlerFor(FruitTransactionDto dto) {
+        for (OperationHandler handler : handlers) {
+            if (handler.isApplicable(dto)) {
+                return handler;
+            }
+        }
+        return null;
     }
 }
