@@ -39,16 +39,6 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         return fruitTransactions;
     }
 
-    private String[] separateOperations(List<String> info) {
-        for (String line : info) {
-            String[] operations = line.split(System.lineSeparator());
-            for (String operation : operations) {
-                return operation.split(SEPARATOR);
-            }
-        }
-        throw new InvalidDataException("Data is not exist");
-    }
-
     private FruitTransaction.Operation getOperation(String operation) {
         for (FruitTransaction.Operation operationEnum : FruitTransaction.Operation.values()) {
             if (operation.equals(operationEnum.getCode())) {
