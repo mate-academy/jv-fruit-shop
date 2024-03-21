@@ -1,8 +1,6 @@
 package core.basesyntax.dto;
 
-import core.basesyntax.models.Fruit;
-
-public record FruitTransaction(Operation operation, Fruit fruit, int quantity) {
+public record Transaction(Operation operation, String product, int quantity) {
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

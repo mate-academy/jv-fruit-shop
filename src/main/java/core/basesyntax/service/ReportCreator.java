@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.FruitStorage;
+import core.basesyntax.db.ProductStorage;
 import java.util.List;
 
 public interface ReportCreator {
-    List<String> create(FruitStorage storage);
+    List<String> create(ProductStorage storage);
 }

@@ -1,15 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.CsvDao;
-import core.basesyntax.dao.FruitShopDao;
-import core.basesyntax.db.FruitStorage;
-import core.basesyntax.dto.FruitTransaction;
-import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.db.ProductStorage;
+import core.basesyntax.dto.Transaction;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.impl.ConditionalFirstRowRemover;
 import core.basesyntax.service.impl.CsvParser;
+import core.basesyntax.service.impl.CvsReader;
+import core.basesyntax.service.impl.CvsWriter;
 import core.basesyntax.service.impl.ReportCreatorImpl;
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.OperationStrategyImpl;
+import core.basesyntax.service.impl.RowRemover;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.impl.BalanceHandler;
 import core.basesyntax.strategy.handler.impl.PurchaseHandler;
@@ -23,35 +27,34 @@ import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
-        FruitShopDao fruitShopDao = new CsvDao();
+        FileReader fileReader = new CvsReader();
+        ProductStorage productStorage = new ProductStorage(new TreeMap<>());
 
-        FruitStorage fruitStorage = new FruitStorage(new TreeMap<>());
-
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceHandler(fruitStorage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseHandler(fruitStorage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnHandler(fruitStorage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyHandler(fruitStorage));
+        Map<Transaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(Transaction.Operation.BALANCE,
+                new BalanceHandler(productStorage));
+        operationHandlers.put(Transaction.Operation.PURCHASE,
+                new PurchaseHandler(productStorage));
+        operationHandlers.put(Transaction.Operation.RETURN,
+                new ReturnHandler(productStorage));
+        operationHandlers.put(Transaction.Operation.SUPPLY,
+                new SupplyHandler(productStorage));
 
         Path readPath = Path.of("src/main/resources/input.csv");
         Path writePath = Path.of("src/main/resources/report.csv");
 
-        FruitTransactionParser fruitTransactionParser = new CsvParser();
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        List<String> data = fileReader.loadDataFromFile(readPath);
+        RowRemover rowRemover = new ConditionalFirstRowRemover();
+        rowRemover.remove(data);
 
-        List<String> data = fruitShopDao.loadDataFromFile(readPath);
-        List<FruitTransaction> transactions = fruitTransactionParser.parseTransactions(data);
-        OperationHandler operationHandler;
-        for (var transaction : transactions) {
-            operationHandler = operationStrategy.findHandler(transaction.operation());
-            operationHandler.handle(transaction.fruit(), transaction.quantity());
-        }
+        TransactionParser transactionParser = new CsvParser();
+        List<Transaction> transactions = transactionParser.parseTransactions(data);
+
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(operationHandlers);
+        transactionProcessor.process(transactions);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
-        fruitShopDao.saveDataToFile(writePath, reportCreator.create(fruitStorage));
+        FileWriter fileWriter = new CvsWriter();
+        fileWriter.saveDataToFile(writePath, reportCreator.create(productStorage));
     }
 }

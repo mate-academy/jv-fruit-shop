@@ -1,10 +1,8 @@
-package core.basesyntax.dao;
+package core.basesyntax.service;
 
 import java.nio.file.Path;
 import java.util.List;
 
-public interface FruitShopDao {
-    List<String> loadDataFromFile(Path path);
-
+public interface FileWriter {
     void saveDataToFile(Path path, List<String> data);
 }

@@ -1,20 +1,23 @@
 package core.basesyntax.strategy.handler.impl;
 
-import core.basesyntax.db.FruitStorage;
-import core.basesyntax.models.Fruit;
+import core.basesyntax.db.ProductStorage;
+import core.basesyntax.dto.Transaction;
 import core.basesyntax.strategy.handler.OperationHandler;
 
 public class SupplyHandler extends OperationHandler {
 
-    public SupplyHandler(FruitStorage fruitStorage) {
-        super(fruitStorage);
+    public SupplyHandler(ProductStorage productStorage) {
+        super(productStorage);
     }
 
     @Override
-    public void handle(Fruit fruit, Integer quantity) {
-        if (fruitStorage.storage().containsKey(fruit)) {
-            fruitStorage.storage().put(fruit, fruitStorage.storage().get(fruit) + quantity);
+    public void handle(Transaction transaction) {
+        String product = transaction.product();
+        int quantity = transaction.quantity();
+        if (productStorage.getStorage().containsKey(product)) {
+            productStorage.getStorage().put(
+                    product, productStorage.getStorage().get(product) + quantity);
         }
-        fruitStorage.storage().putIfAbsent(fruit, quantity);
+        productStorage.getStorage().putIfAbsent(product, quantity);
     }
 }

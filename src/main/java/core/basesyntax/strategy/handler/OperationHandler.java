@@ -1,14 +1,14 @@
 package core.basesyntax.strategy.handler;
 
-import core.basesyntax.db.FruitStorage;
-import core.basesyntax.models.Fruit;
+import core.basesyntax.db.ProductStorage;
+import core.basesyntax.dto.Transaction;
 
 public abstract class OperationHandler {
-    protected final FruitStorage fruitStorage;
+    protected final ProductStorage productStorage;
 
-    public OperationHandler(FruitStorage fruitStorage) {
-        this.fruitStorage = fruitStorage;
+    public OperationHandler(ProductStorage productStorage) {
+        this.productStorage = productStorage;
     }
 
-    public abstract void handle(Fruit fruit, Integer quantity);
+    public abstract void handle(Transaction transaction);
 }
