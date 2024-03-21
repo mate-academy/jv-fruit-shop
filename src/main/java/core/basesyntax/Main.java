@@ -17,7 +17,7 @@ public class Main {
         ReportGenerate reportGenerate = new ReportGenerate();
         ReportWriter reportWriter = new ReportWriter();
         CalculateValues calculateValues = new CalculateValues();
-        List<String> strings = readInfo.readInfo("src/main/resources/example.csv");
+        List<String> strings = readInfo.readInfo("src/main/resources/example2.csv");
         List<FruitTransaction> parsed = csvFileHandler.parse(strings);
         calculateValues.getFruitsAndValues(parsed);
         reportWriter.writeReportInFile("src/main/resources/report.csv",

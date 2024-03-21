@@ -1,9 +1,9 @@
 type,fruit,quantity
 b,banana,204
-b,,24
-,kiwi, 1
-r,kiwi,
-p,banana,1s3
+b,fj,24
+b,kiwi,1
+r,kiwi,2
+p,banana,13
 r,apple,10
 p,tomato,20
 w,banana,5
