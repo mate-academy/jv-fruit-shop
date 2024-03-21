@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dto.Operation;
 import core.basesyntax.dto.ProductTransaction;
-import core.basesyntax.service.CsvDataProcessor;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;
@@ -42,7 +41,7 @@ public class Main {
 
         List<String> data = fileReader.readFromFile(readPath);
 
-        TransactionParser transactionParser = new CsvParser(new CsvDataProcessor());
+        TransactionParser transactionParser = new CsvParser();
         List<ProductTransaction> productTransactions = transactionParser.parseTransactions(data);
 
         TransactionProcessor transactionProcessor = new TransactionProcessorImpl(operationHandlers);
