@@ -15,7 +15,7 @@ public class ReturnOperation implements OperationHandler {
     }
 
     @Override
-    public HashMap<String, Integer> apply(FruitTransactionDto dto) {
+    public void handle(FruitTransactionDto dto) {
         HashMap<String, Integer> fruitValue = storageDao.get(dto.fruitName());
         if (fruitValue == null) {
             throw new NegativeBalanceException("Trying to return fruits "
@@ -23,7 +23,7 @@ public class ReturnOperation implements OperationHandler {
                     + " but there was no fruit in balance or supply which were purchased");
         }
         int newQuantity = fruitValue.get(dto.fruitName()) + dto.quantity();
-        return storageDao.add(dto.fruitName(), newQuantity);
+        storageDao.add(dto.fruitName(), newQuantity);
     }
 
     @Override

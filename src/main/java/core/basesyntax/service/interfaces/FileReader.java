@@ -2,6 +2,6 @@ package core.basesyntax.service.interfaces;
 
 import java.util.List;
 
-public interface FruitFileReader {
+public interface FileReader {
     List<String> readFile(String filePath);
 }

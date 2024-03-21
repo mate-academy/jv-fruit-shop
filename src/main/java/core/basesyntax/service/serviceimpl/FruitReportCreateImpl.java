@@ -6,22 +6,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitReportCreateImpl implements FruitReportCreate {
-    private static final String SEMICOL = ",";
+    private static final String FIRST_CSV_REPORT_LINE = "fruit,quantity" + System.lineSeparator();
+    private static final String DIVIDER = ",";
 
     public String createReport(HashMap<String, Integer> fruitQuantity) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("fruit").append(SEMICOL).append("quantity").append(System.lineSeparator());
+        StringBuilder builder = new StringBuilder(FIRST_CSV_REPORT_LINE);
         for (Map.Entry<String, Integer> fruits: fruitQuantity.entrySet()) {
-            if (fruits.getValue() < 0) {
-                throw new NegativeBalanceException("Incorrect quantity,"
-                        + " some operations probably missing,"
-                        + " quantity for fruit"
-                        + fruits.getKey()
-                        + " is "
-                        + fruits.getValue());
-            }
             builder.append(fruits.getKey())
-                    .append(SEMICOL)
+                    .append(DIVIDER)
                     .append(fruits.getValue())
                     .append(System.lineSeparator());
         }

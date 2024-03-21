@@ -4,7 +4,7 @@ import core.basesyntax.dto.FruitTransactionDto;
 import java.util.HashMap;
 
 public interface OperationHandler {
-    HashMap<String, Integer> apply(FruitTransactionDto dto);
+    void handle(FruitTransactionDto dto);
 
     boolean isApplicable(FruitTransactionDto dto);
 }

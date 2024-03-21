@@ -6,6 +6,7 @@ import java.util.List;
 
 public class FruitStringsCheckImpl implements FruitStringsCheck {
     private static final int EXPECTED_COLUMN_COUNT = 3;
+    private static final String DIVIDER = ",";
 
     @Override
     public boolean checkFruitQuantity(List<String> rawStrings) {
@@ -13,7 +14,7 @@ public class FruitStringsCheckImpl implements FruitStringsCheck {
             return false;
         }
         String headerLine = rawStrings.get(0);
-        String[] headerColumns = headerLine.split(",");
+        String[] headerColumns = headerLine.split(DIVIDER);
         if (headerColumns.length != EXPECTED_COLUMN_COUNT) {
             throw new DataFileCorrupted("Header row is missing");
         }

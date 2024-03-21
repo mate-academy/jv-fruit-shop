@@ -3,13 +3,13 @@ package core.basesyntax;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.service.interfaces.FruitFileReader;
-import core.basesyntax.service.interfaces.FruitFileSaver;
-import core.basesyntax.service.interfaces.FruitRawStringParser;
+import core.basesyntax.service.interfaces.FileReader;
+import core.basesyntax.service.interfaces.FileWriter;
+import core.basesyntax.service.interfaces.TransactionParser;
 import core.basesyntax.service.interfaces.FruitReportCreate;
-import core.basesyntax.service.serviceimpl.FruitFileReaderImpl;
-import core.basesyntax.service.serviceimpl.FruitFileSaverImpl;
-import core.basesyntax.service.serviceimpl.FruitRawStringParserImpl;
+import core.basesyntax.service.serviceimpl.FileReaderImpl;
+import core.basesyntax.service.serviceimpl.FileWriterImpl;
+import core.basesyntax.service.serviceimpl.FruitTransactionParser;
 import core.basesyntax.service.serviceimpl.FruitReportCreateImpl;
 import core.basesyntax.service.strategy.FruitStrategy;
 import core.basesyntax.service.strategy.OperationHandler;
@@ -25,26 +25,26 @@ public class Main {
 
     public static void main(String[] args) {
         List<String> fileString = readFile(OPEN_FROM_FILE);
-        var readerService = parseFruitData(fileString);
+        var readerService = parse(fileString);
         FruitStrategy strategy = initializeStrategy();
 
-        readerService.forEach(dto -> strategy.getHandlers(dto).forEach(oh -> oh.apply(dto)));
+        readerService.forEach(dto -> strategy.getHandlers(dto).forEach(oh -> oh.handle(dto)));
 
         var report = prepareReport();
         System.out.println(report);
 
-        saveToFile(report);
+        writeDataToFile(report);
         System.out.println("Data successfully saved to file " + SAVE_TO_FILE);
     }
 
     private static List<String> readFile(String filePath) {
-        FruitFileReader reader = new FruitFileReaderImpl();
+        FileReader reader = new FileReaderImpl();
         return reader.readFile(filePath);
     }
 
-    private static List<FruitTransactionDto> parseFruitData(List<String> fileData) {
-        FruitRawStringParser parser = new FruitRawStringParserImpl();
-        return parser.parsedFruitData(fileData);
+    private static List<FruitTransactionDto> parse(List<String> fileData) {
+        TransactionParser parser = new FruitTransactionParser();
+        return parser.parse(fileData);
     }
 
     private static FruitStrategy initializeStrategy() {
@@ -62,8 +62,8 @@ public class Main {
         return reportCreator.createReport(Storage.fruitsQuantity);
     }
 
-    private static void saveToFile(String report) {
-        FruitFileSaver saver = new FruitFileSaverImpl();
-        saver.saveToFile(report, SAVE_TO_FILE);
+    private static void writeDataToFile(String data) {
+        FileWriter saver = new FileWriterImpl();
+        saver.writeDataToFile(data, SAVE_TO_FILE);
     }
 }
