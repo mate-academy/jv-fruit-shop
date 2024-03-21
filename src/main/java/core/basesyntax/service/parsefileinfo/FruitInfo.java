@@ -1,6 +1,6 @@
 package core.basesyntax.service.parsefileinfo;
 
-import core.basesyntax.service.functionalityexpansion.ActivityTypeEnum;
+import core.basesyntax.service.functionalityexpansion.ActivityType;
 
-public record FruitInfo(ActivityTypeEnum activityType, String name, int quantity) {
+public record FruitInfo(ActivityType activityType, String name, int quantity) {
 }

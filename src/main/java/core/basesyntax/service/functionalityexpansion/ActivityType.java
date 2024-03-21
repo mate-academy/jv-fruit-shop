@@ -1,6 +1,6 @@
 package core.basesyntax.service.functionalityexpansion;
 
-public enum ActivityTypeEnum {
+public enum ActivityType {
     BALANCE("b"),
     PURCHASE("p"),
     RETURN("r"),
@@ -8,12 +8,12 @@ public enum ActivityTypeEnum {
 
     private final String code;
 
-    ActivityTypeEnum(String code) {
+    ActivityType(String code) {
         this.code = code;
     }
 
-    public static ActivityTypeEnum getByCode(String code) {
-        for (ActivityTypeEnum type : ActivityTypeEnum.values()) {
+    public static ActivityType getByCode(String code) {
+        for (ActivityType type : ActivityType.values()) {
             if (type.code.equals(code)) {
                 return type;
             }

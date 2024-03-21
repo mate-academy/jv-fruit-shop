@@ -1,36 +1,38 @@
 package core.basesyntax;
 
-import core.basesyntax.db.CurrentData;
-import core.basesyntax.service.ShopService;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.filehandler.FileWriter;
 import core.basesyntax.service.filehandler.ReadFromFile;
-import core.basesyntax.service.filehandler.WriteToFile;
-import core.basesyntax.service.functionalityexpansion.ActivityTypeEnum;
-import core.basesyntax.service.functionalityexpansion.FunctionalityExpansion;
-import core.basesyntax.service.parsefileinfo.CurrentStringParse;
+import core.basesyntax.service.filehandler.ReportGenerate;
+import core.basesyntax.service.functionalityexpansion.ActivityHandlerProvider;
+import core.basesyntax.service.parsefileinfo.FruitInfo;
 import core.basesyntax.service.parsefileinfo.FruitParser;
-import core.basesyntax.service.strategy.ShopActivityStrategy;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
+    private static final String INPUT_FILE_PATH = "src/main/resources/StorageInfo.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/StorageReport.csv";
+
     public static void main(String[] args) {
         FruitParser fruitParser = new FruitParser();
-        ShopService shopService = new ShopService(fruitParser);
-        CurrentData data = new CurrentData();
-        FunctionalityExpansion expansion = new FunctionalityExpansion(data);
+        FruitShopService fruitShopService = new FruitShopService();
+        Storage data = new Storage();
+        ActivityHandlerProvider activityProvider = new ActivityHandlerProvider(data);
         ReadFromFile fileInfo = new ReadFromFile();
-        WriteToFile writeToFile = new WriteToFile(data);
-        CurrentStringParse currentStringParse = new CurrentStringParse();
+        FileWriter fileWriter = new FileWriter();
+        ReportGenerate reportGenerate = new ReportGenerate();
 
-        Map<ActivityTypeEnum, ShopActivityStrategy> strategyMap = new HashMap<>();
-        expansion.putStrategyByKey(strategyMap);
+        activityProvider.putStrategyByKey();
+        List<String> lines = fileInfo.readFromFile(INPUT_FILE_PATH);
 
-        String inputFilePath = "src/main/resources/StorageInfo.csv";
-        String info = fileInfo.readFromFile(inputFilePath);
+        List<FruitInfo> fruits = lines.stream()
+                .map(fruitParser::parseActivity)
+                .collect(Collectors.toList());
 
-        String[] infoAsArray = currentStringParse.parse(info);
-        shopService.doStrategy(strategyMap,infoAsArray);
-        String reportFilePath = "src/main/resources/StorageReport.csv";
-        writeToFile.write(reportFilePath);
+        fruitShopService.execute(fruits, activityProvider);
+        String report = reportGenerate.generate(data);
+        fileWriter.write(REPORT_FILE_PATH, report);
     }
 }

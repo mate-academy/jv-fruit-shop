@@ -1,18 +1,20 @@
 package core.basesyntax.service.filehandler;
 
-import core.basesyntax.db.CurrentData;
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class ReportGenerate {
-    public String createReport(CurrentData currentData) {
-        StringBuilder builder = new StringBuilder();
-        builder.append("fruit,quantity").append(System.lineSeparator());
+    private static final String COMA = ",";
+    private static final String HEADER = "fruit,quantity";
 
-        for (Map.Entry<String, Integer> entry : currentData.getChangedData().entrySet()) {
+    public String generate(Storage storage) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(HEADER).append(System.lineSeparator());
+
+        for (Map.Entry<String, Integer> entry : storage.getData().entrySet()) {
             String key = entry.getKey();
             Integer value = entry.getValue();
-            builder.append(key).append(",").append(value).append(System.lineSeparator());
-            System.out.println(key + ": " + value);
+            builder.append(key).append(COMA).append(value).append(System.lineSeparator());
         }
         return builder.toString();
     }
