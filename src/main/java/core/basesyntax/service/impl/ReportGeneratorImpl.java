@@ -18,7 +18,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public List<String> generate() {
         List<String> formattedList = new ArrayList<>();
         formattedList.add(TITLE);
-        storage.getFruits().forEach((fruit, quantity) -> formattedList.add(fruit + SEPARATOR + quantity));
+        storage.getFruits().forEach((fruit, quantity) -> formattedList
+                .add(fruit + SEPARATOR + quantity));
         return formattedList;
     }
 }
