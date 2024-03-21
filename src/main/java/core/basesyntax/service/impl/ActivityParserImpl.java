@@ -7,7 +7,7 @@ import core.basesyntax.service.ActivityParser;
 import java.util.List;
 
 public class ActivityParserImpl implements ActivityParser {
-    private static final int HEADER_SIZE = 1;
+    private static final int HEADER_INDEX = 1;
     private static final int COLUMNS_SIZE = 3;
     private static final int CODE_INDEX = 0;
     private static final int TITLE_INDEX = 1;
@@ -17,7 +17,7 @@ public class ActivityParserImpl implements ActivityParser {
     @Override
     public List<ActivityDto> parse(List<String> activityRows) {
         return activityRows.stream()
-                    .skip(HEADER_SIZE)
+                    .skip(HEADER_INDEX)
                     .map(this::mapToDto)
                     .toList();
     }
