@@ -12,7 +12,7 @@ public class ReportProviderImpl implements ReportProvider {
         StringBuilder report = new StringBuilder(REPORT_HEADER);
 
         for (var element : Storage.fruitStorage.entrySet()) {
-            report.append("\n").append(element.getKey())
+            report.append(System.lineSeparator()).append(element.getKey())
                     .append(ELEMENT_SEPARATOR).append(element.getValue());
         }
         return report.toString();
