@@ -13,7 +13,7 @@ public class ReadFromFileServiceImpl implements ReadFromFileService {
         try {
             return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
-            throw new InvalidFileException("can`t read content from the file");
+            throw new InvalidFileException("Can`t read content from the file: " + filePath);
         }
     }
 }

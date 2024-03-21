@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
-    private static final String COMA = ",";
-    private static final String REPORT_CATEGORY = "fruit,quantity";
+    private static final String SEPARATOR = ",";
+    private static final String REPORT_HEADER = "fruit,quantity";
     private final StorageService storageService;
 
     public ReportServiceImpl(StorageService storageService) {
@@ -18,9 +18,9 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public List<String> createReport() {
         List<String> report = new ArrayList<>();
-        report.add(REPORT_CATEGORY);
+        report.add(REPORT_HEADER);
         for (Map.Entry<String, Integer> entry : storageService.getAll().entrySet()) {
-            report.add(entry.getKey() + COMA + entry.getValue());
+            report.add(entry.getKey() + SEPARATOR + entry.getValue());
         }
         return report;
     }

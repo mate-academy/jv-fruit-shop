@@ -9,23 +9,23 @@ public class StorageServiceImpl implements StorageService {
 
     @Override
     public int getQuantity(String key) {
-        return storage.getProducts().get(key);
+        return storage.getFruits().get(key);
     }
 
     @Override
     public void add(String fruitName, Integer value) {
-        storage.getProducts().put(fruitName, value);
+        storage.getFruits().put(fruitName, value);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return storage.getProducts();
+        return storage.getFruits();
     }
 
     @Override
     public void updateQuantity(String fruitName, Integer value) {
-        if (storage.getProducts().containsKey(fruitName)) {
-            storage.getProducts().put(fruitName, value);
+        if (storage.getFruits().containsKey(fruitName)) {
+            storage.getFruits().put(fruitName, value);
         } else {
             add(fruitName, value);
         }

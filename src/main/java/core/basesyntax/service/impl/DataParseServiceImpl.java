@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class DataParseServiceImpl implements DataParseService {
     private static final String ARRAY_SPLITER = ",";
+    private static final int SKIP_INDEX = 1;
     private static final int OPERATION_INDEX = 0;
     private static final int NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -16,7 +17,7 @@ public class DataParseServiceImpl implements DataParseService {
     @Override
     public List<FruitsTransaction> getTransactionList(List<String> data) {
         return data.stream()
-                .skip(1)
+                .skip(SKIP_INDEX)
                 .map(this::parseTransaction)
                 .collect(Collectors.toList());
     }
