@@ -11,11 +11,10 @@ public class ReportCreatorImpl implements ReportCreator {
     public static final String COMMA = ",";
 
     @Override
-    public List<String> create(ProductStorage storage) {
+    public List<String> create() {
         List<String> reportLines = new ArrayList<>();
         reportLines.add(TITLE);
-        reportLines.addAll(storage
-                .getStorage()
+        reportLines.addAll(ProductStorage.storage
                 .entrySet()
                 .stream()
                 .map(e -> e.getKey() + COMMA + e.getValue())

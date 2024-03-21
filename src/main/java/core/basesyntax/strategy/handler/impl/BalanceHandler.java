@@ -7,18 +7,14 @@ import core.basesyntax.strategy.handler.OperationHandler;
 
 public class BalanceHandler extends OperationHandler {
 
-    public BalanceHandler(ProductStorage productStorage) {
-        super(productStorage);
-    }
-
     @Override
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        if (productStorage.getStorage().containsKey(product)) {
+        if (ProductStorage.storage.containsKey(product)) {
             throw new BalanceOperationException("Balance can`t be reassigned! "
                     + "You have duplicate balance operation for product: " + product);
         }
-        productStorage.getStorage().putIfAbsent(product, quantity);
+        ProductStorage.storage.putIfAbsent(product, quantity);
     }
 }

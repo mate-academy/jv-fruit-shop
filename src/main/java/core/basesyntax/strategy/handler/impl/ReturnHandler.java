@@ -6,16 +6,13 @@ import core.basesyntax.exception.ReturnOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 
 public class ReturnHandler extends OperationHandler {
-    public ReturnHandler(ProductStorage productStorage) {
-        super(productStorage);
-    }
 
     @Override
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        Integer currentBalance = productStorage.getStorage().get(product);
-        if (!productStorage.getStorage().containsKey(product)) {
+        Integer currentBalance = ProductStorage.storage.get(product);
+        if (!ProductStorage.storage.containsKey(product)) {
             throw new ReturnOperationException("Can`t return absent product" + product);
         }
         if (currentBalance < quantity) {
@@ -26,6 +23,6 @@ public class ReturnHandler extends OperationHandler {
                             + "Currently available balance: " + currentBalance
             );
         }
-        productStorage.getStorage().put(product, currentBalance - quantity);
+        ProductStorage.storage.put(product, currentBalance - quantity);
     }
 }

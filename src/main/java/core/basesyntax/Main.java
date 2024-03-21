@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.ProductStorage;
 import core.basesyntax.dto.Operation;
 import core.basesyntax.dto.ProductTransaction;
 import core.basesyntax.service.CsvDataProcessor;
@@ -23,22 +22,20 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Main {
     public static void main(String[] args) {
         FileReader fileReader = new CsvReader();
-        ProductStorage productStorage = new ProductStorage(new TreeMap<>());
 
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE,
-                new BalanceHandler(productStorage));
+                new BalanceHandler());
         operationHandlers.put(Operation.PURCHASE,
-                new PurchaseHandler(productStorage));
+                new PurchaseHandler());
         operationHandlers.put(Operation.RETURN,
-                new ReturnHandler(productStorage));
+                new ReturnHandler());
         operationHandlers.put(Operation.SUPPLY,
-                new SupplyHandler(productStorage));
+                new SupplyHandler());
 
         Path readPath = Path.of("src/main/resources/input.csv");
         Path writePath = Path.of("src/main/resources/report.csv");
@@ -53,6 +50,6 @@ public class Main {
 
         ReportCreator reportCreator = new ReportCreatorImpl();
         FileWriter fileWriter = new CsvWriter();
-        fileWriter.writeToFile(writePath, reportCreator.create(productStorage));
+        fileWriter.writeToFile(writePath, reportCreator.create());
     }
 }

@@ -1,15 +1,8 @@
 package core.basesyntax.db;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 public class ProductStorage {
-    private final Map<String, Integer> storage;
-
-    public ProductStorage(Map<String, Integer> storage) {
-        this.storage = storage;
-    }
-
-    public Map<String, Integer> getStorage() {
-        return storage;
-    }
+    public static final Map<String, Integer> storage = new TreeMap<>();
 }

@@ -6,15 +6,12 @@ import core.basesyntax.exception.PurchaseOperationException;
 import core.basesyntax.strategy.handler.OperationHandler;
 
 public class PurchaseHandler extends OperationHandler {
-    public PurchaseHandler(ProductStorage productStorage) {
-        super(productStorage);
-    }
 
     @Override
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        Integer currentBalance = productStorage.getStorage().get(product);
+        Integer currentBalance = ProductStorage.storage.get(product);
         if (currentBalance < quantity) {
             throw new PurchaseOperationException(
                     "Unable to purchase product: " + product
@@ -25,6 +22,6 @@ public class PurchaseHandler extends OperationHandler {
                             + "Purchase quantity: " + quantity
             );
         }
-        productStorage.getStorage().put(product, currentBalance - quantity);
+        ProductStorage.storage.put(product, currentBalance - quantity);
     }
 }

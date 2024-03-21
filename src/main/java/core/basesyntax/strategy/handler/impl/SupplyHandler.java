@@ -6,18 +6,14 @@ import core.basesyntax.strategy.handler.OperationHandler;
 
 public class SupplyHandler extends OperationHandler {
 
-    public SupplyHandler(ProductStorage productStorage) {
-        super(productStorage);
-    }
-
     @Override
     public void handle(ProductTransaction productTransaction) {
         String product = productTransaction.product();
         int quantity = productTransaction.quantity();
-        if (productStorage.getStorage().containsKey(product)) {
-            productStorage.getStorage().put(
-                    product, productStorage.getStorage().get(product) + quantity);
+        if (ProductStorage.storage.containsKey(product)) {
+            ProductStorage.storage.put(
+                    product, ProductStorage.storage.get(product) + quantity);
         }
-        productStorage.getStorage().putIfAbsent(product, quantity);
+        ProductStorage.storage.putIfAbsent(product, quantity);
     }
 }
