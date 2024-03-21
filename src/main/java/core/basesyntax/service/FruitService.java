@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface FruitService {
-    void manipulate(String nameFruit, int quantity);
+    void save(String nameFruit, int quantity);
 }

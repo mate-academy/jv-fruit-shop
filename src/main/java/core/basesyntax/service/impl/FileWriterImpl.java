@@ -1,17 +1,16 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.WriterFile;
+import core.basesyntax.service.FileWriter;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class WriterFileImpl implements WriterFile {
+public class FileWriterImpl implements FileWriter {
     @Override
-    public void writeFile(List<String> report, File file) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (String line : report) {
+    public void writeToFile(List<String> data, File file) {
+        try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(file))) {
+            for (String line : data) {
                 writer.write(line);
                 writer.newLine();
             }

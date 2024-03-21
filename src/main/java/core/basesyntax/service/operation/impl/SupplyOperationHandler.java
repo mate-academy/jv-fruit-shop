@@ -17,13 +17,6 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransactionDto dto) {
         int newFruitQuantity = storage.getFruitQuantity(dto.getNameFruit()) + dto.getQuantity();
-        fruitService.manipulate(dto.getNameFruit(), newFruitQuantity);
-
+        fruitService.save(dto.getNameFruit(), newFruitQuantity);
     }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "s".equals(dto.getOperationType());
-    }
-
 }

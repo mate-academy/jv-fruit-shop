@@ -2,9 +2,8 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private Storage storage;
@@ -15,11 +14,9 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public List<String> generate() {
-        Map<String,Integer> fruits = storage.getFruits();
-        List<String> formattedList = fruits.entrySet().stream()
-                .map(entry -> entry.getKey() + "," + entry.getValue())
-                .collect(Collectors.toList());
-        formattedList.add(0, "fruit,quantity");
+        List<String> formattedList = new ArrayList<>();
+        formattedList.add("fruit,quantity");
+        storage.getFruits().forEach((fruit, quantity) -> formattedList.add(fruit + "," + quantity));
         return formattedList;
     }
 }

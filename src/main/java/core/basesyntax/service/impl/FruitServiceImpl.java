@@ -11,7 +11,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void manipulate(String nameFruit, int quantity) {
+    public void save(String nameFruit, int quantity) {
         storage.addFruit(nameFruit, quantity);
     }
 }

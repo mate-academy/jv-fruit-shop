@@ -17,14 +17,13 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransactionDto dto) {
-        int newFruitQuantity = storage.getFruitQuantity(dto.getNameFruit()) - dto.getQuantity();
-        fruitService.manipulate(dto.getNameFruit(), newFruitQuantity);
-
-    }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "p".equals(dto.getOperationType());
+        int quantityFruitInStorage = storage.getFruitQuantity(dto.getNameFruit());
+        if (quantityFruitInStorage - dto.getQuantity() < 0) {
+            throw new RuntimeException("Quantity of " + dto.getNameFruit()
+                    + " is not enough for this purchase");
+        }
+        int newFruitQuantity = quantityFruitInStorage - dto.getQuantity();
+        fruitService.save(dto.getNameFruit(), newFruitQuantity);
     }
 }
 

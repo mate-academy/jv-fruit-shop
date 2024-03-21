@@ -18,12 +18,6 @@ public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitTransactionDto dto) {
         int newFruitQuantity = storage.getFruitQuantity(dto.getNameFruit()) + dto.getQuantity();
-        fruitService.manipulate(dto.getNameFruit(), newFruitQuantity);
-
-    }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return "r".equals(dto.getOperationType());
+        fruitService.save(dto.getNameFruit(), newFruitQuantity);
     }
 }
