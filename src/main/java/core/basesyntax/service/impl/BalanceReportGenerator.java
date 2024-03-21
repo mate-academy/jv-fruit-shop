@@ -20,10 +20,9 @@ public class BalanceReportGenerator implements ReportGenerator {
     public List<String> getReport() {
         List<String> report = new ArrayList<>();
         report.add(REPORT_HEADER);
-        List<String> balanceRows = balanceStorage.getAll().stream()
+        report.addAll(balanceStorage.getAll().stream()
                 .map(this::buildRow)
-                .toList();
-        report.addAll(balanceRows);
+                .toList());
         return report;
     }
 
