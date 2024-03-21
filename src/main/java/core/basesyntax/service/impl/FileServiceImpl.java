@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.exceptions.CouldNotWriteToFile;
+import core.basesyntax.exceptions.CouldNotReadFromFileException;
+import core.basesyntax.exceptions.CouldNotWriteToFileException;
 import core.basesyntax.service.FileService;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -22,7 +23,7 @@ public class FileServiceImpl implements FileService {
             }
             return result;
         } catch (IOException e) {
-            throw new CouldNotWriteToFile("File: " + fileName + " Not Found!");
+            throw new CouldNotReadFromFileException("Could not read from file: " + fileName);
         }
     }
 
@@ -31,7 +32,7 @@ public class FileServiceImpl implements FileService {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(data);
         } catch (IOException e) {
-            throw new CouldNotWriteToFile("Could not write to file: " + fileName);
+            throw new CouldNotWriteToFileException("Could not write to file: " + fileName);
         }
     }
 }
