@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.dto.Operation;
 import core.basesyntax.dto.ProductTransaction;
+import core.basesyntax.enums.Operation;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportCreator;

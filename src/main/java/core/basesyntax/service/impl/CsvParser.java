@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dto.Operation;
 import core.basesyntax.dto.ProductTransaction;
+import core.basesyntax.enums.Operation;
 import core.basesyntax.service.TransactionParser;
 import java.util.List;
 
