@@ -15,8 +15,7 @@ public class DataValidatorImpl implements DataValidator {
 
     }
 
-    @Override
-    public void validateFruitType(FruitTransactionDto fruitTransactionDto) {
+    private void validateFruitType(FruitTransactionDto fruitTransactionDto) {
         String fruitName = fruitTransactionDto.fruit();
         if (fruitName.matches(ILLEGAL_CHARACTERS)) {
             throw new InvalidFruitTypeException("Your fruit can't have special symbols "
@@ -24,8 +23,7 @@ public class DataValidatorImpl implements DataValidator {
         }
     }
 
-    @Override
-    public void validateQuantity(FruitTransactionDto fruitTransactionDto) {
+    private void validateQuantity(FruitTransactionDto fruitTransactionDto) {
         if (fruitTransactionDto.quantity() < 0) {
             throw new InvalidQuantityException("Quantity of product can't be less than 0, now: "
                     + fruitTransactionDto.quantity());

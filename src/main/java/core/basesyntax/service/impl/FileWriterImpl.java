@@ -8,13 +8,10 @@ import java.util.List;
 
 public class FileWriterImpl implements FileWriterService {
     private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String HEADER = "fruit,quantity";
 
     @Override
     public boolean write(List<String> processedData, String fileName) {
         try (FileWriter fileWriter = new FileWriter(fileName)) {
-            fileWriter.write(HEADER);
-            fileWriter.write(LINE_SEPARATOR);
             for (String data : processedData) {
                 fileWriter.write(data);
                 fileWriter.write(LINE_SEPARATOR);

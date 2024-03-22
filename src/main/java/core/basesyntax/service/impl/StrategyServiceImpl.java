@@ -2,6 +2,7 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.InvalidOperationException;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataValidator;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.OperationStrategy;
@@ -11,28 +12,28 @@ import java.util.Map;
 
 public class StrategyServiceImpl implements StrategyService, OperationStrategy {
     private static final DataValidator DATA_VALIDATOR = new DataValidatorImpl();
-    private final Map<String, OperationHandler> operations;
+    private final Map<Operation, OperationHandler> operations;
 
-    public StrategyServiceImpl(Map<String, OperationHandler> operations) {
+    public StrategyServiceImpl(Map<Operation, OperationHandler> operations) {
         this.operations = operations;
     }
 
     @Override
     public void processData(List<FruitTransactionDto> fruitTransactionDtoList,
-                            Map<String, OperationHandler> operationTypeList) {
+                            Map<Operation, OperationHandler> operationTypeList) {
         for (FruitTransactionDto fruitTransactionDto : fruitTransactionDtoList) {
             DATA_VALIDATOR.validate(fruitTransactionDto);
-            getHandlers(fruitTransactionDto).handle(fruitTransactionDto);
+            getHandler(fruitTransactionDto).handle(fruitTransactionDto);
         }
     }
 
     @Override
-    public OperationHandler getHandlers(FruitTransactionDto fruitTransactionDto) {
-        String code = fruitTransactionDto.operation();
-        var handler = operations.get(code);
+    public OperationHandler getHandler(FruitTransactionDto fruitTransactionDto) {
+        Operation operation = fruitTransactionDto.operation();
+        var handler = operations.get(operation);
         if (handler == null) {
-            throw new InvalidOperationException("Invalid operation: " + code);
+            throw new InvalidOperationException("Invalid operation: " + operation);
         }
-        return operations.get(code);
+        return operations.get(operation);
     }
 }

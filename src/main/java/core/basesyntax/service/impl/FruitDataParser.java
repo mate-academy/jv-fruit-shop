@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,9 @@ public class FruitDataParser implements DataParser<FruitTransactionDto> {
         for (int i = DATA_WITHOUT_HEADER_INDEX; i < rawData.size(); i++) {
             String line = rawData.get(i);
             String[] strings = line.split(DELIMITER);
+            Operation operation = Operation.getByCode(strings[OPERATION_INDEX]);
             FruitTransactionDto dto =
-                    new FruitTransactionDto(strings[OPERATION_INDEX],
+                    new FruitTransactionDto(operation,
                             strings[FRUIT_INDEX],
                             Integer.parseInt(strings[QUANTITY_INDEX]));
             fruitsList.add(dto);
