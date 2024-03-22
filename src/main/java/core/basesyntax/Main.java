@@ -4,7 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.filehandler.FileWriter;
 import core.basesyntax.service.filehandler.ReadFromFile;
-import core.basesyntax.service.filehandler.ReportGenerate;
+import core.basesyntax.service.filehandler.ReportGenerator;
 import core.basesyntax.service.functionalityexpansion.ActivityHandlerProvider;
 import core.basesyntax.service.parsefileinfo.FruitInfo;
 import core.basesyntax.service.parsefileinfo.FruitParser;
@@ -22,7 +22,7 @@ public class Main {
         ActivityHandlerProvider activityProvider = new ActivityHandlerProvider(data);
         ReadFromFile fileInfo = new ReadFromFile();
         FileWriter fileWriter = new FileWriter();
-        ReportGenerate reportGenerate = new ReportGenerate();
+        ReportGenerator reportGenerator = new ReportGenerator();
 
         activityProvider.putStrategyByKey();
         List<String> lines = fileInfo.readFromFile(INPUT_FILE_PATH);
@@ -32,7 +32,7 @@ public class Main {
                 .collect(Collectors.toList());
 
         fruitShopService.execute(fruits, activityProvider);
-        String report = reportGenerate.generate(data);
+        String report = reportGenerator.generate(data);
         fileWriter.write(REPORT_FILE_PATH, report);
     }
 }
