@@ -6,11 +6,12 @@ import core.basesyntax.service.exeptions.UnsupportedOperationExeption;
 import core.basesyntax.storage.Storage;
 
 public class BalanceOperationHandler implements OperationHandler {
+    public static final String BALANCE_EXEPTION_MESSAGE = "There is no applicable operation!";
 
     @Override
     public void apply(FruitTransactionDto dto) {
         if (!isApplicable(dto)) {
-            throw new UnsupportedOperationExeption("There is no applicable operation!");
+            throw new UnsupportedOperationExeption(BALANCE_EXEPTION_MESSAGE);
         }
         Storage.fruits.put(new Fruit(dto.fruitName()), dto.quantity());
     }

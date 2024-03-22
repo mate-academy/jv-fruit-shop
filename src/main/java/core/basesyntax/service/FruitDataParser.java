@@ -13,7 +13,7 @@ public class FruitDataParser implements DataParser<FruitTransactionDto> {
     public static final int QUANTITY_COLUMN_NUMBER = 2;
 
     public List<FruitTransactionDto> parse(List<String> data) {
-        var dtos = new ArrayList<FruitTransactionDto>(data.size() - 1);
+        var dtos = new ArrayList<FruitTransactionDto>(data.size());
         for (int i = 1; i < data.size(); i++) {
             String line = data.get(i);
             String[] columns = line.split(SPLITTER);

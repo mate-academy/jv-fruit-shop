@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void writeToFile(List<String> report, String filePath) throws IOException {
+    public void writeToFile(List<String> report, String filePath) {
         try {
             Files.write(Path.of(filePath), report);
         } catch (IOException e) {
