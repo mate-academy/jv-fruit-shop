@@ -4,15 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitsTransaction;
 import core.basesyntax.service.DataParserService;
 import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReporterService;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.impl.FruitTransactionParser;
 import core.basesyntax.service.impl.FileRiaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
+import core.basesyntax.service.impl.FruitTransactionParser;
 import core.basesyntax.service.impl.ReporterServiceImpl;
 import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
-import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.util.List;
 
 public class Main {
