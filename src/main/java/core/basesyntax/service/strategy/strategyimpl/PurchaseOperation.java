@@ -5,9 +5,7 @@ import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
 import core.basesyntax.exception.NegativeBalanceException;
 import core.basesyntax.exception.WrongOperationException;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.OperationHandler;
-import java.util.HashMap;
 
 public class PurchaseOperation implements OperationHandler {
     private final StorageDao storageDao;
@@ -18,8 +16,8 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void handle(FruitTransactionDto dto) {
-        HashMap<String, Integer> fruitValue = storageDao.get(dto.fruitName());
-        if (fruitValue == null) {
+        Integer currentQuantity = storageDao.get(dto.fruitName());
+        if (currentQuantity == null) {
             throw new WrongOperationException("Trying to purchase fruits"
                     + dto.fruitName()
                     + " that we "
@@ -27,7 +25,7 @@ public class PurchaseOperation implements OperationHandler {
                     + " this means there wasnt any supply or balance operations"
                     + "in the incoming file");
         }
-        int newQuantity = fruitValue.get(dto.fruitName()) - dto.quantity();
+        int newQuantity = currentQuantity - dto.quantity();
         if (newQuantity < 0) {
             throw new NegativeBalanceException("Incorrect quantity,"
                     + " some operations probably missing,"
@@ -37,10 +35,5 @@ public class PurchaseOperation implements OperationHandler {
                     + newQuantity);
         }
         storageDao.add(dto.fruitName(), newQuantity);
-    }
-
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return dto.operationType() == Operation.PURCHASE;
     }
 }

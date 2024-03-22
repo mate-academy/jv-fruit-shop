@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.interfaces.FileReader;
 import core.basesyntax.service.interfaces.FileWriter;
 import core.basesyntax.service.interfaces.FruitReportCreate;
@@ -10,13 +11,13 @@ import core.basesyntax.service.serviceimpl.FileReaderImpl;
 import core.basesyntax.service.serviceimpl.FileWriterImpl;
 import core.basesyntax.service.serviceimpl.FruitReportCreateImpl;
 import core.basesyntax.service.serviceimpl.FruitTransactionParser;
-import core.basesyntax.service.strategy.FruitStrategy;
 import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.strategyimpl.BalanceOperation;
 import core.basesyntax.service.strategy.strategyimpl.PurchaseOperation;
 import core.basesyntax.service.strategy.strategyimpl.ReturnOperation;
 import core.basesyntax.service.strategy.strategyimpl.SupplyOperation;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String OPEN_FROM_FILE = "src/main/resources/fruitts.csv";
@@ -27,10 +28,10 @@ public class Main {
     public static void main(String[] args) {
         List<String> fileString = readFile(OPEN_FROM_FILE);
         var transactions = parse(fileString);
-        FruitStrategy strategy = initializeStrategy();
+        Map<Operation, OperationHandler> strategy = initializeStrategy();
 
         transactions.forEach(dto -> {
-            OperationHandler handler = strategy.findHandlerFor(dto);
+            OperationHandler handler = strategy.get(dto.operationType());
             handler.handle(dto);
         });
 
@@ -51,13 +52,13 @@ public class Main {
         return parser.parse(fileData);
     }
 
-    private static FruitStrategy initializeStrategy() {
-        var balance = new BalanceOperation(storageDao);
-        var supply = new SupplyOperation(storageDao);
-        var returns = new ReturnOperation(storageDao);
-        var purchase = new PurchaseOperation(storageDao);
-        List<OperationHandler> handlers = List.of(balance, returns, purchase, supply);
-        return new FruitStrategy(handlers);
+    private static Map<Operation, OperationHandler> initializeStrategy() {
+        return Map.of(
+                Operation.BALANCE, new BalanceOperation(storageDao),
+                Operation.RETURN, new ReturnOperation(storageDao),
+                Operation.PURCHASE, new PurchaseOperation(storageDao),
+                Operation.SUPPLY, new SupplyOperation(storageDao)
+        );
     }
 
     private static String prepareReport() {

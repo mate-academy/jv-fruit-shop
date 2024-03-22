@@ -6,9 +6,11 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.interfaces.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.lang3.StringUtils;
 
 public class FruitTransactionParser implements TransactionParser<FruitTransactionDto> {
     private static final int OPERATION_NEXT_INDEX = 0;
+    private static final int MIN_COLUMNS_NUMBER = 3;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FIRST_CSV_LINE = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
@@ -35,11 +37,11 @@ public class FruitTransactionParser implements TransactionParser<FruitTransactio
     }
 
     private void validateRawData(String[] columns) {
-        if (columns.length <= FRUIT_QUANTITY_INDEX) {
+        if (columns.length < MIN_COLUMNS_NUMBER) {
             throw new DataFileCorruptedException("Invalid number of columns in data");
         }
         for (String column : columns) {
-            if (column == null || column.trim().isEmpty()) {
+            if (StringUtils.isBlank(column)) {
                 throw new DataFileCorruptedException("Data in column is absent");
             }
         }

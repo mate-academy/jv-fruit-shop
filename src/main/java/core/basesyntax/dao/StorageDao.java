@@ -5,5 +5,5 @@ import java.util.HashMap;
 public interface StorageDao {
     HashMap<String, Integer> add(String fruitName, Integer quantity);
 
-    HashMap<String, Integer> get(String fruitName);
+    Integer get(String fruitName);
 }

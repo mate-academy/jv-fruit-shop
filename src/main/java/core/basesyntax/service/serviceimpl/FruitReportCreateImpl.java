@@ -17,12 +17,13 @@ public class FruitReportCreateImpl implements FruitReportCreate {
 
     public String createReport() {
         StringBuilder builder = new StringBuilder(FIRST_CSV_REPORT_LINE);
-        for (String fruitName : Storage.fruitsQuantity.keySet()) {
-            Map<String, Integer> fruitMap = storageDao.get(fruitName);
-            for (Map.Entry<String, Integer> fruits : fruitMap.entrySet()) {
-                builder.append(fruits.getKey())
+        for (Map.Entry<String, Integer> entry : Storage.fruitsQuantity.entrySet()) {
+            String fruitName = entry.getKey();
+            Integer quantity = storageDao.get(fruitName);
+            if (quantity != null) {
+                builder.append(fruitName)
                         .append(DIVIDER)
-                        .append(fruits.getValue())
+                        .append(quantity)
                         .append(System.lineSeparator());
             }
         }

@@ -3,7 +3,6 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.dto.FruitTransactionDto;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.strategy.OperationHandler;
 
 public class BalanceOperation implements OperationHandler {
@@ -18,8 +17,4 @@ public class BalanceOperation implements OperationHandler {
         storageDao.add(dto.fruitName(), dto.quantity());
     }
 
-    @Override
-    public boolean isApplicable(FruitTransactionDto dto) {
-        return dto.operationType() == Operation.BALANCE;
-    }
 }

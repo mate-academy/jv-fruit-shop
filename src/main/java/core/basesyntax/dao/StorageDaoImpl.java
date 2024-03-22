@@ -12,13 +12,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public HashMap<String, Integer> get(String fruitName) {
-        Integer quantity = Storage.fruitsQuantity.get(fruitName);
-        if (quantity != null) {
-            HashMap<String, Integer> result = new HashMap<>();
-            result.put(fruitName, quantity);
-            return result;
-        }
-        return null;
+    public Integer get(String fruitName) {
+        return Storage.fruitsQuantity.get(fruitName);
     }
 }
