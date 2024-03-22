@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitsTransaction;
 import core.basesyntax.service.DataParseService;
 import core.basesyntax.service.ReadFromFileService;
 import core.basesyntax.service.ReportService;
@@ -11,7 +13,6 @@ import core.basesyntax.service.impl.ReportServiceImpl;
 import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-
 import java.util.List;
 
 public class Main {
@@ -21,19 +22,27 @@ public class Main {
             = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
-        ReadFromFileService readService = new ReadFromFileServiceImpl();
-        DataParseService listFruitTransactions = new DataParseServiceImpl();
-        StorageService storageService = new StorageServiceImpl();
-        TransactionProcessorImpl transactionProcessor = new TransactionProcessorImpl();
-        ReportService reportService = new ReportServiceImpl(storageService);
-        WriterService writerService = new WriterServiceImpl();
-
+        Storage storage = new Storage();
+        ReadFromFileService readService
+                = new ReadFromFileServiceImpl();
+        DataParseService listFruitTransactions =
+                new DataParseServiceImpl();
+        StorageService storageService
+                = new StorageServiceImpl(storage);
+        TransactionProcessorImpl transactionProcessor
+                = new TransactionProcessorImpl(storageService);
+        ReportService reportService
+                = new ReportServiceImpl(storageService);
+        WriterService writerService
+                = new WriterServiceImpl();
         List<String> inputData = readService.readFile(PATH_FROM);
 
-        transactionProcessor.executeTransactions(
-                listFruitTransactions.getTransactionList(inputData));
+        List<FruitsTransaction> fruitsTransactionList
+                = listFruitTransactions.getTransactionList(inputData);
 
-        List<String> readyReport = reportService.createReport();
+        transactionProcessor.executeTransactions(fruitsTransactionList);
+
+        String readyReport = reportService.createReport();
 
         writerService.writeToFile(PATH_TO, readyReport);
     }

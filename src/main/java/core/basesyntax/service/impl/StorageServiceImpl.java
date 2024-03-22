@@ -5,7 +5,11 @@ import core.basesyntax.service.StorageService;
 import java.util.Map;
 
 public class StorageServiceImpl implements StorageService {
-    private final Storage storage = new Storage();
+    private final Storage storage;
+
+    public StorageServiceImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public int getQuantity(String key) {

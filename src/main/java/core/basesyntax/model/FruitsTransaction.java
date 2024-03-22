@@ -1,9 +1,11 @@
 package core.basesyntax.model;
 
+import core.basesyntax.service.impl.Operation;
+
 public class FruitsTransaction {
-    private Operation operation;
-    private String name;
-    private int quantity;
+    private final Operation operation;
+    private final String name;
+    private final int quantity;
 
     public FruitsTransaction(String operationCode, String name, int quantity) {
         this.operation = Operation.getByCode(operationCode);
@@ -21,27 +23,5 @@ public class FruitsTransaction {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
-
-        private final String code;
-
-        Operation(String code) {
-            this.code = code;
-        }
-
-        public static Operation getByCode(String operationCode) {
-            for (Operation operation : Operation.values()) {
-                if (operation.code.equals(operationCode)) {
-                    return operation;
-                }
-            }
-            throw new IllegalArgumentException("Invalid operation code: " + operationCode);
-        }
     }
 }
