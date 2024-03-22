@@ -3,7 +3,7 @@ package core.basesyntax.service.filehandler;
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class ReportGenerate {
+public class ReportGenerator {
     private static final String COMA = ",";
     private static final String HEADER = "fruit,quantity";
 
