@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.InvalidDataTypeException;
 import core.basesyntax.model.FruitsTransaction;
-import core.basesyntax.service.DataParseService;
+import core.basesyntax.service.DataParserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataParseServiceImpl implements DataParseService {
+public class FruitTransactionParser implements DataParserService {
     private static final String ARRAY_SPLITER = ",";
     private static final int SKIP_INDEX = 1;
     private static final int OPERATION_INDEX = 0;
@@ -15,7 +15,7 @@ public class DataParseServiceImpl implements DataParseService {
     private static final int LENGTH = 3;
 
     @Override
-    public List<FruitsTransaction> getTransactionList(List<String> data) {
+    public List<FruitsTransaction> parse(List<String> data) {
         return data.stream()
                 .skip(SKIP_INDEX)
                 .map(this::parseTransaction)

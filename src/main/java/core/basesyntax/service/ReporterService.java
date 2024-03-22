@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface ReportService {
+public interface ReporterService {
     String createReport();
 }

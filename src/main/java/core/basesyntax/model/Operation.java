@@ -1,4 +1,4 @@
-package core.basesyntax.service.impl;
+package core.basesyntax.model;
 
 import core.basesyntax.exceptions.InvalidOperationException;
 

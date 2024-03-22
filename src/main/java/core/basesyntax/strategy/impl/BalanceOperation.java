@@ -12,7 +12,7 @@ public class BalanceOperation implements OperationHandler {
     }
 
     @Override
-    public void perform(FruitsTransaction fruitsTransaction) {
+    public void handle(FruitsTransaction fruitsTransaction) {
         storageService.add(fruitsTransaction.getName(), fruitsTransaction.getQuantity());
     }
 }

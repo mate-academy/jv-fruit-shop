@@ -1,15 +1,15 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReporterService;
 import core.basesyntax.service.StorageService;
 import java.util.Map;
 
-public class ReportServiceImpl implements ReportService {
+public class ReporterServiceImpl implements ReporterService {
     private static final String SEPARATOR = ",";
     private static final String REPORT_HEADER = "fruit,quantity" + System.lineSeparator();
     private final StorageService storageService;
 
-    public ReportServiceImpl(StorageService storageService) {
+    public ReporterServiceImpl(StorageService storageService) {
         this.storageService = storageService;
     }
 

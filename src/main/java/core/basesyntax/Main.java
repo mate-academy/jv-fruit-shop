@@ -2,17 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitsTransaction;
-import core.basesyntax.service.DataParseService;
-import core.basesyntax.service.ReadFromFileService;
-import core.basesyntax.service.ReportService;
+import core.basesyntax.service.DataParserService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.ReporterService;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.DataParseServiceImpl;
-import core.basesyntax.service.impl.ReadFromFileServiceImpl;
-import core.basesyntax.service.impl.ReportServiceImpl;
+import core.basesyntax.service.FileWriterService;
+import core.basesyntax.service.impl.FruitTransactionParser;
+import core.basesyntax.service.impl.FileRiaderServiceImpl;
+import core.basesyntax.service.impl.ReporterServiceImpl;
 import core.basesyntax.service.impl.StorageServiceImpl;
 import core.basesyntax.service.impl.TransactionProcessorImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import java.util.List;
 
 public class Main {
@@ -23,22 +23,22 @@ public class Main {
 
     public static void main(String[] args) {
         Storage storage = new Storage();
-        ReadFromFileService readService
-                = new ReadFromFileServiceImpl();
-        DataParseService listFruitTransactions =
-                new DataParseServiceImpl();
+        FileReaderService readService
+                = new FileRiaderServiceImpl();
+        DataParserService listFruitTransactions =
+                new FruitTransactionParser();
         StorageService storageService
                 = new StorageServiceImpl(storage);
         TransactionProcessorImpl transactionProcessor
                 = new TransactionProcessorImpl(storageService);
-        ReportService reportService
-                = new ReportServiceImpl(storageService);
-        WriterService writerService
-                = new WriterServiceImpl();
+        ReporterService reportService
+                = new ReporterServiceImpl(storageService);
+        FileWriterService writerService
+                = new FileWriterServiceImpl();
         List<String> inputData = readService.readFile(PATH_FROM);
 
         List<FruitsTransaction> fruitsTransactionList
-                = listFruitTransactions.getTransactionList(inputData);
+                = listFruitTransactions.parse(inputData);
 
         transactionProcessor.executeTransactions(fruitsTransactionList);
 

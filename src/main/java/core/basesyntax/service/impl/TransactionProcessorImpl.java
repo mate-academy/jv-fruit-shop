@@ -2,8 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.exceptions.InvalidOperationException;
 import core.basesyntax.model.FruitsTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.StorageService;
-import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.TransactionProcessorService;
 import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TransactionProcessorImpl implements TransactionProcessor {
+public class TransactionProcessorImpl implements TransactionProcessorService {
     private final StorageService storageService;
     private final Map<Operation, OperationHandler> operationHandlerMap;
 
@@ -30,7 +31,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
             if (handler == null) {
                 throw new InvalidOperationException("Cannot perform operation: " + operation);
             }
-            handler.perform(transaction);
+            handler.handle(transaction);
         }
     }
 
