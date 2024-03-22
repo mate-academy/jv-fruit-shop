@@ -12,17 +12,12 @@ public class PurchaseHandler implements ActivityHandler {
 
     @Override
     public void operate(String fruit, int quantity) {
-        int currentProductQuantity = storage.getData().get(fruit);
-
-        try {
-            int newQuantity = currentProductQuantity - quantity;
-            if (currentProductQuantity <= 0) {
-                throw new ProductQuantityException("Attempting to remove more "
-                        + fruit + " than available.");
-            }
-            storage.getData().put(fruit, newQuantity);
-        } catch (ProductQuantityException e) {
-            throw new RuntimeException("there are no these products: " + fruit, e);
+        int newQuantity = storage.getData().get(fruit);
+        newQuantity = newQuantity - quantity;
+        if (newQuantity <= 0) {
+            throw new ProductQuantityException("Attempting to remove more "
+                    + fruit + " than available.");
         }
+        storage.getData().put(fruit, newQuantity);
     }
 }
