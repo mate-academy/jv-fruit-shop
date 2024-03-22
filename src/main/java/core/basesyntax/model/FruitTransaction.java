@@ -1,4 +1,6 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.model;
+
+import core.basesyntax.exception.InvalidDataException;
 
 public class FruitTransaction {
     private Operation operation;
@@ -35,6 +37,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
+
         private final String code;
 
         Operation(String code) {
@@ -43,6 +46,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static FruitTransaction.Operation getOperation(String operation) {
+            for (FruitTransaction.Operation operationEnum : FruitTransaction.Operation.values()) {
+                if (operation.equals(operationEnum.getCode())) {
+                    return operationEnum;
+                }
+            }
+            throw new InvalidDataException("Operation is not exist" + operation);
         }
     }
 }

@@ -1,6 +1,9 @@
-package core.basesyntax.serviceimpl;
+package core.basesyntax.service.impl;
+
+import static core.basesyntax.model.FruitTransaction.Operation.getOperation;
 
 import core.basesyntax.exception.InvalidDataException;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,25 +18,22 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     public List<FruitTransaction> parse(List<String> info) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String line : info) {
-            parseLine(line, fruitTransactions);
+            fruitTransactions.add(parseLine(line));
         }
         return fruitTransactions;
     }
 
-    private void parseLine(String line, List<FruitTransaction> fruitTransactions) {
-        String[] operations = line.split(System.lineSeparator());
-        for (String operation : operations) {
-            String[] data = operation.split(SEPARATOR);
-            FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(getOperation(data[OPERATION_INDEX]));
-            validateAndSetData(data, fruitTransaction);
-            fruitTransactions.add(fruitTransaction);
-        }
+    private FruitTransaction parseLine(String line) {
+        String[] data = line.split(SEPARATOR);
+        FruitTransaction fruitTransaction = new FruitTransaction();
+        fruitTransaction.setOperation(getOperation(data[OPERATION_INDEX]));
+        validateAndSetData(data, fruitTransaction);
+        return fruitTransaction;
     }
 
     private void validateAndSetData(String[] data, FruitTransaction fruitTransaction) {
         String fruit = data[FRUIT_INDEX];
-        if (validatorFruits(fruit)) {
+        if (isFruitsNoTNull(fruit)) {
             throw new InvalidDataException("Fruit does not exist: " + fruit);
         }
         fruitTransaction.setFruit(fruit);
@@ -43,26 +43,17 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new InvalidDataException("Fruit does not exist: " + fruit);
         }
-        if (validatorQuantity(quantity)) {
+        if (isQuantityNotNull(quantity)) {
             throw new InvalidDataException("Fruit does not exist: " + fruit);
         }
         fruitTransaction.setQuantity(quantity);
     }
 
-    private FruitTransaction.Operation getOperation(String operation) {
-        for (FruitTransaction.Operation operationEnum : FruitTransaction.Operation.values()) {
-            if (operation.equals(operationEnum.getCode())) {
-                return operationEnum;
-            }
-        }
-        throw new InvalidDataException("Operation is not exist" + operation);
-    }
-
-    private boolean validatorFruits(String info) {
+    private boolean isFruitsNoTNull(String info) {
         return info == null || info.isEmpty();
     }
 
-    private boolean validatorQuantity(int info) {
+    private boolean isQuantityNotNull(int info) {
         try {
             return info < 0;
         } catch (NumberFormatException e) {
