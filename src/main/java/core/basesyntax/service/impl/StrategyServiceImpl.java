@@ -12,10 +12,10 @@ import java.util.Map;
 
 public class StrategyServiceImpl implements StrategyService, OperationStrategy {
     private static final DataValidator DATA_VALIDATOR = new DataValidatorImpl();
-    private final Map<Operation, OperationHandler> operations;
+    private final Map<Operation, OperationHandler> operationStrategyMap;
 
     public StrategyServiceImpl(Map<Operation, OperationHandler> operations) {
-        this.operations = operations;
+        this.operationStrategyMap = operations;
     }
 
     @Override
@@ -30,10 +30,10 @@ public class StrategyServiceImpl implements StrategyService, OperationStrategy {
     @Override
     public OperationHandler getHandler(FruitTransactionDto fruitTransactionDto) {
         Operation operation = fruitTransactionDto.operation();
-        var handler = operations.get(operation);
+        var handler = operationStrategyMap.get(operation);
         if (handler == null) {
             throw new InvalidOperationException("Invalid operation: " + operation);
         }
-        return operations.get(operation);
+        return operationStrategyMap.get(operation);
     }
 }
