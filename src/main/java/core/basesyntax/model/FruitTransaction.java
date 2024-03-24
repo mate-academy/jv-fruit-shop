@@ -52,6 +52,6 @@ public class FruitTransaction {
                 return operation;
             }
         }
-        throw new RuntimeException("Invalid name of operation");
+        throw new IllegalArgumentException("Inappropriate name of operation");
     }
 }

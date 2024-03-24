@@ -10,9 +10,9 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
     @Override
     public List<String> createReport() {
         List<String> report = new ArrayList<>();
-        report.add("fruit;quantity");
+        report.add("fruit,quantity");
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
-            report.add(System.lineSeparator() + entry.getKey() + ";" + entry.getValue());
+            report.add(System.lineSeparator() + entry.getKey() + "," + entry.getValue());
         }
         return report;
     }

@@ -6,12 +6,11 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void getOperation(FruitTransaction transaction) {
-        if (Storage.storage.get(transaction.getFruit()) - transaction.getQuantity() > 0) {
-            int valueBeforeOperation = Storage.storage.get(transaction.getFruit());
-            Storage.storage
-                    .put(transaction.getFruit(), valueBeforeOperation - transaction.getQuantity());
-        } else {
+        int valueBeforeOperation = Storage.storage.get(transaction.getFruit());
+        if (valueBeforeOperation - transaction.getQuantity() <= 0) {
             throw new RuntimeException("Balance after purchase will be negative");
         }
+        Storage.storage
+                .put(transaction.getFruit(), valueBeforeOperation - transaction.getQuantity());
     }
 }

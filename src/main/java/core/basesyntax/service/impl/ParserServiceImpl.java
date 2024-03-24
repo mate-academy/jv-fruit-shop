@@ -10,7 +10,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int INDEX_OF_OPERATION_CODE = 0;
     private static final int INDEX_OF_FRUIT_NAME = 1;
     private static final int INDEX_OF_QUANTITY = 2;
-    private static final String SEPARATION_SIGN = ";";
+    private static final String SEPARATION_SIGN = ",";
 
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {

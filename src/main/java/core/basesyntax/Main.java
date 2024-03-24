@@ -18,7 +18,6 @@ import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseHandler;
 import core.basesyntax.strategy.operation.ReturnHandler;
 import core.basesyntax.strategy.operation.SupplyHandler;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,11 +26,12 @@ public class Main {
     private static final String REPORT_FILE_NAME = "src/main/resources/outputData.csv";
 
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnHandler()
+        );
 
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(FILE_NAME_INPUT_DATA);
