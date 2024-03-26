@@ -1,5 +1,7 @@
 package mate.fruitshop.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -35,7 +37,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
@@ -46,13 +48,11 @@ public class FruitTransaction {
         }
 
         public static Operation pickOperation(String type) {
-            return switch (type) {
-                case "b" -> Operation.BALANCE;
-                case "s" -> Operation.SUPPLY;
-                case "p" -> Operation.PURCHASE;
-                case "r" -> Operation.RETURN;
-                default -> throw new RuntimeException("Invalid operation type " + type);
-            };
+            return Arrays.stream(Operation.values())
+                    .filter(operation -> operation.getCode().equals(type))
+                    .findFirst()
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Invalid operation type " + type));
         }
     }
 }

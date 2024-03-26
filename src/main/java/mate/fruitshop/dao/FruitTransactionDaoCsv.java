@@ -13,15 +13,15 @@ import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 
 public class FruitTransactionDaoCsv implements FruitTransactionDao {
-    public static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
-    public static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
     public static final String OPERATION_TYPE = "type";
     public static final String FRUIT = "fruit";
     public static final String QUANTITY = "quantity";
+    private static final String INPUT_FILE_NAME = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/output.csv";
 
     @Override
     public List<FruitTransaction> getAll() {
-        Reader in = getFileReader();
+        Reader reader = getFileReader();
 
         List<FruitTransaction> transactionList = new ArrayList<>();
         CSVFormat csvFormat = CSVFormat.DEFAULT.builder()
@@ -29,7 +29,7 @@ public class FruitTransactionDaoCsv implements FruitTransactionDao {
                 .setSkipHeaderRecord(true)
                 .build();
         try {
-            Iterable<CSVRecord> records = csvFormat.parse(in);
+            Iterable<CSVRecord> records = csvFormat.parse(reader);
             records.forEach(record -> transactionList.add(parseTransaction(record)));
         } catch (IOException e) {
             throw new RuntimeException("Can't parse file " + INPUT_FILE_NAME, e);

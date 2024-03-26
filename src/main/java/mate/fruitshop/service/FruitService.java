@@ -11,7 +11,7 @@ import mate.fruitshop.dao.FruitTransactionDao;
 import mate.fruitshop.model.FruitTransaction;
 
 public class FruitService {
-    private FruitTransactionDao dao;
+    private final FruitTransactionDao dao;
 
     public FruitService(FruitTransactionDao dao) {
         this.dao = dao;
@@ -20,23 +20,17 @@ public class FruitService {
     public Map<String, Integer> calculateFruitsLeft() {
         List<FruitTransaction> transactions = dao.getAll();
         Map<String, Integer> fruitQuantityMap = new HashMap<>();
-        int currentFruitQuantity;
-
-        for (FruitTransaction transaction: transactions) {
-            currentFruitQuantity = TRANSACTIONS_MAP.get(transaction.getOperation())
-                    .conductTransaction(transaction,
-                            fruitQuantityMap.getOrDefault(transaction.getFruit(), 0));
-            fruitQuantityMap.put(transaction.getFruit(), currentFruitQuantity);
-        }
+        transactions.forEach(t -> fruitQuantityMap.compute(t.getFruit(), (k, v) ->
+                TRANSACTIONS_MAP.get(t.getOperation())
+                        .conductTransaction(t, v == null ? 0 : v)));
         return fruitQuantityMap;
     }
 
     public String createReport(Map<String, Integer> fruitQuantityMap) {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(FRUIT + ", " + QUANTITY);
-        fruitQuantityMap.entrySet().stream()
-                        .forEach(e -> reportBuilder.append(System.lineSeparator())
-                                        .append(e.getKey()).append(", ").append(e.getValue()));
+        fruitQuantityMap.forEach((key, value) -> reportBuilder.append(System.lineSeparator())
+                .append(key).append(", ").append(value));
         return reportBuilder.toString();
     }
 
