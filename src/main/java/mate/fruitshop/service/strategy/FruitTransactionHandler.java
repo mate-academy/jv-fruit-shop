@@ -7,7 +7,7 @@ public interface FruitTransactionHandler {
 
     default void checkPositiveQuantity(FruitTransaction transaction) {
         if (transaction.getQuantity() < 0) {
-            throw new RuntimeException("Negative value of " + transaction.getQuantity()
+            throw new IllegalArgumentException("Negative value of " + transaction.getQuantity()
                     + " for transaction: " + transaction.getOperation());
         }
     }
