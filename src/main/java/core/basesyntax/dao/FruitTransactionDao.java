@@ -1,24 +1,14 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
+import java.util.Set;
 
-public class FruitTransactionDao implements IFruitTransactionDao {
-    @Override
-    public void add(FruitTransaction fruitTransaction) {
-        Storage.fruitTransactions.add(fruitTransaction);
-    }
+public interface FruitTransactionDao {
+    void add(String name, Integer quantity);
 
-    @Override
-    public FruitTransaction getByIndex(int index) {
-        if (index >= getLength()) {
-            throw new IndexOutOfBoundsException();
-        }
-        return Storage.fruitTransactions.get(index);
-    }
+    void update(String name, Integer quantity);
 
-    @Override
-    public int getLength() {
-        return Storage.fruitTransactions.size();
-    }
+    int getByName(String name);
+
+    Set<Map.Entry<String, Integer>> getFull();
 }

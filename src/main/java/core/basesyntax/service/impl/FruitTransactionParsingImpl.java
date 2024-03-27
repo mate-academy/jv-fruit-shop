@@ -2,16 +2,16 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.IFruitTransactionParsing;
+import core.basesyntax.service.FruitTransactionParsing;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class FruitTransactionParsing implements IFruitTransactionParsing {
+public class FruitTransactionParsingImpl implements FruitTransactionParsing {
 
     private final Map<String, Operation> codeOperationMap;
 
-    public FruitTransactionParsing(Map<String, Operation> codeOperationMap) {
+    public FruitTransactionParsingImpl(Map<String, Operation> codeOperationMap) {
         this.codeOperationMap = codeOperationMap;
     }
 
@@ -30,7 +30,7 @@ public class FruitTransactionParsing implements IFruitTransactionParsing {
             throw new RuntimeException("Incorrect data entry method");
         }
 
-        Operation operation = new OperationIdentifier(codeOperationMap).get(splitLine[0]);
+        Operation operation = new OperationIdentifierImpl(codeOperationMap).get(splitLine[0]);
         String name = splitLine[1];
         int quantity = Integer.parseInt(splitLine[2]);
 

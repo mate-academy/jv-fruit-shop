@@ -1,16 +1,15 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitTransactionDao;
+import core.basesyntax.dao.FruitTransactionDaoImpl;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.impl.FileReaderCvs;
-import core.basesyntax.service.impl.FileWriterCvs;
-import core.basesyntax.service.impl.FruitQuantityCounter;
-import core.basesyntax.service.impl.FruitTransactionParsing;
-import core.basesyntax.service.impl.FruitTransactionProcessor;
-import core.basesyntax.service.impl.OperationStrategy;
-import core.basesyntax.service.impl.ReportCreator;
+import core.basesyntax.service.impl.FileReaderCvsImpl;
+import core.basesyntax.service.impl.FileWriterCvsImpl;
+import core.basesyntax.service.impl.FruitTransactionParsingImpl;
+import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.operations.strategy.BalanceOperationHandler;
-import core.basesyntax.service.operations.strategy.IOperationHandler;
+import core.basesyntax.service.operations.strategy.OperationHandler;
 import core.basesyntax.service.operations.strategy.PurchaseOperationHandler;
 import core.basesyntax.service.operations.strategy.ReturnOperationHandler;
 import core.basesyntax.service.operations.strategy.SupplyOperationHandler;
@@ -22,11 +21,17 @@ public class Main {
     public static final String WRITE_PATH = "src/main/java/core/basesyntax/resources/report.csv";
 
     public static void main(String[] args) {
-        Map<Operation, IOperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
+        FruitTransactionDaoImpl fruitTransactionDaoImpl = new FruitTransactionDaoImpl();
+
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE,
+                new BalanceOperationHandler(fruitTransactionDaoImpl));
+        operationHandlerMap.put(Operation.SUPPLY,
+                new SupplyOperationHandler(fruitTransactionDaoImpl));
+        operationHandlerMap.put(Operation.PURCHASE,
+                new PurchaseOperationHandler(fruitTransactionDaoImpl));
+        operationHandlerMap.put(Operation.RETURN,
+                new ReturnOperationHandler(fruitTransactionDaoImpl));
 
         Map<String, Operation> codeOperationMap = new HashMap<>();
         codeOperationMap.put("b", Operation.BALANCE);
@@ -34,27 +39,19 @@ public class Main {
         codeOperationMap.put("p", Operation.PURCHASE);
         codeOperationMap.put("r", Operation.RETURN);
 
-        FruitTransactionDao fruitTransactionDao = new FruitTransactionDao();
+        FileReaderCvsImpl fileReaderCvsImpl = new FileReaderCvsImpl();
+        FileWriterCvsImpl fileWriterCvsImpl = new FileWriterCvsImpl();
 
-        FileReaderCvs fileReaderCvs = new FileReaderCvs();
-        FileWriterCvs fileWriterCvs = new FileWriterCvs();
+        FruitTransactionParsingImpl fruitTransactionParsingImpl =
+                new FruitTransactionParsingImpl(codeOperationMap);
+        FruitTransactionProcessorImpl fruitTransactionProcessorImpl =
+                new FruitTransactionProcessorImpl(new OperationStrategyImpl(operationHandlerMap));
+        ReportCreatorImpl reportCreatorImpl = new ReportCreatorImpl(fruitTransactionDaoImpl);
 
-        FruitTransactionParsing fruitTransactionParsing =
-                new FruitTransactionParsing(codeOperationMap);
-        FruitTransactionProcessor fruitTransactionProcessor =
-                new FruitTransactionProcessor(fruitTransactionDao);
+        fruitTransactionProcessorImpl.process(
+                fruitTransactionParsingImpl.parse(
+                        fileReaderCvsImpl.read(READ_PATH)));
 
-        FruitQuantityCounter fruitQuantityCounter =
-                new FruitQuantityCounter(fruitTransactionDao,
-                        new OperationStrategy(operationHandlerMap));
-        ReportCreator reportCreator = new ReportCreator();
-
-        fruitTransactionProcessor.process(
-                fruitTransactionParsing.parse(
-                        fileReaderCvs.read(READ_PATH)));
-
-        fileWriterCvs.write(WRITE_PATH,
-                reportCreator.create(
-                        fruitQuantityCounter.get()));
+        fileWriterCvsImpl.write(WRITE_PATH, reportCreatorImpl.create());
     }
 }

@@ -1,13 +1,13 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.IOperationIdentifier;
+import core.basesyntax.service.OperationIdentifier;
 import java.util.Map;
 
-public class OperationIdentifier implements IOperationIdentifier {
+public class OperationIdentifierImpl implements OperationIdentifier {
     private final Map<String, Operation> codeOperationMap;
 
-    public OperationIdentifier(Map<String, Operation> codeOperationMap) {
+    public OperationIdentifierImpl(Map<String, Operation> codeOperationMap) {
         this.codeOperationMap = codeOperationMap;
     }
 
