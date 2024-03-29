@@ -5,12 +5,13 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportCreatorImpl;
 import core.basesyntax.service.impl.TransactionParserImpl;
+import core.basesyntax.service.impl.TransactionProcessorImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.impl.BalanceHandlerImpl;
 import core.basesyntax.strategy.impl.PurchaseHandlerImpl;
@@ -36,11 +37,8 @@ public class Main {
                 Operation.PURCHASE, new PurchaseHandlerImpl(),
                 Operation.RETURN, new ReturnHandlerImpl()));
 
-        for (FruitTransaction transaction : fruitTransactions) {
-            OperationHandler operationHandler = operationStrategy
-                    .getHandler(transaction.getOperation());
-            operationHandler.apply(transaction);
-        }
+        TransactionProcessor transactionProcessor = new TransactionProcessorImpl(operationStrategy);
+        transactionProcessor.process(fruitTransactions);
 
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport();
