@@ -1,7 +1,8 @@
 package core.basesyntax.service;
 
-import java.util.Map;
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
 
 public interface FruitShopService {
-    Map<String, Integer> fruitTransaction(String path);
+    void fruitTransaction(List<FruitTransaction> fruitTransactionList);
 }
