@@ -7,7 +7,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private FileReaderImpl fileReader = new FileReaderImpl();
     private OperationStrategy strategy = new OperationStrategy();
 
     @Override
