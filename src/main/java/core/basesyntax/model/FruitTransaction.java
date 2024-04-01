@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
+
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -9,6 +10,18 @@ public class FruitTransaction {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public enum Operation {
@@ -23,12 +36,13 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public static Operation getValue (String code) {
+        public static Operation getValue(String code) {
             for (Operation o : values()) {
                 if (o.code.equals(code)) {
                     return o;
                 }
             }
+            return null;
         }
 
         public String getCode() {
