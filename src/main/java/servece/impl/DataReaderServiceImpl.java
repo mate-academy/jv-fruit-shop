@@ -1,12 +1,13 @@
 package servece.impl;
 
-import model.FruitTransaction;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import model.FruitTransaction;
 import service.DataReaderService;
 
 public class DataReaderServiceImpl implements DataReaderService {

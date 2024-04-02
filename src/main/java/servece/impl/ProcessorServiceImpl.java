@@ -1,11 +1,11 @@
 package servece.impl;
 
 import model.FruitTransaction;
-import service.handler.OperationHandler;
-import java.util.Map;
 import service.ProcessorService;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import service.handler.OperationHandler;
 
 public class ProcessorServiceImpl implements ProcessorService {
 
