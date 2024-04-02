@@ -1,11 +1,10 @@
-package serviceImpl;
+package service.impl;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
-
 import db.Storage;
+import java.util.Map;
 import service.DataWriterService;
 
 public class DataWriterServiceImpl implements DataWriterService {

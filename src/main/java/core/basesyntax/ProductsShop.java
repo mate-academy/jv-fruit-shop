@@ -1,17 +1,16 @@
 package core.basesyntax;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import serviceImpl.DataReaderServiceImpl;
-import serviceImpl.DataWriterServiceImpl;
-import serviceImpl.ProcessorServiceImpl;
+import service.impl.DataReaderServiceImpl;
+import service.impl.DataWriterServiceImpl;
 import service.handler.BalanceHandler;
-import service.handler.OperationHandler;
 import service.handler.PurchaseHandler;
 import service.handler.ReturnHandler;
 import service.handler.SupplyHandler;
+import service.handler.OperationHandler;
+import service.impl.ProcessorServiceImpl;
 
 public class ProductsShop {
     private static final String PATH_TO_READ_FILE =

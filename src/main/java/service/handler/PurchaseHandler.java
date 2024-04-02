@@ -1,7 +1,5 @@
 package service.handler;
 
-import java.util.Map;
-
 import db.Storage;
 import model.FruitTransaction;
 
