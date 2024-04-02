@@ -6,6 +6,6 @@ import model.FruitTransaction;
 import service.handler.OperationHandler;
 
 public interface ProcessorService {
-    Map<String, Integer> processOnData(List<FruitTransaction> transactions,
+   void processOnData(List<FruitTransaction> transactions,
                                        Map<FruitTransaction.Operation, OperationHandler> operation);
 }

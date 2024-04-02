@@ -1,6 +1,5 @@
-package servece.impl;
+package serviceImpl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -10,20 +9,18 @@ import service.handler.OperationHandler;
 public class ProcessorServiceImpl implements ProcessorService {
 
     @Override
-    public Map<String, Integer> processOnData(List<FruitTransaction> transactions,
+    public void processOnData(List<FruitTransaction> transactions,
                                               Map<FruitTransaction.Operation,
                                                       OperationHandler> operation) {
-        Map<String, Integer> fruitBalance = new HashMap<>();
         for (FruitTransaction fruitTransaction : transactions) {
             OperationHandler operationHandler =
                     operation.get(fruitTransaction.getOperation());
             if (operationHandler != null) {
-                operationHandler.apply(fruitTransaction, fruitBalance);
+                operationHandler.apply(fruitTransaction);
             } else {
-                throw new RuntimeException("Operation does not find!");
+                throw new RuntimeException("Couldn't be found");
             }
 
         }
-        return fruitBalance;
     }
 }

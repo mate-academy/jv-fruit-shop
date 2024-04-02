@@ -1,9 +1,6 @@
-package servece.impl;
+package serviceImpl;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
@@ -17,10 +14,7 @@ public class DataReaderServiceImpl implements DataReaderService {
     @Override
     public List<FruitTransaction> readDataInFile(String filePath) {
         List<FruitTransaction> transaktion = new ArrayList<>();
-        File file = new File(filePath);
-        BufferedReader bufferedReader;
-        try {
-            bufferedReader = new BufferedReader(new FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))){
             String value = bufferedReader.readLine();
             while (value != null) {
                 String[] current = value.split(",");
