@@ -20,18 +20,21 @@ public class ProductsShop {
             "src/main/java/resorces/productsAfterDay.txt";
 
     public static void main(String[] args) {
-        DataReaderServiceImpl dataReaderService = new DataReaderServiceImpl();
-        DataWriterServiceImpl dataWriterService = new DataWriterServiceImpl();
-        ProcessorServiceImpl processorService = new ProcessorServiceImpl();
         Map<FruitTransaction.Operation, OperationHandler> handlerMap = new HashMap<>();
         handlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
         handlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseHandler());
         handlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyHandler());
         handlerMap.put(FruitTransaction.Operation.RETURN, new ReturnHandler());
+
+        DataReaderServiceImpl dataReaderService = new DataReaderServiceImpl();
         List<FruitTransaction> fruitTransactionList =
                 dataReaderService.readDataInFile(PATH_TO_READ_FILE);
+
+        ProcessorServiceImpl processorService = new ProcessorServiceImpl();
         Map<String, Integer> processedData =
                 processorService.processOnData(fruitTransactionList, handlerMap);
+
+        DataWriterServiceImpl dataWriterService = new DataWriterServiceImpl();
         dataWriterService.writeProcessedDataToFile(PATH_TO_FILE_WRITE, processedData);
     }
 }
