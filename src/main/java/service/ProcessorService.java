@@ -1,10 +1,9 @@
 package service;
 
-import model.FruitTransaction;
-import service.Handler.OperationHandler;
-
 import java.util.List;
 import java.util.Map;
+import model.FruitTransaction;
+import service.Handler.service.OperationHandler;
 
 public interface ProcessorService {
     Map<String, Integer> processOnData(List<FruitTransaction> transactions,

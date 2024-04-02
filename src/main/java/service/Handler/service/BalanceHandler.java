@@ -1,9 +1,7 @@
-package service.Handler;
-
-import model.FruitTransaction;
-import service.Handler.OperationHandler;
+package service.Handler.service;
 
 import java.util.Map;
+import model.FruitTransaction;
 
 public class BalanceHandler implements OperationHandler {
     @Override

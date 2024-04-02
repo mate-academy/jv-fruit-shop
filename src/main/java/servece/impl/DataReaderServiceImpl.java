@@ -1,20 +1,18 @@
 package servece.impl;
 
 import model.FruitTransaction;
-import service.DataReaderService;
-
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import service.DataReaderService;
 
 public class DataReaderServiceImpl implements DataReaderService {
-    private final static int OPERATION_PART = 0;
-    private final static int FRUIT_PART = 1;
-    private final static int QUANTITY_PART = 2;
+    private static final int OPERATION_PART = 0;
+    private static final int FRUIT_PART = 1;
+    private static final int QUANTITY_PART = 2;
 
     @Override
     public List<FruitTransaction> readDataInFile(String filePath) {
