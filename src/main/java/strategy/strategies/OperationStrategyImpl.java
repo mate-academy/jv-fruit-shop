@@ -1,8 +1,8 @@
 package strategy.strategies;
 
 import java.util.Map;
-import service.Handler.service.OperationHandler;
 import model.FruitTransaction;
+import service.handler.OperationHandler;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation,
@@ -15,6 +15,6 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation operation) {
-       return operationOperationHandlerMap.get(operation);
+        return operationOperationHandlerMap.get(operation);
     }
 }

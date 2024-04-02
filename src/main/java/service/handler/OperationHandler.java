@@ -1,4 +1,4 @@
-package service.Handler.service;
+package service.handler;
 
 import java.util.Map;
 import model.FruitTransaction;

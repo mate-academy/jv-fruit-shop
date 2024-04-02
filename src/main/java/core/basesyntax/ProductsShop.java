@@ -1,25 +1,22 @@
 package core.basesyntax;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import servece.impl.DataReaderServiceImpl;
 import servece.impl.DataWriterServiceImpl;
 import servece.impl.ProcessorServiceImpl;
-import service.Handler.service.OperationHandler;
-import service.Handler.service.BalanceHandler;
-import service.Handler.service.PurchaseHandler;
-import service.Handler.service.ReturnHandler;
-import service.Handler.service.SupplyHandler;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
-/**
- * Feel free to remove this class and create your own.
- */
-public class HelloWorld {
+import service.handler.BalanceHandler;
+import service.handler.OperationHandler;
+import service.handler.PurchaseHandler;
+import service.handler.ReturnHandler;
+import service.handler.SupplyHandler;
+
+
+public class ProductsShop {
     private static final String PATH_TO_READ_FILE = "src/main/java/resorces/store.txt";
     private static final String PATH_TO_FILE_WRITE = "src/main/java/resorces/productsAfterDay.txt";
-    // HINT: In the `public static void main(String[] args)` it is better to create instances of your classes, 
-    // and call their methods, but do not write any business logic in the `main` method!
 
     public static void main(String[] args) {
 

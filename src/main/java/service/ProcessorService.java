@@ -3,7 +3,7 @@ package service;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.Handler.service.OperationHandler;
+import service.handler.OperationHandler;
 
 public interface ProcessorService {
     Map<String, Integer> processOnData(List<FruitTransaction> transactions,
