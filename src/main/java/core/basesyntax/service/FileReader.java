@@ -3,18 +3,17 @@ package core.basesyntax.service;
 import static core.basesyntax.service.TransactionParser.parseTransaction;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
-public class InputReader {
+public class FileReader {
     private TransactionProcessor transactionProcessor;
 
-    private InputReader(TransactionProcessor transactionProcessor) {
+    private FileReader(TransactionProcessor transactionProcessor) {
         this.transactionProcessor = transactionProcessor;
     }
 
     public void read(String fileName) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
             bufferedReader.readLine(); //reading first line because it contains fields names
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -25,7 +24,7 @@ public class InputReader {
         }
     }
 
-    public static InputReader of(TransactionProcessor transactionProcessor) {
-        return new InputReader(transactionProcessor);
+    public static FileReader of(TransactionProcessor transactionProcessor) {
+        return new FileReader(transactionProcessor);
     }
 }

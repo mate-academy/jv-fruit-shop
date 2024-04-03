@@ -5,7 +5,7 @@ public class FruitTransaction {
     private int quantity;
     private Operation operation;
 
-    private FruitTransaction(Operation operation, String fruit, int quantity) {
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -43,9 +43,5 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("No operation with code: " + code);
         }
-    }
-
-    public static FruitTransaction of(Operation operation, String fruit, int quantity) {
-        return new FruitTransaction(operation, fruit,quantity);
     }
 }
