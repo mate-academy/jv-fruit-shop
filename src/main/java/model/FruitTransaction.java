@@ -5,6 +5,9 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    public FruitTransaction() {
+    }
+
     public FruitTransaction(Operation type, String fruit, int quantity) {
         this.type = type;
         this.fruit = fruit;
@@ -47,13 +50,13 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public static String getCode(Operation operation) {
-            return operation.code;
+        public String getCode() {
+            return code;
         }
 
         public static Operation fromCode(String code) {
             for (Operation operation : Operation.values()) {
-                if (getCode(operation).equals(code)) {
+                if (operation.getCode().equals(code)) {
                     return operation;
                 }
             }
@@ -63,7 +66,7 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return " FruitsTransaction: " + Operation.getCode(type) + " " + fruit +
+        return " FruitsTransaction: " + type.getCode() + " " + fruit +
                 " " + quantity;
     }
 }

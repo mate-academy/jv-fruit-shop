@@ -6,6 +6,7 @@ import strategy.FruitStrategy;
 import java.util.List;
 import java.util.Map;
 
-public interface FruitService {
-    public void processTransaction(Map<List<FruitTransaction>, FruitStrategy> strategies);
+public interface TransactionProcessorService {
+
+    void processTransaction(List<FruitTransaction> listOfTransactions);
 }

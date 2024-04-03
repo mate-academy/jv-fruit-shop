@@ -13,6 +13,6 @@ public class FruitStrategyImpl implements FruitStrategy {
     }
     @Override
     public StrategyHandler getTypeHandler(FruitTransaction.Operation type) {
-        return typeHandlerMap.get(type);
+        return typeHandlerMap.get(type.getCode());
     }
 }
