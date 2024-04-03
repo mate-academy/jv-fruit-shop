@@ -1,11 +1,8 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class ReportCreator {
-    private static final String REPORT_FILE_NAME = "src/main/resources/report.csv";
     private static final String DELIMITER = ",";
 
     public String createReport(Storage storage) {
@@ -17,11 +14,6 @@ public class ReportCreator {
             if (++index < size) {
                 report.append(System.lineSeparator());
             }
-        }
-        try (FileWriter fileWriter = new FileWriter(REPORT_FILE_NAME)) {
-            fileWriter.write(report.toString());
-        } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + REPORT_FILE_NAME, e);
         }
         return report.toString();
     }

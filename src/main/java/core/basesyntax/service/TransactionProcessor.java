@@ -13,7 +13,7 @@ public class TransactionProcessor {
     private Storage storage;
     private HashMap<FruitTransaction.Operation, OperationStrategy> operationMap;
 
-    private TransactionProcessor(Storage storage) {
+    public TransactionProcessor(Storage storage) {
         this.storage = storage;
         operationMap = new HashMap<>();
         operationMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -26,9 +26,4 @@ public class TransactionProcessor {
         operationMap.get(transaction.getOperation())
                 .processTransaction(transaction,storage);
     }
-
-    public static TransactionProcessor of(Storage storage) {
-        return new TransactionProcessor(storage);
-    }
-
 }

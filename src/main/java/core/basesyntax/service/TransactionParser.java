@@ -8,7 +8,7 @@ public class TransactionParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-    public static FruitTransaction parseTransaction(String line) {
+    public FruitTransaction parseTransaction(String line) {
         String[] parts = line.split(DELIMITER);
         FruitTransaction.Operation operation = FruitTransaction.Operation
                 .fromCode(parts[TYPE_INDEX]);

@@ -1,30 +1,22 @@
 package core.basesyntax.service;
 
-import static core.basesyntax.service.TransactionParser.parseTransaction;
-
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class FileReader {
-    private TransactionProcessor transactionProcessor;
 
-    private FileReader(TransactionProcessor transactionProcessor) {
-        this.transactionProcessor = transactionProcessor;
-    }
-
-    public void read(String fileName) {
+    public ArrayList<String> read(String fileName) {
+        ArrayList<String> textFromFile = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
             bufferedReader.readLine(); //reading first line because it contains fields names
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                transactionProcessor.processTransaction(parseTransaction(line));
+                textFromFile.add(line);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + fileName, e);
         }
-    }
-
-    public static FileReader of(TransactionProcessor transactionProcessor) {
-        return new FileReader(transactionProcessor);
+        return textFromFile;
     }
 }
