@@ -1,17 +1,23 @@
 package core.basesyntax;
 
-import core.basesyntax.impl.ReadDataLogicImpl;
-import core.basesyntax.impl.WriteToFileImpl;
-import core.basesyntax.service.ReadDataLogic;
+import core.basesyntax.database.DataBase;
+import core.basesyntax.database.FruitActivity;
+import core.basesyntax.impl.CalculateFruitsImpl;
+import core.basesyntax.impl.FileReaderImpl;
+import core.basesyntax.impl.FileWriterImpl;
+import core.basesyntax.service.CalculateFruits;
+import core.basesyntax.service.FileReaderInterface;
+import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        WriteToFileImpl write = new WriteToFileImpl();
-        ReadDataLogic read = new ReadDataLogicImpl();
-        Map<String, Integer> map = read.readDataFromFile("E:\\IDEA Projects\\jv-fruit-shop\\"
-                + "src\\main\\java\\core\\basesyntax\\database\\beginningData");
-        write.writeReport("E:\\IDEA Projects\\"
-                + "jv-fruit-shop\\src\\main\\java\\core\\basesyntax\\database\\report", map);
+        FileWriterImpl write = new FileWriterImpl();
+        FileReaderInterface read = new FileReaderImpl();
+        CalculateFruits calculateFruits = new CalculateFruitsImpl();
+        DataBase dataBase = new DataBase();
+        List<FruitActivity> fruitActivities = read.readDataFromFile(dataBase.getDataFilePath());
+        Map<String, Integer> calculate = calculateFruits.calculate(fruitActivities);
+        write.writeReport(dataBase.getReportFilePath(), calculate);
     }
 }
