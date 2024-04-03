@@ -2,11 +2,11 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.Parser;
+import core.basesyntax.service.TransactionParser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserImpl implements Parser {
+public class ParserImpl implements TransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -14,7 +14,7 @@ public class ParserImpl implements Parser {
     private static final int FIELDS_COUNT = 3;
 
     @Override
-    public List<FruitTransaction> parseTransactions(List<String> lines) {
+    public List<FruitTransaction> parseAll(List<String> lines) {
         List<FruitTransaction> transactions = new ArrayList<>();
 
         for (String line : lines) {

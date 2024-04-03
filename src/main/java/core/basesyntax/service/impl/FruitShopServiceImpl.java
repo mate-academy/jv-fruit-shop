@@ -7,10 +7,14 @@ import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private OperationStrategy strategy = new OperationStrategy();
+    private OperationStrategy strategy;
+
+    public FruitShopServiceImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
+    }
 
     @Override
-    public void fruitTransaction(List<FruitTransaction> fruitTransactionList) {
+    public void processTransaction(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
             TransactionHandler transactionHandler = strategy
                     .getOperationHandler(fruitTransaction.getOperation());
