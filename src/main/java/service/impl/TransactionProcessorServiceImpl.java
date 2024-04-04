@@ -1,17 +1,18 @@
 package service.impl;
 
+import dao.TransactionDao;
 import db.Storage;
 import model.FruitTransaction;
 import service.TransactionProcessorService;
-import strategy.FruitStrategy;
 import strategy.OperationStrategy;
 
 import java.util.List;
 import java.util.Map;
 
 public class TransactionProcessorServiceImpl implements TransactionProcessorService {
-
     Storage storage = new Storage();
+//    private TransactionDao transactionDao;
+
     private final Map<FruitTransaction.Operation, OperationStrategy> strategies;
 
     public TransactionProcessorServiceImpl(Map<FruitTransaction.Operation, OperationStrategy> strategies) {
@@ -31,6 +32,6 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
                 .sum();
 
         int availableProduct = totalQuantity - purchaseQuantity;
-                System.out.println("Total quantity is : " + availableProduct);
+                System.out.println("Available quantity is : " + availableProduct);
         }
     }

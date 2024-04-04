@@ -13,7 +13,6 @@ public class ParseServiceImpl implements ParseService {
 
         FruitTransaction.Operation operationCode =
                 FruitTransaction.Operation.fromCode(parts[0]);
-//                FruitTransaction.Operation.fromCode(parts[0]);
         String fruit = parts[1];
         int quantity = Integer.parseInt(parts[2]);
         return new FruitTransaction(operationCode, fruit, quantity);
