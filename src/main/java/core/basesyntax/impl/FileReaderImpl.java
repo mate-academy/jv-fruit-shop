@@ -15,9 +15,9 @@ public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readDataFromFile(String path) {
         List<String> fruitData = DataBase.listDb;
-        try (BufferedReader br = new BufferedReader(new java.io.FileReader(path))) {
-            String line;// Skip header
-            while ((line = br.readLine()) != null) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(path))) {
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
                 fruitData.add(line);
             }
         } catch (IOException e) {

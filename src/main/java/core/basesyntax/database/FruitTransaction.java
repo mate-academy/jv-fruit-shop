@@ -1,11 +1,11 @@
 package core.basesyntax.database;
 
-public class FruitActivity {
+public class FruitTransaction {
     private String operation;
     private String fruit;
     private int quantity;
 
-    public FruitActivity(String operation, String fruit, int quantity) {
+    public FruitTransaction(String operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
