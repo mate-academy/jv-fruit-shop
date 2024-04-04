@@ -1,23 +1,25 @@
 package core.basesyntax;
 
 import core.basesyntax.database.DataBase;
-import core.basesyntax.database.FruitActivity;
-import core.basesyntax.impl.CalculateFruitsImpl;
+import core.basesyntax.impl.CreateReportImpl;
 import core.basesyntax.impl.FileReaderImpl;
 import core.basesyntax.impl.FileWriterImpl;
-import core.basesyntax.service.CalculateFruits;
-import core.basesyntax.service.FileReaderInterface;
+import core.basesyntax.impl.FruitsCalculatorImpl;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FruitsCalculator;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        FileWriterImpl write = new FileWriterImpl();
-        FileReaderInterface read = new FileReaderImpl();
-        CalculateFruits calculateFruits = new CalculateFruitsImpl();
+        FileWriterImpl writer = new FileWriterImpl();
+        FileReader reader = new FileReaderImpl();
+        CreateReportImpl createReport = new CreateReportImpl();
+        FruitsCalculator calculateFruits = new FruitsCalculatorImpl();
         DataBase dataBase = new DataBase();
-        List<FruitActivity> fruitActivities = read.readDataFromFile(dataBase.getDataFilePath());
-        Map<String, Integer> calculate = calculateFruits.calculate(fruitActivities);
-        write.writeReport(dataBase.getReportFilePath(), calculate);
+        List<String> strings = reader.readDataFromFile(dataBase.getDataFilePath());
+        Map<String, Integer> map = calculateFruits.parseAndCalculate(strings);
+        String report = createReport.createReport(map);
+        writer.write(dataBase.getReportFilePath(), report);
     }
 }
