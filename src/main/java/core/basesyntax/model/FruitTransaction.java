@@ -1,17 +1,19 @@
-package core.basesyntax.database;
+package core.basesyntax.model;
+
+import core.basesyntax.database.DataBase;
 
 public class FruitTransaction {
-    private String operation;
+    private DataBase.Operation operation;
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(String operation, String fruit, int quantity) {
+    public FruitTransaction(DataBase.Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public String getOperation() {
+    public DataBase.Operation getOperation() {
         return operation;
     }
 
