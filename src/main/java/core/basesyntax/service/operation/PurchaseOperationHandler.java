@@ -14,6 +14,5 @@ public class PurchaseOperationHandler implements OperationHandler {
                 - fruitTransaction.getQuantity();
         quantityValidator.getQuantityValidation(fruitTransaction.getQuantity());
         Storage.remainsOfFruits.put(fruitTransaction.getFruit(), quantityAfterTransaction);
-
     }
 }

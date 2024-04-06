@@ -16,6 +16,5 @@ public class FruitServiceImpl implements FruitService {
     public void operationWithFruits(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(fruitTransaction -> operationStrategy
                 .getHandler(fruitTransaction.getOperation()).getTransaction(fruitTransaction));
-
     }
 }
