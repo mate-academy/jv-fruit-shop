@@ -5,9 +5,6 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction() {
-    }
-
     public FruitTransaction(Operation type, String fruit, int quantity) {
         this.type = type;
         this.fruit = fruit;
@@ -55,9 +52,9 @@ public class FruitTransaction {
         }
 
         public static Operation fromCode(String code) {
-            for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(code)) {
-                    return operation;
+            for (Operation operationType : Operation.values()) {
+                if (operationType.getCode().equals(code)) {
+                    return operationType;
                 }
             }
             throw new IllegalArgumentException("Unknown operation code: " + code);

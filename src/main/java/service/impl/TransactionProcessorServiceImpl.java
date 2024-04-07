@@ -3,15 +3,18 @@ package service.impl;
 import dao.TransactionDao;
 import db.Storage;
 import model.FruitTransaction;
+import service.ParseService;
 import service.TransactionProcessorService;
 import strategy.OperationStrategy;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TransactionProcessorServiceImpl implements TransactionProcessorService {
-    Storage storage = new Storage();
-//    private TransactionDao transactionDao;
+    private TransactionDao transactionDao;
+    private ParseService parseService = new ParseServiceImpl();
 
     private final Map<FruitTransaction.Operation, OperationStrategy> strategies;
 
@@ -19,19 +22,31 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
         this.strategies = strategies;
     }
 
+
     @Override
-    public void processTransaction(List<FruitTransaction> listOfTransactions) {
-        List<FruitTransaction> transactions = storage.getTransactions();
-                int totalQuantity = listOfTransactions.stream()
-                        .mapToInt(FruitTransaction::getQuantity) // Map to int instead of type
-                        .sum();
+    public Map<String, Integer> processTransaction(List<FruitTransaction> transactions) {
+        Map<String, Integer> fruitCounts = new HashMap<>();
 
-        int purchaseQuantity = listOfTransactions.stream()
-                .filter(tr -> "p".equals(tr.getType().getCode()))
-                .mapToInt(FruitTransaction::getQuantity)
-                .sum();
+        for (FruitTransaction transaction : transactions) {
+                String fruit = transaction.getFruit();
+                int quantity = transaction.getQuantity();
+                String type = transaction.getType().getCode();
 
-        int availableProduct = totalQuantity - purchaseQuantity;
-                System.out.println("Available quantity is : " + availableProduct);
-        }
+                FruitTransaction.Operation operationType =
+                        FruitTransaction.Operation.fromCode(type);
+                OperationStrategy strategy = strategies.get(operationType);
+                if (strategy != null) {
+                    strategy.apply(Arrays.asList(fruit, String.valueOf(quantity)), strategies);
+                } else {
+                    System.out.println("Invalid operation type: " + operationType);
+                }
+
+                if (operationType == FruitTransaction.Operation.PURCHASE) {
+                    fruitCounts.put(fruit, fruitCounts.getOrDefault(fruit, 0) - quantity);
+                } else {
+                    fruitCounts.put(fruit, fruitCounts.getOrDefault(fruit, 0) + quantity);
+                }
+            }
+        return fruitCounts;
     }
+}

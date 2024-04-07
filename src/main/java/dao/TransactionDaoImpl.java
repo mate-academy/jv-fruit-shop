@@ -3,6 +3,8 @@ package dao;
 import db.Storage;
 import model.FruitTransaction;
 
+import java.util.List;
+
 public class TransactionDaoImpl implements TransactionDao {
 
     @Override
@@ -11,7 +13,7 @@ public class TransactionDaoImpl implements TransactionDao {
     }
 
     @Override
-    public void getTransaction(FruitTransaction transaction) {
-        Storage.transactions.get(0);
+    public List<FruitTransaction> getTransaction() {
+       return Storage.transactions;
     }
 }

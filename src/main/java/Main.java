@@ -1,7 +1,7 @@
 import db.Storage;
 import model.FruitTransaction;
+import service.ParseService;
 import service.ReaderService;
-import service.TransactionProcessorService;
 import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.TransactionProcessorServiceImpl;
@@ -18,24 +18,18 @@ public class Main {
         String outputFilePath = "src/main/resources/output.csv";
 
         ReaderService readerService = new ReaderServiceImpl();
-
-        Storage storage = new Storage();
-
-        TransactionProcessorService processorService =
+        ParseService parseService = new ParseServiceImpl();
+        TransactionProcessorServiceImpl processorService =
                 new TransactionProcessorServiceImpl(buildStrategyMap());
 
         List<String> transactions =
                 readerService.readFromFilesContents(inputFilePath);
 
-        ParseServiceImpl fruitTransaction = new ParseServiceImpl();
-        List<FruitTransaction> parsedData = new ArrayList<>();
-        for (String transaction : transactions) {
-            storage.addTransaction(fruitTransaction.parseFromString(transaction));
-            parsedData.add(fruitTransaction.parseFromString(transaction));
-            processorService.processTransaction(parsedData);
-        }
-        // Print the transactions from the storage for checking, if the transactions are added to the storage
-//        storage.getTransactions().forEach(transaction -> System.out.println(transaction));
+        List<FruitTransaction> parsedFromString =
+                parseService.parseFromString(transactions);
+
+        Map<String, Integer> fruitCounts = processorService.processTransaction(parsedFromString);
+        System.out.println("Each Fruit counts: " + fruitCounts);
     }
 
     private static Map<FruitTransaction.Operation, OperationStrategy> buildStrategyMap() {
@@ -47,4 +41,3 @@ public class Main {
         return operationStrategies;
     }
 }
-
