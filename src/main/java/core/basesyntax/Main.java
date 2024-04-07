@@ -22,12 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
     private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         Reader reader = new ReaderImpl();
-        String dataFromFile = reader.readDataFromFile(OUTPUT_FILE_PATH);
+        String dataFromFile = reader.readDataFromFile(INPUT_FILE_PATH);
         Parser parser = new ParserImpl();
         final List<FruitTransaction> fruitTransactions
                 = parser.parseFruitTransactions(dataFromFile);
@@ -44,6 +44,6 @@ public class Main {
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         Writer writer = new WriterImpl();
-        writer.writeToFile(INPUT_FILE_PATH, reportGenerator.getReport());
+        writer.writeToFile(OUTPUT_FILE_PATH, reportGenerator.getReport());
     }
 }

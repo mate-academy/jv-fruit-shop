@@ -8,12 +8,12 @@ import java.nio.file.Files;
 
 public class WriterImpl implements Writer {
     @Override
-    public void writeToFile(String inputFilePath, String report) {
-        File file = new File(inputFilePath);
+    public void writeToFile(String outputFilePath, String report) {
+        File file = new File(outputFilePath);
         try {
             Files.write(file.toPath(), report.getBytes());
         } catch (IOException e) {
-            throw new FruitShopException("Can't write data to file by path " + inputFilePath);
+            throw new FruitShopException("Can't write data to file by path " + outputFilePath);
         }
     }
 }
