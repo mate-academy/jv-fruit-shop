@@ -12,13 +12,13 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReport() {
         Map<String, Integer> sortedFruitsMap = new TreeMap<>(Storage.remainsOfFruits);
-        StringBuilder stringBuilder = new StringBuilder(FIRST_LINE_OF_INPUT_FILE);
+        StringBuilder inputFileStringBuilder = new StringBuilder(FIRST_LINE_OF_INPUT_FILE);
         for (Map.Entry<String, Integer> entry : sortedFruitsMap.entrySet()) {
-            stringBuilder.append(System.lineSeparator())
+            inputFileStringBuilder.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(DELIMITER)
                     .append(entry.getValue());
         }
-        return stringBuilder.toString();
+        return inputFileStringBuilder.toString();
     }
 }

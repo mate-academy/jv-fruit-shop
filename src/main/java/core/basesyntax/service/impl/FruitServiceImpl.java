@@ -13,7 +13,7 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void operationWithFruits(List<FruitTransaction> fruitTransactions) {
+    public void processActivitiesWithFruits(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.forEach(fruitTransaction -> operationStrategy
                 .getHandler(fruitTransaction.getOperation()).getTransaction(fruitTransaction));
     }

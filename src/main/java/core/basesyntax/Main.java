@@ -18,7 +18,6 @@ import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,20 +31,16 @@ public class Main {
         Parser parser = new ParserImpl();
         final List<FruitTransaction> fruitTransactions
                 = parser.parseFruitTransactions(dataFromFile);
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
-                = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler());
+                = Map.of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        fruitService.operationWithFruits(fruitTransactions);
+        fruitService.processActivitiesWithFruits(fruitTransactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         Writer writer = new WriterImpl();

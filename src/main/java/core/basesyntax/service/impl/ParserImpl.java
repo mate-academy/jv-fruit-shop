@@ -16,8 +16,8 @@ public class ParserImpl implements Parser {
     public List<FruitTransaction> parseFruitTransactions(String dataFromFile) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         String[] stringsWithData = dataFromFile.split(STRINGS_DELIMITER);
-        for (String string : stringsWithData) {
-            String[] fieldsOfStrings = string.split(FIELDS_DELIMITER);
+        for (String stringWithData : stringsWithData) {
+            String[] fieldsOfStrings = stringWithData.split(FIELDS_DELIMITER);
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(FruitTransaction.Operation
                     .getOperationByCode(fieldsOfStrings[INDEX_OF_OPERATION]));
