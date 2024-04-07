@@ -12,8 +12,17 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void process(FruitTransaction fruitTransaction) {
-        int fruitQuantityInStorage = fruitDao.get(fruitTransaction.getFruit());
+        checkValidQuantity(fruitTransaction);
         fruitDao.update(fruitTransaction.getFruit(),
-                fruitQuantityInStorage - fruitTransaction.getQuantity());
+                fruitDao.get(fruitTransaction.getFruit())
+                        - fruitTransaction.getQuantity());
+    }
+
+    private void checkValidQuantity(FruitTransaction fruitTransaction) {
+        int fruitQuantityInStorage = fruitDao.get(fruitTransaction.getFruit());
+        int newQuantityInStorage = fruitQuantityInStorage - fruitTransaction.getQuantity();
+        if (newQuantityInStorage < 0) {
+            throw new RuntimeException("Negative quantity");
+        }
     }
 }

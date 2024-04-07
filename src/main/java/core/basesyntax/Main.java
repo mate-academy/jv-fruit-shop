@@ -2,15 +2,12 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.FileWriterService;
-import core.basesyntax.service.OperationProcessorService;
-import core.basesyntax.service.impl.FileReaderServiceCsvImpl;
-import core.basesyntax.service.impl.FileWriterServiceCsvImpl;
-import core.basesyntax.service.impl.OperationProcessorServiceImpl;
-import core.basesyntax.service.impl.TransactionParserServiceImpl;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.FruitTransactionService;
+import core.basesyntax.service.impl.FileServiceCsvImpl;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
+import core.basesyntax.service.impl.TransactionParserImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.handler.BalanceOperationHandler;
@@ -29,10 +26,10 @@ public class Main {
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        FileReaderService fileReaderService = new FileReaderServiceCsvImpl();
-        List<String> strings = fileReaderService.read(INPUT_FILE_PATH);
-        TransactionParserServiceImpl transactionParserService = new TransactionParserServiceImpl();
-        List<FruitTransaction> fruits = transactionParserService.parse(strings);
+        FileService fileService = new FileServiceCsvImpl();
+        List<String> strings = fileService.read(INPUT_FILE_PATH);
+        TransactionParserImpl transactionParserService = new TransactionParserImpl();
+        List<FruitTransaction> transactions = transactionParserService.parse(strings);
         FruitDao fruitDao = new FruitDaoImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap
                 = Map.of(FruitTransaction.Operation.BALANCE,
@@ -44,13 +41,9 @@ public class Main {
                 FruitTransaction.Operation.RETURN,
                          new ReturnOperationHandler(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        OperationProcessorService operationProcessorService
-                = new OperationProcessorServiceImpl(operationStrategy);
-        operationProcessorService.process(fruits);
-        FileWriterService fileWriterService = new FileWriterServiceCsvImpl();
-        fileWriterService.write(REPORT_FILE_PATH);
-        System.out.println(fruits);
-        System.out.println(Storage.fruitStorage);
-
+        FruitTransactionService fruitTransactionService
+                = new FruitTransactionServiceImpl(operationStrategy);
+        fruitTransactionService.process(transactions);
+        fileService.write(REPORT_FILE_PATH);
     }
 }
