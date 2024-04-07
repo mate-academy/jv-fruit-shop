@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.database.DataBase;
+import core.basesyntax.database.Operation;
 import core.basesyntax.handlers.BalanceOperationHandler;
 import core.basesyntax.handlers.PurchaseOperationHandler;
 import core.basesyntax.handlers.ReturnOperationHandler;
@@ -20,6 +21,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final Map<Operation, OperationHandler> handlerMap = new HashMap<>();
+    private static final String DATA_FILE_PATH = "./src/main/resources/beginningData";
+    private static final String REPORT_FILE_PATH = "./src/main/resources/report";
+
     public static void main(String[] args) {
         FileWriterService writer = new FileWriterServiceImpl();
         FileReader reader = new FileReaderImpl();
@@ -27,19 +32,18 @@ public class Main {
         TransactionService transactionService = new TransactionServiceImpl();
         DataBase dataBase = new DataBase();
         FruitshopServiceImpl shop = new FruitshopServiceImpl(createMapOfOperaions());
-        List<String> strings = reader.readDataFromFile(dataBase.getDataFilePath());
+        List<String> strings = reader.readDataFromFile(DATA_FILE_PATH);
         List<FruitTransaction> fruitTransactions = transactionService.parseData(strings);
         shop.processData(fruitTransactions, createMapOfOperaions());
         String report = createReport.createReport();
-        writer.write(dataBase.getReportFilePath(), report);
+        writer.write(REPORT_FILE_PATH, report);
     }
 
-    public static Map<DataBase.Operation, OperationHandler> createMapOfOperaions() {
-        Map<DataBase.Operation, OperationHandler> handlerMap = new HashMap<>();
-        handlerMap.put(DataBase.Operation.BALANCE, new BalanceOperationHandler());
-        handlerMap.put(DataBase.Operation.PURCHASE, new PurchaseOperationHandler());
-        handlerMap.put(DataBase.Operation.RETURN, new ReturnOperationHandler());
-        handlerMap.put(DataBase.Operation.SUPPLY, new SupplyOperationHandler());
+    public static Map<Operation, OperationHandler> createMapOfOperaions() {
+        handlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        handlerMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        handlerMap.put(Operation.RETURN, new ReturnOperationHandler());
+        handlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
         return handlerMap;
     }
 }
