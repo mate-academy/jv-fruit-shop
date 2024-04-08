@@ -1,13 +1,15 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileService;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
-
+public class FileServiceImpl implements FileService {
     @Override
     public List<String> readDataFromFile(String path) {
         List<String> fruitData = new ArrayList<>();
@@ -20,5 +22,15 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("Can't read from file " + path, e);
         }
         return fruitData;
+    }
+
+    @Override
+    public void write(String path, String content) {
+        File file = new File(path);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write(content);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file " + path);
+        }
     }
 }

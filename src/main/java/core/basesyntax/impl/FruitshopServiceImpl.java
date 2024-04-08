@@ -4,11 +4,10 @@ import core.basesyntax.database.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitshopService;
 import core.basesyntax.service.OperationHandler;
-import core.basesyntax.service.OperationStrategy;
 import java.util.List;
 import java.util.Map;
 
-public class FruitshopServiceImpl implements FruitshopService, OperationStrategy {
+public class FruitshopServiceImpl implements FruitshopService {
     private final Map<Operation, OperationHandler> operationHandlerMap;
 
     public FruitshopServiceImpl(Map<Operation, OperationHandler> operationHandlerMap) {
@@ -16,20 +15,14 @@ public class FruitshopServiceImpl implements FruitshopService, OperationStrategy
     }
 
     @Override
-    public void processData(List<FruitTransaction> fruitTransactionList,
-                            Map<Operation, OperationHandler> operationHandlerMap) {
+    public void processData(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction value : fruitTransactionList) {
-            getHandler(value).apply(value.getFruit(), value.getQuantity());
+            if (operationHandlerMap.get(value.getOperation()) == null) {
+                throw new RuntimeException("Invalid operation type");
+            }
+            operationHandlerMap
+                    .get(value.getOperation())
+                    .apply(value.getFruit(), value.getQuantity());
         }
-    }
-
-    @Override
-    public OperationHandler getHandler(FruitTransaction fruitTransaction) {
-        var checkHandlerForNull = fruitTransaction.getOperation();
-        if (checkHandlerForNull == null) {
-            throw new RuntimeException("Invalid operation type. "
-                    + "Choose operation type correctly");
-        }
-        return operationHandlerMap.get(fruitTransaction.getOperation());
     }
 }

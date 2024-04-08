@@ -1,10 +1,10 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.database.DataBase;
-import core.basesyntax.service.CreateReport;
+import core.basesyntax.service.ReportService;
 import java.util.Map;
 
-public class ReportServiceImpl implements CreateReport {
+public class ReportServiceImplService implements ReportService {
     private static final String SEPARATOR = ",";
 
     @Override
@@ -16,7 +16,6 @@ public class ReportServiceImpl implements CreateReport {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-        System.out.println(builder);
         return builder.toString();
     }
 }
