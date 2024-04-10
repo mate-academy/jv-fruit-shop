@@ -2,12 +2,13 @@ import db.Storage;
 import model.FruitTransaction;
 import service.ParseService;
 import service.ReaderService;
+import service.WriterSerivce;
 import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.TransactionProcessorServiceImpl;
+import service.impl.WriterSerivceImpl;
 import strategy.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +22,7 @@ public class Main {
         ParseService parseService = new ParseServiceImpl();
         TransactionProcessorServiceImpl processorService =
                 new TransactionProcessorServiceImpl(buildStrategyMap());
+        WriterSerivce writerSerivce = new WriterSerivceImpl();
 
         List<String> transactions =
                 readerService.readFromFilesContents(inputFilePath);
@@ -29,8 +31,11 @@ public class Main {
                 parseService.parseFromString(transactions);
 
         Map<String, Integer> fruitCounts = processorService.processTransaction(parsedFromString);
-        System.out.println("Each Fruit counts: " + fruitCounts);
+
+        writerSerivce.writeToFile(outputFilePath, fruitCounts);
     }
+
+
 
     private static Map<FruitTransaction.Operation, OperationStrategy> buildStrategyMap() {
         Map<FruitTransaction.Operation, OperationStrategy> operationStrategies = new HashMap<>();

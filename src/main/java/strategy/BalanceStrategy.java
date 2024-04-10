@@ -1,14 +1,10 @@
 package strategy;
 
-import model.FruitTransaction;
-
-import java.util.List;
 import java.util.Map;
 
 public class BalanceStrategy implements OperationStrategy {
-
     @Override
-    public void apply(List<String> operation, Map<FruitTransaction.Operation, OperationStrategy> quantity) {
-
+    public void apply(Map<String, Integer> fruitCounts, String fruit, int quantity) {
+        fruitCounts.put(fruit, fruitCounts.getOrDefault(fruit, 0) + quantity);
     }
 }

@@ -1,13 +1,15 @@
 package strategy;
 
-import model.FruitTransaction;
-
-import java.util.List;
 import java.util.Map;
 
 public class PurchaseStrategy implements OperationStrategy {
     @Override
-    public void apply(List<String> operation, Map<FruitTransaction.Operation, OperationStrategy> quantity) {
-
+    public void apply(Map<String, Integer> fruitCounts, String fruit, int quantity) {
+        if (fruitCounts.getOrDefault(fruit, 0) < quantity) {
+            throw new RuntimeException("Not enough " + fruit + " in the store");
+        } else {
+            fruitCounts.put(fruit, fruitCounts.getOrDefault(fruit, 0) - quantity);
+        }
     }
 }
+
