@@ -63,7 +63,9 @@ public class FruitTransaction {
 
     @Override
     public String toString() {
-        return " FruitsTransaction: " + type.getFirstLetterOfOperationType() + " " + fruit +
-                " " + quantity;
+        return " FruitsTransaction: " + type.getFirstLetterOfOperationType() + " "
+                + fruit
+                + " "
+                + quantity;
     }
 }

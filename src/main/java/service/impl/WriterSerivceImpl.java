@@ -1,11 +1,10 @@
 package service.impl;
 
-import service.WriterSerivce;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Map;
+import service.WriterSerivce;
 
 public class WriterSerivceImpl implements WriterSerivce {
     @Override

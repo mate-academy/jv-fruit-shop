@@ -1,9 +1,9 @@
 package db;
 
-import dao.TransactionDao;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import model.FruitTransaction;
-
-import java.util.*;
 
 public class Storage {
     //method synchronized was used to make the list thread safe

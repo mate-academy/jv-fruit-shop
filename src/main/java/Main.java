@@ -1,4 +1,6 @@
-import db.Storage;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import service.ParseService;
 import service.ReaderService;
@@ -7,11 +9,11 @@ import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.TransactionProcessorServiceImpl;
 import service.impl.WriterSerivceImpl;
-import strategy.*;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import strategy.BalanceStrategy;
+import strategy.OperationStrategy;
+import strategy.PurchaseStrategy;
+import strategy.ReturnStrategy;
+import strategy.SupplyStrategy;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,8 +36,6 @@ public class Main {
 
         writerSerivce.writeToFile(outputFilePath, fruitCounts);
     }
-
-
 
     private static Map<FruitTransaction.Operation, OperationStrategy> buildStrategyMap() {
         Map<FruitTransaction.Operation, OperationStrategy> operationStrategies = new HashMap<>();

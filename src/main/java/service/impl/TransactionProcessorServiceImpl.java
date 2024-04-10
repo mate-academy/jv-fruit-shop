@@ -1,18 +1,18 @@
 package service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 import service.TransactionProcessorService;
 import strategy.OperationStrategy;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 public class TransactionProcessorServiceImpl implements TransactionProcessorService {
-    Map<String, Integer> fruitCounts;
+    private Map<String, Integer> fruitCounts;
     private final Map<FruitTransaction.Operation, OperationStrategy> strategies;
 
-    public TransactionProcessorServiceImpl(Map<FruitTransaction.Operation, OperationStrategy> strategies) {
+    public TransactionProcessorServiceImpl(Map<FruitTransaction.Operation,
+            OperationStrategy> strategies) {
         this.strategies = strategies;
     }
 
