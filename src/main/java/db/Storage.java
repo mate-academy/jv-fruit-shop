@@ -1,17 +1,16 @@
 package db;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    private static final List<String> FRUITS_BALANCE_REPORT = new ArrayList<>();
+    private static final Map<String, Integer> FRUITS_BALANCE_REPORT = new HashMap<>();
 
-    public static List<String> getFruitsBalanceReport() {
-        return new ArrayList<>(FRUITS_BALANCE_REPORT);
+    public static HashMap<String, Integer> getFruitsBalanceReport() {
+        return new HashMap<>(FRUITS_BALANCE_REPORT);
     }
 
-    public static void saveToFruitsBalanceReport(String reportData) {
-        FRUITS_BALANCE_REPORT.add(reportData);
-
+    public static void saveToFruitsBalanceReport(Map<String, Integer> fruitTransactions) {
+        FRUITS_BALANCE_REPORT.putAll(fruitTransactions);
     }
 }

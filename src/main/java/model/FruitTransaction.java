@@ -3,15 +3,15 @@ package model;
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
-    private String quantity;
+    private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, String quantity) {
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public String getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 

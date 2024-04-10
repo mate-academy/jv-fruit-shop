@@ -1,7 +1,8 @@
 package service;
 
+import java.util.List;
 import model.FruitTransaction;
 
 public interface TransactionMapper {
-    FruitTransaction map(String dataLine);
+    List<FruitTransaction> map(List<String> fruitTransactionsList);
 }

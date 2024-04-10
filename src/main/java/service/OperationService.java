@@ -1,5 +1,5 @@
 package service;
 
 public interface OperationService {
-    int operate(String quantity);
+    int operate(int quantity);
 }

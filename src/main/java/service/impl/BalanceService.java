@@ -4,7 +4,7 @@ import service.OperationService;
 
 public class BalanceService implements OperationService {
     @Override
-    public int operate(String quantity) {
-        return Integer.parseInt(quantity);
+    public int operate(int quantity) {
+        return quantity;
     }
 }
