@@ -31,7 +31,7 @@ public class TransactionParserServiceImpl implements TransactionParserService {
             case "s" -> TransactionType.SUPPLY;
             case "p" -> TransactionType.PURCHASE;
             case "r" -> TransactionType.RETURN;
-            default -> throw new RuntimeException("Input csv is invalid. Transaction: "
+            default -> throw new InvalidTransactionInputException(" Transaction: "
                     + transaction
                     + " is not defined in shop");
         };

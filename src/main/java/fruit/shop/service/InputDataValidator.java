@@ -12,28 +12,27 @@ public class InputDataValidator {
 
     public String[] test(String[] inputData) {
         if (inputData.length != EXPECTED_INPUT_COLUMNS) {
-            throwException("Row contains wrong number of parameters");
+            throw new InvalidTransactionInputException("Row contains wrong number of parameters");
         }
         if (Arrays.stream(inputData).anyMatch(Objects::isNull)) {
-            throwException("Row contains null value");
+            throw new InvalidTransactionInputException("Row contains null value");
         }
         try {
             Fruit.valueOf(inputData[FRUIT_INDEX].toUpperCase());
         } catch (IllegalArgumentException e) {
-            throwException("Fruit: " + inputData[FRUIT_INDEX] + "is not defined in shop");
+            throw new InvalidTransactionInputException("Fruit: "
+                    + inputData[FRUIT_INDEX]
+                    + "is not defined in shop");
         }
         try {
             Integer.parseInt(inputData[QUANTITY_INDEX]);
         } catch (NumberFormatException e) {
-            throwException("Quantity column contains non-numerical data");
+            throw new InvalidTransactionInputException(
+                    "Quantity column contains non-numerical data");
         }
         if (Integer.parseInt(inputData[QUANTITY_INDEX]) < MINIMUM_QUANTITY_VALUE) {
-            throwException("Quantity cannot be negative");
+            throw new InvalidTransactionInputException("Quantity cannot be negative");
         }
         return inputData;
-    }
-
-    private void throwException(String message) {
-        throw new TransactionInputValidationException("Input csv is invalid. " + message);
     }
 }
