@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class WriterImpl implements Writer {
     @Override
-    public void write(String report, String filePath) {
+    public void writeToFile(String content, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write(report);
+            writer.write(content);
         } catch (IOException e) {
             throw new RuntimeException("Can't write data to file: ", e);
         }
