@@ -1,5 +1,5 @@
 package fruit.shop.model;
 
-public enum Transaction {
+public enum TransactionType {
     BALANCE, SUPPLY, PURCHASE, RETURN
 }

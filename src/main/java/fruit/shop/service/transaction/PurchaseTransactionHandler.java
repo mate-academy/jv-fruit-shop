@@ -10,10 +10,11 @@ public class PurchaseTransactionHandler implements TransactionHandler {
     public void execute(FruitTransaction transaction) {
         Integer stock = Storage.get(transaction.getFruit());
         Integer transactionQuantity = transaction.getQuantity();
-        if (quantityValidator.validate(stock, transactionQuantity)) {
-            Storage.put(transaction.getFruit(), stock - transactionQuantity);
-            return;
+        if (!quantityValidator.validate(stock, transactionQuantity)) {
+            throw new QuantityValidationException("Shop doesn't have enough stock of: "
+                    + transaction.getFruit());
         }
-        throw new RuntimeException("Shop doesn't have enough stock of: " + transaction.getFruit());
+        Storage.put(transaction.getFruit(), stock - transactionQuantity);
+
     }
 }

@@ -2,7 +2,7 @@ package fruit.shop.service;
 
 import fruit.shop.model.Fruit;
 import fruit.shop.model.FruitTransaction;
-import fruit.shop.model.Transaction;
+import fruit.shop.model.TransactionType;
 import java.util.List;
 
 public class TransactionParserServiceImpl implements TransactionParserService {
@@ -18,19 +18,19 @@ public class TransactionParserServiceImpl implements TransactionParserService {
                 .map(INPUT_DATA_VALIDATOR::test)
                 .map(input -> new FruitTransaction(
                                 Fruit.valueOf(input[FRUIT_INDEX].toUpperCase()),
-                                transactionShort(input[TRANSACTION_INDEX]),
+                                parseTransactionType(input[TRANSACTION_INDEX]),
                                 Integer.parseInt(input[QUANTITY_INDEX])
                         )
                 )
                 .toList();
     }
 
-    private Transaction transactionShort(String transaction) {
+    private TransactionType parseTransactionType(String transaction) {
         return switch (transaction) {
-            case "b" -> Transaction.BALANCE;
-            case "s" -> Transaction.SUPPLY;
-            case "p" -> Transaction.PURCHASE;
-            case "r" -> Transaction.RETURN;
+            case "b" -> TransactionType.BALANCE;
+            case "s" -> TransactionType.SUPPLY;
+            case "p" -> TransactionType.PURCHASE;
+            case "r" -> TransactionType.RETURN;
             default -> throw new RuntimeException("Input csv is invalid. Transaction: "
                     + transaction
                     + " is not defined in shop");
