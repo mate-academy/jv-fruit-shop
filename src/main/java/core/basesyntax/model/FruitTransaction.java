@@ -1,14 +1,12 @@
 package core.basesyntax.model;
 
-import jdk.dynalink.Operation;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
 
-    public core.basesyntax.model.Operation getOperation() {
-        return (core.basesyntax.model.Operation) operation;
+    public Operation getOperation() {
+        return operation;
     }
 
     public void setOperation(Operation operation) {

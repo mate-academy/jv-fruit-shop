@@ -1,6 +1,6 @@
 package core.basesyntax.model;
 
-public enum Operation implements jdk.dynalink.Operation {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
