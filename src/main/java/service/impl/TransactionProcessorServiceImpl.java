@@ -1,6 +1,6 @@
 package service.impl;
 
-import java.util.HashMap;
+import db.Storage;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -9,6 +9,7 @@ import strategy.OperationStrategy;
 
 public class TransactionProcessorServiceImpl implements TransactionProcessorService {
     private Map<String, Integer> fruitCounts;
+
     private final Map<FruitTransaction.Operation, OperationStrategy> strategies;
 
     public TransactionProcessorServiceImpl(Map<FruitTransaction.Operation,
@@ -18,7 +19,7 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
 
     @Override
     public Map<String, Integer> processTransaction(List<FruitTransaction> transactions) {
-        fruitCounts = new HashMap<>();
+        fruitCounts = Storage.getFruitCounts();
 
         for (FruitTransaction transaction : transactions) {
             processSingleTransaction(transaction);
@@ -39,3 +40,4 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
         }
     }
 }
+

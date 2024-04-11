@@ -41,31 +41,32 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String firstLetterOfOperationType;
+        private final String code;
 
-        Operation(String firstLetterOfOperationType) {
-            this.firstLetterOfOperationType = firstLetterOfOperationType;
+        Operation(String code) {
+            this.code = code;
         }
 
-        public String getFirstLetterOfOperationType() {
-            return firstLetterOfOperationType;
+        public String getCode() {
+            return code;
         }
 
-        public static Operation getNameOfType(String letterType) {
+        public static Operation getByCode(String codeLetter) {
             for (Operation operationType : Operation.values()) {
-                if (operationType.getFirstLetterOfOperationType().equals(letterType)) {
+                if (operationType.getCode().equals(codeLetter)) {
                     return operationType;
                 }
             }
-            throw new IllegalArgumentException("Unknown operation letterType: " + letterType);
+            throw new IllegalArgumentException("Unknown operation type: " + codeLetter);
         }
     }
 
     @Override
     public String toString() {
-        return " FruitsTransaction: " + type.getFirstLetterOfOperationType() + " "
+        return " FruitsTransaction: " + type.getCode() + " "
                 + fruit
                 + " "
                 + quantity;
     }
 }
+

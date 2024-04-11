@@ -4,11 +4,13 @@ import java.util.Map;
 import model.FruitTransaction;
 import service.ParseService;
 import service.ReaderService;
-import service.WriterSerivce;
+import service.ReportService;
+import service.WriterService;
 import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
+import service.impl.ReportServiceImpl;
 import service.impl.TransactionProcessorServiceImpl;
-import service.impl.WriterSerivceImpl;
+import service.impl.WriterServiceImpl;
 import strategy.BalanceStrategy;
 import strategy.OperationStrategy;
 import strategy.PurchaseStrategy;
@@ -17,24 +19,27 @@ import strategy.SupplyStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        String inputFilePath = "src/main/resources/fruitList.csv";
-        String outputFilePath = "src/main/resources/output.csv";
+        final String input_File_Path = "src/main/resources/fruitList.csv";
+        final String output_File_Path = "src/main/resources/output.csv";
 
         ReaderService readerService = new ReaderServiceImpl();
         ParseService parseService = new ParseServiceImpl();
         TransactionProcessorServiceImpl processorService =
                 new TransactionProcessorServiceImpl(buildStrategyMap());
-        WriterSerivce writerSerivce = new WriterSerivceImpl();
+        ReportService reportService = new ReportServiceImpl();
+        WriterService writerService = new WriterServiceImpl();
 
-        List<String> transactions =
-                readerService.readFromFilesContents(inputFilePath);
+        List<String> fileContent =
+                readerService.readFromFilesContents(input_File_Path);
 
         List<FruitTransaction> parsedFromString =
-                parseService.parseFromString(transactions);
+                parseService.parseFromString(fileContent);
 
         Map<String, Integer> fruitCounts = processorService.processTransaction(parsedFromString);
 
-        writerSerivce.writeToFile(outputFilePath, fruitCounts);
+        List<String> report = reportService.generateReport(fruitCounts);
+
+        writerService.writeToFile(output_File_Path, report);
     }
 
     private static Map<FruitTransaction.Operation, OperationStrategy> buildStrategyMap() {
