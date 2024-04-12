@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.StorageDao;
 import core.basesyntax.db.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Executor;
@@ -42,10 +43,11 @@ public class Main {
         Parser parser = new ParserImpl();
         List<FruitTransaction> fruitTransactions = parser.parse(data);
         OperationStrategy operationStrategy = new OperationStrategyImpl(OPERATION_HANDLER_MAP);
-        Executor executor = new ExecutorImpl(new StorageDaoImpl(), operationStrategy);
+        StorageDao storageDao = new StorageDaoImpl();
+        Executor executor = new ExecutorImpl(storageDao, operationStrategy);
         executor.execute(fruitTransactions);
-        ReportCreator reportCreator = new ReportCreatorImpl();
-        String report = reportCreator.create(new StorageDaoImpl().getAll());
+        ReportCreator reportCreator = new ReportCreatorImpl(storageDao);
+        String report = reportCreator.createReport();
         Writer writer = new WriterImpl();
         writer.writeToFile(report, REPORT_FILE_PATH);
     }

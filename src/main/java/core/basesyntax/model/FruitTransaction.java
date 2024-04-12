@@ -45,13 +45,13 @@ public class FruitTransaction {
             return code;
         }
 
-        public Operation getOperationFromLetter(String letter) {
+        public static Operation getOperationFromLetter(String code) {
             for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(letter)) {
+                if (operation.getCode().equals(code)) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation letter: " + letter);
+            throw new RuntimeException("Unknown operation letter: " + code);
         }
     }
 }

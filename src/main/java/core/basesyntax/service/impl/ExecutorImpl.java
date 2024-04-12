@@ -18,19 +18,11 @@ public class ExecutorImpl implements Executor {
     @Override
     public void execute(List<FruitTransaction> fruitTransactionData) {
         for (FruitTransaction fruitTransaction : fruitTransactionData) {
-            if (storageDao.get(fruitTransaction.getFruit()) == null) {
-                storageDao.add(fruitTransaction);
-                continue;
-            }
-            FruitTransaction fruitTransactionInStorage = storageDao
-                    .get(fruitTransaction.getFruit());
-            int quantity = fruitTransaction.getQuantity();
             int operation = operationStrategy
                     .get(fruitTransaction.getOperation())
-                    .getOperation(quantity);
-            int newQuantity = fruitTransactionInStorage.getQuantity() + operation;
-            fruitTransactionInStorage.setQuantity(newQuantity);
-
+                    .getOperation(fruitTransaction.getQuantity());
+            int oldQuantity = storageDao.getQuantity(fruitTransaction.getFruit());
+            storageDao.update(fruitTransaction.getFruit(), oldQuantity + operation);
         }
     }
 }

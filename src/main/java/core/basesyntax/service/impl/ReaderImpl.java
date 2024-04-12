@@ -9,12 +9,10 @@ import java.util.List;
 public class ReaderImpl implements Reader {
     @Override
     public List<String> readFile(String filePath) {
-        List<String> data;
         try {
-            data = Files.readAllLines(Path.of(filePath));
+            return Files.readAllLines(Path.of(filePath));
         } catch (IOException e) {
             throw new RuntimeException("Can't find file by path: " + filePath, e);
         }
-        return data;
     }
 }

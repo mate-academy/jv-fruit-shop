@@ -7,14 +7,13 @@ import java.util.stream.Collectors;
 
 public class ParserImpl implements Parser {
     public static final String WORD_SEPARATOR = ",";
+    private static final int CODE_INDEX = 0;
 
     @Override
     public List<FruitTransaction> parse(List<String> data) {
         return data.stream()
-                .filter(line -> line.startsWith("b")
-                        || line.startsWith("s")
-                        || line.startsWith("p")
-                        || line.startsWith("r"))
+                .filter(line ->
+                        data.indexOf(line) != data.indexOf(data.get(CODE_INDEX)))
                 .map(this::getFromCsvRow)
                 .collect(Collectors.toList());
     }
@@ -29,8 +28,8 @@ public class ParserImpl implements Parser {
         }
         FruitTransaction fruitTransaction = new FruitTransaction();
         try {
-            FruitTransaction.Operation operation = FruitTransaction.Operation.BALANCE;
-            operation = operation.getOperationFromLetter(fields[0]);
+            FruitTransaction.Operation operation = FruitTransaction.Operation
+                    .getOperationFromLetter(fields[CODE_INDEX]);
             fruitTransaction.setOperation(operation);
             fruitTransaction.setFruit(fields[1]);
             fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
