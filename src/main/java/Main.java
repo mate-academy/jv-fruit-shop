@@ -1,4 +1,3 @@
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -22,10 +21,18 @@ public class Main {
         final String input_File_Path = "src/main/resources/fruitList.csv";
         final String output_File_Path = "src/main/resources/output.csv";
 
+        Map<FruitTransaction.Operation, OperationStrategy> strategyMap
+                = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceStrategy(),
+                FruitTransaction.Operation.SUPPLY, new SupplyStrategy(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseStrategy(),
+                FruitTransaction.Operation.RETURN, new ReturnStrategy()
+        );
+
         ReaderService readerService = new ReaderServiceImpl();
         ParseService parseService = new ParseServiceImpl();
         TransactionProcessorServiceImpl processorService =
-                new TransactionProcessorServiceImpl(buildStrategyMap());
+                new TransactionProcessorServiceImpl(strategyMap);
         ReportService reportService = new ReportServiceImpl();
         WriterService writerService = new WriterServiceImpl();
 
@@ -40,14 +47,5 @@ public class Main {
         List<String> report = reportService.generateReport(fruitCounts);
 
         writerService.writeToFile(output_File_Path, report);
-    }
-
-    private static Map<FruitTransaction.Operation, OperationStrategy> buildStrategyMap() {
-        Map<FruitTransaction.Operation, OperationStrategy> operationStrategies = new HashMap<>();
-        operationStrategies.put(FruitTransaction.Operation.BALANCE, new BalanceStrategy());
-        operationStrategies.put(FruitTransaction.Operation.SUPPLY, new SupplyStrategy());
-        operationStrategies.put(FruitTransaction.Operation.PURCHASE, new PurchaseStrategy());
-        operationStrategies.put(FruitTransaction.Operation.RETURN, new ReturnStrategy());
-        return operationStrategies;
     }
 }
