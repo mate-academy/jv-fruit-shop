@@ -7,10 +7,10 @@ import java.util.stream.Collectors;
 
 public class ParserImpl implements Parser {
     public static final String WORD_SEPARATOR = ",";
+    private static final int MAX_FIELD_LENGTH = 3;
     private static final int CODE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final int MAX_FIELD_LENGTH = 3;
 
     @Override
     public List<FruitTransaction> parse(List<String> data) {
