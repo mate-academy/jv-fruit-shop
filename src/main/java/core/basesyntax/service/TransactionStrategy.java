@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.db.Storage;
+import core.basesyntax.db.DataBase;
 
 public class TransactionStrategy {
     private static int balanceFruits = 0;
@@ -10,7 +10,7 @@ public class TransactionStrategy {
     private static int supplyFruits = 0;
 
     public void getShopService() {
-        Storage.storageFromInputFile.forEach(fruitTransaction -> {
+        DataBase.fruitDataBase.forEach(fruitTransaction -> {
             if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE) {
                 balanceFruits++;
             } else if (fruitTransaction.getOperation() == FruitTransaction.Operation.PURCHASE) {
