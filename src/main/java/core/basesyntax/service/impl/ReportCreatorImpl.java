@@ -4,6 +4,7 @@ import core.basesyntax.db.StorageDao;
 import core.basesyntax.service.ReportCreator;
 
 public class ReportCreatorImpl implements ReportCreator {
+    public static final int MIN_VALUE = 0;
     public static final String WORD_SEPARATOR = ",";
     public static final String LINE_SEPARATOR = "\n";
     private final StorageDao storageDao;
@@ -17,7 +18,7 @@ public class ReportCreatorImpl implements ReportCreator {
         StringBuilder report = new StringBuilder("fruit,quantity");
         storageDao.getAll().entrySet()
                 .forEach(fruit -> {
-                    if (fruit.getValue() < 0) {
+                    if (fruit.getValue() < MIN_VALUE) {
                         throw new RuntimeException("Balance should be positive: "
                                 + fruit);
                     }
