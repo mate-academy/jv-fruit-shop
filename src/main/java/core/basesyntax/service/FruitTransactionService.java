@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 public interface FruitTransactionService {
-    void handleTransactions();
+    void handleTransactions(String fileToReadPath);
 
-    void writeReportToFile();
+    void writeReportToFile(String fileToWritePath);
 }

@@ -1,7 +1,5 @@
 package core.basesyntax.service;
 
-import java.util.List;
-
 public interface WriterService {
-    void writeToFile(List<String> strings, String filePath);
+    void writeToFile(String stringToWrite, String filePath);
 }

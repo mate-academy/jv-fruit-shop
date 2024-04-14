@@ -1,8 +1,12 @@
 package core.basesyntax.strategy;
 
-public interface FruitHandler {
-    int FRUIT_NAME_INDEX = 1;
-    int FRUIT_QUANTITY_INDEX = 2;
+import core.basesyntax.model.Fruit;
+import java.util.Map;
 
-    void transactionHandler(String[] transactionValues);
+public interface FruitHandler {
+    void transactionHandler(
+            Map<String, Fruit> fruitsData,
+            String fruitName,
+            int fruitQuantity
+    );
 }
