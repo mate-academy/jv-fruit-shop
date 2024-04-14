@@ -23,16 +23,16 @@ public class TransactionStrategy {
         });
 
         if (balanceFruits > 0) {
-            new BalanceService().operationWithFruits();
+            new BalanceService().operationHandler();
         }
         if (purchaseFruits > 0) {
-            new PurchaseService().operationWithFruits();
+            new PurchaseService().operationHandler();
         }
         if (returnFruits > 0) {
-            new ReturnService().operationWithFruits();
+            new ReturnService().operationHandler();
         }
         if (supplyFruits > 0) {
-            new SupplyService().operationWithFruits();
+            new SupplyService().operationHandler();
         }
     }
 }

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class BalanceService implements ShopService {
     @Override
-    public void operationWithFruits() {
+    public void operationHandler() {
         ReportCreator.storageForReport.putAll(DataBase.fruitDataBase.stream()
                 .filter(s -> s.getOperation() == FruitTransaction.Operation.BALANCE)
                 .collect(Collectors.toMap(FruitTransaction::getFruit,

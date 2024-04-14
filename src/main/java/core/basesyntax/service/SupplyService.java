@@ -6,7 +6,7 @@ import java.util.List;
 
 public class SupplyService implements ShopService {
     @Override
-    public void operationWithFruits() {
+    public void operationHandler() {
         List<FruitTransaction> supply = DataBase.fruitDataBase.stream()
                 .filter(s -> s.getOperation() == FruitTransaction.Operation.SUPPLY)
                 .toList();

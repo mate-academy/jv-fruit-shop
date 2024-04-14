@@ -6,13 +6,7 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(String operation, String fruit, int quantity) {
-        switch (operation) {
-            case "b" -> this.operation = Operation.BALANCE;
-            case "p" -> this.operation = Operation.PURCHASE;
-            case "r" -> this.operation = Operation.RETURN;
-            case "s" -> this.operation = Operation.SUPPLY;
-            default -> this.operation = null;
-        }
+        this.operation = Operation.fromCode(operation);
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -43,6 +37,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation fromCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Unknown operation code: " + code);
         }
     }
 }

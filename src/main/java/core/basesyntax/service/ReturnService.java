@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ReturnService implements ShopService {
     @Override
-    public void operationWithFruits() {
+    public void operationHandler() {
         List<FruitTransaction> returnFruits = DataBase.fruitDataBase.stream()
                 .filter(s -> s.getOperation() == FruitTransaction.Operation.RETURN)
                 .toList();
