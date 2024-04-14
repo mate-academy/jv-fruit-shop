@@ -5,14 +5,8 @@ import core.basesyntax.servise.FruitTransaction;
 import core.basesyntax.servise.strategy.OperationService;
 
 public class OutgoingOperationService implements OperationService {
-    private final FruitTransaction fruitTransaction;
-
-    public OutgoingOperationService(FruitTransaction fruitTransaction) {
-        this.fruitTransaction = fruitTransaction;
-    }
-
     @Override
-    public void calculation() {
+    public void calculation(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int newQuantity = Storage.balance.get(fruit) - fruitTransaction.getQuantity();
 

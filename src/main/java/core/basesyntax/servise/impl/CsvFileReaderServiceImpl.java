@@ -9,14 +9,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class CsvFileReaderServiceImpl implements ReaderService {
-    public static final String FILE_PATH = "src/main/resources/file.txt";
-
     @Override
-    public List<String> readFromFile() {
-        try (Stream<String> streamFromFile = Files.lines(Paths.get(FILE_PATH))) {
+    public List<String> readFromFile(String pathInnFile) {
+        try (Stream<String> streamFromFile = Files.lines(Paths.get(pathInnFile))) {
             return streamFromFile.collect(Collectors.toList());
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path: " + FILE_PATH, e);
+            throw new RuntimeException("Can't find file by path: " + pathInnFile, e);
         }
     }
 }

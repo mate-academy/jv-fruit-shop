@@ -2,6 +2,6 @@ package core.basesyntax.servise.strategy;
 
 import core.basesyntax.servise.FruitTransaction;
 
-public interface OperationStrategies {
+public interface OperationStrategy {
     OperationService getOperationHandler(FruitTransaction fruitTransaction);
 }

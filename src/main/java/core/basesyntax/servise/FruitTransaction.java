@@ -45,7 +45,7 @@ public class FruitTransaction {
                     return element;
                 }
             }
-            return null;
+            throw new RuntimeException("Invalid code value of operation: " + code);
         }
     }
 }

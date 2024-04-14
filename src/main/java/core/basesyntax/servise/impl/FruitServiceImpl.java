@@ -1,44 +1,31 @@
 package core.basesyntax.servise.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.servise.FruitService;
 import core.basesyntax.servise.FruitTransaction;
-import core.basesyntax.servise.strategy.OperationStrategies;
+import core.basesyntax.servise.strategy.OperationStrategy;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class FruitServiceImpl implements FruitService {
-    private static final String LINE_SEPARATOR = System.lineSeparator();
-    private static final String TITLE = "fruit,quantity" + LINE_SEPARATOR;
+    private static final int OFFSET = 1;
     private static final int TYPE_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private final OperationStrategies strategy;
+    private final OperationStrategy strategy;
 
-    public FruitServiceImpl(OperationStrategies strategy) {
+    public FruitServiceImpl(OperationStrategy strategy) {
         this.strategy = strategy;
     }
 
     @Override
-    public void processingData(List<String> inputData) {
+    public void processData(List<String> inputData) {
         inputData.stream()
-                .skip(1)
-                .map(s -> s.split(","))
-                .map(a -> new FruitTransaction(
-                        a[TYPE_INDEX],
-                        a[FRUIT_INDEX],
-                        Integer.parseInt(a[QUANTITY_INDEX])))
-                .forEach(f -> strategy.getOperationHandler(f).calculation());
-    }
-
-    @Override
-    public String generateReport() {
-        return Storage.balance.entrySet().stream()
-                .map(e -> new StringBuilder()
-                        .append(e.getKey())
-                        .append(",")
-                        .append(e.getValue()))
-                .map(StringBuilder::toString)
-                .collect(Collectors.joining(LINE_SEPARATOR, TITLE,""));
+                .skip(OFFSET)
+                .map(line -> line.split(","))
+                .map(array -> new FruitTransaction(
+                        array[TYPE_INDEX],
+                        array[FRUIT_INDEX],
+                        Integer.parseInt(array[QUANTITY_INDEX])))
+                .forEach(transaction -> strategy.getOperationHandler(transaction)
+                        .calculation(transaction));
     }
 }
