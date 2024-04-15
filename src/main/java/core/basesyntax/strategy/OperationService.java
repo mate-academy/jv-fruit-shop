@@ -1,4 +1,4 @@
-package core.basesyntax.servise.strategy;
+package core.basesyntax.strategy;
 
 import core.basesyntax.servise.FruitTransaction;
 

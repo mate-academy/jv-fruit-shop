@@ -1,8 +1,8 @@
-package core.basesyntax.servise.strategy.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.servise.FruitTransaction;
-import core.basesyntax.servise.strategy.OperationService;
+import core.basesyntax.strategy.OperationService;
 
 public class OutgoingOperationService implements OperationService {
     @Override

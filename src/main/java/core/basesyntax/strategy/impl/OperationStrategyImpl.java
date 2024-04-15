@@ -1,8 +1,8 @@
-package core.basesyntax.servise.strategy.impl;
+package core.basesyntax.strategy.impl;
 
 import core.basesyntax.servise.FruitTransaction;
-import core.basesyntax.servise.strategy.OperationService;
-import core.basesyntax.servise.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationService;
+import core.basesyntax.strategy.OperationStrategy;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final MapOfHandlersForStrategyImpl mapOfStrategy;

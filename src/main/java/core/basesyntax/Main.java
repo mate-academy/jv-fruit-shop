@@ -1,16 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.servise.FruitService;
+import core.basesyntax.servise.DataProcessorService;
+import core.basesyntax.servise.FruitTransaction;
+import core.basesyntax.servise.ParserService;
 import core.basesyntax.servise.ReaderService;
 import core.basesyntax.servise.ReportMakerService;
 import core.basesyntax.servise.WriterService;
 import core.basesyntax.servise.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.servise.impl.CsvFileWriterServiceImpl;
-import core.basesyntax.servise.impl.FruitServiceImpl;
+import core.basesyntax.servise.impl.DataProcessorServiceImpl;
+import core.basesyntax.servise.impl.ParserServiceImpl;
 import core.basesyntax.servise.impl.ReportMakerServiceImpl;
-import core.basesyntax.servise.strategy.OperationStrategy;
-import core.basesyntax.servise.strategy.impl.MapOfHandlersForStrategyImpl;
-import core.basesyntax.servise.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.MapOfHandlersForStrategyImpl;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.List;
 
 public class Main {
@@ -20,13 +23,16 @@ public class Main {
     public static void main(String[] args) {
         ReaderService readerService = new CsvFileReaderServiceImpl();
         OperationStrategy strategy = new OperationStrategyImpl(new MapOfHandlersForStrategyImpl());
-        FruitService fruitService = new FruitServiceImpl(strategy);
+        ParserService parsingFruits = new ParserServiceImpl();
+        DataProcessorService processingFruits = new DataProcessorServiceImpl(strategy);
         ReportMakerService reportMaker = new ReportMakerServiceImpl();
         WriterService writerService = new CsvFileWriterServiceImpl();
 
-        List<String> inputData = readerService.readFromFile(PATH_INFILE);
-        fruitService.processData(inputData);
+        List<String> inputList = readerService.readFromFile(PATH_INFILE);
+        List<FruitTransaction> listOfTransactions = parsingFruits.parsingData(inputList);
+        processingFruits.processingData(listOfTransactions);
         String report = reportMaker.generateReport();
         writerService.writeToFile(PATH_OUTFILE, report);
     }
 }
+

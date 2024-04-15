@@ -1,4 +1,4 @@
-package core.basesyntax.servise.strategy.impl;
+package core.basesyntax.strategy.impl;
 
 import static core.basesyntax.servise.FruitTransaction.Operation.BALANCE;
 import static core.basesyntax.servise.FruitTransaction.Operation.PURCHASE;
@@ -6,8 +6,8 @@ import static core.basesyntax.servise.FruitTransaction.Operation.RETURN;
 import static core.basesyntax.servise.FruitTransaction.Operation.SUPPLY;
 
 import core.basesyntax.servise.FruitTransaction;
-import core.basesyntax.servise.strategy.MapOfHandlersForStrategy;
-import core.basesyntax.servise.strategy.OperationService;
+import core.basesyntax.strategy.MapOfHandlersForStrategy;
+import core.basesyntax.strategy.OperationService;
 import java.util.HashMap;
 import java.util.Map;
 
