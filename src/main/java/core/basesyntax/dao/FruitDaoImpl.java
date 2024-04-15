@@ -27,6 +27,11 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
+    public void plus(String fruitName, int quantity) {
+        Storage.fruits.merge(fruitName, quantity, Integer::sum);
+    }
+
+    @Override
     public boolean containsFruit(String fruitName) {
         return Storage.fruits.containsKey(fruitName);
     }

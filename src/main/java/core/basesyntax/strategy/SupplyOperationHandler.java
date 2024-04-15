@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.exception.InvalidQuantityException;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperationHandler implements OperationHandler {
@@ -12,9 +13,11 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction fruitTransaction) {
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new InvalidQuantityException("Supply can't be less 0");
+        }
         if (fruitDao.containsFruit(fruitTransaction.getFruit())) {
-            fruitDao.update(fruitTransaction.getFruit(),
-                    fruitDao.get(fruitTransaction.getFruit()) + fruitTransaction.getQuantity());
+            fruitDao.plus(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         } else {
             fruitDao.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }

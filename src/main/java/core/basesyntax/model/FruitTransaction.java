@@ -1,7 +1,8 @@
 package core.basesyntax.model;
 
-public class FruitTransaction {
+import core.basesyntax.exception.InvalidOperationCodeException;
 
+public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -42,7 +43,7 @@ public class FruitTransaction {
                     return o;
                 }
             }
-            return null;
+            throw new InvalidOperationCodeException("Can't find operation with code: " + code);
         }
 
         public String getCode() {

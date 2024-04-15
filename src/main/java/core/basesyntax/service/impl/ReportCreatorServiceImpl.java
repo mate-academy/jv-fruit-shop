@@ -10,13 +10,13 @@ public class ReportCreatorServiceImpl implements ReportCreatorService {
 
     @Override
     public String create() {
-        StringBuilder stringBuilder = new StringBuilder(TITLE);
+        StringBuilder report = new StringBuilder(TITLE);
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
-            stringBuilder.append(System.lineSeparator())
+            report.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(SEPARATOR)
                     .append(entry.getValue());
         }
-        return stringBuilder.toString();
+        return report.toString();
     }
 }

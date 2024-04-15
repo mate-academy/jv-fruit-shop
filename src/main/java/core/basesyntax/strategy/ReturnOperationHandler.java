@@ -1,6 +1,7 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.dao.FruitDao;
+import core.basesyntax.exception.InvalidQuantityException;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperationHandler implements OperationHandler {
@@ -12,7 +13,9 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction fruitTransaction) {
-        fruitDao.update(fruitTransaction.getFruit(),
-                fruitDao.get(fruitTransaction.getFruit()) + fruitTransaction.getQuantity());
+        if (fruitTransaction.getQuantity() < 0) {
+            throw new InvalidQuantityException("Return can't be less 0");
+        }
+        fruitDao.plus(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

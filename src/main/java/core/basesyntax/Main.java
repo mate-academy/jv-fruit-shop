@@ -35,9 +35,9 @@ public class Main {
         FileReaderService fileReader = new FileReaderServiceCsvImpl();
         List<String> readDataList = fileReader.readData(INPUT_FILE_PATH);
         ParserServiceImpl parserService = new ParserServiceImpl();
-        List<FruitTransaction> transactionsList = parserService.parse(readDataList);
+        List<FruitTransaction> transactions = parserService.parse(readDataList);
         OperationProcessor operationProcessor = new OperationProcessorImpl(operationStrategies);
-        operationProcessor.process(transactionsList);
+        operationProcessor.process(transactions);
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
         String reportString = reportCreatorService.create();
         FileWriterService fileWriterService = new FileWriterServiceCsvImpl();

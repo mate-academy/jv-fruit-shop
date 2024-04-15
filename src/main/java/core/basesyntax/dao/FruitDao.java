@@ -7,5 +7,7 @@ public interface FruitDao {
 
     void update(String fruitName, int quantity);
 
+    void plus(String fruitName, int quantity);
+
     boolean containsFruit(String fruitName);
 }
