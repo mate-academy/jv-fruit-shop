@@ -1,10 +1,11 @@
-package db;
+package service.impl;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import service.FileReaderService;
 
-public class FileReaderImpl implements FileReader {
+public class FileReaderServiceImpl implements FileReaderService {
     @Override
     public String read(String fileName) {
         try {

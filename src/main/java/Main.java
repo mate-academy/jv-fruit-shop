@@ -1,15 +1,15 @@
-import db.FileReader;
-import db.FileReaderImpl;
-import db.FileWriter;
-import db.FileWriterImpl;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
+import service.FileReaderService;
+import service.FileWriterService;
 import service.FruitService;
-import service.FruitServiceImpl;
 import service.ReportService;
-import service.ReportServiceImpl;
 import service.TransactionMapperService;
+import service.impl.FileReaderServiceImpl;
+import service.impl.FileWriterServiceImpl;
+import service.impl.FruitServiceImpl;
+import service.impl.ReportServiceImpl;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 import strategy.activities.BalanceHandler;
@@ -19,16 +19,19 @@ import strategy.activities.ReturnHandler;
 import strategy.activities.SupplyHandler;
 
 public class Main {
+    private static final String REPORT_PATH = "src/main/resources/dailyReport.csv";
     private static final String FILE_PATH = "src/main/resources/file.csv";
-    private static final FileReader readFile = new FileReaderImpl();
-    private static final FileWriter fileWriter = new FileWriterImpl();
+    private static final FileReaderService readFile = new FileReaderServiceImpl();
+    private static final FileWriterService fileWriter = new FileWriterServiceImpl();
     private static final ReportService reportService = new ReportServiceImpl();
+    private static final TransactionMapperService transactionMapperService =
+            new TransactionMapperService();
 
     public static void main(String[] args) {
-        String transactions = readFile.read(FILE_PATH);
+        String inputFileLines = readFile.read(FILE_PATH);
 
-        List<FruitTransaction> convertedData =
-                new TransactionMapperService().stringToFruitTransaction(transactions);
+        List<FruitTransaction> transactions =
+                transactionMapperService.stringToFruitTransaction(inputFileLines);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceHandler(),
@@ -39,10 +42,10 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         FruitService fruitService = new FruitServiceImpl(operationStrategy);
-        Map<String, Integer> calculatedData = fruitService.processData(convertedData);
+        fruitService.processTransactions(transactions);
 
-        String reportFile = reportService.generateReport(calculatedData);
+        String reportFile = reportService.generateReport();
 
-        fileWriter.writeToFile(reportFile);
+        fileWriter.writeToFile(reportFile, REPORT_PATH);
     }
 }
