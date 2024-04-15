@@ -3,6 +3,6 @@ package service;
 import java.util.List;
 import model.FruitTransaction;
 
-public interface TransactionMapper {
+public interface FruitTransactionMapper {
     List<FruitTransaction> map(List<String> fruitTransactionsList);
 }

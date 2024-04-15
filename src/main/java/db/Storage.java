@@ -11,6 +11,18 @@ public class Storage {
     }
 
     public static void saveToFruitsBalanceReport(Map<String, Integer> fruitTransactions) {
+        for (Map.Entry<String, Integer> entry : fruitTransactions.entrySet()) {
+            if (entry.getValue() < 0) {
+                throw new RuntimeException("The balance of "
+                        + entry.getKey()
+                        + " is negative: "
+                        + entry.getValue());
+            }
+        }
         FRUITS_BALANCE_REPORT.putAll(fruitTransactions);
+    }
+
+    public static void clearStorage() {
+        FRUITS_BALANCE_REPORT.clear();
     }
 }

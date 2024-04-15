@@ -4,20 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import model.Operation;
-import service.TransactionMapper;
 
-public class FruitTransactionMapper implements TransactionMapper {
+public class FruitTransactionMapperImpl implements service.FruitTransactionMapper {
     private static final int INDEX_OF_FRUIT = 1;
     private static final int INDEX_OF_OPERATION = 0;
     private static final int INDEX_OF_QUANTITY = 2;
     private static final String SEPARATOR = ",";
+    private static final List<FruitTransaction> FRUIT_TRANSACTIONS = new ArrayList<>();
 
     public List<FruitTransaction> map(List<String> fruitTransactionsList) {
-        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String fruitTransaction : fruitTransactionsList) {
-            fruitTransactions.add(mapToObject(fruitTransaction));
+            FRUIT_TRANSACTIONS.add(mapToObject(fruitTransaction));
         }
-        return fruitTransactions;
+        return FRUIT_TRANSACTIONS;
     }
 
     private FruitTransaction mapToObject(String dataLine) {

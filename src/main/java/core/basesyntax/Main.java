@@ -1,24 +1,31 @@
 package core.basesyntax;
 
-import java.io.File;
-import java.util.Map;
+import java.util.List;
+import model.FruitTransaction;
 import service.FileReaderService;
-import service.FileWriterService;
+import service.FruitTransactionMapper;
+import service.FruitTransactionProcessor;
 import service.ReportService;
+import service.ReportWriterService;
 import service.impl.FileReaderServiceImpl;
+import service.impl.FruitTransactionMapperImpl;
+import service.impl.FruitTransactionProcessorImpl;
 import service.impl.ReportServiceImpl;
-import service.impl.ReportWriterService;
+import service.impl.ReportWriterServiceImpl;
 
 public class Main {
-    private static final String PATH_TO_FILE = "src/main/java/resources/File.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
+        FruitTransactionMapper fruitTransactionMapper = new FruitTransactionMapperImpl();
+        FruitTransactionProcessor fruitTransactionProcessor = new FruitTransactionProcessorImpl();
         ReportService reportService = new ReportServiceImpl();
-        FileWriterService fileWriterService = new ReportWriterService();
-        Map<String, Integer> report = reportService
-                .createReport(fileReaderService
-                        .readFromFile(new File(PATH_TO_FILE)));
-        fileWriterService.writeToFile(report);
+        ReportWriterService reportWriterService = new ReportWriterServiceImpl();
+        List<String> fruitTransactionsLines = fileReaderService.readFromFile();
+        List<FruitTransaction> fruitTransactions = fruitTransactionMapper
+                .map(fruitTransactionsLines);
+        fruitTransactionProcessor.process(fruitTransactions);
+        String report = reportService.createReport();
+        reportWriterService.writeToFile(report);
     }
 }
