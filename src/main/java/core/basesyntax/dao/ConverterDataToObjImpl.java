@@ -10,9 +10,8 @@ public class ConverterDataToObjImpl {
     private static final int FRUIT_NAME_SEQUENCE = 1;
     private static final int FRUIT_QUANTITY_SEQUENCE = 2;
 
-    public void convertData(String filePath) {
-        ReaderDataFromFileImpl readerDataFromFile = new ReaderDataFromFileImpl();
-
+    public List<FruitTransaction> convertData(String filePath,
+                                              ReaderDataFromFile readerDataFromFile) {
         List<FruitTransaction> list = readerDataFromFile.readFromFile(filePath).stream()
                 .map(line -> line.split(SPLITERATOR))
                 .map(fruitTransaction -> new FruitTransaction(fruitTransaction[OPERATION_SEQUENCE],
@@ -20,5 +19,6 @@ public class ConverterDataToObjImpl {
                         Integer.parseInt(fruitTransaction[FRUIT_QUANTITY_SEQUENCE])))
                 .toList();
         DataBase.fruitDataBase.addAll(list);
+        return DataBase.fruitDataBase;
     }
 }

@@ -6,8 +6,7 @@ import java.io.IOException;
 
 public class ReportWriterToFileImpl implements ReportWriterToFile {
     @Override
-    public void getReport(String filePath) {
-        ReportCreator reportCreator = new ReportCreator();
+    public void getReport(String filePath, ReportCreator reportCreator) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             for (String line : reportCreator.constructingLines(ReportCreator.storageForReport)) {
                 writer.write(line);
