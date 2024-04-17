@@ -1,14 +1,15 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.DataBase;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReportWriterToFileImpl implements ReportWriterToFile {
     @Override
-    public void getReport(String filePath, ReportCreator reportCreator) {
+    public void getReport(String filePath, DataBase reportCreator) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            for (String line : reportCreator.constructingLines(ReportCreator.storageForReport)) {
+            for (String line : reportCreator.constructingLines(DataBase.FRUIT_DATABASE)) {
                 writer.write(line);
                 writer.newLine();
             }

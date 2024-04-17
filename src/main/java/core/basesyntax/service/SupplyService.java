@@ -2,18 +2,11 @@ package core.basesyntax.service;
 
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.db.DataBase;
-import java.util.List;
 
-public class SupplyService implements ShopService {
+public class SupplyService implements OperationHandler {
     @Override
-    public void operationHandler() {
-        List<FruitTransaction> supply = DataBase.fruitDataBase.stream()
-                .filter(s -> s.getOperation() == FruitTransaction.Operation.SUPPLY)
-                .toList();
-
-        supply.forEach(fruitTransaction ->
-                ReportCreator.storageForReport.replace(fruitTransaction.getFruit(),
-                        ReportCreator.storageForReport.get(fruitTransaction.getFruit())
-                        + fruitTransaction.getQuantity()));
+    public void operationHandler(FruitTransaction fruitTransaction) {
+        DataBase.FRUIT_DATABASE.merge(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity(), Integer::sum);
     }
 }

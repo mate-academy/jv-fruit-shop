@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.db.DataBase;
 import java.util.List;
 
 public class ConverterDataToObjImpl {
@@ -11,14 +10,13 @@ public class ConverterDataToObjImpl {
     private static final int FRUIT_QUANTITY_SEQUENCE = 2;
 
     public List<FruitTransaction> convertData(String filePath,
-                                              ReaderDataFromFile readerDataFromFile) {
-        List<FruitTransaction> list = readerDataFromFile.readFromFile(filePath).stream()
+                                              List<String> listOfStrings) {
+        List<FruitTransaction> list = listOfStrings.stream()
                 .map(line -> line.split(SPLITERATOR))
                 .map(fruitTransaction -> new FruitTransaction(fruitTransaction[OPERATION_SEQUENCE],
                         fruitTransaction[FRUIT_NAME_SEQUENCE],
                         Integer.parseInt(fruitTransaction[FRUIT_QUANTITY_SEQUENCE])))
                 .toList();
-        DataBase.fruitDataBase.addAll(list);
-        return DataBase.fruitDataBase;
+        return list;
     }
 }
