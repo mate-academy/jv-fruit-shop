@@ -47,8 +47,13 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getOperationByCode() {
-            return code;
+        public static Operation getByCode(String operation) {
+            for (Operation op : Operation.values()) {
+                if (op.code.equalsIgnoreCase(operation)) {
+                    return op;
+                }
+            }
+            return SUPPLY;
         }
     }
 }
