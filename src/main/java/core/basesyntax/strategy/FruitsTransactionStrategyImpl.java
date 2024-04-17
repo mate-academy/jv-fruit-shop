@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import java.util.Map;
 
 public class FruitsTransactionStrategyImpl implements FruitsTransactionStrategy {
-    private Map<String, FruitHandler> fruitHandlerMap;
+    private final Map<String, FruitHandler> fruitHandlerMap;
 
     public FruitsTransactionStrategyImpl(Map<String, FruitHandler> fruitHandlerMap) {
         this.fruitHandlerMap = fruitHandlerMap;

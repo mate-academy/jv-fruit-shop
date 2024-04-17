@@ -1,7 +1,17 @@
 package core.basesyntax.service;
 
-public interface FruitTransactionService {
-    void handleTransactions(String fileToReadPath);
+import core.basesyntax.model.Fruit;
+import java.util.List;
+import java.util.Map;
 
-    void writeReportToFile(String fileToWritePath);
+public interface FruitTransactionService {
+    List<String[]> getTransactions(String fileToReadPath);
+
+    Fruit makeFruit(String[] transactionValues);
+
+    void handleTransaction(Fruit fruit, String transactionType);
+
+    String getReport(Map<String, Fruit> fruits);
+
+    void writeReportToFile(String fileToWritePath, String report);
 }

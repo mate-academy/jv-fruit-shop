@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitTransactionServiceImpl implements FruitTransactionService {
+    public static final int TRANSACTION_TYPE_INDEX = 0;
     private static final String REPORT_HEADER = "fruit,quantity";
-    private static final int TRANSACTION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
     private final FruitsTransactionStrategy fruitsTransactionStrategy;
@@ -22,31 +22,44 @@ public class FruitTransactionServiceImpl implements FruitTransactionService {
         this.fruitsTransactionStrategy = fruitsTransactionStrategy;
     }
 
-    public void handleTransactions(String fileToReadPath) {
+    @Override
+    public List<String[]> getTransactions(String fileToReadPath) {
         List<String> transactionsData = new ReaderServiceImpl().readFromFile(fileToReadPath);
-        List<String[]> transactionsOnly = transactionsData.subList(1, transactionsData.size())
+        return transactionsData.subList(1, transactionsData.size())
                 .stream()
                 .map(s -> s.split(","))
                 .toList();
-        Map<String, Fruit> fruitsData = Storage.getFruits();
-        for (String[] transactionParts : transactionsOnly) {
-            String fruitName = transactionParts[FRUIT_NAME_INDEX];
-            int fruitQuantity = Integer.parseInt(transactionParts[FRUIT_QUANTITY_INDEX]);
-            fruitsTransactionStrategy
-                    .fruitHandler(transactionParts[TRANSACTION_TYPE_INDEX])
-                    .transactionHandler(fruitsData, fruitName, fruitQuantity);
-        }
     }
 
     @Override
-    public void writeReportToFile(String fileToWritePath) {
+    public Fruit makeFruit(String[] transactionValues) {
+        return new Fruit(
+                transactionValues[FRUIT_NAME_INDEX],
+                Integer.parseInt(transactionValues[FRUIT_QUANTITY_INDEX])
+        );
+    }
+
+    public void handleTransaction(Fruit fruit, String transactionType) {
+        Map<String, Fruit> fruitsData = Storage.getFruits();
+        fruitsTransactionStrategy
+                .fruitHandler(transactionType)
+                .transactionHandler(fruitsData, fruit);
+    }
+
+    @Override
+    public String getReport(Map<String, Fruit> fruits) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(REPORT_HEADER).append(System.lineSeparator());
-        for (Fruit fruit : Storage.getFruits().values()) {
+        for (Fruit fruit : fruits.values()) {
             String string = fruit.getFruit() + "," + fruit.getQuantity();
             stringBuilder.append(string).append(System.lineSeparator());
         }
-        new WriterServiceImpl().writeToFile(stringBuilder.toString(), fileToWritePath);
+        return stringBuilder.toString();
+    }
+
+    @Override
+    public void writeReportToFile(String fileToWritePath, String report) {
+        new WriterServiceImpl().writeToFile(report, fileToWritePath);
     }
 
     public enum Operation {

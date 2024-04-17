@@ -7,15 +7,14 @@ public class FruitSupply implements FruitHandler {
     @Override
     public void transactionHandler(
             Map<String, Fruit> fruitsData,
-            String fruitName,
-            int fruitQuantity
+            Fruit transactionFruit
     ) {
-        Fruit fruit = fruitsData.get(fruitName);
+        String transactionFruitName = transactionFruit.getFruit();
+        Fruit fruit = fruitsData.get(transactionFruitName);
         if (fruit == null) {
-            Fruit newFruit = new Fruit(fruitName, fruitQuantity);
-            fruitsData.put(fruitName, newFruit);
+            fruitsData.put(transactionFruitName, transactionFruit);
         } else {
-            fruit.setQuantity(fruit.getQuantity() + fruitQuantity);
+            fruit.setQuantity(fruit.getQuantity() + transactionFruit.getQuantity());
         }
     }
 }

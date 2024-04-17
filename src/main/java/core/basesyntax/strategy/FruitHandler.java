@@ -6,7 +6,6 @@ import java.util.Map;
 public interface FruitHandler {
     void transactionHandler(
             Map<String, Fruit> fruitsData,
-            String fruitName,
-            int fruitQuantity
+            Fruit transactionFruit
     );
 }
