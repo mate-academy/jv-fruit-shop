@@ -3,6 +3,7 @@ package core.basesyntax;
 import core.basesyntax.dao.ConverterDataToObjImpl;
 import core.basesyntax.dao.ReaderDataFromFile;
 import core.basesyntax.dao.ReaderDataFromFileImpl;
+import core.basesyntax.db.DataBase;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportWriterToFileImpl;
 import core.basesyntax.service.TransactionStrategy;
@@ -22,6 +23,8 @@ public class Main {
                 .forEach(fruit ->
                         transactionStrategy.getOperationHandler(
                                 fruit.getOperation()).operationHandler(fruit));
-        reportWriterToFile.createReport(REPORT_PATH, reportCreator);
+
+        reportWriterToFile.createReport(REPORT_PATH,
+                reportCreator.createReport(DataBase.FRUIT_DATABASE));
     }
 }

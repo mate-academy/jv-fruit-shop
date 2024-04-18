@@ -5,9 +5,10 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportCreator {
-    public List<String> constructingLines(Map<String, Integer> storageForReport) {
-        return storageForReport.entrySet().stream()
+    public String createReport(Map<String, Integer> storageForReport) {
+        List<String> lines = storageForReport.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())
                 .collect(Collectors.toList());
+        return String.join(System.lineSeparator(), lines);
     }
 }
