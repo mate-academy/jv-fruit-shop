@@ -3,12 +3,12 @@ package core.basesyntax;
 import core.basesyntax.dao.ConverterDataToObjImpl;
 import core.basesyntax.dao.ReaderDataFromFile;
 import core.basesyntax.dao.ReaderDataFromFileImpl;
-import core.basesyntax.db.DataBase;
+import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportWriterToFileImpl;
 import core.basesyntax.service.TransactionStrategy;
 
 public class Main {
-    private static final String FILE_PATH = "src/main/resources/data.csv";
+    private static final String INPUT_FILE_PATH = "src/main/resources/data.csv";
     private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
@@ -16,11 +16,12 @@ public class Main {
         ConverterDataToObjImpl converterDataToObj = new ConverterDataToObjImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategy();
         ReportWriterToFileImpl reportWriterToFile = new ReportWriterToFileImpl();
-        DataBase dataBase = new DataBase();
+        ReportCreator reportCreator = new ReportCreator();
 
-        converterDataToObj.convertData(FILE_PATH, readerDataFromFile.readFromFile(FILE_PATH))
+        converterDataToObj.dataConverter(readerDataFromFile.readFromFile(INPUT_FILE_PATH))
                 .forEach(fruit ->
-                        transactionStrategy.getShopService(fruit).operationHandler(fruit));
-        reportWriterToFile.getReport(REPORT_PATH, dataBase);
+                        transactionStrategy.getOperationHandler(
+                                fruit.getOperation()).operationHandler(fruit));
+        reportWriterToFile.createReport(REPORT_PATH, reportCreator);
     }
 }

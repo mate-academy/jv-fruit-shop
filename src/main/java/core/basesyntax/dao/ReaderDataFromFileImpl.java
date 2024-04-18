@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class ReaderDataFromFileImpl implements ReaderDataFromFile {
-
     @Override
     public List<String> readFromFile(String filePath) {
         File inputFile = new File(filePath);
