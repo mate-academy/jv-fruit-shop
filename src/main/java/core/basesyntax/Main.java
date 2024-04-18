@@ -1,9 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.ConverterDataToObjImpl;
-import core.basesyntax.dao.ReaderDataFromFile;
-import core.basesyntax.dao.ReaderDataFromFileImpl;
-import core.basesyntax.db.DataBase;
+import core.basesyntax.dao.FileDataReader;
+import core.basesyntax.dao.FileDataReaderImpl;
+import core.basesyntax.db.Database;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportWriterToFileImpl;
 import core.basesyntax.service.TransactionStrategy;
@@ -13,7 +13,7 @@ public class Main {
     private static final String REPORT_PATH = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        ReaderDataFromFile readerDataFromFile = new ReaderDataFromFileImpl();
+        FileDataReader readerDataFromFile = new FileDataReaderImpl();
         ConverterDataToObjImpl converterDataToObj = new ConverterDataToObjImpl();
         TransactionStrategy transactionStrategy = new TransactionStrategy();
         ReportWriterToFileImpl reportWriterToFile = new ReportWriterToFileImpl();
@@ -25,6 +25,6 @@ public class Main {
                                 fruit.getOperation()).processTransaction(fruit));
 
         reportWriterToFile.writeToFile(REPORT_PATH,
-                reportCreator.createReport(DataBase.FRUIT_DATABASE));
+                reportCreator.createReport(Database.database));
     }
 }

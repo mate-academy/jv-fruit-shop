@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
 
-public class ReaderDataFromFileImpl implements ReaderDataFromFile {
+public class FileDataReaderImpl implements FileDataReader {
     @Override
     public List<String> readFromFile(String filePath) {
         File inputFile = new File(filePath);
