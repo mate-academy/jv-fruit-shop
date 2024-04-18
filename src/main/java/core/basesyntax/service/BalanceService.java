@@ -5,8 +5,8 @@ import core.basesyntax.db.DataBase;
 
 public class BalanceService implements OperationHandler {
     @Override
-    public void operationHandler(FruitTransaction fruitTransaction) {
-        DataBase.FRUIT_DATABASE.merge(fruitTransaction.getFruit(),
-                fruitTransaction.getQuantity(), Integer::sum);
+    public void processTransaction(FruitTransaction fruitTransaction) {
+        DataBase.FRUIT_DATABASE.put(fruitTransaction.getFruit(),
+                fruitTransaction.getQuantity());
     }
 }

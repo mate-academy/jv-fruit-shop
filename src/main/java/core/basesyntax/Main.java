@@ -19,12 +19,12 @@ public class Main {
         ReportWriterToFileImpl reportWriterToFile = new ReportWriterToFileImpl();
         ReportCreator reportCreator = new ReportCreator();
 
-        converterDataToObj.dataConverter(readerDataFromFile.readFromFile(INPUT_FILE_PATH))
+        converterDataToObj.convertAll(readerDataFromFile.readFromFile(INPUT_FILE_PATH))
                 .forEach(fruit ->
                         transactionStrategy.getOperationHandler(
-                                fruit.getOperation()).operationHandler(fruit));
+                                fruit.getOperation()).processTransaction(fruit));
 
-        reportWriterToFile.createReport(REPORT_PATH,
+        reportWriterToFile.writeToFile(REPORT_PATH,
                 reportCreator.createReport(DataBase.FRUIT_DATABASE));
     }
 }

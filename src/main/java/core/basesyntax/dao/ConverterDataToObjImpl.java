@@ -9,7 +9,7 @@ public class ConverterDataToObjImpl {
     private static final int FRUIT_NAME_SEQUENCE = 1;
     private static final int FRUIT_QUANTITY_SEQUENCE = 2;
 
-    public List<FruitTransaction> dataConverter(List<String> listOfStrings) {
+    public List<FruitTransaction> convertAll(List<String> listOfStrings) {
         List<FruitTransaction> list = listOfStrings.stream()
                 .map(line -> line.split(SEPARATOR))
                 .map(fruitTransaction -> new FruitTransaction(fruitTransaction[OPERATION_SEQUENCE],
