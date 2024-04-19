@@ -7,7 +7,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.parser.ParserCsv;
 import core.basesyntax.service.report.ReportService;
 import core.basesyntax.service.storage.StorageService;
-
 import java.nio.file.Path;
 import java.util.List;
 

@@ -2,10 +2,8 @@ package core.basesyntax.service.storage;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
-
 import java.util.List;
 
 public class StorageServiceImpl implements StorageService {

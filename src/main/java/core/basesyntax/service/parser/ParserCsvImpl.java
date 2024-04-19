@@ -1,7 +1,6 @@
 package core.basesyntax.service.parser;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +10,9 @@ public class ParserCsvImpl implements ParserCsv {
     private static final Integer FRUIT_OPERATION_INDEX = 0;
     private static final Integer FRUIT_NAME_INDEX = 1;
     private static final Integer FRUIT_QUANTITY_INDEX = 2;
+
     @Override
-    public List<FruitTransaction> parseTransactions (List<String> transactions) {
+    public List<FruitTransaction> parseTransactions(List<String> transactions) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         List<String[]> parsedTransactions = convertTransactions(transactions);
         for (String[] element : parsedTransactions) {
@@ -25,7 +25,7 @@ public class ParserCsvImpl implements ParserCsv {
         return fruitTransactions;
     }
 
-    public List<String[]> convertTransactions (List<String> transactions) {
+    public List<String[]> convertTransactions(List<String> transactions) {
         return transactions.stream()
                 .skip(1)
                 .map(el -> el.split(DELLIMETER))
