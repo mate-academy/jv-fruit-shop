@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
-    private final String splitBy = ",";
+    private static final int FIRST_LINE = 1;
+    private static final int OPERATION_CODE_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA = ",";
     private final List<FruitTransaction> fruitTransactions;
     private String[] dataArray;
     private FruitTransaction.Operation operation;
@@ -25,13 +29,13 @@ public class DataConverterImpl implements DataConverter {
             throw new IllegalArgumentException("Incorrect data format!" + transactionData);
         }
         return transactionData.stream()
-                .skip(1)
+                .skip(FIRST_LINE)
                 .map(line -> {
-                    dataArray = line.split(splitBy);
+                    dataArray = line.split(COMMA);
                     return new FruitTransaction(
-                            operation.fromCode(dataArray[0]),
-                            dataArray[1],
-                            Integer.parseInt(dataArray[2]));
+                            operation.fromCode(dataArray[OPERATION_CODE_INDEX]),
+                            dataArray[FRUIT_INDEX],
+                            Integer.parseInt(dataArray[QUANTITY_INDEX]));
                 })
                 .collect(Collectors.toList());
     }
