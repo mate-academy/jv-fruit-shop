@@ -2,11 +2,10 @@ package service.impl;
 
 import static java.util.stream.Collectors.summingInt;
 
+import db.Storage;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
-import db.Storage;
 import model.FruitTransaction;
 import service.FruitTransactionProcessor;
 

@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.List;
-
 import model.FruitTransaction;
 import service.FruitTransactionMapper;
 import service.FruitTransactionProcessor;
@@ -18,8 +17,9 @@ public class Main {
     public static void main(String[] args) {
         final FileReaderService fileReaderService = new FileReaderService();
         final FruitTransactionMapper fruitTransactionMapper = new FruitTransactionMapperImpl();
-        final FruitTransactionProcessor fruitTransactionProcessor = new FruitTransactionProcessorImpl();
-        final ReportService  reportService = new ReportServiceImpl();
+        final FruitTransactionProcessor
+                fruitTransactionProcessor = new FruitTransactionProcessorImpl();
+        final ReportService reportService = new ReportServiceImpl();
         final ReportWriterService reportWriterService = new ReportWriterServiceImpl();
         final List<String> fruitTransactionsLines = fileReaderService
                 .readFromFile("src/main/resources/file.csv");
