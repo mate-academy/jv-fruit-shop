@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static final Map<String, Integer> FRUITS_BALANCE_REPORT = new HashMap<>();
+    public static final Map<String, Integer> STORAGE = new HashMap<>();
 
     public static HashMap<String, Integer> getFruitsBalanceReport() {
-        return new HashMap<>(FRUITS_BALANCE_REPORT);
+        return new HashMap<>(STORAGE);
     }
 
     public static void saveToFruitsBalanceReport(Map<String, Integer> fruitTransactions) {
@@ -19,10 +19,10 @@ public class Storage {
                         + entry.getValue());
             }
         }
-        FRUITS_BALANCE_REPORT.putAll(fruitTransactions);
+        STORAGE.putAll(fruitTransactions);
     }
 
     public static void clearStorage() {
-        FRUITS_BALANCE_REPORT.clear();
+        STORAGE.clear();
     }
 }

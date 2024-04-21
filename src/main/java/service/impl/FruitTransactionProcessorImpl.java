@@ -2,7 +2,6 @@ package service.impl;
 
 import static java.util.stream.Collectors.summingInt;
 
-import db.Storage;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -13,13 +12,12 @@ public class FruitTransactionProcessorImpl implements FruitTransactionProcessor 
     private final OperationStrategy operationStrategy = new OperationStrategy();
 
     @Override
-    public void process(List<FruitTransaction> fruitTransactionsList) {
-        Map<String, Integer> fruitTransactions = fruitTransactionsList.stream()
+    public Map<String, Integer> process(List<FruitTransaction> fruitTransactionsList) {
+        return fruitTransactionsList.stream()
                 .collect(Collectors.groupingBy(
-                        FruitTransaction::getFruit, summingInt(fruitTransaction
-                                -> operationStrategy
-                                .getOperationService(fruitTransaction.getOperation())
-                                .operate(fruitTransaction.getQuantity()))));
-        Storage.saveToFruitsBalanceReport(fruitTransactions);
+                        FruitTransaction::getFruit, summingInt(
+                                fruitTransaction -> operationStrategy.getOperation(
+                                        fruitTransaction.getQuantity(),
+                                        fruitTransaction.getOperation()))));
     }
 }

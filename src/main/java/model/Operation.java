@@ -16,12 +16,12 @@ public enum Operation {
         return code;
     }
 
-    public static Operation parse(String operationSymbol) {
+    public static Operation getByCode(String code) {
         for (Operation operation : values()) {
-            if (operation.getCode().equals(operationSymbol)) {
+            if (operation.getCode().equals(code)) {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Unknown operation symbol: " + operationSymbol);
+        throw new IllegalArgumentException("Unknown operation symbol: " + code);
     }
 }

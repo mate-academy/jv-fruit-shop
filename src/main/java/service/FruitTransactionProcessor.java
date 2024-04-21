@@ -1,9 +1,10 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
 
 public interface FruitTransactionProcessor {
-    void process(List<FruitTransaction> fruitTransactions);
+    Map<String, Integer> process(List<FruitTransaction> fruitTransactions);
 
 }

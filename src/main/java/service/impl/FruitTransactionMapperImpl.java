@@ -6,10 +6,6 @@ import model.FruitTransaction;
 import model.Operation;
 
 public class FruitTransactionMapperImpl implements service.FruitTransactionMapper {
-    private static final int INDEX_OF_FRUIT = 1;
-    private static final int INDEX_OF_OPERATION = 0;
-    private static final int INDEX_OF_QUANTITY = 2;
-    private static final String SEPARATOR = ",";
     private static final List<FruitTransaction> FRUIT_TRANSACTIONS = new ArrayList<>();
 
     public List<FruitTransaction> map(List<String> fruitTransactionsList) {
@@ -20,10 +16,14 @@ public class FruitTransactionMapperImpl implements service.FruitTransactionMappe
     }
 
     private FruitTransaction mapToObject(String dataLine) {
-        String[] fruitTransaction = dataLine.split(SEPARATOR);
-        Operation operation = Operation.parse(fruitTransaction[INDEX_OF_OPERATION]);
-        String fruit = fruitTransaction[INDEX_OF_FRUIT];
-        int quantity = Integer.parseInt(fruitTransaction[INDEX_OF_QUANTITY]);
+        String separator = ",";
+        int indexOfOperation = 0;
+        int indexOfFruit = 1;
+        int indexOfQuantity = 2;
+        String[] fruitTransaction = dataLine.split(separator);
+        Operation operation = Operation.getByCode(fruitTransaction[indexOfOperation]);
+        String fruit = fruitTransaction[indexOfFruit];
+        int quantity = Integer.parseInt(fruitTransaction[indexOfQuantity]);
         return new FruitTransaction(operation, fruit, quantity);
     }
 }

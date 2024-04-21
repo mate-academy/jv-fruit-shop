@@ -8,19 +8,18 @@ import java.util.List;
 import service.FileReaderService;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    private final String pathToInputFile = "src/main/resources/file.csv";
 
     @Override
-    public List<String> readFromFile() {
+    public List<String> readFromFile(String fileName) {
         List<String> fruitTransactions = new ArrayList<>();
-        try (BufferedReader fileReader = new BufferedReader(new FileReader(pathToInputFile))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName))) {
             String readedLineFromFile;
             fileReader.readLine();
             while ((readedLineFromFile = fileReader.readLine()) != null) {
                 fruitTransactions.add(readedLineFromFile.trim());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read data from file " + pathToInputFile, e);
+            throw new RuntimeException("Can't read data from file " + fileName, e);
         }
         return fruitTransactions;
     }
