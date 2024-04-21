@@ -11,7 +11,7 @@ public class ReportServiceImpl implements ReportService {
 
     public String createReport() {
         StringBuilder builder = new StringBuilder(HEADER_LINE);
-        for (Map.Entry<String, Integer> entry : Storage.getFruitsBalanceReport().entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.getFruits().entrySet()) {
             builder.append(LINE_SEPARATOR)
                     .append(entry.getKey())
                     .append(Separator)

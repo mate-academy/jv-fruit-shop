@@ -6,13 +6,13 @@ import model.FruitTransaction;
 import model.Operation;
 
 public class FruitTransactionMapperImpl implements service.FruitTransactionMapper {
-    private static final List<FruitTransaction> FRUIT_TRANSACTIONS = new ArrayList<>();
 
     public List<FruitTransaction> map(List<String> fruitTransactionsList) {
+        List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String fruitTransaction : fruitTransactionsList) {
-            FRUIT_TRANSACTIONS.add(mapToObject(fruitTransaction));
+            fruitTransactions.add(mapToObject(fruitTransaction));
         }
-        return FRUIT_TRANSACTIONS;
+        return fruitTransactions;
     }
 
     private FruitTransaction mapToObject(String dataLine) {
