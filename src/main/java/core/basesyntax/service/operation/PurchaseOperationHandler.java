@@ -1,8 +1,17 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.db.FruitStorage;
+import core.basesyntax.model.FruitTransaction;
+
 public class PurchaseOperationHandler implements OperationHandler {
+
     @Override
-    public Integer calculateQuantity(Integer before, Integer after) {
-        return before - after;
+    public void process(FruitTransaction transaction, FruitStorage storage) {
+        int quantity = storage.getQuantity(transaction.getFruit());
+        if (quantity <= 0) {
+            throw new RuntimeException("The product is not available");
+        }
+        storage.add(transaction.getFruit(),
+                storage.getQuantity(transaction.getFruit()) - transaction.getQuantity());
     }
 }

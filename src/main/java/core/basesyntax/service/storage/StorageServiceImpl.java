@@ -16,16 +16,10 @@ public class StorageServiceImpl implements StorageService {
     }
 
     @Override
-    public void transfer(List<FruitTransaction> fruits) {
-        for (FruitTransaction fruit : fruits) {
-            OperationHandler operationHandler = operationStrategy.get(fruit.getOperation());
-            storage.add(
-                    fruit.getFruit(),
-                    operationHandler.calculateQuantity(
-                            storage.getQuantity(fruit.getFruit()),
-                            fruit.getQuantity()
-                    )
-            );
+    public void transfer(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
+            OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
+            operationHandler.process(transaction, storage);
         }
     }
 }

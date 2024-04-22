@@ -32,8 +32,8 @@ public class FruitServiceImpl implements FruitService {
     @Override
     public void countToCsv(Path fromFile, Path toFile) {
         List<String> lines = csvReader.read(fromFile);
-        List<FruitTransaction> fruits = csvParser.parseTransactions(lines);
-        storageService.transfer(fruits);
+        List<FruitTransaction> transactions = csvParser.parseTransactions(lines);
+        storageService.transfer(transactions);
         List<String> report = reportGenerator.report(storage.getAll());
         csvWriter.writeToFile(toFile, report);
     }
