@@ -5,8 +5,8 @@ import service.WriteToFile;
 import service.WriteToStorage;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    WriteToStorage writeToStorage = new WriteToStorageImpl();
-    WriteToFile writeFromStorage = new WriteToFileImpl();
+    private final WriteToStorage writeToStorage = new WriteToStorageImpl();
+    private final WriteToFile writeFromStorage = new WriteToFileImpl();
 
     @Override
     public void getResult(String fromFileName, String toFileName) {

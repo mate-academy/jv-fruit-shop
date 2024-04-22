@@ -31,13 +31,21 @@ public class FruitOperation {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         FruitOperation that = (FruitOperation) o;
 
-        if (amount != that.amount) return false;
-        if (!Objects.equals(fruit, that.fruit)) return false;
+        if (amount != that.amount) {
+            return false;
+        }
+        if (!Objects.equals(fruit, that.fruit)) {
+            return false;
+        }
         return operationType == that.operationType;
     }
 

@@ -4,14 +4,13 @@ import dao.FruitDao;
 import dao.FruitDaoImpl;
 import exception.CheckSplitLine;
 import exception.CheckSplitLineImpl;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import model.Fruit;
 import service.GetFruitFromFile;
 import service.GetValueForFruit;
 import service.WriteToStorage;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class WriteToStorageImpl implements WriteToStorage {
     private static final int FRUIT_INDEX = 1;

@@ -10,7 +10,8 @@ public class GetValueForFruitImpl implements GetValueForFruit {
     private static final int FRUIT_INDEX = 1;
     private static final int VALUE_INDEX = 2;
 
-    FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
     public Integer calculateNewValue(String line) {
         String[] arr = line.split(SPECIAL_CHARACTER);

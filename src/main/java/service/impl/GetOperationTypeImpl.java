@@ -1,9 +1,8 @@
 package service.impl;
 
+import java.util.NoSuchElementException;
 import model.OperationType;
 import service.GetOperationType;
-
-import java.util.NoSuchElementException;
 
 public class GetOperationTypeImpl implements GetOperationType {
     @Override

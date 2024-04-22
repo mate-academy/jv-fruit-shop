@@ -2,15 +2,15 @@ package service.impl;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
-import model.Fruit;
-import service.WriteToFile;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
+import model.Fruit;
+import service.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
-    FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao = new FruitDaoImpl();
+
     @Override
     public void writeFromDataBase(String fileName) {
         try (FileWriter writer = new FileWriter(fileName);) {

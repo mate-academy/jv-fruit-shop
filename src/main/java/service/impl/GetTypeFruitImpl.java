@@ -1,9 +1,8 @@
 package service.impl;
 
+import java.util.NoSuchElementException;
 import model.FruitType;
 import service.GetTypeFruit;
-
-import java.util.NoSuchElementException;
 
 public class GetTypeFruitImpl implements GetTypeFruit {
     @Override

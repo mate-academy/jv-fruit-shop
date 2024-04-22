@@ -13,15 +13,20 @@ public class Fruit {
 
     @Override
     public String toString() {
-        return "Fruit{" +
-                "fruitType=" + fruitType +
-                '}';
+        return "Fruit{"
+                + "fruitType="
+                + fruitType
+                + '}';
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Fruit fruit = (Fruit) o;
 
