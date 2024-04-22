@@ -53,7 +53,7 @@ public class FruitTransaction {
                     return op;
                 }
             }
-            return SUPPLY;
+            throw new IllegalArgumentException("No operation found for code: " + operation);
         }
     }
 }

@@ -2,6 +2,7 @@ package service.impl;
 
 import db.Storage;
 import db.StorageImpl;
+import java.util.StringJoiner;
 import service.ReportService;
 
 public class ReportServiceImpl implements ReportService {
@@ -10,8 +11,10 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public String generateReport() {
-        String receivedData = storage.getFromStorage()
-                .substring(1, (storage.getFromStorage()).length() - 1);
-        return TITLE + receivedData.replace(", ", ",\n");
+        StringJoiner joiner = new StringJoiner(",\n");
+        for (String fruit : storage.getKeys()) {
+            joiner.add(fruit + "=" + storage.getValue(fruit));
+        }
+        return TITLE + joiner;
     }
 }

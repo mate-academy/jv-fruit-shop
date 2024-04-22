@@ -1,7 +1,11 @@
 package db;
 
-public interface Storage {
-    void transferToStorage(String data);
+import java.util.Set;
 
-    String getFromStorage();
+public interface Storage {
+    void setValue(String key, Integer value);
+
+    Integer getValue(String key);
+
+    Set<String> getKeys();
 }

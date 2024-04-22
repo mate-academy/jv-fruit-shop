@@ -1,22 +1,21 @@
 package db;
 
-import service.FileReaderService;
-import service.FileWriterService;
-import service.impl.FileReaderServiceImpl;
-import service.impl.FileWriterServiceImpl;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class StorageImpl implements Storage {
-    private static final String STORAGE_PATH = "src/main/resources/storage.csv";
-    private static final FileWriterService fileWriter = new FileWriterServiceImpl();
-    private static final FileReaderService readFile = new FileReaderServiceImpl();
+    private static Map<String, Integer> data = new HashMap<>();
 
-    @Override
-    public void transferToStorage(String data) {
-        fileWriter.writeToFile(data, STORAGE_PATH);
+    public Integer getValue(String key) {
+        return data.get(key);
     }
 
-    @Override
-    public String getFromStorage() {
-        return readFile.read(STORAGE_PATH);
+    public void setValue(String key, Integer value) {
+        data.put(key, value);
+    }
+
+    public Set<String> getKeys() {
+        return data.keySet();
     }
 }

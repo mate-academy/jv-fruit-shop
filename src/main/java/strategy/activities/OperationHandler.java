@@ -1,5 +1,7 @@
 package strategy.activities;
 
+import model.FruitTransaction;
+
 public interface OperationHandler {
-    Integer executionOfOperation(Integer currentAction, Integer quantity);
+    void executeTransaction(FruitTransaction transaction);
 }
