@@ -6,7 +6,7 @@ import service.GetOperationType;
 
 public class GetOperationTypeImpl implements GetOperationType {
     @Override
-    public OperationType checkOperationType(String operation) {
+    public OperationType checkAndGetOperationType(String operation) {
         return switch (operation.toLowerCase()) {
             case "b" -> OperationType.BALANCE;
             case "s" -> OperationType.SUPPLY;

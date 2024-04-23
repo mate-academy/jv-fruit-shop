@@ -18,7 +18,7 @@ public class GetValueForFruitImpl implements GetValueForFruit {
     public Integer calculateNewValue(String line) {
         String[] arr = line.split(COMMA);
 
-        switch (getOperationTypeImpl.checkOperationType(arr[TYPE_FRUIT_INDEX])) {
+        switch (getOperationTypeImpl.checkAndGetOperationType(arr[TYPE_FRUIT_INDEX])) {
             case BALANCE:
                 return Integer.parseInt(arr[VALUE_INDEX]);
             case PURCHASE:
