@@ -24,7 +24,7 @@ public class WriteToStorageImpl implements WriteToStorage {
     public void writeToDataBase(String fromFileName) {
         try (BufferedReader br = new BufferedReader(new FileReader(fromFileName))) {
             String line;
-            br.readLine();//skipping first line with "columns" description
+            br.readLine();
             while ((line = br.readLine()) != null) {
                 String[] splitLine = checkSplitLine.checkAndGetLine(line);
                 Fruit fruit = getFruitFromFile.getFruit(splitLine[FRUIT_INDEX]);

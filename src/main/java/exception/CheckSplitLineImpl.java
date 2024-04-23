@@ -3,11 +3,11 @@ package exception;
 import java.util.Arrays;
 
 public class CheckSplitLineImpl implements CheckSplitLine {
-    private static final String SPECIAL_CHARACTER = ",";
+    private static final String COMMA = ",";
     private static final int VALUE_INDEX = 2;
 
     public String[] checkAndGetLine(String line) {
-        String[] splitLine = line.split(SPECIAL_CHARACTER);
+        String[] splitLine = line.split(COMMA);
         if (splitLine.length != 3) {
             throw new IndexOutOfBoundsException(Arrays.toString(splitLine)
                     + " length don't equals 3");

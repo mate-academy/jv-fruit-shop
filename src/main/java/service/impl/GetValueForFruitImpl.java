@@ -5,7 +5,9 @@ import dao.FruitDaoImpl;
 import service.GetValueForFruit;
 
 public class GetValueForFruitImpl implements GetValueForFruit {
-    private static final String SPECIAL_CHARACTER = ",";
+    private static final GetOperationTypeImpl getOperationTypeImpl = new GetOperationTypeImpl();
+    private static final GetFruitFromFileImpl getFruitFromFileImpl = new GetFruitFromFileImpl();
+    private static final String COMMA = ",";
     private static final int TYPE_FRUIT_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int VALUE_INDEX = 2;
@@ -14,9 +16,7 @@ public class GetValueForFruitImpl implements GetValueForFruit {
 
     @Override
     public Integer calculateNewValue(String line) {
-        String[] arr = line.split(SPECIAL_CHARACTER);
-        GetOperationTypeImpl getOperationTypeImpl = new GetOperationTypeImpl();
-        GetFruitFromFileImpl getFruitFromFileImpl = new GetFruitFromFileImpl();
+        String[] arr = line.split(COMMA);
 
         switch (getOperationTypeImpl.checkOperationType(arr[TYPE_FRUIT_INDEX])) {
             case BALANCE:
