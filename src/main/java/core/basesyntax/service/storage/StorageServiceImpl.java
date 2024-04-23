@@ -7,11 +7,9 @@ import core.basesyntax.service.operation.OperationStrategy;
 import java.util.List;
 
 public class StorageServiceImpl implements StorageService {
-    private FruitStorage storage;
     private OperationStrategy operationStrategy;
 
-    public StorageServiceImpl(FruitStorage storage, OperationStrategy operationStrategy) {
-        this.storage = storage;
+    public StorageServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
@@ -19,7 +17,7 @@ public class StorageServiceImpl implements StorageService {
     public void transfer(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
-            operationHandler.process(transaction, storage);
+            operationHandler.process(transaction);
         }
     }
 }
