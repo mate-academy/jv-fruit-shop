@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorageImpl implements FruitStorage {
-    public static Map<String, Integer> fruitStorage = new HashMap<>();
+    private static Map<String, Integer> fruitStorage = new HashMap<>();
 
     @Override
     public void add(String fruitName, Integer quantity) {

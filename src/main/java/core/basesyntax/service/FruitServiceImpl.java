@@ -33,7 +33,7 @@ public class FruitServiceImpl implements FruitService {
     public void countToCsv(Path fromFile, Path toFile) {
         List<String> lines = csvReader.read(fromFile);
         List<FruitTransaction> transactions = csvParser.parseTransactions(lines);
-        storageService.transfer(transactions);
+        storageService.transfer(transactions, storage);
         List<String> report = reportGenerator.report(storage.getAll());
         csvWriter.writeToFile(toFile, report);
     }
