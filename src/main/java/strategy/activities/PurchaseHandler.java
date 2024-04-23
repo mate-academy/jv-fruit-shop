@@ -2,7 +2,6 @@ package strategy.activities;
 
 import db.Storage;
 import db.StorageImpl;
-import java.util.Objects;
 import model.FruitTransaction;
 
 public class PurchaseHandler implements OperationHandler {
@@ -14,11 +13,10 @@ public class PurchaseHandler implements OperationHandler {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
 
-        if (transaction.getQuantity() < 0) {
+        if (transaction.getQuantity() < PRIMARY_QUANTITY) {
             throw new RuntimeException("Balance is negative!");
         }
         Integer currentValue = storage.getValue(fruit);
-        storage.setValue(fruit,
-                Objects.requireNonNullElse(currentValue, PRIMARY_QUANTITY) - quantity);
+        storage.setValue(fruit, currentValue - quantity);
     }
 }
