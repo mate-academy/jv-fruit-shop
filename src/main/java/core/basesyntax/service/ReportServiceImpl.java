@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class ReportServiceImpl implements ReportService {
     private static final String FIRST_LINE_REPORT_TEXT = "fruit,quantity";
+
     @Override
     public String createReport(Map<String, Integer> endOfDayQuantities) {
         StringBuilder report = new StringBuilder();

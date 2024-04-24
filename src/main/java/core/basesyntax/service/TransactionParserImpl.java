@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.operation.Transaction;
 import core.basesyntax.operation.TransactionProvider;
 import core.basesyntax.operation.TransactionProviderImpl;
-import core.basesyntax.operation.Transaction;
 import java.util.ArrayList;
 import java.util.List;
 
