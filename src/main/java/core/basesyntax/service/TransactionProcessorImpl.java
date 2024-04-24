@@ -1,19 +1,19 @@
 package core.basesyntax.service;
 
-import core.basesyntax.operation.StoreOperation;
+import core.basesyntax.operation.Transaction;
 import core.basesyntax.strategy.QuantityCounterStrategy;
 import core.basesyntax.strategy.QuantityCounterStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class OperationListProcessorImpl implements OperationListProcessor {
+public class TransactionProcessorImpl implements TransactionProcessor {
     private static final int DEFAULT_QUANTITY = 0;
     private QuantityCounterStrategy quantityCounterStrategy = new QuantityCounterStrategyImpl();
     private QuantityCounter quantityCounter;
 
     @Override
-    public Map<String, Integer> process(List<StoreOperation> operationsList) {
+    public Map<String, Integer> process(List<Transaction> operationsList) {
         isNullList(operationsList);
         Map<String, Integer> endOfDayQuantityMap = new HashMap<>();
         List<String> storeProductNames = getStoreFruitNames(operationsList);
@@ -23,16 +23,16 @@ public class OperationListProcessorImpl implements OperationListProcessor {
         return endOfDayQuantityMap;
     }
 
-    private List<String> getStoreFruitNames(List<StoreOperation> operationsList) {
+    private List<String> getStoreFruitNames(List<Transaction> operationsList) {
         return operationsList.stream()
-                .map(StoreOperation::getFruit)
+                .map(Transaction::getFruit)
                 .distinct()
                 .toList();
     }
 
-    private int getProductFinalQuantity(List<StoreOperation> operationsList, String product) {
+    private int getProductFinalQuantity(List<Transaction> operationsList, String product) {
         int finalQuantity = DEFAULT_QUANTITY;
-        for (StoreOperation operation : operationsList) {
+        for (Transaction operation : operationsList) {
             if (operation.getFruit().equals(product)) {
                 isQuantityNegative(operation);
                 quantityCounter = quantityCounterStrategy.get(operation);
@@ -50,13 +50,13 @@ public class OperationListProcessorImpl implements OperationListProcessor {
         }
     }
 
-    private void isQuantityNegative(StoreOperation operation) {
+    private void isQuantityNegative(Transaction operation) {
         if (operation.getQuantity() < 0) {
             throw new RuntimeException("Quantity can't be negative");
         }
     }
 
-    private void isNullList(List<StoreOperation> operationsList) {
+    private void isNullList(List<Transaction> operationsList) {
         if (operationsList == null) {
             throw new RuntimeException("No operations in the List");
         }

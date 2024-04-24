@@ -1,14 +1,15 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ReportDao;
-import core.basesyntax.dao.ReportDaoCsvImpl;
-import core.basesyntax.dao.StorageDaoCsvImpl;
-import core.basesyntax.operation.StoreOperation;
+import core.basesyntax.operation.Transaction;
 import core.basesyntax.service.BalanceQuantityCounter;
-import core.basesyntax.service.OperationListProcessor;
-import core.basesyntax.service.OperationListProcessorImpl;
-import core.basesyntax.service.OperationListProvider;
-import core.basesyntax.service.OperationListProviderImpl;
+import core.basesyntax.service.FileService;
+import core.basesyntax.service.FileServiceImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.ReportServiceImpl;
+import core.basesyntax.service.TransactionProcessor;
+import core.basesyntax.service.TransactionProcessorImpl;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionParserImpl;
 import core.basesyntax.service.PurchaseQuantityCounter;
 import core.basesyntax.service.QuantityCounter;
 import core.basesyntax.service.ReturnQuantityCounter;
@@ -20,25 +21,26 @@ import java.util.Map;
 public class Main {
     private static final String STORAGE_FILE_PATH = "src/main/resources/storage.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
-    private static Map<StoreOperation.Operation, QuantityCounter> quantityCounterMap
+    private static Map<Transaction.Operation, QuantityCounter> quantityCounterMap
                                                                     = new HashMap<>();
 
     public static void main(String[] args) {
-        quantityCounterMap.put(StoreOperation.Operation.BALANCE, new BalanceQuantityCounter());
-        quantityCounterMap.put(StoreOperation.Operation.SUPPLY, new SupplyQuantityCounter());
-        quantityCounterMap.put(StoreOperation.Operation.PURCHASE, new PurchaseQuantityCounter());
-        quantityCounterMap.put(StoreOperation.Operation.RETURN, new ReturnQuantityCounter());
-        StorageDaoCsvImpl storage = new StorageDaoCsvImpl();
-        List<String> fileInfo = storage.get(STORAGE_FILE_PATH);
-        OperationListProvider provider = new OperationListProviderImpl();
-        List<StoreOperation> operations = provider.get(fileInfo);
-        OperationListProcessor processor = new OperationListProcessorImpl();
-        Map<String, Integer> endOfDayQuantities = processor.process(operations);
-        ReportDao reportWriter = new ReportDaoCsvImpl();
-        reportWriter.writeReport(endOfDayQuantities, REPORT_FILE_PATH);
+        quantityCounterMap.put(Transaction.Operation.BALANCE, new BalanceQuantityCounter());
+        quantityCounterMap.put(Transaction.Operation.SUPPLY, new SupplyQuantityCounter());
+        quantityCounterMap.put(Transaction.Operation.PURCHASE, new PurchaseQuantityCounter());
+        quantityCounterMap.put(Transaction.Operation.RETURN, new ReturnQuantityCounter());
+        FileService fileService = new FileServiceImpl();
+        List<String> fileInfo = fileService.readFile(STORAGE_FILE_PATH);
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<Transaction> transactions = transactionParser.parse(fileInfo);
+        TransactionProcessor processor = new TransactionProcessorImpl();
+        Map<String, Integer> endOfDayQuantities = processor.process(transactions);
+        ReportService reportService = new ReportServiceImpl();
+        String report = reportService.createReport(endOfDayQuantities);
+        fileService.writeToFile(report, REPORT_FILE_PATH);
     }
 
-    public static Map<StoreOperation.Operation, QuantityCounter> get() {
+    public static Map<Transaction.Operation, QuantityCounter> get() {
         return quantityCounterMap;
     }
 }

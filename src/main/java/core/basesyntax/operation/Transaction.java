@@ -1,6 +1,6 @@
 package core.basesyntax.operation;
 
-public class StoreOperation {
+public class Transaction {
     private Operation operation;
     private String fruit;
     private int quantity;
