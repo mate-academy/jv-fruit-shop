@@ -18,9 +18,8 @@ public class CsvReportServiceImpl implements CsvReportService {
     @Override
     public void writeReport(Path path) {
         Map<String, Integer> map = fruitStorageDao.getAllAsMap();
-        try {
-            File file = new File(path.toUri());
-            FileWriter writer = new FileWriter(file);
+        File file = new File(path.toUri());
+        try (FileWriter writer = new FileWriter(file)) {
             writer.write("fruit,quantity\n");
             for (Map.Entry<String, Integer> entry : map.entrySet()) {
                 writer.write(entry.getKey() + "," + entry.getValue() + "\n");

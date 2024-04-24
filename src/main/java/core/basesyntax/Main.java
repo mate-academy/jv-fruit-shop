@@ -1,8 +1,9 @@
 package core.basesyntax;
 
+import static core.basesyntax.model.FruitTransaction.Operation;
+
 import core.basesyntax.dao.impl.FruitStorageDaoImpl;
 import core.basesyntax.dao.impl.TransactionStorageDaoImpl;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvReportService;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FruitStorageService;
@@ -28,12 +29,12 @@ import java.util.Map;
  */
 public class Main {
     public static void main(String[] args) {
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+        Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
+        operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlerMap.put(Operation.SUPPLY, new SupplyOperationHandler());
+        operationHandlerMap.put(Operation.PURCHASE,
                 new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         FileReaderService fileReaderService = new CsvFileReaderServiceImpl();

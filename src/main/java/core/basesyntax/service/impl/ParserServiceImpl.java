@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation;
+
 import core.basesyntax.dao.TransactionStorageDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ParserService;
@@ -20,13 +22,14 @@ public class ParserServiceImpl implements ParserService {
 
     @Override
     public void parse(List<String> rawData) {
+        boolean firstLine = true;
         for (String element : rawData) {
-            String[] parts = element.split(SEPARATOR);
-            Optional<FruitTransaction.Operation> operation = FruitTransaction.Operation
-                    .fromString(parts[CODE_POSITION]);
-            if (operation.isEmpty()) {
+            if (firstLine) {
+                firstLine = false;
                 continue;
             }
+            String[] parts = element.split(SEPARATOR);
+            Optional<Operation> operation = Operation.fromString(parts[CODE_POSITION]);
             String fruit = parts[FRUIT_POSITION];
             int quantity = Integer.parseInt(parts[QUANTITY_POSITION]);
             operation.ifPresent(value -> transactionStorageDao
