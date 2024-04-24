@@ -2,11 +2,11 @@ package exception;
 
 import java.util.Arrays;
 
-public class CheckSplitLineImpl implements CheckSplitLine {
+public class LineSplitterImpl implements LineSplitter {
     private static final String COMMA = ",";
     private static final int VALUE_INDEX = 2;
 
-    public String[] checkAndGetLine(String line) {
+    public String[] splitLine(String line) {
         String[] splitLine = line.split(COMMA);
         if (splitLine.length != 3) {
             throw new IndexOutOfBoundsException(Arrays.toString(splitLine)

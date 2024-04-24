@@ -2,8 +2,8 @@ package db;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.Fruit;
+import model.FruitType;
 
 public class Storage {
-    public static final Map<Fruit, Integer> fruitHashMap = new HashMap<>();
+    public static final Map<FruitType, Integer> fruitHashMap = new HashMap<>();
 }

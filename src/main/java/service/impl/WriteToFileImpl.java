@@ -1,21 +1,24 @@
 package service.impl;
 
 import dao.FruitDao;
-import dao.FruitDaoImpl;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
-import model.Fruit;
+import model.FruitType;
 import service.WriteToFile;
 
 public class WriteToFileImpl implements WriteToFile {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+
+    public WriteToFileImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
-    public void writeFromDataBase(String fileName) {
+    public void writeToFileFromDataBase(String fileName) {
         try (FileWriter writer = new FileWriter(fileName);) {
-            for (Map.Entry<Fruit, Integer> entry : fruitDao.getEntries()) {
-                writer.write(entry.getKey().getFruitType() + "," + entry.getValue() + "\n");
+            for (Map.Entry<FruitType, Integer> entry : fruitDao.getEntries()) {
+                writer.write(entry.getKey() + "," + entry.getValue() + "\n");
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file");

@@ -2,16 +2,12 @@ package dao;
 
 import java.util.Map;
 import java.util.Set;
-import model.Fruit;
+import model.FruitType;
 
 public interface FruitDao {
-    void add(Fruit fruit, Integer value);
+    void put(FruitType fruitType, Integer count);
 
-    void put(Fruit fruit, Integer count);
+    Set<Map.Entry<FruitType, Integer>> getEntries();
 
-    Integer get(Fruit fruit);
-
-    Map<Fruit, Integer> getMap();
-
-    Set<Map.Entry<Fruit, Integer>> getEntries();
+    Map<FruitType, Integer> getMap();
 }

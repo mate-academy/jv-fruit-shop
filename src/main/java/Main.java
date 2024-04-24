@@ -10,8 +10,7 @@ public class Main {
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         FruitShopService fruitShopService = new FruitShopServiceImpl();
-
         fruitShopService.getResult("inputDateFile.csv", "file.csv");
-        System.out.println(fruitDao.getMap().toString());
+        System.out.println(fruitDao.getMap());
     }
 }
