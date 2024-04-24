@@ -18,7 +18,7 @@ public class WriteToFileImpl implements WriteToFile {
     public void writeToFileFromDataBase(String fileName) {
         try (FileWriter writer = new FileWriter(fileName);) {
             for (Map.Entry<FruitType, Integer> entry : fruitDao.getEntries()) {
-                writer.write(entry.getKey() + "," + entry.getValue() + "\n");
+                writer.write(entry.getKey() + "," + entry.getValue() + System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file");
