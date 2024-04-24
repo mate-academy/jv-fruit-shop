@@ -68,7 +68,7 @@ the most suitable for your needs.
     ```java
     public class ReaderServiceImpl implements ReaderService {
        public List<String> readFromFile(String filePath) {
-          File file = new File(f[README.md](README.md)ilePath);
+          File file = new File(filePath);
           ...
        }
     }

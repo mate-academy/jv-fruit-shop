@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionServiceImpl implements TransactionService {
-    private Map<String, BigDecimal> inventory;
+    private final Map<String, BigDecimal> inventory;
 
     public TransactionServiceImpl(Map<String, BigDecimal> inventory) {
         this.inventory = inventory;
@@ -22,17 +22,14 @@ public class TransactionServiceImpl implements TransactionService {
                 OperationStrategy strategy = StrategyFactory
                         .getStrategy(transaction.getOperation());
                 if (strategy == null) {
-                    System.err.println("No strategy found for operation: "
+                    throw new IllegalStateException("No strategy found for operation: "
                             + transaction.getOperation());
-                    return false;
                 }
                 strategy.apply(inventory, transaction);
             }
             return true;
         } catch (Exception e) {
-            System.err.println("Error processing transactions: "
-                    + e.getMessage());
-            return false;
+            throw new IllegalStateException("Error processing transactions: " + e);
         }
     }
 }

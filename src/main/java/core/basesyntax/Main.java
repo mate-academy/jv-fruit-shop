@@ -7,8 +7,10 @@ import core.basesyntax.io.FileWriter;
 import core.basesyntax.model.FruitReport;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitReportService;
+import core.basesyntax.service.ParseRowToObjectService;
 import core.basesyntax.service.TransactionService;
 import core.basesyntax.service.impl.FruitReportServiceImpl;
+import core.basesyntax.service.impl.ParseRowToObjectServiceImpl;
 import core.basesyntax.service.impl.TransactionServiceImpl;
 import java.math.BigDecimal;
 import java.util.HashMap;
@@ -23,15 +25,16 @@ public class Main {
         Map<String, BigDecimal> inventory = new HashMap<>();
         FileWriter writer = new FileWriter();
         FileReader reader = new FileReader();
-        FruitOperationDao csvDao = new FruitOperationDaoImpl(reader, writer);
+        FruitOperationDao fruitOperationDao = new FruitOperationDaoImpl(reader, writer);
         TransactionService transactionService = new TransactionServiceImpl(inventory);
         FruitReportService reportService = new FruitReportServiceImpl(inventory);
-
-        List<FruitTransaction> transactions = csvDao.readFile();
-        boolean success = transactionService.processTransactions(transactions);
+        ParseRowToObjectService parseRowToObjectService
+                = new ParseRowToObjectServiceImpl(fruitOperationDao);
+        List<FruitTransaction> parseRowToObjects = parseRowToObjectService.parseRowToObjects();
+        boolean success = transactionService.processTransactions(parseRowToObjects);
         if (success) {
             List<FruitReport> reports = reportService.generateInventoryReport();
-            csvDao.writeToFile(reports);
+            fruitOperationDao.writeToFile(reports);
         } else {
             System.err.println("Transaction processing failed.");
         }

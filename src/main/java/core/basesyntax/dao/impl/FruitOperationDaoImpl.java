@@ -4,12 +4,11 @@ import core.basesyntax.dao.FruitOperationDao;
 import core.basesyntax.io.FileReader;
 import core.basesyntax.io.FileWriter;
 import core.basesyntax.model.FruitReport;
-import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class FruitOperationDaoImpl implements FruitOperationDao {
-    private FileReader fileReader;
-    private FileWriter fileWriter;
+    private final FileReader fileReader;
+    private final FileWriter fileWriter;
 
     public FruitOperationDaoImpl(FileReader fileReader, FileWriter fileWriter) {
         this.fileReader = fileReader;
@@ -17,12 +16,12 @@ public class FruitOperationDaoImpl implements FruitOperationDao {
     }
 
     @Override
-    public List<FruitTransaction> readFile() {
+    public List<String> readFile() {
         return fileReader.readFile();
     }
 
     @Override
-    public void writeToFile(List<FruitReport> reports) {
-        fileWriter.writeToFile(reports);
+    public void writeToFile(List<FruitReport> report) {
+        fileWriter.writeToFile(report);
     }
 }
