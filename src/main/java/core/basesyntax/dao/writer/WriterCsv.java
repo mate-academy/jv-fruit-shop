@@ -4,5 +4,5 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface WriterCsv {
-    void writeToFile(Path filePath, List<String> storageInfo);
+    void writeToFile(Path filePath, List<String> lines);
 }

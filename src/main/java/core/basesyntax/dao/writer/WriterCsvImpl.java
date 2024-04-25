@@ -7,12 +7,12 @@ import java.util.List;
 
 public class WriterCsvImpl implements WriterCsv {
     @Override
-    public void writeToFile(Path filePath, List<String> storageInfo) {
+    public void writeToFile(Path filePath, List<String> lines) {
         try {
-            Files.write(filePath, storageInfo);
+            Files.write(filePath, lines);
         } catch (IOException e) {
             throw new RuntimeException("An error occurred while writing to the file: "
-                    + e.getMessage());
+                    + filePath, e);
         }
     }
 }
