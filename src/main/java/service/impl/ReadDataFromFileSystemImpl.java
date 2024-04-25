@@ -5,9 +5,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import service.ReadDataFromFile;
+import service.ReadDataFromFileSystem;
 
-public class ReadDataFromFileImpl implements ReadDataFromFile {
+public class ReadDataFromFileSystemImpl implements ReadDataFromFileSystem {
     private final List<String> listString = new ArrayList<>();
 
     @Override

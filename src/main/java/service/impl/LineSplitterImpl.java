@@ -1,6 +1,7 @@
-package exception;
+package service.impl;
 
 import java.util.Arrays;
+import service.LineSplitter;
 
 public class LineSplitterImpl implements LineSplitter {
     private static final String COMMA = ",";

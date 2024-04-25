@@ -1,17 +1,16 @@
 package service.impl;
 
-import exception.LineSplitter;
-import exception.LineSplitterImpl;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitOperation;
 import model.FruitOperationType;
 import model.FruitType;
-import service.FruitOperationParse;
+import service.FruitOperationParser;
 import service.FruitOperationTypeParser;
 import service.FruitTypeParser;
+import service.LineSplitter;
 
-public class FruitOperationParseImpl implements FruitOperationParse {
+public class FruitOperationParserImpl implements FruitOperationParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int VALUE_INDEX = 2;
@@ -21,8 +20,8 @@ public class FruitOperationParseImpl implements FruitOperationParse {
     private final FruitOperationTypeParser fruitOperationTypeParser;
     private final FruitTypeParser fruitTypeParser;
 
-    public FruitOperationParseImpl(FruitOperationTypeParser fruitOperationTypeParser,
-                                   FruitTypeParser fruitTypeParser) {
+    public FruitOperationParserImpl(FruitOperationTypeParser fruitOperationTypeParser,
+                                    FruitTypeParser fruitTypeParser) {
         this.fruitOperationTypeParser = fruitOperationTypeParser;
         this.fruitTypeParser = fruitTypeParser;
     }

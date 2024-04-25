@@ -5,12 +5,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import model.FruitType;
-import service.WriteToFile;
+import service.SaveToFileSystem;
 
-public class WriteToFileImpl implements WriteToFile {
+public class SaveToFileSystemImpl implements SaveToFileSystem {
     private final FruitDao fruitDao;
 
-    public WriteToFileImpl(FruitDao fruitDao) {
+    public SaveToFileSystemImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 

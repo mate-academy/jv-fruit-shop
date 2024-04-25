@@ -1,5 +1,5 @@
 package service;
 
-public interface WriteToFile {
+public interface SaveToFileSystem {
     void writeToFileFromDataBase(String fileName);
 }

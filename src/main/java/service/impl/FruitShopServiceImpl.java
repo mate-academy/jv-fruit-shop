@@ -7,36 +7,36 @@ import java.util.Map;
 import model.FruitOperation;
 import model.FruitType;
 import service.CalculateFruit;
-import service.FruitOperationParse;
+import service.FruitOperationParser;
 import service.FruitOperationTypeParser;
 import service.FruitShopService;
 import service.FruitTypeParser;
-import service.ReadDataFromFile;
-import service.WriteToFile;
-import service.WriteToStorage;
+import service.ReadDataFromFileSystem;
+import service.SaveToFileSystem;
+import service.SaveToStorage;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final ReadDataFromFile readDataFromFile = new ReadDataFromFileImpl();
+    private final ReadDataFromFileSystem readDataFromFileSystem = new ReadDataFromFileSystemImpl();
     private final CalculateFruit calculateFruitImpl = new CalculateFruitImpl();
 
     private final FruitOperationTypeParser fruitOperationTypeParser
             = new FruitOperationTypeParserImpl();
     private final FruitTypeParser fruitTypeParser = new FruitTypeParserImpl();
-    private final FruitOperationParse fruitOperationParse
-            = new FruitOperationParseImpl(fruitOperationTypeParser, fruitTypeParser);
+    private final FruitOperationParser fruitOperationParser
+            = new FruitOperationParserImpl(fruitOperationTypeParser, fruitTypeParser);
 
     private final FruitDao fruitDao = new FruitDaoImpl();
-    private final WriteToStorage writeToStorage = new WriteToStorageImpl(fruitDao);
-    private final WriteToFile writeToFile = new WriteToFileImpl(fruitDao);
+    private final SaveToStorage saveToStorage = new SaveToStorageImpl(fruitDao);
+    private final SaveToFileSystem saveToFileSystem = new SaveToFileSystemImpl(fruitDao);
 
     @Override
-    public void getResult(String fromFileName, String toFileName) {
-        List<String> listOfData = readDataFromFile.getData(fromFileName);
+    public void processData(String readFromFileName, String writeToFileName) {
+        List<String> listOfData = readDataFromFileSystem.getData(readFromFileName);
         List<FruitOperation> listFruitOperation
-                = fruitOperationParse.parseFruitOperationList(listOfData);
+                = fruitOperationParser.parseFruitOperationList(listOfData);
         Map<FruitType, Integer> listCountedFruit
-                = calculateFruitImpl.calcualteFruit(listFruitOperation);
-        writeToStorage.writeToDataBase(listCountedFruit);
-        writeToFile.writeToFileFromDataBase(toFileName);
+                = calculateFruitImpl.calculateFruit(listFruitOperation);
+        saveToStorage.writeToDataBase(listCountedFruit);
+        saveToFileSystem.writeToFileFromDataBase(writeToFileName);
     }
 }

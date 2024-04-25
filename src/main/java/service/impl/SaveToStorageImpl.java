@@ -3,12 +3,12 @@ package service.impl;
 import dao.FruitDao;
 import java.util.Map;
 import model.FruitType;
-import service.WriteToStorage;
+import service.SaveToStorage;
 
-public class WriteToStorageImpl implements WriteToStorage {
+public class SaveToStorageImpl implements SaveToStorage {
     private static FruitDao fruitDao;
 
-    public WriteToStorageImpl(FruitDao fruitDao) {
+    public SaveToStorageImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
