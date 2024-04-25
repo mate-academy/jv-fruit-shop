@@ -1,15 +1,19 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.Main;
 import core.basesyntax.operation.Transaction;
 import core.basesyntax.service.QuantityCounter;
 import java.util.Map;
 
 public class QuantityCounterStrategyImpl implements QuantityCounterStrategy {
-    private Map<Transaction.Operation, QuantityCounter> quantityCounterMap = Main.getOperationMap();
+    private final Map<Transaction.Operation, QuantityCounter> quantityCounters;
+
+    public QuantityCounterStrategyImpl(Map<Transaction.Operation,
+            QuantityCounter> quantityCounters) {
+        this.quantityCounters = quantityCounters;
+    }
 
     @Override
     public QuantityCounter get(Transaction operation) {
-        return quantityCounterMap.get(operation.getOperation());
+        return quantityCounters.get(operation.getOperation());
     }
 }

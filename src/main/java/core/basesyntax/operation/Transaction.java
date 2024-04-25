@@ -1,8 +1,12 @@
 package core.basesyntax.operation;
 
 public class Transaction {
+    private static final String BALANCE_ABBREVIATION = "b";
+    private static final String SUPPLY_ABBREVIATION = "s";
+    private static final String PURCHASE_ABBREVIATION = "p";
+    private static final String RETURN_ABBREVIATION = "r";
     private Operation operation;
-    private String fruit;
+    private String product;
     private int quantity;
 
     public void setOperation(Operation operation) {
@@ -21,12 +25,12 @@ public class Transaction {
         return quantity;
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getProduct() {
+        return product;
     }
 
     public void setProduct(String fruit) {
-        this.fruit = fruit;
+        this.product = fruit;
     }
 
     public enum Operation {
@@ -34,5 +38,15 @@ public class Transaction {
         SUPPLY,
         PURCHASE,
         RETURN;
+
+        public static Operation getByCode(String code) {
+            return switch (code) {
+                case BALANCE_ABBREVIATION -> Transaction.Operation.BALANCE;
+                case SUPPLY_ABBREVIATION -> Transaction.Operation.SUPPLY;
+                case PURCHASE_ABBREVIATION -> Transaction.Operation.PURCHASE;
+                case RETURN_ABBREVIATION -> Transaction.Operation.RETURN;
+                default -> throw new RuntimeException("Invalid data, no corresponding Operation");
+            };
+        }
     }
 }

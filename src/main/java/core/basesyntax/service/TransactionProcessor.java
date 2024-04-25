@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
+import core.basesyntax.Storage;
 import core.basesyntax.operation.Transaction;
 import java.util.List;
-import java.util.Map;
 
 public interface TransactionProcessor {
-    Map<String, Integer> process(List<Transaction> operationsList);
+    void process(List<Transaction> operationsList, Storage storage);
 }
