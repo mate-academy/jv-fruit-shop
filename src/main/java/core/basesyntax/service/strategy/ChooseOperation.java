@@ -1,4 +1,4 @@
-package core.basesyntax.service.operation;
+package core.basesyntax.service.strategy;
 
 public interface ChooseOperation {
     OperationService chooseOperation(String line);

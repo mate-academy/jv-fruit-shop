@@ -2,18 +2,23 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.operation.ChooseOperation;
-import core.basesyntax.service.operation.ChooseOperationImpl;
+import core.basesyntax.service.strategy.ChooseOperation;
+import core.basesyntax.service.strategy.ChooseOperationImpl;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final String SEPARATOR = ",";
 
     @Override
     public Fruit getFruit(String line) {
-        String fruitName = line.split(",")[1];
+        String[] splitLine = line.split(SEPARATOR);
+        String fruitName = splitLine[ONE];
         for (int i = 0; i < Storage.FRUITS.size(); i++) {
-            if (Storage.FRUITS.get(i).getName().equals(fruitName)) {
-                return Storage.FRUITS.get(i);
+            Fruit fruit = Storage.FRUITS.get(i);
+            if (fruit.getName().equals(fruitName)) {
+                return fruit;
             }
         }
         return null;
@@ -21,13 +26,14 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void addFruit(String line) {
-        String fruitName = line.split(",")[1];
-        int fruitAmount = Integer.parseInt(line.split(",")[2]);
+        String[] splitLine = line.split(SEPARATOR);
+        String fruitName = splitLine[ONE];
+        int fruitAmount = Integer.parseInt(splitLine[TWO]);
         Storage.FRUITS.add(new Fruit(fruitName, fruitAmount));
     }
 
     @Override
-    public void upDateAMount(String line) {
+    public void updateAmount(String line) {
         ChooseOperation chooseOperation = new ChooseOperationImpl();
         getFruit(line).setAmount(chooseOperation.chooseOperation(line).doOperation(line));
     }

@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import java.util.List;
 
 public interface ReportService {
-    List<String> solveReport(String filePath);
+    List<String> calculateDataForReport(List<String> readFromFile);
 }

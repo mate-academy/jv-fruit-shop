@@ -8,7 +8,7 @@ public interface FruitDao {
 
     void addFruit(String line);
 
-    void upDateAMount(String line);
+    void updateAmount(String line);
 
     List<Fruit> getFruitList();
 }

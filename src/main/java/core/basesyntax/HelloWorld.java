@@ -2,18 +2,24 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.ReportServiceImpl;
-import core.basesyntax.service.WriteReport;
-import core.basesyntax.service.WriteReportImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriteServiceImpl;
+import core.basesyntax.service.impl.ReportServiceImpl;
+import java.util.List;
 
 public class HelloWorld {
     public static void main(String[] args) {
-        ReportService reportService = new ReportServiceImpl();
-        String filePath = "src/main/java/core/basesyntax/db/storageInputFile.csv";
-        reportService.solveReport(filePath);
+        String filePath =
+                "/Users/macbook/IdeaProjects/jv-fruit-shop/src/main/resources/InputFile.csv";
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        List<String> readFromFile = fileReaderService.readFile(filePath);
         FruitDao fruitDao = new FruitDaoImpl();
-        WriteReport writeReport = new WriteReportImpl();
-        writeReport.writeReport(fruitDao.getFruitList());
+        ReportService reportService = new ReportServiceImpl(fruitDao);
+        reportService.calculateDataForReport(readFromFile);
+        FileWriterService fileWriterService = new FileWriteServiceImpl();
+        fileWriterService.writeReport(fruitDao.getFruitList());
     }
 }
