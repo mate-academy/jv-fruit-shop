@@ -1,9 +1,11 @@
 type,fruit,quantity
-b,banana,100
+b,banana,20
 b,apple,100
 s,banana,100
 p,banana,13
 r,apple,10
 p,apple,20
 p,banana,5
-s,banana,50
+s,banana,300
+s,nahruk,1
+s,ipso,999

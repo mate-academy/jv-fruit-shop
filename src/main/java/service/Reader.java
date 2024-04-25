@@ -2,6 +2,6 @@ package service;
 
 import java.util.List;
 
-public interface ReadDataFromFileSystem {
+public interface Reader {
     List<String> getData(String fromFileName);
 }

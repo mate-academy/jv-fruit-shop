@@ -1,8 +1,8 @@
 package service;
 
 import java.util.List;
-import model.FruitOperation;
+import model.FruitTransaction;
 
 public interface FruitOperationParser {
-    List<FruitOperation> parseFruitOperationList(List<String> listOfData);
+    List<FruitTransaction> parseFruitOperationList(List<String> listOfData);
 }

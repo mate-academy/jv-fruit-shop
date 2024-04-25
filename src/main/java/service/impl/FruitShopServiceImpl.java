@@ -3,40 +3,37 @@ package service.impl;
 import dao.FruitDao;
 import dao.FruitDaoImpl;
 import java.util.List;
-import java.util.Map;
-import model.FruitOperation;
-import model.FruitType;
-import service.CalculateFruit;
+import model.FruitTransaction;
+import service.FruitCalculator;
 import service.FruitOperationParser;
 import service.FruitOperationTypeParser;
 import service.FruitShopService;
-import service.FruitTypeParser;
-import service.ReadDataFromFileSystem;
-import service.SaveToFileSystem;
-import service.SaveToStorage;
+import service.Reader;
+import service.ReportService;
+import service.Writer;
 
 public class FruitShopServiceImpl implements FruitShopService {
-    private final ReadDataFromFileSystem readDataFromFileSystem = new ReadDataFromFileSystemImpl();
-    private final CalculateFruit calculateFruitImpl = new CalculateFruitImpl();
+
+    private final Reader reader = new FileReaderImpl();
+    private final FruitCalculator fruitCalculator = new FruitCalculatorImpl();
 
     private final FruitOperationTypeParser fruitOperationTypeParser
             = new FruitOperationTypeParserImpl();
-    private final FruitTypeParser fruitTypeParser = new FruitTypeParserImpl();
     private final FruitOperationParser fruitOperationParser
-            = new FruitOperationParserImpl(fruitOperationTypeParser, fruitTypeParser);
+            = new FruitOperationParserImpl(fruitOperationTypeParser);
 
     private final FruitDao fruitDao = new FruitDaoImpl();
-    private final SaveToStorage saveToStorage = new SaveToStorageImpl(fruitDao);
-    private final SaveToFileSystem saveToFileSystem = new SaveToFileSystemImpl(fruitDao);
+    private final ReportService reportService = new ReportServiceImpl(fruitDao);
+
+    private final Writer writer = new FileWriter();
 
     @Override
     public void processData(String readFromFileName, String writeToFileName) {
-        List<String> listOfData = readDataFromFileSystem.getData(readFromFileName);
-        List<FruitOperation> listFruitOperation
+        List<String> listOfData = reader.getData("src/main/resources/" + readFromFileName);
+        List<FruitTransaction> fruits
                 = fruitOperationParser.parseFruitOperationList(listOfData);
-        Map<FruitType, Integer> listCountedFruit
-                = calculateFruitImpl.calculateFruit(listFruitOperation);
-        saveToStorage.writeToDataBase(listCountedFruit);
-        saveToFileSystem.writeToFileFromDataBase(writeToFileName);
+        fruitCalculator.calculateFruit(fruits);
+        String stringReport = reportService.getReport();
+        writer.writeToFile("src/main/resources/" + writeToFileName, stringReport);
     }
 }

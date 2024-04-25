@@ -1,19 +1,19 @@
 package model;
 
-public class FruitOperation {
-    private FruitOperationType fruitOperationType;
-    private FruitType fruitType;
+public class FruitTransaction {
+    private final FruitOperationType fruitOperationType;
+    private final String string;
     private Integer value;
 
-    public FruitOperation(FruitOperationType fruitOperationType,
-                          FruitType fruitType, Integer value) {
+    public FruitTransaction(FruitOperationType fruitOperationType,
+                            String string, Integer value) {
         this.fruitOperationType = fruitOperationType;
-        this.fruitType = fruitType;
+        this.string = string;
         this.value = value;
     }
 
-    public FruitType getFruitType() {
-        return fruitType;
+    public String getFruitType() {
+        return string;
     }
 
     public FruitOperationType getOperationType() {
@@ -29,10 +29,10 @@ public class FruitOperation {
     }
 
     @Override
-    public String toString() {
+    public java.lang.String toString() {
         return "Fruit{"
                 + "operationType=" + fruitOperationType
-                + ", fruitType=" + fruitType
+                + ", fruitType=" + string
                 + ", value="
                 + value
                 + '}';
@@ -47,13 +47,13 @@ public class FruitOperation {
             return false;
         }
 
-        FruitOperation fruitOperation = (FruitOperation) o;
+        FruitTransaction fruitTransaction = (FruitTransaction) o;
 
-        return fruitType == fruitOperation.fruitType;
+        return string == fruitTransaction.string;
     }
 
     @Override
     public int hashCode() {
-        return fruitType != null ? fruitType.hashCode() : 0;
+        return string != null ? string.hashCode() : 0;
     }
 }

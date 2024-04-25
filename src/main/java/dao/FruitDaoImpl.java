@@ -3,21 +3,15 @@ package dao;
 import db.Storage;
 import java.util.Map;
 import java.util.Set;
-import model.FruitType;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void put(FruitType fruitType, Integer count) {
-        Storage.fruitHashMap.put(fruitType, count);
+    public void put(String string, Integer count) {
+        Storage.fruitHashMap.put(string, count);
     }
 
     @Override
-    public Set<Map.Entry<FruitType, Integer>> getEntries() {
+    public Set<Map.Entry<String, Integer>> getEntries() {
         return Storage.fruitHashMap.entrySet();
-    }
-
-    @Override
-    public Map<FruitType, Integer> getMap() {
-        return Storage.fruitHashMap;
     }
 }
