@@ -14,21 +14,19 @@ import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionParserImpl;
 import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.TransactionProcessorImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String STORAGE_FILE_PATH = "src/main/resources/storage.csv";
     private static final String REPORT_FILE_PATH = "src/main/resources/report.csv";
-    private static Map<Transaction.Operation, QuantityCounter> quantityCounterMap
-                                                                    = new HashMap<>();
+    private static Map<Transaction.Operation, QuantityCounter> quantityCounterMap;
 
     public static void main(String[] args) {
-        quantityCounterMap.put(Transaction.Operation.BALANCE, new BalanceQuantityCounter());
-        quantityCounterMap.put(Transaction.Operation.SUPPLY, new SupplyQuantityCounter());
-        quantityCounterMap.put(Transaction.Operation.PURCHASE, new PurchaseQuantityCounter());
-        quantityCounterMap.put(Transaction.Operation.RETURN, new ReturnQuantityCounter());
+        quantityCounterMap = Map.of(Transaction.Operation.BALANCE, new BalanceQuantityCounter(),
+                Transaction.Operation.SUPPLY, new SupplyQuantityCounter(),
+                Transaction.Operation.PURCHASE, new PurchaseQuantityCounter(),
+                Transaction.Operation.RETURN, new ReturnQuantityCounter());
         FileService fileService = new FileServiceImpl();
         List<String> fileInfo = fileService.readFile(STORAGE_FILE_PATH);
         TransactionParser transactionParser = new TransactionParserImpl();
@@ -40,7 +38,7 @@ public class Main {
         fileService.writeToFile(report, REPORT_FILE_PATH);
     }
 
-    public static Map<Transaction.Operation, QuantityCounter> get() {
+    public static Map<Transaction.Operation, QuantityCounter> getOperationMap() {
         return quantityCounterMap;
     }
 }

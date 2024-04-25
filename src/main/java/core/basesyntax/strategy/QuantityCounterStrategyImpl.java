@@ -6,7 +6,7 @@ import core.basesyntax.service.QuantityCounter;
 import java.util.Map;
 
 public class QuantityCounterStrategyImpl implements QuantityCounterStrategy {
-    private Map<Transaction.Operation, QuantityCounter> quantityCounterMap = Main.get();
+    private Map<Transaction.Operation, QuantityCounter> quantityCounterMap = Main.getOperationMap();
 
     @Override
     public QuantityCounter get(Transaction operation) {
