@@ -22,8 +22,8 @@ public class FruitOperationParserImpl implements FruitOperationParser {
     }
 
     public List<FruitTransaction> parseFruitOperationList(List<String> listOfData) {
-        for (java.lang.String lineOfData: listOfData) {
-            java.lang.String[] splitStringOfData = lineSplitter.splitLine(lineOfData);
+        for (String lineOfData: listOfData) {
+            String[] splitStringOfData = lineSplitter.splitLine(lineOfData);
 
             FruitOperationType fruitOperationType = fruitOperationTypeParser
                     .checkAndGetOperationType(splitStringOfData[OPERATION_INDEX]);

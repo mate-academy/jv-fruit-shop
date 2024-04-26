@@ -37,23 +37,4 @@ public class FruitTransaction {
                 + value
                 + '}';
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        FruitTransaction fruitTransaction = (FruitTransaction) o;
-
-        return string == fruitTransaction.string;
-    }
-
-    @Override
-    public int hashCode() {
-        return string != null ? string.hashCode() : 0;
-    }
 }

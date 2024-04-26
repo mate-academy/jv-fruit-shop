@@ -9,7 +9,7 @@ public class FileWriter implements Writer {
         try (java.io.FileWriter writer = new java.io.FileWriter(fileName);) {
             writer.write(stringReport);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file");
+            throw new RuntimeException("Can't write to file " + fileName, e);
         }
     }
 }
