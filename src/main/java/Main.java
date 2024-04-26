@@ -7,5 +7,8 @@ public class Main {
     public static void main(String[] args) {
         fruitShopService.processData("inputDateFile.csv",
                     "file.csv");
+
+        fruitShopService.processData("otherInput.csv",
+                "file.csv");
     }
 }

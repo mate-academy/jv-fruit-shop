@@ -4,23 +4,23 @@ import dao.FruitDao;
 import dao.FruitDaoImpl;
 import java.util.List;
 import model.FruitTransaction;
-import service.FruitCalculator;
-import service.FruitOperationParser;
 import service.FruitOperationTypeParser;
 import service.FruitShopService;
+import service.FruitTransactionParser;
 import service.Reader;
 import service.ReportService;
+import service.TransactionProcessor;
 import service.Writer;
 
 public class FruitShopServiceImpl implements FruitShopService {
     private static final String RESOURCES_PATH = "src/main/resources/";
     private final Reader reader = new FileReaderImpl();
-    private final FruitCalculator fruitCalculator = new FruitCalculatorImpl();
+    private final TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
 
     private final FruitOperationTypeParser fruitOperationTypeParser
             = new FruitOperationTypeParserImpl();
-    private final FruitOperationParser fruitOperationParser
-            = new FruitOperationParserImpl(fruitOperationTypeParser);
+    private final FruitTransactionParser fruitTransactionParser
+            = new FruitTransactionParserImpl(fruitOperationTypeParser);
 
     private final FruitDao fruitDao = new FruitDaoImpl();
     private final ReportService reportService = new ReportServiceImpl(fruitDao);
@@ -29,11 +29,11 @@ public class FruitShopServiceImpl implements FruitShopService {
 
     @Override
     public void processData(String readFromFileName, String writeToFileName) {
-        List<String> listOfData = reader.getData(RESOURCES_PATH + readFromFileName);
+        List<String> data = reader.readFile(RESOURCES_PATH + readFromFileName);
         List<FruitTransaction> fruits
-                = fruitOperationParser.parseFruitOperationList(listOfData);
-        fruitCalculator.calculateFruit(fruits);
-        String stringReport = reportService.getReport();
-        writer.writeToFile(RESOURCES_PATH + writeToFileName, stringReport);
+                = fruitTransactionParser.parseTransaction(data);
+        transactionProcessor.processTransactions(fruits);
+        String content = reportService.getReport();
+        writer.writeToFile(RESOURCES_PATH + writeToFileName, content);
     }
 }

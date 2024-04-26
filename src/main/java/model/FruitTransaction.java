@@ -2,18 +2,18 @@ package model;
 
 public class FruitTransaction {
     private final FruitOperationType fruitOperationType;
-    private final String string;
+    private final String fruitName;
     private Integer value;
 
     public FruitTransaction(FruitOperationType fruitOperationType,
-                            String string, Integer value) {
+                            String fruitName, Integer value) {
         this.fruitOperationType = fruitOperationType;
-        this.string = string;
+        this.fruitName = fruitName;
         this.value = value;
     }
 
     public String getFruitType() {
-        return string;
+        return fruitName;
     }
 
     public FruitOperationType getOperationType() {
@@ -32,7 +32,7 @@ public class FruitTransaction {
     public java.lang.String toString() {
         return "Fruit{"
                 + "operationType=" + fruitOperationType
-                + ", fruitType=" + string
+                + ", fruitType=" + fruitName
                 + ", value="
                 + value
                 + '}';
