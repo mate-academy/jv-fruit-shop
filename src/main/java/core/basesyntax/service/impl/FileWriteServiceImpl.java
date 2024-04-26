@@ -8,13 +8,14 @@ import java.io.IOException;
 import java.util.List;
 
 public class FileWriteServiceImpl implements FileWriterService {
+    private static final String FIRST_LINE_IN_REPORT = "fruit,quantity";
     private static final String NEW_FILE_NAME =
             "/Users/macbook/IdeaProjects/jv-fruit-shop/src/main/resources/fileReport.csv";
 
     @Override
     public void writeReport(List<Fruit> inputList) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(NEW_FILE_NAME))) {
-            bufferedWriter.write("fruit,quantity" + System.lineSeparator());
+            bufferedWriter.write(FIRST_LINE_IN_REPORT + System.lineSeparator());
             for (Fruit fruit : inputList) {
                 bufferedWriter.write(fruit.getName() + "," + fruit.getAmount()
                         + System.lineSeparator());

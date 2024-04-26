@@ -5,21 +5,21 @@ import core.basesyntax.service.ReportService;
 import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public ReportServiceImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
-    public List<String> calculateDataForReport(List<String> dateFromFile) {
+    public void calculateDataForReport(List<String> dateFromFile) {
         for (int i = 1; i < dateFromFile.size(); i++) {
-            if (fruitDao.getFruit(dateFromFile.get(i)) == null) {
-                fruitDao.addFruit(dateFromFile.get(i));
+            String line = dateFromFile.get(i);
+            if (fruitDao.getFruit(line) == null) {
+                fruitDao.addFruit(line);
             } else {
-                fruitDao.updateAmount(dateFromFile.get(i));
+                fruitDao.updateAmount(line);
             }
         }
-        return null;
     }
 }

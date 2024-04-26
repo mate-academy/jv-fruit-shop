@@ -7,14 +7,14 @@ import core.basesyntax.service.strategy.ChooseOperationImpl;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
-    private static final int ONE = 1;
-    private static final int TWO = 2;
+    private static final int FRUIT_NAME_POSITION_IN_ARR = 1;
+    private static final int FRUIT_AMOUNT_POSITION_IN_ARR = 2;
     private static final String SEPARATOR = ",";
 
     @Override
     public Fruit getFruit(String line) {
         String[] splitLine = line.split(SEPARATOR);
-        String fruitName = splitLine[ONE];
+        String fruitName = splitLine[FRUIT_NAME_POSITION_IN_ARR];
         for (int i = 0; i < Storage.FRUITS.size(); i++) {
             Fruit fruit = Storage.FRUITS.get(i);
             if (fruit.getName().equals(fruitName)) {
@@ -27,8 +27,8 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void addFruit(String line) {
         String[] splitLine = line.split(SEPARATOR);
-        String fruitName = splitLine[ONE];
-        int fruitAmount = Integer.parseInt(splitLine[TWO]);
+        String fruitName = splitLine[FRUIT_NAME_POSITION_IN_ARR];
+        int fruitAmount = Integer.parseInt(splitLine[FRUIT_AMOUNT_POSITION_IN_ARR]);
         Storage.FRUITS.add(new Fruit(fruitName, fruitAmount));
     }
 
