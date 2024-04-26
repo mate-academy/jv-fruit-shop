@@ -2,6 +2,7 @@ package service.impl;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
+import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +38,7 @@ public class TransactionProcessorImpl implements TransactionProcessor {
             String fruitType = entry.getKey();
             Integer count = entry.getValue();
 
-            fruitDao.merge(fruitType, count, Integer::sum);
+            Storage.fruitHashMap.merge(fruitType, count, Integer::sum);
         }
     }
 }

@@ -1,9 +1,8 @@
 package service.impl;
 
 import java.util.Arrays;
-import service.LineSplitter;
 
-public class LineSplitterImpl implements LineSplitter {
+public class LineSplitterImpl {
     private static final String COMMA = ",";
     private static final int VALUE_INDEX = 2;
 

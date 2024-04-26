@@ -6,14 +6,13 @@ import model.FruitOperationType;
 import model.FruitTransaction;
 import service.FruitOperationTypeParser;
 import service.FruitTransactionParser;
-import service.LineSplitter;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int VALUE_INDEX = 2;
 
-    private final LineSplitter lineSplitter = new LineSplitterImpl();
+    private final LineSplitterImpl lineSplitter = new LineSplitterImpl();
     private final FruitOperationTypeParser fruitOperationTypeParser;
 
     public FruitTransactionParserImpl(FruitOperationTypeParser fruitOperationTypeParser) {

@@ -6,13 +6,13 @@ public enum FruitOperationType {
     PURCHASE("p"),
     RETURN("r");
 
-    private final String shortName;
+    private final String operationCode;
 
-    FruitOperationType(String shortName) {
-        this.shortName = shortName;
+    FruitOperationType(String operationCode) {
+        this.operationCode = operationCode;
     }
 
-    public String getShortName() {
-        return shortName;
+    public String getOperationCode() {
+        return operationCode;
     }
 }

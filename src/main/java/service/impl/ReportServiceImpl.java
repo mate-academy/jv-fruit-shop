@@ -12,7 +12,7 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
-    public String getReport() {
+    public String createReport() {
         StringBuilder reportBuilder = new StringBuilder();
         for (Map.Entry<String, Integer> entry : fruitDao.getEntries()) {
             reportBuilder.append(System.lineSeparator())
