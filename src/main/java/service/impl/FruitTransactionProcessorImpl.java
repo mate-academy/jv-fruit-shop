@@ -1,28 +1,19 @@
 package service.impl;
 
-import static java.util.stream.Collectors.summingInt;
-
-import db.Storage;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.FruitTransactionProcessor;
+import service.OperationStrategy;
 
 public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
-    private final OperationStrategy operationStrategy = new OperationStrategy();
-    private final FruitBalanceCheckService
-            fruitBalanceCheckService = new FruitBalanceCheckService();
+    private final OperationStrategy operationStrategy = new OperationStrategyImpl();
 
     @Override
     public void process(List<FruitTransaction> fruitTransactionsList) {
-        Map<String, Integer> fruitTransactionsBalance = fruitTransactionsList.stream()
-                .collect(Collectors.groupingBy(
-                        FruitTransaction::getFruit, summingInt(
-                                fruitTransaction -> operationStrategy.getOperation(
-                                        fruitTransaction.getQuantity(),
-                                        fruitTransaction.getOperation()))));
-        Storage.STORAGE.putAll(
-                fruitBalanceCheckService.checkNegativeBalance(fruitTransactionsBalance));
+        for (FruitTransaction fruitTransaction : fruitTransactionsList) {
+            operationStrategy
+                    .getOperationHandler(fruitTransaction.getOperation())
+                    .handleTransaction(fruitTransaction);
+        }
     }
 }

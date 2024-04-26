@@ -6,7 +6,6 @@ import model.FruitTransaction;
 import model.Operation;
 
 public class FruitTransactionMapperImpl implements service.FruitTransactionMapper {
-
     public List<FruitTransaction> map(List<String> fruitTransactionsList) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String fruitTransaction : fruitTransactionsList) {
@@ -17,9 +16,9 @@ public class FruitTransactionMapperImpl implements service.FruitTransactionMappe
 
     private FruitTransaction mapToObject(String dataLine) {
         String separator = ",";
-        int indexOfOperation = 0;
-        int indexOfFruit = 1;
-        int indexOfQuantity = 2;
+        final int indexOfOperation = 0;
+        final int indexOfFruit = 1;
+        final int indexOfQuantity = 2;
         String[] fruitTransaction = dataLine.split(separator);
         Operation operation = Operation.getByCode(fruitTransaction[indexOfOperation]);
         String fruit = fruitTransaction[indexOfFruit];

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderService {
-
     public List<String> readFromFile(String fileName) {
         List<String> fruitTransactions = new ArrayList<>();
         try (BufferedReader fileReader = new BufferedReader(new FileReader(fileName))) {
