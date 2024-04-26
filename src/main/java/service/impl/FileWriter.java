@@ -18,6 +18,7 @@ public class FileWriter implements Writer {
         }
 
         try (java.io.FileWriter writer = new java.io.FileWriter(fileName);) {
+            writer.write("fruit,quantity");
             writer.write(content);
         } catch (IOException e) {
             throw new RuntimeException("Can't write to file " + fileName, e);

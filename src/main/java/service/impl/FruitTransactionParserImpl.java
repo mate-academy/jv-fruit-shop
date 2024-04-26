@@ -22,7 +22,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
 
     public List<FruitTransaction> parseTransaction(List<String> listOfData) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (String lineOfData: listOfData) {
+        for (String lineOfData : listOfData) {
             String[] splitStringOfData = lineSplitter.splitLine(lineOfData);
 
             FruitOperationType fruitOperationType = fruitOperationTypeParser
