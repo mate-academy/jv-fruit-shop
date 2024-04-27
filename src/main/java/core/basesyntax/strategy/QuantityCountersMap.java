@@ -1,11 +1,11 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.operation.Transaction;
 import core.basesyntax.service.BalanceQuantityCounter;
 import core.basesyntax.service.PurchaseQuantityCounter;
 import core.basesyntax.service.QuantityCounter;
 import core.basesyntax.service.ReturnQuantityCounter;
 import core.basesyntax.service.SupplyQuantityCounter;
+import core.basesyntax.transaction.Transaction;
 import java.util.Map;
 
 public class QuantityCountersMap {

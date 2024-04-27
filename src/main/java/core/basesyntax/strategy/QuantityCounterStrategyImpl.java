@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.operation.Transaction;
 import core.basesyntax.service.QuantityCounter;
+import core.basesyntax.transaction.Transaction;
 import java.util.Map;
 
 public class QuantityCounterStrategyImpl implements QuantityCounterStrategy {

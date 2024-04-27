@@ -1,20 +1,20 @@
 package core.basesyntax.service;
 
-import core.basesyntax.Storage;
-import core.basesyntax.operation.Transaction;
+import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.QuantityCounterStrategy;
-import core.basesyntax.strategy.QuantityCounterStrategyImpl;
-import core.basesyntax.strategy.QuantityCountersMap;
+import core.basesyntax.transaction.Transaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
     private static final int DEFAULT_QUANTITY = 0;
-    private QuantityCountersMap quantityCountersMap = new QuantityCountersMap();
-    private QuantityCounterStrategy quantityCounterStrategy =
-            new QuantityCounterStrategyImpl(quantityCountersMap.getQuantityCountersMap());
+    private QuantityCounterStrategy quantityCounterStrategy;
     private QuantityCounter quantityCounter;
+
+    public TransactionProcessorImpl(QuantityCounterStrategy quantityCounterStrategy) {
+        this.quantityCounterStrategy = quantityCounterStrategy;
+    }
 
     @Override
     public void process(List<Transaction> transactions, Storage storage) {

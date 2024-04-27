@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.Storage;
-import core.basesyntax.operation.Transaction;
+import core.basesyntax.storage.Storage;
+import core.basesyntax.transaction.Transaction;
 import java.util.List;
 
 public interface TransactionProcessor {

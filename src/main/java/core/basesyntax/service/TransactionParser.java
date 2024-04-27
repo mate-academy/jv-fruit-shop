@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.operation.Transaction;
+import core.basesyntax.transaction.Transaction;
 import java.util.List;
 
 public interface TransactionParser {

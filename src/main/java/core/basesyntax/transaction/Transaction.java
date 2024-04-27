@@ -1,4 +1,4 @@
-package core.basesyntax.operation;
+package core.basesyntax.transaction;
 
 public class Transaction {
     private static final String BALANCE_ABBREVIATION = "b";
@@ -34,19 +34,28 @@ public class Transaction {
     }
 
     public enum Operation {
-        BALANCE,
-        SUPPLY,
-        PURCHASE,
-        RETURN;
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private String code;
+
+        Operation(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
 
         public static Operation getByCode(String code) {
-            return switch (code) {
-                case BALANCE_ABBREVIATION -> Transaction.Operation.BALANCE;
-                case SUPPLY_ABBREVIATION -> Transaction.Operation.SUPPLY;
-                case PURCHASE_ABBREVIATION -> Transaction.Operation.PURCHASE;
-                case RETURN_ABBREVIATION -> Transaction.Operation.RETURN;
-                default -> throw new RuntimeException("Invalid data, no corresponding Operation");
-            };
+            for (Operation operationName : Operation.values()) {
+                if (operationName.getCode().equals(code)) {
+                    return operationName;
+                }
+            }
+            throw new RuntimeException("Invalid operation code");
         }
     }
 }
