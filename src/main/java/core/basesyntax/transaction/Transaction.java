@@ -55,7 +55,7 @@ public class Transaction {
                     return operationName;
                 }
             }
-            throw new RuntimeException("Invalid operation code");
+            throw new IllegalArgumentException("Invalid operation code: " + code);
         }
     }
 }

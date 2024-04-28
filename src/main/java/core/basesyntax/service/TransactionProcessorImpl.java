@@ -50,19 +50,22 @@ public class TransactionProcessorImpl implements TransactionProcessor {
 
     private void isFinalQuantityNegative(int finalQuantity) {
         if (finalQuantity < 0) {
-            throw new RuntimeException("End of the day quantity can't be negative");
+            throw new IllegalArgumentException("End of the day quantity can't be negative: "
+                + finalQuantity);
         }
     }
 
     private void isQuantityNegative(Transaction operation) {
         if (operation.getQuantity() < 0) {
-            throw new RuntimeException("Quantity can't be negative");
+            throw new IllegalArgumentException("Quantity can't be negative"
+                + operation.getQuantity());
         }
     }
 
     private void isNullList(List<Transaction> operationsList) {
         if (operationsList == null) {
-            throw new RuntimeException("No operations in the List");
+            throw new IllegalArgumentException("List can't be null: "
+                    + operationsList);
         }
     }
 }
