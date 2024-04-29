@@ -6,13 +6,13 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
-import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.DataReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.DataConverterService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.ProcessService;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.serviceimpl.DataConverterImpl;
-import core.basesyntax.serviceimpl.DataReaderImpl;
+import core.basesyntax.serviceimpl.FileReaderImpl;
 import core.basesyntax.serviceimpl.FileWriterImpl;
 import core.basesyntax.serviceimpl.ProcessServiceImpl;
 import core.basesyntax.serviceimpl.ReportServiceImpl;
@@ -32,10 +32,10 @@ public class Main {
     );
 
     public static void main(String[] args) {
-        DataReader dataReader = new DataReaderImpl();
+        FileReaderService dataReader = new FileReaderImpl();
         List<String> dataFromFile = dataReader.read(FILE_FROM);
 
-        DataConverter dataConverter = new DataConverterImpl();
+        DataConverterService dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convert(dataFromFile);
 
         Strategy strategy = new StrategyImpl(operationMap);
@@ -46,7 +46,7 @@ public class Main {
         ReportService reportService = new ReportServiceImpl();
         String report = reportService.createReport();
 
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWriterService fileWriter = new FileWriterImpl();
         fileWriter.writeFile(FILE_TO, report);
     }
 }
