@@ -1,5 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
+
 public interface FruitStorageService {
-    void update();
+    void processTransactions(List<FruitTransaction> transactions);
 }

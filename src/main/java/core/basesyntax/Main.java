@@ -3,15 +3,15 @@ package core.basesyntax;
 import static core.basesyntax.model.FruitTransaction.Operation;
 
 import core.basesyntax.dao.impl.FruitStorageDaoImpl;
-import core.basesyntax.dao.impl.TransactionStorageDaoImpl;
-import core.basesyntax.service.CsvReportService;
-import core.basesyntax.service.FileReaderService;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FileService;
 import core.basesyntax.service.FruitStorageService;
 import core.basesyntax.service.ParserService;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.service.impl.CsvReportServiceImpl;
+import core.basesyntax.service.ReportService;
+import core.basesyntax.service.impl.FileServiceCsvImpl;
 import core.basesyntax.service.impl.FruitStorageServiceImpl;
 import core.basesyntax.service.impl.ParserServiceImpl;
+import core.basesyntax.service.impl.ReportServiceCsvImpl;
 import core.basesyntax.strategy.BalanceOperationHandler;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -19,7 +19,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
-import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +27,9 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    private static final String FILE_NAME_SOURCE = "src/main/resources/file.csv";
+    private static final String FILE_NAME_REPORT = "src/main/resources/report.csv";
+
     public static void main(String[] args) {
         Map<Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Operation.BALANCE, new BalanceOperationHandler());
@@ -37,17 +39,18 @@ public class Main {
         operationHandlerMap.put(Operation.RETURN, new ReturnOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
-        FileReaderService fileReaderService = new CsvFileReaderServiceImpl();
-        ParserService parserService = new ParserServiceImpl(new TransactionStorageDaoImpl());
+        ParserService parserService = new ParserServiceImpl();
         FruitStorageService fruitStorageService = new FruitStorageServiceImpl(
                 new FruitStorageDaoImpl(),
-                new TransactionStorageDaoImpl(), operationStrategy);
-        CsvReportService csvReportService = new CsvReportServiceImpl(new FruitStorageDaoImpl());
+                operationStrategy);
+        ReportService reportService = new ReportServiceCsvImpl(new FruitStorageDaoImpl());
+        FileService fileService = new FileServiceCsvImpl();
 
-        List<String> list = fileReaderService.read(Path.of("src/main/resources/file.csv"));
-        parserService.parse(list);
-        fruitStorageService.update();
-        csvReportService.writeReport(Path.of("src/main/resources/report.csv"));
+        List<String> list = fileService.readFile(FILE_NAME_SOURCE);
+        List<FruitTransaction> transactions = parserService.parse(list);
+        fruitStorageService.processTransactions(transactions);
+        String report = reportService.createReport();
+        fileService.writeFile(report, FILE_NAME_REPORT);
     }
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
