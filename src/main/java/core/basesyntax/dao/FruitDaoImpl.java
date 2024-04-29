@@ -2,14 +2,19 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.service.strategy.ChooseOperation;
-import core.basesyntax.service.strategy.ChooseOperationImpl;
+import core.basesyntax.service.StrategyService;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
+    private static final int FRUIT_STRATEGY_POSITION_IN_ARR = 0;
     private static final int FRUIT_NAME_POSITION_IN_ARR = 1;
     private static final int FRUIT_AMOUNT_POSITION_IN_ARR = 2;
     private static final String SEPARATOR = ",";
+    private final StrategyService strategyService;
+
+    public FruitDaoImpl(StrategyService strategyService) {
+        this.strategyService = strategyService;
+    }
 
     @Override
     public Fruit getFruit(String line) {
@@ -34,8 +39,8 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void updateAmount(String line) {
-        ChooseOperation chooseOperation = new ChooseOperationImpl();
-        getFruit(line).setAmount(chooseOperation.chooseOperation(line).doOperation(line));
+        String typeStrategy = line.split(SEPARATOR)[FRUIT_STRATEGY_POSITION_IN_ARR];
+        getFruit(line).setAmount(strategyService.getStrategy(typeStrategy).doStrategy(line));
     }
 
     @Override
