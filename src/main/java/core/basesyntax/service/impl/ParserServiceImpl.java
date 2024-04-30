@@ -13,6 +13,7 @@ public class ParserServiceImpl implements ParserService {
     private static final int FRUIT_POSITION = 1;
     private static final int QUANTITY_POSITION = 2;
     private static final String SEPARATOR = ",";
+    private static final int PARTS_NUMBER = 3;
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
@@ -24,7 +25,7 @@ public class ParserServiceImpl implements ParserService {
                 continue;
             }
             String[] parts = line.split(SEPARATOR);
-            if (parts.length != 3) {
+            if (parts.length != PARTS_NUMBER) {
                 continue;
             }
             Optional<Operation> operation = Operation.fromString(parts[CODE_POSITION]);
