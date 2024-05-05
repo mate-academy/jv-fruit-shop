@@ -1,9 +1,8 @@
 package core.basesyntax.db;
 
-import core.basesyntax.model.Fruit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    public static final List<Fruit> FRUITS = new ArrayList<>();
+    public static final Map<String, Integer> FRUITS = new HashMap<>();
 }

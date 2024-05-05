@@ -7,13 +7,14 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
+
     @Override
-    public List<String> readFile(String filePath) {
+    public List<String> readFile(String fileName) {
         List<String> readFromInputFile;
         try {
-            readFromInputFile = Files.readAllLines(Path.of(filePath));
+            readFromInputFile = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read fileInput: " + filePath);
+            throw new RuntimeException("Can't read fileInput: " + fileName);
         }
         return readFromInputFile;
     }

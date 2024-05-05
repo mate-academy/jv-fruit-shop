@@ -1,24 +1,25 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoTransaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ReportService;
 import java.util.List;
 
 public class ReportServiceImpl implements ReportService {
-    private final FruitDao fruitDao;
+    private final FruitDaoTransaction fruitDao;
 
-    public ReportServiceImpl(FruitDao fruitDao) {
+    public ReportServiceImpl(FruitDaoTransaction fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
-    public void calculateDataForReport(List<String> dateFromFile) {
-        for (int i = 1; i < dateFromFile.size(); i++) {
-            String line = dateFromFile.get(i);
-            if (fruitDao.getFruit(line) == null) {
-                fruitDao.addFruit(line);
+    public void calculateDataForReport(List<FruitTransaction> fruitTransactionList) {
+        for (FruitTransaction fruitTransaction : fruitTransactionList) {
+            if (!fruitDao.getFruitMap().containsKey(fruitTransaction.getFruitName())) {
+                fruitDao.getFruitMap()
+                        .put(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
             } else {
-                fruitDao.updateAmount(line);
+                fruitDao.updateAmount(fruitTransaction);
             }
         }
     }

@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface StrategyHandler {
-    int doStrategy(String line);
+    int doStrategy(FruitTransaction fruitTransaction);
 }

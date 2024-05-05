@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.Map;
 
 public interface FileWriterService {
-    void writeReport(List<Fruit> inputList);
+    void writeReport(Map<String, Integer> inputList);
 }

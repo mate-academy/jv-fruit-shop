@@ -1,18 +1,20 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.StrategyService;
 import core.basesyntax.strategy.StrategyHandler;
 import java.util.Map;
 
 public class StrategyServiceImpl implements StrategyService {
-    private final Map<String, StrategyHandler> strategyHandlerMap;
+    private final Map<FruitTransaction.Operation, StrategyHandler> strategyHandlerMap;
 
-    public StrategyServiceImpl(Map<String, StrategyHandler> stringStrategyHandlerMap) {
-        this.strategyHandlerMap = stringStrategyHandlerMap;
+    public StrategyServiceImpl(Map<FruitTransaction.Operation,
+            StrategyHandler> strategyHandlerMap) {
+        this.strategyHandlerMap = strategyHandlerMap;
     }
 
     @Override
-    public StrategyHandler getStrategy(String typeStrategy) {
-        return strategyHandlerMap.get(typeStrategy);
+    public StrategyHandler getStrategy(FruitTransaction.Operation operation) {
+        return strategyHandlerMap.get(operation);
     }
 }
