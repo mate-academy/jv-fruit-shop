@@ -1,17 +1,17 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertDataFromFile;
+import core.basesyntax.service.ConvertorService;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConvertDataFromFileImpl implements ConvertDataFromFile {
+public class ConvertorServiceImpl implements ConvertorService {
     private static final int FRUIT_STRATEGY_POSITION = 0;
     private static final int FRUIT_NAME_POSITION = 1;
     private static final int FRUIT_AMOUNT_POSITION = 2;
 
     @Override
-    public List<FruitTransaction> convertDataFromFile(List<String> inputList) {
+    public List<FruitTransaction> convertData(List<String> inputList) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (int i = 1; i < inputList.size(); i++) {
             String[] splitInputList = inputList.get(i).split(",");

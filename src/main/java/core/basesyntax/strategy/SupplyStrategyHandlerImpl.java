@@ -1,17 +1,17 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.dao.FruitDaoTransaction;
+import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyStrategyHandlerImpl implements StrategyHandler {
-    private final FruitDaoTransaction fruitDao;
+    private final FruitDao fruitDao;
 
-    public SupplyStrategyHandlerImpl(FruitDaoTransaction fruitDao) {
+    public SupplyStrategyHandlerImpl(FruitDao fruitDao) {
         this.fruitDao = fruitDao;
     }
 
     @Override
-    public int doStrategy(FruitTransaction fruitTransaction) {
+    public int handle(FruitTransaction fruitTransaction) {
         Integer oldQuantity = fruitDao.getFruitMap().get(fruitTransaction.getFruitName());
         Integer newQuantity = fruitTransaction.getQuantity();
         return oldQuantity + newQuantity;
