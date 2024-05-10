@@ -1,13 +1,14 @@
 package strategy.operation;
 
-import java.util.Map;
+import dao.FruitShopDaoImpl;
 import model.FruitTransaction;
 
 public class BalanceOperationHandler implements OperationHandler {
+    private final FruitShopDaoImpl fruitShopDao = new FruitShopDaoImpl();
 
     @Override
-    public void execute(Map<String, Integer> fruitBalance, FruitTransaction transaction) {
+    public void execute(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        fruitBalance.put(fruit, transaction.getQuantity());
+        fruitShopDao.putBalanceStatistic(fruit, transaction.getQuantity());
     }
 }

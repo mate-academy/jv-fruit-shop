@@ -88,7 +88,7 @@ Please provide the relative path to a resource instead.
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
-In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each strategy.operation.
+In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
 
 - Example:  
     ```java
@@ -100,5 +100,5 @@ In the `main()` method you can pass the strategy map into the service that choos
 
 #### Be attentive with [class](https://mate-academy.github.io/style-guides/java/java.html#s5.2.2-class-names) and [method](https://mate-academy.github.io/style-guides/java/java.html#s5.2.3-method-names) naming. 
 
-#### Handling Purchase strategy.operation.
+#### Handling Purchase operation.
 Check result balance before saving it in the Storage - it should be positive. Throw `RuntimeException` in case the balance is negative.

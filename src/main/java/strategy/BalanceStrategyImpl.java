@@ -10,26 +10,19 @@ import strategy.operation.ReturnOperationHandler;
 import strategy.operation.SupplyOperationHandler;
 
 public class BalanceStrategyImpl implements OperationStrategy {
-    private final Map<String, Integer> fruitBalance = new HashMap<>();
-    private final Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlerMap = new HashMap<>();
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    @Override
-    public OperationHandler handler(FruitTransaction fruitTransaction) {
+    public BalanceStrategyImpl() {
+        operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,new PurchaseOperationHandler());
+        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler());
+    }
+
+    @Override
+    public OperationHandler getHandler(FruitTransaction fruitTransaction) {
         return operationHandlerMap.get(fruitTransaction.getOperation());
-    }
-
-    @Override
-    public Map<String, Integer> getFruitStatistic() {
-        return fruitBalance;
-    }
-
-    @Override
-    public void executeStrategy(FruitTransaction fruitTransaction) {
-        handler(fruitTransaction).execute(fruitBalance, fruitTransaction);
     }
 }

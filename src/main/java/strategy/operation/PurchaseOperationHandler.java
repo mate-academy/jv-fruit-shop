@@ -1,13 +1,20 @@
 package strategy.operation;
 
-import java.util.Map;
+import dao.FruitShopDaoImpl;
+import exception.FruitShopException;
 import model.FruitTransaction;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private final FruitShopDaoImpl fruitShopDao = new FruitShopDaoImpl();
 
     @Override
-    public void execute(Map<String, Integer> fruitBalance, FruitTransaction transaction) {
+    public void execute(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        fruitBalance.put(fruit, fruitBalance.getOrDefault(fruit, 0) - transaction.getQuantity());
+        int balance = fruitShopDao.getBalanceByFruit(fruit) - transaction.getQuantity();
+        if (balance > 0) {
+            fruitShopDao.putBalanceStatistic(fruit, balance);
+        } else {
+            throw new FruitShopException("Quantity can't be bigger then balance");
+        }
     }
 }
