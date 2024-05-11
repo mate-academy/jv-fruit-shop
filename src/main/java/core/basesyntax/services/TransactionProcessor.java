@@ -1,17 +1,17 @@
 package core.basesyntax.services;
 
+import static core.basesyntax.transactions.FruitsTransaction.Operation;
+import static core.basesyntax.transactions.FruitsTransaction.Operation.BALANCE;
+import static core.basesyntax.transactions.FruitsTransaction.Operation.PURCHASE;
+import static core.basesyntax.transactions.FruitsTransaction.Operation.RETURN;
+import static core.basesyntax.transactions.FruitsTransaction.Operation.SUPPLY;
+
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.transactions.FruitsTransaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
-
-import static core.basesyntax.transactions.FruitsTransaction.Operation;
-import static core.basesyntax.transactions.FruitsTransaction.Operation.BALANCE;
-import static core.basesyntax.transactions.FruitsTransaction.Operation.SUPPLY;
-import static core.basesyntax.transactions.FruitsTransaction.Operation.PURCHASE;
-import static core.basesyntax.transactions.FruitsTransaction.Operation.RETURN;
 
 public class TransactionProcessor implements TransactionService {
     private final FruitsDao fruitsDao;
