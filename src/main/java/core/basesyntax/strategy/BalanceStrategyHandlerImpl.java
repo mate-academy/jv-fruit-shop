@@ -11,9 +11,9 @@ public class BalanceStrategyHandlerImpl implements StrategyHandler {
     }
 
     @Override
-    public int handle(FruitTransaction fruitTransaction) {
-        Integer oldQuantity = fruitDao.getFruitMap().get(fruitTransaction.getFruitName());
-        Integer newQuantity = fruitTransaction.getQuantity();
-        return oldQuantity + newQuantity;
+    public void handle(FruitTransaction fruitTransaction) {
+        String fruitName = fruitTransaction.getFruitName();
+        Integer diffQuantity = fruitTransaction.getQuantity();
+        fruitDao.getFruitMap().merge(fruitName, diffQuantity, Integer::sum);
     }
 }

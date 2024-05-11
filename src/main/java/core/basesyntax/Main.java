@@ -39,14 +39,18 @@ public class Main {
         );
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> readFile = fileReaderService.readFile(FILE_PATH);
+
         DataConvertorService dataConvertorService = new DataConvertorServiceImpl();
         List<FruitTransaction> fruitTransactionList = dataConvertorService.convertData(readFile);
+
         StrategyService strategyService = new StrategyServiceImpl(strategyHandlerMap);
         FruitTransactionProcessor calculatorService =
-                new FruitTransactionProcessorImpl(fruitDao, strategyService);
+                new FruitTransactionProcessorImpl(strategyService);
         calculatorService.fillStorage(fruitTransactionList);
+
         ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
         String report = reportCreator.createReport(fruitDao.getFruitMap());
+
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.write(OUTPUT_FILE, report);
     }

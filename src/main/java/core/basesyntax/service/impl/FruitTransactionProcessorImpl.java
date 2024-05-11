@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitTransactionProcessor;
 import core.basesyntax.service.StrategyService;
@@ -8,27 +7,18 @@ import core.basesyntax.strategy.StrategyHandler;
 import java.util.List;
 
 public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
-    private final FruitDao fruitDao;
     private final StrategyService strategyService;
 
-    public FruitTransactionProcessorImpl(FruitDao fruitDao, StrategyService strategyService) {
-        this.fruitDao = fruitDao;
+    public FruitTransactionProcessorImpl(StrategyService strategyService) {
         this.strategyService = strategyService;
     }
 
     @Override
     public void fillStorage(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
-            if (!fruitDao.getFruitMap().containsKey(fruitTransaction.getFruitName())) {
-                fruitDao.getFruitMap()
-                        .put(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
-            } else {
-                String fruitName = fruitTransaction.getFruitName();
-                StrategyHandler strategy =
-                        strategyService.getStrategy(fruitTransaction.getOperation());
-                Integer quantity = strategy.handle(fruitTransaction);
-                fruitDao.updateQuantity(fruitName, quantity);
-            }
+            StrategyHandler strategy =
+                    strategyService.getStrategy(fruitTransaction.getOperation());
+            strategy.handle(fruitTransaction);
         }
     }
 }
