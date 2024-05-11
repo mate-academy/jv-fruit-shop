@@ -10,7 +10,6 @@ import java.util.List;
 public class FruitTransactionProcessorImpl implements FruitTransactionProcessor {
     private final FruitDao fruitDao;
     private final StrategyService strategyService;
-    private StrategyHandler strategyHandler;
 
     public FruitTransactionProcessorImpl(FruitDao fruitDao, StrategyService strategyService) {
         this.fruitDao = fruitDao;
@@ -25,8 +24,9 @@ public class FruitTransactionProcessorImpl implements FruitTransactionProcessor 
                         .put(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
             } else {
                 String fruitName = fruitTransaction.getFruitName();
-                strategyService.getStrategy(fruitTransaction.getOperation());
-                Integer quantity = strategyHandler.handle(fruitTransaction);
+                StrategyHandler strategy =
+                        strategyService.getStrategy(fruitTransaction.getOperation());
+                Integer quantity = strategy.handle(fruitTransaction);
                 fruitDao.updateQuantity(fruitName, quantity);
             }
         }

@@ -3,24 +3,23 @@ package core.basesyntax;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ConvertorService;
-import core.basesyntax.service.CreatorService;
+import core.basesyntax.service.DataConvertorService;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitTransactionProcessor;
-import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportCreatorService;
 import core.basesyntax.service.StrategyService;
-import core.basesyntax.service.WriterService;
-import core.basesyntax.service.impl.ConvertorServiceImpl;
-import core.basesyntax.service.impl.CreatorServiceImpl;
+import core.basesyntax.service.impl.DataConvertorServiceImpl;
+import core.basesyntax.service.impl.FileReaderServiceImpl;
+import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitTransactionProcessorImpl;
-import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportCreatorServiceImpl;
 import core.basesyntax.service.impl.StrategyServiceImpl;
-import core.basesyntax.service.impl.WriterServiceImpl;
 import core.basesyntax.strategy.BalanceStrategyHandlerImpl;
 import core.basesyntax.strategy.PurchaseStrategyHandlerImpl;
 import core.basesyntax.strategy.ReturnStrategyHandlerImpl;
 import core.basesyntax.strategy.StrategyHandler;
 import core.basesyntax.strategy.SupplyStrategyHandlerImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -32,26 +31,23 @@ public class Main {
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, StrategyHandler> strategyHandlerMap = new HashMap<>();
-        strategyHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceStrategyHandlerImpl(fruitDao));
-        strategyHandlerMap.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyStrategyHandlerImpl(fruitDao));
-        strategyHandlerMap.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseStrategyHandlerImpl(fruitDao));
-        strategyHandlerMap.put(FruitTransaction.Operation.RETURN,
-                new ReturnStrategyHandlerImpl(fruitDao));
-        ReaderService readerService = new ReaderServiceImpl();
-        List<String> readFromFile = readerService.readFile(FILE_PATH);
-        ConvertorService convertorService = new ConvertorServiceImpl();
-        List<FruitTransaction> fruitTransactionList = convertorService.convertData(readFromFile);
+        Map<FruitTransaction.Operation, StrategyHandler> strategyHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceStrategyHandlerImpl(fruitDao),
+                FruitTransaction.Operation.SUPPLY, new SupplyStrategyHandlerImpl(fruitDao),
+                FruitTransaction.Operation.PURCHASE, new PurchaseStrategyHandlerImpl(fruitDao),
+                FruitTransaction.Operation.RETURN, new ReturnStrategyHandlerImpl(fruitDao)
+        );
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        List<String> readFile = fileReaderService.readFile(FILE_PATH);
+        DataConvertorService dataConvertorService = new DataConvertorServiceImpl();
+        List<FruitTransaction> fruitTransactionList = dataConvertorService.convertData(readFile);
         StrategyService strategyService = new StrategyServiceImpl(strategyHandlerMap);
         FruitTransactionProcessor calculatorService =
                 new FruitTransactionProcessorImpl(fruitDao, strategyService);
         calculatorService.fillStorage(fruitTransactionList);
-        CreatorService reportCreator = new CreatorServiceImpl();
+        ReportCreatorService reportCreator = new ReportCreatorServiceImpl();
         String report = reportCreator.createReport(fruitDao.getFruitMap());
-        WriterService writerService = new WriterServiceImpl();
-        writerService.write(OUTPUT_FILE, report);
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.write(OUTPUT_FILE, report);
     }
 }

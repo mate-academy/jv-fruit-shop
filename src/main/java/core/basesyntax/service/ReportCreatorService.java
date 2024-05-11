@@ -2,6 +2,6 @@ package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface CreatorService {
+public interface ReportCreatorService {
     String createReport(Map<String, Integer> inputList);
 }
