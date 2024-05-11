@@ -18,12 +18,11 @@ public class Storage {
         fruitsInventory.put(fruit, quantity);
     }
 
-    public void increaseFruiteQuantity(String fruit, int quantity) {
+    public void increaseFruitsQuantity(String fruit, int quantity) {
         fruitsInventory.put(fruit, getFruitsInventory(fruit) + quantity);
     }
 
-    public void decreaseFruiteQuantity(String fruit, int quantity) {
+    public void decreaseFruitsQuantity(String fruit, int quantity) {
         fruitsInventory.put(fruit, getFruitsInventory(fruit) - quantity);
     }
-
 }

@@ -17,17 +17,17 @@ public class FruitsDaoImpl implements FruitsDao {
 
     @Override
     public void supply(String fruit, int quantity) {
-        storage.increaseFruiteQuantity(fruit, quantity);
+        storage.increaseFruitsQuantity(fruit, quantity);
     }
 
     @Override
     public void purchase(String fruit, int quantity) {
-        storage.decreaseFruiteQuantity(fruit, quantity);
+        storage.decreaseFruitsQuantity(fruit, quantity);
     }
 
     @Override
     public void returnFruits(String fruit, int quantity) {
-        storage.increaseFruiteQuantity(fruit, quantity);
+        storage.increaseFruitsQuantity(fruit, quantity);
     }
 
     @Override
