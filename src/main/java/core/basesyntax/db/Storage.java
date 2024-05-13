@@ -19,10 +19,10 @@ public class Storage {
     }
 
     public void increaseFruitsQuantity(String fruit, int quantity) {
-        fruitsInventory.put(fruit, getFruitsInventory(fruit) + quantity);
+        fruitsInventory.merge(fruit, quantity, Integer::sum);
     }
 
     public void decreaseFruitsQuantity(String fruit, int quantity) {
-        fruitsInventory.put(fruit, getFruitsInventory(fruit) - quantity);
+        fruitsInventory.merge(fruit, -quantity, Integer::sum);
     }
 }

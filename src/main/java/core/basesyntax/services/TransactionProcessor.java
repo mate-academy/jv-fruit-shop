@@ -8,7 +8,6 @@ import static core.basesyntax.transactions.FruitsTransaction.Operation.SUPPLY;
 
 import core.basesyntax.dao.FruitsDao;
 import core.basesyntax.transactions.FruitsTransaction;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiConsumer;
@@ -23,11 +22,12 @@ public class TransactionProcessor implements TransactionService {
     }
 
     private void initializeOperations() {
-        operationsMap = new HashMap<>();
-        operationsMap.put(BALANCE, fruitsDao::balance);
-        operationsMap.put(SUPPLY, fruitsDao::supply);
-        operationsMap.put(PURCHASE, fruitsDao::purchase);
-        operationsMap.put(RETURN, fruitsDao::returnFruits);
+        operationsMap = Map.of(
+                BALANCE, fruitsDao::balance,
+                SUPPLY, fruitsDao::supply,
+                PURCHASE, fruitsDao::purchase,
+                RETURN, fruitsDao::returnFruits
+        );
     }
 
     @Override

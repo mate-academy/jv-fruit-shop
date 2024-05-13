@@ -8,9 +8,9 @@ import core.basesyntax.services.ReportService;
 import core.basesyntax.services.TransactionProcessor;
 import core.basesyntax.services.TransactionService;
 import core.basesyntax.transactions.FruitsTransaction;
-import core.basesyntax.util.CsvParser;
-import core.basesyntax.util.CsvReader;
-import core.basesyntax.util.CsvWriter;
+import core.basesyntax.utils.CsvParser;
+import core.basesyntax.utils.CsvReader;
+import core.basesyntax.utils.CsvWriter;
 import java.util.List;
 
 public class Main {
@@ -23,8 +23,8 @@ public class Main {
         TransactionService transactionService = new TransactionProcessor(fruitsDao);
         ReportService reportService = new ReportGenerator(fruitsDao);
 
-        List<String[]> rawLines = CsvReader.readLines((INPUT_FILE_PATH));
-        List<FruitsTransaction> transactions = CsvParser.parseTransactions(rawLines);
+        List<String> lines = CsvReader.readLines(INPUT_FILE_PATH);
+        List<FruitsTransaction> transactions = CsvParser.parseTransactions(lines);
         transactionService.processTransactions(transactions);
         String report = reportService.createReport();
         CsvWriter.writeReport(OUTPUT_FILE_PATH, report);
