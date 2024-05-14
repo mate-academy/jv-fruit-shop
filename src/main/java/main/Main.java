@@ -13,7 +13,7 @@ import service.impl.BalanceReportCreatorService;
 import service.impl.FileReaderServiceImpl;
 import service.impl.FileWriterServiceImpl;
 import service.impl.TransactionParserServiceImpl;
-import strategy.BalanceStrategyImpl;
+import strategy.OperationStrategyImpl;
 import strategy.OperationStrategy;
 import strategy.operation.BalanceOperationHandler;
 import strategy.operation.OperationHandler;
@@ -33,17 +33,17 @@ public class Main {
                         FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
                         FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        TransactionParserService parse = new TransactionParserServiceImpl();
+        TransactionParserService parser = new TransactionParserServiceImpl();
         FruitShopDao dao = new FruitShopDaoImpl();
-        OperationStrategy strategy = new BalanceStrategyImpl(operationHandlerMap);
+        OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
         ReportCreatorService reportCreator = new BalanceReportCreatorService();
         FileWriterService fileWriter = new FileWriterServiceImpl();
         List<String> dataFromFile = fileReaderService.read(DATA_FILE_PATH);
-        List<FruitTransaction> getAllFruitTransaction = parse.parseFromListStrings(dataFromFile);
-        for (FruitTransaction fruitTransaction : getAllFruitTransaction) {
+        List<FruitTransaction> allFruitTransaction = parser.parseFromListStrings(dataFromFile);
+        for (FruitTransaction fruitTransaction : allFruitTransaction) {
             strategy.getHandler(fruitTransaction).execute(fruitTransaction);
         }
-        List<String> balanceReport = reportCreator.getReport(dao.getBalance());
+        List<String> balanceReport = reportCreator.createReport();
         fileWriter.write(balanceReport, STATISTIC_FILE_PATH);
     }
 }
