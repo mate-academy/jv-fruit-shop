@@ -1,11 +1,11 @@
 package service.impl;
 
+import dao.FruitShopDao;
+import dao.FruitShopDaoImpl;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import dao.FruitShopDao;
-import dao.FruitShopDaoImpl;
 import service.ReportCreatorService;
 
 public class BalanceReportCreatorService implements ReportCreatorService {
