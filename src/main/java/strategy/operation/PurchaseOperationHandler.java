@@ -10,11 +10,10 @@ public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void execute(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        int balance = fruitShopDao.getBalanceByFruit(fruit) - transaction.getQuantity();
-        if (balance > 0) {
-            fruitShopDao.putBalanceStatistic(fruit, balance);
-        } else {
-            throw new FruitShopException("Quantity can't be bigger then balance");
+        int newBalance = fruitShopDao.getBalanceByFruit(fruit) - transaction.getQuantity();
+        if (newBalance <= 0) {
+            throw new FruitShopException("Not enough in storage: " + newBalance);
         }
+        fruitShopDao.putBalanceStatistic(fruit, newBalance);
     }
 }

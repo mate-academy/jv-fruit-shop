@@ -18,7 +18,8 @@ public class BalanceReportCreatorService implements ReportCreatorService {
         List<String> statisticToString = statistic.entrySet().stream()
                 .peek(kv -> {
                     if (kv.getValue() < 0) {
-                        throw new RuntimeException("Balance is negative");
+                        throw new IllegalStateException("Balance " + kv.getKey()
+                                + " is negative: " + kv.getValue());
                     }
                 })
                 .map(kv -> kv.getKey() + SEPARATOR + kv.getValue())
