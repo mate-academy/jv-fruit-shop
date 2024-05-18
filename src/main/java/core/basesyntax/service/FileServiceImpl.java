@@ -1,55 +1,48 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitDao;
 import core.basesyntax.db.Storage;
-import core.basesyntax.service.operation.OperationStrategy;
+import core.basesyntax.model.Fruit;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileServiceImpl implements FileService {
-    private static final String INPUT_FILE = "input.csv";
     private static final String SEPARATOR = ",";
-    private static final String REPORT_FILE = "report.csv";
-    private FruitTransactionServiceImpl fruitTransactionService;
+    private static final String HEADER = "fruit,quantity";
 
-    public FileServiceImpl(FruitDao fruitDao, OperationStrategy strategy) {
-        fruitTransactionService = new FruitTransactionServiceImpl(fruitDao, strategy);
+    public FileServiceImpl() {
     }
 
     @Override
-    public void writeReport() {
-        try (FileOutputStream outputStream = new FileOutputStream(REPORT_FILE)) {
-            String title = "fruit,quantity";
-            StringBuilder reportBuilder = new StringBuilder(title).append(System.lineSeparator());
+    public void writeToFile(String filename) {
+        try (FileOutputStream outputStream = new FileOutputStream(filename)) {
+            StringBuilder reportBuilder = new StringBuilder(HEADER).append(System.lineSeparator());
 
-            for (String fruit : Storage.fruitNames) {
+            for (Fruit fruit : Storage.fruits) {
                 reportBuilder
-                        .append(fruit)
+                        .append(fruit.getName())
                         .append(SEPARATOR)
-                        .append(fruitTransactionService.getFruitCount(fruit))
+                        .append(fruit.getQuantity())
                         .append(System.lineSeparator());
             }
             byte[] bytes = reportBuilder.toString().getBytes();
 
             outputStream.write(bytes);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @Override
-    public void readInput() {
-        try (InputStream inputStream = FruitTransactionServiceImpl.class
-                .getClassLoader().getResourceAsStream(INPUT_FILE);
+    public List<String> readFile(String filename) {
+        List<String> records = new ArrayList<>();
+        try (InputStream inputStream = FileServiceImpl.class
+                .getClassLoader().getResourceAsStream(filename);
                 Scanner scanner = new Scanner(inputStream)) {
-
-            if (inputStream == null) {
-                throw new FileNotFoundException("Resource not found: " + inputStream);
-            }
 
             // Skip the title line
             if (scanner.hasNextLine()) {
@@ -57,17 +50,13 @@ public class FileServiceImpl implements FileService {
             }
 
             while (scanner.hasNextLine()) {
-                String[] row = scanner.nextLine().split(SEPARATOR);
-                fruitTransactionService.createNewFruitTransaction(
-                        row[0],
-                        row[1],
-                        Integer.parseInt(row[2]));
+                records.add(scanner.nextLine());
             }
-
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            throw new RuntimeException("File not found " + e);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("IO Exception " + e);
         }
+        return records;
     }
 }

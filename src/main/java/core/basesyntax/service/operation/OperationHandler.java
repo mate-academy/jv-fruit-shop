@@ -1,9 +1,9 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 
 public interface OperationHandler {
-    FruitTransaction.Operation getOperation();
+    Operation getOperation();
 
     int getOperationResult(int result, int quantity);
 }

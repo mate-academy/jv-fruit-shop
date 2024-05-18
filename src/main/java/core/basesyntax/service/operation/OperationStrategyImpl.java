@@ -1,22 +1,17 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<String, OperationHandler> operationHandlerMap;
+    private final Map<Operation, OperationHandler> operationHandlerMap;
 
-    public OperationStrategyImpl(Map<String, OperationHandler> operationHandlerMap) {
+    public OperationStrategyImpl(Map<Operation, OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public OperationHandler get(String code) {
-        return operationHandlerMap.get(code);
-    }
-
-    @Override
-    public int getCalculatedCount(int count, int quantity, FruitTransaction.Operation operation) {
-        return 0;
+    public OperationHandler get(Operation operation) {
+        return operationHandlerMap.get(operation);
     }
 }

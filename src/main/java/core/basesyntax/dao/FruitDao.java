@@ -1,10 +1,10 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.FruitTransaction;
-import java.util.List;
+import core.basesyntax.model.Fruit;
+import java.util.Optional;
 
 public interface FruitDao {
-    void add(FruitTransaction fruitTransaction);
+    void add(Fruit fruit);
 
-    List<FruitTransaction> getFruitTransactionsByFruit(String fruit);
+    Optional<Fruit> getFruitIfPresent(String fruitName);
 }

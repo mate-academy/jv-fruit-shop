@@ -2,8 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FileServiceImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.OperationStrategy;
@@ -11,32 +14,32 @@ import core.basesyntax.service.operation.OperationStrategyImpl;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.EnumMap;
+import java.util.List;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
+    private static final String REPORT_FILE = "report.csv";
+    private static final String INPUT_FILE = "input.csv";
+
     public static void main(String[] args) {
-        Map<String, OperationHandler> operationHandlerMap = new HashMap<>();
+        EnumMap<Operation, OperationHandler> operationHandlerMap
+                = new EnumMap<>(Operation.class);
         fillOperationMap(operationHandlerMap);
 
         FruitDao fruitDao = new FruitDaoImpl();
         OperationStrategy strategy = new OperationStrategyImpl(operationHandlerMap);
-        FileService fileService = new FileServiceImpl(fruitDao, strategy);
+        FruitService fruitService = new FruitServiceImpl(fruitDao, strategy);
+        FileService fileService = new FileServiceImpl();
 
-        fileService.readInput();
-
-        fileService.writeReport();
+        List<String> fileRows = fileService.readFile(INPUT_FILE);
+        fruitService.createFruitsFromList(fileRows);
+        fileService.writeToFile(REPORT_FILE);
     }
 
-    private static Map<String, OperationHandler>
-            fillOperationMap(Map<String, OperationHandler> map) {
-        map.put("b", new BalanceOperationHandler());
-        map.put("s", new SupplyOperationHandler());
-        map.put("p", new PurchaseOperationHandler());
-        map.put("r", new ReturnOperationHandler());
-        return map;
+    private static void fillOperationMap(EnumMap<Operation, OperationHandler> map) {
+        map.put(Operation.BALANCE, new BalanceOperationHandler());
+        map.put(Operation.SUPPLY, new SupplyOperationHandler());
+        map.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        map.put(Operation.RETURN, new ReturnOperationHandler());
     }
 }

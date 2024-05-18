@@ -1,20 +1,23 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
-import java.util.List;
+import core.basesyntax.model.Fruit;
+import java.util.Optional;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void add(FruitTransaction fruitTransaction) {
-        Storage.fruits.add(fruitTransaction);
-        Storage.fruitNames.add(fruitTransaction.getFruit());
+    public void add(Fruit newFruit) {
+        Storage.fruits.removeIf(fruit -> fruit.getName().equals(newFruit.getName()));
+        Storage.fruits.add(newFruit);
     }
 
     @Override
-    public List<FruitTransaction> getFruitTransactionsByFruit(String fruit) {
-        return Storage.fruits.stream()
-                .filter(f -> f.getFruit().equals(fruit))
-                .toList();
+    public Optional<Fruit> getFruitIfPresent(String fruitName) {
+        for (Fruit fruitFromDb : Storage.fruits) {
+            if (fruitFromDb.getName().equals(fruitName)) {
+                return Optional.of(fruitFromDb);
+            }
+        }
+        return Optional.empty();
     }
 }

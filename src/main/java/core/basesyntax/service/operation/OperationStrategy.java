@@ -1,9 +1,7 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 
 public interface OperationStrategy {
-    OperationHandler get(String code);
-
-    int getCalculatedCount(int count, int quantity, FruitTransaction.Operation operation);
+    OperationHandler get(Operation operation);
 }

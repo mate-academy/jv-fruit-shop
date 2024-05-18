@@ -1,11 +1,11 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public FruitTransaction.Operation getOperation() {
-        return FruitTransaction.Operation.SUPPLY;
+    public Operation getOperation() {
+        return Operation.SUPPLY;
     }
 
     @Override

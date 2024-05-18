@@ -1,11 +1,11 @@
 package core.basesyntax.service.operation;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public FruitTransaction.Operation getOperation() {
-        return FruitTransaction.Operation.RETURN;
+    public Operation getOperation() {
+        return Operation.RETURN;
     }
 
     @Override

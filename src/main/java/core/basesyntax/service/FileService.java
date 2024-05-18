@@ -1,7 +1,9 @@
 package core.basesyntax.service;
 
-public interface FileService {
-    void writeReport();
+import java.util.List;
 
-    void readInput();
+public interface FileService {
+    void writeToFile(String filename);
+
+    List<String> readFile(String filename);
 }
