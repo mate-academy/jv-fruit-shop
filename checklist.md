@@ -20,7 +20,7 @@ purpose/common logic in a corresponding package.
 
 Your project structure should consist the following packages:
 - `db` for holding Storage
-- `model` for holding models like Fruit (if necessary)
+- `core.basesyntax.db.model` for holding models like Fruit (if necessary)
 - `service` for holding services, like Writer, Reader, Parser and so on
 - `service.impl` for holding implementations of services
 - `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)

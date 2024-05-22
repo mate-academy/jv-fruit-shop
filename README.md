@@ -65,7 +65,7 @@ We are expecting to see how many fruits are available today after the work shift
 ```
 The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
 
-**Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
+**Hint: Think about creating some FruitTransaction core.basesyntax.db.model to store info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes/approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
@@ -93,6 +93,42 @@ public class FruitTransaction {
   }
 }
 ```
+
+Also, here is an example of what the `main` method may look like:
+```java
+public class Main {
+    public static void main(String[] arg) {
+        // 1. Read the data from the input CSV file
+        FileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read("reportToRead.csv");
+
+        // 2. Convert the incoming data into FruitTransactions list
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+
+        // 3. Create and feel the map with all OperationHandler implementations
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+
+        // 4. Process the incoming transactions with applicable OperationHandler implementations
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transactions);
+
+        // 5.Generate report based on the current Storage state
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String resultingReport = reportGenerator.getReport();
+
+        // 6. Write the received report into the destination file
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, "finalReport.csv");
+    }
+}
+```
+
 
 #### [Try to avoid these common mistakes while solving task](./checklist.md)
 
