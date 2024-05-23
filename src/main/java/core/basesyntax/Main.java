@@ -17,7 +17,5 @@ public class Main {
         System.out.println("--------------------");
         System.out.println(createReport.create(dataProcess.process(readFromFile.read("file.csv"))));
         writeToFile.write(createReport.create(dataProcess.process(readFromFile.read("file.csv"))));
-
-
     }
 }
