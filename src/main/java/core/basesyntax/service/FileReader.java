@@ -1,14 +1,13 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 
-public class ReadFromFile {
+public class FileReader {
     private static final int START_INDEX = 19;
 
     public String[] read(String fileName) {
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
             StringBuilder stringBuilder = new StringBuilder();
             String value = bufferedReader.readLine();
 
