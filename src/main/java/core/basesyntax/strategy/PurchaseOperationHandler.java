@@ -2,7 +2,7 @@ package core.basesyntax.strategy;
 
 import java.util.HashMap;
 
-public class ReturnActivitiesHandler implements ActivitiesHandler {
+public class PurchaseOperationHandler implements OperationHandler {
     private static final int FRUIT = 1;
     private static final int NUMBER = 2;
 
@@ -11,7 +11,7 @@ public class ReturnActivitiesHandler implements ActivitiesHandler {
         for (String key : map.keySet()) {
             Integer value = map.get(key);
             if (key.equals(data[FRUIT])) {
-                value += Integer.parseInt(data[NUMBER]);
+                value -= Integer.parseInt(data[NUMBER]);
             }
             map.replace(key, value);
         }

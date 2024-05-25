@@ -2,7 +2,7 @@ package core.basesyntax.strategy;
 
 import java.util.HashMap;
 
-public class SupplyActivitiesHandler implements ActivitiesHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private static final int FRUIT = 1;
     private static final int NUMBER = 2;
 

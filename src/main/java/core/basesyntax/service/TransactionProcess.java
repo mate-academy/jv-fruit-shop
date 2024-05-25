@@ -1,14 +1,14 @@
 package core.basesyntax.service;
 
-import core.basesyntax.strategy.ActivitiesStrategy;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 
 public class TransactionProcess {
     private static final int OPERATION = 0;
     private static final String COMMA = ",";
-    private ActivitiesStrategy activitiesStrategy;
+    private OperationStrategy activitiesStrategy;
 
-    public TransactionProcess(ActivitiesStrategy activitiesStrategy) {
+    public TransactionProcess(OperationStrategy activitiesStrategy) {
         this.activitiesStrategy = activitiesStrategy;
     }
 
