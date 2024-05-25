@@ -1,7 +1,7 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.dao.AddTransaction;
-import core.basesyntax.dao.RemoveTransaction;
+import core.basesyntax.dao.AdditionOperationHandler;
+import core.basesyntax.dao.RemovalOperationHandler;
 import core.basesyntax.dao.dao.impl.BalanceOperationImpl;
 import core.basesyntax.dao.dao.impl.PurchaseTransactionImpl;
 import core.basesyntax.dao.dao.impl.ReturnOperationImpl;
@@ -10,10 +10,10 @@ import core.basesyntax.model.OperationModel;
 import java.util.List;
 
 public class TransactionStrategyImpl implements TransactionStrategy {
-    private final AddTransaction balanceOperation = new BalanceOperationImpl();
-    private final AddTransaction supplyOperation = new SupplyOperationImpl();
-    private final AddTransaction returnOperation = new ReturnOperationImpl();
-    private final RemoveTransaction purchaseOperation = new PurchaseTransactionImpl();
+    private final AdditionOperationHandler balanceOperation = new BalanceOperationImpl();
+    private final AdditionOperationHandler supplyOperation = new SupplyOperationImpl();
+    private final AdditionOperationHandler returnOperation = new ReturnOperationImpl();
+    private final RemovalOperationHandler purchaseOperation = new PurchaseTransactionImpl();
 
     @Override
     public void transactionOperator(List<OperationModel> operationList) {

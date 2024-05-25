@@ -1,10 +1,10 @@
 package core.basesyntax.dao.dao.impl;
 
-import core.basesyntax.dao.RemoveTransaction;
+import core.basesyntax.dao.RemovalOperationHandler;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.FruitModel;
 
-public class PurchaseTransactionImpl implements RemoveTransaction {
+public class PurchaseTransactionImpl implements RemovalOperationHandler {
     private final StorageDao storageDao = new StorageDaoImpl();
 
     @Override

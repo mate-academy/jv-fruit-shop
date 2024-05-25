@@ -5,17 +5,22 @@ import core.basesyntax.model.FruitModel;
 import core.basesyntax.service.ReportWriter;
 
 public class ReportWriterImpl implements ReportWriter {
+    private static final String REPORT_HEADER = "fruit,quantity";
+    private static final String SEPARATOR = ",";
 
     @Override
     public String createReport() {
         StringBuilder report = new StringBuilder();
         FruitModel[] fruitModels = FruitModel.values();
-        report.append("fruit,quantity");
+        report.append(REPORT_HEADER);
         for (FruitModel model : fruitModels) {
             String fruitType = model.getCode();
             Integer amount = Storage.fruitStorage.get(model);
             if (amount != null) {
-                report.append(System.lineSeparator()).append(fruitType).append(",").append(amount);
+                report.append(System.lineSeparator())
+                        .append(fruitType)
+                        .append(SEPARATOR)
+                        .append(amount);
             }
         }
         return report.toString();

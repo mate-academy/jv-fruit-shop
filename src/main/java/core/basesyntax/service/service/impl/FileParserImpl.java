@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileParserImpl implements FileParserService {
-    private static final String separator = ",";
+    private static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -17,7 +17,7 @@ public class FileParserImpl implements FileParserService {
         List<OperationModel> transactionList = new ArrayList<>();
         for (int i = 1; i < listFromFile.size(); i++) {
             OperationModel transaction = new OperationModel();
-            String[] splitData = listFromFile.get(i).split(separator);
+            String[] splitData = listFromFile.get(i).split(SEPARATOR);
             OperationModel.Operation operation
                     = OperationModel.Operation.getOperationFromCode(splitData[OPERATION_INDEX]);
             FruitModel fruitType = FruitModel.getModelFromCode(splitData[FRUIT_TYPE_INDEX]);

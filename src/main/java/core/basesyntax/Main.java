@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Main {
-    private static final Path startPath = Paths.get("src/main/resources/newTransactions.txt");
+    private static final Path startPath = Paths.get("src/main/resources/inputOperation.txt");
     private static final LocalDate localDate = LocalDate.now();
     private static final String fileName = "src/main/resources/dailyRecord_" + localDate + ".txt";
     private static final Path endPath = Paths.get(fileName);
