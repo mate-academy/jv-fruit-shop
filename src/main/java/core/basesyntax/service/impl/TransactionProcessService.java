@@ -1,17 +1,19 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.Transact;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 
-public class TransactionProcess {
+public class TransactionProcessService implements Transact {
     private static final int OPERATION = 0;
     private static final String COMMA = ",";
     private OperationStrategy activitiesStrategy;
 
-    public TransactionProcess(OperationStrategy activitiesStrategy) {
+    public TransactionProcessService(OperationStrategy activitiesStrategy) {
         this.activitiesStrategy = activitiesStrategy;
     }
 
+    @Override
     public HashMap<String, Integer> process(String[] data) {
         HashMap<String, Integer> database = new HashMap<>();
         for (String datum : data) {

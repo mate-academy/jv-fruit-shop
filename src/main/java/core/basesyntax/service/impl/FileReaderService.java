@@ -1,13 +1,16 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.Reader;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 
-public class FileReader {
+public class FileReaderService implements Reader {
     private static final int START_INDEX = 19;
 
+    @Override
     public String[] read(String fileName) {
-        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
             StringBuilder stringBuilder = new StringBuilder();
             String value = bufferedReader.readLine();
 
