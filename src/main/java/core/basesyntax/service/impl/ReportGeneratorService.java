@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportService;
-import core.basesyntax.service.db.Database;
 import java.util.Map;
 
 public class ReportGeneratorService implements ReportService {
@@ -14,7 +14,7 @@ public class ReportGeneratorService implements ReportService {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER).append(SEPARATOR);
         for (Map.Entry<String, Integer> set :
-                Database.database.entrySet()) {
+                Storage.Storage.entrySet()) {
             String key = set.getKey();
             Integer value = set.getValue();
             report.append(key).append(COMMA).append(value).append(SEPARATOR);

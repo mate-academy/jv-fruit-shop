@@ -1,16 +1,16 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.service.db.Database;
+import core.basesyntax.db.Storage;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void processCommand(String[] data) {
-        for (String key : Database.database.keySet()) {
-            Integer value = Database.database.get(key);
+        for (String key : Storage.Storage.keySet()) {
+            Integer value = Storage.Storage.get(key);
             if (key.equals(data[FRUIT])) {
                 value -= Integer.parseInt(data[QUANTITY]);
             }
-            Database.database.replace(key, value);
+            Storage.Storage.replace(key, value);
         }
     }
 }

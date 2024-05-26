@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.impl.FileParserService;
 import core.basesyntax.service.impl.FileReaderService;
 import core.basesyntax.service.impl.FileWriterService;
@@ -21,15 +22,15 @@ public class Main {
     public static void main(String[] args) {
         final FileReaderService readFromFile = new FileReaderService();
         final FileParserService fileParser = new FileParserService();
-        OperationStrategy activitiesStrategy = new OperationStrategyImpl(mapInitializer());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(mapInitializer());
         final TransactionProcessService dataProcess =
-                new TransactionProcessService(activitiesStrategy);
-        final ReportGeneratorService createReport = new ReportGeneratorService();
+                new TransactionProcessService(operationStrategy);
+        final ReportGeneratorService reportGenerator = new ReportGeneratorService();
         final FileWriterService writeToFile = new FileWriterService();
 
         dataProcess.process(fileParser
                 .parse(readFromFile.read(INPUT_FILE)));
-        writeToFile.write(createReport
+        writeToFile.write(reportGenerator
                 .createReport(), OUTPUT_FILE);
     }
 
