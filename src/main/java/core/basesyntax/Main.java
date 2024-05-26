@@ -29,7 +29,7 @@ public class Main {
         final FileWriterService writeToFile = new FileWriterService();
 
         writeToFile.write(createReport
-                .create(dataProcess.process(readFromFile.read(INPUT_FILE))), OUTPUT_FILE);
+                .createReport(dataProcess.process(readFromFile.read(INPUT_FILE))), OUTPUT_FILE);
     }
 
     private static void mapInitializer(HashMap<String, OperationHandler> map) {

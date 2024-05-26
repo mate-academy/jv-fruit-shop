@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface Reader {
+public interface ReaderService {
     String[] read(String fileName);
 }

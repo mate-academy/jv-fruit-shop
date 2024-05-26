@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportService;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ReportGeneratorService implements ReportGenerator {
+public class ReportGeneratorService implements ReportService {
     private static final String REPORT_HEADER = "fruit,quantity";
     private static final String COMMA = ",";
     private static final String SEPARATOR = System.lineSeparator();
 
     @Override
-    public String create(HashMap<String, Integer> data) {
+    public String createReport(HashMap<String, Integer> data) {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER).append(SEPARATOR);
         for (Map.Entry<String, Integer> set :

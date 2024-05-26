@@ -1,10 +1,10 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.Transact;
+import core.basesyntax.service.TransactService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.HashMap;
 
-public class TransactionProcessService implements Transact {
+public class TransactionProcessService implements TransactService {
     private static final int OPERATION = 0;
     private static final String COMMA = ",";
     private OperationStrategy activitiesStrategy;
