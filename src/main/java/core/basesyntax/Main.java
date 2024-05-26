@@ -19,27 +19,23 @@ import java.util.List;
 public class Main {
     private static final Path startPath = Paths.get("src/main/resources/inputOperation.txt");
     private static final LocalDate localDate = LocalDate.now();
-    private static final String fileName = "src/main/resources/dailyRecord_" + localDate + ".txt";
-    private static final Path endPath = Paths.get(fileName);
+    private static final Path endPath = Paths.get("src/main/resources/dailyRecord_"
+            + localDate + ".txt");
 
     public static void main(String[] args) {
-        try {
-            FileReaderService reader = new FileReaderImpl();
-            List<String> listFromFile = reader.readFromFile(startPath);
+        FileReaderService reader = new FileReaderImpl();
+        List<String> listFromFile = reader.readFromFile(startPath);
 
-            FileParserService parser = new FileParserImpl();
-            List<OperationModel> convertData = parser.parse(listFromFile);
+        FileParserService parser = new FileParserImpl();
+        List<OperationModel> convertData = parser.parse(listFromFile);
 
-            TransactionStrategy strategy = new TransactionStrategyImpl();
-            strategy.transactionOperator(convertData);
+        TransactionStrategy strategy = new TransactionStrategyImpl();
+        strategy.transactionOperator(convertData);
 
-            ReportWriter reportWriter = new ReportWriterImpl();
-            String dailyReport = reportWriter.createReport();
+        ReportWriter reportWriter = new ReportWriterImpl();
+        String dailyReport = reportWriter.createReport();
 
-            FileWriterService writeToFile = new FileWriterImpl();
-            writeToFile.writeToFile(dailyReport, endPath);
-        } catch (Exception e) {
-            throw new RuntimeException("Can't find file by path: " + startPath, e);
-        }
+        FileWriterService writeToFile = new FileWriterImpl();
+        writeToFile.writeToFile(dailyReport, endPath);
     }
 }
