@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.service.db.Database;
 import core.basesyntax.service.impl.FileParserService;
 import core.basesyntax.service.impl.FileReaderService;
 import core.basesyntax.service.impl.FileWriterService;
@@ -31,7 +30,7 @@ public class Main {
         dataProcess.process(fileParser
                 .parse(readFromFile.read(INPUT_FILE)));
         writeToFile.write(createReport
-                .createReport(Database.database), OUTPUT_FILE);
+                .createReport(), OUTPUT_FILE);
     }
 
     private static Map<String, OperationHandler> mapInitializer() {
