@@ -6,7 +6,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class FileReaderService implements ReaderService {
-
     @Override
     public String read(String fileName) {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {

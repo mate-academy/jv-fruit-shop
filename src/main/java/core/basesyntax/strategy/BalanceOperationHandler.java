@@ -1,12 +1,10 @@
 package core.basesyntax.strategy;
 
-import java.util.HashMap;
+import core.basesyntax.service.db.Database;
 
 public class BalanceOperationHandler implements OperationHandler {
-
     @Override
-    public HashMap<String, Integer> processCommand(HashMap<String, Integer> map, String[] data) {
-        map.put(data[FRUIT], Integer.valueOf(data[QUANTITY]));
-        return map;
+    public void processCommand(String[] data) {
+        Database.database.put(data[FRUIT], Integer.valueOf(data[QUANTITY]));
     }
 }

@@ -1,10 +1,9 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.TransactService;
+import core.basesyntax.service.TransactionService;
 import core.basesyntax.strategy.OperationStrategy;
-import java.util.HashMap;
 
-public class TransactionProcessService implements TransactService {
+public class TransactionProcessService implements TransactionService {
     private static final int OPERATION = 0;
     private static final String COMMA = ",";
     private OperationStrategy activitiesStrategy;
@@ -14,12 +13,10 @@ public class TransactionProcessService implements TransactService {
     }
 
     @Override
-    public HashMap<String, Integer> process(String[] data) {
-        HashMap<String, Integer> database = new HashMap<>();
+    public void process(String[] data) {
         for (String datum : data) {
             String[] check = datum.split(COMMA);
-            activitiesStrategy.get(check[OPERATION]).processCommand(database, check);
+            activitiesStrategy.get(check[OPERATION]).processCommand(check);
         }
-        return database;
     }
 }

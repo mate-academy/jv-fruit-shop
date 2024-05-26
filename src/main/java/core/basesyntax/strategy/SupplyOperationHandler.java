@@ -1,18 +1,16 @@
 package core.basesyntax.strategy;
 
-import java.util.HashMap;
+import core.basesyntax.service.db.Database;
 
 public class SupplyOperationHandler implements OperationHandler {
-
     @Override
-    public HashMap<String, Integer> processCommand(HashMap<String, Integer> map, String[] data) {
-        for (String key : map.keySet()) {
-            Integer value = map.get(key);
+    public void processCommand(String[] data) {
+        for (String key : Database.database.keySet()) {
+            Integer value = Database.database.get(key);
             if (key.equals(data[FRUIT])) {
                 value += Integer.parseInt(data[QUANTITY]);
             }
-            map.replace(key, value);
+            Database.database.replace(key, value);
         }
-        return map;
     }
 }
