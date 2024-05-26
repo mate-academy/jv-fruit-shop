@@ -3,7 +3,7 @@ package core.basesyntax.model;
 public class OperationModel {
     private Operation operation;
     private FruitModel fruit;
-    private int quantity;
+    private int amount;
 
     public Operation getOperation() {
         return operation;
@@ -21,12 +21,12 @@ public class OperationModel {
         this.fruit = fruit;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getAmount() {
+        return amount;
     }
 
     public void setQuantity(int quantity) {
-        this.quantity = quantity;
+        this.amount = quantity;
     }
 
     public enum Operation {

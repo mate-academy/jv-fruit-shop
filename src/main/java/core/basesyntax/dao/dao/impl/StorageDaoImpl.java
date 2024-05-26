@@ -6,10 +6,9 @@ import core.basesyntax.model.FruitModel;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public String addFruit(FruitModel fruitModel, Integer amount) {
-        for (Map.Entry<FruitModel, Integer> entry: Storage.fruitStorage.entrySet()) {
+        for (Map.Entry<FruitModel, Integer> entry : Storage.fruitStorage.entrySet()) {
             if (entry.getKey().equals(fruitModel)) {
                 int newAmount = entry.getValue() + amount;
                 entry.setValue(newAmount);
