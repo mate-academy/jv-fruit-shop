@@ -2,8 +2,8 @@ package core.basesyntax.handler.operation.handler.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.impl.StorageDaoImpl;
-import core.basesyntax.model.FruitModel;
 import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.model.FruitModel;
 
 public class BalanceOperationImpl implements OperationHandler {
     private final StorageDao storageDao = new StorageDaoImpl();
