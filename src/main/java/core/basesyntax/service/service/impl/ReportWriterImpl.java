@@ -14,15 +14,12 @@ public class ReportWriterImpl implements ReportWriter {
         FruitModel[] fruitModels = FruitModel.values();
         report.append(REPORT_HEADER);
         for (FruitModel model : fruitModels) {
-            String fruitType = model.getCode();
             Integer amount = Storage.fruitStorage.get(model);
-            if (amount != null) {
-                report.append(System.lineSeparator())
-                        .append(fruitType)
-                        .append(SEPARATOR)
-                        .append(amount);
-            }
+            report.append(System.lineSeparator())
+                    .append(model)
+                    .append(SEPARATOR)
+                    .append(amount);
         }
-        return report.toString();
+        return report.toString().toLowerCase();
     }
 }

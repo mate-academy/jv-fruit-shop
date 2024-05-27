@@ -5,6 +5,12 @@ public class OperationModel {
     private FruitModel fruit;
     private int amount;
 
+    public OperationModel(Operation operation, FruitModel fruit, int amount) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.amount = amount;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -51,7 +57,7 @@ public class OperationModel {
                     return operation;
                 }
             }
-            throw new RuntimeException("Invalid operation type " + code);
+            throw new IllegalArgumentException("Invalid operation type " + code);
         }
     }
 }

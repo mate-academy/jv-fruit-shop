@@ -24,10 +24,10 @@ public class Main {
 
     public static void main(String[] args) {
         FileReaderService reader = new FileReaderImpl();
-        List<String> listFromFile = reader.readFromFile(startPath);
+        List<String> inputData = reader.readFromFile(startPath);
 
         FileParserService parser = new FileParserImpl();
-        List<OperationModel> convertData = parser.parse(listFromFile);
+        List<OperationModel> convertData = parser.parse(inputData);
 
         TransactionStrategy strategy = new TransactionStrategyImpl();
         strategy.transactionOperator(convertData);

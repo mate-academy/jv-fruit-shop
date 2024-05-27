@@ -1,4 +1,4 @@
-package core.basesyntax.dao.dao.impl;
+package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.db.Storage;
@@ -24,10 +24,9 @@ public class StorageDaoImpl implements StorageDao {
         if (amount > currentAmount) {
             throw new IllegalArgumentException("There are not enough "
                     + "fruits in the storage. Current amount is: " + currentAmount);
-        } else {
-            int newAmount = currentAmount - amount;
-            Storage.fruitStorage.put(fruitModel, newAmount);
-            return newAmount;
         }
+        int newAmount = currentAmount - amount;
+        Storage.fruitStorage.put(fruitModel, newAmount);
+        return newAmount;
     }
 }
