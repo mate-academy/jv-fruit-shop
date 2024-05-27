@@ -1,8 +1,6 @@
 package core.basesyntax.db;
 
 import core.basesyntax.service.CantReadFileWithThisNameException;
-import core.basesyntax.service.FruitShop;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -35,7 +33,7 @@ public class FruitShopDaoImpl implements FruitShopDao {
     @Override
     public List<String> calculate(List<String> fruitList, String activities) {
         List<String> fruitsQuantity = new ArrayList<>();
-        for (int i = 0; i < fruitList.size(); i++){
+        for (int i = 0; i < fruitList.size(); i++) {
             String actualFruit = fruitList.get(i);
             int balances = fruitList.stream()
                     .map(l -> l.split(","))

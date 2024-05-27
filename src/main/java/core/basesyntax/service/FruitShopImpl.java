@@ -2,21 +2,15 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoImpl;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class FruitShopImpl implements FruitShop{
-    private FruitShopDao fruitShop = new FruitShopDaoImpl();
+public class FruitShopImpl implements FruitShop {
     private static final String BALANCE = "b";
     private static final String SUPPLY = "s";
     private static final String PURCHASE = "p";
     private static final String RETURN = "r";
+    private FruitShopDao fruitShop = new FruitShopDaoImpl();
 
     @Override
     public void calculateFruitAmount(String fromFileName, String toFileName) {
@@ -42,7 +36,7 @@ public class FruitShopImpl implements FruitShop{
 
         //2.e) mix everything
         HashMap<String, Integer> fruitsAmount = new HashMap<>();
-        for (int i = 0; i < amountOfOurFruits; i++){
+        for (int i = 0; i < amountOfOurFruits; i++) {
             int amount = amountFruits(balanceFruits, i)
                     + amountFruits(supplyFruits, i)
                     + amountFruits(purchaseFruits, i)
