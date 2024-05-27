@@ -1,11 +1,11 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.OperationModel;
-import core.basesyntax.service.operation.handler.OperationHandler;
-import core.basesyntax.service.operation.handler.operation.handler.impl.BalanceOperationImpl;
-import core.basesyntax.service.operation.handler.operation.handler.impl.PurchaseOperationImpl;
-import core.basesyntax.service.operation.handler.operation.handler.impl.ReturnOperationImpl;
-import core.basesyntax.service.operation.handler.operation.handler.impl.SupplyOperationImpl;
+import core.basesyntax.handler.OperationHandler;
+import core.basesyntax.handler.operation.handler.impl.BalanceOperationImpl;
+import core.basesyntax.handler.operation.handler.impl.PurchaseOperationImpl;
+import core.basesyntax.handler.operation.handler.impl.ReturnOperationImpl;
+import core.basesyntax.handler.operation.handler.impl.SupplyOperationImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

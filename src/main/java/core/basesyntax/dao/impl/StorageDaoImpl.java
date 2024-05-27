@@ -9,7 +9,7 @@ public class StorageDaoImpl implements StorageDao {
     public String addFruit(FruitModel fruitModel, int amount) {
         if (Storage.fruitStorage.containsKey(fruitModel)) {
             int newAmount = Storage.fruitStorage.get(fruitModel) + amount;
-            Storage.fruitStorage.replace(fruitModel, newAmount);
+            Storage.fruitStorage.put(fruitModel, newAmount);
             return fruitModel + " amount was updated: " + Storage.fruitStorage.get(fruitModel);
         } else {
             Storage.fruitStorage.put(fruitModel, amount);
