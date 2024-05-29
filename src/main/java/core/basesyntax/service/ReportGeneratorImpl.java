@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import java.util.Map;
+import core.basesyntax.model.Storage;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -12,10 +12,9 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
-        Map<String, Integer> storage = shopService.getStorage();
-        return "fruit,quantity\n"
-                + storage.entrySet().stream()
+        return "fruit,quantity" + System.lineSeparator()
+                + Storage.FRUIT_STORAGE.entrySet().stream()
                         .map(entry -> entry.getKey() + "," + entry.getValue())
-                        .collect(Collectors.joining("\n"));
+                        .collect(Collectors.joining(System.lineSeparator()));
     }
 }

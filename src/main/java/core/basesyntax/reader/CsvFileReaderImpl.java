@@ -16,7 +16,7 @@ public class CsvFileReaderImpl implements CsvFileReader {
                 listOfLines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading the file: " + e);
+            throw new RuntimeException("Error reading the file: " + fileName + e);
         }
         return listOfLines;
     }

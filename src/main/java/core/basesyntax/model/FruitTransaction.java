@@ -29,14 +29,24 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String markInFile;
+        private final String code;
 
-        Operation(String markInFile) {
-            this.markInFile = markInFile;
+        Operation(String code) {
+            this.code = code;
         }
 
-        public String getMarkInFile() {
-            return markInFile;
+        public String getCode() {
+            return code;
         }
+
+        public static Operation convertToOperation(String mark) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(mark)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Unknown Operation");
+        }
+
     }
 }
