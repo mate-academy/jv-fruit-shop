@@ -1,8 +1,8 @@
 package core.basesyntax.operations;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.OperationHandler;
 import core.basesyntax.Storage;
+import core.basesyntax.dao.OperationHandler;
 
 public class BalanceOperation implements OperationHandler {
     @Override
@@ -10,4 +10,3 @@ public class BalanceOperation implements OperationHandler {
         storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }
-

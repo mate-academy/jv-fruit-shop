@@ -1,8 +1,8 @@
 package core.basesyntax.operations;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.OperationHandler;
 import core.basesyntax.Storage;
+import core.basesyntax.dao.OperationHandler;
 
 public class SupplyOperation implements OperationHandler {
     @Override

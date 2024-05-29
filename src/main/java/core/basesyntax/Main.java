@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.OperationHandler;
+import core.basesyntax.dao.OperationStrategy;
 import core.basesyntax.impl.OperationStrategyImpl;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.impl.ShopServiceImpl;
@@ -16,7 +18,6 @@ public class Main {
         FileRider fileRider = new FileRider();
         final List<FruitTransaction> transactions =
                 fileRider.readTransactions("src/main/input.csv");
-
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
@@ -24,8 +25,8 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        Storage storage = new Storage();
 
+        Storage storage = new Storage();
         ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
         shopService.process(transactions);
 
