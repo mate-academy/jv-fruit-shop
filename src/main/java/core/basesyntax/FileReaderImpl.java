@@ -9,7 +9,11 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String fileName) throws IOException {
-        return Files.readAllLines(Paths.get(fileName));
+        try {
+            return Files.readAllLines(Paths.get(fileName));
+        } catch (IOException e) {
+            throw new IOException("Failed to read file: " + fileName, e);
+        }
     }
 }
 

@@ -35,7 +35,7 @@ public class Main {
         System.out.println("Generated report:\n" + resultingReport);
 
         core.basesyntax.FileWriterImpl fileWriter = new core.basesyntax.FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, "src/main/resources/finalReport.csv");
         System.out.println("Report written to finalReport.csv successfully.");
     }
 }
