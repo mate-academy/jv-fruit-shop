@@ -5,7 +5,7 @@ import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserImpl implements Parser {
+public class TransactionParserImpl implements TransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int PRODUCT_INDEX = 1;
     private static final int QUANTITY = 2;
