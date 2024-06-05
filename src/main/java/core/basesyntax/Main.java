@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.service.Parser;
-import core.basesyntax.service.ParserImpl;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReaderImpl;
 import core.basesyntax.service.ReportCreator;
 import core.basesyntax.service.ReportCreatorImpl;
+import core.basesyntax.service.TransactionParser;
+import core.basesyntax.service.TransactionParserImpl;
+import core.basesyntax.service.TransactionProcessor;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.WriterImpl;
-import core.basesyntax.strategy.Transaction;
 
 public class Main {
     private static final String INPUT = "src/main/resources/input.csv";
@@ -17,8 +17,8 @@ public class Main {
     public static void main(String[] args) {
         Reader reader = new ReaderImpl(INPUT);
         ReportCreator reportCreator = new ReportCreatorImpl();
-        Parser parser = new ParserImpl();
+        TransactionParser parser = new TransactionParserImpl();
         Writer writer = new WriterImpl(REPORT);
-        Transaction transaction = new Transaction();
+        TransactionProcessor transaction = new TransactionProcessor();
     }
 }

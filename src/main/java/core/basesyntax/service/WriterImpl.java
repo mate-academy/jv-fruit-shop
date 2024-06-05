@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class WriterImpl implements Writer {
+
     public WriterImpl(String report) {
     }
 
