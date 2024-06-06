@@ -6,9 +6,6 @@ import java.io.IOException;
 
 public class WriterImpl implements Writer {
 
-    public WriterImpl(String report) {
-    }
-
     @Override
     public void writeReport(String filePath) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {

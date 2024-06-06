@@ -15,10 +15,10 @@ public class Main {
     private static final String REPORT = "src/main/resources/report.csv";
 
     public static void main(String[] args) {
-        Reader reader = new ReaderImpl(INPUT);
+        Reader reader = new ReaderImpl();
         ReportCreator reportCreator = new ReportCreatorImpl();
         TransactionParser parser = new TransactionParserImpl();
-        Writer writer = new WriterImpl(REPORT);
+        Writer writer = new WriterImpl();
         TransactionProcessor transaction = new TransactionProcessor();
     }
 }
