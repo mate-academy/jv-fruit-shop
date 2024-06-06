@@ -11,17 +11,14 @@ public class Storage {
     }
 
     public void addFruit(String fruit, int quantity) {
-        int currentQuantity = fruitQuantities.getOrDefault(fruit, 0);
-        fruitQuantities.put(fruit, currentQuantity + quantity);
+        fruitQuantities.merge(fruit, quantity, Integer::sum);
     }
 
     public void removeFruit(String fruit, int quantity) {
-        int currentQuantity = fruitQuantities.getOrDefault(fruit, 0);
-        fruitQuantities.put(fruit, currentQuantity - quantity);
+        fruitQuantities.merge(fruit, -quantity, Integer::sum);
     }
 
     public Map<String, Integer> getFruitQuantities() {
         return fruitQuantities;
     }
 }
-
