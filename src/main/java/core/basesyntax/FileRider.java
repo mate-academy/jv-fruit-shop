@@ -14,19 +14,28 @@ public class FileRider {
 
             br.readLine();
             while ((line = br.readLine()) != null) {
-                String[] values = line.split(",");
-                if (values.length != 3) {
-                    throw new IllegalArgumentException("Invalid input format");
+                try {
+                    FruitTransaction transaction = parseTransaction(line);
+                    transactions.add(transaction);
+                } catch (IllegalArgumentException e) {
+                    System.err.println("Skipping invalid line: " + line);
                 }
-                FruitTransaction.Operation operation =
-                        FruitTransaction.Operation.fromCode(values[0].trim());
-                String fruit = values[1].trim();
-                int quantity = Integer.parseInt(values[2].trim());
-                transactions.add(new FruitTransaction(operation, fruit, quantity));
             }
-        } catch (IOException | IllegalArgumentException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return transactions;
+    }
+
+    private FruitTransaction parseTransaction(String line) {
+        String[] values = line.split(",");
+        if (values.length != 3) {
+            throw new IllegalArgumentException("Invalid input format");
+        }
+        FruitTransaction.Operation operation =
+                FruitTransaction.Operation.fromCode(values[0].trim());
+        String fruit = values[1].trim();
+        int quantity = Integer.parseInt(values[2].trim());
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }
