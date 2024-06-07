@@ -1,14 +1,23 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.*;
-import core.basesyntax.service.impl.*;
-import core.basesyntax.strategy.*;
-
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
+import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.PurchaseOperation;
+import core.basesyntax.strategy.ReturnOperation;
+import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +30,7 @@ public class Main {
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
