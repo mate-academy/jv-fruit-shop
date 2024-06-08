@@ -55,7 +55,7 @@ Let's check details of all types of activities:
     p,banana,5 
     s,banana,50
 ```
-0
+
 ### Expecting report file example
 We are expecting to see how many fruits are available today after the work shift in your Fruit store. 
 ```text
