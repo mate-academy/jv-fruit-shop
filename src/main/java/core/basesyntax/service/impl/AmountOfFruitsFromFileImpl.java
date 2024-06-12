@@ -1,12 +1,18 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.AmountOfFruitsFromFile;
+import core.basesyntax.service.OperationStrategy;
 import java.util.ArrayList;
 import java.util.List;
 
 public class AmountOfFruitsFromFileImpl implements AmountOfFruitsFromFile {
+    private final OperationStrategy operationStrategy;
+
+    public AmountOfFruitsFromFileImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
     public List<Integer> getAmountOfFruitsFromFile(List<String> fruits,
                                                    List<FruitTransaction> fruitTransactions) {
@@ -16,19 +22,14 @@ public class AmountOfFruitsFromFileImpl implements AmountOfFruitsFromFile {
             String fruit = fruits.get(i);
             int sum = fruitTransactions.stream()
                     .filter(ft -> ft.getFruit().equals(fruit))
-                    .mapToInt(n -> calculateQantityFromOperation(n))
+                    .mapToInt(this::calculateQuantityFromOperation)
                     .sum();
             amounts.add(sum);
         }
         return amounts;
     }
 
-    private static int calculateQantityFromOperation(FruitTransaction transaction) {
-        return transaction.getOperation() == Operation.BALANCE
-                ? transaction.getQuantity()
-                : transaction.getOperation() == Operation.SUPPLY
-                ? transaction.getQuantity()
-                : transaction.getOperation() == Operation.RETURN
-                ? transaction.getQuantity() : transaction.getQuantity() * -1;//purchase
+    private int calculateQuantityFromOperation(FruitTransaction transaction) {
+        return operationStrategy.getHandler(transaction.getOperation()).getOperation(transaction);
     }
 }
