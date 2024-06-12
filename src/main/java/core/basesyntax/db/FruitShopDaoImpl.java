@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitShopDaoImpl implements FruitShopDao {
+    private static int ZERO = 0;
     @Override
-    public int storageSize() {
+    public int getStorageSize() {
         return Storage.fruitStorage.size();
     }
 
     @Override
-    public List<String> getKeyAndValue() {
+    public List<String> getAllFruitsWithQuantities() {
         List<String> lines = new ArrayList<>();
         for (String key : Storage.fruitStorage.keySet()) {
             Integer value = Storage.fruitStorage.get(key);
@@ -21,12 +22,12 @@ public class FruitShopDaoImpl implements FruitShopDao {
     }
 
     @Override
-    public void put(String fruit, int quantity) {
+    public void addFruitAndQuantity(String fruit, int quantity) {
         Storage.fruitStorage.put(fruit, quantity);
     }
 
     @Override
-    public void putOnlyFruits(String fruit) {
-        Storage.fruitStorage.put(fruit, null);
+    public void addFruitWithoutQuantity(String fruit) {
+        Storage.fruitStorage.put(fruit, ZERO);
     }
 }

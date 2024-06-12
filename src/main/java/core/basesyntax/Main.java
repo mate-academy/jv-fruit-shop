@@ -2,39 +2,38 @@ package core.basesyntax;
 
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoImpl;
-import core.basesyntax.impl.AmountFromFileImpl;
-import core.basesyntax.impl.ConvertingFileToFruitTransactionImpl;
-import core.basesyntax.impl.FruitsFromFileImpl;
-import core.basesyntax.impl.ReadingCsvFileImpl;
-import core.basesyntax.impl.WritingToNewFileImpl;
-import core.basesyntax.service.AmountFromFile;
-import core.basesyntax.service.ConvertingFileToFruitTransaction;
-import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.impl.AmountOfFruitsFromFileImpl;
+import core.basesyntax.service.impl.FileToTransactionConverterImpl;
+import core.basesyntax.service.impl.FruitsFromFileImpl;
+import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.impl.FruitStorageWriterImpl;
+import core.basesyntax.service.AmountOfFruitsFromFile;
+import core.basesyntax.service.FileToTransactionConverter;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitsFromFile;
-import core.basesyntax.service.ReadingCsvFile;
-import core.basesyntax.service.WritingToNewFile;
+import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.FruitStorageWriter;
 import java.util.List;
 
 public class Main {
-    // HINT: In the `public static void main(String[] args)`
-    // it is better to create instances of your classes,
-    // and call their methods,
-    // but do not write any business logic in the `main` method!
-    public static void main(String[] args) {
-        FruitShopDao fruitShopDao = new FruitShopDaoImpl();
-        ReadingCsvFile readClass = new ReadingCsvFileImpl();
-        ConvertingFileToFruitTransaction convertClass = new ConvertingFileToFruitTransactionImpl();
-        FruitsFromFile fruitClass = new FruitsFromFileImpl(fruitShopDao);
-        AmountFromFile amountClass = new AmountFromFileImpl(fruitShopDao);
-        WritingToNewFile writeClass = new WritingToNewFileImpl(fruitShopDao);
-        //---------------------------------------------------------
-        String fromFileName = "xyz.csv";
-        String toFileName = "abc.csv";
+    private static final String fromFileName = "xyz.csv";
+    private static final String toFileName = "abc.csv";
+    private static FruitShopDao fruitShopDao = new FruitShopDaoImpl();
+    private static CsvFileReaderService readClass = new CsvFileReaderServiceImpl();
+    private static FileToTransactionConverter convertClass = new FileToTransactionConverterImpl();
+    private static FruitsFromFile fruitClass = new FruitsFromFileImpl();
+    private static AmountOfFruitsFromFile amountClass = new AmountOfFruitsFromFileImpl();
+    private static FruitStorageWriter writeClass = new FruitStorageWriterImpl(fruitShopDao);
 
-        List<String> reading = readClass.reading(fromFileName);
+    public static void main(String[] args) {
+
+        List<String> reading = readClass.readFromFile(fromFileName);
         List<FruitTransaction> converted = convertClass.convert(reading);
-        List<String> fruits = fruitClass.getFruits(converted);
-        List<Integer> amounts = amountClass.getAmountInShop(fruits, converted);
-        writeClass.writing(toFileName);
+        List<String> fruits = fruitClass.getFruitsFromFile(converted);
+        List<Integer> amounts = amountClass.getAmountOfFruitsFromFile(fruits, converted);
+        for (int i = 0; i < fruits.size(); i++) {
+            fruitShopDao.addFruitAndQuantity(fruits.get(i), amounts.get(i));
+        }
+        writeClass.writeReportToFile(toFileName);
     }
 }

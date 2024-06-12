@@ -3,11 +3,11 @@ package core.basesyntax.db;
 import java.util.List;
 
 public interface FruitShopDao {
-    int storageSize();
+    int getStorageSize();//returns storage size
 
-    List<String> getKeyAndValue();
+    List<String> getAllFruitsWithQuantities();// give us all fruits and quantities
 
-    void put(String fruit, int quantity);
+    void addFruitAndQuantity(String fruit, int quantity);//adding fruits and quantities
 
-    void putOnlyFruits(String fruit);
+    void addFruitWithoutQuantity(String fruit);// adding fruits without quantities
 }
