@@ -2,17 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.db.FruitShopDaoImpl;
-import core.basesyntax.service.impl.AmountOfFruitsFromFileImpl;
-import core.basesyntax.service.impl.FileToTransactionConverterImpl;
-import core.basesyntax.service.impl.FruitsFromFileImpl;
-import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
-import core.basesyntax.service.impl.FruitStorageWriterImpl;
-import core.basesyntax.service.AmountOfFruitsFromFile;
-import core.basesyntax.service.FileToTransactionConverter;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitsFromFile;
+import core.basesyntax.service.AmountOfFruitsFromFile;
 import core.basesyntax.service.CsvFileReaderService;
+import core.basesyntax.service.FileToTransactionConverter;
 import core.basesyntax.service.FruitStorageWriter;
+import core.basesyntax.service.FruitsFromFile;
+import core.basesyntax.service.impl.AmountOfFruitsFromFileImpl;
+import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
+import core.basesyntax.service.impl.FileToTransactionConverterImpl;
+import core.basesyntax.service.impl.FruitStorageWriterImpl;
+import core.basesyntax.service.impl.FruitsFromFileImpl;
 import java.util.List;
 
 public class Main {

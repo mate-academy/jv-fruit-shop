@@ -6,6 +6,7 @@ import java.util.List;
 
 public class FruitShopDaoImpl implements FruitShopDao {
     private static int ZERO = 0;
+
     @Override
     public int getStorageSize() {
         return Storage.fruitStorage.size();

@@ -1,7 +1,5 @@
 package core.basesyntax.model;
 
-import core.basesyntax.service.CantWorkWithThisFileException;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
