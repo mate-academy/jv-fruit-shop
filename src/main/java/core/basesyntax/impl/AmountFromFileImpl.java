@@ -1,9 +1,8 @@
 package core.basesyntax.impl;
 
 import core.basesyntax.db.FruitShopDao;
-import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.AmountFromFile;
-
+import core.basesyntax.service.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 

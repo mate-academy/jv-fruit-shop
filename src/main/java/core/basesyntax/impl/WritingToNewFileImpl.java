@@ -1,9 +1,8 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.WritingToNewFile;
 import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.service.CantWorkWithThisFileException;
-
+import core.basesyntax.service.WritingToNewFile;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

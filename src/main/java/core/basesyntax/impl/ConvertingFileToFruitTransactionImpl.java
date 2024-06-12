@@ -1,8 +1,7 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.ConvertingFileToFruitTransaction;
-
+import core.basesyntax.service.FruitTransaction;
 import java.util.List;
 
 public class ConvertingFileToFruitTransactionImpl implements ConvertingFileToFruitTransaction {
