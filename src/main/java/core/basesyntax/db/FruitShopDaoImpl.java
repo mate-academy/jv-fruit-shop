@@ -1,11 +1,10 @@
 package core.basesyntax.db;
 
 import core.basesyntax.storage.Storage;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class FruitShopDaoImpl implements FruitShopDao{
+public class FruitShopDaoImpl implements FruitShopDao {
     @Override
     public int storageSize() {
         return Storage.fruitStorage.size();

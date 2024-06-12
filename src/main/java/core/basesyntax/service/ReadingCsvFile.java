@@ -1,10 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 public interface ReadingCsvFile {
-    List<String> reading(String FileName);
+    List<String> reading(String fileName);
 }

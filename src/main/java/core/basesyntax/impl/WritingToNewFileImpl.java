@@ -1,9 +1,8 @@
 package core.basesyntax.impl;
 
+import core.basesyntax.db.FruitShopDao;
 import core.basesyntax.service.CantWorkWithThisFileException;
 import core.basesyntax.service.WritingToNewFile;
-import core.basesyntax.db.FruitShopDao;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,8 +15,8 @@ public class WritingToNewFileImpl implements WritingToNewFile {
     }
 
     @Override
-    public void writing(String FileName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FileName))){
+    public void writing(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write("fruit,quantity");
             writer.newLine();
             for (int i = 0; i < fruitShopDao.storageSize(); i++) {

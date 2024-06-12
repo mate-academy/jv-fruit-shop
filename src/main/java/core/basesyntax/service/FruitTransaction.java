@@ -47,6 +47,7 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
         public static Operation fromCode(String operation) {
             String trim = operation.trim();
             for (Operation o : Operation.values()) {
