@@ -13,6 +13,5 @@ public class WriterImpl implements Writer {
         } catch (IOException e) {
             throw new RuntimeException("Can`t write data" + filePath);
         }
-
     }
 }

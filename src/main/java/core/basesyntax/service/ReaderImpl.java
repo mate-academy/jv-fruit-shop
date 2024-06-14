@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderImpl implements Reader {
+
     @Override
-    public List<String> read(String filePath) {
+    public List<String> readFile(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line;
