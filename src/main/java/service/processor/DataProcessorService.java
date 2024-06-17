@@ -4,6 +4,5 @@ import java.util.List;
 import model.FruitRecord;
 
 public interface DataProcessorService {
-    void processingData(List<FruitRecord> fruitRecords);
-
+    void processData(List<FruitRecord> fruitRecords);
 }

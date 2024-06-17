@@ -29,18 +29,18 @@ public class HelloWorld {
         FileReader fileReader = new FileReaderImpl();
         String[] lines = fileReader.readFile(PATH_TO_READ);
 
-        HashMap<FruitRecord.Type, TypeService> typeServiceMap = new HashMap<>();
-        typeServiceMap.put(FruitRecord.Type.BALANCE, new BalanceStrategy());
-        typeServiceMap.put(FruitRecord.Type.PURCHASE, new PurchaseStrategy());
-        typeServiceMap.put(FruitRecord.Type.RETURN, new ReturnStrategy());
-        typeServiceMap.put(FruitRecord.Type.SUPPLY, new SupplyStrategy());
+        HashMap<FruitRecord.Operation, TypeService> typeServiceMap = new HashMap<>();
+        typeServiceMap.put(FruitRecord.Operation.BALANCE, new BalanceStrategy());
+        typeServiceMap.put(FruitRecord.Operation.PURCHASE, new PurchaseStrategy());
+        typeServiceMap.put(FruitRecord.Operation.RETURN, new ReturnStrategy());
+        typeServiceMap.put(FruitRecord.Operation.SUPPLY, new SupplyStrategy());
         TypeStrategy typeStrategy = new TypeStrategyImpl(typeServiceMap);
 
         FruitRecordParser fruitRecordParser = new FruitRecordParserImpl();
-        List<FruitRecord> fruitRecords = fruitRecordParser.convertToObject(lines);
+        List<FruitRecord> fruitRecords = fruitRecordParser.parseFruitRecords(lines);
 
         DataProcessorService dataProcessorService = new DataProcessorServiceImpl(typeStrategy);
-        dataProcessorService.processingData(fruitRecords);
+        dataProcessorService.processData(fruitRecords);
 
         CreateReport createReport = new CreateReportImpl();
         String report = createReport.getReport();

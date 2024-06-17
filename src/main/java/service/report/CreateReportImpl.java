@@ -3,7 +3,6 @@ package service.report;
 import database.Storage;
 
 public class CreateReportImpl implements CreateReport {
-
     @Override
     public String getReport() {
         StringBuilder report = new StringBuilder();

@@ -4,5 +4,5 @@ import model.FruitRecord;
 import service.strategy.strategyimpl.TypeService;
 
 public interface TypeStrategy {
-    TypeService getType(FruitRecord.Type type);
+    TypeService getType(FruitRecord.Operation operation);
 }

@@ -12,9 +12,9 @@ public class DataProcessorServiceImpl implements DataProcessorService {
     }
 
     @Override
-    public void processingData(List<FruitRecord> fruitRecords) {
+    public void processData(List<FruitRecord> fruitRecords) {
         for (FruitRecord fruitRecord : fruitRecords) {
-            typeStrategy.getType(fruitRecord.getType()).calculation(fruitRecord);
+            typeStrategy.getType(fruitRecord.getOperation()).calculation(fruitRecord);
         }
     }
 }

@@ -5,21 +5,28 @@ import java.util.List;
 import model.FruitRecord;
 
 public class FruitRecordParserImpl implements FruitRecordParser {
+    private static final String SEPARATOR = ",";
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int EXPECTED_LENGTH = 3;
+
     @Override
-    public List<FruitRecord> convertToObject(String[] lines) {
+    public List<FruitRecord> parseFruitRecords(String[] lines) {
         List<FruitRecord> object = new ArrayList<>();
-        for (int i = 1; i < lines.length; i++) {
+        for (int i = ONE; i < lines.length; i++) {
             String line = lines[i];
-            String[] parts = line.split(",");
-            if (parts.length != 3) {
+            String[] split = line.split(SEPARATOR);
+            if (split.length != EXPECTED_LENGTH) {
                 throw new IllegalArgumentException("Invalid line format: " + line);
             }
-            FruitRecord.Type type = FruitRecord.Type.valueOfType(parts[0].trim().toUpperCase());
-            String fruit = parts[1].trim();
+            FruitRecord.Operation operation = FruitRecord.Operation
+                    .valueOfOperation(split[ZERO].trim().toUpperCase());
+            String fruit = split[ONE].trim();
             int quantity;
-            quantity = Integer.parseInt(parts[2]);
+            quantity = Integer.parseInt(split[TWO]);
 
-            FruitRecord record = new FruitRecord(type, fruit, quantity);
+            FruitRecord record = new FruitRecord(operation, fruit, quantity);
             object.add(record);
         }
         return object;
