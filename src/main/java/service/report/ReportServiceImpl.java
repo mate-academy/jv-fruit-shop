@@ -13,7 +13,7 @@ public class ReportServiceImpl implements ReportService {
         report.append(FRUIT).append(COMMA).append(QUANTITY).append(System.lineSeparator());
 
         Storage.storage.forEach((fruit, quantity) -> report
-                .append(fruit).append(",").append(quantity).append(System.lineSeparator()));
+                .append(fruit).append(COMMA).append(quantity).append(System.lineSeparator()));
         return report.toString();
     }
 }
