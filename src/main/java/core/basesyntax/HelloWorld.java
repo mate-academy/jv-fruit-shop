@@ -9,8 +9,8 @@ import service.processor.DataProcessorService;
 import service.processor.DataProcessorServiceImpl;
 import service.read.FileReader;
 import service.read.FileReaderImpl;
-import service.report.CreateReport;
-import service.report.CreateReportImpl;
+import service.report.ReportService;
+import service.report.ReportServiceImpl;
 import service.strategy.TypeStrategy;
 import service.strategy.TypeStrategyImpl;
 import service.strategy.strategyimpl.BalanceStrategy;
@@ -18,8 +18,8 @@ import service.strategy.strategyimpl.PurchaseStrategy;
 import service.strategy.strategyimpl.ReturnStrategy;
 import service.strategy.strategyimpl.SupplyStrategy;
 import service.strategy.strategyimpl.TypeService;
-import service.write.FileWrite;
-import service.write.FileWriteImpl;
+import service.write.FileWriterService;
+import service.write.FileWriterServiceImpl;
 
 public class HelloWorld {
     private static final String PATH_TO_READ = "src/main/resources/test.csv";
@@ -42,10 +42,10 @@ public class HelloWorld {
         DataProcessorService dataProcessorService = new DataProcessorServiceImpl(typeStrategy);
         dataProcessorService.processData(fruitRecords);
 
-        CreateReport createReport = new CreateReportImpl();
+        ReportService createReport = new ReportServiceImpl();
         String report = createReport.getReport();
 
-        FileWrite fileWrite = new FileWriteImpl();
+        FileWriterService fileWrite = new FileWriterServiceImpl();
         fileWrite.writeToFile(report, PATH_TO_WRITE);
     }
 }
