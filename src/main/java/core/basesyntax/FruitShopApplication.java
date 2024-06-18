@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.config.AppConfig;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.CsvFileReaderService;
@@ -10,34 +11,31 @@ import core.basesyntax.service.impl.CsvFileReaderServiceImpl;
 import core.basesyntax.service.impl.CsvFileWriterServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorServiceImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
-import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReturnOperation;
-import core.basesyntax.strategy.SupplyOperation;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class HelloWorld {
-    public static void main(String[] args) {
-        CsvFileReaderService csvFileReaderService = new CsvFileReaderServiceImpl();
-        CsvFileWriterService csvFileWriterService = new CsvFileWriterServiceImpl();
-        ReportGeneratorService reportGeneratorService = new ReportGeneratorServiceImpl();
+public class FruitShopApplication {
+    private final CsvFileReaderService csvFileReaderService;
+    private final CsvFileWriterService csvFileWriterService;
+    private final ReportGeneratorService reportGeneratorService;
+    private final ShopService shopService;
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+    public FruitShopApplication(AppConfig appConfig) {
+        csvFileReaderService = new CsvFileReaderServiceImpl();
+        csvFileWriterService = new CsvFileWriterServiceImpl();
+        reportGeneratorService = new ReportGeneratorServiceImpl();
 
-        ShopService shopService = new ShopServiceImpl(operationHandlers);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers =
+                appConfig.getOperationHandlers();
+        shopService = new ShopServiceImpl(operationHandlers);
+    }
 
+    public void run(String inputFilePath, String outputFilePath) {
         try {
-            List<String> inputReport = csvFileReaderService.readFromFile(
-                    "src/main/resources/reportToRead.csv");
+            List<String> inputReport = csvFileReaderService.readFromFile(inputFilePath);
             List<FruitTransaction> transactions = inputReport.stream()
                     .skip(1)
                     .map(line -> line.split(","))
@@ -52,7 +50,7 @@ public class HelloWorld {
 
             String resultingReport = reportGeneratorService.generateReport(Storage.getInventory());
 
-            csvFileWriterService.writeToFile(resultingReport, "src/main/resources/finalReport.csv");
+            csvFileWriterService.writeToFile(resultingReport, outputFilePath);
         } catch (IOException e) {
             throw new RuntimeException("Error reading or writing files", e);
         }

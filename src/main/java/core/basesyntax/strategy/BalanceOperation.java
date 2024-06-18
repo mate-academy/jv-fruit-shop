@@ -9,3 +9,4 @@ public class BalanceOperation implements OperationHandler {
         inventory.put(transaction.getFruit(), transaction.getQuantity());
     }
 }
+
