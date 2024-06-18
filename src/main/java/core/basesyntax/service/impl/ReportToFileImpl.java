@@ -1,5 +1,6 @@
-package core.basesyntax.reportservices;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.ReportToFile;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,7 +15,7 @@ public class ReportToFileImpl implements ReportToFile {
                 writer.println(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to write the report to file: " + fileName, e);
         }
     }
 }

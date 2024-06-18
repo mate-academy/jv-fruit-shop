@@ -1,5 +1,6 @@
-package core.basesyntax.dataservices;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.DataReader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class DataReaderImpl implements DataReader {
                 transactions.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Unable to read file: " + fileName, e);
         }
         return transactions;
     }

@@ -1,4 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.model;
+
+import core.basesyntax.strategy.Operation;
 
 public class FruitTransaction {
     private Operation operation;
@@ -35,10 +37,4 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public enum Operation {
-        BALANCE,
-        SUPPLY,
-        PURCHASE,
-        RETURN
-    }
 }
