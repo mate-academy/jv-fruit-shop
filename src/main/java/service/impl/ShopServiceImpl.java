@@ -7,7 +7,7 @@ import service.ShopService;
 import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -19,11 +19,12 @@ public class ShopServiceImpl implements ShopService {
             if (!Storage.reports.containsKey(transaction.getFruit())) {
                 Storage.reports.put(transaction.getFruit(), getHowManyHaveChanged(transaction));
             } else {
-                Storage.reports.put(transaction.getFruit(), getBalance(transaction)
-                        + getHowManyHaveChanged(transaction));
-            }
-            if (getBalance(transaction) < 0) {
-                throw new RuntimeException("The quantity is not enough to purchase");
+                if (getBalance(transaction) + getHowManyHaveChanged(transaction) >= 0) {
+                    Storage.reports.put(transaction.getFruit(), getBalance(transaction)
+                            + getHowManyHaveChanged(transaction));
+                } else {
+                    throw new RuntimeException("The quantity at shop is not enough to purchase");
+                }
             }
         }
     }

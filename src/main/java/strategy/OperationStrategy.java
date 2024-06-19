@@ -1,7 +1,7 @@
 package strategy;
 
-import model.FruitTransaction;
+import model.Operation;
 
 public interface OperationStrategy {
-    OperationHandler getOperationHandler(FruitTransaction.Operation operation);
+    OperationHandler getOperationHandler(Operation operation);
 }

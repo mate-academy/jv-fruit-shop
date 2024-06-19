@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
+import model.Operation;
 import service.DataConverter;
 import service.FileReader;
 import service.FileWriter;
@@ -30,11 +31,7 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<Operation, OperationHandler> operationHandlers = getMap();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl();
@@ -48,5 +45,14 @@ public class Main {
 
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, OUTPUT_FILE);
+    }
+
+    private static Map<Operation, OperationHandler> getMap() {
+        Map<Operation, OperationHandler> map = new HashMap<>();
+        map.put(Operation.BALANCE, new BalanceOperation());
+        map.put(Operation.PURCHASE, new PurchaseOperation());
+        map.put(Operation.RETURN, new ReturnOperation());
+        map.put(Operation.SUPPLY, new SupplyOperation());
+        return map;
     }
 }
