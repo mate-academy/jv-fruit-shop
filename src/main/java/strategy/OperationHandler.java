@@ -1,5 +1,7 @@
 package strategy;
 
+import model.FruitTransaction;
+
 public interface OperationHandler {
-    int apply(int quantity);
+    void apply(FruitTransaction transaction);
 }

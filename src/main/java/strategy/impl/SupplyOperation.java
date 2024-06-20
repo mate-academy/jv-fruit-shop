@@ -1,10 +1,21 @@
 package strategy.impl;
 
+import db.Storage;
+import model.FruitTransaction;
 import strategy.OperationHandler;
 
 public class SupplyOperation implements OperationHandler {
     @Override
-    public int apply(int quantity) {
-        return quantity;
+    public void apply(FruitTransaction transaction) {
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("The quantity for Supply Operation can't be negative = "
+                    + transaction.getQuantity());
+        }
+        Storage.reports.put(transaction.getFruit(),
+                getBalance(transaction) + transaction.getQuantity());
+    }
+
+    private int getBalance(FruitTransaction transaction) {
+        return Storage.reports.get(transaction.getFruit());
     }
 }
