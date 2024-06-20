@@ -11,6 +11,6 @@ public class SupplyOperation implements OperationHandler {
         if (quantity < 0) {
             throw new IllegalArgumentException("Invalid quantity: " + quantity);
         }
-        Storage.getFruits().merge(fruit, quantity, Integer::sum);
+        Storage.mergeFruitQuantity(fruit, quantity);
     }
 }

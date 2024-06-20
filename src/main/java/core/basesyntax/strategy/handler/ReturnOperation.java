@@ -8,7 +8,7 @@ public class ReturnOperation implements OperationHandler {
     public void process(FruitTransaction transaction) {
         int returnQuantity = transaction.getQuantity();
         if (returnQuantity >= 0) {
-            Storage.getFruits().merge(transaction.getFruitName(), returnQuantity, Integer::sum);
+            Storage.mergeFruitQuantity(transaction.getFruitName(), transaction.getQuantity());
         } else {
             throw new IllegalArgumentException("Invalid quantity: " + returnQuantity);
         }
