@@ -1,4 +1,4 @@
-package core.basesyntax.stategy.handler;
+package core.basesyntax.strategy.handler;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
@@ -11,6 +11,6 @@ public class SupplyOperation implements OperationHandler {
         if (quantity < 0) {
             throw new IllegalArgumentException("Invalid quantity: " + quantity);
         }
-        Storage.fruits.merge(fruit, quantity, Integer::sum);
+        Storage.getFruits().merge(fruit, quantity, Integer::sum);
     }
 }

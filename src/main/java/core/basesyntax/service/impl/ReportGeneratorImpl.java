@@ -1,4 +1,4 @@
-package core.basesyntax.service.serviceimpl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
@@ -12,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(TITLE).append(System.lineSeparator());
 
-        Storage.fruits.forEach(
+        Storage.getFruits().forEach(
                 (fruit, quantity) -> reportBuilder
                         .append(fruit)
                         .append(SEPARATOR)
