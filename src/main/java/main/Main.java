@@ -28,8 +28,8 @@ public class Main {
             = "src/main/resources/files/reportToRead.csv";
     public static final String REPORT_TO_WRITE
             = "src/main/resources/files/reportToWrite.csv";
+
     public static void main(String[] arg) {
-        // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(new File(REPORT_TO_READ));
 
@@ -51,6 +51,5 @@ public class Main {
 
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, new File(REPORT_TO_WRITE));
-        System.out.println(resultingReport);
     }
 }
