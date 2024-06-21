@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    // Use a private map to store the fruits
     private static final Map<String, Integer> fruits = new HashMap<>();
 
     public static Map<String, Integer> getFruits() {
@@ -26,4 +25,3 @@ public class Storage {
         fruits.merge(name, quantity, Integer::sum);
     }
 }
-

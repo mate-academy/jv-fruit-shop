@@ -8,11 +8,10 @@ public class PurchaseOperation implements OperationHandler {
     public void process(FruitTransaction transaction) {
         Integer fruitQuantity = Storage.getFruits().get(transaction.getFruitName());
         int purchaseQuantity = transaction.getQuantity();
-        if (purchaseQuantity > 0 && purchaseQuantity <= fruitQuantity) {
-            int updateQuantity = fruitQuantity - purchaseQuantity;
-            Storage.addFruit(transaction.getFruitName(), updateQuantity);
-        } else {
+        if (purchaseQuantity <= 0 && purchaseQuantity > fruitQuantity) {
             throw new IllegalArgumentException("Invalid quantity: " + purchaseQuantity);
         }
+        int updateQuantity = fruitQuantity - purchaseQuantity;
+        Storage.addFruit(transaction.getFruitName(), updateQuantity);
     }
 }
