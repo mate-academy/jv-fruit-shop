@@ -1,32 +1,42 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.errors.ErrorMessages;
 import core.basesyntax.model.Fruit;
 import java.util.List;
 
 public class FruitDaoImpl implements FruitDao {
     @Override
-    public void add(Fruit fruit) {
-        Storage.fruits.add(fruit);
+    public synchronized void add(Fruit fruit) {
+        Storage.addFruit(fruit);
     }
 
     @Override
-    public Fruit getFruitByName(String fruitName) {
-        return Storage.fruits.stream()
+    public synchronized Fruit getFruitByName(String fruitName) {
+        return Storage.getFruits().stream()
                 .filter(f -> f.getName().equals(fruitName))
                 .findFirst()
-                .orElseGet(() -> new Fruit(fruitName));
+                .orElseThrow(() -> new IllegalArgumentException(ErrorMessages.FRUIT_NOT_FOUND
+                        + fruitName));
     }
 
     @Override
     public List<Fruit> getAll() {
-        return Storage.fruits;
+        return Storage.getFruits();
     }
 
     @Override
-    public void update(Fruit fruit) {
-        Fruit fruitFromDb = getFruitByName(fruit.getName());
-        Storage.fruits.remove(fruitFromDb);
+    public synchronized void update(Fruit fruit) {
+        if (isPresent(fruit.getName())) {
+            Fruit fruitFromDb = getFruitByName(fruit.getName());
+            Storage.removeFruit(fruitFromDb);
+        }
         add(fruit);
+    }
+
+    @Override
+    public synchronized boolean isPresent(String fruitName) {
+        return Storage.getFruits().stream()
+                .anyMatch(f -> f.getName().equals(fruitName));
     }
 }

@@ -1,14 +1,16 @@
 package core.basesyntax.model;
 
+import core.basesyntax.errors.ErrorMessages;
+
 public class FruitTransaction {
-    private Operation operation;
+    private final Operation operation;
     private String fruit;
     private int quantity;
 
-    public FruitTransaction(String operation, String fruit, String quantity) {
-        this.operation = Operation.of(operation);
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
-        this.quantity = Integer.parseInt(quantity);
+        this.quantity = quantity;
     }
 
     public Operation getOperation() {
@@ -37,7 +39,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
@@ -53,7 +55,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new IllegalArgumentException("Invalid Operation code: " + code);
+            throw new IllegalArgumentException(ErrorMessages.INVALID_OPERATION_CODE + code);
         }
     }
 

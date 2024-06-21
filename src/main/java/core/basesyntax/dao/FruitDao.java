@@ -11,4 +11,6 @@ public interface FruitDao {
     List<Fruit> getAll();
 
     void update(Fruit fruit);
+
+    boolean isPresent(String fruitName);
 }
