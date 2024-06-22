@@ -18,22 +18,21 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> listOfFruitTransactions = new ArrayList<>();
         for (int i = FIRST_DATA_LINE; i < lines.size(); i++) {
             String[] strings = lines.get(i).split(REGEX);
-            if (strings.length == 3) {
-                listOfFruitTransactions.add(new FruitTransaction(getOperation(strings[TYPE]),
-                        strings[FRUIT], Integer.parseInt(strings[QUANTITY])));
-            } else {
+            if (strings.length != 3) {
                 throw new RuntimeException("The data in file don't separate by comma");
             }
+            listOfFruitTransactions.add(new FruitTransaction(getOperation(strings[TYPE]),
+                    strings[FRUIT], Integer.parseInt(strings[QUANTITY])));
         }
         return listOfFruitTransactions;
     }
 
-    private Operation getOperation(String string) {
+    private Operation getOperation(String code) {
         for (Operation operation : Operation.values()) {
-            if (operation.getCode().equals(string)) {
+            if (operation.getCode().equals(code)) {
                 return operation;
             }
         }
-        throw new RuntimeException("unknown operation \"" + string + "\" in source file");
+        throw new IllegalArgumentException("Unknown operation \"" + code + "\" in source file");
     }
 }

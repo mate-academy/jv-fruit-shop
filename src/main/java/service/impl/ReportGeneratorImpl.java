@@ -10,15 +10,15 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(FIRST_LINE_OF_REPORT).append(System.lineSeparator());
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(FIRST_LINE_OF_REPORT).append(System.lineSeparator());
 
         for (Map.Entry<String, Integer> pair : Storage.reports.entrySet()) {
-            stringBuilder.append(pair.getKey())
+            reportBuilder.append(pair.getKey())
                     .append(COMMA_SIGN)
                     .append(pair.getValue())
                     .append(System.lineSeparator());
         }
-        return stringBuilder.toString();
+        return reportBuilder.toString();
     }
 }

@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -48,11 +47,11 @@ public class Main {
     }
 
     private static Map<Operation, OperationHandler> getMap() {
-        Map<Operation, OperationHandler> map = new HashMap<>();
-        map.put(Operation.BALANCE, new BalanceOperation());
-        map.put(Operation.PURCHASE, new PurchaseOperation());
-        map.put(Operation.RETURN, new ReturnOperation());
-        map.put(Operation.SUPPLY, new SupplyOperation());
-        return map;
+        return Map.of(
+                Operation.BALANCE, new BalanceOperation(),
+                Operation.PURCHASE, new PurchaseOperation(),
+                Operation.RETURN, new ReturnOperation(),
+                Operation.SUPPLY, new SupplyOperation()
+        );
     }
 }

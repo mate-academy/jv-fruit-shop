@@ -12,14 +12,13 @@ public class PurchaseOperation implements OperationHandler {
                     + transaction.getQuantity());
         }
         int finalBalance = getBalance(transaction) - transaction.getQuantity();
-        if (finalBalance >= 0) {
-            Storage.reports.put(transaction.getFruit(),
-                    getBalance(transaction) - transaction.getQuantity());
-        } else {
+        if (finalBalance < 0) {
             throw new RuntimeException("It's not possible make purchase = "
                     + transaction.getQuantity()
                     + ", due insufficient balance = " + getBalance(transaction));
         }
+        Storage.reports.put(transaction.getFruit(),
+                getBalance(transaction) - transaction.getQuantity());
     }
 
     private int getBalance(FruitTransaction transaction) {
