@@ -58,5 +58,4 @@ public class FruitTransaction {
             throw new IllegalArgumentException(ErrorMessages.INVALID_OPERATION_CODE + code);
         }
     }
-
 }

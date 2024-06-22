@@ -14,7 +14,7 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public synchronized Fruit getFruitByName(String fruitName) {
         return Storage.getFruits().stream()
-                .filter(f -> f.getName().equals(fruitName))
+                .filter(fruit -> fruit.getName().equals(fruitName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessages.FRUIT_NOT_FOUND
                         + fruitName));
@@ -37,6 +37,6 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public synchronized boolean isPresent(String fruitName) {
         return Storage.getFruits().stream()
-                .anyMatch(f -> f.getName().equals(fruitName));
+                .anyMatch(fruit -> fruit.getName().equals(fruitName));
     }
 }
