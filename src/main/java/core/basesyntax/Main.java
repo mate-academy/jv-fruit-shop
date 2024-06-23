@@ -9,8 +9,9 @@ import core.basesyntax.service.TransactionParser;
 import core.basesyntax.service.TransactionParserImpl;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.WriterImpl;
-import core.basesyntax.strategy.TransactionProcessor;
+import core.basesyntax.strategy.TransactionProcessorImpl;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT = "src/main/resources/input.csv";
@@ -22,11 +23,9 @@ public class Main {
         ReportCreator reportCreator = new ReportCreatorImpl();
         String report = reportCreator.createReport();
         TransactionParser parser = new TransactionParserImpl();
-        List<FruitTransaction> dates = parser.parse(products);
-        TransactionProcessor transaction = new TransactionProcessor();
-        for (var data : dates) {
-            transaction.process(data);
-        }
+        List<FruitTransaction> transactions = parser.parse(products);
+        TransactionProcessorImpl processor = new TransactionProcessorImpl();
+        Map<String,Integer> fruits = processor.process(transactions);
         Writer writer = new WriterImpl();
         writer.writeReport(REPORT);
     }

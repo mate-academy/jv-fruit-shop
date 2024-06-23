@@ -1,29 +1,34 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class TransactionProcessor {
-    private Map<String, Integer> fruits;
+public class TransactionProcessorImpl implements TrabnsactionProcessor {
 
-    public void process(FruitTransaction transaction) {
-        if (transaction == null) {
+    @Override
+    public Map<String, Integer> process(List<FruitTransaction> transactions) {
+        if (transactions == null) {
             throw new RuntimeException("Transaction is null");
         }
-        String fruit = transaction.fruit();
-        int quantity = transaction.quantity();
-        switch (transaction.operation()) {
-            case BALANCE:
-                fruits.put(fruit, quantity);
-                break;
-            case SUPPLY, RETURN:
-                Storage.fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
-                break;
-            case PURCHASE:
-                Storage.fruits.put(fruit, fruits.getOrDefault(fruit, 0) - quantity);
-                break;
-            default:
+        Map<String, Integer> fruits = new HashMap<>();
+        for (FruitTransaction transaction : transactions) {
+            String fruit = transaction.fruit();
+            int quantity = transaction.quantity();
+            switch (transaction.operation()) {
+                case BALANCE:
+                    fruits.put(fruit, quantity);
+                    break;
+                case SUPPLY, RETURN:
+                    fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
+                    break;
+                case PURCHASE:
+                    fruits.put(fruit, fruits.getOrDefault(fruit, 0) - quantity);
+                    break;
+                default:
+            }
         }
+        return fruits;
     }
 }
