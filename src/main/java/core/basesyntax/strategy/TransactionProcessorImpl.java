@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TransactionProcessorImpl implements TrabnsactionProcessor {
+public class TransactionProcessorImpl implements TransactionProcessor {
 
     @Override
     public Map<String, Integer> process(List<FruitTransaction> transactions) {
