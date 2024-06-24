@@ -1,3 +1,7 @@
+package core.basesyntax.service.impl;
+
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
                 throw new IllegalArgumentException("Invalid data format: " + line);
             }
 
-            FruitTransaction.Operation operation = getOperation(parts[OPERATION_INDEX]);
+            FruitTransaction.Operation operation = FruitTransaction.Operation.getOperationByCode(parts[OPERATION_INDEX]);
             String fruit = parts[FRUIT_INDEX];
             int quantity;
             try {
@@ -32,14 +36,5 @@ public class DataConverterImpl implements DataConverter {
             transactions.add(transaction);
         }
         return transactions;
-    }
-
-    private FruitTransaction.Operation getOperation(String code) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Unknown operation: " + code);
     }
 }
