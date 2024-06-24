@@ -20,7 +20,8 @@ public class DataConverterImpl implements DataConverter {
                 throw new IllegalArgumentException("Invalid data format: " + line);
             }
 
-            FruitTransaction.Operation operation = FruitTransaction.Operation.getOperationByCode(parts[OPERATION_INDEX]);
+            FruitTransaction.Operation operation = FruitTransaction.Operation
+                    .getOperationByCode(parts[OPERATION_INDEX]);
             String fruit = parts[FRUIT_INDEX];
             int quantity;
             try {
