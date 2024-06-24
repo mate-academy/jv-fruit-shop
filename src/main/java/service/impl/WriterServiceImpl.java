@@ -3,7 +3,6 @@ package service.impl;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import service.WriterService;
 
 public class WriterServiceImpl implements WriterService {

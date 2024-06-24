@@ -22,6 +22,7 @@ public enum Operation {
         return Arrays.stream(Operation.values())
                 .filter(c -> c.getCode().equals(code))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No operation found for code: " + code));
+                .orElseThrow(() ->
+                        new IllegalArgumentException("No operation found for code: " + code));
     }
 }

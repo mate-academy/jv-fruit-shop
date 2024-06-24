@@ -10,7 +10,7 @@ public class Storage {
         fruitsStock.put(name, quantity);
     }
 
-    public static Map<String, Integer> readDb(){
+    public static Map<String, Integer> readDb() {
         return new HashMap<>(fruitsStock);
     }
 

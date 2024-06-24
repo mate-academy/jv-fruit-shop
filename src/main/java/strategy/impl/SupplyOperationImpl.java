@@ -5,11 +5,11 @@ import model.FruitTransaction;
 import strategy.OperationHandler;
 
 public class SupplyOperationImpl implements OperationHandler {
-    int MIN_QUANTITY = 0;
+    private static final int MINIMUM_QUANTITY = 0;
 
     @Override
     public void applyOperation(FruitTransaction transaction) {
-        if (transaction.getQuantity() <= MIN_QUANTITY) {
+        if (transaction.getQuantity() <= MINIMUM_QUANTITY) {
             throw new RuntimeException("Supplier must supply 1 or more items. But was: "
                     + transaction.getQuantity());
         }

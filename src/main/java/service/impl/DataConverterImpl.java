@@ -2,7 +2,6 @@ package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import model.FruitTransaction;
 import model.Operation;
 import service.DataConverter;
@@ -19,16 +18,18 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> convertedList = new ArrayList<>();
         for (int i = SKIP_TITLE_LINE; i < inputReport.size(); i++) {
             String[] data = inputReport.get(i).split(SPLIT_SYMBOL);
-            int quantity = 0;
+            int quantity;
             if (data.length != 3) {
                 throw new RuntimeException("The data in file don't separate by comma");
             }
             try {
                 quantity = Integer.parseInt(data[QUANTITY_INDEX]);
             } catch (NumberFormatException e) {
-                throw new RuntimeException("Quantity data is not valid. Actual: " + data[QUANTITY_INDEX], e);
+                throw new RuntimeException("Quantity data is not valid. Actual: "
+                        + data[QUANTITY_INDEX], e);
             }
-            convertedList.add(new FruitTransaction(Operation.getValueFromCode(data[OPERATION_INDEX]),
+            convertedList.add(
+                    new FruitTransaction(Operation.getValueFromCode(data[OPERATION_INDEX]),
                     data[FRUIT_NAME_INDEX],
                     quantity));
         }
