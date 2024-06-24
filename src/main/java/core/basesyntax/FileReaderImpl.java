@@ -1,3 +1,6 @@
+package core.basesyntax.util.impl;
+
+import core.basesyntax.util.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
