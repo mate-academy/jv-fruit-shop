@@ -1,3 +1,6 @@
+package core.basesyntax.util.impl;
+
+import core.basesyntax.util.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.logging.Level;
