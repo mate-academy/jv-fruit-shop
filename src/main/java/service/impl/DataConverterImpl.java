@@ -12,6 +12,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final int SKIP_TITLE_LINE = 1;
+    private static final int NUMBER_OF_COLUMNS = 3;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
@@ -19,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
         for (int i = SKIP_TITLE_LINE; i < inputReport.size(); i++) {
             String[] data = inputReport.get(i).split(SPLIT_SYMBOL);
             int quantity;
-            if (data.length != 3) {
+            if (data.length != NUMBER_OF_COLUMNS) {
                 throw new RuntimeException("The data in file don't separate by comma");
             }
             try {

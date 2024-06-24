@@ -31,11 +31,12 @@ public class Main {
         ReaderService fileReader = new ReaderServiceImpl();
         List<String> inputReport = fileReader.read(READ_FILE_PATH);
 
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperationImpl());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperationImpl());
-        operationHandlers.put(Operation.RETURN, new ReturnOperationImpl());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperationImpl());
+        Map<Operation, OperationHandler> operationHandlers = Map.of(
+                Operation.BALANCE, new BalanceOperationImpl(),
+                Operation.PURCHASE, new PurchaseOperationImpl(),
+                Operation.RETURN, new ReturnOperationImpl(),
+                Operation.SUPPLY, new SupplyOperationImpl()
+        );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl();
