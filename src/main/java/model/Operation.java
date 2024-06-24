@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package model;
 
 import java.util.Arrays;
 
@@ -21,6 +21,7 @@ public enum Operation {
     public static Operation getValueFromCode(String code) {
         return Arrays.stream(Operation.values())
                 .filter(c -> c.getCode().equals(code))
-                .findFirst().orElseThrow();
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("No operation found for code: " + code));
     }
 }

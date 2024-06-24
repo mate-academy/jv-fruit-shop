@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package service;
 
 public interface ReportGenerator {
     String getReport();

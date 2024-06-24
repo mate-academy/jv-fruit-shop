@@ -1,4 +1,4 @@
-package core.basesyntax.model;
+package model;
 
 public class FruitTransaction {
     private final Operation operation;
@@ -11,15 +11,15 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() {
+    public final Operation getOperation() {
         return operation;
     }
 
-    public String getFruitName() {
+    public final String getFruitName() {
         return fruitName;
     }
 
-    public int getQuantity() {
+    public final int getQuantity() {
         return quantity;
     }
 }

@@ -1,7 +1,7 @@
-package core.basesyntax.service;
+package service;
 
 import java.util.List;
 
-public interface ReaderFromCsv {
+public interface ReaderService {
     List<String> read(String filePath);
 }

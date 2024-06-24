@@ -1,13 +1,13 @@
-package core.basesyntax.service.impl;
+package service.impl;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.service.ReportGenerator;
+import db.Storage;
 import java.util.stream.Collectors;
+import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReport() {
-        return "fruit,quantity" + Storage.reports.entrySet().stream()
+        return "fruit,quantity" + Storage.readDb().entrySet().stream()
                 .map(entry -> String.format("%s%s,%d",
                         System.lineSeparator(),
                         entry.getKey(),

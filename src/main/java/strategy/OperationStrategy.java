@@ -1,6 +1,6 @@
-package core.basesyntax.strategy;
+package strategy;
 
-import core.basesyntax.model.Operation;
+import model.Operation;
 
 public interface OperationStrategy {
     OperationHandler get(Operation operation);

@@ -1,9 +1,9 @@
-package core.basesyntax.service.impl;
+package service.impl;
 
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
+import model.FruitTransaction;
+import service.ShopService;
+import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy strategy;
@@ -14,6 +14,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        transactions.forEach(t -> strategy.get(t.getOperation()).applyOperation(t));
+        transactions.forEach(transaction ->
+                strategy.get(transaction.getOperation()).applyOperation(transaction));
     }
 }
