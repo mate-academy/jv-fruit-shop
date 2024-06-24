@@ -8,7 +8,7 @@ public class Main {
         List<String> inputReport = fileReader.read("reportToRead.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         Map<String, Integer> fruitStorage = new HashMap<>();
