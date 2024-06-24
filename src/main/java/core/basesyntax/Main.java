@@ -12,10 +12,14 @@ public class Main {
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         Map<String, Integer> fruitStorage = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitStorage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitStorage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(fruitStorage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, 
+                new BalanceOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, 
+                new PurchaseOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN, 
+                new ReturnOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, 
+                new SupplyOperation(fruitStorage));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
