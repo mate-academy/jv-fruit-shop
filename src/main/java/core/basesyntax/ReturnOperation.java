@@ -10,6 +10,6 @@ public class ReturnOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         fruitStorage.put(transaction.getFruit(), 
-            fruitStorage.getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
+                fruitStorage.getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
     }
 }
