@@ -26,7 +26,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl(fruitStorage);
-        String resultingReport = reportGenerator.getReport();
+        String resultingReport = reportGenerator.createReport();
 
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
