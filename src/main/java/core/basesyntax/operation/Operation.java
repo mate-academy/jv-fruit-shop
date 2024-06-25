@@ -1,4 +1,4 @@
-package core.basesyntax.transaction;
+package core.basesyntax.operation;
 
 import java.util.Arrays;
 import java.util.Objects;

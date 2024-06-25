@@ -1,7 +1,7 @@
 package core.basesyntax.data;
 
+import core.basesyntax.operation.Operation;
 import core.basesyntax.transaction.FruitTransaction;
-import core.basesyntax.transaction.Operation;
 import java.util.Arrays;
 import java.util.List;
 

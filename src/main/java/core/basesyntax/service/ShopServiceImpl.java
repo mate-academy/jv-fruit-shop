@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.transaction.FruitTransaction;
-import core.basesyntax.transaction.OperationHandler;
-import core.basesyntax.transaction.OperationStrategy;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +36,10 @@ public class ShopServiceImpl implements ShopService {
                         operationHandler.execute(fruitQuantity, quantity);
                     }
                 });
+    }
 
+    @Override
+    public Map<String, Integer> getRepository() {
+        return repository;
     }
 }

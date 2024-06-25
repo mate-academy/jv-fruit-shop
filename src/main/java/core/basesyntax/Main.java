@@ -2,19 +2,23 @@ package core.basesyntax;
 
 import core.basesyntax.data.DataConverter;
 import core.basesyntax.data.DataConverterImpl;
+import core.basesyntax.operation.BalanceOperation;
+import core.basesyntax.operation.Operation;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.PurchaseOperation;
+import core.basesyntax.operation.SupplyOperation;
 import core.basesyntax.reader.FileReader;
 import core.basesyntax.reader.FileReaderImpl;
+import core.basesyntax.repoter.ReportGenerator;
+import core.basesyntax.repoter.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.transaction.BalanceOperation;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.transaction.FruitTransaction;
-import core.basesyntax.transaction.Operation;
-import core.basesyntax.transaction.OperationHandler;
-import core.basesyntax.transaction.OperationStrategy;
-import core.basesyntax.transaction.OperationStrategyImpl;
-import core.basesyntax.transaction.PurchaseOperation;
-import core.basesyntax.transaction.ReturnOperation;
-import core.basesyntax.transaction.SupplyOperation;
+import core.basesyntax.writer.FileWriter;
+import core.basesyntax.writer.FileWriterImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,11 +36,17 @@ public class Main {
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(Operation.RETURN, new BalanceOperation.ReturnOperation());
         operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         // 4. Process the incoming transactions with applicable OperationHandler implementations
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
+        // 5.Generate report based on the current Storage state
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String resultingReport = reportGenerator.getReport(shopService.getRepository());
+        // 6. Write the received report into the destination file
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, "finalReport.csv");
     }
 }
