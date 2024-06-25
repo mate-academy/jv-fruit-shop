@@ -1,8 +1,8 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
-import java.util.stream.Collectors;
 import core.basesyntax.service.ReportGenerator;
+import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override

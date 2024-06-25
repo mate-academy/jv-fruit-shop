@@ -1,7 +1,5 @@
 package core.basesyntax.main;
 
-import java.util.List;
-import java.util.Map;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
@@ -21,6 +19,8 @@ import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseOperationImpl;
 import core.basesyntax.strategy.impl.ReturnOperationImpl;
 import core.basesyntax.strategy.impl.SupplyOperationImpl;
+import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String READ_FILE_PATH = "src/main/resources/ReportToRead.csv";
