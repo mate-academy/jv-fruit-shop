@@ -11,14 +11,10 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
-        }
-
-        public String getCode() {
-            return code;
         }
 
         public static Operation fromCode(String code) {

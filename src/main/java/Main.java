@@ -35,7 +35,7 @@ public class Main {
         List<FruitTransaction> transactions = lines.stream()
                 .skip(1) // skip header line
                 .map(parser::parse)
-                .collect(Collectors.toList());
+                .toList();
 
         for (FruitTransaction transaction : transactions) {
             fruitService.applyTransaction(transaction);
