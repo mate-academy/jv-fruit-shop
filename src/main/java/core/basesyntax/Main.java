@@ -6,6 +6,7 @@ import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.Operation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
+import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
 import core.basesyntax.reader.FileReader;
 import core.basesyntax.reader.FileReaderImpl;
@@ -36,7 +37,7 @@ public class Main {
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(Operation.RETURN, new BalanceOperation.ReturnOperation());
+        operationHandlers.put(Operation.RETURN, new ReturnOperation());
         operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         // 4. Process the incoming transactions with applicable OperationHandler implementations
