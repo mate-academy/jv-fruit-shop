@@ -1,26 +1,26 @@
-package core.basesyntax;
+package core.basesyntax.main;
 
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import model.Operation;
-import service.DataConverter;
-import service.ReaderService;
-import service.ReportGenerator;
-import service.ShopService;
-import service.WriterService;
-import service.impl.DataConverterImpl;
-import service.impl.ReaderServiceImpl;
-import service.impl.ReportGeneratorImpl;
-import service.impl.ShopServiceImpl;
-import service.impl.WriterServiceImpl;
-import strategy.OperationHandler;
-import strategy.OperationStrategy;
-import strategy.impl.BalanceOperationImpl;
-import strategy.impl.OperationStrategyImpl;
-import strategy.impl.PurchaseOperationImpl;
-import strategy.impl.ReturnOperationImpl;
-import strategy.impl.SupplyOperationImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.ReaderService;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.WriterService;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.ReaderServiceImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
+import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.BalanceOperationImpl;
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
+import core.basesyntax.strategy.impl.PurchaseOperationImpl;
+import core.basesyntax.strategy.impl.ReturnOperationImpl;
+import core.basesyntax.strategy.impl.SupplyOperationImpl;
 
 public class Main {
     private static final String READ_FILE_PATH = "src/main/resources/ReportToRead.csv";

@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntax.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import model.FruitTransaction;
-import model.Operation;
-import service.DataConverter;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
     private static final String SPLIT_SYMBOL = ",";

@@ -1,8 +1,8 @@
-package strategy.impl;
+package core.basesyntax.strategy.impl;
 
-import db.Storage;
-import model.FruitTransaction;
-import strategy.OperationHandler;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.OperationHandler;
 
 public class SupplyOperationImpl implements OperationHandler {
     private static final int MINIMUM_QUANTITY = 0;
