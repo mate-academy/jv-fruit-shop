@@ -22,8 +22,7 @@ public enum Operation {
     public static Operation getOperation(String code) {
         return Arrays.stream(Operation.values())
                 .filter(operation -> Objects.equals(operation.code, code))
-                .distinct()
-                .min((o1, o2) -> 0)
+                .reduce((first, second) -> first)
                 .orElseThrow();
     }
 }
