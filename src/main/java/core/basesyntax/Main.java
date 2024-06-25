@@ -6,8 +6,15 @@ import core.basesyntax.reader.FileReader;
 import core.basesyntax.reader.FileReaderImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.transaction.*;
-
+import core.basesyntax.transaction.BalanceOperation;
+import core.basesyntax.transaction.FruitTransaction;
+import core.basesyntax.transaction.Operation;
+import core.basesyntax.transaction.OperationHandler;
+import core.basesyntax.transaction.OperationStrategy;
+import core.basesyntax.transaction.OperationStrategyImpl;
+import core.basesyntax.transaction.PurchaseOperation;
+import core.basesyntax.transaction.ReturnOperation;
+import core.basesyntax.transaction.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +27,7 @@ public class Main {
         List<String> inputReport = fileReader.read(filePathRead);
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         // 3. Create and feel the map with all OperationHandler implementations
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());

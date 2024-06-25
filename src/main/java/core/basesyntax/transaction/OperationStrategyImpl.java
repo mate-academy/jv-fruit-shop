@@ -1,7 +1,6 @@
 package core.basesyntax.transaction;
 
 import java.util.Map;
-import java.util.function.Predicate;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private Map<Operation, OperationHandler> operationHandlers;

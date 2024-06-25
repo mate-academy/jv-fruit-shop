@@ -1,15 +1,12 @@
 package core.basesyntax.service;
 
 import core.basesyntax.transaction.FruitTransaction;
-import core.basesyntax.transaction.Operation;
 import core.basesyntax.transaction.OperationHandler;
 import core.basesyntax.transaction.OperationStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
