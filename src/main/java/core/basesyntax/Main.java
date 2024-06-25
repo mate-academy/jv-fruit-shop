@@ -18,7 +18,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.transaction.FruitTransaction;
 import core.basesyntax.writer.FileWriter;
 import core.basesyntax.writer.FileWriterImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +26,7 @@ public class Main {
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         final String filePathRead = "reportToRead.csv";
+        final String filePathWrite = "finalReport.csv";
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(filePathRead);
         // 2. Convert the incoming data into FruitTransactions list
@@ -47,6 +47,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport(shopService.getRepository());
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, filePathWrite);
     }
 }

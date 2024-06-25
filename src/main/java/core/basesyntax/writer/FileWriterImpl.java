@@ -3,13 +3,11 @@ package core.basesyntax.writer;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.function.Consumer;
 
 public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String resultingReport, String filePath) {
-        try(BufferedWriter bufferedWriter =
+        try (BufferedWriter bufferedWriter =
                     new BufferedWriter(
                             new java.io.FileWriter(
                                     new File(filePath)
