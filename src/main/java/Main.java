@@ -20,14 +20,13 @@ import strategy.handlers.SupplyHandler;
 public class Main {
     public static void main(String[] args) {
         if (args.length < 2) {
-            throw new IllegalArgumentException("Please provide input and output file paths as arguments.");
+            throw new IllegalArgumentException("Please provide input and output file"
+                    + "paths as arguments.");
         }
 
         String inputFilePath = args[0];
-        String outputFilePath = args[1];
 
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         FruitTransactionParser parser = new FruitTransactionParserImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
@@ -53,6 +52,8 @@ public class Main {
                 .collect(Collectors.toList());
         report.add(0, "fruit,quantity"); // add header line
 
+        String outputFilePath = args[1];
+        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         writerService.writeToFile(outputFilePath, report);
     }
 }

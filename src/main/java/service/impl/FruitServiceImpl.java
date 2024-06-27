@@ -19,7 +19,8 @@ public class FruitServiceImpl implements FruitService {
         if (handler != null) {
             handler.apply(transaction);
         } else {
-            throw new RuntimeException("No handler found for operation: " + transaction.getOperation());
+            throw new RuntimeException("No handler found for operation: "
+                    + transaction.getOperation());
         }
     }
 
