@@ -7,6 +7,6 @@ import strategy.OperationHandler;
 public class SupplyHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        Storage.fruitStorage.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
+        Storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }

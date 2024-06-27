@@ -7,12 +7,11 @@ import strategy.OperationHandler;
 public class PurchaseHandler implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        String fruit = transaction.getFruit();
-        int currentQuantity = Storage.fruitStorage.getOrDefault(fruit, 0);
+        int currentQuantity = Storage.getFruitQuantity(transaction.getFruit());
         int newQuantity = currentQuantity - transaction.getQuantity();
         if (newQuantity < 0) {
-            throw new RuntimeException("Not enough " + fruit + " in stock to purchase.");
+            throw new RuntimeException("Not enough " + transaction.getFruit() + " in storage.");
         }
-        Storage.fruitStorage.put(fruit, newQuantity);
+        Storage.addFruit(transaction.getFruit(), -transaction.getQuantity());
     }
 }

@@ -1,4 +1,3 @@
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,15 @@ import strategy.handlers.SupplyHandler;
 
 public class Main {
     public static void main(String[] args) {
+        if (args.length < 2) {
+            throw new IllegalArgumentException("Please provide input and output file paths as arguments.");
+        }
+
+        String inputFilePath = args[0];
+        String outputFilePath = args[1];
+
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
+        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         FruitTransactionParser parser = new FruitTransactionParserImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
@@ -31,9 +38,8 @@ public class Main {
 
         FruitService fruitService = new FruitServiceImpl(operationHandlers);
 
-        List<String> lines = readerService.readFromFile("src/input.txt");
+        List<String> lines = readerService.readFromFile(inputFilePath);
         List<FruitTransaction> transactions = lines.stream()
-                .skip(1) // skip header line
                 .map(parser::parse)
                 .toList();
 
@@ -41,12 +47,12 @@ public class Main {
             fruitService.applyTransaction(transaction);
         }
 
-        List<String> report = Storage.fruitStorage.entrySet().stream()
+        Map<String, Integer> reportData = fruitService.getReportData();
+        List<String> report = reportData.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())
                 .collect(Collectors.toList());
         report.add(0, "fruit,quantity"); // add header line
 
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
-        writerService.writeToFile("src/output.txt", report);
+        writerService.writeToFile(outputFilePath, report);
     }
 }
