@@ -20,19 +20,18 @@ import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
-import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final File REPORT = new File("src/main/java/resources/reportToRead.csv");
-    private static final File FINAL_REPORT = new File("src/main/java/resources/finalReport.csv");
+    private static final String REPORT_PATH = "src/main/resources/reportToRead.csv";
+    private static final String FINAL_REPORT_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
         FruitDao fruitDao = new FruitDaoImpl();
         FileReaderService fileReader = new FileReaderServiceImpl();
-        List<String> inputReport = fileReader.read(REPORT);
+        List<String> inputReport = fileReader.read(REPORT_PATH);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE,
@@ -54,6 +53,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         FileWriterService fileWriter = new FileWriterServiceImpl();
-        fileWriter.write(resultingReport, FINAL_REPORT);
+        fileWriter.write(resultingReport, FINAL_REPORT_PATH);
     }
 }

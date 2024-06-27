@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterServiceImpl implements FileWriterService {
-
     @Override
-    public void write(String report, File finalReportFile) {
+    public void write(String report, String finalReportFilePath) {
+        File finalReportFile = new File(finalReportFilePath);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(finalReportFile))) {
             writer.write(report);
         } catch (IOException e) {

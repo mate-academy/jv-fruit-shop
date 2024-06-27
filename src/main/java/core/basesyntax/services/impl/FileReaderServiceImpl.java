@@ -7,11 +7,11 @@ import java.nio.file.Files;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-
     @Override
-    public List<String> read(File file) {
+    public List<String> read(String file) {
+        File filePath = new File(file);
         try {
-            return Files.readAllLines(file.toPath());
+            return Files.readAllLines(filePath.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can't read data from file - " + file, e);
         }
