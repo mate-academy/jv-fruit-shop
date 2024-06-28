@@ -18,4 +18,9 @@ public class FruitDaoImpl implements FruitDao {
     public void add(String name, Integer quantity) {
         Storage.fruitsStorage.put(name, quantity);
     }
+
+    @Override
+    public void update(String name, Integer quantity) {
+        Storage.fruitsStorage.put(name, quantity);
+    }
 }

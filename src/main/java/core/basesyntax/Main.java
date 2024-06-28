@@ -20,7 +20,6 @@ import core.basesyntax.strategy.handler.OperationHandler;
 import core.basesyntax.strategy.handler.PurchaseOperationHandler;
 import core.basesyntax.strategy.handler.ReturnOperationHandler;
 import core.basesyntax.strategy.handler.SupplyOperationHandler;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,16 +32,7 @@ public class Main {
         FileReaderService fileReader = new FileReaderServiceImpl();
         List<String> inputReport = fileReader.read(REPORT_PATH);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(fruitDao));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(fruitDao));
-        operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(fruitDao));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler(fruitDao));
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        OperationStrategy operationStrategy = getOperationStrategy(fruitDao);
 
         DataConverterService dataConverter = new DataConverterServiceImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -54,5 +44,15 @@ public class Main {
 
         FileWriterService fileWriter = new FileWriterServiceImpl();
         fileWriter.write(resultingReport, FINAL_REPORT_PATH);
+    }
+
+    private static OperationStrategy getOperationStrategy(FruitDao fruitDao) {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map
+                .of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(fruitDao),
+                        FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(fruitDao),
+                        FruitTransaction.Operation.RETURN, new ReturnOperationHandler(fruitDao),
+                        FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(fruitDao));
+
+        return new OperationStrategyImpl(operationHandlers);
     }
 }

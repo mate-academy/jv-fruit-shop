@@ -17,6 +17,6 @@ public class ReturnOperationHandler implements OperationHandler {
         if (purchaseQuantity < 0) {
             throw new IllegalArgumentException("Invalid return quantity - " + purchaseQuantity);
         }
-        fruitDao.getStorage().put(transaction.getFruit(), currentQuantity + purchaseQuantity);
+        fruitDao.update(transaction.getFruit(), currentQuantity + purchaseQuantity);
     }
 }

@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public class FruitTransaction {
     private final Operation operation;
     private final String fruit;
@@ -37,6 +39,15 @@ public class FruitTransaction {
 
         public String getOperation() {
             return operation;
+        }
+
+        public static FruitTransaction.Operation getOperationByValue(String operation) {
+            return Arrays.stream(Operation.values())
+                    .filter(it -> it.getOperation().equals(operation))
+                    .findFirst()
+                    .orElseThrow(
+                            () -> new IllegalArgumentException(
+                                    "Invalid value of Operation - " + operation));
         }
     }
 }

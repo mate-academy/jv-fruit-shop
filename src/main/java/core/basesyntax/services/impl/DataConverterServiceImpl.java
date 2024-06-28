@@ -19,12 +19,9 @@ public class DataConverterServiceImpl implements DataConverterService {
             String fruitOperation = fruitInfo[FRUIT_OPERATION_INDEX].trim();
             String fruitName = fruitInfo[FRUIT_NAME_INDEX];
             int fruitQuantity = Integer.parseInt(fruitInfo[FRUIT_QUANTITY_INDEX]);
-            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-                if (operation.getOperation().equals(fruitOperation)) {
-                    fruitTransactions.add(
-                            new FruitTransaction(operation, fruitName, fruitQuantity));
-                }
-            }
+            FruitTransaction.Operation operation = FruitTransaction.Operation
+                    .getOperationByValue(fruitOperation);
+            fruitTransactions.add(new FruitTransaction(operation, fruitName, fruitQuantity));
         }
         return fruitTransactions;
     }

@@ -8,4 +8,6 @@ public interface FruitDao {
     Integer get(String key);
 
     void add(String name, Integer quantity);
+
+    void update(String name, Integer quantity);
 }

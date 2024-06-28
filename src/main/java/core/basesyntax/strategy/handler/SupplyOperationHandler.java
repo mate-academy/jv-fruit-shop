@@ -17,6 +17,6 @@ public class SupplyOperationHandler implements OperationHandler {
         if (purchaseQuantity < 0) {
             throw new IllegalArgumentException("Invalid supply quantity - " + purchaseQuantity);
         }
-        fruitDao.getStorage().put(transaction.getFruit(), currentQuantity + purchaseQuantity);
+        fruitDao.update(transaction.getFruit(), currentQuantity + purchaseQuantity);
     }
 }

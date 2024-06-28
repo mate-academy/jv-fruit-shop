@@ -17,6 +17,6 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (purchaseQuantity <= 0 && purchaseQuantity > currentQuantity) {
             throw new IllegalArgumentException("Invalid purchase quantity - " + purchaseQuantity);
         }
-        fruitDao.getStorage().put(transaction.getFruit(), currentQuantity - purchaseQuantity);
+        fruitDao.update(transaction.getFruit(), currentQuantity - purchaseQuantity);
     }
 }
