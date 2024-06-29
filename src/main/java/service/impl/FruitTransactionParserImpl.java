@@ -1,9 +1,8 @@
 package service.impl;
 
+import java.util.List;
 import model.FruitTransaction;
 import service.FruitTransactionParser;
-
-import java.util.List;
 
 public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
@@ -21,7 +20,8 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
         try {
             operation = FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid operation code: " + parts[OPERATION_INDEX], e);
+            throw new IllegalArgumentException("Invalid operation code: "
+                    + parts[OPERATION_INDEX], e);
         }
 
         String fruit = parts[FRUIT_INDEX];

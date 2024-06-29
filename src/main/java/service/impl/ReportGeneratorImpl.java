@@ -1,10 +1,9 @@
 package service.impl;
 
-import service.ReportGenerator;
-
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override

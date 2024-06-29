@@ -1,7 +1,5 @@
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.CsvFileReaderService;
 import service.CsvFileWriterService;
@@ -24,7 +22,8 @@ public class Main {
 
     public static void main(String[] args) {
         if (args.length != 2) {
-            throw new IllegalArgumentException("Please provide input and output file paths as arguments.");
+            throw new IllegalArgumentException("Please provide input and "
+                    + "output file paths as arguments.");
         }
 
         String inputFilePath = args[0];

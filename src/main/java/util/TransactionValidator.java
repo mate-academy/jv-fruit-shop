@@ -1,6 +1,7 @@
 package util;
 
 import model.FruitTransaction;
+
 public class TransactionValidator {
     public static void validate(FruitTransaction transaction) {
         if (transaction == null) {

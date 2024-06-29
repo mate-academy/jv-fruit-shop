@@ -11,7 +11,8 @@ public class PurchaseHandler implements OperationHandler {
         TransactionValidator.validate(transaction);
         int currentQuantity = Storage.getFruitQuantity(transaction.getFruit());
         if (currentQuantity < transaction.getQuantity()) {
-            throw new IllegalArgumentException("Not enough fruit in stock to complete the purchase");
+            throw new IllegalArgumentException("Not enough fruit in stock to "
+                    + "complete the purchase");
         }
         Storage.addFruit(transaction.getFruit(), -transaction.getQuantity());
     }
