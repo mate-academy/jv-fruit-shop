@@ -26,6 +26,7 @@ import java.util.Map;
 
 public class Main {
     private static final String FILE_READ_SRC = "reportToRead.csv";
+    private static final String FILE_WRITE_SRC = "finalReport.csv";
 
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
@@ -49,6 +50,6 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(repository.selectAll());
         Writer fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, FILE_WRITE_SRC);
     }
 }
