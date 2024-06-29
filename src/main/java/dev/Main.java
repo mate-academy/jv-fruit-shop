@@ -8,11 +8,14 @@ import dev.service.OperationStrategy;
 import dev.service.OperationStrategyImpl;
 import dev.service.ShopService;
 import dev.service.ShopServiceImpl;
-import dev.service.operation.*;
+import dev.service.operation.BalanceOperation;
+import dev.service.operation.OperationHandler;
+import dev.service.operation.PurchaseOperation;
+import dev.service.operation.ReturnOperation;
+import dev.service.operation.SupplyOperation;
 import dev.transaction.DataConverter;
 import dev.transaction.DataConverterImpl;
 import dev.transaction.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +29,7 @@ public class Main {
         List<String> inputReport = reader.read(FILE_READ_SRC);
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
