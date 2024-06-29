@@ -3,19 +3,12 @@ package strategy.handlers;
 import db.Storage;
 import model.FruitTransaction;
 import strategy.OperationHandler;
+import util.TransactionValidator;
 
 public class BalanceHandler implements OperationHandler {
-
     @Override
     public void apply(FruitTransaction transaction) {
-        validateTransaction(transaction);
+        TransactionValidator.validate(transaction);
         Storage.addFruit(transaction.getFruit(), transaction.getQuantity());
-    }
-
-    private void validateTransaction(FruitTransaction transaction) {
-        if (transaction.getQuantity() < 0) {
-            throw new IllegalArgumentException("Quantity cannot be negative: "
-                    + transaction.getQuantity());
-        }
     }
 }
