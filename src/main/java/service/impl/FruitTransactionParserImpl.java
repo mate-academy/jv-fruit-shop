@@ -3,34 +3,43 @@ package service.impl;
 import model.FruitTransaction;
 import service.FruitTransactionParser;
 
+import java.util.List;
+
 public class FruitTransactionParserImpl implements FruitTransactionParser {
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public FruitTransaction parse(String line) {
-        if (line == null || line.trim().isEmpty()) {
-            throw new IllegalArgumentException("Input line cannot be null or empty");
-        }
-
         String[] parts = line.split(",");
         if (parts.length != 3) {
-            throw new IllegalArgumentException("Invalid line format: " + line);
+            throw new IllegalArgumentException("Invalid transaction format: " + line);
         }
 
         FruitTransaction.Operation operation;
         try {
-            operation = FruitTransaction.Operation.fromCode(parts[0]);
+            operation = FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid operation code: " + parts[0], e);
+            throw new IllegalArgumentException("Invalid operation code: " + parts[OPERATION_INDEX], e);
         }
 
-        String fruit = parts[1];
+        String fruit = parts[FRUIT_INDEX];
         int quantity;
         try {
-            quantity = Integer.parseInt(parts[2]);
+            quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid quantity value: " + parts[2], e);
+            throw new IllegalArgumentException("Invalid quantity: " + parts[QUANTITY_INDEX], e);
         }
 
         return new FruitTransaction(operation, fruit, quantity);
+    }
+
+    @Override
+    public List<FruitTransaction> parseLines(List<String> lines) {
+        return lines.stream()
+                .skip(1) // skip header line
+                .map(this::parse)
+                .toList();
     }
 }
