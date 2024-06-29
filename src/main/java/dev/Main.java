@@ -2,6 +2,8 @@ package dev;
 
 import dev.input.FileReaderImpl;
 import dev.input.Reader;
+import dev.output.FileWriterImpl;
+import dev.output.Writer;
 import dev.report.ReportGenerator;
 import dev.report.ReportGeneratorImpl;
 import dev.repository.Repository;
@@ -46,5 +48,7 @@ public class Main {
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(repository.selectAll());
+        Writer fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, "finalReport.csv");
     }
 }
