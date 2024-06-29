@@ -2,6 +2,8 @@ package dev;
 
 import dev.input.FileReaderImpl;
 import dev.input.Reader;
+import dev.report.ReportGenerator;
+import dev.report.ReportGeneratorImpl;
 import dev.repository.Repository;
 import dev.repository.RepositoryImp;
 import dev.service.OperationStrategy;
@@ -41,5 +43,8 @@ public class Main {
         Repository repository = new RepositoryImp();
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions, repository);
+        // 5.Generate report based on the current Storage state
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String resultingReport = reportGenerator.getReport(repository.selectAll());
     }
 }

@@ -4,14 +4,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RepositoryImp implements Repository {
-    private Map<String, Integer> store;
+    private final Map<String, Integer> store;
 
     public RepositoryImp() {
         store = new HashMap<>();
     }
 
+    public Map<String, Integer> selectAll() {
+        return store;
+    }
+
     @Override
-    public Integer readQuantity(String fruitKey) {
+    public Integer selectQuantity(String fruitKey) {
         Integer quantity = store.get(fruitKey);
         return quantity != null ? quantity : 0;
     }
