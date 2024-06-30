@@ -3,21 +3,22 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
+import core.basesyntax.serviceimpl.FruitTransactionValidatorImpl;
 import java.util.Optional;
 
 public class ReturnOperationHandler implements OperationHandler {
+    private FruitTransactionValidatorImpl validator;
+
     @Override
     public void apply(FruitTransaction fruitTransaction) {
-        if (fruitTransaction == null) {
-            throw new IllegalArgumentException("FruitTransaction cannot be null");
-        }
+        validator.validateOperation(fruitTransaction);
         String fruit = fruitTransaction.getFruit();
-        if (fruit == null || fruit.isEmpty()) {
-            throw new IllegalArgumentException("Fruit cannot be null or empty");
-        }
+        validator.validateFruit(fruit);
         int amountToReturn = fruitTransaction.getQuantity();
+        validator.validateAmount(amountToReturn, FruitTransaction.Operation.RETURN);
+
         Optional<Integer> currentBalance = Optional.ofNullable(Storage.fruitStorage.get(fruit));
         int balanceAfterReturn = currentBalance.orElse(0) + amountToReturn;
-        Storage.fruitStorage.put(fruit,balanceAfterReturn);
+        Storage.fruitStorage.put(fruit, balanceAfterReturn);
     }
 }

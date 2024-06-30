@@ -7,7 +7,7 @@ import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.WriterService;
-import core.basesyntax.serviceimpl.DataConverterImpl;
+import core.basesyntax.serviceimpl.CsvToFruitTransactionConverter;
 import core.basesyntax.serviceimpl.ReaderServiceImpl;
 import core.basesyntax.serviceimpl.ReportGeneratorImpl;
 import core.basesyntax.serviceimpl.ShopServiceImpl;
@@ -18,7 +18,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperationHandler;
 import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -29,15 +28,17 @@ public class Main {
         List<String> inputReport = readerService.readFromFile("src/main/java/resources/input.csv");
 
         // 2. Convert the incoming data into FruitTransactions list
-        DataConverter<List<String>, List<FruitTransaction>> dataConverter = new DataConverterImpl();
+        DataConverter<List<String>,
+                List<FruitTransaction>> dataConverter = new CsvToFruitTransactionConverter();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         // 3. Create and fill the map with all OperationHandler implementations
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        Map<FruitTransaction.Operation,
+                OperationHandler> operationHandlers = Map
+                .of(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations

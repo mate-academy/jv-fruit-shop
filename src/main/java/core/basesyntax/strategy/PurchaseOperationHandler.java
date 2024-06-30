@@ -3,28 +3,26 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
+import core.basesyntax.serviceimpl.FruitTransactionValidatorImpl;
 import java.util.Optional;
 
 public class PurchaseOperationHandler implements OperationHandler {
+    private FruitTransactionValidatorImpl validator;
+
     @Override
     public void apply(FruitTransaction fruitTransaction) {
-        if (fruitTransaction == null) {
-            throw new IllegalArgumentException("FruitTransaction cannot be null");
-        }
+        validator.validateOperation(fruitTransaction);
         String fruit = fruitTransaction.getFruit();
-        if (fruit == null || fruit.isEmpty()) {
-            throw new IllegalArgumentException("Fruit cannot be null or empty");
-        }
+        validator.validateFruit(fruit);
         int amountToPurchase = fruitTransaction.getQuantity();
-        if (amountToPurchase <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than zero");
-        }
+        validator.validateAmount(amountToPurchase, FruitTransaction.Operation.PURCHASE);
+
         Optional<Integer> currentBalance = Optional.ofNullable(Storage.fruitStorage.get(fruit));
         int balanceAfterPurchase = currentBalance.orElse(0) - amountToPurchase;
-        if (balanceAfterPurchase != 0) {
-            Storage.fruitStorage.put(fruit,balanceAfterPurchase);
-        } else {
-            throw new RuntimeException("Item " + fruit + " is out of stock");
+
+        if (balanceAfterPurchase < 0) {
+            throw new RuntimeException("Insufficient stock for item " + fruit);
         }
+        Storage.fruitStorage.put(fruit, balanceAfterPurchase);
     }
 }
