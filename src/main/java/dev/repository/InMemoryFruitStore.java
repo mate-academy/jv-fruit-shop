@@ -3,10 +3,10 @@ package dev.repository;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RepositoryImp implements Repository {
+public class InMemoryFruitStore implements FruitStore {
     private final Map<String, Integer> store;
 
-    public RepositoryImp() {
+    public InMemoryFruitStore() {
         store = new HashMap<>();
     }
 

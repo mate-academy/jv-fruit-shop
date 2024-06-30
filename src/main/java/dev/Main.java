@@ -6,8 +6,8 @@ import dev.output.FileWriterImpl;
 import dev.output.Writer;
 import dev.report.ReportGenerator;
 import dev.report.ReportGeneratorImpl;
-import dev.repository.Repository;
-import dev.repository.RepositoryImp;
+import dev.repository.FruitStore;
+import dev.repository.InMemoryFruitStore;
 import dev.service.OperationStrategy;
 import dev.service.OperationStrategyImpl;
 import dev.service.ShopService;
@@ -43,7 +43,7 @@ public class Main {
         );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        Repository repository = new RepositoryImp();
+        FruitStore repository = new InMemoryFruitStore();
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions, repository);
         // 5.Generate report based on the current Storage state

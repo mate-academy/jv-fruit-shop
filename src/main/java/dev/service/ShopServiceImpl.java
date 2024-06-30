@@ -1,6 +1,6 @@
 package dev.service;
 
-import dev.repository.Repository;
+import dev.repository.FruitStore;
 import dev.service.operation.OperationHandler;
 import dev.transaction.FruitTransaction;
 import java.util.List;
@@ -13,7 +13,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void process(List<FruitTransaction> transactions, Repository repository) {
+    public void process(List<FruitTransaction> transactions, FruitStore repository) {
         transactions
                 .forEach(fruitTransaction -> {
                     String fruit = fruitTransaction.getFruit();

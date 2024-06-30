@@ -1,9 +1,9 @@
 package dev.service;
 
-import dev.repository.Repository;
+import dev.repository.FruitStore;
 import dev.transaction.FruitTransaction;
 import java.util.List;
 
 public interface ShopService {
-    void process(List<FruitTransaction> transactions, Repository repository);
+    void process(List<FruitTransaction> transactions, FruitStore repository);
 }

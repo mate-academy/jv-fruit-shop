@@ -1,7 +1,7 @@
 package dev.service.operation;
 
-import dev.repository.Repository;
+import dev.repository.FruitStore;
 
 public interface OperationHandler {
-    void update(Repository repository, String keyFruit, Integer value);
+    void update(FruitStore repository, String keyFruit, Integer value);
 }

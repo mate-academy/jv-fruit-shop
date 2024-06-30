@@ -9,11 +9,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     public ReportGeneratorImpl() {
         stringBuilder = new StringBuilder();
-        stringBuilder.append(HEADER);
     }
 
     @Override
     public String getReport(Map<String, Integer> store) {
+        stringBuilder.append(HEADER);
         store.forEach((key, value) -> stringBuilder.append(System.lineSeparator())
                 .append(key)
                 .append(DEFAULT_DELIMETER)

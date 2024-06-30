@@ -2,7 +2,7 @@ package dev.repository;
 
 import java.util.Map;
 
-public interface Repository {
+public interface FruitStore {
     Integer selectQuantity(String fruitKey);
 
     void updateQuantity(String fruitKey, int newQuantity);
