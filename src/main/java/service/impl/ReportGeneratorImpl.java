@@ -6,10 +6,13 @@ import java.util.stream.Collectors;
 import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    @Override
+    private static final String REPORT_HEADER = "fruit,quantity";
+
     public List<String> generateReport(Map<String, Integer> reportData) {
-        return reportData.entrySet().stream()
+        List<String> report = reportData.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue())
                 .collect(Collectors.toList());
+        report.add(0, REPORT_HEADER); // Add header line
+        return report;
     }
 }

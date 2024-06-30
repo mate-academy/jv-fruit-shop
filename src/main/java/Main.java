@@ -18,7 +18,8 @@ import strategy.handlers.ReturnHandler;
 import strategy.handlers.SupplyHandler;
 
 public class Main {
-    private static final String REPORT_HEADER = "fruit,quantity";
+    private static final int INPUT_FILE_PATH_ARG_INDEX = 0;
+    private static final int OUTPUT_FILE_PATH_ARG_INDEX = 1;
 
     public static void main(String[] args) {
         if (args.length != 2) {
@@ -26,13 +27,13 @@ public class Main {
                     + "output file paths as arguments.");
         }
 
-        String inputFilePath = args[0];
-        String outputFilePath = args[1];
+        String inputFilePath = args[INPUT_FILE_PATH_ARG_INDEX];
+        String outputFilePath = args[OUTPUT_FILE_PATH_ARG_INDEX];
 
         CsvFileReaderService readerService = new CsvFileReaderServiceImpl();
-        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
         FruitTransactionParser parser = new FruitTransactionParserImpl();
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        CsvFileWriterService writerService = new CsvFileWriterServiceImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceHandler(),
@@ -49,8 +50,6 @@ public class Main {
         fruitService.applyTransactions(transactions);
 
         List<String> report = reportGenerator.generateReport(fruitService.getReportData());
-        report.add(0, REPORT_HEADER);
-
         writerService.writeToFile(outputFilePath, report);
     }
 }
