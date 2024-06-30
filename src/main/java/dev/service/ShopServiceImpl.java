@@ -17,12 +17,10 @@ public class ShopServiceImpl implements ShopService {
         transactions
                 .forEach(fruitTransaction -> {
                     String fruit = fruitTransaction.getFruit();
-                    Integer before = repository.selectQuantity(fruit);
                     Integer add = fruitTransaction.getQuantity();
                     OperationHandler operationHandler = operationStrategy
                             .toOperationHandler(fruitTransaction.getOperation());
-                    Integer now = operationHandler.update(before, add);
-                    repository.updateQuantity(fruit, now);
+                    operationHandler.update(repository, fruit, add);
                 });
     }
 }
