@@ -8,10 +8,11 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String SEPARATOR = ",";
 
     @Override
     public FruitTransaction parse(String line) {
-        String[] parts = line.split(",");
+        String[] parts = line.split(SEPARATOR);
         if (parts.length != 3) {
             throw new IllegalArgumentException("Invalid transaction format: " + line);
         }
@@ -21,7 +22,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
             operation = FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("Invalid operation code: "
-                    + parts[OPERATION_INDEX], e);
+                        + parts[OPERATION_INDEX], e);
         }
 
         String fruit = parts[FRUIT_INDEX];

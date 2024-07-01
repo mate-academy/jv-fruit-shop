@@ -7,7 +7,7 @@ public class Storage {
     private static final Map<String, Integer> fruitStorage = new HashMap<>();
 
     public static void addFruit(String fruit, int quantity) {
-        fruitStorage.put(fruit, fruitStorage.getOrDefault(fruit, 0) + quantity);
+        fruitStorage.merge(fruit, quantity, Integer::sum);
     }
 
     public static int getFruitQuantity(String fruit) {
@@ -16,9 +16,5 @@ public class Storage {
 
     public static Map<String, Integer> getFruitStorage() {
         return new HashMap<>(fruitStorage);
-    }
-
-    public static void clear() {
-        fruitStorage.clear();
     }
 }
