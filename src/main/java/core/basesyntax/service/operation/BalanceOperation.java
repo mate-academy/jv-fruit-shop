@@ -12,9 +12,13 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void recount(FruitTransaction transaction) {
-        if (transaction.getQuantity() < 0) {
+        if (isNegative(transaction.getQuantity())) {
             throw new RuntimeException("Quantity can't be less than 0.");
         }
         fruitTransactionDao.add(transaction.getFruit(), transaction.getQuantity());
+    }
+
+    private boolean isNegative(int num) {
+        return num < 0;
     }
 }

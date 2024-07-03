@@ -1,9 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
-
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
@@ -15,8 +13,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        for(FruitTransaction transaction : transactions) {
-            OperationHandler operationHandler = operationStrategy.getOperationHandler(transaction.getOperation());
+        for (FruitTransaction transaction : transactions) {
+            OperationHandler operationHandler = operationStrategy.getOperationHandler(
+                    transaction.getOperation());
             operationHandler.recount(transaction);
         }
     }

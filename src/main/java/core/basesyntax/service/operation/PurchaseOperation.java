@@ -9,13 +9,18 @@ public class PurchaseOperation implements OperationHandler {
     public PurchaseOperation(FruitTransactionDao fruitTransactionDao) {
         this.fruitTransactionDao = fruitTransactionDao;
     }
+
     @Override
     public void recount(FruitTransaction transaction) {
-        if (transaction.getQuantity() < 0) {
+        if (isNegative(transaction.getQuantity())) {
             throw new RuntimeException("Quantity can't be less than 0.");
         }
-        int currentQuantity = fruitTransactionDao.get(transaction.getFruit());
+        int currentQuantity = fruitTransactionDao.getQuantity(transaction.getFruit());
         currentQuantity -= transaction.getQuantity();
         fruitTransactionDao.update(transaction.getFruit(), currentQuantity);
+    }
+
+    private boolean isNegative(int num) {
+        return num < 0;
     }
 }
