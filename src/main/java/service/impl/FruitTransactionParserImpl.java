@@ -9,11 +9,13 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
+    private static final long OFFSET = 1;
+    private static final int NUMBER_OF_INPUT_PARTS = 3;
 
     @Override
     public FruitTransaction parse(String line) {
         String[] parts = line.split(SEPARATOR);
-        if (parts.length != 3) {
+        if (parts.length != NUMBER_OF_INPUT_PARTS) {
             throw new IllegalArgumentException("Invalid transaction format: " + line);
         }
 
@@ -39,7 +41,7 @@ public class FruitTransactionParserImpl implements FruitTransactionParser {
     @Override
     public List<FruitTransaction> parseLines(List<String> lines) {
         return lines.stream()
-                .skip(1) // skip header line
+                .skip(OFFSET)
                 .map(this::parse)
                 .toList();
     }
