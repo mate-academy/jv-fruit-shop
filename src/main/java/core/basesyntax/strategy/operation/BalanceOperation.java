@@ -1,14 +1,19 @@
 package core.basesyntax.strategy.operation;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
-import core.basesyntax.model.Fruit;
 
-public class BalanceOperation implements OperationHandler {
-    private StorageDao storageDao = new StorageDaoImpl();
+public class BalanceOperation implements FruitOperationHandler {
+    private StorageDao storageDao;
+
+    public BalanceOperation(StorageDao storageDao) {
+        this.storageDao = storageDao;
+    }
 
     @Override
-    public void operationType(String fruit, int amount) {
-        storageDao.addFruit(new Fruit(fruit, amount));
+    public void applyOperation(String fruit, int amount) {
+        if (amount < 0) {
+            throw new IllegalArgumentException("Illegal amount value" + amount);
+        }
+        storageDao.addFruit(fruit, amount);
     }
 }
