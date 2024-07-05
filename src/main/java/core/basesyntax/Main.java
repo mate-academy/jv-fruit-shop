@@ -9,7 +9,6 @@ import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,12 +16,14 @@ public class Main {
     public static void main(String[] args) {
         FileRider fileRider = new FileRider();
         final List<FruitTransaction> transactions =
-                fileRider.readTransactions("src/main/input.csv");
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+                fileRider.readTransactions("src/main/resources/input.csv");
+
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation()
+        );
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 

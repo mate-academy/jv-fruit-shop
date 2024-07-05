@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
 import core.basesyntax.dao.FileReader;
 import java.io.IOException;
@@ -16,4 +16,3 @@ public class FileReaderImpl implements FileReader {
         }
     }
 }
-

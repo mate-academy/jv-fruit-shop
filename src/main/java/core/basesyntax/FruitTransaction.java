@@ -24,10 +24,10 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-        BALANCE("b"),
-        SUPPLY("s"),
-        PURCHASE("p"),
-        RETURN("r");
+        BALANCE("B"),
+        SUPPLY("S"),
+        PURCHASE("P"),
+        RETURN("R");
 
         private String code;
 
@@ -41,7 +41,7 @@ public class FruitTransaction {
 
         public static Operation fromCode(String code) {
             for (Operation operation : Operation.values()) {
-                if (operation.code.equalsIgnoreCase(code)) {
+                if (operation.code.equalsIgnoreCase(code.trim())) {
                     return operation;
                 }
             }

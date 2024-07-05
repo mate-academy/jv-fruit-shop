@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.impl;
 
+import core.basesyntax.FruitTransaction;
 import core.basesyntax.dao.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,10 +17,10 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : data.subList(START_INDEX, data.size())) {
             String[] parts = line.split(COMMA);
-            FruitTransaction.Operation operation
-                    = FruitTransaction.Operation.valueOf(parts[OPERATION_INDEX].toUpperCase());
-            String fruit = parts[FRUIT_INDEX];
-            int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+            FruitTransaction.Operation operation =
+                    FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX].trim());
+            String fruit = parts[FRUIT_INDEX].trim();
+            int quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
             transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
         return transactions;
