@@ -3,7 +3,7 @@ package core.basesyntax.strategy.operation;
 import core.basesyntax.dao.StorageDao;
 
 public class ReturnOperation implements FruitOperationHandler {
-    private StorageDao storageDao;
+    private final StorageDao storageDao;
 
     public ReturnOperation(StorageDao storageDao) {
         this.storageDao = storageDao;

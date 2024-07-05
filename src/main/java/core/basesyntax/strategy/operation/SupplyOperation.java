@@ -5,7 +5,7 @@ import core.basesyntax.model.Fruit;
 import java.util.Optional;
 
 public class SupplyOperation implements FruitOperationHandler {
-    private StorageDao storageDao;
+    private final StorageDao storageDao;
 
     public SupplyOperation(StorageDao storageDao) {
         this.storageDao = storageDao;
