@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import java.util.Optional;
+
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
@@ -49,6 +51,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Optional<Operation> getByType(String type) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(type)) {
+                    return Optional.of(operation);
+                }
+            }
+            return Optional.empty();
         }
     }
 }

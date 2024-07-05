@@ -1,5 +1,6 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.checker.Validator;
 import core.basesyntax.dao.FruitTransactionDao;
 import core.basesyntax.model.FruitTransaction;
 
@@ -12,13 +13,7 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void recount(FruitTransaction transaction) {
-        if (isNegative(transaction.getQuantity())) {
-            throw new RuntimeException("Quantity can't be less than 0.");
-        }
+        Validator.checkQuantity(transaction.getQuantity());
         fruitTransactionDao.add(transaction.getFruit(), transaction.getQuantity());
-    }
-
-    private boolean isNegative(int num) {
-        return num < 0;
     }
 }
