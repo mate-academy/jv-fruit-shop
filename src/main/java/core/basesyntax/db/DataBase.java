@@ -2,7 +2,6 @@ package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 public class DataBase {
     private static final Map<String, Integer> storage = new HashMap<>();
@@ -19,7 +18,7 @@ public class DataBase {
         return storage.get(fruit);
     }
 
-    public static Set<Map.Entry<String, Integer>> entries() {
-        return storage.entrySet();
+    public static Map<String, Integer> getStorage() {
+        return storage;
     }
 }

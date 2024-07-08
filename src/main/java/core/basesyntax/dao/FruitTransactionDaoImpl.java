@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.DataBase;
 import java.util.Map;
-import java.util.Set;
 
 public class FruitTransactionDaoImpl implements FruitTransactionDao {
     @Override
@@ -20,7 +19,7 @@ public class FruitTransactionDaoImpl implements FruitTransactionDao {
     }
 
     @Override
-    public Set<Map.Entry<String, Integer>> getEntries() {
-        return DataBase.entries();
+    public Map<String, Integer> getStorage() {
+        return DataBase.getStorage();
     }
 }

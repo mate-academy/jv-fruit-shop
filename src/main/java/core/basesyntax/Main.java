@@ -20,7 +20,6 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
 import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.operation.SupplyOperation;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -38,12 +37,12 @@ public class Main {
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         FruitTransactionDao dao = new FruitTransactionDaoImpl();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(dao));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(dao));
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(dao));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(dao));
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(dao),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(dao),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(dao),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(dao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
