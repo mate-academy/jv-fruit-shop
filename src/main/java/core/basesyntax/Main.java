@@ -20,7 +20,6 @@ import core.basesyntax.strategy.operation.FruitOperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperation;
 import core.basesyntax.strategy.operation.ReturnOperation;
 import core.basesyntax.strategy.operation.SupplyOperation;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,15 +32,11 @@ public class Main {
         FileReaderService fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.getDataFromFile(REPORT);
 
-        Map<FruitTransaction.Operation, FruitOperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperation(STORAGE_DAO));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation(STORAGE_DAO));
-        operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperation(STORAGE_DAO));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperation(STORAGE_DAO));
+        Map<FruitTransaction.Operation, FruitOperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(STORAGE_DAO),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(STORAGE_DAO),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(STORAGE_DAO),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(STORAGE_DAO));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl();

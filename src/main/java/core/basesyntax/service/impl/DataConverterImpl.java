@@ -9,6 +9,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final int MIN_SIZE_OF_TRANSACTION_STRING = 3;
 
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> inputReport) {
@@ -21,7 +22,7 @@ public class DataConverterImpl implements DataConverter {
 
     public FruitTransaction parseToFruitTransaction(String inputReportString) {
         String[] inputToArray = inputReportString.split(",");
-        if (inputToArray.length == 3) {
+        if (inputToArray.length == MIN_SIZE_OF_TRANSACTION_STRING) {
             FruitTransaction.Operation operation = FruitTransaction.Operation
                     .fromCode(inputToArray[OPERATION_TYPE_INDEX]);
             String fruitName = inputToArray[FRUIT_NAME_INDEX];

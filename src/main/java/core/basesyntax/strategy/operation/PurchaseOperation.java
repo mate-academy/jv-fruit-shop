@@ -16,9 +16,10 @@ public class PurchaseOperation implements FruitOperationHandler {
         }
         int newQuantity = storageDao.getFruit(fruit).getQuantity() - amount;
         if (newQuantity < 0) {
-            throw new RuntimeException(newQuantity + " invalid value of quantity. "
-                    + "Quantity can't be less than 0");
+            throw new RuntimeException("Quantity can't be "
+                    + "less than 0. Actual quantity value is " + newQuantity);
+        } else {
+            storageDao.update(fruit, newQuantity);
         }
-        storageDao.update(fruit, newQuantity);
     }
 }

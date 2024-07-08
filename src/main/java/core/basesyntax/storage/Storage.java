@@ -15,8 +15,7 @@ public class Storage {
         return fruits.stream()
                 .filter(f -> f.getFruitName().equals(fruit))
                 .findFirst()
-                .orElseThrow(() ->
-                        new RuntimeException("Can't get a fruit from database" + fruit));
+                .orElse(null);
     }
 
     public void updateFruit(String fruit, int quantity) {

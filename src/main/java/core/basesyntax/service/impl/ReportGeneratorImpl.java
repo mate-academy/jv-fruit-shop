@@ -14,7 +14,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
         resultingReport.append(FIRST_LINE);
         for (Fruit fruit : STORAGE.getFruits()) {
             resultingReport.append(System.lineSeparator())
-                    .append(fruit.getFruitName()).append(",").append(fruit.getQuantity());
+                    .append(fruit.getFruitName()).append(",")
+                    .append(fruit.getQuantity());
         }
         return resultingReport.toString();
     }
