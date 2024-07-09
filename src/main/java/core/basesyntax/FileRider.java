@@ -15,16 +15,15 @@ public class FileRider {
         this.dataConverter = new DataConverterImpl();
     }
 
-    public List<FruitTransaction> readTransactions(String filePath) {
+    public List<FruitTransaction> readTransactions(String filePath) throws IOException {
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException("Error reading file: " + filePath, e);
         }
 
         return dataConverter.convertToTransaction(lines);

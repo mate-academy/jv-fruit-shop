@@ -4,11 +4,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterImpl {
-    public void write(String data, String filePath) {
+    public void write(String data, String filePath) throws IOException {
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(data);
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new IOException("Error writing to file: " + filePath, e);
         }
     }
 }

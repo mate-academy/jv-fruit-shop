@@ -9,11 +9,12 @@ import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         FileRider fileRider = new FileRider();
         final List<FruitTransaction> transactions =
                 fileRider.readTransactions("src/main/resources/input.csv");
@@ -33,7 +34,9 @@ public class Main {
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.generateReport(storage);
-        System.out.println("Generated report:\n" + resultingReport);
+
+        String formattedReport = "Generated report:" + System.lineSeparator() + resultingReport;
+        System.out.println(formattedReport);
 
         core.basesyntax.FileWriterImpl fileWriter = new core.basesyntax.FileWriterImpl();
         fileWriter.write(resultingReport, "src/main/resources/finalReport.csv");
