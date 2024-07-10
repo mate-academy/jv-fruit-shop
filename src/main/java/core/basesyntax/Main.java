@@ -1,21 +1,27 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.OperationHandler;
-import core.basesyntax.dao.OperationStrategy;
-import core.basesyntax.impl.OperationStrategyImpl;
-import core.basesyntax.impl.ReportGeneratorImpl;
-import core.basesyntax.impl.ShopServiceImpl;
-import core.basesyntax.operations.BalanceOperation;
-import core.basesyntax.operations.PurchaseOperation;
-import core.basesyntax.operations.ReturnOperation;
-import core.basesyntax.operations.SupplyOperation;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
+import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.PurchaseOperation;
+import core.basesyntax.strategy.ReturnOperation;
+import core.basesyntax.strategy.SupplyOperation;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        FileRider fileRider = new FileRider();
+        FileReaderImpl fileRider = new FileReaderImpl();
         final List<FruitTransaction> transactions =
                 fileRider.readTransactions("src/main/resources/input.csv");
 
@@ -38,7 +44,7 @@ public class Main {
         String formattedReport = "Generated report:" + System.lineSeparator() + resultingReport;
         System.out.println(formattedReport);
 
-        core.basesyntax.FileWriterImpl fileWriter = new core.basesyntax.FileWriterImpl();
+        FileWriterImpl fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, "src/main/resources/finalReport.csv");
         System.out.println("Report written to finalReport.csv successfully.");
     }

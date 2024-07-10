@@ -1,7 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.OperationHandler;
-import core.basesyntax.dao.OperationStrategy;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationStrategy;
+import java.util.HashMap;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -9,7 +11,7 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlers) {
-        this.operationHandlers = operationHandlers;
+        this.operationHandlers = new HashMap<>(operationHandlers);
     }
 
     @Override

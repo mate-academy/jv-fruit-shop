@@ -1,10 +1,10 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.ShopService;
-import core.basesyntax.Storage;
-import core.basesyntax.dao.OperationHandler;
-import core.basesyntax.dao.OperationStrategy;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ShopService;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {

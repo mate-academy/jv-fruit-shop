@@ -1,8 +1,8 @@
-package core.basesyntax.operations;
+package core.basesyntax.strategy;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.Storage;
-import core.basesyntax.dao.OperationHandler;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationHandler;
 
 public class ReturnOperation implements OperationHandler {
     @Override

@@ -1,7 +1,7 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.dao.DataConverter;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
 
