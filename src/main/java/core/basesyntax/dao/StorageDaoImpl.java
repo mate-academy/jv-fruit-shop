@@ -10,7 +10,8 @@ public class StorageDaoImpl implements StorageDao {
     public void addFruit(String fruit, int quantity) {
         if (fruit.isEmpty()) {
             throw new RuntimeException("Fruit can't be null");
-        } if (quantity < 0) {
+        }
+        if (quantity < 0) {
             throw new RuntimeException(
                     "Quantity can't be less than 0. Quantity value " + quantity);
         } else {
