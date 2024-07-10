@@ -1,19 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitsDao;
-import core.basesyntax.dao.FruitsDaoImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.FileService;
 import core.basesyntax.service.FileServiceImpl;
-import core.basesyntax.service.FruitsService;
-import core.basesyntax.service.FruitsServiceImpl;
+import core.basesyntax.service.FruitService;
+import core.basesyntax.service.FruitServiceImpl;
 import core.basesyntax.service.operations.BalanceOperationsHandler;
-import core.basesyntax.service.operations.OperationsHandler;
-import core.basesyntax.service.operations.OperationsStrategy;
-import core.basesyntax.service.operations.OperationsStrategyImpl;
 import core.basesyntax.service.operations.PurchaseOperationsHandler;
-import core.basesyntax.service.operations.ReturnOperationsHandler;
 import core.basesyntax.service.operations.SupplyOperationsHandler;
+import core.basesyntax.service.strategy.OperationHandler;
+import core.basesyntax.service.strategy.OperationsStrategy;
+import core.basesyntax.service.strategy.OperationsStrategyImpl;
+import core.basesyntax.service.strategy.ReturnOperationHandler;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -22,24 +22,24 @@ public class Main {
     private static final String REPORT_FILE = "report.csv";
 
     public static void main(String[] args) {
-        EnumMap<Operations, OperationsHandler> operationsHandlerMap
+        EnumMap<Operations, OperationHandler> operationsHandlerMap
                 = new EnumMap<>(Operations.class);
         fillOperationMap(operationsHandlerMap);
 
-        FruitsDao fruitDao = new FruitsDaoImpl();
+        FruitDao fruitDao = new FruitDaoImpl();
         OperationsStrategy strategy = new OperationsStrategyImpl(operationsHandlerMap);
-        FruitsService fruitService = new FruitsServiceImpl(fruitDao, strategy);
+        FruitService fruitService = new FruitServiceImpl(fruitDao, strategy);
         FileService fileService = new FileServiceImpl();
 
         List<String> fileRows = fileService.readFile(INPUT_FILE);
-        fruitService.createFruitsFromList(fileRows);
+        fruitService.addFruitFromList(fileRows);
         fileService.writeToFile(REPORT_FILE);
     }
 
-    private static void fillOperationMap(EnumMap<Operations, OperationsHandler> map) {
+    private static void fillOperationMap(EnumMap<Operations, OperationHandler> map) {
         map.put(Operations.BALANCE, new BalanceOperationsHandler());
         map.put(Operations.SUPPLY, new SupplyOperationsHandler());
         map.put(Operations.PURCHASE, new PurchaseOperationsHandler());
-        map.put(Operations.RETURN, new ReturnOperationsHandler());
+        map.put(Operations.RETURN, new ReturnOperationHandler());
     }
 }

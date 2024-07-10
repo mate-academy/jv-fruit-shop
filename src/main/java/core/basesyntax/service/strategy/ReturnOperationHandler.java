@@ -1,8 +1,8 @@
-package core.basesyntax.service.operations;
+package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.Operations;
 
-public class ReturnOperationsHandler implements OperationsHandler {
+public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public Operations getOperation() {
@@ -10,7 +10,7 @@ public class ReturnOperationsHandler implements OperationsHandler {
     }
 
     @Override
-    public int getOperationsResult(int result, int quantity) {
+    public int applyOperation(int result, int quantity) {
         return result + quantity;
     }
 }
