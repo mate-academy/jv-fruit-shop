@@ -20,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
         return transactions;
     }
 
-    public FruitTransaction parseToFruitTransaction(String inputReportString) {
+    private FruitTransaction parseToFruitTransaction(String inputReportString) {
         String[] inputToArray = inputReportString.split(",");
         if (inputToArray.length == SIZE_OF_TRANSACTION_STRING) {
             FruitTransaction.Operation operation = FruitTransaction.Operation
@@ -28,7 +28,7 @@ public class DataConverterImpl implements DataConverter {
             String fruitName = inputToArray[FRUIT_NAME_INDEX];
             try {
                 int quantity = Integer.parseInt(inputToArray[QUANTITY_INDEX]);
-                return FruitTransaction.of(operation, fruitName, quantity);
+                return FruitTransaction.transactionOf(operation, fruitName, quantity);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid format of quantity"
                         + inputToArray[QUANTITY_INDEX]);

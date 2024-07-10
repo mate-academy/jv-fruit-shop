@@ -10,9 +10,7 @@ public class StorageDaoImpl implements StorageDao {
     public void addFruit(String fruit, int quantity) {
         if (fruit.isEmpty()) {
             throw new RuntimeException("Fruit can't be null");
-        } else if (STORAGE.getFruit(fruit) != null) {
-            update(fruit,quantity);
-        } else if (quantity < 0) {
+        } if (quantity < 0) {
             throw new RuntimeException(
                     "Quantity can't be less than 0. Quantity value " + quantity);
         } else {
@@ -25,7 +23,8 @@ public class StorageDaoImpl implements StorageDao {
         if (fruitName.isEmpty()) {
             throw new RuntimeException("Can't get fruit. Input value is empty");
         }
-        return STORAGE.getFruit(fruitName.toLowerCase());
+        return STORAGE.getFruit(fruitName.toLowerCase())
+                .orElseThrow(() -> new RuntimeException("Can't get fruit, by name" + fruitName));
     }
 
     @Override
@@ -33,9 +32,6 @@ public class StorageDaoImpl implements StorageDao {
         if (newQuantity < 0) {
             throw new RuntimeException(
                     "Quantity can't be less than 0. Quantity value " + newQuantity);
-        }
-        if (STORAGE.getFruit(fruit.toLowerCase()) == null) {
-            addFruit(fruit, newQuantity);
         } else {
             STORAGE.updateFruit(fruit.toLowerCase(), newQuantity);
         }

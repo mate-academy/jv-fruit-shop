@@ -11,7 +11,7 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public static FruitTransaction of(Operation operation, String fruit, int quantity) {
+    public static FruitTransaction transactionOf(Operation operation, String fruit, int quantity) {
         return new FruitTransaction(operation, fruit, quantity);
     }
 
