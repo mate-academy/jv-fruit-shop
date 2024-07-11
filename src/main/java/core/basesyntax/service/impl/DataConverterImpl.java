@@ -40,7 +40,7 @@ public class DataConverterImpl implements DataConverter {
                     + inputToArray.length);
         }
         try {
-            int quantity = Integer.parseInt(inputToArray[QUANTITY_INDEX]);
+            Integer.parseInt(inputToArray[QUANTITY_INDEX]);
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid format of quantity"
                     + inputToArray[QUANTITY_INDEX]);
