@@ -1,33 +1,32 @@
 package core.basesyntax.storage;
 
 import core.basesyntax.model.Fruit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiFunction;
 
 public class Storage {
-    private static final List<Fruit> fruits = new ArrayList<>();
+    private static final Map<String, Fruit> fruits = new HashMap<>();
 
     public void addFruitToStorage(String fruit, int quantity) {
-        fruits.add(Fruit.of(fruit, quantity));
+        fruits.put(fruit, Fruit.of(fruit, quantity));
     }
 
-    public Optional<Fruit> getFruit(String fruit) {
-        return fruits.stream()
-                .filter(f -> f.getFruitName().equals(fruit))
-                .findFirst();
+    public Fruit getFruit(String fruit) {
+        return Optional.of(fruits.get(fruit)).orElseThrow(() ->
+                new RuntimeException("Can't get fruit by name" + fruit));
     }
 
     public void updateFruit(String fruit, int quantity) {
-        Optional<Fruit> receivedFruit = getFruit(fruit);
-        if (receivedFruit.isPresent()) {
-            receivedFruit.get().setQuantity(quantity);
-        } else {
-            addFruitToStorage(fruit, quantity);
-        }
+        BiFunction<Fruit, Fruit, Fruit> remappingFunction = (oldValue, newValue) -> {
+            oldValue.setQuantity(newValue.getQuantity());
+            return oldValue;
+        };
+        fruits.merge(fruit.toLowerCase(), Fruit.of(fruit, quantity), remappingFunction);
     }
 
-    public List<Fruit> getFruits() {
+    public Map<String, Fruit> getFruits() {
         return fruits;
     }
 }

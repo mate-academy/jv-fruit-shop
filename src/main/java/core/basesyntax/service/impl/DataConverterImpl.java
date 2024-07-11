@@ -14,28 +14,37 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> inputReport) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (int i = 1; i < inputReport.size(); i++) {
-            transactions.add(parseToFruitTransaction(inputReport.get(i)));
-        }
+        inputReport.stream()
+                .filter(s -> !s.startsWith("type"))
+                .map(this::parseToFruitTransaction)
+                .forEach(transactions::add);
         return transactions;
     }
 
     private FruitTransaction parseToFruitTransaction(String inputReportString) {
         String[] inputToArray = inputReportString.split(",");
-        if (inputToArray.length == SIZE_OF_TRANSACTION_STRING) {
+        FruitTransaction fruitTransaction = null;
+        if (isValidData(inputToArray)) {
             FruitTransaction.Operation operation = FruitTransaction.Operation
                     .fromCode(inputToArray[OPERATION_TYPE_INDEX]);
             String fruitName = inputToArray[FRUIT_NAME_INDEX];
-            try {
-                int quantity = Integer.parseInt(inputToArray[QUANTITY_INDEX]);
-                return FruitTransaction.transactionOf(operation, fruitName, quantity);
-            } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid format of quantity"
-                        + inputToArray[QUANTITY_INDEX]);
-            }
-        } else {
-            throw new RuntimeException("Invalid length of result line -" + inputToArray.length
-                    + ". Length should be 3");
+            int quantity = Integer.parseInt(inputToArray[QUANTITY_INDEX]);
+            fruitTransaction = FruitTransaction.transactionOf(operation, fruitName, quantity);
         }
+        return fruitTransaction;
+    }
+
+    private boolean isValidData(String[] inputToArray) {
+        if (inputToArray.length != SIZE_OF_TRANSACTION_STRING) {
+            throw new RuntimeException("Length for parsed string must be three, actual length "
+                    + inputToArray.length);
+        }
+        try {
+            int quantity = Integer.parseInt(inputToArray[QUANTITY_INDEX]);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("Invalid format of quantity"
+                    + inputToArray[QUANTITY_INDEX]);
+        }
+        return true;
     }
 }

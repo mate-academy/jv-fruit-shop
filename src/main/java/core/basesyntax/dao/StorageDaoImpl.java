@@ -24,8 +24,7 @@ public class StorageDaoImpl implements StorageDao {
         if (fruitName.isEmpty()) {
             throw new RuntimeException("Can't get fruit. Input value is empty");
         }
-        return STORAGE.getFruit(fruitName.toLowerCase())
-                .orElseThrow(() -> new RuntimeException("Can't get fruit, by name" + fruitName));
+        return STORAGE.getFruit(fruitName.toLowerCase());
     }
 
     @Override
