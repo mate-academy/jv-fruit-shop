@@ -14,17 +14,20 @@ import core.basesyntax.service.strategy.OperationHandler;
 import core.basesyntax.service.strategy.OperationsStrategy;
 import core.basesyntax.service.strategy.OperationsStrategyImpl;
 import core.basesyntax.service.strategy.ReturnOperationHandler;
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE = "input.csv";
     private static final String REPORT_FILE = "report.csv";
 
     public static void main(String[] args) {
-        EnumMap<Operations, OperationHandler> operationsHandlerMap
-                = new EnumMap<>(Operations.class);
-        fillOperationMap(operationsHandlerMap);
+        Map<Operations, OperationHandler> operationsHandlerMap = Map.of(
+                Operations.BALANCE, new BalanceOperationsHandler(),
+                Operations.SUPPLY, new SupplyOperationsHandler(),
+                Operations.PURCHASE, new PurchaseOperationsHandler(),
+                Operations.RETURN, new ReturnOperationHandler()
+        );
 
         FruitDao fruitDao = new FruitDaoImpl();
         OperationsStrategy strategy = new OperationsStrategyImpl(operationsHandlerMap);
@@ -34,12 +37,5 @@ public class Main {
         List<String> fileRows = fileService.readFile(INPUT_FILE);
         fruitService.addFruitFromList(fileRows);
         fileService.writeToFile(REPORT_FILE);
-    }
-
-    private static void fillOperationMap(EnumMap<Operations, OperationHandler> map) {
-        map.put(Operations.BALANCE, new BalanceOperationsHandler());
-        map.put(Operations.SUPPLY, new SupplyOperationsHandler());
-        map.put(Operations.PURCHASE, new PurchaseOperationsHandler());
-        map.put(Operations.RETURN, new ReturnOperationHandler());
     }
 }

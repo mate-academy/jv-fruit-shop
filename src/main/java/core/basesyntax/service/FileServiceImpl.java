@@ -4,10 +4,9 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
-import java.util.Scanner;
 
 public class FileServiceImpl implements FileService {
     private static final String TITLE = "Fruit, quantity";
@@ -25,37 +24,24 @@ public class FileServiceImpl implements FileService {
                         .append(fruits.getQuantity())
                         .append(System.lineSeparator());
             }
+
             byte[] bytes = reportBuilder.toString().getBytes();
 
             outputStream.write(bytes);
+
         } catch (IOException e) {
-            throw new RuntimeException("Failed to write report to file: " + fileName, e);
+            e.printStackTrace();
         }
     }
 
     @Override
     public List<String> readFile(String fileName) {
-        List<String> documentation = new ArrayList<>();
-        InputStream inputStream = FileServiceImpl.class.getClassLoader()
-                .getResourceAsStream(fileName);
-
-        if (inputStream == null) {
-            throw new RuntimeException("File not found: " + fileName);
-        }
-
-        try (Scanner scanner = new Scanner(inputStream)) {
-            // Skip the title line
-            if (scanner.hasNextLine()) {
-                scanner.nextLine();
-            }
-
-            while (scanner.hasNextLine()) {
-                documentation.add(scanner.nextLine());
-            }
+        try {
+            // Читаємо всі рядки з файлу і повертаємо їх у вигляді списку
+            return Files.readAllLines(Paths.get(getClass().getClassLoader()
+                    .getResource(fileName).toURI()));
         } catch (Exception e) {
             throw new RuntimeException("Error reading file " + fileName, e);
         }
-
-        return documentation;
     }
 }
