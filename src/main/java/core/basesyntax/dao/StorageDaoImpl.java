@@ -14,9 +14,9 @@ public class StorageDaoImpl implements StorageDao {
         if (quantity < 0) {
             throw new RuntimeException(
                     "Quantity can't be less than 0. Quantity value " + quantity);
-        } else {
-            STORAGE.addFruitToStorage(fruit.toLowerCase(), quantity);
         }
+        STORAGE.addFruitToStorage(fruit.toLowerCase(), quantity);
+
     }
 
     @Override
@@ -29,11 +29,6 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void update(String fruit, int newQuantity) {
-        if (newQuantity < 0) {
-            throw new RuntimeException(
-                    "Quantity can't be less than 0. Quantity value " + newQuantity);
-        } else {
-            STORAGE.updateFruit(fruit.toLowerCase(), newQuantity);
-        }
+        STORAGE.updateFruit(fruit.toLowerCase(), newQuantity);
     }
 }

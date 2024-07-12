@@ -3,6 +3,7 @@ package core.basesyntax.strategy.operation;
 import core.basesyntax.dao.StorageDao;
 
 public class PurchaseOperation implements FruitOperationHandler {
+    private static final int MODIFIRE_OF_AMOUNT = -1;
     private final StorageDao storageDao;
 
     public PurchaseOperation(StorageDao storageDao) {
@@ -14,12 +15,6 @@ public class PurchaseOperation implements FruitOperationHandler {
         if (amount < 0) {
             throw new IllegalArgumentException("Illegal amount value" + amount);
         }
-        int newQuantity = storageDao.getFruit(fruit).getQuantity() - amount;
-        if (newQuantity < 0) {
-            throw new RuntimeException("Quantity can't be "
-                    + "less than 0. Actual quantity value is " + newQuantity);
-        } else {
-            storageDao.update(fruit, newQuantity);
-        }
+        storageDao.update(fruit, (amount * MODIFIRE_OF_AMOUNT));
     }
 }

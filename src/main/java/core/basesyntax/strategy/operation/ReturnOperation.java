@@ -14,7 +14,6 @@ public class ReturnOperation implements FruitOperationHandler {
         if (amount < 0) {
             throw new IllegalArgumentException("Illegal amount value" + amount);
         }
-        int newQuantity = storageDao.getFruit(fruit).getQuantity() + amount;
-        storageDao.update(fruit, newQuantity);
+        storageDao.update(fruit, amount);
     }
 }
