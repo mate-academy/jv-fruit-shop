@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 
 public class FileServiceImpl implements FileService {
     private static final String TITLE = "Fruit, quantity";
@@ -17,16 +18,16 @@ public class FileServiceImpl implements FileService {
         try (FileOutputStream outputStream = new FileOutputStream(fileName)) {
             StringBuilder reportBuilder = new StringBuilder(TITLE).append(System.lineSeparator());
 
-            for (Fruit fruits : Storage.fruits.values()) {
+            Map<String, Fruit> fruits = Storage.getFruits();
+            for (Fruit fruit : fruits.values()) {
                 reportBuilder
-                        .append(fruits.getName())
+                        .append(fruit.getName())
                         .append(SEPARATOR)
-                        .append(fruits.getQuantity())
+                        .append(fruit.getQuantity())
                         .append(System.lineSeparator());
             }
 
             byte[] bytes = reportBuilder.toString().getBytes();
-
             outputStream.write(bytes);
 
         } catch (IOException e) {
@@ -37,7 +38,6 @@ public class FileServiceImpl implements FileService {
     @Override
     public List<String> readFile(String fileName) {
         try {
-            // Читаємо всі рядки з файлу і повертаємо їх у вигляді списку
             return Files.readAllLines(Paths.get(getClass().getClassLoader()
                     .getResource(fileName).toURI()));
         } catch (Exception e) {

@@ -6,7 +6,6 @@ import core.basesyntax.model.Operations;
 import java.util.Map;
 
 public class ReturnOperationHandler implements OperationHandler {
-
     @Override
     public Operations getOperation() {
         return Operations.RETURN;
@@ -14,7 +13,6 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public int applyOperation(int result, int quantity) {
-
         for (Map.Entry<String, Fruit> entry : Storage.getFruits().entrySet()) {
             String fruitName = entry.getKey();
             Fruit fruit = entry.getValue();
