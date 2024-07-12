@@ -5,7 +5,6 @@ import core.basesyntax.model.Fruit;
 import core.basesyntax.model.Operations;
 import core.basesyntax.service.strategy.OperationsStrategy;
 import java.util.List;
-import java.util.Optional;
 
 public class FruitServiceImpl implements FruitService {
     private static final int FRUITS_INDEX = 1;
@@ -44,15 +43,10 @@ public class FruitServiceImpl implements FruitService {
             int quantity = Integer.parseInt(splitRecord[QUANTITY_INDEX]);
 
             Fruit newFruit = new Fruit(fruitName, quantity);
-            Optional<Fruit> optionalFruitFromDb = fruitDao.getFruitIfPresent(fruitName);
-
-            if (optionalFruitFromDb.isPresent()) {
-                newFruit.setQuantity(performOperation(optionalFruitFromDb.get().getQuantity(),
-                        newFruit.getQuantity(), operation));
-            } else {
-                newFruit.setQuantity(
-                        performOperation(DEFAULT_QUANTITY, newFruit.getQuantity(), operation));
-            }
+            int updatedQuantity = fruitDao.getFruitIfPresent(fruitName)
+                    .map(fruit -> performOperation(fruit.getQuantity(), quantity, operation))
+                    .orElseGet(() -> performOperation(DEFAULT_QUANTITY, quantity, operation));
+            newFruit.setQuantity(updatedQuantity);
             fruitDao.add(newFruit);
         }
     }

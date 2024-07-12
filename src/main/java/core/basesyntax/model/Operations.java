@@ -25,4 +25,3 @@ public enum Operations {
         throw new IllegalArgumentException("The operation for the given code is invalid: " + code);
     }
 }
-
