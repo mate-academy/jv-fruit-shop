@@ -1,3 +1,6 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationHandler;
@@ -10,17 +13,12 @@ import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AllTests {
     private Storage storage;
@@ -43,7 +41,6 @@ public class AllTests {
         shopService = new ShopServiceImpl(operationStrategy, storage);
     }
 
-    // DataConverterImplTest
     @Test
     public void testConvertToTransaction() {
         List<String> data = Arrays.asList(
@@ -61,49 +58,51 @@ public class AllTests {
         assertEquals(20, transactions.get(0).getQuantity());
     }
 
-    // FileReaderImplTest
     @Test
-    public void testReadTransactionsFileNotFound() {
+    public void testReadTransactionsFileNotFound() throws IOException {
         try {
-            List<FruitTransaction> transactions = fileReader.readTransactions("nonexistentfile.csv");
+            List<FruitTransaction> transactions =
+                    fileReader.readTransactions("nonexistentfile.csv");
             fail("Expected IOException to be thrown");
         } catch (IOException e) {
             assertEquals("Error reading file: nonexistentfile.csv", e.getMessage());
         }
     }
 
-    // OperationHandlersTest
     @Test
     public void testBalanceOperation() {
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE, "banana", 20);
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.BALANCE,
+                "banana", 20);
         new BalanceOperation().handle(transaction, storage);
-        assertEquals(20, storage.getFruitQuantities().get("banana"));
+        assertEquals((Integer) 20, storage.getFruitQuantities().get("banana"));
     }
 
     @Test
     public void testSupplyOperation() {
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY, "apple", 100);
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.SUPPLY,
+                "apple", 100);
         new SupplyOperation().handle(transaction, storage);
-        assertEquals(100, storage.getFruitQuantities().get("apple"));
+        assertEquals((Integer) 100, storage.getFruitQuantities().get("apple"));
     }
 
     @Test
     public void testPurchaseOperation() {
         storage.addFruit("banana", 50);
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE, "banana", 10);
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.PURCHASE,
+                "banana", 10);
         new PurchaseOperation().handle(transaction, storage);
-        assertEquals(40, storage.getFruitQuantities().get("banana"));
+        assertEquals((Integer) 40, storage.getFruitQuantities().get("banana"));
     }
 
     @Test
     public void testReturnOperation() {
         storage.addFruit("apple", 30);
-        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN, "apple", 20);
+        FruitTransaction transaction = new FruitTransaction(FruitTransaction.Operation.RETURN,
+                "apple", 20);
         new ReturnOperation().handle(transaction, storage);
-        assertEquals(50, storage.getFruitQuantities().get("apple"));
+        assertEquals((Integer) 50, storage.getFruitQuantities().get("apple"));
     }
 
-    // ShopServiceImplTest
     @Test
     public void testProcessTransactions() {
         List<FruitTransaction> transactions = Arrays.asList(
@@ -115,28 +114,28 @@ public class AllTests {
 
         shopService.process(transactions);
 
-        assertEquals(80, storage.getFruitQuantities().get("apple"));
-        assertEquals(60, storage.getFruitQuantities().get("banana"));
+        assertEquals((Integer) 80, storage.getFruitQuantities().get("apple"));
+        assertEquals((Integer) 60, storage.getFruitQuantities().get("banana"));
     }
 
-    // StorageTest
     @Test
     public void testAddFruit() {
         storage.addFruit("apple", 10);
-        assertEquals(10, storage.getFruitQuantities().get("apple"));
+        assertEquals((Integer) 10, storage.getFruitQuantities().get("apple"));
     }
 
     @Test
     public void testRemoveFruit() {
         storage.addFruit("apple", 10);
         storage.removeFruit("apple", 5);
-        assertEquals(5, storage.getFruitQuantities().get("apple"));
+        assertEquals((Integer) 5, storage.getFruitQuantities().get("apple"));
     }
 
     @Test
     public void testRemoveFruitBeyondZero() {
         storage.addFruit("apple", 5);
         storage.removeFruit("apple", 10);
-        assertEquals(-5, storage.getFruitQuantities().get("apple"));
+        assertEquals(Integer.valueOf(-5), storage.getFruitQuantities().get("apple"));
     }
+
 }
