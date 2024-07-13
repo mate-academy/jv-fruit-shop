@@ -1,9 +1,10 @@
-package util;
+package serviceImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import model.Operation;
+import service.DataConverter;
 
 class DataConverterImpl implements DataConverter {
     @Override

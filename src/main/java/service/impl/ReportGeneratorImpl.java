@@ -1,4 +1,6 @@
-package service;
+package serviceImpl;
+
+import service.ReportGenerator;
 
 import java.util.Map;
 
