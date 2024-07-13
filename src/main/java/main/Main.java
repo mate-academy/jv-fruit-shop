@@ -1,39 +1,45 @@
 package main;
 
-import dao.FileReader;
-import dao.FileReaderImpl;
-import dao.FileWriter;
-import dao.FileWriterImpl;
+import io.FileReader;
+import io.FileWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import service.BalanceOperationHandler;
+import model.Operation;
+import service.DataConverter;
 import service.OperationHandler;
-import service.PurchaseOperationHandler;
 import service.ReportGenerator;
-import service.ReportGeneratorImpl;
-import service.ReturnOperationHandler;
 import service.ShopService;
-import service.ShopServiceImpl;
-import service.SupplyOperationHandler;
+import service.impl.BalanceOperationHandler;
+import service.impl.DataConverterGetter;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
+import service.impl.PurchaseOperationHandler;
+import service.impl.ReportGeneratorImpl;
+import service.impl.ReturnOperationHandler;
+import service.impl.ShopServiceImpl;
+import service.impl.SupplyOperationHandler;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
-import util.DataConverter;
-import util.DataConverterImpl;
 
 public class Main {
     public static void main(String[] args) {
-        String reportToReadFilePath = "src/main/resources/reportToRead.csv";
+        if (args.length < 2) {
+            System.out.println("Usage: java Main <reportToReadFilePath> <finalReportFilePath>");
+            return;
+        }
+
+        String reportToReadFilePath = args[0];
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(reportToReadFilePath);
 
-        DataConverter dataConverter = new DataConverterImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        DataConverter dataConverter = DataConverterGetter.getDataConverter();
+        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlers.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        operationHandlers.put(Operation.RETURN, new ReturnOperationHandler());
+        operationHandlers.put(Operation.SUPPLY, new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -43,10 +49,10 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator
                 .getReport(((ShopServiceImpl) shopService)
-                .getStorage());
+                        .getStorage());
 
+        String finalReportFilePath = args[1];
         FileWriter fileWriter = new FileWriterImpl();
-        String finalReportFilePath = "src/main/resources/finalReport.csv";
         fileWriter.write(resultingReport, finalReportFilePath);
     }
 }

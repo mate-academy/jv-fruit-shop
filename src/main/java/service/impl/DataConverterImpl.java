@@ -1,4 +1,4 @@
-package serviceImpl;
+package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,8 @@ class DataConverterImpl implements DataConverter {
                 try {
                     quantity = Integer.parseInt(parts[2]);
                 } catch (NumberFormatException e) {
-                    throw new IllegalArgumentException("Invalid quantity: " + parts[2] + " in line: " + line, e);
+                    throw new IllegalArgumentException("Invalid quantity: "
+                            + parts[2] + " in line: " + line, e);
                 }
 
                 FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);

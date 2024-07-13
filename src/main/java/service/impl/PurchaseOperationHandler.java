@@ -1,4 +1,4 @@
-package serviceImpl;
+package service.impl;
 
 import java.util.Map;
 import model.FruitTransaction;
