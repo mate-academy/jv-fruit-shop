@@ -5,8 +5,8 @@ import core.basesyntax.service.ReportGenerator;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String SEPARATOR = "\n";
-    private static final String PREFIX = "fruit,quantity\n";
+    private static final String SEPARATOR = System.lineSeparator();
+    private static final String PREFIX = "fruit,quantity" + SEPARATOR;
     private static final String DELIMITER = ",";
 
     @Override

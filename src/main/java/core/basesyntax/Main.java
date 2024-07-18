@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.config.AppConfig;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
@@ -8,36 +7,44 @@ import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.StorageService;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
+import core.basesyntax.service.impl.StorageServiceImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.impl.BalanceOperation;
+import core.basesyntax.strategy.impl.PurchaseOperation;
+import core.basesyntax.strategy.impl.ReturnOperation;
+import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        if (args.length < 2) {
-            System.out.println("Please provide input and output file paths as arguments.");
-            return;
-        }
+        StorageService storageService = new StorageServiceImpl();
 
-        String inputFilePath = args[0];
-        String outputFilePath = args[1];
+        FileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read("src/main/resources/reportToRead.csv");
 
-        AppConfig appConfig = new AppConfig();
-        StorageService storageService = appConfig.storageService();
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        FileReader fileReader = appConfig.fileReader();
-        List<String> inputReport = fileReader.read(inputFilePath);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(storageService),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(storageService),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storageService),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(storageService)
+        );
 
-        DataConverter dataConverter = appConfig.dataConverter();
-        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
-
-        ShopService shopService = appConfig.shopService();
+        ShopService shopService = new ShopServiceImpl(operationHandlers);
         shopService.process(transactions);
 
-        ReportGenerator reportGenerator = appConfig.reportGenerator();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
 
-        System.out.println(report);
-
-        FileWriter fileWriter = appConfig.fileWriter();
-        fileWriter.write(report, outputFilePath);
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(report, "src/main/resources/finalReport.csv");
     }
 }

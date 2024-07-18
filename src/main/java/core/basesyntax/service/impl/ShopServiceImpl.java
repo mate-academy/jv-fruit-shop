@@ -23,8 +23,6 @@ public class ShopServiceImpl implements ShopService {
                 throw new RuntimeException("No handler found for operation: "
                         + transaction.getOperation());
             }
-
         }
-
     }
 }
