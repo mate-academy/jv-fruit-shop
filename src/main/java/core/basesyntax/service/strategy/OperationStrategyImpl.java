@@ -2,7 +2,6 @@ package core.basesyntax.service.strategy;
 
 import core.basesyntax.domain.Fruit;
 import core.basesyntax.service.operation.OperationHandler;
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

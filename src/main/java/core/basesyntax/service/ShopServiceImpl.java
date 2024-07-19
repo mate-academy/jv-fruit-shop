@@ -3,13 +3,12 @@ package core.basesyntax.service;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.domain.Fruit;
 import core.basesyntax.service.strategy.OperationStrategy;
-
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
-    private final OperationStrategy operationStrategy;
     private static final String APPLE_NAME = "apple";
     private static final String BANANA_NAME = "banana";
+    private final OperationStrategy operationStrategy;
     private final FruitDao fruitDao;
 
     public ShopServiceImpl(OperationStrategy operationStrategy, FruitDao fruitDao) {
