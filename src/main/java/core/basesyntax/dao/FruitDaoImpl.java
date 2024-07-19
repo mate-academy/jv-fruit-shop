@@ -6,6 +6,6 @@ import core.basesyntax.domain.Fruit;
 public class FruitDaoImpl implements FruitDao {
     @Override
     public void add(Fruit fruit) {
-        Storage.fruits.add(fruit);
+        Storage.getFruits().add(fruit);
     }
 }

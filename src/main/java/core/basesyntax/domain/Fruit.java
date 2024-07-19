@@ -40,7 +40,9 @@ public class Fruit {
             return false;
         }
         Fruit fruit = (Fruit) o;
-        return quantity == fruit.quantity && operation == fruit.operation && Objects.equals(name, fruit.name);
+        return quantity == fruit.quantity
+                && operation == fruit.operation
+                && Objects.equals(name, fruit.name);
     }
 
     @Override
