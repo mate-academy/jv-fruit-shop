@@ -8,13 +8,27 @@ public class Fruit {
     private String name;
     private int quantity;
 
-    public Fruit() {
+    public Fruit(String name, int quantity) {
+        this.name = name;
+        this.quantity = quantity;
     }
 
     public Fruit(Operation operation, String name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     @Override
