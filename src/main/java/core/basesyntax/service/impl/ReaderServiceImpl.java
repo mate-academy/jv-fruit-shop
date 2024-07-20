@@ -10,17 +10,14 @@ import java.util.Scanner;
 public class ReaderServiceImpl implements ReaderService {
     @Override
     public List<String> readFile(String filePath) {
-        Scanner scanner;
-        try {
-            scanner = new Scanner(new File(filePath));
+        List<String> list = new ArrayList<>();
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            while (scanner.hasNext()) {
+                list.add(scanner.nextLine());
+            }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("File path is not correct", e);
         }
-        ArrayList<String> list = new ArrayList<>();
-        while (scanner.hasNext()) {
-            list.add(scanner.next());
-        }
-        scanner.close();
         return list;
     }
 }

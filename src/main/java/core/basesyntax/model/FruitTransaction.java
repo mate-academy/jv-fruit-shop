@@ -1,27 +1,22 @@
-package core.basesyntax.db;
+package core.basesyntax.model;
 
 public class FruitTransaction {
+    private Operation operation;
     private String fruit;
     private int quantity;
-    private String type;
 
-    public FruitTransaction(String fruit, int quantity) {
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public FruitTransaction(String type, String fruit, int quantity) {
-        this.type = type;
-        this.fruit = fruit;
-        this.quantity = quantity;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType() {
-        this.type = type;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
     public String getFruit() {
@@ -38,5 +33,12 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public enum Operation {
+        BALANCE,
+        SUPPLY,
+        PURCHASE,
+        RETURN;
     }
 }

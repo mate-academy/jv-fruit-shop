@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface DataConverter {
-    List<FruitTransaction> convertListToObjects(List<String> list);
+    List<FruitTransaction> convertToTransactions(List<String> csvLines);
 }
