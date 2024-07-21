@@ -1,7 +1,7 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.domain.Fruit;
+import core.basesyntax.domain.FruitTransaction;
 
 public interface FruitDao {
-    void add(Fruit fruit);
+    void add(FruitTransaction fruitTransaction);
 }

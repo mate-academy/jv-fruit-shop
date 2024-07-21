@@ -1,13 +1,13 @@
 package core.basesyntax.db;
 
-import core.basesyntax.domain.Fruit;
+import core.basesyntax.domain.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Storage {
-    private static List<Fruit> fruits = new ArrayList<>();
+    private static List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
-    public static List<Fruit> getFruits() {
-        return fruits;
+    public static List<FruitTransaction> getFruits() {
+        return fruitTransactions;
     }
 }
