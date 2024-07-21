@@ -5,10 +5,13 @@ import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override
-    public String getReport(Map<String, Integer> storage) {
+    public String getReport(Storage storage) {
         StringBuilder report = new StringBuilder();
-        for (Map.Entry<String, Integer> entry : storage.entrySet()) {
-            report.append(entry.getKey()).append(entry.getValue()).append("\n");
+        Map<String, Integer> allStorage = storage.getAll();
+        for (Map.Entry<String, Integer> entry : allStorage.entrySet()) {
+            report.append(entry.getKey())
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

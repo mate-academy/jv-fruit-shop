@@ -1,7 +1,7 @@
 package service;
 
-import java.util.Map;
+import service.impl.Storage;
 
 public interface ReportGenerator {
-    String getReport(Map<String, Integer> storage);
+    String getReport(Storage storage);
 }

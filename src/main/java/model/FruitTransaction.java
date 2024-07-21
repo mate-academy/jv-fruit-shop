@@ -6,9 +6,6 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
-        if (operation == null || fruit == null || fruit.isEmpty()) {
-            throw new IllegalArgumentException("Invalid argument(s) for creating FruitTransaction");
-        }
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -27,4 +24,3 @@ public class FruitTransaction {
     }
 
 }
-

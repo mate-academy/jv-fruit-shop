@@ -1,6 +1,5 @@
 package service.impl;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -10,10 +9,11 @@ import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
-    private final Map<String, Integer> storage = new HashMap<>();
+    private final Storage storage;
 
-    public ShopServiceImpl(OperationStrategy operationStrategy) {
+    public ShopServiceImpl(OperationStrategy operationStrategy, Storage storage) {
         this.operationStrategy = operationStrategy;
+        this.storage = storage;
     }
 
     @Override
@@ -25,6 +25,6 @@ public class ShopServiceImpl implements ShopService {
     }
 
     public Map<String, Integer> getStorage() {
-        return storage;
+        return storage.getAll();
     }
 }
