@@ -28,7 +28,8 @@ public class Parser {
     }
 
     private FruitTransaction.Operation getOperation(String[] parts) {
-        FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(parts[INDEX_OPERATION]);
+        FruitTransaction.Operation operation = FruitTransaction.Operation
+                .fromCode(parts[INDEX_OPERATION]);
         if (operation == null) {
             throw new RuntimeException("Invalid operation: " + parts[INDEX_OPERATION]);
         }
