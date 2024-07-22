@@ -1,18 +1,19 @@
 package core.basesyntax.service.strategy;
 
-import core.basesyntax.domain.Fruit;
+import core.basesyntax.domain.FruitTransaction;
 import core.basesyntax.service.operation.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<Fruit.Operation, OperationHandler> operationHandlerMap;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public OperationStrategyImpl(Map<Fruit.Operation, OperationHandler> operationHandlerMap) {
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlerMap) {
         this.operationHandlerMap = operationHandlerMap;
     }
 
     @Override
-    public OperationHandler get(Fruit.Operation operation) {
+    public OperationHandler get(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
     }
 }

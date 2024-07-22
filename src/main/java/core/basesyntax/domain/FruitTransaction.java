@@ -3,17 +3,17 @@ package core.basesyntax.domain;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Fruit {
+public class FruitTransaction {
     private Operation operation;
-    private String name;
+    private FruitName name;
     private int quantity;
 
-    public Fruit(String name, int quantity) {
+    public FruitTransaction(FruitName name, int quantity) {
         this.name = name;
         this.quantity = quantity;
     }
 
-    public Fruit(Operation operation, String name, int quantity) {
+    public FruitTransaction(Operation operation, FruitName name, int quantity) {
         this.operation = operation;
         this.name = name;
         this.quantity = quantity;
@@ -23,7 +23,7 @@ public class Fruit {
         return operation;
     }
 
-    public String getName() {
+    public FruitName getName() {
         return name;
     }
 
@@ -39,10 +39,10 @@ public class Fruit {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Fruit fruit = (Fruit) o;
-        return quantity == fruit.quantity
-                && operation == fruit.operation
-                && Objects.equals(name, fruit.name);
+        FruitTransaction fruitTransaction = (FruitTransaction) o;
+        return quantity == fruitTransaction.quantity
+                && operation == fruitTransaction.operation
+                && Objects.equals(name, fruitTransaction.name);
     }
 
     @Override
@@ -67,6 +67,24 @@ public class Fruit {
                     .filter(operation -> operation.code.equals(code))
                     .findFirst()
                     .orElseThrow(() -> new RuntimeException("Invalid code" + code));
+        }
+    }
+
+    public enum FruitName {
+        APPLE("apple"),
+        BANANA("banana");
+
+        private String name;
+
+        FruitName(String name) {
+            this.name = name;
+        }
+
+        public static FruitName getByFruitName(String name) {
+            return Arrays.stream(FruitName.values())
+                    .filter(fruitName -> fruitName.name.equals(name))
+                    .findFirst()
+                    .orElseThrow(() -> new RuntimeException("Invalid fruit name: " + name));
         }
     }
 }

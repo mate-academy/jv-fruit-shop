@@ -1,7 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.domain.Fruit;
+import core.basesyntax.domain.FruitTransaction;
 import core.basesyntax.service.DataConverterImpl;
 import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.FileService;
@@ -26,15 +26,16 @@ public class FruitShopApplication {
         FileService fileService = new FileServiceImpl();
         List<String> readLines = fileService.read("fruits.csv");
         DataConverterService dataConverterService = new DataConverterImpl();
-        final List<Fruit> convertedFruits = dataConverterService.convertToFruit(readLines);
-        Map<Fruit.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Fruit.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(Fruit.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(Fruit.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(Fruit.Operation.SUPPLY, new SupplyOperation());
+        final List<FruitTransaction> convertedFruitTransactions =
+                dataConverterService.convertToFruit(readLines);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
-        shopService.process(convertedFruits);
+        shopService.process(convertedFruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         String generatedReport = reportService.generateReport();
         fileService.writeToFile(generatedReport, "resultReport.csv");
