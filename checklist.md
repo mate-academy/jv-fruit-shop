@@ -1,4 +1,4 @@
-## Common mistakes (jv-fruitTransaction-shop)
+## Common mistakes (jv-fruit-shop)
 
 #### Don't begin class or method implementation with empty line. 
 Remove all redundant empty lines, be careful :)
