@@ -23,6 +23,7 @@ public class DataConverterImpl implements DataConverterService {
         String[] splitFruits = line.split(COMMA_DELIMITER);
         FruitTransaction.Operation fruitOperation =
                 FruitTransaction.Operation.getByCode(splitFruits[FRUIT_OPERATION_INDEX]);
+
         FruitTransaction.FruitName fruitName =
                 FruitTransaction.FruitName.getByFruitName(splitFruits[FRUIT_NAME_INDEX]);
         int fruitQuantity = Integer.parseInt(splitFruits[FRUIT_QUANTITY_INDEX]);
