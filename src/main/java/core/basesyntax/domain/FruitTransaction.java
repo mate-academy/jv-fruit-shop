@@ -1,6 +1,7 @@
 package core.basesyntax.domain;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -84,8 +85,7 @@ public class FruitTransaction {
             return Arrays.stream(FruitName.values())
                     .filter(fruitName -> fruitName.name.equals(name))
                     .findFirst()
-                    .orElseThrow(() -> new RuntimeException("Invalid fruit name: " + name));
+                    .orElseThrow(() -> new NoSuchElementException("Invalid fruit name: " + name));
         }
     }
 }
-
