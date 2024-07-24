@@ -5,5 +5,5 @@ public interface FruitTransactionValidator<T, U> {
 
     void validateFruit(String fruit);
 
-    void validateAmount(int amount,U u);
+    void validateAmount(int amount, U u);
 }

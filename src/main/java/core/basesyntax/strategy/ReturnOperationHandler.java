@@ -7,7 +7,11 @@ import core.basesyntax.serviceimpl.FruitTransactionValidatorImpl;
 import java.util.Optional;
 
 public class ReturnOperationHandler implements OperationHandler {
-    private FruitTransactionValidatorImpl validator;
+    private final FruitTransactionValidatorImpl validator;
+
+    public ReturnOperationHandler() {
+        this.validator = new FruitTransactionValidatorImpl();
+    }
 
     @Override
     public void apply(FruitTransaction fruitTransaction) {

@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 
 public class CsvToFruitTransactionConverter implements DataConverter<List<String>,
         List<FruitTransaction>> {
-    private static final int TYPE = 0;
-    private static final int FRUIT = 1;
-    private static final int QUANTITY = 2;
+    private static final int TYPE_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
@@ -17,9 +17,9 @@ public class CsvToFruitTransactionConverter implements DataConverter<List<String
                 .map(line -> {
                     String[] parts = line.split(",");
                     return new FruitTransaction(
-                            FruitTransaction.Operation.fromCode(parts[TYPE]),
-                            parts[FRUIT],
-                            Integer.parseInt(parts[QUANTITY])
+                            FruitTransaction.Operation.fromCode(parts[TYPE_INDEX]),
+                            parts[FRUIT_INDEX],
+                            Integer.parseInt(parts[QUANTITY_INDEX])
                     );
                 })
                 .collect(Collectors.toList());

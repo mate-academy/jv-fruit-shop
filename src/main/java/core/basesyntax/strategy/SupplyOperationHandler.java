@@ -18,7 +18,7 @@ public class SupplyOperationHandler implements OperationHandler {
         validator.validateAmount(suppliedAmount, FruitTransaction.Operation.SUPPLY);
 
         Optional<Integer> currentBalance = Optional.ofNullable(Storage.fruitStorage
-                .get(fruit)); //currentBalance=50 suppliedAmount = 20
+                .get(fruit));
         int balanceAfterSupply = currentBalance.orElse(0) + suppliedAmount;
         Storage.fruitStorage.put(fruit, balanceAfterSupply);
 

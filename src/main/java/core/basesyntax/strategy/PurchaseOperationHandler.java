@@ -17,8 +17,8 @@ public class PurchaseOperationHandler implements OperationHandler {
         int amountToPurchase = fruitTransaction.getQuantity();
         validator.validateAmount(amountToPurchase, FruitTransaction.Operation.PURCHASE);
 
-        Optional<Integer> currentBalance = Optional.ofNullable(Storage.fruitStorage.get(fruit));
-        int balanceAfterPurchase = currentBalance.orElse(0) - amountToPurchase;
+        Integer currentBalance = Optional.ofNullable(Storage.fruitStorage.get(fruit)).orElse(0);
+        int balanceAfterPurchase = currentBalance - amountToPurchase;
 
         if (balanceAfterPurchase < 0) {
             throw new RuntimeException("Insufficient stock for item " + fruit);

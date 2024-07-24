@@ -22,9 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class HelloWorld {
+    private static final String INPUT_FULL_PATH = "src/main/java/resources/input.csv";
+    private static final String OUTPUT_FULL_PATH = "src/main/java/resources/output.csv";
+
     public static void main(String[] arg) {
         ReaderService<List<String>> readerService = new ReaderServiceImpl();
-        List<String> inputReport = readerService.readFromFile("src/main/java/resources/input.csv");
+        List<String> inputReport = readerService.readFromFile(INPUT_FULL_PATH);
 
         DataConverter<List<String>,
                 List<FruitTransaction>> dataConverter = new CsvToFruitTransactionConverter();
@@ -44,6 +47,6 @@ public class HelloWorld {
         List<String> resultingReport = reportGenerator.getReport();
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile("src/main/java/resources/output.csv", resultingReport);
+        writerService.writeToFile(OUTPUT_FULL_PATH, resultingReport);
     }
 }
