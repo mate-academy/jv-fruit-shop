@@ -9,6 +9,9 @@ import service.DataConverter;
 class DataConverterImpl implements DataConverter {
     private static final String SEPARATOR = ",";
     private static final int PARTS_COUNT = 3;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
@@ -18,11 +21,11 @@ class DataConverterImpl implements DataConverter {
             if (parts.length != PARTS_COUNT) {
                 throw new IllegalArgumentException("Invalid input line: " + line);
             }
-            Operation operation = Operation.fromCode(parts[0]);
-            String fruit = parts[1];
+            Operation operation = Operation.fromCode(parts[OPERATION_INDEX]);
+            String fruit = parts[FRUIT_INDEX];
             int quantity;
             try {
-                quantity = Integer.parseInt(parts[2]);
+                quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid quantity: "
                         + parts[2] + " in line: " + line, e);
