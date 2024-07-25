@@ -36,13 +36,17 @@ public class DataConverterImpl implements DataConverter {
     }
 
     public int getQuantity(List<String> csvLines, int index) {
-        int quantity = 0;
+        int quantity;
         try {
             quantity = Integer.parseInt(csvLines.get(index)
                     .substring(csvLines.get(index)
                             .lastIndexOf(",") + 1));
         } catch (NumberFormatException e) {
-            System.out.println("Number is invalid");
+            throw new RuntimeException();
+        }
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity cannot be less than 0, actual quantity: "
+                    + quantity);
         }
         return quantity;
     }

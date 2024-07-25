@@ -2,16 +2,21 @@ package core.basesyntax.main;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FruitShopDao;
+import core.basesyntax.service.FruitTransactionService;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportGenerator;
-import core.basesyntax.service.ShopService;
 import core.basesyntax.service.WriterService;
 import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.FruitShopDaoImpl;
+import core.basesyntax.service.impl.FruitTransactionServiceImpl;
 import core.basesyntax.service.impl.ReaderServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
-import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.impl.WriterServiceImpl;
+import core.basesyntax.strategy.FruitStrategy;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.impl.BalanceHandlerImpl;
+import core.basesyntax.strategy.impl.FruitStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyHandlerImpl;
@@ -27,18 +32,23 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransactions(csvFile);
 
-        Map<FruitTransaction.Operation, Map<String, Integer>> operationHandlers = new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceHandlerImpl().getBalanceComputedMap(fruitTransactions));
+                new BalanceHandlerImpl());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseHandlerImpl().getPurchaseComputedMap(fruitTransactions));
+                new PurchaseHandlerImpl());
         operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnHandlerImpl().getReturnComputedMap(fruitTransactions));
+                new ReturnHandlerImpl());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyHandlerImpl().getSupplyComputedMap(fruitTransactions));
+                new SupplyHandlerImpl());
 
-        ShopService shopService = new ShopServiceImpl();
-        Map<String, Integer> fruitsQuantityAfterDay = shopService.process(operationHandlers);
+        FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlers);
+        FruitShopDao fruitShopDao = new FruitShopDaoImpl();
+
+        FruitTransactionService fruitTransactionService =
+                new FruitTransactionServiceImpl(fruitShopDao, fruitStrategy);
+        Map<String, Integer> fruitsQuantityAfterDay =
+                fruitTransactionService.processTransactions(fruitTransactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String generatedReport = reportGenerator.generateReport(fruitsQuantityAfterDay);
