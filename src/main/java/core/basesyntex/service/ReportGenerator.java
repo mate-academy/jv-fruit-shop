@@ -1,6 +1,6 @@
-package service;
+package core.basesyntex.service;
 
-import service.impl.Storage;
+import core.basesyntex.service.impl.Storage;
 
 public interface ReportGenerator {
     String getReport(Storage storage);

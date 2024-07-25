@@ -1,10 +1,10 @@
-package service.impl;
+package core.basesyntex.service.impl;
 
+import core.basesyntex.model.FruitTransaction;
+import core.basesyntex.model.Operation;
+import core.basesyntex.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
-import model.FruitTransaction;
-import model.Operation;
-import service.DataConverter;
 
 class DataConverterImpl implements DataConverter {
     private static final String SEPARATOR = ",";

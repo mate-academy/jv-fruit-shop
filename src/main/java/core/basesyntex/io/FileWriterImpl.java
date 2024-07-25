@@ -1,4 +1,4 @@
-package io;
+package core.basesyntex.io;
 
 import java.io.IOException;
 import java.nio.file.Files;

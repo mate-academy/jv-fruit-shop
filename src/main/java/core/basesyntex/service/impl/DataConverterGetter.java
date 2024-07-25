@@ -1,6 +1,6 @@
-package service.impl;
+package core.basesyntex.service.impl;
 
-import service.DataConverter;
+import core.basesyntex.service.DataConverter;
 
 public class DataConverterGetter {
     public static DataConverter getDataConverter() {

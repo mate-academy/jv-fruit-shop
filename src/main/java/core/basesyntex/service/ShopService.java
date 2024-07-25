@@ -1,7 +1,7 @@
-package service;
+package core.basesyntex.service;
 
+import core.basesyntex.model.FruitTransaction;
 import java.util.List;
-import model.FruitTransaction;
 
 public interface ShopService {
     void process(List<FruitTransaction> transactions);

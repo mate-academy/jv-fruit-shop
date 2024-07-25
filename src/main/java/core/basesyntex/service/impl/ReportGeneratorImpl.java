@@ -1,7 +1,7 @@
-package service.impl;
+package core.basesyntex.service.impl;
 
+import core.basesyntex.service.ReportGenerator;
 import java.util.Map;
-import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override

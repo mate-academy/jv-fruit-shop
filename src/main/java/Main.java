@@ -1,27 +1,25 @@
-package main;
-
-import io.FileReader;
-import io.FileReaderImpl;
-import io.FileWriter;
-import io.FileWriterImpl;
+import core.basesyntex.io.FileReader;
+import core.basesyntex.io.FileReaderImpl;
+import core.basesyntex.io.FileWriter;
+import core.basesyntex.io.FileWriterImpl;
+import core.basesyntex.model.FruitTransaction;
+import core.basesyntex.model.Operation;
+import core.basesyntex.service.DataConverter;
+import core.basesyntex.service.OperationHandler;
+import core.basesyntex.service.ReportGenerator;
+import core.basesyntex.service.ShopService;
+import core.basesyntex.service.impl.BalanceOperationHandler;
+import core.basesyntex.service.impl.DataConverterGetter;
+import core.basesyntex.service.impl.PurchaseOperationHandler;
+import core.basesyntex.service.impl.ReportGeneratorImpl;
+import core.basesyntex.service.impl.ReturnOperationHandler;
+import core.basesyntex.service.impl.ShopServiceImpl;
+import core.basesyntex.service.impl.Storage;
+import core.basesyntex.service.impl.SupplyOperationHandler;
+import core.basesyntex.strategy.OperationStrategy;
+import core.basesyntex.strategy.OperationStrategyImpl;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import model.Operation;
-import service.DataConverter;
-import service.OperationHandler;
-import service.ReportGenerator;
-import service.ShopService;
-import service.impl.BalanceOperationHandler;
-import service.impl.DataConverterGetter;
-import service.impl.PurchaseOperationHandler;
-import service.impl.ReportGeneratorImpl;
-import service.impl.ReturnOperationHandler;
-import service.impl.ShopServiceImpl;
-import service.impl.Storage;
-import service.impl.SupplyOperationHandler;
-import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
 
 public class Main {
     public static void main(String[] args) {

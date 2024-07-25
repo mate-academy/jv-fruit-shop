@@ -1,11 +1,11 @@
-package service.impl;
+package core.basesyntex.service.impl;
 
+import core.basesyntex.model.FruitTransaction;
+import core.basesyntex.service.OperationHandler;
+import core.basesyntex.service.ShopService;
+import core.basesyntex.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import service.OperationHandler;
-import service.ShopService;
-import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;

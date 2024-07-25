@@ -1,4 +1,4 @@
-package model;
+package core.basesyntex.model;
 
 public enum Operation {
     BALANCE("b"),

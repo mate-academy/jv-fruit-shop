@@ -1,4 +1,4 @@
-package service.impl;
+package core.basesyntex.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;

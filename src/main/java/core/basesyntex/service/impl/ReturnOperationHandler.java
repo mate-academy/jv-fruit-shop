@@ -1,7 +1,7 @@
-package service.impl;
+package core.basesyntex.service.impl;
 
-import model.FruitTransaction;
-import service.OperationHandler;
+import core.basesyntex.model.FruitTransaction;
+import core.basesyntex.service.OperationHandler;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override

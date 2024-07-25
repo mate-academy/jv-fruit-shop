@@ -1,4 +1,4 @@
-package model;
+package core.basesyntex.model;
 
 public class FruitTransaction {
     private final Operation operation;
@@ -22,5 +22,4 @@ public class FruitTransaction {
     public int getQuantity() {
         return quantity;
     }
-
 }
