@@ -22,6 +22,6 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Invalid Operation code" + code);
+        throw new IllegalArgumentException("Invalid Operation code: " + code);
     }
 }

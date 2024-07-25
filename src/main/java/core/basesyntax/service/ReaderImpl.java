@@ -17,7 +17,7 @@ public class ReaderImpl implements Reader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can`t read data " + filePath);
+            throw new RuntimeException("Can't read data: " + filePath);
         }
         return lines;
     }

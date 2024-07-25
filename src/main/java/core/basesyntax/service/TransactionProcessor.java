@@ -1,9 +1,8 @@
-package core.basesyntax.strategy;
+package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.Map;
 
 public interface TransactionProcessor {
-    Map<String, Integer> process(List<FruitTransaction> transactions);
+    void process(List<FruitTransaction> fruitTransactions);
 }

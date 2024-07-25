@@ -12,10 +12,10 @@ public class TransactionParserImpl implements TransactionParser {
     private static final String SPLITTER = ",";
 
     @Override
-    public List<FruitTransaction> parse(List<String> registers) {
+    public List<FruitTransaction> parse(List<String> lines) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        for (var register : registers) {
-            String[] data = register.split(SPLITTER);
+        for (var line : lines) {
+            String[] data = line.split(SPLITTER);
             Operation operation = Operation.operationCode(data[OPERATION_INDEX]);
             String fruit = data[PRODUCT_INDEX];
             int quantity = Integer.parseInt(data[QUANTITY]);
