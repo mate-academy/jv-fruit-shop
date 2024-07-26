@@ -20,13 +20,14 @@ import core.basesyntax.strategy.ReturnOperationHandler;
 import core.basesyntax.strategy.SupplyOperationHandler;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class HelloWorld {
     private static final String INPUT_FULL_PATH = "src/main/java/resources/input.csv";
     private static final String OUTPUT_FULL_PATH = "src/main/java/resources/output.csv";
 
     public static void main(String[] arg) {
-        ReaderService<List<String>> readerService = new ReaderServiceImpl();
+        ReaderService readerService = new ReaderServiceImpl();
         List<String> inputReport = readerService.readFromFile(INPUT_FULL_PATH);
 
         DataConverter<List<String>,
@@ -44,7 +45,7 @@ public class HelloWorld {
         shopService.process(transactions);
 
         ReportGenerator<List<String>> reportGenerator = new ReportGeneratorImpl();
-        List<String> resultingReport = reportGenerator.getReport();
+        Set<String> resultingReport = reportGenerator.getReport();
 
         WriterService writerService = new WriterServiceImpl();
         writerService.writeToFile(OUTPUT_FULL_PATH, resultingReport);

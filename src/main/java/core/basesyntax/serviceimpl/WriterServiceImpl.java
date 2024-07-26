@@ -4,13 +4,13 @@ import core.basesyntax.service.WriterService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.List;
+import java.util.Set;
 
 public class WriterServiceImpl implements WriterService {
     private static final String REPORT_HEADER = "fruit,quantity";
 
     @Override
-    public void writeToFile(String filePath, List<String> lines) {
+    public void writeToFile(String filePath, Set<String> lines) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(REPORT_HEADER);
             writer.newLine();

@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderServiceImpl implements ReaderService<List<String>> {
+public class ReaderServiceImpl implements ReaderService {
     private final List<String> lines = new ArrayList<>();
 
     @Override
