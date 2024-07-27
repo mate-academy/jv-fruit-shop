@@ -6,11 +6,4 @@ public class SupplyOperation implements OperationHandler {
         validateQuantity(defaultQuantity, fruitQuantity);
         return defaultQuantity + fruitQuantity;
     }
-
-    private void validateQuantity(int defaultQuantity, int fruitQuantity) {
-        int resultSupplyQuantity = defaultQuantity + fruitQuantity;
-        if (resultSupplyQuantity < 0) {
-            throw new RuntimeException("Result quantity can't be less than 0");
-        }
-    }
 }

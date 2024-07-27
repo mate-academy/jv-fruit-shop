@@ -6,11 +6,4 @@ public class PurchaseOperation implements OperationHandler {
         validateQuantity(defaultQuantity, fruitQuantity);
         return defaultQuantity - fruitQuantity;
     }
-
-    private void validateQuantity(int defaultQuantity, int fruitQuantity) {
-        int resultPurchaseQuantity = defaultQuantity - fruitQuantity;
-        if (resultPurchaseQuantity < 0) {
-            throw new RuntimeException("Result quantity can't be less than 0");
-        }
-    }
 }
