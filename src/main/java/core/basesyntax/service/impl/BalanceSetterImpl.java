@@ -3,13 +3,13 @@ package core.basesyntax.service.impl;
 import core.basesyntax.dao.ReportDao;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.service.SetterBalance;
+import core.basesyntax.service.BalanceSetter;
 import java.util.List;
 
-public class SetterBalanceImpl implements SetterBalance {
+public class BalanceSetterImpl implements BalanceSetter {
     private final ReportDao reportDao;
 
-    public SetterBalanceImpl(ReportDao reportDao) {
+    public BalanceSetterImpl(ReportDao reportDao) {
         this.reportDao = reportDao;
     }
 

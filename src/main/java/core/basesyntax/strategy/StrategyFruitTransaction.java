@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Operation;
-import core.basesyntax.transaction.HandlerOperation;
+import core.basesyntax.transaction.OperationHandler;
 
 public interface StrategyFruitTransaction {
-    HandlerOperation execute(Operation operation);
+    OperationHandler execute(Operation operation);
 }

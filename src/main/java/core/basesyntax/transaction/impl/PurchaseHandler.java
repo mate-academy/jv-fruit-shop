@@ -1,8 +1,8 @@
 package core.basesyntax.transaction.impl;
 
-import core.basesyntax.transaction.HandlerOperation;
+import core.basesyntax.transaction.OperationHandler;
 
-public class Purchase implements HandlerOperation {
+public class PurchaseHandler implements OperationHandler {
     @Override
     public int perform(int balance, int quantity) {
         if (balance < quantity) {

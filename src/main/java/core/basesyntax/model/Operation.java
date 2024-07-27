@@ -16,14 +16,14 @@ public enum Operation {
     }
 
     public static Operation getOperationFromCode(String operationValue) {
-        return switch (operationValue) {
-            case "b" -> BALANCE;
-            case "s" -> SUPPLY;
-            case "p" -> PURCHASE;
-            case "r" -> RETURN;
-            default -> throw new RuntimeException("You have entered a non-existent transaction."
-                    + operationValue
-                    + "Available values: BALANCE, SUPPLY, PURCHASE, RETURN");
-        };
+        Operation[] operations = Operation.values();
+        for (Operation operation : operations) {
+            if (operation.code.equals(operationValue)) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("You have entered a non-existent transaction."
+                + operationValue
+                + "Available values: BALANCE, SUPPLY, PURCHASE, RETURN");
     }
 }

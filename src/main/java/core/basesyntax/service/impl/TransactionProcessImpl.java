@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionProcess;
 import core.basesyntax.strategy.StrategyFruitTransaction;
-import core.basesyntax.transaction.HandlerOperation;
+import core.basesyntax.transaction.OperationHandler;
 
 public class TransactionProcessImpl implements TransactionProcess {
     private final StrategyFruitTransaction strategyFruitTransaction;
@@ -22,11 +22,11 @@ public class TransactionProcessImpl implements TransactionProcess {
         if (fruitTransaction.getOperation() == Operation.BALANCE) {
             return;
         }
-        HandlerOperation handlerOperation = strategyFruitTransaction
+        OperationHandler operationHandler = strategyFruitTransaction
                 .execute(fruitTransaction.getOperation());
         int balanceBeforeOperation = reportDao
                 .getBalanceFruitTransaction(fruitTransaction);
-        int balanceAfterOperation = handlerOperation
+        int balanceAfterOperation = operationHandler
                 .perform(balanceBeforeOperation, fruitTransaction.getQuantity());
         fruitTransaction.setQuantity(balanceAfterOperation);
         reportDao.updateReport(fruitTransaction);

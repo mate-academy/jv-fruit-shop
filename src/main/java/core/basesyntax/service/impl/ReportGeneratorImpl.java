@@ -1,16 +1,16 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.ReportDao;
-import core.basesyntax.service.GenerateReport;
+import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
-public class GenerateReportImpl implements GenerateReport {
+public class ReportGeneratorImpl implements ReportGenerator {
     private static final String TITLE_REPORT = "fruit,quantity";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private static final String FIELD_SEPARATOR = ",";
     private final ReportDao reportDao;
 
-    public GenerateReportImpl(ReportDao reportDao) {
+    public ReportGeneratorImpl(ReportDao reportDao) {
         this.reportDao = reportDao;
     }
 

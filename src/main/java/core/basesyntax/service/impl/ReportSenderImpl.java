@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.SenderReport;
+import core.basesyntax.service.ReportSender;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class SenderReportImpl implements SenderReport {
+public class ReportSenderImpl implements ReportSender {
     @Override
     public void send(String path, String report) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {

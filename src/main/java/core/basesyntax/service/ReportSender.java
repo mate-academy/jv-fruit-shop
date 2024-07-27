@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface SenderReport {
+public interface ReportSender {
     void send(String path, String report);
 }

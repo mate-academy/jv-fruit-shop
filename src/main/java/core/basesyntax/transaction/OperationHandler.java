@@ -1,5 +1,5 @@
 package core.basesyntax.transaction;
 
-public interface HandlerOperation {
+public interface OperationHandler {
     int perform(int balance, int quantity);
 }
