@@ -31,15 +31,15 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private int parseQuantity(String quantityStr, String csvLine) {
+        if (Integer.parseInt(quantityStr) < 0) {
+            throw new IllegalArgumentException("Quantity cannot be less than 0, "
+                    + "actual quantity: " + Integer.parseInt(quantityStr));
+        }
         int quantity;
         try {
             quantity = Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid quantity value in line: " + csvLine, e);
-        }
-        if (quantity < 0) {
-            throw new IllegalArgumentException("Quantity cannot be less than 0, "
-                    + "actual quantity: " + quantity);
         }
         return quantity;
     }

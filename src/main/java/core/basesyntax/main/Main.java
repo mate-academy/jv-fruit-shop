@@ -27,9 +27,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_PATH_INPUT = "src/main/resources/inputFile.csv";
+    private static final String FILE_PATH_OUTPUT = "src/main/resources/outputFile.csv";
+
     public static void main(String[] args) {
         ReaderService readerService = new ReaderServiceImpl();
-        List<String> csvFile = readerService.readFile("src/main/resources/inputFile.csv");
+        List<String> csvFile = readerService.readFile(FILE_PATH_INPUT);
 
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransactions(csvFile);
@@ -57,6 +60,6 @@ public class Main {
         String generatedReport = reportGenerator.generateReport(fruitsQuantityAfterDay);
 
         WriterService writerService = new WriterServiceImpl();
-        writerService.writeToCsv(generatedReport, "src/main/resources/outputFile.csv");
+        writerService.writeToCsv(generatedReport, FILE_PATH_OUTPUT);
     }
 }
