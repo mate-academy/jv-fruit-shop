@@ -5,12 +5,6 @@ import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private final Storage storage;
-
-    public ReportGeneratorImpl(Storage storage) {
-        this.storage = storage;
-    }
-
     @Override
     public String getReport(Storage storage) {
         StringBuilder builder = new StringBuilder("fruit,quantity" + System.lineSeparator());

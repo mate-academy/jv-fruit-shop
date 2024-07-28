@@ -12,15 +12,15 @@ public class FileReaderImpl implements core.basesyntax.service.FileReader {
     public List<String> readFromFile(String fromFile) {
         try (BufferedReader reader = new BufferedReader(new FileReader(fromFile))) {
             List<String> inputList = new ArrayList<>();
-            String value = reader.readLine();
-            while (value != null) {
+            String value;
+            while ((value = reader.readLine()) != null) {
                 inputList.add(value);
             }
             return inputList;
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("No file found with such name", e);
+            throw new RuntimeException("Can't find file by path: " + fromFile, e);
         } catch (IOException e) {
-            throw new RuntimeException("Input/Output exception", e);
+            throw new RuntimeException("Error reading from file: " + fromFile, e);
         }
     }
 }

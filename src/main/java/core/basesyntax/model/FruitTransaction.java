@@ -39,7 +39,7 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getFromChar(String code) {
+        public static Operation getFromCode(String code) {
             for (Operation op : Operation.values()) {
                 if (op.getCode().equals(code)) {
                     return op;

@@ -11,10 +11,7 @@ public class ReturnOperation implements OperationHandler {
     }
 
     @Override
-    public void count(FruitTransaction transaction) {
-        if (transaction.getQuantity() < 0) {
-            throw new RuntimeException("Quantity can't be less than 0");
-        }
+    public void handleTransaction(FruitTransaction transaction) {
         storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }

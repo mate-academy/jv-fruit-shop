@@ -9,7 +9,7 @@ public class FileWriterImpl implements core.basesyntax.service.FileWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(toFile))) {
             writer.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file" + toFile, e);
+            throw new RuntimeException("Error writing to file: " + toFile, e);
         }
     }
 }

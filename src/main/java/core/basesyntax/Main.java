@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFromFile("reportToRead.csv");
 
@@ -42,7 +42,7 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(storage);
 
         FileWriter fileWriter = new FileWriterImpl();
