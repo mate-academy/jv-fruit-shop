@@ -4,20 +4,25 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.FruitShopDao;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.utility.ListService;
-import core.basesyntax.utility.impl.ListServiceImpl;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class BalanceHandlerImpl implements OperationHandler {
-    private static List<FruitTransaction> balanceList = new ArrayList<>();
+    private static final List<FruitTransaction> BALANCE_LIST = new ArrayList<>();
+    private final ListService listService;
     private Map<String, Integer> balanceFruitsMap;
-    private ListService listService = new ListServiceImpl();
+
+    public BalanceHandlerImpl(ListService listService) {
+        this.listService = listService;
+        this.balanceFruitsMap = new HashMap<>();
+    }
 
     @Override
     public void handleOperation(FruitTransaction transaction, FruitShopDao fruitShopDao) {
-        balanceList.add(transaction);
-        balanceFruitsMap = listService.getComputedMap(balanceList);
+        BALANCE_LIST.add(transaction);
+        balanceFruitsMap = listService.getComputedMap(BALANCE_LIST);
         fruitShopDao.setBalanceMap(balanceFruitsMap);
     }
 }

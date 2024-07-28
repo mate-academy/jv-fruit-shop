@@ -11,16 +11,8 @@ public class ListServiceImpl implements ListService {
     public Map<String, Integer> getComputedMap(List<FruitTransaction> fruitTransactionList) {
         Map<String, Integer> fruitTransactionComputed = new HashMap<>();
         for (FruitTransaction fruitTransaction : fruitTransactionList) {
-            if (!fruitTransactionComputed.containsKey(fruitTransaction.getFruit())) {
-                fruitTransactionComputed.put(fruitTransaction.getFruit(),
-                        fruitTransaction.getQuantity());
-            } else if (fruitTransactionComputed.containsKey(fruitTransaction.getFruit())) {
-                int value = fruitTransactionComputed.get(fruitTransaction.getFruit());
-                fruitTransactionComputed
-                        .replace(fruitTransaction.getFruit(),
-                                value,
-                                value + fruitTransaction.getQuantity());
-            }
+            fruitTransactionComputed.merge(fruitTransaction.getFruit(),
+                    fruitTransaction.getQuantity(), Integer::sum);
         }
         return fruitTransactionComputed;
     }

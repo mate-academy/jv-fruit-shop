@@ -11,7 +11,7 @@ public class OperationHandlerSwitchImpl implements OperationHandlerSwitch {
             case "s" -> FruitTransaction.Operation.SUPPLY;
             case "p" -> FruitTransaction.Operation.PURCHASE;
             case "r" -> FruitTransaction.Operation.RETURN;
-            default -> throw new IllegalStateException("Unexpected value: " + operation);
+            default -> throw new IllegalStateException("No such operation available " + operation);
         };
     }
 }

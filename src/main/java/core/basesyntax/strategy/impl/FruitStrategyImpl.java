@@ -3,6 +3,7 @@ package core.basesyntax.strategy.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.utility.impl.ListServiceImpl;
 import java.util.Map;
 
 public class FruitStrategyImpl implements FruitStrategy {
@@ -14,22 +15,25 @@ public class FruitStrategyImpl implements FruitStrategy {
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("Operation is null");
+        }
         {
             switch (operation) {
                 case BALANCE -> {
-                    return new BalanceHandlerImpl();
+                    return new BalanceHandlerImpl(new ListServiceImpl());
                 }
                 case SUPPLY -> {
-                    return new SupplyHandlerImpl();
+                    return new SupplyHandlerImpl(new ListServiceImpl());
                 }
                 case PURCHASE -> {
-                    return new PurchaseHandlerImpl();
+                    return new PurchaseHandlerImpl(new ListServiceImpl());
                 }
                 case RETURN -> {
-                    return new ReturnHandlerImpl();
+                    return new ReturnHandlerImpl(new ListServiceImpl());
                 }
                 default -> {
-                    return null;
+                    throw new RuntimeException("Invalid operation");
                 }
             }
         }

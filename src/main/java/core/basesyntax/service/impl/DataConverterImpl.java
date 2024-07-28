@@ -11,44 +11,36 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> csvLines) {
-        List<String> csvLinesCopy = csvLines;
+        List<String> csvLinesCopy = new ArrayList<>(csvLines);
         csvLinesCopy.remove(0);
         OperationHandlerSwitch operationHandlerSwitch = new OperationHandlerSwitchImpl();
         List<FruitTransaction> listOfTransactions = new ArrayList<>();
-        for (int i = 0; i < csvLinesCopy.size(); i++) {
-            String type = getType(csvLinesCopy, i);
-            String fruit = getFruit(csvLinesCopy, i);
-            int quantity = getQuantity(csvLinesCopy, i);
-            listOfTransactions.add(new FruitTransaction(operationHandlerSwitch
-                    .getOperation(type.trim()), fruit, quantity));
+        for (String csvLine : csvLinesCopy) {
+            String[] parts = csvLine.split(",");
+            if (parts.length != 3) {
+                throw new IllegalArgumentException("CSV line format is incorrect: " + csvLine);
+            }
+            String type = parts[0].trim();
+            String fruit = parts[1].trim();
+            int quantity = parseQuantity(parts[2].trim(), csvLine);
+
+            listOfTransactions.add(new FruitTransaction(
+                    operationHandlerSwitch.getOperation(type), fruit, quantity));
         }
         return listOfTransactions;
     }
 
-    public String getType(List<String> csvLines, int index) {
-        return csvLines.get(index).substring(0, csvLines.get(index).indexOf(","));
-    }
-
-    public String getFruit(List<String> csvLines, int index) {
-        return csvLines.get(index)
-                .substring(csvLines.get(index).indexOf(",") + 1,
-                        csvLines.get(index).lastIndexOf(","));
-    }
-
-    public int getQuantity(List<String> csvLines, int index) {
+    private int parseQuantity(String quantityStr, String csvLine) {
         int quantity;
         try {
-            quantity = Integer.parseInt(csvLines.get(index)
-                    .substring(csvLines.get(index)
-                            .lastIndexOf(",") + 1));
+            quantity = Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
-            throw new RuntimeException();
+            throw new IllegalArgumentException("Invalid quantity value in line: " + csvLine, e);
         }
         if (quantity < 0) {
-            throw new RuntimeException("Quantity cannot be less than 0, actual quantity: "
-                    + quantity);
+            throw new IllegalArgumentException("Quantity cannot be less than 0, "
+                    + "actual quantity: " + quantity);
         }
         return quantity;
     }
 }
-

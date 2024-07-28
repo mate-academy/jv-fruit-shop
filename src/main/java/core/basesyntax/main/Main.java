@@ -20,6 +20,8 @@ import core.basesyntax.strategy.impl.FruitStrategyImpl;
 import core.basesyntax.strategy.impl.PurchaseHandlerImpl;
 import core.basesyntax.strategy.impl.ReturnHandlerImpl;
 import core.basesyntax.strategy.impl.SupplyHandlerImpl;
+import core.basesyntax.utility.ListService;
+import core.basesyntax.utility.impl.ListServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +35,15 @@ public class Main {
         List<FruitTransaction> fruitTransactions = dataConverter.convertToTransactions(csvFile);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        ListService listService = new ListServiceImpl();
         operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceHandlerImpl());
+                new BalanceHandlerImpl(listService));
         operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseHandlerImpl());
+                new PurchaseHandlerImpl(listService));
         operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnHandlerImpl());
+                new ReturnHandlerImpl(listService));
         operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyHandlerImpl());
+                new SupplyHandlerImpl(listService));
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl(operationHandlers);
         FruitShopDao fruitShopDao = new FruitShopDaoImpl();
