@@ -33,17 +33,17 @@ public class Main {
 
         Storage storage = new Storage();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(storage));
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(storage);
+        String resultingReport = reportGenerator.getReport();
 
         Writer fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(resultingReport, "finalReport.csv");

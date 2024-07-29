@@ -17,12 +17,11 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
-            if (handler != null) {
-                handler.handleTransaction(transaction);
-            } else {
+            if (handler == null) {
                 throw new IllegalArgumentException("No handler found for operation: "
-                                                    + transaction.getOperation());
+                        + transaction.getOperation());
             }
+            handler.handleTransaction(transaction);
         }
     }
 }
