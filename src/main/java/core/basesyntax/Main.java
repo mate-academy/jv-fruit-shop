@@ -3,10 +3,10 @@ package core.basesyntax;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
+import core.basesyntax.service.Writer;
 import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
 import core.basesyntax.service.impl.FileWriterImpl;
@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImpl();
+        Reader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFromFile("reportToRead.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
@@ -45,7 +45,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(storage);
 
-        FileWriter fileWriter = new FileWriterImpl();
+        Writer fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(resultingReport, "finalReport.csv");
     }
 }
