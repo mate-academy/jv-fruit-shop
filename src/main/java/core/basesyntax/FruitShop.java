@@ -5,11 +5,13 @@ import core.basesyntax.dao.impl.ReportDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceSetter;
+import core.basesyntax.service.ConverterFruitTransaction;
 import core.basesyntax.service.Reader;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportSender;
 import core.basesyntax.service.TransactionProcess;
 import core.basesyntax.service.impl.BalanceSetterImpl;
+import core.basesyntax.service.impl.ConverterFruitTransactionImpl;
 import core.basesyntax.service.impl.ReaderImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ReportSenderImpl;
@@ -47,7 +49,10 @@ public class FruitShop {
                 = new TransactionProcessImpl(strategyFruitTransaction, reportDao);
         ReportGenerator reportGenerator = new ReportGeneratorImpl(reportDao);
         ReportSender reportSender = new ReportSenderImpl();
-        List<FruitTransaction> fruitTransactions = reader.read(TRANSACTIONS_FILE_PATH);
+        List<String> readFruitTransaction = reader.read(TRANSACTIONS_FILE_PATH);
+        ConverterFruitTransaction converterFruitTransaction = new ConverterFruitTransactionImpl();
+        List<FruitTransaction> fruitTransactions = converterFruitTransaction
+                .convertToFruitTransaction(readFruitTransaction);
         balanceSetter.setBalance(fruitTransactions);
         fruitTransactions.forEach(transactionProcess::process);
         String report = reportGenerator.generate();
