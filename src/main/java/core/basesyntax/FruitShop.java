@@ -22,7 +22,6 @@ import core.basesyntax.transaction.OperationHandler;
 import core.basesyntax.transaction.impl.PurchaseHandler;
 import core.basesyntax.transaction.impl.ReturnHandler;
 import core.basesyntax.transaction.impl.SupplyHandler;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,13 +30,10 @@ public class FruitShop {
             = "src/main/java/resourses/transactions.csv";
     private static final String REPORTS_FILE_PATH
             = "src/main/java/resourses/reports.csv";
-    private static final Map<Operation, OperationHandler> operations = new HashMap<>();
-
-    static {
-        operations.put(Operation.SUPPLY, new SupplyHandler());
-        operations.put(Operation.PURCHASE, new PurchaseHandler());
-        operations.put(Operation.RETURN, new ReturnHandler());
-    }
+    private static final Map<Operation, OperationHandler> operations =
+            Map.of(Operation.SUPPLY, new SupplyHandler(),
+                    Operation.PURCHASE, new PurchaseHandler(),
+                    Operation.RETURN, new ReturnHandler());
 
     public static void main(String[] args) {
         StrategyFruitTransaction strategyFruitTransaction
