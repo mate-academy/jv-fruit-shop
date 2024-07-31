@@ -6,10 +6,12 @@ import java.util.Map;
 import java.util.Stack;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String HEAD_LINE = "fruit,quantity" + System.lineSeparator();
+
     @Override
     public String getReport() {
         Stack<String> stack = new Stack<>();
-        stack.push("fruit,quantity" + System.lineSeparator());
+        stack.push(HEAD_LINE);
         for (Map.Entry<String, Integer> entry : Storage.getStorage().entrySet()) {
             if (entry.getValue() < 0) {
                 throw new RuntimeException("Quantity can't be less than 0");

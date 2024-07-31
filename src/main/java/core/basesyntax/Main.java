@@ -18,7 +18,6 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,11 +29,12 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                    FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                    FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                    FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                    FruitTransaction.Operation.SUPPLY, new SupplyOperation()
+        );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);

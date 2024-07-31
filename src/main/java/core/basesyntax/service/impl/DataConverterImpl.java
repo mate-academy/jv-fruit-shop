@@ -8,7 +8,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final String SPLITTER = ",";
+    private static final String DELIMITER = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputList) {
@@ -18,7 +18,7 @@ public class DataConverterImpl implements DataConverter {
         return inputList.stream()
                 .skip(1)
                 .map(s -> {
-                    String[] parts = s.split(SPLITTER);
+                    String[] parts = s.split(DELIMITER);
                     return new FruitTransaction(
                             FruitTransaction.Operation.getFromCode(parts[OPERATION_INDEX]),
                             parts[FRUIT_INDEX],
