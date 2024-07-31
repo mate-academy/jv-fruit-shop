@@ -35,6 +35,15 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    @Override
+    public String toString() {
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -53,11 +62,11 @@ public class FruitTransaction {
 
         public static Operation fromCode(String code) {
             for (Operation operation : Operation.values()) {
-                if (operation.getCode().equals(code)) {
+                if (operation.code.equals(code)) {
                     return operation;
                 }
             }
-            throw new IllegalArgumentException("Unknown operation code: " + code);
+            throw new IllegalArgumentException("Unrecognized operation code: " + code);
         }
     }
 }
