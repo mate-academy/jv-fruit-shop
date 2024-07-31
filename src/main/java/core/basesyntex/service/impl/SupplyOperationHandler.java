@@ -5,7 +5,7 @@ import core.basesyntex.service.OperationHandler;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override
-    public void handle(FruitTransaction transaction, Storage storage) {
-        storage.updateStorage(transaction.getFruit(), transaction.getQuantity());
+    public void handle(FruitTransaction transaction) {
+        Storage.updateStorage(transaction.getFruit(), transaction.getQuantity());
     }
 }

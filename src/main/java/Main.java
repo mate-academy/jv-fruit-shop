@@ -14,7 +14,6 @@ import core.basesyntex.service.impl.PurchaseOperationHandler;
 import core.basesyntex.service.impl.ReportGeneratorImpl;
 import core.basesyntex.service.impl.ReturnOperationHandler;
 import core.basesyntex.service.impl.ShopServiceImpl;
-import core.basesyntex.service.impl.Storage;
 import core.basesyntex.service.impl.SupplyOperationHandler;
 import core.basesyntex.strategy.OperationStrategy;
 import core.basesyntex.strategy.OperationStrategyImpl;
@@ -40,12 +39,11 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        Storage storage = new Storage();
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(storage);
+        String resultingReport = reportGenerator.getReport();
         String finalReportFilePath = args[1];
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, finalReportFilePath);

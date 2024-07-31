@@ -28,7 +28,7 @@ class DataConverterImpl implements DataConverter {
                 quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid quantity: "
-                        + parts[2] + " in line: " + line, e);
+                        + QUANTITY_INDEX + " in line: " + line, e);
             }
             FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
             transactions.add(transaction);
