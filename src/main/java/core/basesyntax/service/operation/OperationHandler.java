@@ -1,10 +1,18 @@
 package core.basesyntax.service.operation;
 
-public interface OperationHandler {
-    int getQuantity(int defaultQuantity, int fruitQuantity);
+import core.basesyntax.domain.FruitTransaction;
 
-    default void validateQuantity(int defaultQuantity, int fruitQuantity) {
-        if (defaultQuantity < 0 || fruitQuantity < 0) {
+public interface OperationHandler {
+    void calculateQuantity(FruitTransaction.FruitName fruitName, int quantity);
+
+    default void validateFruitName(FruitTransaction.FruitName fruitName) {
+        if (fruitName == null) {
+            throw new RuntimeException("Fruit name can't be null");
+        }
+    }
+
+    default void validateQuantity(int quantity) {
+        if (quantity < 0) {
             throw new RuntimeException("Quantity can't be less than 0");
         }
     }

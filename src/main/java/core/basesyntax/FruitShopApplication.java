@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.domain.FruitTransaction;
 import core.basesyntax.service.DataConverterImpl;
 import core.basesyntax.service.DataConverterService;
@@ -24,9 +23,6 @@ public class FruitShopApplication {
     public static void main(String[] args) {
         FileService fileService = new FileServiceImpl();
         List<String> readLines = fileService.read("fruits.csv");
-        DataConverterService dataConverterService = new DataConverterImpl();
-        final List<FruitTransaction> convertedFruitTransactions =
-                dataConverterService.convertToFruit(readLines);
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
@@ -34,7 +30,10 @@ public class FruitShopApplication {
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation()
         );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopService shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        DataConverterService dataConverterService = new DataConverterImpl();
+        List<FruitTransaction> convertedFruitTransactions =
+                dataConverterService.convertToFruit(readLines);
         shopService.process(convertedFruitTransactions);
         ReportService reportService = new ReportServiceImpl();
         String generatedReport = reportService.generateReport();

@@ -12,10 +12,10 @@ public class ReportServiceImpl implements ReportService {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(HEADER_LINE)
                 .append(SYSTEM_LINE_SEPARATOR);
-        Storage.getFruits().forEach(fruit ->
-                reportBuilder.append(fruit.getName().name().toLowerCase())
+        Storage.getFruitTransactions()
+                .forEach((key, value) -> reportBuilder.append(key.toString().toLowerCase())
                 .append(COMMA_DELIMITER)
-                .append(fruit.getQuantity())
+                .append(value)
                 .append(SYSTEM_LINE_SEPARATOR));
         return reportBuilder.toString();
     }
