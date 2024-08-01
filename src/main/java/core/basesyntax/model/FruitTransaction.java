@@ -60,7 +60,7 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation fromCode(String code) {
+        public static Operation getOperationFromCode(String code) {
             for (Operation op : values()) {
                 if (op.getCode().equalsIgnoreCase(code)) {
                     return op;

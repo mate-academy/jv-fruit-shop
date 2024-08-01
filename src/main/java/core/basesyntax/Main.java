@@ -40,7 +40,7 @@ public class Main {
         FruitShop shopService = new FruitShopImpl(operationStrategy);
         shopService.process(transactions);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(transactions);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.generateReport();
 
         FileWriter fileWriter = new FileWriterImpl();

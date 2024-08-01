@@ -17,7 +17,7 @@ public class DataConverterImpl implements DataConverter {
             }
             FruitTransaction.Operation operation;
             try {
-                operation = FruitTransaction.Operation.fromCode(parts[0]);
+                operation = FruitTransaction.Operation.getOperationFromCode(parts[0]);
             } catch (IllegalArgumentException e) {
                 System.err.println("Invalid operation code: " + parts[0]);
                 continue;
@@ -38,8 +38,7 @@ public class DataConverterImpl implements DataConverter {
         return transactions;
     }
 
-    private static List<String> removeSpaces(List<String> inputReport) {
+    private static void removeSpaces(List<String> inputReport) {
         inputReport.replaceAll(string -> string.replace(" ", ""));
-        return inputReport;
     }
 }

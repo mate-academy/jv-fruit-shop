@@ -1,11 +1,12 @@
 package core.basesyntax.service.operations;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        storageFruits.put(transaction.getFruit(), storageFruits
+        Storage.getAllFruits().put(transaction.getFruit(), Storage.getAllFruits()
                 .getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
     }
 }
