@@ -22,9 +22,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_FILE_NAME = "fruits.csv";
+    private static final String OUTPUT_FILE_NAME = "fruitReport.csv";
+
     public static void main(String[] args) {
         MyFileReader fileReader = new MyFileReaderImpl();
-        List<String> inputReport = fileReader.read("fruits.csv");
+        List<String> inputReport = fileReader.read(INPUT_FILE_NAME);
 
         DataConverter dataConverter = new DataConverterImpl();
 
@@ -45,6 +48,6 @@ public class Main {
         String report = reportGenerator.getReport();
 
         MyFileWriter fileWriter = new MyFileWriterImpl();
-        fileWriter.write("fruitReport.csv", report);
+        fileWriter.write(OUTPUT_FILE_NAME, report);
     }
 }
