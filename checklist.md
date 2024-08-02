@@ -7,12 +7,12 @@ Remove all redundant empty lines, be careful :)
 Please design your classes according to the SOLID principles. Make your classes simple, reusable and focused on a single problem.
 In this case you will save a lot of time when you need to add/modify existing functionality in the future.
 
-#### Make your services independent and call them in core.basesyntex.main() method
+#### Make your services independent and call them in main() method
 All services should be independent. 
 We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
 
-Let's create `Main` class with `core.basesyntex.main()` method to show how the program works.
-Make all services independent and call them in the right order in `core.basesyntex.main()` method step by step (the result of previous core.basesyntex.service method should be the input for next one)
+Let's create `Main` class with `main()` method to show how the program works.
+Make all services independent and call them in the right order in `main()` method step by step (the result of previous service method should be the input for next one)
 
 #### Don't keep all logic in a single package
 You can use packages to make the structure of the code better, so let's do it. Gather classes with same 
@@ -20,10 +20,10 @@ purpose/common logic in a corresponding package.
 
 Your project structure should consist the following packages:
 - `db` for holding Storage
-- `core.basesyntex.model` for holding models like Fruit (if necessary)
-- `core.basesyntex.service` for holding services, like Writer, Reader, Parser and so on
-- `core.basesyntex.service.impl` for holding implementations of services
-- `core.basesyntex.strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
+- `model` for holding models like Fruit (if necessary)
+- `service` for holding services, like Writer, Reader, Parser and so on
+- `service.impl` for holding implementations of services
+- `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
 
 #### VCS usage
 Remember about the informative commit and PR naming. Person that is outside of context of your work progress should understand
@@ -40,8 +40,8 @@ Let's rethrow a RuntimeException with an **informative** message and exception o
         }
     ```
   
-#### try-with-core.basesyntex.resources
-Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-core.basesyntex.resources.
+#### try-with-resources
+Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resources.
 
 #### Follow the encapsulation principle
 Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
@@ -50,7 +50,7 @@ Hide inner class elements with the help of access modifiers. It's a bad practice
 In order to represent fruit storage you may use already existing data structures, think of the one that will be 
 the most suitable for your needs.
 
-#### Place the input and output files into the `src/core.basesyntex.main/core.basesyntex.resources` folder.
+#### Place the input and output files into the `src/main/resources` folder.
 
 #### Avoid hardcode in your solution
 * Use hardcoded values only in the Main class and/or test classes.  
@@ -59,7 +59,7 @@ the most suitable for your needs.
     ```java
     public class ReaderServiceImpl implements ReaderService {
        public List<String> readFromFile() {
-          File file = new File("src/core.basesyntex.main/core.basesyntex.resources/file.txt");
+          File file = new File("src/main/resources/file.txt");
           ...
        }
     }
@@ -79,21 +79,21 @@ Please provide the relative path to a resource instead.
  
 - Bad:  
     ```java
-    readerService.readFromFile("C:/Users/.../my-project/src/core.basesyntex.main/core.basesyntex.resources/file.txt");
+    readerService.readFromFile("C:/Users/.../my-project/src/main/resources/file.txt");
     ```  
     
 - Good:  
     ```java
-    readerService.readFromFile("src/core.basesyntex.main/core.basesyntex.resources/file.txt");
+    readerService.readFromFile("src/main/resources/file.txt");
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
-In the `core.basesyntex.main()` method you can pass the core.basesyntex.strategy map into the core.basesyntex.service that chooses the correct core.basesyntex.strategy for each operation.
+In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
 
 - Example:  
     ```java
-    public static void core.basesyntex.main(String[] args){
-        // create and fill the core.basesyntex.strategy map
+    public static void main(String[] args){
+        // create and fill the strategy map
         FruitService fruitService = new FruitServiceImpl(operationStrategies);
     }
     ```  
