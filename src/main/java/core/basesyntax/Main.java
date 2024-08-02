@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import converter.DataConverter;
 import converter.DataConverterImpl;
 import handler.BalanceOperationHandler;
 import handler.OperationHandler;
@@ -8,11 +9,17 @@ import handler.ReturnOperationHandler;
 import handler.SupplyOperationHandler;
 import java.util.HashMap;
 import java.util.Map;
+import manager.FruitShopManager;
 import model.FruitTransaction;
+import read.write.file.FileReader;
 import read.write.file.FileReaderImpl;
+import read.write.file.FileWriter;
 import read.write.file.FileWriterImpl;
+import report.ReportGenerator;
 import report.ReportGeneratorImpl;
-import service.ShopServiceImpl;
+import service.ShopService;
+import service.impl.ShopServiceImpl;
+import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
 /**
@@ -22,31 +29,27 @@ public class Main {
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
     // and call their methods, but do not write any business logic in the `main` method!
+    private static final String INPUT_FILE_PATH = "src/reportToRead.csv";
+    private static final String OUTPUT_FILE_PATH = "src/finalReport.csv";
+
     public static void main(String[] args) {
-        FileReaderImpl fileReader = new FileReaderImpl();
-        DataConverterImpl dataConverter = new DataConverterImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        FileReader fileReader = new FileReaderImpl();
+        DataConverter dataConverter = new DataConverterImpl();
         Map<String, Integer> storage = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler(storage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler(storage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler(storage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler(storage));
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
-        ReportGeneratorImpl reportGenerator = new ReportGeneratorImpl(storage);
-        FileWriterImpl fileWriter = new FileWriterImpl();
-
-        String inputFilePath = "src/reportToRead.csv";
-        String outputFilePath = "finalReport.csv";
-
-        FruitShopManager fruitShopManager = new FruitShopManager(fileReader,
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storage),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storage),
+                FruitTransaction.Operation.RETURN, new ReturnOperationHandler(storage),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(storage)
+        );
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        FileWriter fileWriter = new FileWriterImpl();
+        FruitShopManager manager = new FruitShopManager(fileReader,
                 dataConverter, shopService,
                 reportGenerator, fileWriter,
-                inputFilePath, outputFilePath);
-        fruitShopManager.manageShop();
+                INPUT_FILE_PATH, OUTPUT_FILE_PATH);
+        manager.manageShop();
     }
 }
