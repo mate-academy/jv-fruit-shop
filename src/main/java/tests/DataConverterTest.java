@@ -6,10 +6,8 @@ import core.basesyntax.DataConverter;
 import core.basesyntax.DataConverterImpl;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
-
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 public class DataConverterTest {

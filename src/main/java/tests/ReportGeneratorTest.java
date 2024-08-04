@@ -1,12 +1,12 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.ReportGenerator;
 import core.basesyntax.ReportGeneratorImpl;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ReportGeneratorTest {
     @Test
