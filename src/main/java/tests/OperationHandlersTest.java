@@ -1,9 +1,9 @@
 package tests;
 
-import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
+import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.PurchaseOperation;
 import core.basesyntax.ReturnOperation;
 import core.basesyntax.SupplyOperation;

@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
@@ -18,7 +20,6 @@ import java.util.Map;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 public class ShopServiceTest {
     private ShopService shopService;
@@ -98,7 +99,8 @@ public class ShopServiceTest {
         supply.setQuantity(-20); // Негативное количество
         transactions.add(supply);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions));
         assertEquals("Invalid quantity: -20", exception.getMessage());
     }
 
@@ -171,7 +173,8 @@ public class ShopServiceTest {
         balance.setQuantity(-50);
         transactions.add(balance);
 
-        RuntimeException exception = assertThrows(RuntimeException.class, () -> shopService.process(transactions));
+        RuntimeException exception = assertThrows(RuntimeException.class,
+                () -> shopService.process(transactions));
         assertEquals("Balance cannot be negative", exception.getMessage());
     }
 
@@ -235,7 +238,8 @@ public class ShopServiceTest {
         purchase.setQuantity(150);
         transactions.add(purchase);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions));
         assertEquals("Not enough fruit in storage for purchase: banana", exception.getMessage());
     }
 
@@ -249,7 +253,8 @@ public class ShopServiceTest {
         purchase.setQuantity(30);
         transactions.add(purchase);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions));
         assertEquals("Not enough fruit in storage for purchase: orange", exception.getMessage());
     }
 
@@ -273,7 +278,8 @@ public class ShopServiceTest {
         purchase.setQuantity(30);
         transactions.add(purchase);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions));
         assertEquals("Invalid quantity: -50", exception.getMessage());
 
         final Map<String, Integer> storage = shopService.getStorage();
@@ -294,7 +300,8 @@ public class ShopServiceTest {
         unknownOperation.setQuantity(50);
         transactions.add(unknownOperation);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions));
         assertEquals("Unknown operation: null", exception.getMessage());
 
         final Map<String, Integer> storage = shopService.getStorage();
@@ -328,7 +335,8 @@ public class ShopServiceTest {
         transactions.add(returnOp);
 
         // Проверка на выброс исключения
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> shopService.process(transactions));
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> shopService.process(transactions));
         assertEquals("Not enough fruit in storage for purchase: apple", exception.getMessage());
 
         // Проверка состояния хранилища
