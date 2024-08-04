@@ -11,7 +11,7 @@ import core.basesyntax.PurchaseOperation;
 import core.basesyntax.ReturnOperation;
 import core.basesyntax.SupplyOperation;
 import java.util.HashMap;
-import java .util.Map;
+import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class OperationStrategyTest {
