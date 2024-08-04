@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.service.converter.DataConverter;
 import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.strategy.BalanceOperation;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;

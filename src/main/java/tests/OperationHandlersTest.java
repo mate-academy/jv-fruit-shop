@@ -1,7 +1,5 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
@@ -12,6 +10,8 @@ import core.basesyntax.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OperationHandlersTest {
 
@@ -26,7 +26,8 @@ public class OperationHandlersTest {
         handler.handle(transaction, storage);
 
         // Проверяем, что после операции BALANCE в хранилище у банана 100
-        assertEquals(100, (int) storage.get("banana"), "Balance operation failed to set the correct quantity");
+        assertEquals(100, (int) storage.get("banana"),
+                "Balance operation failed to set the correct quantity");
     }
 
     @Test
@@ -40,7 +41,8 @@ public class OperationHandlersTest {
         handler.handle(transaction, storage);
 
         // Проверяем, что после операции SUPPLY в хранилище у банана 100
-        assertEquals(100, (int) storage.get("banana"), "Supply operation failed to add the correct quantity");
+        assertEquals(100, (int) storage.get("banana"),
+                "Supply operation failed to add the correct quantity");
     }
 
     @Test
@@ -55,7 +57,8 @@ public class OperationHandlersTest {
         handler.handle(transaction, storage);
 
         // Проверяем, что после операции PURCHASE в хранилище у банана 100 (150 - 50)
-        assertEquals(100, (int) storage.get("banana"), "Purchase operation failed to subtract the correct quantity");
+        assertEquals(100, (int) storage.get("banana"),
+                "Purchase operation failed to subtract the correct quantity");
     }
 
     @Test
@@ -70,6 +73,7 @@ public class OperationHandlersTest {
         handler.handle(transaction, storage);
 
         // Проверяем, что после операции RETURN в хранилище у банана 75 (50 + 25)
-        assertEquals(75, (int) storage.get("banana"), "Return operation failed to add the correct quantity");
+        assertEquals(75, (int) storage.get("banana"),
+                "Return operation failed to add the correct quantity");
     }
 }

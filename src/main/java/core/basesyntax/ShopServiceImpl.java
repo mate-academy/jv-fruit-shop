@@ -17,7 +17,8 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             if (handler == null) {
-                throw new IllegalArgumentException("Unknown operation: " + transaction.getOperation());
+                throw new IllegalArgumentException(
+                        "Unknown operation: " + transaction.getOperation());
             }
             try {
                 handler.handle(transaction, storage);

@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import java.util.Map;
 
-
 public class PurchaseOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction, Map<String, Integer> storage) {
@@ -13,7 +12,8 @@ public class PurchaseOperation implements OperationHandler {
             throw new IllegalArgumentException("Invalid quantity: " + quantity);
         }
         if (currentQuantity < quantity) {
-            throw new IllegalArgumentException("Not enough fruit in storage for purchase: " + transaction.getFruit());
+            throw new IllegalArgumentException(
+                    "Not enough fruit in storage for purchase: " + transaction.getFruit());
         }
         storage.put(transaction.getFruit(), currentQuantity - quantity);
     }

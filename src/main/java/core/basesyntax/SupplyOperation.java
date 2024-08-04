@@ -9,6 +9,7 @@ public class SupplyOperation implements OperationHandler {
         if (quantity < 0) {
             throw new IllegalArgumentException("Invalid quantity: " + quantity);
         }
-        storage.put(transaction.getFruit(), storage.getOrDefault(transaction.getFruit(), 0) + quantity);
+        storage.put(transaction.getFruit(),
+                storage.getOrDefault(transaction.getFruit(), 0) + quantity);
     }
 }

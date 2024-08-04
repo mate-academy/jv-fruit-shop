@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
-
 import java.util.HashMap;
 import java.util.Map;
 
