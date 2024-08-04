@@ -13,15 +13,12 @@ import core.basesyntax.ReturnOperation;
 import core.basesyntax.ShopService;
 import core.basesyntax.ShopServiceImpl;
 import core.basesyntax.SupplyOperation;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import core.basesyntax.strategy.BalanceOperation;
 import org.junit.jupiter.api.BeforeEach;
-
 import org.junit.jupiter.api.Test;
 
 public class ShopServiceTest {

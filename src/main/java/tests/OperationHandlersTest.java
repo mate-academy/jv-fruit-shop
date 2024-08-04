@@ -2,7 +2,6 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
