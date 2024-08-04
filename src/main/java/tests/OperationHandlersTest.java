@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.BalanceOperation;
+import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
@@ -14,6 +14,7 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class OperationHandlersTest {
+
     @Test
     public void testBalanceOperation() {
         final OperationHandler handler = new BalanceOperation();
@@ -24,7 +25,8 @@ public class OperationHandlersTest {
         transaction.setQuantity(100);
         handler.handle(transaction, storage);
 
-        assertEquals(100, (int) storage.get("banana"));
+        // Проверяем, что после операции BALANCE в хранилище у банана 100
+        assertEquals(100, (int) storage.get("banana"), "Balance operation failed to set the correct quantity");
     }
 
     @Test
@@ -37,7 +39,8 @@ public class OperationHandlersTest {
         transaction.setQuantity(100);
         handler.handle(transaction, storage);
 
-        assertEquals(100, (int) storage.get("banana"));
+        // Проверяем, что после операции SUPPLY в хранилище у банана 100
+        assertEquals(100, (int) storage.get("banana"), "Supply operation failed to add the correct quantity");
     }
 
     @Test
@@ -51,7 +54,8 @@ public class OperationHandlersTest {
         transaction.setQuantity(50);
         handler.handle(transaction, storage);
 
-        assertEquals(100, (int) storage.get("banana"));
+        // Проверяем, что после операции PURCHASE в хранилище у банана 100 (150 - 50)
+        assertEquals(100, (int) storage.get("banana"), "Purchase operation failed to subtract the correct quantity");
     }
 
     @Test
@@ -65,6 +69,7 @@ public class OperationHandlersTest {
         transaction.setQuantity(25);
         handler.handle(transaction, storage);
 
-        assertEquals(75, (int) storage.get("banana"));
+        // Проверяем, что после операции RETURN в хранилище у банана 75 (50 + 25)
+        assertEquals(75, (int) storage.get("banana"), "Return operation failed to add the correct quantity");
     }
 }

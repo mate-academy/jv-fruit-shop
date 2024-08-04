@@ -2,7 +2,7 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
-import core.basesyntax.BalanceOperation;
+import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
 import core.basesyntax.OperationStrategy;

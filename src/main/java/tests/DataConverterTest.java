@@ -2,8 +2,8 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.DataConverter;
-import core.basesyntax.DataConverterImpl;
+import core.basesyntax.service.converter.DataConverter;
+import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
 import java.util.Arrays;
