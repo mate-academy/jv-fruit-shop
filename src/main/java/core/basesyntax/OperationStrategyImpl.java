@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {

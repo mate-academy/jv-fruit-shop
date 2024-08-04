@@ -1,10 +1,18 @@
 package tests;
 
-import core.basesyntax.*;
-import org.junit.jupiter.api.Test;
+import core.basesyntax.BalanceOperation;
+import core.basesyntax.Operation;
+import core.basesyntax.OperationHandler;
+import core.basesyntax.OperationStrategy;
+import core.basesyntax.OperationStrategyImpl;
+import core.basesyntax.PurchaseOperation;
+import core.basesyntax.ReturnOperation;
+import core.basesyntax.SupplyOperation;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 

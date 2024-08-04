@@ -1,10 +1,17 @@
 package tests;
 
-import core.basesyntax.*;
-import org.junit.jupiter.api.Test;
+import core.basesyntax.BalanceOperation;
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.Operation;
+import core.basesyntax.OperationHandler;
+import core.basesyntax.PurchaseOperation;
+import core.basesyntax.ReturnOperation;
+import core.basesyntax.SupplyOperation;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -17,7 +24,7 @@ public class OperationHandlersTest {
         transaction.setOperation(Operation.BALANCE);
         transaction.setFruit("banana");
         transaction.setQuantity(100);
-        ((BalanceOperation) handler).handle(transaction, storage);
+        handler.handle(transaction, storage);
 
         assertEquals(100, (int) storage.get("banana"));
     }
