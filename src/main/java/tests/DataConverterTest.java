@@ -4,11 +4,12 @@ import core.basesyntax.DataConverter;
 import core.basesyntax.DataConverterImpl;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DataConverterTest {
 
@@ -19,43 +20,44 @@ public class DataConverterTest {
             "p,banana,13",
             "r,banana,10"
     );
+
     private final DataConverter dataConverter = new DataConverterImpl();
     private final List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
 
     @Test
-    public void data_converter_size_test() {
-        Assertions.assertEquals(4, transactions.size());
+    public void dataConverterSizeTest() {
+        assertEquals(4, transactions.size());
     }
 
     @Test
-    public void data_converter_balance_test() {
+    public void dataConverterBalanceTest() {
         FruitTransaction transaction = transactions.get(0);
-        Assertions.assertEquals(Operation.BALANCE.getCode(), transaction.getOperation().getCode());
-        Assertions.assertEquals("banana", transaction.getFruit());
-        Assertions.assertEquals(20, transaction.getQuantity());
+        assertEquals(Operation.BALANCE.getCode(), transaction.getOperation().getCode());
+        assertEquals("banana", transaction.getFruit());
+        assertEquals(20, transaction.getQuantity());
     }
 
     @Test
-    public void data_converter_supply_test() {
+    public void dataConverterSupplyTest() {
         FruitTransaction transaction = transactions.get(1);
-        Assertions.assertEquals(Operation.SUPPLY.getCode(), transaction.getOperation().getCode());
-        Assertions.assertEquals("banana", transaction.getFruit());
-        Assertions.assertEquals(100, transaction.getQuantity());
+        assertEquals(Operation.SUPPLY.getCode(), transaction.getOperation().getCode());
+        assertEquals("banana", transaction.getFruit());
+        assertEquals(100, transaction.getQuantity());
     }
 
     @Test
-    public void data_converter_purchase_test() {
+    public void dataConverterPurchaseTest() {
         FruitTransaction transaction = transactions.get(2);
-        Assertions.assertEquals(Operation.PURCHASE.getCode(), transaction.getOperation().getCode());
-        Assertions.assertEquals("banana", transaction.getFruit());
-        Assertions.assertEquals(13, transaction.getQuantity());
+        assertEquals(Operation.PURCHASE.getCode(), transaction.getOperation().getCode());
+        assertEquals("banana", transaction.getFruit());
+        assertEquals(13, transaction.getQuantity());
     }
 
     @Test
-    public void data_converter_return_test() {
+    public void dataConverterReturnTest() {
         FruitTransaction transaction = transactions.get(3);
-        Assertions.assertEquals(Operation.RETURN.getCode(), transaction.getOperation().getCode());
-        Assertions.assertEquals("banana", transaction.getFruit());
-        Assertions.assertEquals(10, transaction.getQuantity());
+        assertEquals(Operation.RETURN.getCode(), transaction.getOperation().getCode());
+        assertEquals("banana", transaction.getFruit());
+        assertEquals(10, transaction.getQuantity());
     }
 }

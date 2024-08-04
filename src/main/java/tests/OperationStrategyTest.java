@@ -24,7 +24,9 @@ public class OperationStrategyTest {
         operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(Operation.RETURN, new ReturnOperation());
         operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
+
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+
         assertInstanceOf(BalanceOperation.class, operationStrategy.getHandler(Operation.BALANCE));
         assertInstanceOf(PurchaseOperation.class, operationStrategy.getHandler(Operation.PURCHASE));
         assertInstanceOf(ReturnOperation.class, operationStrategy.getHandler(Operation.RETURN));

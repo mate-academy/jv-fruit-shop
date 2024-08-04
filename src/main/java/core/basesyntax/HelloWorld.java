@@ -15,7 +15,7 @@ public class HelloWorld {
         List<String> inputReport = fileReader.read("reportToRead.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());

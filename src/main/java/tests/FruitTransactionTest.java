@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class FruitTransactionTest {
 
     @Test
-    public void test_set_and_get_operation() {
+    public void testSetAndGetOperation() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.BALANCE);
 
@@ -17,7 +17,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void test_set_and_get_fruit() {
+    public void testSetAndGetFruit() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setFruit("banana");
 
@@ -25,7 +25,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void test_set_and_get_quantity() {
+    public void testSetAndGetQuantity() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setQuantity(100);
 
