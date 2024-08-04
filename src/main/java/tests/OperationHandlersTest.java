@@ -2,7 +2,13 @@ package tests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import core.basesyntax.*;
+
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.Operation;
+import core.basesyntax.OperationHandler;
+import core.basesyntax.PurchaseOperation;
+import core.basesyntax.ReturnOperation;
+import core.basesyntax.SupplyOperation;
 import core.basesyntax.strategy.BalanceOperation;
 import java.util.HashMap;
 import java.util.Map;
