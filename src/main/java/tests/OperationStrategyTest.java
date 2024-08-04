@@ -10,9 +10,11 @@ import core.basesyntax.OperationStrategyImpl;
 import core.basesyntax.PurchaseOperation;
 import core.basesyntax.ReturnOperation;
 import core.basesyntax.SupplyOperation;
-import org.testng.annotations.Test;
+
 import java.util.HashMap;
 import java.util.Map;
+
+import org.testng.annotations.Test;
 
 public class OperationStrategyTest {
     @Test

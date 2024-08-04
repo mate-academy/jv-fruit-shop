@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
-import core.basesyntax.service.converter.DataConverter;  // Assuming this is needed
+import core.basesyntax.service.converter.DataConverter;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Arrays;
 import java.util.List;
