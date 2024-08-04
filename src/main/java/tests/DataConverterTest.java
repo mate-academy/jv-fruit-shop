@@ -5,7 +5,6 @@ import core.basesyntax.DataConverterImpl;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
 import java.util.List;
 

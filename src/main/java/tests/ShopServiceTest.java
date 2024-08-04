@@ -7,9 +7,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import core.basesyntax.BalanceOperation;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
@@ -21,6 +18,8 @@ import core.basesyntax.ReturnOperation;
 import core.basesyntax.ShopService;
 import core.basesyntax.ShopServiceImpl;
 import core.basesyntax.SupplyOperation;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ShopServiceTest {
 
