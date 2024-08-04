@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
@@ -10,8 +12,6 @@ import core.basesyntax.SupplyOperation;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OperationHandlersTest {
 

@@ -1,5 +1,7 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
@@ -8,11 +10,9 @@ import core.basesyntax.OperationStrategyImpl;
 import core.basesyntax.PurchaseOperation;
 import core.basesyntax.ReturnOperation;
 import core.basesyntax.SupplyOperation;
+import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 public class OperationStrategyTest {
     @Test

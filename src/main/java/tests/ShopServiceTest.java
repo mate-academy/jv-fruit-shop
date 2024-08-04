@@ -1,9 +1,9 @@
 package tests;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.*; // Static import for JUnit assertions
 
 import core.basesyntax.strategy.BalanceOperation;
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.FruitTransaction; // Assuming this is needed
 import core.basesyntax.Operation;
 import core.basesyntax.OperationHandler;
 import core.basesyntax.OperationStrategy;
@@ -17,9 +17,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
+import org.junit.jupiter.api.BeforeEach;
+
+import org.junit.jupiter.api.Test;
 
 public class ShopServiceTest {
     private ShopService shopService;
