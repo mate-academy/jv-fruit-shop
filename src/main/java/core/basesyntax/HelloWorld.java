@@ -5,11 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static core.basesyntax.FileCreator.createFile;
-
 public class HelloWorld {
     public static void main(String[] args) throws IOException {
-        createFile();
+        FileCreator.createFile();
 
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read("reportToRead.csv");

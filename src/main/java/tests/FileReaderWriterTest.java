@@ -1,17 +1,19 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.FileReader;
 import core.basesyntax.FileReaderImpl;
 import core.basesyntax.FileWriter;
 import core.basesyntax.FileWriterImpl;
-import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class FileReaderWriterTest {
     @Test

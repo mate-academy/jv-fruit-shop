@@ -1,10 +1,11 @@
 package tests;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.Operation;
-import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class FruitTransactionTest {
 
