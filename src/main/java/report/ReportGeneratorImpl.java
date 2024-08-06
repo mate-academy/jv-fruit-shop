@@ -18,3 +18,4 @@ public class ReportGeneratorImpl implements ReportGenerator {
                 .collect(Collectors.joining(System.lineSeparator()));
     }
 }
+

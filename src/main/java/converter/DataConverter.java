@@ -6,3 +6,4 @@ import model.FruitTransaction;
 public interface DataConverter {
     List<FruitTransaction> converterToTransaction(List<String> inputReport);
 }
+

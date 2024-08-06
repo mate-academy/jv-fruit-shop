@@ -22,3 +22,4 @@ public class OperationStrategyImpl implements OperationStrategy {
         }
     }
 }
+

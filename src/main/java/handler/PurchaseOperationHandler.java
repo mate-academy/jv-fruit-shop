@@ -16,3 +16,4 @@ public class PurchaseOperationHandler implements OperationHandler {
                 storage.getOrDefault(transaction.getFruit(), 0) - transaction.getQuantity());
     }
 }
+

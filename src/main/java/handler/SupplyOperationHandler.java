@@ -16,3 +16,4 @@ public class SupplyOperationHandler implements OperationHandler {
                 storage.getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
     }
 }
+
