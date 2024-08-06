@@ -1,21 +1,26 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.OperationHandler;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.BalanceOperation;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.PurchaseOperation;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ReturnOperation;
+import core.basesyntax.service.impl.ShopServiceImpl;
+import core.basesyntax.service.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.BalanceOperation;
-import service.DataConverter;
-import service.DataConverterImpl;
-import service.ReportGenerator;
-import service.ReportGeneratorImpl;
-import strategy.OperationHandler;
-import strategy.OperationStrategy;
-import strategy.OperationStrategyImpl;
-import strategy.PurchaseOperation;
-import strategy.ReturnOperation;
-import strategy.ShopService;
-import strategy.ShopServiceImpl;
-import strategy.SupplyOperation;
 
 public class Main {
 
@@ -28,11 +33,16 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
 
         // 3. Create and feel the map with all OperationHandler implementations
+        Map<String, Integer> fruitStorage = new HashMap<>();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperation(fruitStorage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperation(fruitStorage));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
@@ -41,7 +51,6 @@ public class Main {
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
-        Map<String, Integer> fruitStorage = new HashMap<>();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(fruitStorage);
         String resultingReport = reportGenerator.getReport();
 
