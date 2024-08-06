@@ -38,4 +38,3 @@ public class FruitShopManager {
         fileWriter.write(resultingReport, outputFilePath);
     }
 }
-

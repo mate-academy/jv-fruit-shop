@@ -7,13 +7,15 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final int OFFSET = 1;
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> converterToTransaction(List<String> data) {
         return data.stream()
-                .skip(1)
+                .skip(OFFSET)
                 .map(line -> {
-                    String[] parts = line.split(",");
+                    String[] parts = line.split(SEPARATOR);
                     FruitTransaction.Operation operation
                             = FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
                     return new FruitTransaction(operation, parts[FRUIT_NAME_INDEX],

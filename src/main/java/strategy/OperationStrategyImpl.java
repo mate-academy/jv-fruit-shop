@@ -14,12 +14,10 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public void handleOperation(FruitTransaction transaction) {
         OperationHandler handler = handlers.get(transaction.getOperation());
-        if (handler != null) {
-            handler.handle(transaction);
-        } else {
+        if (handler == null) {
             throw new RuntimeException("No handler found for operation: "
                     + transaction.getOperation());
         }
+        handler.handle(transaction);
     }
 }
-

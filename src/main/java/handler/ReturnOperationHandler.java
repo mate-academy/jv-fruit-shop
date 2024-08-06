@@ -16,4 +16,3 @@ public class ReturnOperationHandler implements OperationHandler {
                 storage.getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
     }
 }
-

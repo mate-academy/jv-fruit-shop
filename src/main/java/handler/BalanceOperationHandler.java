@@ -15,4 +15,3 @@ public class BalanceOperationHandler implements OperationHandler {
         storage.put(transaction.getFruit(), transaction.getQuantity());
     }
 }
-

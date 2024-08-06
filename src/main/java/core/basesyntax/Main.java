@@ -22,13 +22,7 @@ import service.impl.ShopServiceImpl;
 import strategy.OperationStrategy;
 import strategy.OperationStrategyImpl;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
-    // HINT: In the `public static void main(String[] args)`
-    // it is better to create instances of your classes,
-    // and call their methods, but do not write any business logic in the `main` method!
     private static final String INPUT_FILE_PATH = "src/reportToRead.csv";
     private static final String OUTPUT_FILE_PATH = "src/finalReport.csv";
 
@@ -53,4 +47,3 @@ public class Main {
         manager.manageShop();
     }
 }
-
