@@ -6,7 +6,7 @@ import core.basesyntax.model.FruitTransaction;
 public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        Storage.getAllFruits().put(transaction.getFruit(), Storage.getAllFruits()
-                .getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
+        Storage.getAllFruits().merge(transaction.getFruit(), transaction.getQuantity(),
+                Integer::sum);
     }
 }

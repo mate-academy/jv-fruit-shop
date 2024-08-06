@@ -8,11 +8,16 @@ import java.util.List;
 public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
-        removeSpaces(inputReport);
+        inputReport.replaceAll(string -> string.replace(" ", ""));
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < inputReport.size(); i++) {
             String[] parts = inputReport.get(i).split(",");
-            if (parts.length != 3) {
+            try {
+                if (parts.length != 3) {
+                    continue;
+                }
+            } catch (IllegalArgumentException e) {
+                System.err.println("Invalid format: " + parts.length);
                 continue;
             }
             FruitTransaction.Operation operation;
@@ -36,9 +41,5 @@ public class DataConverterImpl implements DataConverter {
             transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
         return transactions;
-    }
-
-    private static void removeSpaces(List<String> inputReport) {
-        inputReport.replaceAll(string -> string.replace(" ", ""));
     }
 }
