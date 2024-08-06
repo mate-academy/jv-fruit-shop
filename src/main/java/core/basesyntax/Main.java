@@ -21,6 +21,7 @@ import core.basesyntax.strategy.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
