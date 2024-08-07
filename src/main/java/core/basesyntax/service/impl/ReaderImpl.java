@@ -1,9 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Reader;
-
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -16,6 +14,7 @@ public class ReaderImpl implements Reader {
         List<String[]> linesArray = new ArrayList<>();
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
+            bufferedReader.readLine();
             while ((line = bufferedReader.readLine()) != null) {
                 linesArray.add(line.split(","));
             }

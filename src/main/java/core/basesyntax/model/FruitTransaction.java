@@ -5,6 +5,12 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
     public Operation getOperation() {
         return operation;
     }
@@ -43,6 +49,15 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation getFromCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Can't found operation by code " + code);
         }
     }
 }

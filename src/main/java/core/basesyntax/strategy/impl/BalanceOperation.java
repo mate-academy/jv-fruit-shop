@@ -15,8 +15,9 @@ public class BalanceOperation implements Operation {
 
     @Override
     public void proceed(FruitTransaction fruitTransaction) {
-        if (!storageDao.get(fruitTransaction.getFruitName()).equals(null)) {
-            throw new OperationException("Fruit " + fruitTransaction.getFruitName() + " already exist");
+        if (storageDao.get(fruitTransaction.getFruitName()) != null) {
+            throw new OperationException("Fruit " + fruitTransaction.getFruitName()
+                    + " already exist");
         }
         Fruit fruit = new Fruit(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
         storageDao.add(fruit);
