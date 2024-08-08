@@ -12,7 +12,6 @@ public class SupplyOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        storage.put(transaction.getFruit(),
-                storage.getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
+        storage.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
     }
 }

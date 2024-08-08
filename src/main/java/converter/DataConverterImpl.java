@@ -16,8 +16,8 @@ public class DataConverterImpl implements DataConverter {
                 .skip(OFFSET)
                 .map(line -> {
                     String[] parts = line.split(SEPARATOR);
-                    FruitTransaction.Operation operation
-                            = FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
+                    FruitTransaction.Operation operation =
+                            FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
                     return new FruitTransaction(operation, parts[FRUIT_NAME_INDEX],
                             Integer.parseInt(parts[QUANTITY_INDEX]));
                 })
