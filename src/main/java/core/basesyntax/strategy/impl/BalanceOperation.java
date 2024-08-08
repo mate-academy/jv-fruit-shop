@@ -2,7 +2,7 @@ package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitOperation;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationException;
 
@@ -14,12 +14,12 @@ public class BalanceOperation implements Operation {
     }
 
     @Override
-    public void proceed(FruitTransaction fruitTransaction) {
-        if (storageDao.get(fruitTransaction.getFruitName()) != null) {
-            throw new OperationException("Fruit " + fruitTransaction.getFruitName()
+    public void proceed(FruitOperation fruitOperation) {
+        if (storageDao.get(fruitOperation.getFruitName()) != null) {
+            throw new OperationException("Fruit " + fruitOperation.getFruitName()
                     + " already exist");
         }
-        Fruit fruit = new Fruit(fruitTransaction.getFruitName(), fruitTransaction.getQuantity());
+        Fruit fruit = new Fruit(fruitOperation.getFruitName(), fruitOperation.getQuantity());
         storageDao.add(fruit);
     }
 }

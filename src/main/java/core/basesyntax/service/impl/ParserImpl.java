@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitOperation;
 import core.basesyntax.service.Parser;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,18 +8,18 @@ import java.util.List;
 
 public class ParserImpl implements Parser {
     @Override
-    public List<FruitTransaction> parse(List<String[]> lines) {
-        List<FruitTransaction> commands = new ArrayList<>();
+    public List<FruitOperation> parse(List<String[]> lines) {
+        List<FruitOperation> commands = new ArrayList<>();
         for (String[] line : lines) {
             if (line.length != 3) {
                 throw new RuntimeException("Can't parse information from " + Arrays.toString(line));
             }
-            FruitTransaction fruitTransaction = new FruitTransaction(
-                    FruitTransaction.Operation.getFromCode(line[0]),
+            FruitOperation fruitOperation = new FruitOperation(
+                    FruitOperation.Operation.getFromCode(line[0]),
                     line[1],
                     Integer.parseInt(line[2])
             );
-            commands.add(fruitTransaction);
+            commands.add(fruitOperation);
         }
         return commands;
     }
