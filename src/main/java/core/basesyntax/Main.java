@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitOperation;
+import core.basesyntax.model.Instruction;
 import core.basesyntax.service.OperationExecutor;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.Reader;
@@ -25,19 +26,19 @@ public class Main {
 
     public static void main(String[] args) {
         StorageDaoImpl storageDao = new StorageDaoImpl();
-        Map<FruitOperation.Operation, Operation> operationsHandlers = new HashMap<>();
-        operationsHandlers.put(FruitOperation.Operation.BALANCE,
+        Map<FruitOperation, Operation> operationsHandlers = new HashMap<>();
+        operationsHandlers.put(FruitOperation.BALANCE,
                 new BalanceOperation(storageDao));
-        operationsHandlers.put(FruitOperation.Operation.SUPPLY, new SupplyOperation(storageDao));
-        operationsHandlers.put(FruitOperation.Operation.PURCHASE,
+        operationsHandlers.put(FruitOperation.SUPPLY, new SupplyOperation(storageDao));
+        operationsHandlers.put(FruitOperation.PURCHASE,
                 new PurchaseOperation(storageDao));
-        operationsHandlers.put(FruitOperation.Operation.RETURN, new ReturnOperation(storageDao));
+        operationsHandlers.put(FruitOperation.RETURN, new ReturnOperation(storageDao));
         Reader reader = new ReaderImpl();
         Parser parser = new ParserImpl();
         OperationExecutor operationExecutor = new OperationExecutorImpl(operationsHandlers);
         Writer writer = new WriterImpl();
         List<String[]> lines = reader.read(INPUT_FILE);
-        List<FruitOperation> transactions = parser.parse(lines);
+        List<Instruction> transactions = parser.parse(lines);
         operationExecutor.proceedAll(transactions);
         writer.createReport(OUTPUT_FILE);
     }

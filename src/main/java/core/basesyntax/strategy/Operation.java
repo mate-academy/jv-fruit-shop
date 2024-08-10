@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.model.FruitOperation;
+import core.basesyntax.model.Instruction;
 
 public interface Operation {
-    void proceed(FruitOperation fruitOperation);
+    void proceed(Instruction instruction);
 }

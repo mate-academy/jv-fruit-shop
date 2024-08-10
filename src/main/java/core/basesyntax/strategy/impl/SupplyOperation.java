@@ -1,8 +1,7 @@
 package core.basesyntax.strategy.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.model.FruitOperation;
+import core.basesyntax.model.Instruction;
 import core.basesyntax.strategy.Operation;
 import core.basesyntax.strategy.OperationException;
 
@@ -14,12 +13,12 @@ public class SupplyOperation implements Operation {
     }
 
     @Override
-    public void proceed(FruitOperation fruitOperation) {
-        if (storageDao.get(fruitOperation.getFruitName()) == null) {
-            throw new OperationException("Fruit " + fruitOperation.getFruitName()
+    public void proceed(Instruction instruction) {
+        if (!storageDao.contains(instruction.getFruitName())) {
+            throw new OperationException("Fruit " + instruction.getFruitName()
                     + " doesn't exist");
         }
-        Fruit fruit = storageDao.get(fruitOperation.getFruitName());
-        fruit.setQuantity(fruit.getQuantity() + fruitOperation.getQuantity());
+        storageDao.add(instruction.getFruitName(),
+                storageDao.get(instruction.getFruitName()) + instruction.getQuantity());
     }
 }
