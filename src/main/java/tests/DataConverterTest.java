@@ -22,30 +22,28 @@ public class DataConverterTest {
 
     @Test
     public void convertToTransaction_validData_correctSize() {
-        List<String> rawData = Arrays.asList(
+        final List<String> rawData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
                 "s,banana,100",
                 "p,banana,13",
                 "r,banana,10"
         );
-
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
         assertEquals(4, transactions.size());
     }
 
     @Test
     public void convertToTransaction_balanceOperation_ok() {
-        List<String> rawData = Arrays.asList(
+        final List<String> rawData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
                 "s,banana,100",
                 "p,banana,13",
                 "r,banana,10"
         );
-
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
-        FruitTransaction expected = new FruitTransaction();
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
+        final FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.BALANCE);
         expected.setFruit("banana");
         expected.setQuantity(20);
@@ -54,16 +52,15 @@ public class DataConverterTest {
 
     @Test
     public void convertToTransaction_supplyOperation_ok() {
-        List<String> rawData = Arrays.asList(
+        final List<String> rawData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
                 "s,banana,100",
                 "p,banana,13",
                 "r,banana,10"
         );
-
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
-        FruitTransaction expected = new FruitTransaction();
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
+        final FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.SUPPLY);
         expected.setFruit("banana");
         expected.setQuantity(100);
@@ -72,16 +69,15 @@ public class DataConverterTest {
 
     @Test
     public void convertToTransaction_purchaseOperation_ok() {
-        List<String> rawData = Arrays.asList(
+        final List<String> rawData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
                 "s,banana,100",
                 "p,banana,13",
                 "r,banana,10"
         );
-
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
-        FruitTransaction expected = new FruitTransaction();
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
+        final FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.PURCHASE);
         expected.setFruit("banana");
         expected.setQuantity(13);
@@ -90,16 +86,15 @@ public class DataConverterTest {
 
     @Test
     public void convertToTransaction_returnOperation_ok() {
-        List<String> rawData = Arrays.asList(
+        final List<String> rawData = Arrays.asList(
                 "type,fruit,quantity",
                 "b,banana,20",
                 "s,banana,100",
                 "p,banana,13",
                 "r,banana,10"
         );
-
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
-        FruitTransaction expected = new FruitTransaction();
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
+        final FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.RETURN);
         expected.setFruit("banana");
         expected.setQuantity(10);
