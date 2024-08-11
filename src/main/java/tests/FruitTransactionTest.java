@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class FruitTransactionTest {
 
     @Test
-    public void testSetAndGetOperation() {
+    public void setAndGetOperation_validOperation_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setOperation(Operation.BALANCE);
 
@@ -17,7 +17,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void testSetAndGetFruit() {
+    public void setAndGetFruit_validFruit_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setFruit("banana");
 
@@ -25,7 +25,7 @@ public class FruitTransactionTest {
     }
 
     @Test
-    public void testSetAndGetQuantity() {
+    public void setAndGetQuantity_validQuantity_ok() {
         FruitTransaction transaction = new FruitTransaction();
         transaction.setQuantity(100);
 

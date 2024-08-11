@@ -15,11 +15,15 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
+            if (transaction.getOperation() == null) {
+                throw new IllegalArgumentException("Unknown operation: null");
+            }
+
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             if (handler == null) {
-                throw new IllegalArgumentException(
-                        "Unknown operation: " + transaction.getOperation());
+                throw new IllegalArgumentException("Unknown operation: " + transaction.getOperation());
             }
+
             try {
                 handler.handle(transaction, storage);
             } catch (IllegalArgumentException e) {
@@ -30,6 +34,6 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Map<String, Integer> getStorage() {
-        return storage;
+        return new HashMap<>(storage); // Ensure a copy is returned to prevent external modification
     }
 }

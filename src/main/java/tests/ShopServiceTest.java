@@ -1,6 +1,5 @@
 package tests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThrows;
 
 import core.basesyntax.FruitTransaction;
@@ -15,9 +14,10 @@ import core.basesyntax.ShopServiceImpl;
 import core.basesyntax.SupplyOperation;
 import core.basesyntax.strategy.BalanceOperation;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,18 +27,19 @@ public class ShopServiceTest {
 
     @BeforeEach
     public void setUp() {
-        final Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
+        final Map<Operation, OperationHandler> operationHandlers = Map.of(
+                Operation.BALANCE, new BalanceOperation(),
+                Operation.PURCHASE, new PurchaseOperation(),
+                Operation.RETURN, new ReturnOperation(),
+                Operation.SUPPLY, new SupplyOperation()
+        );
         final OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         shopService = new ShopServiceImpl(operationStrategy);
         transactions = new ArrayList<>();
     }
 
     @Test
-    public void test_balance_operation() {
+    public void processTransactions_balanceOperation_ok() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -48,11 +49,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(100, (int) storage.get("banana"));
+        Assertions.assertEquals(100, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_supply_operation() {
+    public void processTransactions_supplyOperation_ok() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -68,11 +69,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(150, (int) storage.get("banana"));
+        Assertions.assertEquals(150, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_supply_new_fruit() {
+    public void processTransactions_supplyNewFruit_ok() {
         final FruitTransaction supply = new FruitTransaction();
         supply.setOperation(Operation.SUPPLY);
         supply.setFruit("apple");
@@ -82,11 +83,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(30, (int) storage.get("apple"));
+        Assertions.assertEquals(30, (int) storage.get("apple"));
     }
 
     @Test
-    public void test_supply_negative_quantity() {
+    public void processTransactions_negativeSupplyQuantity_notOk() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -101,11 +102,11 @@ public class ShopServiceTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Invalid quantity: -20", exception.getMessage());
+        Assertions.assertEquals("Invalid quantity: -20", exception.getMessage());
     }
 
     @Test
-    public void test_supply_operation_with_no_balance() {
+    public void processTransactions_supplyWithoutBalance_ok() {
         final FruitTransaction supply = new FruitTransaction();
         supply.setOperation(Operation.SUPPLY);
         supply.setFruit("banana");
@@ -115,11 +116,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(50, (int) storage.get("banana"));
+        Assertions.assertEquals(50, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_combined_operations() {
+    public void processTransactions_combinedOperations_ok() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -141,11 +142,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(120, (int) storage.get("banana"));
+        Assertions.assertEquals(120, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_multiple_balance_operations() {
+    public void processTransactions_multipleBalanceOperations_ok() {
         final FruitTransaction balanceApple = new FruitTransaction();
         balanceApple.setOperation(Operation.BALANCE);
         balanceApple.setFruit("apple");
@@ -161,12 +162,12 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(150, (int) storage.get("apple"));
-        assertEquals(100, (int) storage.get("banana"));
+        Assertions.assertEquals(150, (int) storage.get("apple"));
+        Assertions.assertEquals(100, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_balance_operation_negative_quantity() {
+    public void processTransactions_negativeBalanceQuantity_notOk() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -175,11 +176,11 @@ public class ShopServiceTest {
 
         RuntimeException exception = assertThrows(RuntimeException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Balance cannot be negative", exception.getMessage());
+        Assertions.assertEquals("Balance cannot be negative", exception.getMessage());
     }
 
     @Test
-    public void test_balance_and_supply_operations_combined() {
+    public void processTransactions_balanceAndSupplyCombined_ok() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -195,11 +196,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(150, (int) storage.get("banana"));
+        Assertions.assertEquals(150, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_multiple_operations_for_same_fruit() {
+    public void processTransactions_multipleOperationsForSameFruit_ok() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -221,11 +222,11 @@ public class ShopServiceTest {
         shopService.process(transactions);
         final Map<String, Integer> storage = shopService.getStorage();
 
-        assertEquals(120, (int) storage.get("banana"));
+        Assertions.assertEquals(120, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_purchase_more_than_available() {
+    public void processTransactions_purchaseMoreThanAvailable_notOk() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -240,11 +241,11 @@ public class ShopServiceTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Not enough fruit in storage for purchase: banana", exception.getMessage());
+        Assertions.assertEquals("Not enough fruit in storage for purchase: banana", exception.getMessage());
     }
 
     @Test
-    public void test_purchase_fruit_not_in_storage() {
+    public void processTransactions_purchaseFruitNotInStorage_notOk() {
         transactions.clear();
 
         final FruitTransaction purchase = new FruitTransaction();
@@ -255,11 +256,11 @@ public class ShopServiceTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Not enough fruit in storage for purchase: orange", exception.getMessage());
+        Assertions.assertEquals("Not enough fruit in storage for purchase: orange", exception.getMessage());
     }
 
     @Test
-    public void test_combined_operations_with_invalid_transactions() {
+    public void processTransactions_combinedWithInvalidTransactions_notOk() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("banana");
@@ -280,36 +281,30 @@ public class ShopServiceTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Invalid quantity: -50", exception.getMessage());
+        Assertions.assertEquals("Invalid quantity: -50", exception.getMessage());
 
         final Map<String, Integer> storage = shopService.getStorage();
-        assertEquals(100, (int) storage.get("banana"));
+        Assertions.assertEquals(100, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_combined_operations_with_unknown_operation() {
-        final FruitTransaction balance = new FruitTransaction();
-        balance.setOperation(Operation.BALANCE);
-        balance.setFruit("banana");
-        balance.setQuantity(100);
+    public void processTransactions_unknownOperation_notOk() {
+        FruitTransaction balance = new FruitTransaction(Operation.BALANCE, "banana", 100);
         transactions.add(balance);
 
-        final FruitTransaction unknownOperation = new FruitTransaction();
-        unknownOperation.setOperation(null);
-        unknownOperation.setFruit("banana");
-        unknownOperation.setQuantity(50);
+        FruitTransaction unknownOperation = new FruitTransaction(null, "banana", 50);
         transactions.add(unknownOperation);
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Unknown operation: null", exception.getMessage());
+        Assertions.assertEquals("Unknown operation: null", exception.getMessage());
 
-        final Map<String, Integer> storage = shopService.getStorage();
-        assertEquals(100, (int) storage.get("banana"));
+        Map<String, Integer> storage = shopService.getStorage();
+        Assertions.assertEquals(100, (int) storage.get("banana"));
     }
 
     @Test
-    public void test_various_operations() {
+    public void processTransactions_variousOperations_ok() {
         final FruitTransaction balance = new FruitTransaction();
         balance.setOperation(Operation.BALANCE);
         balance.setFruit("apple");
@@ -334,14 +329,11 @@ public class ShopServiceTest {
         returnOp.setQuantity(10);
         transactions.add(returnOp);
 
-        // Проверка на выброс исключения
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        assertEquals("Not enough fruit in storage for purchase: apple", exception.getMessage());
+        Assertions.assertEquals("Not enough fruit in storage for purchase: apple", exception.getMessage());
 
-        // Проверка состояния хранилища
         final Map<String, Integer> storage = shopService.getStorage();
-        assertEquals(150, (int) storage.get("apple")); // Ожидаемое значение должно быть 150
+        Assertions.assertEquals(150, (int) storage.get("apple"));
     }
-
 }

@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class ReportGeneratorTest {
     @Test
-    public void testReportGenerator() {
+    public void getReport_storageWithData_ok() {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         Map<String, Integer> storage = new HashMap<>();
         storage.put("banana", 152);

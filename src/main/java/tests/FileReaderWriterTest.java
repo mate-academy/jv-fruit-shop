@@ -15,7 +15,7 @@ import org.junit.jupiter.api.Test;
 
 public class FileReaderWriterTest {
     @Test
-    public void testFileReaderWriter() throws IOException {
+    public void writeAndRead_validData_ok() throws IOException {
         String filePath = "testReport.csv";
         String content = "fruit,quantity\nbanana,152\napple,90\n";
         FileWriter fileWriter = new FileWriterImpl();

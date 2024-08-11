@@ -16,7 +16,7 @@ import org.junit.jupiter.api.Test;
 public class OperationHandlersTest {
 
     @Test
-    public void testBalanceOperation() {
+    public void handle_balanceOperation_ok() {
         final OperationHandler handler = new BalanceOperation();
         final Map<String, Integer> storage = new HashMap<>();
         final FruitTransaction transaction = new FruitTransaction();
@@ -25,13 +25,12 @@ public class OperationHandlersTest {
         transaction.setQuantity(100);
         handler.handle(transaction, storage);
 
-        // Проверяем, что после операции BALANCE в хранилище у банана 100
         assertEquals(100, (int) storage.get("banana"),
                 "Balance operation failed to set the correct quantity");
     }
 
     @Test
-    public void testSupplyOperation() {
+    public void handle_supplyOperation_ok() {
         final OperationHandler handler = new SupplyOperation();
         final Map<String, Integer> storage = new HashMap<>();
         final FruitTransaction transaction = new FruitTransaction();
@@ -40,13 +39,12 @@ public class OperationHandlersTest {
         transaction.setQuantity(100);
         handler.handle(transaction, storage);
 
-        // Проверяем, что после операции SUPPLY в хранилище у банана 100
         assertEquals(100, (int) storage.get("banana"),
                 "Supply operation failed to add the correct quantity");
     }
 
     @Test
-    public void testPurchaseOperation() {
+    public void handle_purchaseOperation_ok() {
         final OperationHandler handler = new PurchaseOperation();
         final Map<String, Integer> storage = new HashMap<>();
         storage.put("banana", 150);
@@ -56,13 +54,12 @@ public class OperationHandlersTest {
         transaction.setQuantity(50);
         handler.handle(transaction, storage);
 
-        // Проверяем, что после операции PURCHASE в хранилище у банана 100 (150 - 50)
         assertEquals(100, (int) storage.get("banana"),
                 "Purchase operation failed to subtract the correct quantity");
     }
 
     @Test
-    public void testReturnOperation() {
+    public void handle_returnOperation_ok() {
         final OperationHandler handler = new ReturnOperation();
         final Map<String, Integer> storage = new HashMap<>();
         storage.put("banana", 50);
@@ -72,7 +69,6 @@ public class OperationHandlersTest {
         transaction.setQuantity(25);
         handler.handle(transaction, storage);
 
-        // Проверяем, что после операции RETURN в хранилище у банана 75 (50 + 25)
         assertEquals(75, (int) storage.get("banana"),
                 "Return operation failed to add the correct quantity");
     }
