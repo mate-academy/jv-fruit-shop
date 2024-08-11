@@ -1,7 +1,4 @@
-package core.basesyntax.service;
-
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.service.DataConverter;
+package core.basesyntax;
 
 import java.util.ArrayList;
 import java.util.List;

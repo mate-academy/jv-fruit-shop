@@ -1,14 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.handler.OperationHandler;
-import core.basesyntax.handler.ReturnOperation;
-import core.basesyntax.handler.BalanceOperation;
-import core.basesyntax.handler.PurchaseOperation;
-import core.basesyntax.handler.SupplyOperation;
-import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.DataConverterImpl;
+import core.basesyntax.handler.*;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.storage.Storage;
 
 import java.util.HashMap;
 import java.util.List;
@@ -33,12 +28,13 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        Storage storage = new Storage();
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+        String resultingReport = reportGenerator.getReport(storage.getProducts());
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();

@@ -2,7 +2,7 @@ package core.basesyntax;
 
 public class FruitTransaction {
     private Operation operation;
-    private String product;
+    private String nameOfProduct;
     private int number;
 
     public enum Operation {
@@ -22,9 +22,9 @@ public class FruitTransaction {
         }
     }
 
-    public FruitTransaction(Operation operation, String product, int number) {
+    public FruitTransaction(Operation operation, String nameOfProduct, int number) {
         this.operation = operation;
-        this.product = product;
+        this.nameOfProduct = nameOfProduct;
         this.number = number;
     }
 
@@ -54,11 +54,13 @@ public class FruitTransaction {
         this.number = number;
     }
 
-    public String getProduct() {
-        return product;
+    public String getNameOfProduct() {
+        return nameOfProduct;
     }
 
     public void setProduct(String product) {
-        this.product = product;
+        this.nameOfProduct = product;
     }
+
+
 }

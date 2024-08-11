@@ -1,4 +1,11 @@
 package core.basesyntax.handler;
 
-public class PurchaseOperation implements OperationHandler{
+import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.Product;
+
+public class PurchaseOperation implements OperationHandler {
+    @Override
+    public void transaction(FruitTransaction fruitTransaction, Product product) {
+        product.setNumber(product.getNumber() - fruitTransaction.getNumber());
+    }
 }
