@@ -22,6 +22,6 @@ public enum FruitOperation {
                 return operation;
             }
         }
-        throw new RuntimeException("Can't found operation by code " + code);
+        throw new RuntimeException("Can't find operation by code " + code);
     }
 }

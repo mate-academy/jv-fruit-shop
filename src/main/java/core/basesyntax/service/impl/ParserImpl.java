@@ -8,20 +8,28 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ParserImpl implements Parser {
+    private static final int INSTRUCTIONS_SIZE = 3;
+    private static final int INDEX_OF_OPERATION = 0;
+    private static final int INDEX_OF_FRUIT_NAME = 1;
+    private static final int INDEX_OF_QUANTITY = 2;
+
     @Override
-    public List<Instruction> parse(List<String[]> lines) {
-        List<Instruction> commands = new ArrayList<>();
-        for (String[] line : lines) {
-            if (line.length != 3) {
-                throw new RuntimeException("Can't parse information from " + Arrays.toString(line));
+    public List<Instruction> parse(List<String> lines) {
+        List<Instruction> instructions = new ArrayList<>();
+        String[] instructionsParameters;
+        for (String line : lines) {
+            instructionsParameters = line.split(",");
+            if (instructionsParameters.length != INSTRUCTIONS_SIZE) {
+                throw new RuntimeException("Can't parse information from "
+                        + Arrays.toString(instructionsParameters));
             }
             Instruction instruction = new Instruction(
-                    FruitOperation.getFromCode(line[0]),
-                    line[1],
-                    Integer.parseInt(line[2])
+                    FruitOperation.getFromCode(instructionsParameters[INDEX_OF_OPERATION]),
+                    instructionsParameters[INDEX_OF_FRUIT_NAME],
+                    Integer.parseInt(instructionsParameters[INDEX_OF_QUANTITY])
             );
-            commands.add(instruction);
+            instructions.add(instruction);
         }
-        return commands;
+        return instructions;
     }
 }

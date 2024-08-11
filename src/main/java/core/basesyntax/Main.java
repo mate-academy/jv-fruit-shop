@@ -36,8 +36,8 @@ public class Main {
         Reader reader = new ReaderImpl();
         Parser parser = new ParserImpl();
         OperationExecutor operationExecutor = new OperationExecutorImpl(operationsHandlers);
-        Writer writer = new WriterImpl();
-        List<String[]> lines = reader.read(INPUT_FILE);
+        Writer writer = new WriterImpl(new StorageDaoImpl());
+        List<String> lines = reader.read(INPUT_FILE);
         List<Instruction> transactions = parser.parse(lines);
         operationExecutor.proceedAll(transactions);
         writer.createReport(OUTPUT_FILE);

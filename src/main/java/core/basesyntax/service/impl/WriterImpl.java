@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.dao.StorageDao;
-import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.service.Writer;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -14,8 +13,8 @@ public class WriterImpl implements Writer {
     private static final char COMMA = ',';
     private StorageDao storageDao;
 
-    public WriterImpl() {
-        storageDao = new StorageDaoImpl();
+    public WriterImpl(StorageDao storageDao) {
+        this.storageDao = storageDao;
     }
 
     @Override
@@ -25,7 +24,8 @@ public class WriterImpl implements Writer {
         for (Map.Entry<String, Integer> fruit : storageDao.getAll()) {
             String fruitName = fruit.getKey();
             int quantity = fruit.getValue();
-            reportText.append("\n").append(fruitName).append(COMMA).append(quantity);
+            reportText.append(System.lineSeparator()).append(fruitName)
+                    .append(COMMA).append(quantity);
         }
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(reportPath))) {
             writer.write(reportText.toString());

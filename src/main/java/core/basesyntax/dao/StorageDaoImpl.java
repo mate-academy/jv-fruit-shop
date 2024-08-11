@@ -5,25 +5,20 @@ import java.util.Map;
 import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
-    private Storage storage;
-
-    public StorageDaoImpl() {
-        storage = new Storage();
-    }
 
     @Override
     public void add(String name, int quantity) {
-        storage.add(name, quantity);
+        Storage.fruits.put(name, quantity);
     }
 
     @Override
     public int get(String fruitName) {
-        return storage.get(fruitName);
+        return Storage.fruits.get(fruitName);
     }
 
     @Override
     public boolean contains(String fruitName) {
-        return storage.contains(fruitName);
+        return Storage.fruits.containsKey(fruitName);
     }
 
     @Override
