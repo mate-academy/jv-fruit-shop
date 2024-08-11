@@ -29,8 +29,7 @@ public class DataConverterTest {
                 "p,banana,13",
                 "r,banana,10"
         );
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
-        assertEquals(4, transactions.size());
+        assertEquals(4, dataConverter.convertToTransaction(rawData).size());
     }
 
     @Test
