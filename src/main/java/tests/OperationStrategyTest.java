@@ -35,7 +35,8 @@ public class OperationStrategyTest {
         OperationHandler handler = operationStrategy.getHandler(Operation.BALANCE);
         assertNotNull(handler, "Handler for BALANCE operation should not be null");
         assertTrue(
-                handler instanceof BalanceOperation, "Handler should be instance of BalanceOperation");
+                handler instanceof BalanceOperation,
+                "Handler should be instance of BalanceOperation");
     }
 
     @Test
@@ -43,7 +44,8 @@ public class OperationStrategyTest {
         OperationHandler handler = operationStrategy.getHandler(Operation.PURCHASE);
         assertNotNull(handler, "Handler for PURCHASE operation should not be null");
         assertTrue(
-                handler instanceof PurchaseOperation, "Handler should be instance of PurchaseOperation");
+                handler instanceof PurchaseOperation,
+                "Handler should be instance of PurchaseOperation");
     }
 
     @Test
@@ -51,7 +53,8 @@ public class OperationStrategyTest {
         OperationHandler handler = operationStrategy.getHandler(Operation.RETURN);
         assertNotNull(handler, "Handler for RETURN operation should not be null");
         assertTrue(
-                handler instanceof ReturnOperation, "Handler should be instance of ReturnOperation");
+                handler instanceof ReturnOperation,
+                "Handler should be instance of ReturnOperation");
     }
 
     @Test
@@ -59,6 +62,7 @@ public class OperationStrategyTest {
         OperationHandler handler = operationStrategy.getHandler(Operation.SUPPLY);
         assertNotNull(handler, "Handler for SUPPLY operation should not be null");
         assertTrue(
-                handler instanceof SupplyOperation, "Handler should be instance of SupplyOperation");
+                handler instanceof SupplyOperation,
+                "Handler should be instance of SupplyOperation");
     }
 }

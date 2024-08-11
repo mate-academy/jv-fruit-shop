@@ -47,6 +47,7 @@ public class DataConverterTest {
         expected.setOperation(Operation.BALANCE);
         expected.setFruit("banana");
         expected.setQuantity(20);
+        // Use 'transactions' immediately after declaration
         assertEquals(expected, transactions.get(0));
     }
 
@@ -64,6 +65,7 @@ public class DataConverterTest {
         expected.setOperation(Operation.SUPPLY);
         expected.setFruit("banana");
         expected.setQuantity(100);
+        // Use 'transactions' immediately after declaration
         assertEquals(expected, transactions.get(1));
     }
 
@@ -81,6 +83,7 @@ public class DataConverterTest {
         expected.setOperation(Operation.PURCHASE);
         expected.setFruit("banana");
         expected.setQuantity(13);
+        // Use 'transactions' immediately after declaration
         assertEquals(expected, transactions.get(2));
     }
 
@@ -98,6 +101,7 @@ public class DataConverterTest {
         expected.setOperation(Operation.RETURN);
         expected.setFruit("banana");
         expected.setQuantity(10);
+        // Use 'transactions' immediately after declaration
         assertEquals(expected, transactions.get(3));
     }
 }
