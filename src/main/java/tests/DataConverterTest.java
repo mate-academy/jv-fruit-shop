@@ -8,7 +8,6 @@ import core.basesyntax.service.converter.DataConverter;
 import core.basesyntax.service.impl.DataConverterImpl;
 import java.util.Arrays;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

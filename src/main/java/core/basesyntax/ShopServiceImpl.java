@@ -21,7 +21,8 @@ public class ShopServiceImpl implements ShopService {
 
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             if (handler == null) {
-                throw new IllegalArgumentException("Unknown operation: " + transaction.getOperation());
+                throw new IllegalArgumentException(
+                        "Unknown operation: " + transaction.getOperation());
             }
 
             try {

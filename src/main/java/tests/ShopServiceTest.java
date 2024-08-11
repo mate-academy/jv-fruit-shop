@@ -16,7 +16,6 @@ import core.basesyntax.strategy.BalanceOperation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -241,7 +240,8 @@ public class ShopServiceTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        Assertions.assertEquals("Not enough fruit in storage for purchase: banana", exception.getMessage());
+        Assertions.assertEquals(
+                "Not enough fruit in storage for purchase: banana", exception.getMessage());
     }
 
     @Test
@@ -256,7 +256,8 @@ public class ShopServiceTest {
 
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        Assertions.assertEquals("Not enough fruit in storage for purchase: orange", exception.getMessage());
+        Assertions.assertEquals(
+                "Not enough fruit in storage for purchase: orange", exception.getMessage());
     }
 
     @Test
@@ -329,9 +330,11 @@ public class ShopServiceTest {
         returnOp.setQuantity(10);
         transactions.add(returnOp);
 
-        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
                 () -> shopService.process(transactions));
-        Assertions.assertEquals("Not enough fruit in storage for purchase: apple", exception.getMessage());
+        Assertions.assertEquals(
+                "Not enough fruit in storage for purchase: apple", exception.getMessage());
 
         final Map<String, Integer> storage = shopService.getStorage();
         Assertions.assertEquals(150, (int) storage.get("apple"));
