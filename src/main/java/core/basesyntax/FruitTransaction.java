@@ -7,7 +7,9 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public FruitTransaction() {}
+    public FruitTransaction() {
+
+    }
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
@@ -62,9 +64,8 @@ public class FruitTransaction {
     public String toString() {
         return "FruitTransaction{"
                 + "operation=" + operation
-                + ", fruit='" + fruit
-                + '\''
-                + ", quantity=" + quantity +
-                '}';
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 }
