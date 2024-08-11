@@ -29,7 +29,9 @@ public class DataConverterTest {
                 "p,banana,13",
                 "r,banana,10"
         );
-        assertEquals(4, dataConverter.convertToTransaction(rawData).size());
+
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
+        assertEquals(4, transactions.size());
     }
 
     @Test
@@ -41,6 +43,7 @@ public class DataConverterTest {
                 "p,banana,13",
                 "r,banana,10"
         );
+
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
         FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.BALANCE);
@@ -58,6 +61,7 @@ public class DataConverterTest {
                 "p,banana,13",
                 "r,banana,10"
         );
+
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
         FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.SUPPLY);
@@ -75,6 +79,7 @@ public class DataConverterTest {
                 "p,banana,13",
                 "r,banana,10"
         );
+
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
         FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.PURCHASE);
@@ -92,6 +97,7 @@ public class DataConverterTest {
                 "p,banana,13",
                 "r,banana,10"
         );
+
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(rawData);
         FruitTransaction expected = new FruitTransaction();
         expected.setOperation(Operation.RETURN);
