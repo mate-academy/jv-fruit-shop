@@ -1,25 +1,14 @@
 package core.basesyntax.db;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> quantities;
+    public static final Map<String, Integer> quantities = new HashMap<>();
 
-    public Storage() {
-        this.quantities = new HashMap<>();
-    }
-
-    public void setQuantity(String fruit, int quantity) {
-        quantities.put(fruit, quantity);
-    }
-
-    public void increaseQuantity(String fruit, int quantity) {
-        quantities.put(fruit, quantities.getOrDefault(fruit, 0) + quantity);
-    }
-
-    public void decreaseQuantity(String fruit, int quantity) {
-        quantities.put(fruit, quantities.getOrDefault(fruit, 0) - quantity);
+    public void addQuantity(FruitTransaction fruitTransaction) {
+        quantities.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 
     public int getQuantity(String fruit) {
