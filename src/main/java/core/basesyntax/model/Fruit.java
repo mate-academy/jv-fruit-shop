@@ -11,6 +11,7 @@ public class Fruit {
     public String getFruitName() {
         return fruitName;
     }
+
     public int getQuantity() {
         return quantity;
     }

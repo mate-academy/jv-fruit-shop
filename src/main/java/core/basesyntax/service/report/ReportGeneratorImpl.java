@@ -5,6 +5,7 @@ import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String TITLE_REPORT = "fruit,quantity";
+
     @Override
     public String getReport(List<Fruit> fruitList) {
         StringBuilder report = new StringBuilder();

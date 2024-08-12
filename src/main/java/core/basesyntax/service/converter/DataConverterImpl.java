@@ -1,8 +1,9 @@
 package core.basesyntax.service.converter;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
-import core.basesyntax.model.FruitTransaction;
+
 import static core.basesyntax.model.FruitTransaction.convertFromCode;
 
 public class DataConverterImpl implements DataConverter {
@@ -36,7 +37,8 @@ public class DataConverterImpl implements DataConverter {
         try {
             quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format for quantity: " + parts[QUANTITY_INDEX], e);
+            throw new IllegalArgumentException("Invalid number format for quantity: "
+                    + parts[QUANTITY_INDEX], e);
         }
         return new FruitTransaction(operation, product, quantity);
     }

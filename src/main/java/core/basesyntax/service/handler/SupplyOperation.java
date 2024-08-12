@@ -1,7 +1,7 @@
 package core.basesyntax.service.handler;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
     @Override

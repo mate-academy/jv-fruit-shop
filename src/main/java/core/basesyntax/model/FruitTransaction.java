@@ -4,6 +4,7 @@ public class FruitTransaction {
     private Operation operation;
     private String fruitName;
     private int transactionQuantity;
+
     public FruitTransaction(Operation operation, String fruitName, int transactionQuantity) {
         this.operation = operation;
         this.fruitName = fruitName;
@@ -26,6 +27,7 @@ public class FruitTransaction {
             return code;
         }
     }
+
     public Operation getOperation() {
         return operation;
     }
