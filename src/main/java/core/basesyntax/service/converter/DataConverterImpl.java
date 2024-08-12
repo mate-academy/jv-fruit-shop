@@ -3,7 +3,6 @@ package core.basesyntax.service.converter;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import static core.basesyntax.model.FruitTransaction.convertFromCode;
 
 public class DataConverterImpl implements DataConverter {

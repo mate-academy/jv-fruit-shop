@@ -1,8 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.converter.DataConverter;
 import core.basesyntax.service.converter.DataConverterImpl;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.handler.BalanceOperation;
 import core.basesyntax.service.handler.OperationHandler;
 import core.basesyntax.service.handler.PurchaseOperation;
