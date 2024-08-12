@@ -3,7 +3,6 @@ package core.basesyntax.service.converter;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 import java.util.stream.Collectors;
-import static core.basesyntax.model.FruitTransaction.convertFromCode;
 
 public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
@@ -29,7 +28,7 @@ public class DataConverterImpl implements DataConverter {
             throw new IllegalArgumentException("Invalid input line: " + line);
         }
 
-        FruitTransaction.Operation operation = convertFromCode(parts[OPERATION_INDEX]);
+        FruitTransaction.Operation operation = FruitTransaction.convertFromCode(parts[OPERATION_INDEX]);
         String product = parts[PRODUCT_INDEX];
         int quantity;
 
