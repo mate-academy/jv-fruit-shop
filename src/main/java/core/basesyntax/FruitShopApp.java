@@ -10,6 +10,8 @@ import core.basesyntax.service.handler.ReturnOperation;
 import core.basesyntax.service.handler.SupplyOperation;
 import core.basesyntax.service.report.ReportGenerator;
 import core.basesyntax.service.report.ReportGeneratorImpl;
+import core.basesyntax.service.shop.ProductService;
+import core.basesyntax.service.shop.ProductServiceImpl;
 import core.basesyntax.service.shop.ShopService;
 import core.basesyntax.service.shop.ShopServiceImpl;
 import core.basesyntax.service.strategy.OperationStrategy;
@@ -17,17 +19,21 @@ import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.util.filereader.FileReader;
 import core.basesyntax.util.filereader.FileReaderImpl;
-import core.basesyntax.util.filewriter.FileWriter;
-import core.basesyntax.util.filewriter.FileWriterImpl;
+import core.basesyntax.util.filewriter.CustomFileWriter;
+import core.basesyntax.util.filewriter.CustomFileWriterImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class FruitShopApp {
+    private static final String INPUT_DATA_FILE = "reportToRead.csv";
+    private static final String REPORT_FILE = "finalReport.csv";
+
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(INPUT_DATA_FILE);
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -43,7 +49,8 @@ public class FruitShopApp {
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
         Storage storage = new Storage();
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        ProductService productService = new ProductServiceImpl(storage);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, productService);
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
@@ -51,7 +58,7 @@ public class FruitShopApp {
         String resultingReport = reportGenerator.getReport(storage.getProducts());
 
         // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        CustomFileWriter customFileWriter = new CustomFileWriterImpl();
+        customFileWriter.write(resultingReport, REPORT_FILE);
     }
 }
