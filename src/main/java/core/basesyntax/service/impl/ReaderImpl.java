@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderImpl implements Reader {
-
     @Override
     public List<String> read(String filePath) {
         List<String> linesArray = new ArrayList<>();

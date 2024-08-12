@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class StorageDaoImpl implements StorageDao {
-
     @Override
     public void add(String name, int quantity) {
         Storage.fruits.put(name, quantity);
