@@ -1,15 +1,26 @@
 package core.basesyntax;
 
-import core.basesyntax.handler.*;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.converter.DataConverter;
+import core.basesyntax.service.converter.DataConverterImpl;
+import core.basesyntax.service.handler.*;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.report.ReportGenerator;
+import core.basesyntax.service.report.ReportGeneratorImpl;
+import core.basesyntax.service.shop.ShopService;
+import core.basesyntax.service.shop.ShopServiceImpl;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.service.strategy.OperationStrategyImpl;
 import core.basesyntax.storage.Storage;
+import core.basesyntax.util.filereader.FileReader;
+import core.basesyntax.util.filereader.FileReaderImpl;
+import core.basesyntax.util.filewriter.FileWriter;
+import core.basesyntax.util.filewriter.FileWriterImpl;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Main {
+public class FruitShopApp {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();

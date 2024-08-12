@@ -1,15 +1,14 @@
-package core.basesyntax.service;
+package core.basesyntax.service.shop;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.OperationStrategy;
-import core.basesyntax.model.Product;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.strategy.OperationStrategy;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
-
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
-    private OperationStrategy operationStrategy;
-    private Storage storage;
+    private final OperationStrategy operationStrategy;
+    private final Storage storage;
 
     public ShopServiceImpl(OperationStrategy operationStrategy, Storage storage) {
         this.operationStrategy = operationStrategy;
@@ -19,23 +18,22 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         fillProducts(transactions);
-        transactions.forEach(transaction -> operationStrategy.getOperationHandlers()
-                .get(transaction.getOperation()).transaction(transaction,
-                        getProductByName(transaction.getNameOfProduct())));
+        transactions.forEach(transaction -> operationStrategy
+                .getOperationHandlers(transaction.getOperation())
+                .transaction(transaction, getProductByName(transaction.getFruitName())));
     }
 
     private void fillProducts(List<FruitTransaction> transactions) {
         storage.setProducts(transactions.stream()
-                .map(FruitTransaction::getNameOfProduct)
+                .map(FruitTransaction::getFruitName)
                 .distinct()
-                .map(Product::new)
+                .map(Fruit::new)
                 .toList());
     }
 
-    private Product getProductByName(String nameOfProduct) {
+    private Fruit getProductByName(String nameOfProduct) {
         return storage.getProducts().stream()
-                .filter(product -> product.getNameOfProduct().equals(nameOfProduct))
+                .filter(product -> product.getFruitName().equals(nameOfProduct))
                 .findFirst().orElseThrow(() -> new RuntimeException("Product not found"));
     }
-
 }

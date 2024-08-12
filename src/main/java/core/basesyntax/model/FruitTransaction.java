@@ -1,9 +1,14 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
-    private String nameOfProduct;
-    private int number;
+    private String fruitName;
+    private int transactionQuantity;
+    public FruitTransaction(Operation operation, String fruitName, int transactionQuantity) {
+        this.operation = operation;
+        this.fruitName = fruitName;
+        this.transactionQuantity = transactionQuantity;
+    }
 
     public enum Operation {
         BALANCE("b"),
@@ -11,7 +16,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;
@@ -21,13 +26,6 @@ public class FruitTransaction {
             return code;
         }
     }
-
-    public FruitTransaction(Operation operation, String nameOfProduct, int number) {
-        this.operation = operation;
-        this.nameOfProduct = nameOfProduct;
-        this.number = number;
-    }
-
     public Operation getOperation() {
         return operation;
     }
@@ -39,28 +37,26 @@ public class FruitTransaction {
                 return operation;
             }
         }
-        return null;
+        throw new IllegalArgumentException("Invalid operation code: " + code);
     }
 
     public void setOperation(Operation operation) {
         this.operation = operation;
     }
 
-    public int getNumber() {
-        return number;
+    public int getTransactionQuantity() {
+        return transactionQuantity;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setTransactionQuantity(int transactionQuantity) {
+        this.transactionQuantity = transactionQuantity;
     }
 
-    public String getNameOfProduct() {
-        return nameOfProduct;
+    public String getFruitName() {
+        return fruitName;
     }
 
     public void setProduct(String product) {
-        this.nameOfProduct = product;
+        this.fruitName = product;
     }
-
-
 }

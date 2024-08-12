@@ -1,7 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.shop;
 
-import core.basesyntax.FruitTransaction;
-
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface ShopService {
