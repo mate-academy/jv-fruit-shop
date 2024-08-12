@@ -18,6 +18,7 @@ public class ShopServiceImpl implements ShopService {
         productService.fillProducts(transactions);
         transactions.forEach(transaction -> operationStrategy
                 .getOperationHandlers(transaction.getOperation())
-                .transaction(transaction, productService.getProductByName(transaction.getFruitName())));
+                .transaction(transaction, productService
+                        .getProductByName(transaction.getFruitName())));
     }
 }

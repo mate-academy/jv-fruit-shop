@@ -1,7 +1,7 @@
 package core.basesyntax.util.filewriter;
 
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 
 public class CustomFileWriterImpl implements CustomFileWriter {
     @Override

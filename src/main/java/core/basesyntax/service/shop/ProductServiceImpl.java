@@ -3,7 +3,6 @@ package core.basesyntax.service.shop;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
-
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
