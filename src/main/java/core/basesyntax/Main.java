@@ -33,7 +33,7 @@ public class Main {
         // 3. Create and feel the map with all OperationHandler implementations
         Map<String, Integer> fruitStorage = new HashMap<>();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map
-                .of(FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitStorage),
+                .of(FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitStorage),
                 FruitTransaction.Operation.RETURN, new ReturnOperation(fruitStorage),
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorage));

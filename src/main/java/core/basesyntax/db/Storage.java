@@ -11,7 +11,7 @@ public class Storage {
         quantities.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 
-    public int getQuantity(String fruit) {
+    public int getFruitQuantity(String fruit) {
         return quantities.getOrDefault(fruit, 0);
     }
 }
