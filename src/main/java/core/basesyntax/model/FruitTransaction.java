@@ -39,7 +39,6 @@ public class FruitTransaction {
             return code;
         }
 
-        // Метод для конвертації коду в Operation
         public static Operation fromCode(String code) {
             for (Operation operation : values()) {
                 if (operation.getCode().equalsIgnoreCase(code)) {

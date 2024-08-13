@@ -11,6 +11,6 @@ public class SupplyOperation implements OperationHandler {
         Map<String, Integer> fruits = Storage.getFruits();
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
+        fruits.merge(fruit, quantity, Integer::sum);
     }
 }
