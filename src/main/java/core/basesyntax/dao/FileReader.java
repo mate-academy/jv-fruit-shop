@@ -1,4 +1,4 @@
-package core.basesyntax.service;
+package core.basesyntax.dao;
 
 import java.util.List;
 

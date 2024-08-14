@@ -1,17 +1,17 @@
 package core.basesyntax;
 
+import core.basesyntax.dao.FileReader;
+import core.basesyntax.dao.FileReaderImpl;
+import core.basesyntax.dao.FileWriter;
+import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.BalanceOperation;
 import core.basesyntax.service.impl.DataConverterImpl;
-import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.PurchaseOperation;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
@@ -34,9 +34,9 @@ public class Main {
         Map<String, Integer> fruitStorage = new HashMap<>();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map
                 .of(FruitTransaction.Operation.BALANCE, new BalanceOperation(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitStorage),
-                FruitTransaction.Operation.RETURN, new ReturnOperation(fruitStorage),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitStorage));
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         // 4. Process the incoming transactions with applicable OperationHandler implementations
