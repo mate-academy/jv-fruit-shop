@@ -1,24 +1,19 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileReader;
-import java.io.BufferedReader;
+import core.basesyntax.service.MyFileReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class MyFileReaderImpl implements FileReader {
+public class MyFileReaderImpl implements MyFileReader {
     @Override
-    public List<String> read(String filePath) {
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
-        if (inputStream == null) {
-            throw new RuntimeException("File not found: " + filePath);
-        }
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
-            return reader.lines().collect(Collectors.toList());
+    public List<String> readFromFile(String filePath) {
+        File file = new File(filePath);
+        try {
+            return Files.readAllLines(file.toPath());
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + filePath, e);
+            throw new RuntimeException("Can`t read file", e);
         }
     }
 }

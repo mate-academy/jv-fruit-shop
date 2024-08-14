@@ -21,32 +21,18 @@ public class DataConverterImpl implements DataConverter {
 
         List<String> linesWithoutHeader = data.subList(1, data.size());
 
-        for (String line : linesWithoutHeader) {
+        for (String line: linesWithoutHeader) {
             String[] parts = line.split(",");
             if (parts.length != EXPECTED_PARTS_LENGTH) {
                 throw new IllegalArgumentException("Invalid data format");
             }
-            FruitTransaction.Operation operation;
-            try {
-                operation = FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX].trim());
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid operation type in data: "
-                        + parts[OPERATION_INDEX].trim(), e);
-            }
-
-            String fruit = parts[FRUIT_INDEX].trim();
-
-            int quantity;
-            try {
-                quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid quantity format in data: "
-                        + parts[QUANTITY_INDEX].trim(), e);
-            }
-
+            FruitTransaction.Operation operation = FruitTransaction
+                    .Operation.fromCode(parts[OPERATION_INDEX]);
+            String fruit = parts[FRUIT_INDEX];
+            int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));
-        }
 
+        }
         return transactions;
     }
 }

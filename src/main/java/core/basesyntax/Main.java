@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.MyFileReader;
+import core.basesyntax.service.MyFileWriter;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
@@ -24,15 +24,13 @@ import java.util.Map;
 public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new MyFileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        MyFileReader fileReader = new MyFileReaderImpl();
+        List<String> inputReport = fileReader
+                .readFromFile("src/main/resources/reportToRead.csv");
 
-        // 2. Convert the incoming data into FruitTransactions list
-        List<FruitTransaction> transactions;
         DataConverter dataConverter = new DataConverterImpl();
-        transactions = dataConverter.convertToTransaction(inputReport);
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
                 FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
@@ -41,16 +39,13 @@ public class Main {
         );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
-        // 6. Write the received report into the destination file
-        FileWriter fileWriter = new MyFileWriterImpl();
+        MyFileWriter fileWriter = new MyFileWriterImpl();
         fileWriter.write(resultingReport, "finalReport.csv");
     }
 }
