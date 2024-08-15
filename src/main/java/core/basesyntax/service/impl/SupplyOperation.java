@@ -9,6 +9,6 @@ public class SupplyOperation implements OperationHandler {
     public void handle(FruitTransaction transaction) {
         Storage.quantities.put(transaction.getFruit(),
                 Storage.quantities
-                        .getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
+                        .merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum));
     }
 }
