@@ -22,11 +22,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String REPORT_FILE_PATH_TO_READ = "src/main/resources/reportToRead.csv";
+    public static final String REPORT_FILE_PATH_TO_WRITE = "src/main/resources/finalReport.csv";
+
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         MyFileReader fileReader = new MyFileReaderImpl();
         List<String> inputReport = fileReader
-                .readFromFile("src/main/resources/reportToRead.csv");
+                .readFromFile(REPORT_FILE_PATH_TO_READ);
 
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -46,6 +49,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         MyFileWriter fileWriter = new MyFileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, REPORT_FILE_PATH_TO_WRITE);
     }
 }
