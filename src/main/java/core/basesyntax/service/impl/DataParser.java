@@ -5,6 +5,7 @@ import java.util.List;
 
 public class DataParser {
     private static final int EXPECTED_PARTS_LENGTH = 3;
+
     public List<String[]> parseLines(List<String> data) {
         List<String[]> parsedLines = new ArrayList<>();
         for (String line : data) {
