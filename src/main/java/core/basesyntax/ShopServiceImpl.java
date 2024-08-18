@@ -21,12 +21,11 @@ public class ShopServiceImpl implements ShopService {
 
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             if (handler == null) {
-                throw new IllegalArgumentException(
-                        "Unknown operation: " + transaction.getOperation());
+                throw new IllegalArgumentException("Unknown operation: " + transaction.getOperation());
             }
 
             try {
-                handler.handle(transaction, storage);
+                handler.handle(transaction);
             } catch (IllegalArgumentException e) {
                 throw e;
             }
@@ -35,6 +34,6 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Map<String, Integer> getStorage() {
-        return new HashMap<>(storage); // Ensure a copy is returned to prevent external modification
+        return new HashMap<>(storage);
     }
 }

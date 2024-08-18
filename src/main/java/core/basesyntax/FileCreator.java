@@ -1,28 +1,31 @@
 package core.basesyntax;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class FileCreator {
 
-    public static void createFile() {
-        String fileName = "/Users/Test_user/IdeaProjects/jv-fruit-shop/reportToRead.csv";
+    public static final String REPORT_FILE_PATH = "src/main/resources/reportToRead.csv";
 
-        try (PrintWriter writer = new PrintWriter(new BufferedWriter(new FileWriter(fileName)))) {
-            // Записываем в файл некоторые данные
-            writer.println("type,fruit,quantity");
-            writer.println("b,banana,20");
-            writer.println("s,banana,100");
-            writer.println("p,banana,13");
-            writer.println("r,banana,10");
+    public static void createFile(String content) {
+        File file = new File(REPORT_FILE_PATH);
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            } else {
+                System.out.println("File already exists.");
+            }
 
-            System.out.println("Файл успешно создан: " + fileName);
+            FileWriter fileWriter = new FileWriterImpl();
+            fileWriter.write(content, REPORT_FILE_PATH);
+            System.out.println("Successfully wrote to the file.");
+
         } catch (IOException e) {
-            System.err.println("Ошибка при создании файла: " + e.getMessage());
-            e.printStackTrace();
+            throw new RuntimeException("An error occurred while creating or writing to the file: " + REPORT_FILE_PATH, e);
         }
     }
-}
 
+    public static String getReportFilePath() {
+        return REPORT_FILE_PATH;
+    }
+}

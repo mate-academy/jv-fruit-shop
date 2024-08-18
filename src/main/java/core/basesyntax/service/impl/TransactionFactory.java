@@ -10,7 +10,6 @@ public class TransactionFactory {
     private static final Map<String, Operation> operationMap = new HashMap<>();
 
     static {
-        // Инициализация карты операций.
         for (Operation op : Operation.values()) {
             operationMap.put(op.getCode(), op);
         }

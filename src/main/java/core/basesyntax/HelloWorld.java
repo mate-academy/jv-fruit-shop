@@ -10,21 +10,23 @@ import java.util.Map;
 
 public class HelloWorld {
     public static void main(String[] args) throws IOException {
-        FileCreator.createFile();
+        String content = "type,fruit,quantity\nb,banana,23\ns,banana,100\np,banana,13\nr,banana,11";
+        FileCreator.createFile(content);
 
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(FileCreator.REPORT_FILE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final var transactions = dataConverter.convertToTransaction(inputReport);
+        Map<String, Integer> storage = new HashMap<>();
+        Map<Operation, OperationHandler> operationHandlers = Map.of(
+                Operation.BALANCE, new BalanceOperation(storage),
+                Operation.PURCHASE, new PurchaseOperation(storage),
+                Operation.RETURN, new ReturnOperation(storage),
+                Operation.SUPPLY, new SupplyOperation(storage)
+        );
 
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 

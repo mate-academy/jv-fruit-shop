@@ -6,7 +6,11 @@ import java.nio.file.Paths;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void write(String data, String filePath) throws IOException {
-        Files.write(Paths.get(filePath), data.getBytes());
+    public void write(String data, String filePath) {
+        try {
+            Files.write(Paths.get(filePath), data.getBytes());
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to write data to file: " + filePath, e);
+        }
     }
 }
