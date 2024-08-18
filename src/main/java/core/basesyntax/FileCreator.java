@@ -21,8 +21,7 @@ public class FileCreator {
             System.out.println("Successfully wrote to the file.");
 
         } catch (IOException e) {
-            throw new RuntimeException(
-                    "An error occurred while creating or writing to the file: " + REPORT_FILE_PATH, e);
+            throw new RuntimeException("File operation error" + REPORT_FILE_PATH, e);
         }
     }
 
