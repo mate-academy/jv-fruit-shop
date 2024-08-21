@@ -7,13 +7,13 @@ import model.FruitTransaction;
 public class BalanceOperation implements OperationHandler {
 
     @Override
-    public void operation(FruitTransaction.Operation operation, FruitTransaction fruitTransaction) {
-        for (Map.Entry<String, Integer> fruit : Storage.fruitsStorage.entrySet()) {
+    public void operation(FruitTransaction fruitTransaction) {
+        for (Map.Entry<String, Integer> fruit : Storage.getFruitsStorage().entrySet()) {
             if (fruit.getKey().equals(fruitTransaction.getFruit())) {
-                fruit.setValue(fruitTransaction.getQuantity());
+                Storage.setFruitsStorage(fruit.getKey(), fruitTransaction.getQuantity());
                 return;
             }
         }
-        Storage.fruitsStorage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        Storage.setFruitsStorage(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

@@ -7,10 +7,11 @@ import model.FruitTransaction;
 public class PurchaseOperation implements OperationHandler {
 
     @Override
-    public void operation(FruitTransaction.Operation operation, FruitTransaction fruitTransaction) {
-        for (Map.Entry<String, Integer> fruit : Storage.fruitsStorage.entrySet()) {
+    public void operation(FruitTransaction fruitTransaction) {
+        for (Map.Entry<String, Integer> fruit : Storage.getFruitsStorage().entrySet()) {
             if (fruit.getKey().equals(fruitTransaction.getFruit())) {
-                fruit.setValue(Math.max(fruit.getValue() - fruitTransaction.getQuantity(), 0));
+                Storage.setFruitsStorage(fruit.getKey(),
+                        Math.max(fruit.getValue() - fruitTransaction.getQuantity(), 0));
                 return;
             }
         }

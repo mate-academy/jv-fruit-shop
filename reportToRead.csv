@@ -1,8 +1,8 @@
 fruit,quantity
 b,banana,20
-b,apple,-100
+b,apple,100
 s,banana,100
-p,banana,500
+p,banana,5
 r,apple,10
 p,apple,20
 p,banana,5

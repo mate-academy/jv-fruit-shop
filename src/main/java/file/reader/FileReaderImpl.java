@@ -7,12 +7,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReaderImpl implements FileReader {
+    private static final String START_PATH = "./";
+
     @Override
     public List<String> read(String fileName) {
         List<String> readList = new ArrayList<>();
 
         try {
-            Scanner scanner = new Scanner(new File(fileName));
+            Scanner scanner = new Scanner(new File(START_PATH + fileName));
             while (scanner.hasNextLine()) {
                 readList.add(scanner.nextLine());
             }

@@ -37,7 +37,7 @@ public class Main {
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
+        shopService.transactions(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
