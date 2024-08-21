@@ -7,4 +7,3 @@ public class PurchaseOperation implements OperationHandler {
         storage.put(fruit, storage.getOrDefault(fruit, 0) - quantity);
     }
 }
-

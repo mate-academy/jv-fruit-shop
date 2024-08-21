@@ -7,4 +7,3 @@ public class BalanceOperation implements OperationHandler {
         storage.put(fruit, quantity);
     }
 }
-

@@ -16,4 +16,3 @@ public class OperationStrategyImpl implements OperationStrategy {
         operationHandlers.get(operation).apply(fruit, quantity, storage);
     }
 }
-
