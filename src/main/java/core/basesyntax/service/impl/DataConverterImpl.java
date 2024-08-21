@@ -3,9 +3,7 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
     private static final String DELIMITER = ",";
@@ -38,7 +36,7 @@ public class DataConverterImpl implements DataConverter {
         if (lineParts.length != QUANTITY_OF_FRUITS_INDEX + 1) {
             throw new RuntimeException(
                     "Incorrect inputReport format should be `b,banana,20` but was "
-                    + Arrays.stream(lineParts).collect(Collectors.joining(DELIMITER)));
+                    + String.join(DELIMITER, lineParts));
         }
     }
 }
