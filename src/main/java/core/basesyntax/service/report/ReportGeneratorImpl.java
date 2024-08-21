@@ -1,21 +1,21 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String TITLE_REPORT = "fruit,quantity";
 
     @Override
-    public String getReport(List<Fruit> fruitList) {
+    public String getReport(Map<String, Integer> fruits) {
         StringBuilder report = new StringBuilder();
 
         report.append(TITLE_REPORT).append(System.lineSeparator());
-        fruitList.forEach(product -> report
-                .append(product.getFruitName())
-                .append(",")
-                .append(product.getQuantity())
-                .append(System.lineSeparator()));
+
+        fruits.keySet().forEach(product -> report
+                        .append(product)
+                        .append(",")
+                        .append(fruits.get(product))
+                        .append(System.lineSeparator()));
         return report.toString();
     }
 }

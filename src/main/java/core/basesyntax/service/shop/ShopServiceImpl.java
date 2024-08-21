@@ -6,19 +6,15 @@ import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
-    private final ProductService productService;
 
-    public ShopServiceImpl(OperationStrategy operationStrategy, ProductService productService) {
+    public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
-        this.productService = productService;
     }
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        productService.fillProducts(transactions);
         transactions.forEach(transaction -> operationStrategy
                 .getOperationHandlers(transaction.getOperation())
-                .transaction(transaction, productService
-                        .getProductByName(transaction.getFruitName())));
+                .transaction(transaction));
     }
 }

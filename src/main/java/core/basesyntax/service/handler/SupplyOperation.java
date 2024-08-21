@@ -1,11 +1,13 @@
 package core.basesyntax.service.handler;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import static core.basesyntax.storage.Storage.fruits;
 
 public class SupplyOperation implements OperationHandler {
     @Override
-    public void transaction(FruitTransaction fruitTransaction, Fruit fruit) {
-        fruit.setQuantity(fruit.getQuantity() + fruitTransaction.getTransactionQuantity());
+    public void transaction(FruitTransaction fruitTransaction) {
+        fruits.replace(fruitTransaction.getFruitName(),
+                (fruits.get(fruitTransaction.getFruitName())
+                        + (fruitTransaction.getTransactionQuantity())));
     }
 }

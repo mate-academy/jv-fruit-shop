@@ -28,8 +28,8 @@ public class DataConverterImpl implements DataConverter {
             throw new IllegalArgumentException("Invalid input line: " + line);
         }
 
-        FruitTransaction.Operation operation = FruitTransaction
-                .convertFromCode(parts[OPERATION_INDEX]);
+        FruitTransaction.Operation operation =
+                FruitTransaction.Operation.convertFromCode(parts[OPERATION_INDEX]);
         String product = parts[PRODUCT_INDEX];
         int quantity;
 

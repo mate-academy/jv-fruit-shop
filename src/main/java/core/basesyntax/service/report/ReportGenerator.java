@@ -1,8 +1,7 @@
 package core.basesyntax.service.report;
 
-import core.basesyntax.model.Fruit;
-import java.util.List;
+import java.util.Map;
 
 public interface ReportGenerator {
-    String getReport(List<Fruit> fruitList);
+    String getReport(Map<String, Integer> fruits);
 }

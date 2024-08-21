@@ -26,20 +26,20 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation convertFromCode(String code) {
+            Operation[] operations = Operation.values();
+            for (Operation operation : operations) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Invalid operation code: " + code);
+        }
     }
 
     public Operation getOperation() {
         return operation;
-    }
-
-    public static Operation convertFromCode(String code) {
-        Operation[] operations = Operation.values();
-        for (Operation operation : operations) {
-            if (operation.getCode().equals(code)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Invalid operation code: " + code);
     }
 
     public void setOperation(Operation operation) {

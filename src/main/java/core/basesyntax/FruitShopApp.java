@@ -47,14 +47,14 @@ public class FruitShopApp {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        Storage storage = new Storage();
-        ProductService productService = new ProductServiceImpl(storage);
-        ShopService shopService = new ShopServiceImpl(operationStrategy, productService);
+        ProductService productService = new ProductServiceImpl();
+        productService.fillProducts(transactions);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(storage.getProducts());
+        String resultingReport = reportGenerator.getReport(Storage.fruits);
 
         // 6. Write the received report into the destination file
         CustomFileWriter customFileWriter = new CustomFileWriterImpl();

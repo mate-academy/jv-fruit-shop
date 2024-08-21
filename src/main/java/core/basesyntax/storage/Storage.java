@@ -1,17 +1,9 @@
 package core.basesyntax.storage;
 
-import core.basesyntax.model.Fruit;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    private List<Fruit> fruits = new ArrayList<>();
+    public static Map<String, Integer> fruits = new HashMap<>();
 
-    public List<Fruit> getProducts() {
-        return fruits;
-    }
-
-    public void setProducts(List<Fruit> fruits) {
-        this.fruits = fruits;
-    }
 }
