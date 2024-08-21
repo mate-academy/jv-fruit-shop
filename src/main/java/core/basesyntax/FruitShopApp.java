@@ -21,6 +21,7 @@ import core.basesyntax.util.filereader.FileReader;
 import core.basesyntax.util.filereader.FileReaderImpl;
 import core.basesyntax.util.filewriter.CustomFileWriter;
 import core.basesyntax.util.filewriter.CustomFileWriterImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -47,14 +48,15 @@ public class FruitShopApp {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        ProductService productService = new ProductServiceImpl();
+        Storage storage = new Storage();
+        ProductService productService = new ProductServiceImpl(storage);
         productService.fillProducts(transactions);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(Storage.fruits);
+        String resultingReport = reportGenerator.getReport(storage.getFruits());
 
         // 6. Write the received report into the destination file
         CustomFileWriter customFileWriter = new CustomFileWriterImpl();

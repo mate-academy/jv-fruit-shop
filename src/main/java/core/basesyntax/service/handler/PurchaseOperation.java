@@ -1,11 +1,11 @@
 package core.basesyntax.service.handler;
 
 import core.basesyntax.model.FruitTransaction;
-import static core.basesyntax.storage.Storage.fruits;
+import java.util.Map;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
-    public void transaction(FruitTransaction fruitTransaction) {
+    public void transaction(FruitTransaction fruitTransaction, Map<String, Integer> fruits) {
         fruits.replace(fruitTransaction.getFruitName(),
                 (fruits.get(fruitTransaction.getFruitName())
                         - (fruitTransaction.getTransactionQuantity())));

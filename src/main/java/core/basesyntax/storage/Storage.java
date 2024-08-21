@@ -4,6 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static Map<String, Integer> fruits = new HashMap<>();
+    private Map<String, Integer> fruits = new HashMap<>();
 
+    public Map<String, Integer> getFruits() {
+        return fruits;
+    }
+
+    public void setFruits(Map<String, Integer> fruits) {
+        this.fruits = fruits;
+    }
 }
