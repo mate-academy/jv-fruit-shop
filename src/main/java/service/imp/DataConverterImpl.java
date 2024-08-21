@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
-
 import model.FruitTransaction;
 import service.DataConverter;
 
@@ -58,7 +57,7 @@ public class DataConverterImpl implements DataConverter {
             throw new RuntimeException("The quantity must consist of numbers only: "
                     + line[QUANTITY_INDEX]);
         }
-        if (Integer.parseInt(line[QUANTITY_INDEX]) < 0 ) {
+        if (Integer.parseInt(line[QUANTITY_INDEX]) < 0) {
             throw new RuntimeException("The quantity can't be less than zero: "
                     + line[QUANTITY_INDEX]);
         }
