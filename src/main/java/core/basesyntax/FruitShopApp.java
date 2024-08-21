@@ -21,7 +21,6 @@ import core.basesyntax.util.filereader.FileReader;
 import core.basesyntax.util.filereader.FileReaderImpl;
 import core.basesyntax.util.filewriter.CustomFileWriter;
 import core.basesyntax.util.filewriter.CustomFileWriterImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

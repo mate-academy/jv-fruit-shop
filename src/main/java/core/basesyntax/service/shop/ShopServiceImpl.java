@@ -3,6 +3,7 @@ package core.basesyntax.service.shop;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.strategy.OperationStrategy;
 import core.basesyntax.storage.Storage;
+
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
@@ -11,7 +12,7 @@ public class ShopServiceImpl implements ShopService {
 
     public ShopServiceImpl(OperationStrategy operationStrategy, Storage storage) {
         this.operationStrategy = operationStrategy;
-        this.storage=storage;
+        this.storage = storage;
     }
 
     @Override
