@@ -54,7 +54,7 @@ public class FruitTransaction {
             return code;
         }
 
-        public FruitTransaction.Operation findEnumValue(String operationCode) {
+        public static FruitTransaction.Operation findEnumValue(String operationCode) {
             for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
                 if (operation.getCode().equals(operationCode)) {
                     return operation;

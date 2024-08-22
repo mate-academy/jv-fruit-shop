@@ -1,5 +1,7 @@
 package service.converter;
 
+import static model.FruitTransaction.Operation.findEnumValue;
+
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
@@ -19,8 +21,7 @@ public class DataConverterImpl implements DataConverter {
         for (String input : inputReport) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] inputSplitter = input.split(SEPARATOR);
-            fruitTransaction.setOperation(
-                    fruitTransaction.getOperation().findEnumValue(inputSplitter[OPERATION_INDEX]));
+            fruitTransaction.setOperation(findEnumValue(inputSplitter[OPERATION_INDEX]));
             fruitTransaction.setFruit(inputSplitter[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(inputSplitter[QUANTITY_INDEX]));
             fruitTransactionList.add(fruitTransaction);
