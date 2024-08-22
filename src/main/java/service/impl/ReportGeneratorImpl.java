@@ -1,4 +1,4 @@
-package service.imp;
+package service.impl;
 
 import dao.FruitDao;
 import dao.FruitDaoImpl;
@@ -8,15 +8,15 @@ import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String COLUMNS_NAME = "fruit,quantity";
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
-    public ReportGeneratorImpl() {
-        this.fruitDao = new FruitDaoImpl();
+    public ReportGeneratorImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public String getReport() {
-        Set<Map.Entry<String, Integer>> data = fruitDao.getAllFruit();
+        Set<Map.Entry<String, Integer>> data = fruitDao.getAllEntries();
         StringBuilder report = new StringBuilder();
         report.append(COLUMNS_NAME).append(System.lineSeparator());
         for (Map.Entry<String, Integer> line : data) {
