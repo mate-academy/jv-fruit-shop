@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.FruitDao;
 import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
-public class ReportGeneratorImpl implements ReportGenerator {
+public class ReportGeneratorImpl<K, V> implements ReportGenerator {
     private static final String FIRST_COLUMN = "fruit";
     private static final String SECOND_COLUMN = "quantity";
     private static final String DELIMITER = ",";
     private static final String NEW_LINE = "\n";
-    private final FruitDao fruitDao;
+    private final Map<K, V> map;
 
-    public ReportGeneratorImpl(FruitDao fruitDao) {
-        this.fruitDao = fruitDao;
+    public ReportGeneratorImpl(Map<K, V> map) {
+        this.map = map;
     }
 
     @Override
@@ -20,8 +19,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder report = new StringBuilder();
         report.append(FIRST_COLUMN + DELIMITER + SECOND_COLUMN + NEW_LINE);
 
-        Map<String, Integer> fruitDB = fruitDao.getFruitDB();
-        for (Map.Entry<String, Integer> entry : fruitDB.entrySet()) {
+        for (Map.Entry<K, V> entry : map.entrySet()) {
             report.append(entry.getKey())
                     .append(DELIMITER)
                     .append(entry.getValue())

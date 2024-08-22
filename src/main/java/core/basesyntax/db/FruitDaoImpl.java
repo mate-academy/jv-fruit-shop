@@ -11,7 +11,7 @@ public class FruitDaoImpl implements FruitDao {
     }
 
     @Override
-    public Integer putFruits(String key, Integer value) {
+    public Integer updateFruitQuantity(String key, Integer value) {
         Integer numberOfFruits = fruitDB.get(key);
 
         validateValue(numberOfFruits, value);
@@ -21,7 +21,7 @@ public class FruitDaoImpl implements FruitDao {
         return fruitDB.put(key, numberOfFruits + value);
     }
 
-    public Map<String, Integer> getFruitDB() {
+    public Map<String, Integer> getAllFruits() {
         return new HashMap<>(fruitDB);
     }
 

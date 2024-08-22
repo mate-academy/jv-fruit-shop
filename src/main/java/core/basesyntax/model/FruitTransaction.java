@@ -8,16 +8,8 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    public void setOperation(String operation) {
-        Optional<Operation> matchingOperation = Arrays.stream(Operation.values())
-                .filter(val -> val.getCode().equals(operation))
-                .findFirst();
-
-        if (matchingOperation.isPresent()) {
-            this.operation = matchingOperation.get();
-        } else {
-            throw new IllegalArgumentException("Invalid operation code: " + operation);
-        }
+    public void setOperation(String code) {
+        operation = operation.getOperationByCode(code);
     }
 
     public Operation getOperation() {
@@ -54,6 +46,18 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        private Operation getOperationByCode(String code) {
+            Optional<Operation> matchingOperation = Arrays.stream(Operation.values())
+                    .filter(val -> val.getCode().equals(code))
+                    .findFirst();
+
+            if (matchingOperation.isPresent()) {
+                return matchingOperation.get();
+            } else {
+                throw new IllegalArgumentException("Invalid operation code: " + code);
+            }
         }
     }
 }

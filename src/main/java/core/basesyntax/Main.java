@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
@@ -35,10 +36,10 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
-        ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
+        ShopServiceImpl shopService = new ShopServiceImpl(operationStrategy, new FruitDaoImpl());
+        shopService.proceedAll(transactions);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(shopService.getFruitDao());
+        ReportGenerator reportGenerator = new ReportGeneratorImpl<>(shopService.getFruitMap());
         String resultingReport = reportGenerator.getReport();
 
         ReportFileWriter fileWriter = new FileWriterImpl();

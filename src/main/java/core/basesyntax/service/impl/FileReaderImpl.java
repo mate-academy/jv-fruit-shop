@@ -19,7 +19,7 @@ public class FileReaderImpl implements core.basesyntax.service.FileReader {
                 line = bufferedReader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can not read from file " + fileName);
+            throw new RuntimeException("Can not read from file " + fileName, e);
         }
 
         return list;

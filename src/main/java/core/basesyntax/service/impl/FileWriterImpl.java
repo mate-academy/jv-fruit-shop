@@ -12,7 +12,7 @@ public class FileWriterImpl implements ReportFileWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathToFile))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can not write to file " + pathToFile);
+            throw new RuntimeException("Can not write to file " + pathToFile, e);
         }
     }
 }
