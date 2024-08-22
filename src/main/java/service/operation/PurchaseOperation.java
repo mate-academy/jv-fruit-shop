@@ -4,19 +4,21 @@ import dao.FruitDao;
 import dao.FruitDaoImpl;
 
 public class PurchaseOperation implements OperationHandler {
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
-    public PurchaseOperation() {
-        this.fruitDao = new FruitDaoImpl();
+    public PurchaseOperation(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public void handle(String fruit, int quantity) {
-        int balanceAfterPurchase = fruitDao.getFruitBalance(fruit) - quantity;
+        int balanceAfterPurchase = fruitDao.getBalance(fruit) - quantity;
         if (balanceAfterPurchase >= 0) {
-            fruitDao.updateBalanceOfFruit(fruit,balanceAfterPurchase);
+            fruitDao.updateBalance(fruit,balanceAfterPurchase);
         } else {
-            throw new RuntimeException("We don't have enough " + fruit + "s");
+            throw new RuntimeException(String.format("You wanted to buy %d %ss " +
+                    "but available only %d %ss",quantity, fruit,fruitDao.getBalance(fruit),fruit
+            ));
         }
     }
 }
