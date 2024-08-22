@@ -1,17 +1,16 @@
 package service.operation;
 
 import dao.FruitDao;
-import dao.FruitDaoImpl;
 
 public class BalanceOperation implements OperationHandler {
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
-    public BalanceOperation() {
-        this.fruitDao = new FruitDaoImpl();
+    public BalanceOperation(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
     }
 
     @Override
     public void handle(String fruit, int quantity) {
-        fruitDao.addBalanceOfFruit(fruit, quantity);
+        fruitDao.addBalance(fruit, quantity);
     }
 }
