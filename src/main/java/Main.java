@@ -1,8 +1,7 @@
+import dao.FruitDaoImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import dao.FruitDaoImpl;
 import model.FruitTransaction;
 import service.DataConverter;
 import service.ReaderService;
