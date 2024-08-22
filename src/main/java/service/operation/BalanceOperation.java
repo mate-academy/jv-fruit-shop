@@ -7,7 +7,7 @@ import model.FruitTransaction;
 public class BalanceOperation implements OperationHandler {
 
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         for (Map.Entry<String, Integer> fruit : Storage.getFruitsStorage().entrySet()) {
             if (fruit.getKey().equals(fruitTransaction.getFruit())) {
                 Storage.setFruitsStorage(fruit.getKey(), fruitTransaction.getQuantity());

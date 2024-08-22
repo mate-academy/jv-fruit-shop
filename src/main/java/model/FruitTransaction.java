@@ -53,5 +53,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public FruitTransaction.Operation findEnumValue(String operationCode) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.getCode().equals(operationCode)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("No operations with: " + operationCode);
+        }
     }
 }

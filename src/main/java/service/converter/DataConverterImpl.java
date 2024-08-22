@@ -19,21 +19,13 @@ public class DataConverterImpl implements DataConverter {
         for (String input : inputReport) {
             FruitTransaction fruitTransaction = new FruitTransaction();
             String[] inputSplitter = input.split(SEPARATOR);
-            fruitTransaction.setOperation(findEnumValue(inputSplitter[OPERATION_INDEX]));
+            fruitTransaction.setOperation(
+                    fruitTransaction.getOperation().findEnumValue(inputSplitter[OPERATION_INDEX]));
             fruitTransaction.setFruit(inputSplitter[FRUIT_INDEX]);
             fruitTransaction.setQuantity(Integer.parseInt(inputSplitter[QUANTITY_INDEX]));
             fruitTransactionList.add(fruitTransaction);
         }
 
         return fruitTransactionList;
-    }
-
-    public static FruitTransaction.Operation findEnumValue(String operationCode) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(operationCode)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("No operations with: " + operationCode);
     }
 }

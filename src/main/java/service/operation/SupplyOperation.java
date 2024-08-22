@@ -6,7 +6,7 @@ import model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
     @Override
-    public void operation(FruitTransaction fruitTransaction) {
+    public void handle(FruitTransaction fruitTransaction) {
         if (fruitTransaction.getQuantity() <= 0) {
             return;
         }

@@ -4,7 +4,6 @@ import file.reader.FileReader;
 import file.reader.FileReaderImpl;
 import file.writer.FileWriter;
 import file.writer.FileWriterImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -28,16 +27,17 @@ public class Main {
         List<String> inputReport = fileReader.read("reportToRead.csv");
         DataConverter dataConverter = new DataConverterImpl();
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation()
+        );
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.transactions(transactions);
+        shopService.handleTransaction(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
