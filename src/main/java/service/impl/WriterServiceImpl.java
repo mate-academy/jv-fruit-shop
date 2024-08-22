@@ -1,4 +1,4 @@
-package service.imp;
+package service.impl;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
         try {
             Files.write(Path.of(fileName), resultingReport.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file" + fileName);
+            throw new RuntimeException("Can't write to file" + fileName, e);
         }
     }
 }
