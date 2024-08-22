@@ -4,12 +4,12 @@ import java.util.Map;
 import java.util.Set;
 
 public interface FruitDao {
-    Integer getFruitBalance(String fruit);
+    Integer getBalance(String fruit);
 
-    boolean addBalanceOfFruit(String fruit, int quantity);
+    boolean addBalance(String fruit, int quantity);
 
-    void updateBalanceOfFruit(String fruit, int quantity);
+    void updateBalance(String fruit, int quantity);
 
-    Set<Map.Entry<String, Integer>> getAllFruit();
+    Set<Map.Entry<String, Integer>> getAllEntries();
 
 }
