@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileReaderImpl implements FileReader {
-    private static final String START_PATH = "./";
+    private static final String START_PATH = "./src/main/resources/";
 
     @Override
     public List<String> read(String fileName) {

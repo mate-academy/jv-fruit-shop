@@ -8,7 +8,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String SEPARATOR = ",";
 
     @Override
-    public String getReport() {
+    public String generateStorageReport() {
         StringBuilder stringStorage = new StringBuilder();
         stringStorage.append(HEADLINE);
 
@@ -17,6 +17,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .append(SEPARATOR).append(storageMap.getValue());
         }
 
-        return String.valueOf(stringStorage);
+        return stringStorage.toString();
     }
 }

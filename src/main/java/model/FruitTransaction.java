@@ -1,6 +1,7 @@
 package model;
 
 public class FruitTransaction {
+    public static final int MIN_QUANTITY = 0;
     private Operation operation;
     private String fruit;
     private int quantity;

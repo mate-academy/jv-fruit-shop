@@ -1,22 +1,23 @@
 package service.operation;
 
+import static model.FruitTransaction.MIN_QUANTITY;
+
 import data.db.Storage;
-import java.util.Map;
 import model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        if (fruitTransaction.getQuantity() <= 0) {
+        if (fruitTransaction.getQuantity() <= MIN_QUANTITY) {
             return;
         }
-        for (Map.Entry<String, Integer> fruit : Storage.getFruitsStorage().entrySet()) {
-            if (fruit.getKey().equals(fruitTransaction.getFruit())) {
-                Storage.setFruitsStorage(fruit.getKey(),
-                        fruit.getValue() + fruitTransaction.getQuantity());
-                return;
-            }
+        if (Storage.getFruitsStorage().containsKey(fruitTransaction.getFruit())) {
+            Storage.updateFruitsStorage(fruitTransaction.getFruit(),
+                    Storage.getFruitsStorage().get(fruitTransaction.getFruit())
+                            + fruitTransaction.getQuantity());
+        } else {
+            Storage.updateFruitsStorage(
+                    fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
-        Storage.setFruitsStorage(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

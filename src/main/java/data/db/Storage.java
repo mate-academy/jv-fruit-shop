@@ -10,7 +10,7 @@ public class Storage {
         return new HashMap<>(fruitsStorage);
     }
 
-    public static void setFruitsStorage(String fruit, int quantity) {
+    public static void updateFruitsStorage(String fruit, int quantity) {
         fruitsStorage.put(fruit, quantity);
     }
 }

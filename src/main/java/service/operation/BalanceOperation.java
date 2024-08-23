@@ -1,19 +1,24 @@
 package service.operation;
 
+import static model.FruitTransaction.MIN_QUANTITY;
+
 import data.db.Storage;
-import java.util.Map;
 import model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
-
     @Override
     public void handle(FruitTransaction fruitTransaction) {
-        for (Map.Entry<String, Integer> fruit : Storage.getFruitsStorage().entrySet()) {
-            if (fruit.getKey().equals(fruitTransaction.getFruit())) {
-                Storage.setFruitsStorage(fruit.getKey(), fruitTransaction.getQuantity());
-                return;
-            }
+        if (fruitTransaction == null || fruitTransaction.getFruit() == null
+                || fruitTransaction.getQuantity() < MIN_QUANTITY) {
+            throw new RuntimeException("Invalid fruitTransaction input");
         }
-        Storage.setFruitsStorage(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+
+        if (Storage.getFruitsStorage().containsKey(fruitTransaction.getFruit())) {
+            Storage.updateFruitsStorage(
+                    fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        } else {
+            Storage.updateFruitsStorage(
+                    fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        }
     }
 }

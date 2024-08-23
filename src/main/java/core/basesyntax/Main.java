@@ -22,9 +22,12 @@ import service.shop.ShopService;
 import service.shop.ShopServiceImpl;
 
 public class Main {
+    private static final String READ_FILE_NAME = "reportToRead.csv";
+    private static final String WRITE_FILE_NAME = "finalReport.csv";
+
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(READ_FILE_NAME);
         DataConverter dataConverter = new DataConverterImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
@@ -40,9 +43,9 @@ public class Main {
         shopService.handleTransaction(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+        String resultingReport = reportGenerator.generateStorageReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, WRITE_FILE_NAME);
     }
 }

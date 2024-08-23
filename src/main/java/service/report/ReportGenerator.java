@@ -1,5 +1,5 @@
 package service.report;
 
 public interface ReportGenerator {
-    String getReport();
+    String generateStorageReport();
 }
