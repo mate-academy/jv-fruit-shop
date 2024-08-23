@@ -1,7 +1,6 @@
 package core.basesyntax.io.write.impl.csv;
 
 import core.basesyntax.io.write.ReportWriter;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;

@@ -12,6 +12,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport(StorageImpl storage) {
-          return generator.getReport(storage);
+        return generator.getReport(storage);
     }
 }

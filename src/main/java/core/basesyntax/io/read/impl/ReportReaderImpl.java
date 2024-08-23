@@ -1,7 +1,6 @@
 package core.basesyntax.io.read.impl;
 
 import core.basesyntax.io.read.ReportReader;
-
 import java.io.FileNotFoundException;
 
 public class ReportReaderImpl implements ReportReader {

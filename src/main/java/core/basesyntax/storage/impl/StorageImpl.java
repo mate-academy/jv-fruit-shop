@@ -1,7 +1,6 @@
 package core.basesyntax.storage.impl;
 
 import core.basesyntax.storage.Storage;
-
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -11,7 +10,10 @@ public class StorageImpl implements Storage {
     public StorageImpl(HashMap<String, StorageEntry> entries) {
         this.entries = entries;
     }
-    public StorageImpl() { this.entries = new HashMap<>(); }
+
+    public StorageImpl() {
+        this.entries = new HashMap<>();
+    }
 
     @Override
     public Collection<StorageEntry> getAllEntries() {
@@ -27,10 +29,5 @@ public class StorageImpl implements Storage {
         } else {
             current.setQuantity(current.getQuantity() + quantity);
         }
-    }
-
-    @Override
-    public StorageEntry getProductQuantity(String product) {
-        return entries.get(product);
     }
 }

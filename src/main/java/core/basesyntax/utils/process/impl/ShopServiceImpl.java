@@ -4,7 +4,6 @@ import core.basesyntax.storage.impl.StorageImpl;
 import core.basesyntax.utils.process.ShopService;
 import core.basesyntax.utils.transaction.FruitTransaction;
 import core.basesyntax.utils.transaction.handlers.OperationHandlerFactory;
-
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
@@ -18,7 +17,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        transactions.forEach(transaction -> factory.getOperationHandlerFromOperation(transaction.getOperation())
+        transactions.forEach(transaction ->
+                factory.getOperationHandlerFromOperation(transaction.getOperation())
                 .perform(transaction, storage));
     }
 }

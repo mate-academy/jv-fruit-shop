@@ -1,8 +1,8 @@
 package core.basesyntax;
 
+import core.basesyntax.io.read.ReportReader;
 import core.basesyntax.io.read.impl.ReportReaderImpl;
 import core.basesyntax.io.read.impl.csv.CsvReaderImpl;
-import core.basesyntax.io.read.ReportReader;
 import core.basesyntax.io.write.ReportWriter;
 import core.basesyntax.io.write.impl.ReportWriterImpl;
 import core.basesyntax.io.write.impl.csv.CsvWriterImpl;
@@ -16,10 +16,8 @@ import core.basesyntax.utils.generate.impl.csv.CsvGeneratorImpl;
 import core.basesyntax.utils.process.impl.ShopServiceImpl;
 import core.basesyntax.utils.transaction.FruitTransaction;
 import core.basesyntax.utils.transaction.handlers.OperationHandlerFactory;
-
-import java.util.List;
-
 import java.io.FileNotFoundException;
+import java.util.List;
 
 public class Main {
     private static final String CSV_FILE_PATH = "/";

@@ -1,9 +1,8 @@
 package core.basesyntax.utils.convert.csv;
 
-import core.basesyntax.utils.transaction.FruitTransaction;
 import core.basesyntax.utils.convert.ReportConverter;
+import core.basesyntax.utils.transaction.FruitTransaction;
 import core.basesyntax.utils.transaction.OperationFactory;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +25,8 @@ public class CsvConverterImpl implements ReportConverter {
 
     private List<FruitTransaction> processStream(Stream<String> stream) {
         return stream.map(line -> line.split(LINE_SEPARATOR))
-                .map(operation -> new FruitTransaction(Integer.parseInt(operation[PRODUCT_QUANTITY_INDEX]),
+                .map(operation ->
+                        new FruitTransaction(Integer.parseInt(operation[PRODUCT_QUANTITY_INDEX]),
                         operation[PRODUCT_INDEX],
                         OperationFactory.getOperationFromString(operation[OPERATION_INDEX])))
                 .collect(Collectors.toList());
