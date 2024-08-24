@@ -5,7 +5,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class FruitDaoImpl implements FruitDao {
-
     @Override
     public Integer getBalance(String fruit) {
         return Storage.fruitStock.get(fruit);
@@ -13,7 +12,7 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public boolean addBalance(String fruit, int quantity) {
-        Storage.fruitStock.put(fruit,quantity);
+        Storage.fruitStock.put(fruit, quantity);
         return Storage.fruitStock.containsKey(fruit)
                 && Storage.fruitStock.get(fruit) == quantity;
     }
