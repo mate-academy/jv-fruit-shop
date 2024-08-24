@@ -10,7 +10,10 @@ import java.util.stream.Collectors;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String fromFileName) {
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fromFileName)) {
+        try (InputStream inputStream = getClass()
+                .getClassLoader()
+                .getResourceAsStream(fromFileName)) {
+
             if (inputStream == null) {
                 throw new RuntimeException("File not found: " + fromFileName);
             }

@@ -47,7 +47,8 @@ public class DataConverterImpl implements DataConverter {
         try {
             return Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format for quantity: " + quantityStr, e);
+            throw new IllegalArgumentException("Invalid number format for quantity: "
+                    + quantityStr, e);
         }
     }
 }
