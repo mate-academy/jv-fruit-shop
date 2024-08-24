@@ -1,5 +1,4 @@
 import dao.FruitDaoImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -30,15 +29,11 @@ public class Main {
         ReaderService fileReader = new ReaderServiceImpl();
         List<String> inputReport = fileReader.read(FROM_FILE);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperation(new FruitDaoImpl()));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation(new FruitDaoImpl()));
-        operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperation(new FruitDaoImpl()));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperation(new FruitDaoImpl()));
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(new FruitDaoImpl()),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(new FruitDaoImpl()),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(new FruitDaoImpl()),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(new FruitDaoImpl()));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl(new DataValidatorServiceImpl());
