@@ -1,11 +1,22 @@
 package model;
 
+import java.util.Arrays;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
+
+    public FruitTransaction() {
+    }
+
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
 
     public Operation getOperation() {
         return operation;
@@ -62,6 +73,17 @@ public class FruitTransaction {
 
         public String getCode() {
             return code;
+        }
+
+        public static Operation parseOperation(String code) {
+            return Arrays.stream(FruitTransaction.Operation.values())
+                    .filter(o -> o.getCode().equals(code))
+                    .findAny()
+                    .orElseThrow(() -> new IllegalArgumentException("Invalid operation name: "
+                            + code + ". Must be one of these "
+                            + Arrays.stream(Operation.values())
+                            .map(Operation::getCode)
+                            .collect(Collectors.joining(",", "{", "}"))));
         }
     }
 }
