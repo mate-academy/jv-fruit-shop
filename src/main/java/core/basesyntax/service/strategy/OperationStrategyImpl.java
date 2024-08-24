@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler getOperationHandlers(FruitTransaction.Operation operation) {
+    public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
         if (operation == null) {
             throw new IllegalArgumentException("Operation cannot be null");
         }

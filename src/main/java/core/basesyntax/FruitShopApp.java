@@ -29,7 +29,7 @@ public class FruitShopApp {
     private static final String INPUT_DATA_FILE = "reportToRead.csv";
     private static final String REPORT_FILE = "finalReport.csv";
 
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_DATA_FILE);
@@ -50,8 +50,8 @@ public class FruitShopApp {
         Storage storage = new Storage();
         ProductService productService = new ProductServiceImpl(storage);
         productService.fillProducts(transactions);
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
-        shopService.process(transactions);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transactions, storage);
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();

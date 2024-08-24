@@ -18,27 +18,36 @@ public class DataConverterImpl implements DataConverter {
 
         return inputReport.stream()
                 .skip(LINES_TO_SKIP)
-                .map(this::parseLine)
+                .map(this::convertLineToTransaction)
                 .collect(Collectors.toList());
     }
 
-    private FruitTransaction parseLine(String line) {
+    private FruitTransaction convertLineToTransaction(String line) {
+        String[] parts = splitLine(line);
+        FruitTransaction.Operation operation = convertToOperation(parts[OPERATION_INDEX]);
+        String product = parts[PRODUCT_INDEX];
+        int quantity = parseQuantity(parts[QUANTITY_INDEX]);
+
+        return new FruitTransaction(operation, product, quantity);
+    }
+
+    private String[] splitLine(String line) {
         String[] parts = line.split(",");
         if (parts.length < 3) {
             throw new IllegalArgumentException("Invalid input line: " + line);
         }
+        return parts;
+    }
 
-        FruitTransaction.Operation operation =
-                FruitTransaction.Operation.convertFromCode(parts[OPERATION_INDEX]);
-        String product = parts[PRODUCT_INDEX];
-        int quantity;
+    private FruitTransaction.Operation convertToOperation(String operationCode) {
+        return FruitTransaction.Operation.convertFromCode(operationCode);
+    }
 
+    private int parseQuantity(String quantityStr) {
         try {
-            quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+            return Integer.parseInt(quantityStr);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid number format for quantity: "
-                    + parts[QUANTITY_INDEX], e);
+            throw new IllegalArgumentException("Invalid number format for quantity: " + quantityStr, e);
         }
-        return new FruitTransaction(operation, product, quantity);
     }
 }
