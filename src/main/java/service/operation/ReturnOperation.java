@@ -11,6 +11,6 @@ public class ReturnOperation implements OperationHandler {
 
     @Override
     public void handle(String fruit, int quantity) {
-        fruitDao.updateBalance(fruit,fruitDao.getBalance(fruit) + quantity);
+        fruitDao.updateBalance(fruit, fruitDao.getBalance(fruit) + quantity);
     }
 }
