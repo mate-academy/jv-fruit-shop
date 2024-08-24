@@ -11,5 +11,4 @@ public interface FruitDao {
     void updateBalance(String fruit, int quantity);
 
     Set<Map.Entry<String, Integer>> getAllEntries();
-
 }
