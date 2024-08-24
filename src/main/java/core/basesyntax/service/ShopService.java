@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Report;
 
 import java.util.List;
-import java.util.Map;
 
 public interface ShopService {
-    Map<String, Integer> process(List<FruitTransaction> transactions);
+    Report process(List<FruitTransaction> transactions);
 }

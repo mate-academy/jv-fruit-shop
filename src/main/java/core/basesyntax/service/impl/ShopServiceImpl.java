@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Report;
 import core.basesyntax.model.enums.Operation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Map<String, Integer> process(List<FruitTransaction> transactions) {
+    public Report process(List<FruitTransaction> transactions) {
         Map<String, Integer> fruitQuantityMap = new HashMap<>();
         boolean isInitialization = true;
         for (FruitTransaction transaction : transactions) {
@@ -27,7 +27,7 @@ public class ShopServiceImpl implements ShopService {
             OperationHandler handler = strategy.getHandler(transaction.getOperation());
             handler.process(fruitQuantityMap, transaction);
         }
-        return fruitQuantityMap;
+        return new Report(fruitQuantityMap);
     }
 
     private boolean validateAndUpdateState(boolean isInitialization, Operation operation) {

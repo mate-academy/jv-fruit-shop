@@ -4,14 +4,14 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.enums.Operation;
 import core.basesyntax.service.Mapper;
 
-public class FruitTransactionMapper implements Mapper<FruitTransaction> {
+public class FruitTransactionMapper implements Mapper<FruitTransaction, String> {
     private static final String DELIMITER = ",";
     private static int OPERATION_INDEX = 0;
     private static int FRUIT_INDEX = 1;
     private static int QUANTITY_INDEX = 2;
 
     @Override
-    public FruitTransaction stringToObject(String string) {
+    public FruitTransaction toObject(String string) {
         String[] split = string.split(DELIMITER);
         validateSplitLength(split, string);
         Operation operation = Operation.fromCode(split[OPERATION_INDEX]);

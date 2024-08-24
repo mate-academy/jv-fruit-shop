@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
-public interface Mapper<T> {
-    T stringToObject(String string);
+public interface Mapper<T, S> {
+    T toObject(S source);
 }
