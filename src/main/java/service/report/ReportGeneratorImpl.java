@@ -12,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder stringStorage = new StringBuilder();
         stringStorage.append(HEADLINE);
 
-        for (Map.Entry<String, Integer> storageMap : Storage.getFruitsStorage().entrySet()) {
+        for (Map.Entry<String, Integer> storageMap : Storage.getFruitStorage().entrySet()) {
             stringStorage.append(System.lineSeparator()).append(storageMap.getKey())
                     .append(SEPARATOR).append(storageMap.getValue());
         }

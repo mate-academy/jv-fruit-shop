@@ -1,5 +1,5 @@
 package file.writer;
 
 public interface FileWriter {
-    void write(String report, String fileName);
+    void writeToCsv(String report, String fileName);
 }

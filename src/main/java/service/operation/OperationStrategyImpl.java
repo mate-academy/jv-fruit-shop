@@ -6,13 +6,13 @@ import model.FruitTransaction;
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
 
-    public OperationStrategyImpl(Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlers) {
+    public OperationStrategyImpl(
+            Map<FruitTransaction.Operation, OperationHandler> operationHandlers) {
         this.operationHandlerMap = operationHandlers;
     }
 
     @Override
-    public OperationHandler get(FruitTransaction.Operation operation) {
+    public OperationHandler getOperation(FruitTransaction.Operation operation) {
         return operationHandlerMap.get(operation);
     }
 }

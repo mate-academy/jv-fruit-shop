@@ -14,9 +14,9 @@ public class PurchaseOperation implements OperationHandler {
             throw new RuntimeException("Invalid fruitTransaction input");
         }
 
-        if (Storage.getFruitsStorage().containsKey(fruitTransaction.getFruit())) {
-            Storage.updateFruitsStorage(fruitTransaction.getFruit(),
-                    Math.max(Storage.getFruitsStorage().get(fruitTransaction.getFruit())
+        if (Storage.getFruitStorage().containsKey(fruitTransaction.getFruit())) {
+            Storage.updateFruitStorage(fruitTransaction.getFruit(),
+                    Math.max(Storage.getFruitStorage().get(fruitTransaction.getFruit())
                             - fruitTransaction.getQuantity(), MIN_QUANTITY));
         }
     }

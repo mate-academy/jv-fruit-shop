@@ -13,9 +13,9 @@ public class ReturnOperation implements OperationHandler {
             throw new RuntimeException("Invalid fruitTransaction input");
         }
 
-        if (Storage.getFruitsStorage().containsKey(fruitTransaction.getFruit())) {
-            Storage.updateFruitsStorage(fruitTransaction.getFruit(),
-                    Storage.getFruitsStorage().get(fruitTransaction.getFruit())
+        if (Storage.getFruitStorage().containsKey(fruitTransaction.getFruit())) {
+            Storage.updateFruitStorage(fruitTransaction.getFruit(),
+                    Storage.getFruitStorage().get(fruitTransaction.getFruit())
                             + fruitTransaction.getQuantity());
         } else {
             throw new RuntimeException("There is no fruit in storage "

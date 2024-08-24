@@ -4,13 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static final Map<String, Integer> fruitsStorage = new HashMap<>();
+    private static final Map<String, Integer> fruitStorage = new HashMap<>();
 
-    public static Map<String, Integer> getFruitsStorage() {
-        return new HashMap<>(fruitsStorage);
+    public static Map<String, Integer> getFruitStorage() {
+        return new HashMap<>(fruitStorage);
     }
 
-    public static void updateFruitsStorage(String fruit, int quantity) {
-        fruitsStorage.put(fruit, quantity);
+    public static void updateFruitStorage(String fruit, int quantity) {
+        fruitStorage.put(fruit, quantity);
     }
 }

@@ -13,11 +13,11 @@ public class BalanceOperation implements OperationHandler {
             throw new RuntimeException("Invalid fruitTransaction input");
         }
 
-        if (Storage.getFruitsStorage().containsKey(fruitTransaction.getFruit())) {
-            Storage.updateFruitsStorage(
+        if (Storage.getFruitStorage().containsKey(fruitTransaction.getFruit())) {
+            Storage.updateFruitStorage(
                     fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         } else {
-            Storage.updateFruitsStorage(
+            Storage.updateFruitStorage(
                     fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }

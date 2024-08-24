@@ -27,7 +27,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read(READ_FILE_NAME);
+        List<String> inputReport = fileReader.readFromCsv(READ_FILE_NAME);
         DataConverter dataConverter = new DataConverterImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
@@ -37,15 +37,15 @@ public class Main {
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation()
         );
 
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        List<FruitTransaction> transactions = dataConverter.convertToTransactionList(inputReport);
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.handleTransaction(transactions);
+        shopService.handleTransactionList(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.generateStorageReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, WRITE_FILE_NAME);
+        fileWriter.writeToCsv(resultingReport, WRITE_FILE_NAME);
     }
 }
