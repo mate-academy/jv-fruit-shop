@@ -1,5 +1,6 @@
 package service.impl;
 
+import exception.ValidationException;
 import service.ValidatorService;
 
 public class DataValidatorServiceImpl implements ValidatorService {
@@ -10,23 +11,23 @@ public class DataValidatorServiceImpl implements ValidatorService {
     @Override
     public void validate(String[] data) {
         if (data.length != DEFAULT_TRANSACTION_LENGTH) {
-            throw new RuntimeException("This data has incorrect length: " + data.length);
+            throw new ValidationException("This data has incorrect length: " + data.length);
         }
         if (data[FRUIT_INDEX].isBlank()) {
-            throw new RuntimeException("The name of the fruit cannot be blank");
+            throw new ValidationException("The name of the fruit cannot be blank");
         }
         if (data[FRUIT_INDEX].equals("null")) {
-            throw new RuntimeException("The name of the fruit cannot be null");
+            throw new ValidationException("The name of the fruit cannot be null");
         }
         if (data[QUANTITY_INDEX].isBlank()) {
-            throw new RuntimeException("The quantity can't be empty");
+            throw new ValidationException("The quantity can't be empty");
         }
         if (!data[QUANTITY_INDEX].matches("\\d+")) {
-            throw new RuntimeException("The quantity must consist of numbers only: "
+            throw new ValidationException("The quantity must consist of numbers only: "
                     + data[QUANTITY_INDEX]);
         }
         if (Integer.parseInt(data[QUANTITY_INDEX]) < 0) {
-            throw new RuntimeException("The quantity can't be less than zero: "
+            throw new ValidationException("The quantity can't be less than zero: "
                     + data[QUANTITY_INDEX]);
         }
     }
