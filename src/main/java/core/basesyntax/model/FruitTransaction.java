@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 public class FruitTransaction {
     private Operation operation;
@@ -49,15 +48,11 @@ public class FruitTransaction {
         }
 
         private Operation getOperationByCode(String code) {
-            Optional<Operation> matchingOperation = Arrays.stream(Operation.values())
+            return Arrays.stream(Operation.values())
                     .filter(val -> val.getCode().equals(code))
-                    .findFirst();
-
-            if (matchingOperation.isPresent()) {
-                return matchingOperation.get();
-            } else {
-                throw new IllegalArgumentException("Invalid operation code: " + code);
-            }
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Invalid operation code: " + code));
         }
     }
 }
