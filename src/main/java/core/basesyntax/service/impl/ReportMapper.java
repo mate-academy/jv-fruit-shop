@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Report;
 import core.basesyntax.service.Mapper;
-
 import java.util.stream.Collectors;
 
 public class ReportMapper implements Mapper<String, Report> {

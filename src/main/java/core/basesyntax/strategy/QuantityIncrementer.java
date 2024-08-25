@@ -2,7 +2,6 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.mapvalidator.KeyPresentValidator;
-
 import java.util.Map;
 import java.util.function.BiFunction;
 

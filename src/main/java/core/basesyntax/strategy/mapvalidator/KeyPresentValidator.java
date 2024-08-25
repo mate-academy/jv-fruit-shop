@@ -1,8 +1,6 @@
 package core.basesyntax.strategy.mapvalidator;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.enums.Operation;
-
 import java.util.Map;
 
 public interface KeyPresentValidator extends MapValidator {

@@ -22,8 +22,8 @@ public class FruitTransactionMapper implements Mapper<FruitTransaction, String> 
 
     private void validateSplitLength(String[] split, String string) {
         if (split.length != 3) {
-            throw new IllegalArgumentException("Input string must contain " +
-                    "exactly three elements separated by the delimiter '"
+            throw new IllegalArgumentException("Input string must contain "
+                    + "exactly three elements separated by the delimiter '"
                     + DELIMITER + "', but found " + split.length + ": [" + string + "]");
         }
     }
@@ -31,7 +31,8 @@ public class FruitTransactionMapper implements Mapper<FruitTransaction, String> 
     private int parseQuantity(String quantityString) {
         int quantity = Integer.parseInt(quantityString);
         if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity = [" + quantity + "], but should be positive");
+            throw new IllegalArgumentException("Quantity = ["
+                    + quantity + "], but should be positive");
         }
         return quantity;
     }

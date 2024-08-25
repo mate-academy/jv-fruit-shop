@@ -15,6 +15,6 @@ public class ReturnOperationHandler
     @Override
     protected void processTransaction(Map<String, Integer> fruitQuantityMap,
                                       FruitTransaction transaction) {
-       incrementByQuantity(fruitQuantityMap, transaction);
+        incrementByQuantity(fruitQuantityMap, transaction);
     }
 }
