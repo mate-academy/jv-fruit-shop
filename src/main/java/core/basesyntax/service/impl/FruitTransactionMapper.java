@@ -6,9 +6,9 @@ import core.basesyntax.service.Mapper;
 
 public class FruitTransactionMapper implements Mapper<FruitTransaction, String> {
     private static final String DELIMITER = ",";
-    private static int OPERATION_INDEX = 0;
-    private static int FRUIT_INDEX = 1;
-    private static int QUANTITY_INDEX = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public FruitTransaction toObject(String string) {

@@ -1,11 +1,12 @@
-package core.basesyntax.strategy.mapvalidator;
+package core.basesyntax.strategy.validator.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.strategy.validator.MapValidator;
 import java.util.Map;
 
-public interface KeyPresentValidator extends MapValidator {
+public class KeyPresentValidator implements MapValidator {
     @Override
-    default void validateMap(Map<String, Integer> fruitQuantityMap,
+    public void validateMap(Map<String, Integer> fruitQuantityMap,
                                     FruitTransaction transaction) {
         if (!fruitQuantityMap.containsKey(transaction.getFruit())) {
             String exceptionMessage = "Fruit from transaction = ["

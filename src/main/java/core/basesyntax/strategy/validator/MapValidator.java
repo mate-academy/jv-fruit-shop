@@ -1,4 +1,4 @@
-package core.basesyntax.strategy.mapvalidator;
+package core.basesyntax.strategy.validator;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;

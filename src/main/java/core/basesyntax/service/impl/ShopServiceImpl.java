@@ -22,7 +22,7 @@ public class ShopServiceImpl implements ShopService {
         Map<String, Integer> fruitQuantityMap = new HashMap<>();
         boolean isInitialization = true;
         for (FruitTransaction transaction : transactions) {
-            isInitialization = validateAndUpdateState(isInitialization,
+            isInitialization = ensureBalanceInitialization(isInitialization,
                     transaction.getOperation());
             OperationHandler handler = strategy.getHandler(transaction.getOperation());
             handler.process(fruitQuantityMap, transaction);
@@ -30,7 +30,7 @@ public class ShopServiceImpl implements ShopService {
         return new Report(fruitQuantityMap);
     }
 
-    private boolean validateAndUpdateState(boolean isInitialization, Operation operation) {
+    private boolean ensureBalanceInitialization(boolean isInitialization, Operation operation) {
         if (!isInitialization && operation == Operation.BALANCE) {
             String exceptionMessage =
                     "Operation = [" + operation + "] can be present only in the beginning";
