@@ -1,12 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.CsvStorageDaoImpl;
-import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.TransactionParser;
+import core.basesyntax.dao.TransactionParserImpl;
 import core.basesyntax.handler.BalanceOperationHandler;
 import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.handler.PurchaseOperationHandler;
 import core.basesyntax.handler.ReturnOperationHandler;
 import core.basesyntax.handler.SupplyOperationHandler;
+import core.basesyntax.io.FileReader;
+import core.basesyntax.io.FileReaderImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.report.CsvReportWriterImpl;
 import core.basesyntax.report.ReportBuilder;
@@ -24,8 +26,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        StorageDao storageDao = new CsvStorageDaoImpl();
-        String filePath = "src/main/java/core/basesyntax/file.csv";
+        TransactionParser transactionParser = new TransactionParserImpl();
+        String filePath = "src/main/resources/file.csv";
 
         FruitStorage fruitStorage = new FruitStorageImpl();
 
@@ -43,14 +45,17 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
 
-        List<FruitTransaction> transactions = storageDao.readTransactions(filePath);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> transactionsList = fileReader.readFile(filePath);
+
+        List<FruitTransaction> transactions = transactionParser.parseTransactions(transactionsList);
         ShopService shopService = new ShopServiceImpl(operationStrategy, fruitStorage);
         shopService.processTransactions(transactions);
 
         ReportBuilder reportBuilder = new ReportBuilderImpl();
         String reportData = reportBuilder.buildReport(fruitStorage);
 
-        String reportPath = "src/main/java/core/basesyntax/report.csv";
+        String reportPath = "src/main/resources/report.csv";
         ReportWriter reportWriter = new CsvReportWriterImpl();
         reportWriter.writeReport(reportData, reportPath);
     }

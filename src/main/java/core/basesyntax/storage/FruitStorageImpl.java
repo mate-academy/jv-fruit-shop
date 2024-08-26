@@ -12,7 +12,7 @@ public class FruitStorageImpl implements FruitStorage {
     }
 
     @Override
-    public void setFruit(String fruit, int quantity) {
+    public void setFruitBalance(String fruit, int quantity) {
         storage.put(fruit, quantity);
     }
 
@@ -32,7 +32,6 @@ public class FruitStorageImpl implements FruitStorage {
 
     @Override
     public Map<String, Integer> getAllFruits() {
-        return storage;
+        return Map.copyOf(storage);
     }
-
 }
