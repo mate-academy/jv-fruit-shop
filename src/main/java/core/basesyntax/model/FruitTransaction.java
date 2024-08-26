@@ -8,7 +8,7 @@ public class FruitTransaction {
     private int quantity;
 
     public void setOperation(String code) {
-        operation = operation.getOperationByCode(code);
+        operation = Operation.getOperationByCode(code);
     }
 
     public Operation getOperation() {
@@ -47,7 +47,7 @@ public class FruitTransaction {
             return code;
         }
 
-        private Operation getOperationByCode(String code) {
+        private static Operation getOperationByCode(String code) {
             return Arrays.stream(Operation.values())
                     .filter(val -> val.getCode().equals(code))
                     .findFirst()

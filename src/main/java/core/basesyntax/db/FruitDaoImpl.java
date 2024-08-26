@@ -31,5 +31,4 @@ public class FruitDaoImpl implements FruitDao {
             throw new RuntimeException("Fruit stock cannot be less than 0");
         }
     }
-
 }
