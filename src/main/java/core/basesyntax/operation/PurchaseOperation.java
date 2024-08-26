@@ -11,7 +11,9 @@ public class PurchaseOperation implements OperationHandler {
         int fruitsToBuy = fruitTransaction.getQuantity();
         Storage.storage.merge(fruit, fruitsToBuy, (prevQuantity, newQuantity) -> {
             if (newQuantity > prevQuantity) {
-                throw new NoSuchElementException("Not enough fruit for purchase. You can purchase max: " + prevQuantity);
+                throw new NoSuchElementException("Not enough fruit for purchase. "
+                        + "You can purchase max: "
+                        + prevQuantity);
             }
             return prevQuantity - newQuantity;
         });
