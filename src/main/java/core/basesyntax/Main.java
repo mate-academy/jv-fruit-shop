@@ -23,9 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_NAME_FOR_READ = "reportToRead.csv";
+    private static final String FILE_NAME_FOR_WRITE = "reportToWrite.csv";
+
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.readFromFile(FILE_NAME_FOR_READ);
 
         DataConverter dataConverter = new DataConverterImpl();
 
@@ -41,10 +44,9 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator
-                .getReport(((ShopServiceImpl) shopService).getStorage());
+        String resultingReport = reportGenerator.getReport(shopService);
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.writeToFile(resultingReport, FILE_NAME_FOR_WRITE);
     }
 }

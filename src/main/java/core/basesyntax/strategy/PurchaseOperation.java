@@ -6,6 +6,15 @@ import java.util.Map;
 public class PurchaseOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction, Map<String, Integer> storage) {
-        storage.merge(transaction.getFruit(), -transaction.getQuantity(), Integer::sum);
+        String fruit = transaction.getFruit();
+        int quantityToPurchase = transaction.getQuantity();
+        int currentQuantity = storage.getOrDefault(fruit, 0);
+        int newQuantity = currentQuantity - quantityToPurchase;
+        if (newQuantity < 0) {
+            throw new RuntimeException("Not enough "
+                    + fruit
+                    + " in stock to complete the purchase.");
+        }
+        storage.put(fruit, newQuantity);
     }
 }
