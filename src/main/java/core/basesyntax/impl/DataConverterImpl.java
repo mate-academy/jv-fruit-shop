@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String DELIMITER = ",";
+    private static final int CORRECT_NUMBERS_OF_PARTS = 3;
     private static final int OPERATION = 0;
     private static final int FRUIT = 1;
     private static final int QUANTITY = 2;
@@ -19,8 +21,8 @@ public class DataConverterImpl implements DataConverter {
                 isFirstLine = false;
                 continue;
             }
-            String[] parts = line.split(",");
-            if (parts.length != 3) {
+            String[] parts = line.split(DELIMITER);
+            if (parts.length != CORRECT_NUMBERS_OF_PARTS) {
                 continue;
             }
 
