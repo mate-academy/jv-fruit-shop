@@ -20,7 +20,6 @@ import core.basesyntax.storage.FruitStorage;
 import core.basesyntax.storage.FruitStorageImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
