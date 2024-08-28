@@ -10,7 +10,6 @@ public class CsvWriterImpl implements CsvWriter {
     public void write(String fileName, String string) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(string);
-            writer.flush();
         } catch (IOException e) {
             throw new RuntimeException("An exception occurred while writing a file = ["
                     + fileName + "]", e);

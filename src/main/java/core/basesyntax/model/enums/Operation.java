@@ -4,7 +4,10 @@ import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 public enum Operation {
-    BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
 
     private final String code;
 
@@ -13,11 +16,11 @@ public enum Operation {
     }
 
     public static Operation fromCode(String code) {
-        String exceptionMessage = "Operation with code = [" + code + "] not found";
         return Arrays.stream(values())
                 .filter(operation -> operation.code.equals(code))
                 .findFirst()
-                .orElseThrow(() -> new NoSuchElementException(exceptionMessage));
+                .orElseThrow(() -> new NoSuchElementException("Operation with code = ["
+                        + code + "] not found"));
     }
 
     public String getCode() {

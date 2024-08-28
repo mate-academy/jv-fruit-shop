@@ -32,9 +32,8 @@ public class ShopServiceImpl implements ShopService {
 
     private boolean ensureBalanceInitialization(boolean isInitialization, Operation operation) {
         if (!isInitialization && operation == Operation.BALANCE) {
-            String exceptionMessage =
-                    "Operation = [" + operation + "] can be present only in the beginning";
-            throw new IllegalStateException(exceptionMessage);
+            throw new IllegalStateException("Operation = ["
+                    + operation + "] can be present only in the beginning");
         }
         if (isInitialization && operation != Operation.BALANCE) {
             isInitialization = false;

@@ -21,9 +21,6 @@ import core.basesyntax.strategy.impl.PurchaseOperationHandler;
 import core.basesyntax.strategy.impl.QuantityIncrementerImpl;
 import core.basesyntax.strategy.impl.ReturnOperationHandler;
 import core.basesyntax.strategy.impl.SupplyOperationHandler;
-import core.basesyntax.strategy.validator.MapValidator;
-import core.basesyntax.strategy.validator.impl.KeyAbsentValidator;
-import core.basesyntax.strategy.validator.impl.KeyPresentValidator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,19 +35,13 @@ public class Main {
                 .map(mapper::toObject)
                 .toList();
 
-        MapValidator keyPresentValidator = new KeyPresentValidator();
-        MapValidator keyAbsentValidator = new KeyAbsentValidator();
         QuantityIncrementer incrementer = new QuantityIncrementerImpl();
 
         Map<Operation, OperationHandler> strategiesMap = new HashMap<>();
-        strategiesMap.put(Operation.BALANCE,
-                new BalanceOperationHandler(keyAbsentValidator));
-        strategiesMap.put(Operation.SUPPLY,
-                new SupplyOperationHandler(keyPresentValidator, incrementer));
-        strategiesMap.put(Operation.PURCHASE,
-                new PurchaseOperationHandler(keyPresentValidator));
-        strategiesMap.put(Operation.RETURN,
-                new ReturnOperationHandler(keyPresentValidator, incrementer));
+        strategiesMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        strategiesMap.put(Operation.SUPPLY, new SupplyOperationHandler(incrementer));
+        strategiesMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        strategiesMap.put(Operation.RETURN, new ReturnOperationHandler(incrementer));
 
         OperationStrategy strategy = new OperationStrategyImpl(strategiesMap);
         ShopService service = new ShopServiceImpl(strategy);

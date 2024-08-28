@@ -16,9 +16,8 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(Operation operation) {
-        String exceptionMessage =
-                "Cannot find OperationHandler for operation = [" + operation + "]";
         return Optional.ofNullable(strategiesMap.get(operation))
-                .orElseThrow(() -> new NoSuchElementException(exceptionMessage));
+                .orElseThrow(() -> new NoSuchElementException("Cannot find OperationHandler "
+                        + "for operation = [" + operation + "]"));
     }
 }
