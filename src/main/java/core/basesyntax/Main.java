@@ -37,11 +37,16 @@ public class Main {
         OperationHandler purchaseHandler = new PurchaseOperationHandler(fruitStorage);
 
         //Creating Map with Transactions operations as KEY and Handlers as VALUE
-        Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
-        handlers.put(FruitTransaction.Operation.BALANCE, balanceHandler);
-        handlers.put(FruitTransaction.Operation.SUPPLY, supplyHandler);
-        handlers.put(FruitTransaction.Operation.PURCHASE, purchaseHandler);
-        handlers.put(FruitTransaction.Operation.RETURN, returnHandler);
+
+        Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
+                FruitTransaction.Operation.BALANCE,
+                balanceHandler,
+                FruitTransaction.Operation.SUPPLY,
+                supplyHandler,
+                FruitTransaction.Operation.PURCHASE,
+                purchaseHandler,
+                FruitTransaction.Operation.RETURN,
+                returnHandler);
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
 

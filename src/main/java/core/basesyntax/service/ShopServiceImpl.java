@@ -27,5 +27,4 @@ public class ShopServiceImpl implements ShopService {
     public Map<String, Integer> getFruitStorage() {
         return fruitStorage.getAllFruits();
     }
-
 }

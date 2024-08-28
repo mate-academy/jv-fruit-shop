@@ -18,11 +18,13 @@ public class FruitStorageImpl implements FruitStorage {
 
     @Override
     public void removeFruit(String fruit, int quantity) {
-        int currentQuantity = storage.getOrDefault(fruit, 0);
-        if (currentQuantity < quantity) {
-            throw new IllegalArgumentException("Not enough " + fruit + "in storage");
-        }
-        storage.put(fruit, currentQuantity - quantity);
+        storage.merge(fruit, -quantity, (currentQuantity, delta) -> {
+            int newQuantity = currentQuantity + delta;
+            if (newQuantity < 0) {
+                throw new IllegalArgumentException("Not enough " + fruit + "in storage");
+            }
+            return newQuantity;
+        });
     }
 
     @Override

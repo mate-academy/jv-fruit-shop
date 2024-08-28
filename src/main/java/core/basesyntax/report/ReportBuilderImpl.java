@@ -8,7 +8,7 @@ public class ReportBuilderImpl implements ReportBuilder {
         StringBuilder report = new StringBuilder();
         report.append("fruit,quantity\n");
         storage.getAllFruits().forEach((fruit, quantity) -> {
-            report.append(fruit).append(",").append(quantity).append("\n");
+            report.append(fruit).append(",").append(quantity).append(System.lineSeparator());
         });
         return report.toString();
     }
