@@ -1,11 +1,17 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
+import core.basesyntax.service.StorageService;
 
 public class ReturnOperation implements OperationHandler {
+    private final StorageService storageService;
+
+    public ReturnOperation(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
     @Override
-    public void handle(FruitTransaction transaction, Map<String, Integer> storage) {
-        storage.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
+    public void handle(FruitTransaction transaction) {
+        storageService.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }

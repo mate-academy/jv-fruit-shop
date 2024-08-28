@@ -1,18 +1,17 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
+import core.basesyntax.service.StorageService;
 
 public class BalanceOperation implements OperationHandler {
+    private StorageService storageService;
+
+    public BalanceOperation(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
     @Override
-    public void handle(FruitTransaction transaction, Map<String, Integer> storage) {
-        String fruit = transaction.getFruit();
-        int quantityToBalance = transaction.getQuantity();
-        int newQuantity = quantityToBalance;
-        if (newQuantity < 0) {
-            throw new RuntimeException("Balance for "
-                    + fruit + " cannot be negative.");
-        }
-        storage.put(fruit, newQuantity);
+    public void handle(FruitTransaction fruitTransaction) {
+        storageService.addFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

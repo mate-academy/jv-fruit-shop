@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final int OPERATION = 0;
+    private static final int FRUIT = 1;
+    private static final int QUANTITY = 2;
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -19,9 +23,12 @@ public class DataConverterImpl implements DataConverter {
             if (parts.length != 3) {
                 continue;
             }
-            FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(parts[0]);
-            String fruit = parts[1];
-            int quantity = Integer.parseInt(parts[2]);
+
+            FruitTransaction.Operation operation
+                    = FruitTransaction.Operation.fromCode(parts[OPERATION]);
+
+            String fruit = parts[FRUIT];
+            int quantity = Integer.parseInt(parts[QUANTITY]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
         return transactions;
