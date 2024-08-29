@@ -24,10 +24,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String reportPath = "src/main/resources/report.csv";
+    private static final String filePath = "src/main/resources/file.csv";
+
     public static void main(String[] args) {
         TransactionParser transactionParser = new TransactionParserImpl();
-        String filePath = "src/main/resources/file.csv";
-
         FruitStorage fruitStorage = new FruitStorageImpl();
 
         OperationHandler balanceHandler = new BalanceOperationHandler(fruitStorage);
@@ -35,7 +36,7 @@ public class Main {
         OperationHandler returnHandler = new ReturnOperationHandler(fruitStorage);
         OperationHandler purchaseHandler = new PurchaseOperationHandler(fruitStorage);
 
-        //Creating Map with Transactions operations as KEY and Handlers as VALUE
+        // Creating Map with Transactions operations as KEY and Handlers as VALUE
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = Map.of(
                 FruitTransaction.Operation.BALANCE,
@@ -59,7 +60,6 @@ public class Main {
         ReportBuilder reportBuilder = new ReportBuilderImpl();
         String reportData = reportBuilder.buildReport(fruitStorage);
 
-        String reportPath = "src/main/resources/report.csv";
         ReportWriter reportWriter = new CsvReportWriterImpl();
         reportWriter.writeReport(reportData, reportPath);
     }

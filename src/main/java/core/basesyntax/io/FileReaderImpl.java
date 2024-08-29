@@ -17,7 +17,7 @@ public class FileReaderImpl implements FileReader {
                 transactionsList.add(currentLine);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can not read the file (" + filePath + ")\n" + e);
+            throw new RuntimeException("Can not read the file (" + filePath + ")" + e);
         }
         return transactionsList;
     }
