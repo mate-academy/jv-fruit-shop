@@ -15,24 +15,22 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
-        boolean isFirstLine = true;
-        for (String line : data) {
-            if (isFirstLine) {
-                isFirstLine = false;
-                continue;
-            }
+
+        List<String> dataWithoutHeader = data.subList(1, data.size());
+
+        for (String line : dataWithoutHeader) {
             String[] parts = line.split(DELIMITER);
             if (parts.length != CORRECT_NUMBERS_OF_PARTS) {
                 continue;
             }
-
             FruitTransaction.Operation operation
                     = FruitTransaction.Operation.fromCode(parts[OPERATION]);
-
             String fruit = parts[FRUIT];
             int quantity = Integer.parseInt(parts[QUANTITY]);
+
             transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
+
         return transactions;
     }
 }
