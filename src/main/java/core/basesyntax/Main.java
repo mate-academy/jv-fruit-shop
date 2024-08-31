@@ -18,11 +18,11 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read("reportToRead.csv");
-
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);

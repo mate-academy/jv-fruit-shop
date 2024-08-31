@@ -9,8 +9,7 @@ public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String filePath) {
         List<String> lines = new ArrayList<>();
-        try {
-            BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath));
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {
             StringBuilder builder = new StringBuilder();
             String line = reader.readLine();
             while (line != null) {

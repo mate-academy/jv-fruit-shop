@@ -24,6 +24,6 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Map<String, Integer> getStorage() {
-        return storage;
+        return new HashMap<>(storage);
     }
 }
