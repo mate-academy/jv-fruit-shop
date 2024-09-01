@@ -1,4 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.Service;
+
+import core.basesyntax.FileReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

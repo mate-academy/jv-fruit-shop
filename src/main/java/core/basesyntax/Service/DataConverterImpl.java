@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.Service;
+
+import core.basesyntax.DataConverter;
+import core.basesyntax.FruitTransaction;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,7 @@ public class DataConverterImpl implements DataConverter {
             }
             String[] parts = line.split(",");
             if (parts.length != MAX_NUMBER_OF_PARTS) {
-                throw new RuntimeException("Invalid line format" + line);
+                throw new RuntimeException( "Invalid line format: expected format <type,fruit,quantity>, got: " + line);
             }
             String typeCode = parts[0];
             String fruit = parts[1];
@@ -23,7 +26,7 @@ public class DataConverterImpl implements DataConverter {
             try {
                 quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
-                throw new RuntimeException("Invalid quanity: " + parts[2], e);
+                throw new RuntimeException("Invalid quantity: " + parts[2], e);
             }
             FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(typeCode);
             FruitTransaction fruitTransaction = new FruitTransaction(operation, fruit, quantity);

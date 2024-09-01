@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.Strategy.OperationHandler;
+
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
@@ -12,7 +14,7 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions, Storage storage) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
+            OperationHandler handler = operationStrategy.getHandler(transaction.operation());
             handler.handle(transaction, storage);
         }
     }

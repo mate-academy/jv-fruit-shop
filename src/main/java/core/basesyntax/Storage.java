@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> fruits = new HashMap<>();
+    private final Map<String, Integer> fruits = new HashMap<>();
 
     public void addFruit(String fruit, int quantity) {
         fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
@@ -12,10 +12,6 @@ public class Storage {
 
     public void removeFruit(String fruit, int quantity) {
         fruits.put(fruit,fruits.getOrDefault(fruit, 0) - quantity);
-    }
-
-    public int getFruitQuantity(String fruit) {
-        return fruits.getOrDefault(fruit, 0);
     }
 
     public Map<String, Integer> getAllFruits() {
