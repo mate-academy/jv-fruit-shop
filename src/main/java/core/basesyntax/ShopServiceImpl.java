@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.operations.OperationHandler;
 import core.basesyntax.operations.OperationStrategy;
 import java.util.HashMap;
@@ -7,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-    private final Map<String, Integer> storage = new HashMap<>();
+    private final Map<String, Integer> storage = Storage.getStorage();
     private final OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {

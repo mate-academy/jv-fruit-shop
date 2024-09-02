@@ -6,7 +6,10 @@ import java.util.Map;
 public class PurchaseOperation implements OperationHandler {
     @Override
     public void apply(Map<String, Integer> storage, FruitTransaction transaction) {
-        storage.put(transaction.getFruit(),
-                storage.getOrDefault(transaction.getFruit(), 0) - transaction.getQuantity());
+        storage.merge(
+                transaction.getFruit(),
+                -transaction.getQuantity(),
+                Integer::sum
+        );
     }
 }
