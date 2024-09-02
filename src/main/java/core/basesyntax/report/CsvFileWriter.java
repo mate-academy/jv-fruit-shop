@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.Map;
 
 public class CsvFileWriter {
+    private static final String REPORT_HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
     private final String filePath;
 
     public CsvFileWriter(String filePath) {
@@ -15,11 +17,13 @@ public class CsvFileWriter {
     public void writeReport(Map<String, Integer> reportData) {
         try (FileWriter writer = new FileWriter(filePath)) {
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("fruit,quantity\n");
+            stringBuilder
+                    .append(REPORT_HEADER)
+                    .append(System.lineSeparator());
             for (Map.Entry<String, Integer> pair : reportData.entrySet()) {
                 stringBuilder
                         .append(pair.getKey())
-                        .append(",")
+                        .append(COMMA)
                         .append(pair.getValue())
                         .append(System.lineSeparator());
             }
