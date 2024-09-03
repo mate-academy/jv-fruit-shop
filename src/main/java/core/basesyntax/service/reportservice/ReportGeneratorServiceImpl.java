@@ -1,8 +1,8 @@
 package core.basesyntax.service.reportservice;
 
 import core.basesyntax.dao.FruitStorageDao;
-
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     private static final String HEADER = "fruit,quantity";
@@ -16,15 +16,9 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
 
     @Override
     public String createReportFromDb() {
-        StringBuilder sb = new StringBuilder(HEADER);
-        sb.append(LINE_SEPARATOR);
         Map<String, Integer> allFruits = fruitStorageDao.getAllFruits();
-        for (Map.Entry entry : allFruits.entrySet()) {
-            sb.append(entry.getKey())
-                    .append(COMMA)
-                    .append(entry.getValue())
-                    .append(LINE_SEPARATOR);
-        }
-        return sb.toString();
+        return HEADER + LINE_SEPARATOR + allFruits.entrySet().stream()
+                .map(e -> e.getKey() + COMMA + e.getValue())
+                .collect(Collectors.joining(LINE_SEPARATOR));
     }
 }
