@@ -14,4 +14,11 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     public int getFruitQuantity(String fruit) {
         return FruitStorage.fruitStorage.get(fruit);
     }
+
+    @Override
+    public void update(String fruit, int quantity) {
+        FruitStorage.fruitStorage.put(fruit, quantity);
+    }
+
+
 }
