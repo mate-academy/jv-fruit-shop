@@ -6,5 +6,5 @@ import java.util.Map;
 public interface ShopService {
     void process(List<FruitTransaction> transactions);
 
-    Map<String, Integer> getStorage(); // Remove the direct reference to storage
+    Map<String, Integer> getStorage();
 }
