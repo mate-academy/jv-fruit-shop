@@ -19,6 +19,4 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
     public void update(String fruit, int quantity) {
         FruitStorage.fruitStorage.put(fruit, quantity);
     }
-
-
 }
