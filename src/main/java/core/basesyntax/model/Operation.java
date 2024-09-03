@@ -1,4 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.model;
+
+import core.basesyntax.exception.UnsupportedOperationException;
 
 public enum Operation {
     BALANCE("b"),
@@ -22,6 +24,6 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Can't find operation by code " + code);
+        throw new UnsupportedOperationException("Operation type not found -> " + "( " + code + " )");
     }
 }
