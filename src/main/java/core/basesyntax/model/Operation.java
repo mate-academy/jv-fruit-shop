@@ -24,6 +24,10 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new UnsupportedOperationException("Operation type not found -> " + "( " + code + " )");
+        throw new UnsupportedOperationException(
+                "Operation type not found -> "
+                + "( "
+                + code
+                + " )");
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax.service.fileservice;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
@@ -19,10 +18,11 @@ public class DataConverterImpl implements DataConverter {
                 .map(s -> s.split(COMMA))
                 .map(parts -> {
                     FruitTransaction fruitTransaction = new FruitTransaction();
-                    fruitTransaction.setOperation(Operation.getOperationByCode(parts[INDEX_OF_OPERATION]));
+                    fruitTransaction.setOperation(
+                            Operation.getOperationByCode(parts[INDEX_OF_OPERATION]));
                     fruitTransaction.setFruit(parts[INDEX_OF_FRUIT]);
                     if (Integer.parseInt(parts[INDEX_OF_QUANTITY]) < 0) {
-                        throw new IllegalArgumentException("Quantity cannot be less than " + 0);
+                        throw new IllegalArgumentException("Quantity can't be less than " + 0);
                     }
                     fruitTransaction.setQuantity(Integer.parseInt(parts[INDEX_OF_QUANTITY]));
                     return fruitTransaction;
