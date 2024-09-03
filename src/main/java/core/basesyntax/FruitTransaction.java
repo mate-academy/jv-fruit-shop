@@ -1,7 +1,36 @@
 package core.basesyntax;
 
-public record FruitTransaction(core.basesyntax.FruitTransaction
-                                       .Operation operation, String fruit, int quantity) {
+public class FruitTransaction {
+    private Operation operation;
+    private String fruit;
+    private int quantity;
+
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public static Operation fromCode(String code) {
+        for (Operation op : Operation.values()) {
+            if (op.getCode().equals(code)) {
+                return op;
+            }
+        }
+        throw new RuntimeException("Invalid operation code: " + code);
+    }
 
     public enum Operation {
         BALANCE("b"),
@@ -17,15 +46,6 @@ public record FruitTransaction(core.basesyntax.FruitTransaction
 
         public String getCode() {
             return code;
-        }
-
-        public static Operation fromCode(String code) {
-            for (Operation op : Operation.values()) {
-                if (op.getCode().equals(code)) {
-                    return op;
-                }
-            }
-            throw new RuntimeException("Invalid operation code: " + code);
         }
     }
 }

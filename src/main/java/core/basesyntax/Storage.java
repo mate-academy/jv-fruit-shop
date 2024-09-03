@@ -11,7 +11,7 @@ public class Storage {
     }
 
     public void removeFruit(String fruit, int quantity) {
-        fruits.put(fruit,fruits.getOrDefault(fruit, 0) - quantity);
+        fruits.put(fruit, fruits.getOrDefault(fruit, 0) - quantity);
     }
 
     public Map<String, Integer> getAllFruits() {
