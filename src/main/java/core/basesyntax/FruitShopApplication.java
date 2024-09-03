@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopApplication {
-    private static final String FILE_TO_READ = "src/main/report/reportToRead.csv";
-    private static final String FILE_TO_WRITE = "src/main/report/finalReport.csv";
+    private static final String FILE_TO_READ = "src/main/resources/reportToRead.csv";
+    private static final String FILE_TO_WRITE = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
