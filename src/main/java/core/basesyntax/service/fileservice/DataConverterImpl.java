@@ -21,10 +21,11 @@ public class DataConverterImpl implements DataConverter {
                     fruitTransaction.setOperation(
                             Operation.getOperationByCode(parts[INDEX_OF_OPERATION]));
                     fruitTransaction.setFruit(parts[INDEX_OF_FRUIT]);
-                    if (Integer.parseInt(parts[INDEX_OF_QUANTITY]) < 0) {
+                    int fruitQuantity = Integer.parseInt(parts[INDEX_OF_QUANTITY]);
+                    if (fruitQuantity < 0) {
                         throw new IllegalArgumentException("Quantity can't be less than " + 0);
                     }
-                    fruitTransaction.setQuantity(Integer.parseInt(parts[INDEX_OF_QUANTITY]));
+                    fruitTransaction.setQuantity(fruitQuantity);
                     return fruitTransaction;
                 })
                 .toList();
