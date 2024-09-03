@@ -24,7 +24,7 @@ import core.basesyntax.service.strategy.SupplyOperation;
 import java.util.List;
 import java.util.Map;
 
-public class HelloWorld {
+public class FruitShopApplication {
     private static final String FILE_TO_READ = "src/main/report/reportToRead.csv";
     private static final String FILE_TO_WRITE = "src/main/report/finalReport.csv";
 

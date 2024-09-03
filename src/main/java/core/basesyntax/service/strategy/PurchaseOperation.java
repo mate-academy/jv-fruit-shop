@@ -23,6 +23,6 @@ public class PurchaseOperation implements OperationHandler {
                         + " available: "
                         + currentFruitQuantity);
         }
-        storageDao.getAllFruits().put(transaction.getFruit(), purchaseResult);
+        storageDao.update(transaction.getFruit(), purchaseResult);
     }
 }
