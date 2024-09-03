@@ -1,6 +1,6 @@
 package core.basesyntax.service.fileservice;
 
-import core.basesyntax.service.ReportGeneratorService;
+import core.basesyntax.service.reportservice.ReportGeneratorService;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
