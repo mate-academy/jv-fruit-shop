@@ -8,5 +8,4 @@ public class BalanceTransactionHandler implements TransactionHandler {
     public void handleTransaction(Map<String, Integer> mapFruitQuantity, String key, int value) {
         mapFruitQuantity.put(key, value);
     }
-
 }

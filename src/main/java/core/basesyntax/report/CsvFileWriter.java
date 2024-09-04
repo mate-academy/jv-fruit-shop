@@ -16,18 +16,18 @@ public class CsvFileWriter {
 
     public void writeReport(Map<String, Integer> reportData) {
         try (FileWriter writer = new FileWriter(filePath)) {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder
+            StringBuilder report = new StringBuilder();
+            report
                     .append(REPORT_HEADER)
                     .append(System.lineSeparator());
             for (Map.Entry<String, Integer> pair : reportData.entrySet()) {
-                stringBuilder
+                report
                         .append(pair.getKey())
                         .append(COMMA)
                         .append(pair.getValue())
                         .append(System.lineSeparator());
             }
-            writer.write(stringBuilder.toString());
+            writer.write(report.toString());
         } catch (IOException e) {
             throw new FileWasNotWrittenException(e.getMessage());
         }

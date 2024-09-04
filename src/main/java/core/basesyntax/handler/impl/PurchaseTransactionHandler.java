@@ -10,11 +10,9 @@ public class PurchaseTransactionHandler implements TransactionHandler {
     @Override
     public void handleTransaction(Map<String, Integer> mapFruitQuantity, String key, int value) {
         Integer quantity = mapFruitQuantity.getOrDefault(key, DEFAULT_VALUE);
-
         if (quantity < 0) {
             throw new NegativeFruitBalanceException("Balance is negative");
         }
         mapFruitQuantity.put(key, mapFruitQuantity.getOrDefault(key, DEFAULT_VALUE) - value);
     }
-
 }
