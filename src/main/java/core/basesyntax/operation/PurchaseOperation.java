@@ -7,8 +7,8 @@ public class PurchaseOperation implements OperationHandler {
     @Override
     public void handle(Map<String, Integer> inventory, FruitTransaction fruitTransaction) {
         inventory.put(fruitTransaction.getFruit(),
-                 inventory.getOrDefault(fruitTransaction
+                inventory.getOrDefault(fruitTransaction
                         .getFruit(), 0)
-                - fruitTransaction.getQuantity());
+                        - fruitTransaction.getQuantity());
     }
 }

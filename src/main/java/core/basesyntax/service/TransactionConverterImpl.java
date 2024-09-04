@@ -1,11 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.impl.DataConverter;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DataConverterImpl implements DataConverter {
+public class TransactionConverterImpl implements TransactionConverter {
     public static final String SEPARATOR = ",";
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;

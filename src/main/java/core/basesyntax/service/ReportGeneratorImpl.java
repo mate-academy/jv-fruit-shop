@@ -4,12 +4,12 @@ import core.basesyntax.service.impl.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    public static final String SEPARATOR = ",";
-    public static final String HEADER = "fruit,quantity";
-    private final StringBuilder report = new StringBuilder(HEADER);
+    private static final String SEPARATOR = ",";
+    private static final String HEADER = "fruit,quantity";
 
     @Override
     public String getReport(Map<String, Integer> storage) {
+        StringBuilder report = new StringBuilder(HEADER);
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             report.append(System.lineSeparator())
                     .append(entry.getKey())

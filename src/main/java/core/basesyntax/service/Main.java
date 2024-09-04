@@ -6,7 +6,6 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
-import core.basesyntax.service.impl.DataConverter;
 import core.basesyntax.service.impl.FileRead;
 import core.basesyntax.service.impl.FileWrite;
 import core.basesyntax.service.impl.OperationStrategy;
@@ -17,17 +16,18 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/java/resources/reportToRead.csv";
+    private static final String INPUT_FILE = "src/main/resources/reportToRead.csv";
     private static final String OUTPUT_FILE_NAME = "finalReport.csv";
 
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         FileRead fileReader = new FileReadImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE);
 
         // 2. Convert the incoming data into FruitTransactions list
-        DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        TransactionConverter transactionConverter = new TransactionConverterImpl();
+        final List<FruitTransaction> transactions = transactionConverter
+                .convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
