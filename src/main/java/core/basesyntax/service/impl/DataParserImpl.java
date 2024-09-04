@@ -14,7 +14,7 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
-        if( lines == null || lines.isEmpty()) {
+        if (lines == null || lines.isEmpty()) {
             return new ArrayList<>();
         }
         lines.remove(INFORMATION_LINE_INDEX);
