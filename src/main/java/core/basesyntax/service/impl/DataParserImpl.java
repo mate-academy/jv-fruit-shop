@@ -14,6 +14,9 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
+        if( lines == null || lines.isEmpty()) {
+            return new ArrayList<>();
+        }
         lines.remove(INFORMATION_LINE_INDEX);
         List<FruitTransaction> transactions = new ArrayList<>();
         lines = removeSpaces(lines);
@@ -25,6 +28,9 @@ public class DataParserImpl implements DataParser {
 
     private FruitTransaction parseFruitTransaction(String line) {
         String[] elements = line.split(SEPARATOR);
+        if (elements.length != 3) {
+            throw new RuntimeException("Invalid fruit transaction line: " + line);
+        }
         FruitTransaction.Operation operation =
                 FruitTransaction.Operation.fromCode(elements[OPERATION_INDEX]);
         String name = elements[FRUIT_NAME_INDEX];
