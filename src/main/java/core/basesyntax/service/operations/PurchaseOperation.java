@@ -2,21 +2,18 @@ package core.basesyntax.service.operations;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.List;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
-    public void getOperation(List<FruitTransaction> transactions) {
-
+    public void apply(FruitTransaction transaction) {
         // someone has bought some fruits
-        List<FruitTransaction> transactionsSelected = transactions.stream()
-                .filter(a -> a.getOperation() == FruitTransaction.Operation.PURCHASE)
-                .toList();
-
-        for (FruitTransaction fruitTransaction : transactionsSelected) {
-            int newValue = Storage.fruits.get(fruitTransaction.getFruit())
-                    - fruitTransaction.getQuantity();
-            Storage.fruits.put(fruitTransaction.getFruit(), newValue);
+        if (transaction.getOperation() == FruitTransaction.Operation.PURCHASE) {
+            int newValue = Storage.fruits.get(transaction.getFruit())
+                    - transaction.getQuantity();
+            if (newValue < 0) {
+                throw new RuntimeException("Result can't be negative number");
+            }
+            Storage.fruits.put(transaction.getFruit(), newValue);
         }
     }
 }

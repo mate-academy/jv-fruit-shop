@@ -1,10 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.db.DataConverter;
-import core.basesyntax.db.DataConverterImpl;
 import core.basesyntax.db.FileReaderImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.DataConverterImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.operations.BalanceOperation;
@@ -14,15 +14,27 @@ import core.basesyntax.service.operations.ReturnOperation;
 import core.basesyntax.service.operations.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    private final FileReader fileReader;
+
+    public Main(FileReader fileReader) {
+        this.fileReader = fileReader;
+    }
+
+    public static void main(String[] args) {
         // 1. Read the data from the input CSV file
-        FileReaderImpl fileReader = new FileReaderImpl();
+        FileReaderImpl fileReader = null;
+        try {
+            fileReader = new FileReaderImpl("input.csv");
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException("Can't read file",e);
+        }
         List<String> inputReport = fileReader.read("input.csv");
 
         // 2. Convert the incoming data into FruitTransactions list

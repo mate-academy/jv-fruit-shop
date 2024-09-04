@@ -15,5 +15,6 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         // TODO
         // implement this method
+
     }
 }

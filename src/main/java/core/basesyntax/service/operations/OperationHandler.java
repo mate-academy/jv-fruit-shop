@@ -1,10 +1,9 @@
 package core.basesyntax.service.operations;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.List;
 
 public interface OperationHandler {
-    void getOperation(List<FruitTransaction> transactions);
+    void apply(FruitTransaction transaction);
     // b - balance, the remnants of fruits at the beginning of the working day - fruits.put
     // s - supply, means you are receiving new fruits from suppliers
     // p - purchase, means someone has bought some fruit

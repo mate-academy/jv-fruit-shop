@@ -5,33 +5,40 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    // getters, setters, ...
+    public FruitTransaction(Operation operation, String fruit, int quantity) {
+        this.operation = operation;
+        this.fruit = fruit;
+        this.quantity = quantity;
+    }
+
+    public FruitTransaction() {
+    }
 
     public Operation getOperation() {
         return operation;
     }
 
-    public FruitTransaction setOperation(String code) {
+    public void setOperation(String code) {
         this.operation = Operation.fromCode(code);
-        return this;
+        //return this;
     }
 
     public String getFruit() {
         return fruit;
     }
 
-    public FruitTransaction setFruit(String fruit) {
+    public void setFruit(String fruit) {
         this.fruit = fruit;
-        return this;
+        //return this;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public FruitTransaction setQuantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-        return this;
+        //return this;
     }
 
     public enum Operation {
