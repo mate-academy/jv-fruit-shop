@@ -32,7 +32,7 @@ public class DataParserImpl implements DataParser {
             throw new RuntimeException("Invalid fruit transaction line: " + line);
         }
         FruitTransaction.Operation operation =
-                FruitTransaction.Operation.fromCode(elements[OPERATION_INDEX]);
+                FruitTransaction.Operation.getCode(elements[OPERATION_INDEX]);
         String name = elements[FRUIT_NAME_INDEX];
         int quantity = Integer.parseInt(elements[FRUIT_QUANTITY_INDEX]);
         return new FruitTransaction(name, quantity, operation);
