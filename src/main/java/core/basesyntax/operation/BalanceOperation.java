@@ -7,6 +7,5 @@ public class BalanceOperation implements OperationHandler {
     @Override
     public void handle(Map<String, Integer> inventory, FruitTransaction fruitTransaction) {
         inventory.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-
     }
 }

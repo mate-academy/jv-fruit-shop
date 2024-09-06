@@ -5,5 +5,4 @@ import java.util.Map;
 
 public interface OperationHandler {
     void handle(Map<String, Integer> inventory, FruitTransaction fruitTransaction);
-
 }

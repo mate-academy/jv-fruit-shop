@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.service.impl.FileRead;
+import core.basesyntax.service.impl.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReadImpl implements FileRead {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();

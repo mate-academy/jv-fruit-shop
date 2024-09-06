@@ -1,16 +1,18 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
-import core.basesyntax.service.impl.FileRead;
-import core.basesyntax.service.impl.FileWrite;
+import core.basesyntax.service.impl.FileReader;
+import core.basesyntax.service.impl.FileWriter;
 import core.basesyntax.service.impl.OperationStrategy;
 import core.basesyntax.service.impl.ReportGenerator;
 import core.basesyntax.service.impl.ShopService;
+import core.basesyntax.service.impl.TransactionConverter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
-        FileRead fileReader = new FileReadImpl();
+        FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE);
 
         // 2. Convert the incoming data into FruitTransactions list
@@ -43,10 +45,10 @@ public class Main {
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(shopService.getStorage());
+        String resultingReport = reportGenerator.getReport(Storage.getInventory());
 
         // 6. Write the received report into the destination file
-        FileWrite fileWriter = new FileWriteImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, OUTPUT_FILE_NAME);
     }
 }
