@@ -2,13 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParser;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.MyFileReader;
+import core.basesyntax.service.MyFileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.DataParserImpl;
-import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.MyFileReaderImpl;
+import core.basesyntax.service.impl.MyFileWriterImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.FruitStrategy;
@@ -27,7 +27,7 @@ public class Main {
     private static final String FILENAME_TO_WRITE = "finalReport.csv";
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImpl();
+        MyFileReader fileReader = new MyFileReaderImpl();
         List<String> inputReport = fileReader.read(FILENAME_TO_READ);
         DataParser dataConverter = new DataParserImpl();
         List<FruitTransaction> transactions = dataConverter.parse(inputReport);
@@ -38,7 +38,7 @@ public class Main {
         shopService.process(transactions);
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.generateReport();
-        FileWriter fileWriter = new FileWriterImpl();
+        MyFileWriter fileWriter = new MyFileWriterImpl();
         fileWriter.write(resultingReport, FILENAME_TO_WRITE);
     }
 

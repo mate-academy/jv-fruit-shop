@@ -11,6 +11,7 @@ public class DataParserImpl implements DataParser {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_NAME_INDEX = 1;
     private static final int FRUIT_QUANTITY_INDEX = 2;
+    private static final int EXPECTED_DATA_ELEMENTS_COUNT = 3;
 
     @Override
     public List<FruitTransaction> parse(List<String> lines) {
@@ -28,7 +29,7 @@ public class DataParserImpl implements DataParser {
 
     private FruitTransaction parseFruitTransaction(String line) {
         String[] elements = line.split(SEPARATOR);
-        if (elements.length != 3) {
+        if (elements.length != EXPECTED_DATA_ELEMENTS_COUNT) {
             throw new RuntimeException("Invalid fruit transaction line: " + line);
         }
         FruitTransaction.Operation operation =
