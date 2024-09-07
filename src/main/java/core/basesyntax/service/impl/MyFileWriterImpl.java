@@ -8,10 +8,13 @@ import java.io.IOException;
 public class MyFileWriterImpl implements MyFileWriter {
     @Override
     public void write(String text, String fileName) {
+        if (text == null) {
+            throw new NullPointerException("Text is null");
+        }
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(text);
         } catch (IOException e) {
-            throw new RuntimeException("Error writing to file: " + fileName, e);
+            throw new RuntimeException("Error writing to file: " + fileName);
         }
     }
 }

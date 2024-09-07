@@ -12,7 +12,7 @@ public class MyFileReaderImpl implements MyFileReader {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + fileName, e);
+            throw new RuntimeException("Error reading file: " + fileName);
         }
     }
 }
