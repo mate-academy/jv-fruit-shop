@@ -13,13 +13,12 @@ import core.basesyntax.service.impl.OperationStrategy;
 import core.basesyntax.service.impl.ReportGenerator;
 import core.basesyntax.service.impl.ShopService;
 import core.basesyntax.service.impl.TransactionConverter;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE = "src/main/resources/reportToRead.csv";
-    private static final String OUTPUT_FILE_NAME = "finalReport.csv";
+    private static final String OUTPUT_FILE_NAME = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
@@ -32,11 +31,12 @@ public class Main {
                 .convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation()
+        );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
