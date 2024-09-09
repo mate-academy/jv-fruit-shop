@@ -1,6 +1,9 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.db.impl.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -28,17 +31,18 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         DataConverter dataConverter = new DataConverterImpl();
         FileWriter fileWriter = new FileWriterImpl();
+        Storage storage = new StorageImpl();
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
-                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
-                FruitTransaction.Operation.RETURN, new ReturnOperation(),
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation()
+        Map<Operation, OperationHandler> operationHandlers = Map.of(
+                Operation.BALANCE, new BalanceOperation(),
+                Operation.PURCHASE, new PurchaseOperation(),
+                Operation.RETURN, new ReturnOperation(),
+                Operation.SUPPLY, new SupplyOperation()
         );
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(shopService);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
 
         List<String> inputReport = fileReader.read(inputPath);
         List<FruitTransaction> transactions = dataConverter.convert(inputReport);

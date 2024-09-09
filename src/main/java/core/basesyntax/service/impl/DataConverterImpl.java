@@ -1,6 +1,7 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
     private FruitTransaction convertToFruitTransaction(String line) {
         String[] fields = line.split(",");
         return new FruitTransaction(
-                FruitTransaction.Operation.fromCode(fields[0]),
+                Operation.fromCode(fields[0]),
                 fields[1],
                 Integer.parseInt(fields[2])
         );

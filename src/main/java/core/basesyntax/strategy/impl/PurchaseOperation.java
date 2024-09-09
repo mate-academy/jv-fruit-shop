@@ -10,7 +10,8 @@ public class PurchaseOperation implements OperationHandler {
         int updatedQuantity = currentQuantity - quantity;
 
         if (updatedQuantity < 0) {
-            throw new RuntimeException("Not enough " + fruit + " in storage");
+            throw new RuntimeException("Not enough " + fruit + " in storage. Current: "
+                    + currentQuantity + ", trying to remove: " + quantity);
         }
 
         storage.put(fruit, updatedQuantity);
