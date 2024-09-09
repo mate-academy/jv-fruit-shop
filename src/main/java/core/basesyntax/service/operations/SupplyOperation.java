@@ -6,8 +6,9 @@ import core.basesyntax.model.FruitTransaction;
 public class SupplyOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        if (transaction.getOperation() == FruitTransaction.Operation.SUPPLY) {
-            int newValue = Storage.fruits.get(transaction.getFruit())
+        if (Storage.fruits.containsKey(transaction.getFruit())
+                && transaction.getOperation() == FruitTransaction.Operation.SUPPLY) {
+            int newValue = new Storage().getQuantity(transaction.getFruit())
                     + transaction.getQuantity();
             Storage.fruits.put(transaction.getFruit(), newValue);
         }
