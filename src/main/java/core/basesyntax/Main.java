@@ -24,11 +24,10 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         final String inputPath = "src/main/resources/input.csv";
+        final String outputPath = "src/main/resources/output.csv";
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read(inputPath);
-
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convert(inputReport);
+        FileWriter fileWriter = new FileWriterImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
                 FruitTransaction.Operation.BALANCE, new BalanceOperation(),
@@ -39,13 +38,14 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl(shopService);
+
+        List<String> inputReport = fileReader.read(inputPath);
+        List<FruitTransaction> transactions = dataConverter.convert(inputReport);
+
+        shopService.process(transactions);
         String resultingReport = reportGenerator.getReport();
 
-        final String outputPath = "src/main/resources/output.csv";
-        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, outputPath);
     }
 }
