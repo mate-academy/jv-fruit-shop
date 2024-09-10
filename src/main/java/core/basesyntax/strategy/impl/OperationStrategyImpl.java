@@ -1,5 +1,6 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.Operation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
@@ -12,8 +13,16 @@ public class OperationStrategyImpl implements OperationStrategy {
         this.operationHandlers = operationHandlers;
     }
 
+    @Override
     public void applyOperation(Operation operation, String fruit,
-                               int quantity, Map<String, Integer> storage) {
-        operationHandlers.get(operation).apply(fruit, quantity, storage);
+                               int quantity, Storage storage) {
+        OperationHandler handler = operationHandlers.get(operation);
+
+        if (handler == null) {
+            throw new IllegalArgumentException("Operation not supported: " + operation);
+        }
+
+        handler.apply(fruit, quantity, storage);
     }
+
 }

@@ -19,7 +19,7 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.applyOperation(transaction.getOperation(),
-                    transaction.getFruit(), transaction.getQuantity(), storage.getStorage());
+                    transaction.getFruitName(), transaction.getQuantity(), storage);
         }
     }
 }

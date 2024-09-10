@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import java.util.Map;
+import core.basesyntax.db.Storage;
 
 public interface OperationHandler {
-    void apply(String fruit, int quantity, Map<String, Integer> storage);
+    void apply(String fruit, int quantity, Storage storage);
 }

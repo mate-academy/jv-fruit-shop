@@ -2,13 +2,13 @@ package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
-    private String fruit;
+    private String fruitName;
     private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
-        this.operation = operation;
-        this.fruit = fruit;
-        this.quantity = quantity;
+    public FruitTransaction(Operation operation, String fruitName, int quantity) {
+        setOperation(operation);
+        setFruitName(fruitName);
+        setQuantity(quantity);
     }
 
     public Operation getOperation() {
@@ -16,15 +16,21 @@ public class FruitTransaction {
     }
 
     public void setOperation(Operation operation) {
+        if (operation == null) {
+            throw new IllegalArgumentException("Operation can't be null.");
+        }
         this.operation = operation;
     }
 
-    public String getFruit() {
-        return fruit;
+    public String getFruitName() {
+        return fruitName;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
+    public void setFruitName(String fruitName) {
+        if (fruitName == null || fruitName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Fruit name can't be null or empty.");
+        }
+        this.fruitName = fruitName;
     }
 
     public int getQuantity() {
@@ -32,6 +38,10 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity can't be negative.");
+        }
         this.quantity = quantity;
     }
 }
+

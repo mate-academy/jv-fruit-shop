@@ -1,11 +1,21 @@
 package core.basesyntax.strategy.impl;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.exception.InsufficientQuantityException;
 import core.basesyntax.strategy.OperationHandler;
-import java.util.Map;
 
 public class ReturnOperation implements OperationHandler {
     @Override
-    public void apply(String fruit, int quantity, Map<String, Integer> storage) {
-        storage.put(fruit, storage.getOrDefault(fruit, 0) + quantity);
+    public void apply(String fruit, int quantity, Storage storage) {
+        int currentQuantity = storage.getQuantity(fruit);
+
+        if (currentQuantity < quantity) {
+            throw new InsufficientQuantityException("Not enough quantity of "
+                    + fruit + " in storage to return.");
+        }
+
+        storage.addEntry(fruit, currentQuantity + quantity);
+        currentQuantity = storage.getQuantity(fruit);
+        System.out.println("Returned " + quantity + " " + fruit + "(s). Now: " + currentQuantity);
     }
 }
