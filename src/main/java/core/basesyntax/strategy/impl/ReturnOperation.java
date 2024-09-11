@@ -7,6 +7,14 @@ import core.basesyntax.strategy.OperationHandler;
 public class ReturnOperation implements OperationHandler {
     @Override
     public void apply(String fruit, int quantity, Storage storage) {
+        if (fruit == null || fruit.trim().isEmpty()) {
+            throw new IllegalArgumentException("Fruit cannot be null or empty.");
+        }
+
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative.");
+        }
+
         int currentQuantity = storage.getQuantity(fruit);
 
         if (currentQuantity < quantity) {
