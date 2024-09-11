@@ -4,6 +4,7 @@ import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
 
 public class BalanceOperation implements OperationHandler {
+    private static final int MIN_FRUIT_QUANTITY = 0;
     private final FruitStorageDao fruitStorageDao;
 
     public BalanceOperation(FruitStorageDao fruitStorageDao) {
@@ -11,7 +12,7 @@ public class BalanceOperation implements OperationHandler {
     }
 
     @Override
-    public boolean doOperation(Fruit fruit, int quantity) {
+    public boolean applyOperation(Fruit fruit, int quantity) {
         if (fruit == null) {
             throw new RuntimeException("Fruit can't be null");
         }

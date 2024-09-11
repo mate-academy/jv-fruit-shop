@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.dao.FruitStorageDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.FileReaderService;
@@ -29,22 +28,14 @@ public class Main {
     private static final FruitStorageDao FRUIT_STORAGE_DAO = new FruitStorageDaoImpl();
 
     public static void main(String[] arg) {
-        System.out.println(Storage.fruits);
-        System.out.println("-----------------------");
         // 1. Read the data from the input CSV file
         FileReaderService fileReader = new FileReaderServiceImpl();
         List<String> inputReport = fileReader.read("src/main/resources/reportToRead.csv");
 
-        inputReport.stream()
-                .forEach(System.out::println);
-
         // 2. Convert the incoming data into FruitTransactions list
         DataConverterService dataConverter = new DataConverterServiceImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
-
-        System.out.println("-------------------");
-        transactions.stream()
-                .forEach(System.out::println);
+        System.out.println(transactions);
 
         // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
@@ -62,15 +53,9 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        System.out.println("-----------------------");
-        System.out.println(Storage.fruits);
-
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new CsvFormatReportGenerator(FRUIT_STORAGE_DAO);
         String resultingReport = reportGenerator.getReport();
-
-        System.out.println("-----------------------");
-        System.out.println(resultingReport);
 
         // 6. Write the received report into the destination file
         FileWriterService fileWriter = new FileWriterServiceImpl();

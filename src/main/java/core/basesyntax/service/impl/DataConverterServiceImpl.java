@@ -6,7 +6,7 @@ import core.basesyntax.service.DataConverterService;
 import java.util.List;
 
 public class DataConverterServiceImpl implements DataConverterService {
-    private static final int TITTLE_POSITION = 1;
+    private static final int LINES_TO_SKIP = 1;
     private static final int NECESSARY_COUNT_OF_ELEMENTS = 3;
     private static final String COMMA_REGEX = ",";
     private static final int OPERATION_INDEX = 0;
@@ -16,7 +16,7 @@ public class DataConverterServiceImpl implements DataConverterService {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
         return inputReport.stream()
-                .skip(TITTLE_POSITION) //for skipping title
+                .skip(LINES_TO_SKIP) //for skipping title
                 .map(this::convertStringToFruitTransaction)
                 .toList();
     }
@@ -30,8 +30,16 @@ public class DataConverterServiceImpl implements DataConverterService {
 
         FruitTransaction.Operation operation = FruitTransaction.Operation
                 .fromCode(fruitTransactionElements[OPERATION_INDEX]);
+
         Fruit fruit = new Fruit(fruitTransactionElements[FRUIT_INDEX]);
-        int quantity = Integer.parseInt(fruitTransactionElements[QUANTITY_INDEX]);
+
+        String quantityString = fruitTransactionElements[QUANTITY_INDEX];
+        int quantity;
+        try {
+            quantity = Integer.parseInt(quantityString);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid quantity format: " + quantityString, e);
+        }
         if (quantity < 0) {
             throw new IllegalArgumentException("Quantity can't be negative. "
                     + "Input quantity: " + quantity);

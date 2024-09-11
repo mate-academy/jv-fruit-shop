@@ -13,6 +13,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public boolean add(Fruit fruit, int quantity) {
+        checkFruitBelongToStorage(fruit);
         int oldValue = Storage.fruits.get(fruit);
         int newValue = oldValue + quantity;
         Storage.fruits.put(fruit, newValue);
@@ -21,6 +22,7 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public boolean subtract(Fruit fruit, int quantity) {
+        checkFruitBelongToStorage(fruit);
         int oldValue = Storage.fruits.get(fruit);
         int newValue = oldValue - quantity;
         Storage.fruits.put(fruit, newValue);
@@ -29,11 +31,19 @@ public class FruitStorageDaoImpl implements FruitStorageDao {
 
     @Override
     public int getBalance(Fruit fruit) {
+        checkFruitBelongToStorage(fruit);
         return Storage.fruits.get(fruit);
     }
 
     @Override
     public Set<Fruit> getAllFruits() {
         return Storage.fruits.keySet();
+    }
+
+    private void checkFruitBelongToStorage(Fruit fruit) {
+        if (Storage.fruits.get(fruit) == null) {
+            throw new RuntimeException("Fruit " + fruit + " doesn't belong "
+                    + "to the Storage");
+        }
     }
 }

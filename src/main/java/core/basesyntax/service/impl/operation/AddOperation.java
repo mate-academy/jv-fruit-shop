@@ -3,15 +3,14 @@ package core.basesyntax.service.impl.operation;
 import core.basesyntax.dao.FruitStorageDao;
 import core.basesyntax.model.Fruit;
 
-public class PurchaseOperation implements OperationHandler {
+public abstract class AddOperation implements OperationHandler {
     private static final int MIN_FRUIT_QUANTITY = 0;
     private final FruitStorageDao fruitStorageDao;
 
-    public PurchaseOperation(FruitStorageDao fruitStorageDao) {
+    protected AddOperation(FruitStorageDao fruitStorageDao) {
         this.fruitStorageDao = fruitStorageDao;
     }
 
-    @Override
     public boolean applyOperation(Fruit fruit, int quantity) {
         if (fruit == null) {
             throw new RuntimeException("Fruit can't be null");
@@ -19,9 +18,6 @@ public class PurchaseOperation implements OperationHandler {
         if (quantity < MIN_FRUIT_QUANTITY) {
             throw new RuntimeException("Quantity " + quantity + " can't be negative");
         }
-        if (fruitStorageDao.getBalance(fruit) < quantity) {
-            throw new RuntimeException("Not enough fruits " + fruit + " on balance");
-        }
-        return fruitStorageDao.subtract(fruit, quantity);
+        return fruitStorageDao.add(fruit, quantity);
     }
 }

@@ -24,7 +24,7 @@ public class ShopServiceImpl implements ShopService {
             int quantity = fruitTransaction.getQuantity();
             OperationHandler operationHandler = operationStrategy
                     .getHandler(fruitTransaction.getOperation());
-            operationHandler.doOperation(fruit, quantity);
+            operationHandler.applyOperation(fruit, quantity);
         }
     }
 }
