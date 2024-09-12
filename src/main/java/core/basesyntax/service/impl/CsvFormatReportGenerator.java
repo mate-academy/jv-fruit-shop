@@ -16,10 +16,12 @@ public class CsvFormatReportGenerator implements ReportGenerator {
 
     @Override
     public String getReport() {
+        StringBuilder stringBuilder = new StringBuilder();
         String reportData = fruitStorageDao.getAllFruits().stream()
                 .map(fruit -> fruit + KEY_VALUE_SEPARATOR
                         + fruitStorageDao.getBalance(fruit))
                 .collect(Collectors.joining(LINE_SEPARATOR));
-        return HEADER + LINE_SEPARATOR + reportData;
+        stringBuilder.append(HEADER).append(LINE_SEPARATOR).append(reportData);
+        return stringBuilder.toString();
     }
 }
