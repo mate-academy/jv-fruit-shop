@@ -15,10 +15,10 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
+
+        parsingLine(data);
+
         for (String line : data) {
-            if (line.trim().isEmpty() || line.equals(CSV_HEADER)) {
-                continue;
-            }
             String[] parts = line.split(",");
             if (parts.length != MAX_NUMBER_OF_PARTS) {
                 throw new RuntimeException(
@@ -37,5 +37,13 @@ public class DataConverterImpl implements DataConverter {
             transactions.add(fruitTransaction);
         }
         return transactions;
+    }
+
+    private void parsingLine(List<String> data) {
+        for (String line : data) {
+            if (line.trim().isEmpty() || line.equals(CSV_HEADER)) {
+                return;
+            }
+        }
     }
 }

@@ -29,7 +29,7 @@ public class FruitTransaction {
                 return op;
             }
         }
-        throw new RuntimeException("Invalid operation code: " + code);
+        throw new IllegalArgumentException("Invalid operation code: " + code);
     }
 
     public enum Operation {
