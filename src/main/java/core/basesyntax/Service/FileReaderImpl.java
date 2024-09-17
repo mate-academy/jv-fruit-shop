@@ -11,8 +11,8 @@ import java.util.stream.Collectors;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String filePath) {
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(filePath))) {
-            return br.lines().collect(Collectors.toList());
+        try (BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {
+            return reader.lines().collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Error reading file: " + filePath, e);
         }
