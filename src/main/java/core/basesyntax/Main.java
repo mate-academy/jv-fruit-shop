@@ -11,12 +11,13 @@ import core.basesyntax.report.ReportGenerator;
 import core.basesyntax.report.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageServiceImpl;
+import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
-import core.basesyntax.service.operation.PurchaseOperation;
-import core.basesyntax.service.operation.ReturnOperation;
-import core.basesyntax.service.operation.SupplyOperation;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.service.operation.PurchaseOperationHandler;
+import core.basesyntax.service.operation.ReturnOperationHandler;
+import core.basesyntax.service.operation.SupplyOperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -25,25 +26,29 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        String filePath = "C:\\full\\path\\to\\fruit_shop.csv";
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/fruit_shop.csv");
+        List<String> inputReport = fileReader.read("src/main/resources/fruit_shop.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = dataConverter.covertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+
+        StorageService storageService = new StorageServiceImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(storageService));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(storageService));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(storageService));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(storageService));
 
-        Storage storage = new Storage();
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storageService);
         shopService.process(transactions);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storageService);
         String report = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();

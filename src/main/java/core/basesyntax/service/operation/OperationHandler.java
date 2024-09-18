@@ -1,8 +1,8 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.storage.Storage;
+import core.basesyntax.service.StorageService;
 
 public interface OperationHandler {
-    void handle(FruitTransaction transaction, Storage storage);
+    void handle(FruitTransaction transaction, StorageService storageService);
 }
