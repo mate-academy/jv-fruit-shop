@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class ReportGenerateImpl implements ReportGenerate {
+public class StorageReportGenerateImpl implements StorageReportGenerate {
     public String getReport() {
         StringBuilder report = new StringBuilder();
         report.append("fruit,quantity").append(System.lineSeparator());

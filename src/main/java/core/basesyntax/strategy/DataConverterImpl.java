@@ -1,12 +1,12 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.FruitTransaction.Action;
+import core.basesyntax.model.Action;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    public List<FruitTransaction> convertToTransaction(List<String> dateList) {
+    public List<FruitTransaction> convertToTransactions(List<String> dateList) {
         List<FruitTransaction> result = new ArrayList<>();
         for (String string : dateList) {
             String[] stringArray = string.split(",");

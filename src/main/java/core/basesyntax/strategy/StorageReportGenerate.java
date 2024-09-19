@@ -1,5 +1,5 @@
 package core.basesyntax.strategy;
 
-public interface ReportGenerate {
+public interface StorageReportGenerate {
     String getReport();
 }

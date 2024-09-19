@@ -1,15 +1,21 @@
 package core.basesyntax.strategy;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class MyFileWriterImpl implements MyFileWriter {
     public void write(String report, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+        File file = new File(filePath);
+        File parentDir = file.getParentFile();
+        if (parentDir != null && !parentDir.exists()) {
+            parentDir.mkdirs();
+        }
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Error writing file: " + filePath, e);
+            throw new RuntimeException("can't write data to" + filePath, e);
         }
     }
 }
