@@ -32,13 +32,6 @@ public class Main {
                     + "as arguments.");
             return;
         }
-        FileReader fileReader = new FileReaderImpl();
-        String readPath = args[0];
-        List<String> inputReport = fileReader.read(readPath);
-
-        TransactionParser transactionParser = new TransactionParserImpl();
-        List<FruitTransaction> transactions = transactionParser.parse(inputReport);
-
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
@@ -48,6 +41,14 @@ public class Main {
 
         Storage storage = new StorageImpl();
         ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+
+        FileReader fileReader = new FileReaderImpl();
+        String readPath = args[0];
+        List<String> inputReport = fileReader.read(readPath);
+
+        TransactionParser transactionParser = new TransactionParserImpl();
+        List<FruitTransaction> transactions = transactionParser.parse(inputReport);
+
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
