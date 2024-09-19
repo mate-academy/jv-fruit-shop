@@ -1,8 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.FileWriter;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class FileWriterImpl implements FileWriter {

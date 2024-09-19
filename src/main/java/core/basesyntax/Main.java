@@ -32,10 +32,8 @@ public class Main {
                     + "as arguments.");
             return;
         }
-        String readPath = args[0];
-        String writePath = args[1];
-
         FileReader fileReader = new FileReaderImpl();
+        String readPath = args[0];
         List<String> inputReport = fileReader.read(readPath);
 
         TransactionParser transactionParser = new TransactionParserImpl();
@@ -56,6 +54,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(shopService);
 
         FileWriter fileWriter = new FileWriterImpl();
+        String writePath = args[1];
         fileWriter.write(resultingReport, writePath);
     }
 }

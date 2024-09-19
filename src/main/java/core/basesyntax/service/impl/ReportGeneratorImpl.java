@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
-
 import java.util.Map;
 import java.util.Set;
 

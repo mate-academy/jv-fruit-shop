@@ -15,7 +15,6 @@ public class ShopServiceImpl implements ShopService {
         this.storage = storage;
     }
 
-
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {

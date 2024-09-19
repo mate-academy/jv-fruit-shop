@@ -4,8 +4,6 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 
-import java.sql.SQLOutput;
-
 public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(Storage storage, FruitTransaction transaction) {
