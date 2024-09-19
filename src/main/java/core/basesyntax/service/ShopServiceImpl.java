@@ -6,6 +6,7 @@ import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
     private final ActionStrategy actionStrategy;
+
     public ShopServiceImpl(ActionStrategy operationStrategy) {
         this.actionStrategy = operationStrategy;
     }

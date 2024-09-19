@@ -29,7 +29,8 @@ public class Main {
         List<String> inputReport = fileReader.read("src/main/resources/report.csv");
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = dataConverter.convertToTransactions(inputReport);
+        final List<FruitTransaction> transactions = dataConverter
+                .convertToTransactions(inputReport);
         // 3. Create and feel the map with all OperationHandler implementations
         Map<Action, ActionHandler> actionHandlers = new HashMap<>();
         actionHandlers.put(Action.BALANCE, new BalanceAction());
