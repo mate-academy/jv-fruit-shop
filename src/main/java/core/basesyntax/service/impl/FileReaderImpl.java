@@ -4,13 +4,15 @@ import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String filePath) {
-        try (BufferedReader br = new BufferedReader(new java.io.FileReader(filePath))) {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(filePath))) {
             String line = br.readLine();
             List<String> lines = new ArrayList<>();
             while (line != null) {
@@ -18,10 +20,8 @@ public class FileReaderImpl implements FileReader {
                 line = br.readLine();
             }
             return lines;
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException("Can't read data from file" + filePath, ex);
         } catch (IOException ex) {
-            throw new RuntimeException("IOException has happened in the file" + filePath, ex);
+            throw new RuntimeException("IOException has happened in the file: " + filePath, ex);
         }
     }
 }

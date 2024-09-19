@@ -7,7 +7,12 @@ import core.basesyntax.strategy.OperationHandler;
 public class SupplyOperation implements OperationHandler {
     @Override
     public void handle(Storage storage, FruitTransaction transaction) {
-        storage.change(transaction.getFruit(),
-                storage.get(transaction.getFruit()) + transaction.getQuantity());
+        String fruit = transaction.getFruit();
+        int quantity = transaction.getQuantity();
+        if (quantity < 0) {
+            throw new RuntimeException(String.format("Error supplying"
+                    + "fruit %s: quantity %d of supply is less than zero", fruit, quantity));
+        }
+        storage.change(fruit, (storage.get(fruit) + quantity));
     }
 }

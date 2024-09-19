@@ -1,7 +1,9 @@
 package core.basesyntax;
 
 import core.basesyntax.db.Storage;
+import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
@@ -24,30 +26,36 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String READ_PATH = "reportToRead.csv";
-    private static final String WRITE_PATH = "writtenReport.csv";
-
     public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("Please provide two filepaths - for reading and writing - "
+                    + "as arguments.");
+            return;
+        }
+        String readPath = args[0];
+        String writePath = args[1];
+
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read(READ_PATH);
+        List<String> inputReport = fileReader.read(readPath);
 
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> transactions = transactionParser.parse(inputReport);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        Storage storage = shopService.process(transactions);
+        Storage storage = new StorageImpl();
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(storage);
+        String resultingReport = reportGenerator.getReport(shopService);
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, WRITE_PATH);
+        fileWriter.write(resultingReport, writePath);
     }
 }

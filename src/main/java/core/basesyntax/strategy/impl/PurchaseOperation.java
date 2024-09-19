@@ -6,7 +6,7 @@ import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
-    public void handle(Storage storage, FruitTransaction transaction) throws RuntimeException {
+    public void handle(Storage storage, FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int oldQuantity = storage.get(fruitName);
         int newQuantity = oldQuantity - transaction.getQuantity();

@@ -4,5 +4,5 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
-    public void handle(Storage storage, FruitTransaction transaction);
+    void handle(Storage storage, FruitTransaction transaction);
 }

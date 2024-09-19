@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageImpl implements Storage {
-    private HashMap<String, Integer> fruitMap;
+    private Map<String, Integer> fruitMap;
 
     public StorageImpl() {
         fruitMap = new HashMap<>();
@@ -27,6 +27,6 @@ public class StorageImpl implements Storage {
 
     @Override
     public Map<String, Integer> getAll() {
-        return fruitMap;
+        return new HashMap<>(fruitMap);
     }
 }
