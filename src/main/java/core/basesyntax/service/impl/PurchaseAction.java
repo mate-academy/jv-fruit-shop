@@ -4,6 +4,7 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.service.ActionHandler;
 
 public class PurchaseAction implements ActionHandler {
+    @Override
     public void apply(String fruit, int quantity) {
         Storage.removeFruit(fruit, quantity);
     }

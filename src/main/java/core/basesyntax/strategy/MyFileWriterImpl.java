@@ -15,7 +15,7 @@ public class MyFileWriterImpl implements MyFileWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("can't write data to" + filePath, e);
+            throw new RuntimeException("Can't write data to" + filePath, e);
         }
     }
 }

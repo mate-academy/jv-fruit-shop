@@ -25,29 +25,24 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        MyFileReader fileReader = new MyFileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/resources/report.csv");
-        // 2. Convert the incoming data into FruitTransactions list
+        final String fromFile = "src/main/resources/report.csv";
+        String toFile = "src/main/resources/new_report.csv";
+                MyFileReader fileReader = new MyFileReaderImpl();
+        List<String> inputReport = fileReader.read(fromFile);
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter
                 .convertToTransactions(inputReport);
-        // 3. Create and feel the map with all OperationHandler implementations
         Map<Action, ActionHandler> actionHandlers = new HashMap<>();
         actionHandlers.put(Action.BALANCE, new BalanceAction());
         actionHandlers.put(Action.PURCHASE, new PurchaseAction());
         actionHandlers.put(Action.RETURN, new ReturnAction());
         actionHandlers.put(Action.SUPPLY, new SupplyAction());
         ActionStrategy operationStrategy = new ActionStrategyImpl(actionHandlers);
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
-        // 5.Generate report based on the current Storage state
         StorageReportGenerate reportGenerator = new StorageReportGenerateImpl();
         String resultingReport = reportGenerator.getReport();
-        // 6. Write the received report into the destination file
         MyFileWriter fileWriter = new MyFileWriterImpl();
-        fileWriter.write(resultingReport, "src/main/resources/new_report.csv");
+        fileWriter.write(resultingReport, toFile);
     }
-    // HINT: In the `public static void main(String[] args)` it is better to
-    // and call their methods, but do not write any business logic in the `main` method!
 }

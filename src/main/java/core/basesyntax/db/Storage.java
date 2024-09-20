@@ -8,21 +8,30 @@ public class Storage {
 
     public static void setBalance(String fruit, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("quantity can't be negative");
+            throw new RuntimeException("Quantity can't be negative");
+        }
+        if (fruitStorage.values().stream().anyMatch(value -> value < 0)) {
+            throw new RuntimeException("Balance can't be negative");
         }
         fruitStorage.put(fruit, quantity);
     }
 
     public static void addFruit(String fruit, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("quantity can't be negative");
+            throw new RuntimeException("Quantity can't be negative");
+        }
+        if (fruitStorage.values().stream().anyMatch(value -> value < 0)) {
+            throw new RuntimeException("Balance can't be negative");
         }
         fruitStorage.put(fruit, fruitStorage.getOrDefault(fruit, 0) + quantity);
     }
 
     public static void removeFruit(String fruit, int quantity) {
         if (quantity < 0) {
-            throw new RuntimeException("quantity can't be negative");
+            throw new RuntimeException("Quantity can't be negative");
+        }
+        if (fruitStorage.values().stream().anyMatch(value -> value < 0)) {
+            throw new RuntimeException("Balance can't be negative");
         }
         fruitStorage.put(fruit, fruitStorage.getOrDefault(fruit, 0) - quantity);
     }
