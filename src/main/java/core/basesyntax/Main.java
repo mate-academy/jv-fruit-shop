@@ -26,8 +26,8 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         final String fromFile = "src/main/resources/report.csv";
-        String toFile = "src/main/resources/new_report.csv";
-                MyFileReader fileReader = new MyFileReaderImpl();
+        final String toFile = "src/main/resources/new_report.csv";
+        MyFileReader fileReader = new MyFileReaderImpl();
         List<String> inputReport = fileReader.read(fromFile);
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter
