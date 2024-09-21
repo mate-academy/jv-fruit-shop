@@ -1,12 +1,23 @@
 package core.basesyntax.operations;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
 
 public class BalanceOperation implements OperationHandler {
     @Override
-    public void apply(Map<String, Integer> storage, FruitTransaction transaction) {
-        storage.put(transaction.getFruit(), transaction.getQuantity());
+    public void apply(Storage storage, FruitTransaction transaction) {
+        if (storage == null) {
+            throw new IllegalArgumentException("Storage cannot be null.");
+        }
+        if (transaction == null) {
+            throw new IllegalArgumentException("Transaction cannot be null.");
+        }
+        if (transaction.getQuantity() < 0) {
+            throw new IllegalArgumentException("Quantity must be non-negative.");
+        }
+
+        storage.updateFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }
+
 

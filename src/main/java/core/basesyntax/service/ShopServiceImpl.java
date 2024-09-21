@@ -1,15 +1,15 @@
 package core.basesyntax.service;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operations.OperationHandler;
 import core.basesyntax.operations.OperationStrategy;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
-    private final Map<String, Integer> storage = new HashMap<>();
+    private final Storage storage = new Storage();
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
@@ -23,8 +23,9 @@ public class ShopServiceImpl implements ShopService {
         }
     }
 
-    public Map<String, Integer> getStorage() {
-        return storage;
+    public Map<String, Integer> getStorageReport() {
+        return storage.getStorage();
     }
 }
+
 
