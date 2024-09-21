@@ -25,6 +25,7 @@ public class FruitShopApplication {
         this.reportGenerator = reportGenerator;
         this.fileWriter = fileWriter;
     }
+
     public void run(String inputFilePath, String outputFilePath) {
         List<String> inputReport = fileReader.read(inputFilePath);
 
