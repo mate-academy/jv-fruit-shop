@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package core.basesyntax.service.impl;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -11,7 +11,7 @@ public class FileWriterImpl {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file" + fileName, e);
+            throw new RuntimeException("Can't write to file " + fileName, e);
         }
     }
 }

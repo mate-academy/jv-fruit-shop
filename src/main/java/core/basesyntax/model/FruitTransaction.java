@@ -2,10 +2,10 @@ package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
-    private String fruit;
+    private Fruit fruit;
     private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
+    public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -18,18 +18,16 @@ public class FruitTransaction {
         return operation;
     }
 
-    public void setOperation(String code) {
-        this.operation = Operation.fromCode(code);
-        //return this;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
 
-    public String getFruit() {
+    public Fruit getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
+    public void setFruit(Fruit fruit) {
         this.fruit = fruit;
-        //return this;
     }
 
     public int getQuantity() {
@@ -38,7 +36,6 @@ public class FruitTransaction {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        //return this;
     }
 
     public enum Operation {

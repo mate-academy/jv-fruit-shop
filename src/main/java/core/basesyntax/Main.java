@@ -1,37 +1,30 @@
 package core.basesyntax;
 
-import core.basesyntax.db.FileReaderImpl;
-import core.basesyntax.db.FileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.DataConverterImpl;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.operations.BalanceOperation;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperation;
-import core.basesyntax.service.operations.ReportGenerator;
-import core.basesyntax.service.operations.ReportGeneratorImpl;
 import core.basesyntax.service.operations.ReturnOperation;
 import core.basesyntax.service.operations.SupplyOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-import java.io.FileReader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private final FileReader fileReader;
-
-    public Main(FileReader fileReader) {
-        this.fileReader = fileReader;
-    }
-
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         FileReaderImpl fileReader = null;
-        fileReader = new FileReaderImpl("input.csv");
+        fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read("input.csv");
 
         // 2. Convert the incoming data into FruitTransactions list

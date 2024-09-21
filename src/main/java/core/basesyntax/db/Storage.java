@@ -1,29 +1,38 @@
 package core.basesyntax.db;
 
+import core.basesyntax.model.Fruit;
+import core.basesyntax.service.exceptions.InvalidFruitException;
+import core.basesyntax.service.exceptions.InvalidQuantityException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 public class Storage {
-    public static final Map<String, Integer> fruits = new HashMap<>();
+    private static final Map<Fruit, Integer> fruits = new HashMap<>();
 
-    public Integer getQuantity(String fruit) {
-        return fruits.get(fruit);
+    public static Integer getQuantity(Fruit fruit) {
+        if (fruits.get(fruit) != null) {
+            return fruits.get(fruit);
+        }
+        throw new InvalidQuantityException("Not found quantity value for fruit: " + fruit);
     }
 
-    public void put(String fruit, Integer quantity) {
+    public static void put(Fruit fruit, Integer quantity) {
+        if (fruit == null) {
+            throw new InvalidFruitException("Fruit can't be null");
+        }
+        if (quantity == null || quantity < 0) {
+            throw new InvalidQuantityException("Quantity must be positive number");
+        }
         fruits.put(fruit, quantity);
     }
 
-    public Set<String> keyset() {
-        return fruits.keySet();
+    public static Set<Fruit> keyset() {
+        return Set.copyOf(fruits.keySet());
     }
-    /*
-    The SupplyOperation class should not directly access and manipulate the Storage class.
-    This violates the SOLID principles, specifically the Single Responsibility Principle,
-    because it couples the operation logic with the storage mechanism.
-    Consider abstracting the storage access behind
-    a service layer that this operation would then call.
-     */
+
+    public static boolean containsKey(Fruit key) {
+        return fruits.containsKey(key);
+    }
 
 }

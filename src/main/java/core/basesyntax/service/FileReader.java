@@ -1,4 +1,4 @@
-package core.basesyntax.db;
+package core.basesyntax.service;
 
 import java.util.List;
 
