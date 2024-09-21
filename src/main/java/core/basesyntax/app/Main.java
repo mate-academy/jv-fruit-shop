@@ -36,9 +36,9 @@ public class Main {
                 new TransactionProcessor(operationStrategy, transactionParser);
         transactionProcessor.processTransactions(inputData);
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        List<String> repoortData = reportGenerator.generateReport();
+        List<String> reportData = reportGenerator.generateReport();
         Writer writer = new CsvWriter();
-        writer.write(repoortData, outputFilePath);
+        writer.write(reportData, outputFilePath);
         System.out.println("Fruit shop report generated successfully!");
     }
 }

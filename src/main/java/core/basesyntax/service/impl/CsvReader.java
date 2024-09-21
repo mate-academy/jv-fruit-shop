@@ -17,7 +17,7 @@ public class CsvReader implements Reader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file", e);
+            throw new RuntimeException("Can't read file at path:" + filePath, e);
         }
         return lines;
     }

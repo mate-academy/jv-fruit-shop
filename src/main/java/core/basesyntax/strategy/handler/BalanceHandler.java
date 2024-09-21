@@ -11,6 +11,6 @@ public class BalanceHandler implements OperationHandler {
             throw new RuntimeException("Balance cannot be negative");
         }
         fruit.setQuantity(quantity);
-        Storage.fruits.put(fruit.getName(), fruit);
+        Storage.addOrUpdateFruit(fruit.getName(), fruit);
     }
 }
