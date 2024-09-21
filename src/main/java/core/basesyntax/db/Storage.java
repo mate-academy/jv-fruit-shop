@@ -1,5 +1,6 @@
 package core.basesyntax.db;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +28,10 @@ public class Storage {
     }
 
     public Map<String, Integer> getStorage() {
-        return new HashMap<>(storage);
+        return Collections.unmodifiableMap(storage);
+    }
+
+    public void setFruitBalance(String fruit, int quantity) {
+        storage.put(fruit, quantity);
     }
 }
-

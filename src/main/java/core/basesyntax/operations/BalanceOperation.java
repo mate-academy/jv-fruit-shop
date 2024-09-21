@@ -4,8 +4,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
+    private final Storage storage;
+
+    public BalanceOperation(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
-    public void apply(Storage storage, FruitTransaction transaction) {
+    public void apply(FruitTransaction transaction) {
         if (storage == null) {
             throw new IllegalArgumentException("Storage cannot be null.");
         }
@@ -16,8 +22,10 @@ public class BalanceOperation implements OperationHandler {
             throw new IllegalArgumentException("Quantity must be non-negative.");
         }
 
-        storage.updateFruit(transaction.getFruit(), transaction.getQuantity());
+        int currentQuantity = storage.getQuantity(transaction.getFruit());
+
+        if (currentQuantity != transaction.getQuantity()) {
+            storage.setFruitBalance(transaction.getFruit(), transaction.getQuantity());
+        }
     }
 }
-
-

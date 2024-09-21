@@ -1,11 +1,11 @@
-package core.basesyntax.application;
+package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.report.ReportGenerator;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.services.DataConverter;
-import core.basesyntax.services.FileReader;
-import core.basesyntax.services.FileWriter;
 import java.util.List;
 
 public class FruitShopApplication {
@@ -25,7 +25,6 @@ public class FruitShopApplication {
         this.reportGenerator = reportGenerator;
         this.fileWriter = fileWriter;
     }
-
     public void run(String inputFilePath, String outputFilePath) {
         List<String> inputReport = fileReader.read(inputFilePath);
 
@@ -38,4 +37,3 @@ public class FruitShopApplication {
         fileWriter.write(resultingReport, outputFilePath);
     }
 }
-

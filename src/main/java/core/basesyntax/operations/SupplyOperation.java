@@ -4,8 +4,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
+    private final Storage storage;
+
+    public SupplyOperation(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
-    public void apply(Storage storage, FruitTransaction transaction) {
+    public void apply(FruitTransaction transaction) {
         if (storage == null) {
             throw new IllegalArgumentException("Storage cannot be null.");
         }
@@ -16,7 +22,7 @@ public class SupplyOperation implements OperationHandler {
             throw new IllegalArgumentException("Quantity must be greater than zero.");
         }
 
-        // Use the addFruit method from Storage to update the quantity
         storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }
+

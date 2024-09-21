@@ -4,8 +4,18 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
+    private final Storage storage;
+
+    public PurchaseOperation(Storage storage) {
+        this.storage = storage;
+    }
+
     @Override
-    public void apply(Storage storage, FruitTransaction transaction) {
+    public void apply(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new IllegalArgumentException("Transaction cannot be null.");
+        }
+
         int currentQuantity = storage.getQuantity(transaction.getFruit());
         int newQuantity = currentQuantity - transaction.getQuantity();
 
@@ -17,6 +27,3 @@ public class PurchaseOperation implements OperationHandler {
         storage.updateFruit(transaction.getFruit(), newQuantity);
     }
 }
-
-
-
