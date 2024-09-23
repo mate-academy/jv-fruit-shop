@@ -26,7 +26,7 @@ public class FruitShopApplication {
         this.fileWriter = fileWriter;
     }
 
-    public void run(String inputFilePath, String outputFilePath) {
+    public void generateFruitReport(String inputFilePath, String outputFilePath) {
         List<String> inputReport = fileReader.read(inputFilePath);
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);

@@ -25,4 +25,3 @@ public class SupplyOperation implements OperationHandler {
         storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }
-

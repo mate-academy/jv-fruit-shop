@@ -25,4 +25,3 @@ public enum Operation {
         throw new InvalidOperationCodeException("Invalid operation code: " + code);
     }
 }
-

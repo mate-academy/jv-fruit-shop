@@ -5,4 +5,3 @@ public class InvalidOperationCodeException extends RuntimeException {
         super(message);
     }
 }
-

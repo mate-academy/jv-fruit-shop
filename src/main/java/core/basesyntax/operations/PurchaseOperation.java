@@ -12,10 +12,6 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
-        if (transaction == null) {
-            throw new IllegalArgumentException("Transaction cannot be null.");
-        }
-
         int currentQuantity = storage.getQuantity(transaction.getFruit());
         int newQuantity = currentQuantity - transaction.getQuantity();
 

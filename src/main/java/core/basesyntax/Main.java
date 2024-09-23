@@ -21,9 +21,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        String inputFilePath = args.length > 0 ? args[0] : System.getenv("DEFAULT_INPUT_FILE_PATH");
-        String outputFilePath = args.length > 1 ? args[1]
-                : System.getenv("DEFAULT_OUTPUT_FILE_PATH");
+        final String inputFilePath = args.length > 0 ? args[0] : "src/main/resources/input.csv";
+        final String outputFilePath = args.length > 1 ? args[1] : "src/main/resources/output.csv";
 
         Storage storage = new Storage();
 
@@ -44,12 +43,6 @@ public class Main {
                 new FileWriterImpl()
         );
 
-        try {
-            fruitShopApp.run(inputFilePath, outputFilePath);
-        } catch (RuntimeException e) {
-            throw new RuntimeException("Error occurred while running the application: "
-                    + e.getMessage(), e);
-        }
+        fruitShopApp.generateFruitReport(inputFilePath, outputFilePath);
     }
 }
-

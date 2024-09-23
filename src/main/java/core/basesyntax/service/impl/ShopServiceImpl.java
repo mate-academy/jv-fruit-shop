@@ -21,7 +21,7 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            handler.apply(transaction); // Це має бути правильна сигнатура
+            handler.apply(transaction);
         }
     }
 

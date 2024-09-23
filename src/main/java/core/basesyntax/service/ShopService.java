@@ -9,6 +9,3 @@ public interface ShopService {
 
     Map<String, Integer> getStorageReport();
 }
-
-
-

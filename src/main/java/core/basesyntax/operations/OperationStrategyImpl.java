@@ -16,4 +16,3 @@ public class OperationStrategyImpl implements OperationStrategy {
         return operationHandlers.get(operation);
     }
 }
-
