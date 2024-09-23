@@ -1,12 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.ShopService;
-import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.impl.*;
-
+import core.basesyntax.strategy.impl.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
