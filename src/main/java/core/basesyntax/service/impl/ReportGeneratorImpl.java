@@ -11,9 +11,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
         builder.append("fruit,quantity")
                 .append(System.lineSeparator());
         for (Fruit name: Storage.keyset()) {
-            Fruit key = name;
             Integer value = Storage.getQuantity(name);
-            builder.append(key)
+            builder.append(name)
                     .append(",")
                     .append(value)
                     .append(System.lineSeparator());

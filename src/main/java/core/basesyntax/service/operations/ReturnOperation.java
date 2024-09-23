@@ -2,6 +2,7 @@ package core.basesyntax.service.operations;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.exceptions.InvalidFruitException;
 import core.basesyntax.service.exceptions.InvalidOperationException;
 
 public class ReturnOperation implements OperationHandler {
@@ -12,7 +13,7 @@ public class ReturnOperation implements OperationHandler {
                     + transaction.getOperation() + ".");
         }
         if (!Storage.containsKey(transaction.getFruit())) {
-            throw new RuntimeException("Item: '" + transaction.getFruit()
+            throw new InvalidFruitException("Item: '" + transaction.getFruit()
             + "' doesn't exist in the storage");
         }
         int currentValue = Storage.getQuantity(transaction.getFruit());

@@ -9,7 +9,6 @@ public class FruitConverter {
             if (fruit.getName().equals(name)) {
                 return fruit;
             }
-            break;
         }
         return new Fruit(name);
     }

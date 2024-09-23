@@ -19,9 +19,9 @@ public class PurchaseOperation implements OperationHandler {
                     - transaction.getQuantity();
             if (newValue < 0) {
                 throw new InvalidResultException("Result: "
-                        + newValue + "for item: "
+                        + newValue + " for item: "
                         + transaction.getFruit()
-                        + "can't be negative number");
+                        + " can't be negative number");
             }
             Storage.put(transaction.getFruit(), newValue);
         } else {

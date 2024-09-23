@@ -24,7 +24,8 @@ public class DataConverterImpl implements DataConverter {
                         transaction.setQuantity(Integer.valueOf(el[2]));
                         return transaction;
                     } else {
-                        return null;
+                        throw new InvalidDataException("Can't convert given transaction,"
+                                + " because given data is incorrect");
                     }
                 })
                 .collect(Collectors.toList());
@@ -39,7 +40,7 @@ public class DataConverterImpl implements DataConverter {
         return true;
     }
 
-    public static boolean isInteger(String str) {
+    private static boolean isInteger(String str) {
         try {
             Integer.parseInt(str);
             return true;
