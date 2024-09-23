@@ -1,12 +1,12 @@
 package core.basesyntax.strategy.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
+import java.util.HashMap;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
-    public void handle(Storage storage, FruitTransaction transaction) {
+    public void handle(HashMap<String, Integer> storage, FruitTransaction transaction) {
         String fruitName = transaction.getFruit();
         int oldQuantity = storage.get(fruitName);
         int newQuantity = oldQuantity - transaction.getQuantity();
@@ -16,6 +16,6 @@ public class PurchaseOperation implements OperationHandler {
                             + "but trying to purchase %d.",
                     oldQuantity, fruitName, transaction.getQuantity()));
         }
-        storage.change(fruitName, newQuantity);
+        storage.put(fruitName, newQuantity);
     }
 }

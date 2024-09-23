@@ -9,8 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
+    private final String filePath;
+
+    public FileReaderImpl(String filePath) {
+        this.filePath = filePath;
+    }
+
     @Override
-    public List<String> read(String filePath) {
+    public List<String> read() {
         try (BufferedReader br = Files.newBufferedReader(Paths.get(filePath))) {
             String line = br.readLine();
             List<String> lines = new ArrayList<>();

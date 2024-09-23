@@ -1,7 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.db.StorageImpl;
+
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.FileReader;
@@ -32,30 +31,23 @@ public class Main {
                     + "as arguments.");
             return;
         }
-        Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(Operation.SUPPLY, new SupplyOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        Storage storage = new StorageImpl();
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
-
-        FileReader fileReader = new FileReaderImpl();
         String readPath = args[0];
-        List<String> inputReport = fileReader.read(readPath);
+
+        FileReader fileReader = new FileReaderImpl(readPath);
+        List<String> inputReport = fileReader.read();
 
         TransactionParser transactionParser = new TransactionParserImpl();
         List<FruitTransaction> transactions = transactionParser.parse(inputReport);
 
+        ShopService shopService = new ShopServiceImpl();
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(shopService);
 
-        FileWriter fileWriter = new FileWriterImpl();
         String writePath = args[1];
-        fileWriter.write(resultingReport, writePath);
+        FileWriter fileWriter = new FileWriterImpl(writePath);
+        fileWriter.write(resultingReport);
     }
 }

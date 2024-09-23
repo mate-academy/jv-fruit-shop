@@ -30,11 +30,10 @@ public class TransactionParserImpl implements TransactionParser {
                 quantity = Integer.parseInt(parts[2]);
                 transactions.add(new FruitTransaction(operation, fruitName, quantity));
             } catch (NumberFormatException e) {
-                System.err.println("Transactions parsing failed: "
-                        + "invalid quantity format: " + parts[2]);
+                throw new RuntimeException("Invalid quantity format: " + parts[2], e);
             } catch (IllegalArgumentException e) {
-                System.err.println("Transactions parsing failed: "
-                        + "invalid operation code: " + parts[0]);
+                throw new RuntimeException("Transactions parsing failed: "
+                        + "invalid operation code: " + parts[0], e);
             }
         }
         return transactions;

@@ -1,18 +1,23 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.ShopService;
+import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.impl.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy strategy;
-    private Storage storage;
+    private HashMap storage;
 
-    public ShopServiceImpl(OperationStrategy strategy, Storage storage) {
-        this.strategy = strategy;
-        this.storage = storage;
+    public ShopServiceImpl() {
+        strategy = new OperationStrategyImpl();
+        storage = new HashMap<String, Integer>();
     }
 
     @Override
@@ -27,7 +32,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Storage getStorage() {
-        return storage;
+    public Map<String, Integer> getStorage() {
+        return (Map<String, Integer>) storage.clone();
     }
 }
