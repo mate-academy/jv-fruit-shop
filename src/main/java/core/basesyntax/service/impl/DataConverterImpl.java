@@ -8,25 +8,29 @@ import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
     private static final String SEPARATOR = ",";
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TWO = 2;
+    private static final int THREE = 3;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
 
-        for (int i = 1; i < data.size(); i++) {
+        for (int i = ONE; i < data.size(); i++) {
             String line = data.get(i);
             String[] parts = line.split(SEPARATOR);
             validateLineFormat(parts, i, line);
 
             try {
-                Operation operation = getOperation(parts[0], i);
-                String fruit = getFruit(parts[1], i, line);
-                int quantity = getQuantity(parts[2], i, line);
+                Operation operation = getOperation(parts[ZERO], i);
+                String fruit = getFruit(parts[ONE], i, line);
+                int quantity = getQuantity(parts[TWO], i, line);
 
                 transactions.add(new FruitTransaction(operation, fruit, quantity));
             } catch (Exception e) {
                 throw new IllegalArgumentException("Error processing line "
-                        + (i + 1) + ": " + line, e);
+                        + (i + ONE) + ": " + line, e);
             }
         }
 
@@ -34,9 +38,9 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private void validateLineFormat(String[] parts, int lineNumber, String line) {
-        if (parts.length < 3) {
+        if (parts.length < THREE) {
             throw new IllegalArgumentException("Invalid data format at line "
-                    + (lineNumber + 1) + ": " + line);
+                    + (lineNumber + ONE) + ": " + line);
         }
     }
 
@@ -44,7 +48,7 @@ public class DataConverterImpl implements DataConverter {
         Operation operation = Operation.getByCode(operationCode.trim());
         if (operation == null) {
             throw new IllegalArgumentException("Invalid operation code at line "
-                    + (lineNumber + 1) + ": " + operationCode.trim());
+                    + (lineNumber + ONE) + ": " + operationCode.trim());
         }
         return operation;
     }
@@ -53,7 +57,7 @@ public class DataConverterImpl implements DataConverter {
         fruit = fruit.trim();
         if (fruit.isEmpty()) {
             throw new IllegalArgumentException("Fruit cannot be empty at line "
-                    + (lineNumber + 1) + ": " + line);
+                    + (lineNumber + ONE) + ": " + line);
         }
         return fruit;
     }
@@ -61,14 +65,14 @@ public class DataConverterImpl implements DataConverter {
     private int getQuantity(String quantityStr, int lineNumber, String line) {
         try {
             int quantity = Integer.parseInt(quantityStr.trim());
-            if (quantity < 0) {
+            if (quantity < ZERO) {
                 throw new IllegalArgumentException("Quantity must be non-negative at line "
-                        + (lineNumber + 1) + ": " + line);
+                        + (lineNumber + ONE) + ": " + line);
             }
             return quantity;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid quantity at line "
-                    + (lineNumber + 1) + ": " + line, e);
+                    + (lineNumber + ONE) + ": " + line, e);
         }
     }
 }

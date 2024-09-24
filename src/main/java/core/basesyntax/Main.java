@@ -20,9 +20,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
+    private static final String INPUT_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_PATH = "src/main/resources/output.csv";
+
     public static void main(String[] args) {
-        final String inputFilePath = args.length > 0 ? args[0] : "src/main/resources/input.csv";
-        final String outputFilePath = args.length > 1 ? args[1] : "src/main/resources/output.csv";
+        final String inputFilePath = args.length > 0 ? args[0] : INPUT_PATH;
+        final String outputFilePath = args.length > 1 ? args[1] : OUTPUT_PATH;
 
         Storage storage = new Storage();
 

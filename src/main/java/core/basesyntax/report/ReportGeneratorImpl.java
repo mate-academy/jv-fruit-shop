@@ -5,7 +5,6 @@ import java.util.Map;
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_HEADER = "fruit,quantity\n";
     private static final String SEPARATOR = ",";
-    private static final String LINE_BREAK = "\n";
 
     @Override
     public String getReport(Map<String, Integer> storage) {
@@ -14,7 +13,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
                 report.append(fruit)
                         .append(SEPARATOR)
                         .append(quantity)
-                        .append(LINE_BREAK));
+                        .append(System.lineSeparator()));
         return report.toString();
     }
 }
