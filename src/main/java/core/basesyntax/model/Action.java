@@ -6,7 +6,7 @@ public enum Action {
     PURCHASE("p"),
     RETURN("r");
 
-    private String code;
+    private final String code;
 
     Action(String code) {
         this.code = code;

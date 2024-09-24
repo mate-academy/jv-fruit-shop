@@ -1,9 +1,9 @@
-package core.basesyntax.strategy;
+package core.basesyntax.report;
 
 import core.basesyntax.db.Storage;
 import java.util.Map;
 
-public class StorageReportGenerateImpl implements StorageReportGenerate {
+public class StorageReportGeneratorImpl implements StorageReportGenerator {
     public String getReport() {
         StringBuilder report = new StringBuilder();
         report.append("fruit,quantity").append(System.lineSeparator());
