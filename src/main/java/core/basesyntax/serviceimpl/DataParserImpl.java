@@ -1,6 +1,7 @@
-package core.basesyntax.sevice.impl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataParser;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +17,8 @@ public class DataParserImpl implements DataParser {
         List<FruitTransaction> transactionsList = new ArrayList<>();
         for (String line : dataFromFile) {
             String [] lineData = line.split(REGEX_FOR_SPLIT);
-            FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.getOperationByCode(lineData[OPERATION_INDEX]);
+            Operation operation =
+                    Operation.getOperationByCode(lineData[OPERATION_INDEX]);
             String fruit = lineData[FRUIT_INDEX];
             int amount = Integer.parseInt(lineData[AMOUNT_INDEX]);
             transactionsList.add(new FruitTransaction(operation, fruit, amount));

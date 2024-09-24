@@ -1,4 +1,4 @@
-package core.basesyntax.sevice.impl;
+package core.basesyntax.serviceimpl;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportGenerator;
