@@ -7,6 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TransactionParserImpl implements TransactionParser {
+    private static final String SEPARATOR = ",";
+    private static final int OPERATION_POS = 0;
+    private static final int FRUIT_NAME_POS = 1;
+    private static final int QUANTITY_POS = 2;
+
     @Override
     public List<FruitTransaction> parse(List<String> transactionStrings) {
         if (transactionStrings == null || transactionStrings.isEmpty()) {
@@ -19,15 +24,15 @@ public class TransactionParserImpl implements TransactionParser {
         String fruitName;
         int quantity;
         for (String line : transactionStrings) {
-            parts = line.split(",");
+            parts = line.split(SEPARATOR);
             if (parts.length != 3) {
                 throw new RuntimeException("Transactions parsing failed: "
                         + "wrong format in line: " + line);
             }
             try {
-                operation = Operation.valueOf(parts[0]);
-                fruitName = parts[1];
-                quantity = Integer.parseInt(parts[2]);
+                operation = Operation.valueOf(parts[OPERATION_POS]);
+                fruitName = parts[FRUIT_NAME_POS];
+                quantity = Integer.parseInt(parts[QUANTITY_POS]);
                 transactions.add(new FruitTransaction(operation, fruitName, quantity));
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid quantity format: " + parts[2], e);
