@@ -19,30 +19,30 @@ import core.basesyntax.strategy.MyFileReader;
 import core.basesyntax.strategy.MyFileReaderImpl;
 import core.basesyntax.strategy.MyFileWriter;
 import core.basesyntax.strategy.MyFileWriterImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    static final String FROM_FILE = "src/main/resources/report.csv";
+    static final String TO_FILE = "src/main/resources/new_report.csv";
+
     public static void main(String[] args) {
-        final String fromFile = "src/main/resources/report.csv";
-        final String toFile = "src/main/resources/new_report.csv";
         MyFileReader fileReader = new MyFileReaderImpl();
-        List<String> inputReport = fileReader.read(fromFile);
+        List<String> inputReport = fileReader.read(FROM_FILE);
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter
                 .convertToTransactions(inputReport);
-        Map<Action, ActionHandler> actionHandlers = new HashMap<>();
-        actionHandlers.put(Action.BALANCE, new BalanceAction());
-        actionHandlers.put(Action.PURCHASE, new PurchaseAction());
-        actionHandlers.put(Action.RETURN, new ReturnAction());
-        actionHandlers.put(Action.SUPPLY, new SupplyAction());
+        Map<Action, ActionHandler> actionHandlers = Map.of(
+                Action.BALANCE, new BalanceAction(),
+                Action.PURCHASE, new PurchaseAction(),
+                Action.RETURN, new ReturnAction(),
+                Action.SUPPLY, new SupplyAction());
         ActionStrategy operationStrategy = new ActionStrategyImpl(actionHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
         StorageReportGenerator reportGenerator = new StorageReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
         MyFileWriter fileWriter = new MyFileWriterImpl();
-        fileWriter.write(resultingReport, toFile);
+        fileWriter.write(resultingReport, TO_FILE);
     }
 }

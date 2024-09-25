@@ -22,7 +22,7 @@ public enum Action {
                 return action;
             }
         }
-        throw new IllegalArgumentException("Invalid operation code: " + code);
+        throw new IllegalArgumentException("Invalid action code: " + code);
     }
 }
 
