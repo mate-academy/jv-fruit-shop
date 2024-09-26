@@ -1,6 +1,7 @@
 package core.basesyntax.converter;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class DataConverterImpl implements DataConverter {
                 continue;
             }
             String[] parts = line.split(",");
-            FruitTransaction.Operation operation = mapToOperation(parts[0]);
+            Operation operation = mapToOperation(parts[0]);
             String fruit = parts[1];
             int quantity = Integer.parseInt(parts[2]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));
@@ -20,12 +21,12 @@ public class DataConverterImpl implements DataConverter {
         return transactions;
     }
 
-    private FruitTransaction.Operation mapToOperation(String code) {
+    private Operation mapToOperation(String code) {
         return switch (code) {
-            case "b" -> FruitTransaction.Operation.BALANCE;
-            case "s" -> FruitTransaction.Operation.SUPPLY;
-            case "p" -> FruitTransaction.Operation.PURCHASE;
-            case "r" -> FruitTransaction.Operation.RETURN;
+            case "b" -> Operation.BALANCE;
+            case "s" -> Operation.SUPPLY;
+            case "p" -> Operation.PURCHASE;
+            case "r" -> Operation.RETURN;
             default -> throw new IllegalArgumentException("Unknown operation code: " + code);
         };
     }

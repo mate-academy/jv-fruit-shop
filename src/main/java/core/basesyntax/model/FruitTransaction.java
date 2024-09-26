@@ -4,10 +4,6 @@ public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
-    
-    public enum Operation {
-        BALANCE, SUPPLY, PURCHASE, RETURN
-    }
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
