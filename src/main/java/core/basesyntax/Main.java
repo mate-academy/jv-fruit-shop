@@ -25,15 +25,16 @@ import java.util.Map;
 public class Main {
     private static final String FILE_FROM = "src/main/resources/input.csv";
     private static final String FILE_TO = "src/main/resources/output.csv";
-    private static final Map<Operation, OperationHandler> operationMap = Map.of(
-            Operation.BALANCE, new BalanceOperation(),
-            Operation.SUPPLY, new SupplyOperation(),
-            Operation.PURCHASE, new PurchaseOperation(),
-            Operation.RETURN, new ReturnOperation());
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFromFile(FILE_FROM);
+
+        Map<Operation, OperationHandler> operationMap = Map.of(
+                Operation.BALANCE, new BalanceOperation(),
+                Operation.SUPPLY, new SupplyOperation(),
+                Operation.PURCHASE, new PurchaseOperation(),
+                Operation.RETURN, new ReturnOperation());
 
         DataParser dataParser = new DataParserImpl();
         List<FruitTransaction> transactions = dataParser.parse(inputReport);

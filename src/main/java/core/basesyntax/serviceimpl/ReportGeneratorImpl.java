@@ -11,7 +11,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String createReport() {
         StringBuilder stringBuilder = new StringBuilder(CONTENTS + System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : FruitStorage.fruitRepository.entrySet()) {
+        for (Map.Entry<String, Integer> entry : FruitStorage.getFruits().entrySet()) {
             stringBuilder.append(entry.getKey())
                     .append(REGEX_TO_SPLIT)
                     .append(entry.getValue())

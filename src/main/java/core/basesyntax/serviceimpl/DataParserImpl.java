@@ -14,6 +14,10 @@ public class DataParserImpl implements DataParser {
 
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {
+        if (dataFromFile.isEmpty()) {
+            throw new IllegalArgumentException("Data list is empty");
+        }
+
         List<FruitTransaction> transactionsList = new ArrayList<>();
         for (String line : dataFromFile) {
             String [] lineData = line.split(REGEX_FOR_SPLIT);
