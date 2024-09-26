@@ -9,7 +9,7 @@ public class StorageReportGeneratorImpl implements StorageReportGenerator {
     public String getReport() {
         StringBuilder report = new StringBuilder();
         report.append(REPORT_HEADER).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : Storage.getAllFruits().entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.getFruitStorage().entrySet()) {
             report.append(entry.getKey()).append(",").append(entry.getValue())
                     .append(System.lineSeparator());
         }

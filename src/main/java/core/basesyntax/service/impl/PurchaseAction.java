@@ -1,14 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ActionHandler;
+import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageServiceImpl;
 
 public class PurchaseAction implements ActionHandler {
+    private final StorageService service = new StorageServiceImpl();
+
     @Override
     public void apply(String fruit, int quantity) {
-        if (quantity < 0) {
-            throw new RuntimeException("Quantity can't be negative");
-        }
-        Storage.removeFruit(fruit, quantity);
+        service.removeFruit(fruit, quantity);
     }
 }

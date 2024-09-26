@@ -1,11 +1,14 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.service.ActionHandler;
+import core.basesyntax.service.StorageService;
+import core.basesyntax.service.StorageServiceImpl;
 
 public class BalanceAction implements ActionHandler {
+    private final StorageService service = new StorageServiceImpl();
+
     @Override
     public void apply(String fruit, int quantity) {
-        Storage.setBalance(fruit, quantity);
+        service.setBalance(fruit, quantity);
     }
 }
