@@ -23,6 +23,7 @@ import java.util.Map;
 
 public class Main {
     private static final String FILE_PATH = "fruit_shop.csv";
+    //for check
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
