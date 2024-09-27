@@ -5,50 +5,39 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    private static final int HEADER_LINE_INDEX = 0;
+    public static final String LINE_SKIP_STRING = "type";
+    public static final String SPLIT_VALUE = ",";
+    public static final int EXPECTED_DATA_LENGTH = 3;
+    public static final int QUANTITY_INDEX = 2;
+    public static final int FRUIT_INDEX = 2;
+    public static final int OPERATION_INDEX = 0;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
-
-        for (int i = HEADER_LINE_INDEX + 1; i < data.size(); i++) {
-            String[] parts = data.get(i).split(",");
-
-            if (parts.length >= 3) {
-                try {
-                    FruitTransaction.Operation operation =
-                            FruitTransaction.Operation.fromCode(parts[0].trim());
-                    String fruit = parts[1].trim();
-                    int quantity = Integer.parseInt(parts[2].trim());
-
-                    transactions.add(new FruitTransaction(operation, fruit, quantity));
-                } catch (NumberFormatException e) {
-                    throw new RuntimeException("Invalid number format in line " + (i + 1)
-                            + ": " + parts[2], e);
-                } catch (IllegalArgumentException e) {
-                    throw new RuntimeException("Invalid operation code in line " + (i + 1)
-                            + ": " + parts[0], e);
-                }
-            } else {
-                System.err.println("Invalid data format at line " + (i + 1));
+        for (String line : data) {
+            if (line.startsWith(LINE_SKIP_STRING)) {
+                continue;
             }
+            String[] parts = line.split(SPLIT_VALUE);
+            if (parts.length < EXPECTED_DATA_LENGTH) {
+                throw new RuntimeException("Invalid input data format. Expected at least 3 parts");
+            }
+            FruitTransaction.Operation operation =
+                    FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
+            if (operation == null) {
+                throw new IllegalArgumentException("Invalid operation: " + parts[OPERATION_INDEX]);
+            }
+            String fruit = parts[FRUIT_INDEX];
+            int quantity;
+            try {
+                quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid quantuty format: "
+                        + parts[QUANTITY_INDEX], e);
+            }
+            transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
         return transactions;
     }
 }
-    /*@Override
-    public List<FruitTransaction> convertToTransaction(List<String> data) {
-        List<FruitTransaction> transactions = new ArrayList<>();
-
-        for (int i = 1; i < data.size(); i++) {
-            String[] parts = data.get(i).split(",");
-            FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.fromCode(parts[0].trim());
-            String fruit = parts[1].trim();
-            int quantity = Integer.parseInt(parts[2].trim());
-
-            transactions.add(new FruitTransaction(operation, fruit, quantity));
-        }
-        return transactions;
-    }*/
-

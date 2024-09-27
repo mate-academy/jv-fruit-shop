@@ -1,19 +1,19 @@
 package core.basesyntax.report;
 
-import core.basesyntax.service.StorageService;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private final StorageService storageService;
-
-    public ReportGeneratorImpl(StorageService storageService) {
-        this.storageService = storageService;
-    }
+    private static final String REPORT_HEADER = "fruit, quantity" + System.lineSeparator();
 
     @Override
-    public String getReport() {
-        return storageService.getInventory().entrySet().stream()
-                .map(entry -> entry.getKey() + "," + entry.getValue())
-                .collect(Collectors.joining("\n", "fruit,quantity\n", ""));
+    public String getReport(Map<String, Integer> storage) {
+        StringBuilder report = new StringBuilder(REPORT_HEADER);
+        for (Map.Entry<String, Integer> entry : storage.entrySet()) {
+            report.append(entry.getKey())
+                    .append(",")
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
+        }
+        return report.toString();
     }
 }

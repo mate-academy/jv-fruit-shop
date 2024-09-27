@@ -1,8 +1,8 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.StorageService;
+import java.util.Map;
 
 public interface OperationHandler {
-    void handle(FruitTransaction transaction, StorageService storageService);
+    void apply(Map<String, Integer> storage, FruitTransaction transaction);
 }
