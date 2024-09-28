@@ -1,35 +1,37 @@
 package core.basesyntax.model;
 
+import java.util.Objects;
+
 public class Fruit {
-    private String name;
-    private int quantity;
+    private final String name;
 
     public Fruit(String name) {
         this.name = name;
-        this.quantity = 0;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public String toString() {
+        return name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        }
+        if (object == null || getClass() != object.getClass()) {
+            return false;
+        }
+        Fruit fruit = (Fruit) object;
+        return Objects.equals(name, fruit.name);
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public void addQuantity(int quantity) {
-        this.quantity += quantity;
-    }
-
-    public void subtractQuantity(int quantity) {
-        this.quantity -= quantity;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
     }
 }

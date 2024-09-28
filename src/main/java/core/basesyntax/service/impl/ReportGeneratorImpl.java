@@ -3,16 +3,18 @@ package core.basesyntax.service.impl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ReportGenerator;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String FIRST_STRING_OF_REPORT = "fruit,quantity";
+    private static final String SEPARATOR = ",";
+
     @Override
-    public List<String> generateReport() {
-        Map<String, Fruit> allFruits = Storage.getAllFruits();
-        return allFruits.values().stream()
-                .map(fruit -> fruit.getName() + "," + fruit.getQuantity())
-                .collect(Collectors.toList());
+    public String generateReport() {
+        StringBuilder report = new StringBuilder(FIRST_STRING_OF_REPORT);
+        for (Map.Entry<Fruit, Integer> entry : Storage.fruitInventory.entrySet()) {
+            report.append("\n").append(entry.getKey()).append(SEPARATOR).append(entry.getValue());
+        }
+        return report.toString();
     }
 }

@@ -1,22 +1,29 @@
 package core.basesyntax.model;
 
 public class Transaction {
-    private final String operation;
-    private final String fruitName;
+    public enum Operation {
+        B,
+        P,
+        R,
+        S
+    }
+
+    private final Operation operation;
+    private final Fruit fruit;
     private final int quantity;
 
-    public Transaction(String operation, String fruitName, int quantity) {
+    public Transaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
-        this.fruitName = fruitName;
+        this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public String getFruitName() {
-        return fruitName;
+    public Fruit getFruit() {
+        return fruit;
     }
 
     public int getQuantity() {
