@@ -6,10 +6,10 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
 
-        final String FILE_PATH = "fruitShop.csv";
+        final String Path = "fruitShop.csv";
 
         CustomFileReader fileReader = new CustomFileReaderImpl();
-        List<String> inputReport = fileReader.read(FILE_PATH);
+        List<String> inputReport = fileReader.read(Path);
 
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
