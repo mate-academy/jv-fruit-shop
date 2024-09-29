@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
+
+        final String FILE_PATH = "fruitShop.csv";
 
         CustomFileReader fileReader = new CustomFileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(FILE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
