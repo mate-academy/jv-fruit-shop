@@ -12,9 +12,8 @@ public class DecrementHandler implements OperationHandler {
     }
 
     @Override
-    public void handle(String fruitName, int quantity) {
-        Fruit fruit = new Fruit(fruitName);
-        storageService.decrement(fruit, quantity);
+    public void handle(Fruit fruit, int quantity) {
+        storageService.removeFruit(fruit, quantity);
     }
 }
 

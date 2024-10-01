@@ -1,22 +1,29 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.Transaction;
+import core.basesyntax.service.OperationHandler;
 import core.basesyntax.service.TransactionProcessor;
-import core.basesyntax.strategy.OperationHandlerFactory;
 import java.util.List;
+import java.util.Map;
 
 public class TransactionProcessorImpl implements TransactionProcessor {
-    private final OperationHandlerFactory handlerFactory;
+    private final Map<Transaction.Operation, OperationHandler> operationHandlers;
 
-    public TransactionProcessorImpl(OperationHandlerFactory handlerFactory) {
-        this.handlerFactory = handlerFactory;
+    public TransactionProcessorImpl(Map<Transaction.Operation,
+            OperationHandler> operationHandlers) {
+        this.operationHandlers = operationHandlers;
     }
 
     @Override
     public void process(List<Transaction> transactions) {
         for (Transaction transaction : transactions) {
-            handlerFactory.getHandler(transaction.getOperation())
-                    .handle(transaction.getFruit().getName(), transaction.getQuantity());
+            OperationHandler handler = operationHandlers.get(transaction.getOperation());
+            if (handler != null) {
+                handler.handle(transaction.getFruit(), transaction.getQuantity());
+            } else {
+                throw new IllegalArgumentException("No handler found for operation: "
+                        + transaction.getOperation());
+            }
         }
     }
 }

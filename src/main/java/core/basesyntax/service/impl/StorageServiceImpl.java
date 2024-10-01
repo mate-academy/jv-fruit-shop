@@ -6,22 +6,23 @@ import core.basesyntax.service.StorageService;
 
 public class StorageServiceImpl implements StorageService {
     @Override
-    public void decrement(Fruit fruit, int quantity) {
-        int currentQuantity = Storage.fruitInventory.getOrDefault(fruit, 0);
-        if (currentQuantity < quantity) {
-            throw new IllegalArgumentException("Not enough " + fruit + " in storage");
-        }
-        Storage.fruitInventory.put(fruit, currentQuantity - quantity);
+    public void addFruit(Fruit fruit, int quantity) {
+        int currentQuantity = Storage.getFruitQuiantity(fruit);
+        Storage.updateFruitQuantity(fruit, currentQuantity + quantity);
     }
 
     @Override
-    public void increment(Fruit fruit, int quantity) {
-        int currentQuantity = Storage.fruitInventory.getOrDefault(fruit, 0);
-        Storage.fruitInventory.put(fruit, currentQuantity + quantity);
+    public void removeFruit(Fruit fruit, int quantity) {
+        int currentQuantity = Storage.getFruitQuiantity(fruit);
+        if (currentQuantity < quantity) {
+            throw new IllegalArgumentException("Not enough " + fruit.getName()
+                    + " in storage to remove");
+        }
+        Storage.updateFruitQuantity(fruit, currentQuantity - quantity);
     }
 
     @Override
     public int getQuantity(Fruit fruit) {
-        return Storage.fruitInventory.getOrDefault(fruit, 0);
+        return Storage.getFruitQuiantity(fruit);
     }
 }

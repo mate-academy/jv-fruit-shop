@@ -12,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String generateReport() {
         StringBuilder report = new StringBuilder(FIRST_STRING_OF_REPORT);
-        for (Map.Entry<Fruit, Integer> entry : Storage.fruitInventory.entrySet()) {
+        for (Map.Entry<Fruit, Integer> entry : Storage.getInventory().entrySet()) {
             report.append("\n").append(entry.getKey()).append(SEPARATOR).append(entry.getValue());
         }
         return report.toString();

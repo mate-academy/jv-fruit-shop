@@ -12,8 +12,7 @@ public class IncrementHandler implements OperationHandler {
     }
 
     @Override
-    public void handle(String fruitName, int quantity) {
-        Fruit fruit = new Fruit(fruitName);
-        storageService.increment(fruit, quantity);
+    public void handle(Fruit fruit, int quantity) {
+        storageService.addFruit(fruit, quantity);
     }
 }
