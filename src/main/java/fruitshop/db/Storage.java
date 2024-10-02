@@ -11,14 +11,10 @@ public class Storage {
     }
 
     public Integer getQuantity(String fruit) {
-        return storage.get(fruit);
+        return storage.getOrDefault(fruit, 0);
     }
 
-    public void set(String fruit, Integer quantity) {
-        storage.replace(fruit, quantity);
-    }
-
-    public Map<String, Integer> returnStorage() {
+    public Map<String, Integer> getStorage() {
         return storage;
     }
 }

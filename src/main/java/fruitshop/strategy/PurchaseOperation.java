@@ -4,15 +4,17 @@ import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
+    private final Storage storage = new Storage();
+
     @Override
     public void handler(FruitTransaction fruitTransaction) {
-        Storage storage = new Storage();
         int newQuantity = storage.getQuantity(fruitTransaction.getFruit())
                 - fruitTransaction.getQuantity();
         if (newQuantity >= 0) {
-            storage.set(fruitTransaction.getFruit(), newQuantity);
+            storage.put(fruitTransaction.getFruit(), newQuantity);
         } else {
-            throw new RuntimeException("negative balance cannot be recorded");
+            throw new RuntimeException("negative balance cannot be recorded at "
+                    + PurchaseOperation.class);
         }
     }
 }

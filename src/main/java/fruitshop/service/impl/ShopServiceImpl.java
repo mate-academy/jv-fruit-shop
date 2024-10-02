@@ -12,10 +12,6 @@ public class ShopServiceImpl implements ShopService {
         this.operationStrategy = operationStrategy;
     }
 
-    public OperationStrategy getOperationStrategy() {
-        return operationStrategy;
-    }
-
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction fruit : transactions) {

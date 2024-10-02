@@ -10,10 +10,10 @@ public class FileWriterImpl implements FileWriter {
     public void write(String fileReport, String fileName) {
         File file = new File(fileName);
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(
-                file, true))) {
+                file))) {
             bufferedWriter.write(fileReport);
         } catch (IOException e) {
-            throw new RuntimeException("can't write the file " + fileReport, e);
+            throw new RuntimeException("can't write to file " + fileName, e);
         }
 
     }
