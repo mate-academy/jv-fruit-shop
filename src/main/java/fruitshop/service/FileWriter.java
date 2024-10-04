@@ -1,5 +1,5 @@
 package fruitshop.service;
 
 public interface FileWriter {
-    void write(String file, String fileName);
+    void write(String content, String filePath);
 }

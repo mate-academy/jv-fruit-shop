@@ -1,4 +1,4 @@
-package fruitshop.db;
+package fruitshop.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,6 @@ public class Storage {
     }
 
     public Map<String, Integer> getStorage() {
-        return storage;
+        return new HashMap<>(storage);
     }
 }

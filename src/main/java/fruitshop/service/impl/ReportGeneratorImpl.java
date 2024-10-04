@@ -1,6 +1,6 @@
 package fruitshop.service.impl;
 
-import fruitshop.db.Storage;
+import fruitshop.model.Storage;
 import fruitshop.service.ReportGenerator;
 import java.util.Map;
 
@@ -17,6 +17,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
             report.append(fruit.getKey()).append(COMA).append(fruit.getValue())
                     .append(System.lineSeparator());
         }
-        return report.toString().trim();
+        return report.toString();
     }
 }

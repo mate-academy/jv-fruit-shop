@@ -27,18 +27,16 @@ public class FruitTransaction {
         return fruit;
     }
 
-    public FruitTransaction setFruit(String fruit) {
+    public void setFruit(String fruit) {
         this.fruit = fruit;
-        return this;
     }
 
     public int getQuantity() {
         return quantity;
     }
 
-    public FruitTransaction setQuantity(int quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
-        return this;
     }
 
     public enum Operation {

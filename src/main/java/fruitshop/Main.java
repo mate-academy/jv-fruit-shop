@@ -1,6 +1,7 @@
 package fruitshop;
 
 import fruitshop.model.FruitTransaction;
+import fruitshop.model.Storage;
 import fruitshop.service.DataConverter;
 import fruitshop.service.FileReader;
 import fruitshop.service.FileWriter;
@@ -23,15 +24,19 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String READ_FILE_PATH = "src/main/resources/reportToRead.csv";
+    public static final String WRITE_FILE_PATH = "src/main/resources/finalReport.csv";
+
     public static void main(String[] arg) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/resources/reportToRead.csv");
+        List<String> inputReport = fileReader.read(READ_FILE_PATH);
 
+        Storage storage = new Storage();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(storage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(storage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(storage));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl();
@@ -44,6 +49,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "src/main/resources/finalReport.csv");
+        fileWriter.write(resultingReport, WRITE_FILE_PATH);
     }
 }
