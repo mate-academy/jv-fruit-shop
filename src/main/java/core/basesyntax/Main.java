@@ -38,7 +38,8 @@ public class Main {
         ParserService parserService = new ParserServiceImpl();
         FruitStorageDaoImpl fruitStorageDao = new FruitStorageDaoImpl();
 
-        FruitStorageService fruitStorageService = new FruitStorageServiceImpl(fruitStorageDao, operationStrategy);
+        FruitStorageService fruitStorageService =
+                new FruitStorageServiceImpl(fruitStorageDao, operationStrategy);
         ReportService reportService = new ReportServiceCsvImpl(fruitStorageDao);
         FileService fileService = new FileServiceCsvImpl();
 
