@@ -36,10 +36,10 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
         ParserService parserService = new ParserServiceImpl();
-        FruitStorageService fruitStorageService = new FruitStorageServiceImpl(
-                new FruitStorageDaoImpl(),
-                operationStrategy);
-        ReportService reportService = new ReportServiceCsvImpl(new FruitStorageDaoImpl());
+        FruitStorageDaoImpl fruitStorageDao = new FruitStorageDaoImpl();
+
+        FruitStorageService fruitStorageService = new FruitStorageServiceImpl(fruitStorageDao, operationStrategy);
+        ReportService reportService = new ReportServiceCsvImpl(fruitStorageDao);
         FileService fileService = new FileServiceCsvImpl();
 
         List<String> list = fileService.readFile(FILE_NAME_SOURCE);
