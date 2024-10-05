@@ -22,13 +22,13 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<FruitTransaction> transactions = fileReader.readFile(SOURCE_PATH_NAME);
-
         Map<OperationType, OperationHandler> operationStrategy = new HashMap<>();
         operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
         operationStrategy.put(OperationType.SUPPLY, new SupplyOperationHandler());
         operationStrategy.put(OperationType.PURCHASE, new PurchaseOperationHandler());
         operationStrategy.put(OperationType.RETURN, new ReturnOperationHandler());
+
+        List<FruitTransaction> transactions = fileReader.readFile(SOURCE_PATH_NAME);
 
         FruitShopService fruitShopService = new FruitShopService(operationStrategy);
         fruitShopService.processTransactions(transactions);
