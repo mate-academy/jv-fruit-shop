@@ -7,13 +7,10 @@ public class PurchaseOperationHandler implements OperationHandler {
     public void apply(Map<String, Integer> inventory, String fruit, int quantity) {
         int currentQuantity = inventory.getOrDefault(fruit, 0);
         if (currentQuantity < quantity) {
-            throw new RuntimeException("Not enough " + fruit + " in inventory.");
+            throw new RuntimeException("Not enough " + fruit
+                    + " in inventory. Avaliable quantity is " + currentQuantity);
         }
         int newQuantity = currentQuantity - quantity;
-        if (newQuantity < 0) {
-            throw new RuntimeException("The resulting quantity of "
-                    + fruit + " cannot be negative.");
-        }
         inventory.put(fruit, newQuantity);
     }
 }

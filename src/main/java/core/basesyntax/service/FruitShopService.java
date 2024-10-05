@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopService {
-    private Map<String, Integer> fruitInventory = new HashMap<>();
-    private Map<OperationType, OperationHandler> operationStrategy = new HashMap<>();
+    private final Map<String, Integer> fruitInventory = new HashMap<>();
+    private final Map<OperationType, OperationHandler> operationStrategy;
 
     public FruitShopService(Map<OperationType, OperationHandler> operationStrategy) {
         this.operationStrategy = operationStrategy;
