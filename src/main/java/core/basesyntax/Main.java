@@ -22,8 +22,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<FruitTransaction> transactions;
-        transactions = fileReader.readFile(SOURCE_PATH_NAME);
+        List<FruitTransaction> transactions = fileReader.readFile(SOURCE_PATH_NAME);
 
         Map<OperationType, OperationHandler> operationStrategy = new HashMap<>();
         operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
@@ -37,6 +36,6 @@ public class Main {
         Map<String, Integer> inventory = fruitShopService.getInventory();
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeFile(TARGET_PATH_NAME, inventory);
-        System.out.println("Report was successfully written in: report.csv");
+        System.out.println("Report was successfully written in: " + TARGET_PATH_NAME);
     }
 }
