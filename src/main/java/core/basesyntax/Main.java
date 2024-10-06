@@ -6,9 +6,19 @@ import core.basesyntax.io.FileWriter;
 import core.basesyntax.io.FileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.servise.*;
-import core.basesyntax.servise.operation.*;
-
+import core.basesyntax.servise.DataConverter;
+import core.basesyntax.servise.DataConverterImpl;
+import core.basesyntax.servise.OperationStrategy;
+import core.basesyntax.servise.OperationStrategyImpl;
+import core.basesyntax.servise.ReportGenerator;
+import core.basesyntax.servise.ReportGeneratorImpl;
+import core.basesyntax.servise.ShopService;
+import core.basesyntax.servise.ShopServiceImpl;
+import core.basesyntax.servise.operation.BalanceOperation;
+import core.basesyntax.servise.operation.OperationHandler;
+import core.basesyntax.servise.operation.PurchaseOperation;
+import core.basesyntax.servise.operation.ReturnOperation;
+import core.basesyntax.servise.operation.SupplyOperation;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +29,8 @@ public class Main {
     private static final String DIRECTORY_PATH = "./src/main/java/core/basesyntax";
     private static final String INPUT_FILE_PATH = DIRECTORY_PATH + "/transactions.csv";
     private static final String OUTPUT_FILE_PATH = "finalReport.csv";
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputData = fileReader.read(INPUT_FILE_PATH);
 
