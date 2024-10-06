@@ -1,7 +1,7 @@
 package strategy;
 
 import java.util.Map;
-
+//PurchaseOperationHandler
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void apply(Map<String, Integer> inventory, String fruit, int quantity) {

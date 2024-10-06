@@ -1,7 +1,7 @@
 package model;
 
 import java.util.Objects;
-
+//FruitTransaction
 public class FruitTransaction {
     private OperationType operation;
     private String fruit;
