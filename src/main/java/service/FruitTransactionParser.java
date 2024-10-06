@@ -13,7 +13,6 @@ public class FruitTransactionParser {
             OperationType operation = OperationType.fromCode(data[0]);
             String fruit = data[1];
             int quantity = Integer.parseInt(data[2]);
-
             FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
             transactions.add(transaction);
         }
