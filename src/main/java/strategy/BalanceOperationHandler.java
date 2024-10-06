@@ -1,5 +1,5 @@
 package strategy;
-//BalanceOperationHandler
+
 import java.util.Map;
 
 public class BalanceOperationHandler implements OperationHandler {

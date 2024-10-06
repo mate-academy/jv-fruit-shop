@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-//main
+
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
 
