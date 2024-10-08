@@ -17,11 +17,13 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> fruitTransactions, Inventory inventory) {
         for (FruitTransaction fruitTransaction : fruitTransactions) {
-            FruitOperationHandler handler = operationStrategy.getHandler(fruitTransaction.getOperation());
+            FruitOperationHandler handler =
+                    operationStrategy.getHandler(fruitTransaction.getOperation());
             if (handler != null) {
                 handler.executeOperation(fruitTransaction, inventory);
             } else {
-                throw new IllegalArgumentException("No handler for operation: " + fruitTransaction.getOperation());
+                throw new IllegalArgumentException("No handler for operation: "
+                        + fruitTransaction.getOperation());
             }
         }
     }

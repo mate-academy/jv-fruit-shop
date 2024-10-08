@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.Inventory;
-
 import java.util.HashMap;
 import java.util.Map;
 
