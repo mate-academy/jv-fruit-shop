@@ -1,4 +1,4 @@
-package service.read;
+package core.basesyntax.service.read;
 
 import java.util.List;
 

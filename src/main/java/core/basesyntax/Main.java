@@ -1,17 +1,21 @@
 package core.basesyntax;
 
-import model.FruitRecord;
-import service.parse.DataParser;
-import service.parse.DataParserImpl;
-import service.read.FileReaderImpl;
-import service.report.ReportService;
-import service.report.ReportServiceImpl;
-import service.strategy.TypeStrategy;
-import service.strategy.TypeStrategyImpl;
-import service.strategy.strategyimpl.*;
-import service.write.FileWriter;
-import service.write.FileWriterImpl;
-
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.parse.DataParser;
+import core.basesyntax.service.parse.DataParserImpl;
+import core.basesyntax.service.read.FileReader;
+import core.basesyntax.service.read.FileReaderImpl;
+import core.basesyntax.service.report.ReportService;
+import core.basesyntax.service.report.ReportServiceImpl;
+import core.basesyntax.service.strategy.TypeStrategy;
+import core.basesyntax.service.strategy.TypeStrategyImpl;
+import core.basesyntax.service.strategy.strategyimpl.BalanceOperation;
+import core.basesyntax.service.strategy.strategyimpl.OperationHandler;
+import core.basesyntax.service.strategy.strategyimpl.PurchaseOperation;
+import core.basesyntax.service.strategy.strategyimpl.ReturnOperation;
+import core.basesyntax.service.strategy.strategyimpl.SupplyOperation;
+import core.basesyntax.service.write.FileWriter;
+import core.basesyntax.service.write.FileWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +25,7 @@ public class Main {
 
     public static void main(String[] args) {
         // 1. Read the data from the CSV file
-        service.read.FileReader fileReader = new FileReaderImpl();
+        FileReader fileReader = new FileReaderImpl();
 
         List<String> inputReport = fileReader.read(PATH_TO_READ);
 

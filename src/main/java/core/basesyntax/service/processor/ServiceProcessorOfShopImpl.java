@@ -1,8 +1,7 @@
-package service.processor;
+package core.basesyntax.service.processor;
 
-import model.FruitRecord;
-import service.strategy.TypeStrategy;
-
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.strategy.TypeStrategy;
 import java.util.List;
 
 public class ServiceProcessorOfShopImpl implements ServiceProcessorOfShop {

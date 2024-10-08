@@ -1,7 +1,6 @@
-package service.parse;
+package core.basesyntax.service.parse;
 
-import model.FruitRecord;
-
+import core.basesyntax.model.FruitRecord;
 import java.util.ArrayList;
 import java.util.List;
 

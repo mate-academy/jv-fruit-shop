@@ -1,8 +1,7 @@
-package service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.strategyimpl;
 
-import dao.Storage;
-import model.FruitRecord;
-
+import core.basesyntax.dao.Storage;
+import core.basesyntax.model.FruitRecord;
 
 public class ReturnOperation implements OperationHandler {
 

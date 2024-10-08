@@ -1,7 +1,6 @@
-package service.processor;
+package core.basesyntax.service.processor;
 
-import model.FruitRecord;
-
+import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
 public interface ServiceProcessorOfShop {

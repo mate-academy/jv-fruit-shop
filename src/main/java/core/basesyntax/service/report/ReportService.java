@@ -1,7 +1,6 @@
-package service.report;
+package core.basesyntax.service.report;
 
-import model.FruitRecord;
-
+import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
 public interface ReportService {

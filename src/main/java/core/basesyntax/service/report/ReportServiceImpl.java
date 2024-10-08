@@ -1,8 +1,7 @@
-package service.report;
+package core.basesyntax.service.report;
 
-import dao.Storage;
-import model.FruitRecord;
-
+import core.basesyntax.dao.Storage;
+import core.basesyntax.model.FruitRecord;
 import java.util.List;
 
 public class ReportServiceImpl implements ReportService {

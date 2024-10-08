@@ -1,4 +1,4 @@
-package model;
+package core.basesyntax.model;
 
 public class FruitRecord {
     private Operation operation;
@@ -19,7 +19,6 @@ public class FruitRecord {
         this.operation = operation;
     }
 
-
     public String getFruit() {
         return fruit;
     }
@@ -28,7 +27,6 @@ public class FruitRecord {
         this.fruit = fruit;
     }
 
-
     public int getQuantity() {
         return quantity;
     }
@@ -36,7 +34,6 @@ public class FruitRecord {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
 
     public enum Operation {
         BALANCE("b"),

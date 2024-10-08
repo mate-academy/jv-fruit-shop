@@ -1,8 +1,7 @@
-package service.strategy;
+package core.basesyntax.service.strategy;
 
-import model.FruitRecord;
-import service.strategy.strategyimpl.OperationHandler;
-
+import core.basesyntax.model.FruitRecord;
+import core.basesyntax.service.strategy.strategyimpl.OperationHandler;
 import java.util.Map;
 
 public class TypeStrategyImpl implements TypeStrategy {

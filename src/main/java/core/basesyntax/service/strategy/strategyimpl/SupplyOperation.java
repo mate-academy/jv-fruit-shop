@@ -1,9 +1,9 @@
-package service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.strategyimpl;
 
-import dao.Storage;
-import model.FruitRecord;
+import core.basesyntax.dao.Storage;
+import core.basesyntax.model.FruitRecord;
 
-public class SupplyOperation implements OperationHandler{
+public class SupplyOperation implements OperationHandler {
 
     @Override
     public void apply(FruitRecord transaction) {

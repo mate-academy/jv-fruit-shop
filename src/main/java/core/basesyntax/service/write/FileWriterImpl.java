@@ -1,4 +1,4 @@
-package service.write;
+package core.basesyntax.service.write;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
