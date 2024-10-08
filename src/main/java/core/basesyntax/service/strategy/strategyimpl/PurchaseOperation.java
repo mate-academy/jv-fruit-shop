@@ -7,11 +7,20 @@ public class PurchaseOperation implements OperationHandler {
     @Override
     public void apply(FruitRecord transaction) {
         Integer currentQuantity = Storage.storage.get(transaction.getFruit());
-        int purchaseQuantity = transaction.getQuantity();
-        if (currentQuantity == null && currentQuantity < 0) {
-            throw new IllegalArgumentException("Invalid quantity of for purchase.");
+
+        if (currentQuantity == null) {
+            throw new IllegalArgumentException("Fruit does not exist in storage.");
         }
+        if (currentQuantity < 0) {
+            throw new IllegalArgumentException("Invalid quantity for purchase.");
+        }
+        int purchaseQuantity = transaction.getQuantity();
         int newQuantity = currentQuantity - purchaseQuantity;
+
+        if (newQuantity < 0) {
+            throw new IllegalArgumentException("Resulting quantity cannot be negative for fruit: "
+                    + transaction);
+        }
         Storage.storage.put(transaction.getFruit(), newQuantity);
     }
 }

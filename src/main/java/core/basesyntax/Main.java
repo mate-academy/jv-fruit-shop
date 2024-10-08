@@ -25,7 +25,6 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-
         List<String> inputReport = fileReader.read(PATH_TO_READ);
 
         HashMap<FruitRecord.Operation, OperationHandler> typeServiceMap = new HashMap<>();
@@ -41,7 +40,7 @@ public class Main {
 
         ReportService reportService = new ReportServiceImpl();
         String resultReport = reportService.getReport(fruitRecords);
-        
+
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultReport, PATH_TO_WRITE);
 
