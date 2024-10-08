@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.Inventory;
+import java.util.Map;
 
 public interface ReportGenerator {
-    String getReport(Inventory inventory);
+    String getReport(Map<String, Integer> inventoryData);
 }

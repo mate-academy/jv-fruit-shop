@@ -1,9 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Inventory;
-import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.FruitOperationHandler;
+import core.basesyntax.model.Operation;
 
 public interface OperationStrategy {
-    FruitOperationHandler getHandler(FruitTransaction fruitTransaction, Inventory inventory);
+    FruitOperationHandler getHandler(Operation operation);
 }

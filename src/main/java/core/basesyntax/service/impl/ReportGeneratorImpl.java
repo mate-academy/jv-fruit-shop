@@ -1,14 +1,14 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.db.Inventory;
+import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override
-    public String getReport(Inventory inventory) {
+    public String getReport(Map<String, Integer> inventoryData) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("fruit,quantity\n");
-        for (Map.Entry<String, Integer> entry : inventory.getInventory().entrySet()) {
+        for (Map.Entry<String, Integer> entry : inventoryData.entrySet()) {
             stringBuilder.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())

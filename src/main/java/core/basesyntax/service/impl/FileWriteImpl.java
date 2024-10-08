@@ -1,4 +1,6 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
+
+import core.basesyntax.service.FileWrite;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ public class FileWriteImpl implements FileWrite {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(report);
         } catch (IOException ioException) {
-            throw new RuntimeException("Data cannot write to file");
+            throw new RuntimeException("Data cannot write to file: " + fileName, ioException);
         }
     }
 }

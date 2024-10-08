@@ -1,11 +1,11 @@
-package core.basesyntax.service;
+package core.basesyntax.strategy;
 
-import core.basesyntax.db.Inventory;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.Inventory;
 
-public class ReturnOperation implements FruitOperationHandler {
+public class SupplyOperation implements FruitOperationHandler {
     @Override
-    public void getFruitOperation(FruitTransaction transaction, Inventory inventory) {
+    public void executeOperation(FruitTransaction transaction, Inventory inventory) {
         inventory.getInventory().put(transaction.getFruit(),
                 inventory.getInventory().getOrDefault(
                         transaction.getFruit(), 0) + transaction.getQuantity());
