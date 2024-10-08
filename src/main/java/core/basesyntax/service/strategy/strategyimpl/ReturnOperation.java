@@ -4,7 +4,6 @@ import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;
 
 public class ReturnOperation implements OperationHandler {
-
     @Override
     public void apply(FruitRecord transaction) {
         int returnFruits = transaction.getQuantity();
