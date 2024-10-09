@@ -7,11 +7,10 @@ public class ReturnOperation implements OperationHandler {
     @Override
     public void apply(FruitRecord transaction) {
         int returnFruits = transaction.getQuantity();
-        Storage.storage.merge(transaction.getFruit(),returnFruits, Integer::sum);
-
         if (returnFruits < 0) {
             throw new RuntimeException("Balance cannot be negative for fruit: "
                     + transaction.getFruit());
         }
+        Storage.storage.merge(transaction.getFruit(),returnFruits, Integer::sum);
     }
 }

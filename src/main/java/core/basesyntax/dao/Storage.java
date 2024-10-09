@@ -1,7 +1,8 @@
 package core.basesyntax.dao;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    public static final HashMap<String, Integer> storage = new HashMap<>();
+    public static final Map<String, Integer> storage = new HashMap<>();
 }

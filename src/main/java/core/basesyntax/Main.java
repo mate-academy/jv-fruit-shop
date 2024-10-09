@@ -16,18 +16,21 @@ import core.basesyntax.service.strategy.strategyimpl.ReturnOperation;
 import core.basesyntax.service.strategy.strategyimpl.SupplyOperation;
 import core.basesyntax.service.write.FileWriter;
 import core.basesyntax.service.write.FileWriterImpl;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String PATH_TO_READ = "src/main/resources/test.csv";
-    private static final String PATH_TO_WRITE = "src/main/resources/report.csv";
+    private static final Path PATH_TO_WRITE = Paths.get("src/main/resources/report.csv");
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(PATH_TO_READ);
 
-        HashMap<FruitRecord.Operation, OperationHandler> typeServiceMap = new HashMap<>();
+        Map<FruitRecord.Operation, OperationHandler> typeServiceMap = new HashMap<>();
         typeServiceMap.put(FruitRecord.Operation.BALANCE, new BalanceOperation());
         typeServiceMap.put(FruitRecord.Operation.PURCHASE, new PurchaseOperation());
         typeServiceMap.put(FruitRecord.Operation.RETURN, new ReturnOperation());
@@ -37,12 +40,10 @@ public class Main {
 
         DataParser fruitRecordParser = new DataParserImpl();
         List<FruitRecord> fruitRecords = fruitRecordParser.parseFruitRecords(inputReport);
-
         ReportService reportService = new ReportServiceImpl();
         String resultReport = reportService.getReport(fruitRecords);
-
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultReport, PATH_TO_WRITE);
+        fileWriter.write(PATH_TO_WRITE, resultReport);
 
     }
 }
