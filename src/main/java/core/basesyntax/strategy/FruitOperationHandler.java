@@ -1,8 +1,8 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.Inventory;
+import java.util.Map;
 
 public interface FruitOperationHandler {
-    void executeOperation(FruitTransaction transaction, Inventory inventory);
+    void executeOperation(FruitTransaction transaction, Map<String, Integer> inventory);
 }
