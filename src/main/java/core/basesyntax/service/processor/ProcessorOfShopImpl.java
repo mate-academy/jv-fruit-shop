@@ -4,10 +4,10 @@ import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.strategy.TypeStrategy;
 import java.util.List;
 
-public class ServiceProcessorOfShopImpl implements ServiceProcessorOfShop {
+public class ProcessorOfShopImpl implements ProcessorOfShop {
     private TypeStrategy typeStrategy;
 
-    public ServiceProcessorOfShopImpl(TypeStrategy typeStrategy) {
+    public ProcessorOfShopImpl(TypeStrategy typeStrategy) {
         this.typeStrategy = typeStrategy;
     }
 

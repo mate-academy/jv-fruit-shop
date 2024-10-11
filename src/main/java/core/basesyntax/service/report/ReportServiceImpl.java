@@ -13,7 +13,12 @@ public class ReportServiceImpl implements ReportService {
     public String getReport(List<FruitRecord> fruitRecords) {
         StringBuilder report = new StringBuilder();
         report.append(FRUIT).append(COMMA).append(QUANTITY).append(System.lineSeparator());
-
+        for (FruitRecord fruitRecord : fruitRecords) {
+            report.append(fruitRecord.getFruit())
+                    .append(COMMA)
+                    .append(fruitRecord.getQuantity())
+                    .append(System.lineSeparator());
+        }
         Storage.storage.forEach((fruit, quantity) -> report
                 .append(fruit).append(COMMA).append(quantity).append(System.lineSeparator()));
         return report.toString();

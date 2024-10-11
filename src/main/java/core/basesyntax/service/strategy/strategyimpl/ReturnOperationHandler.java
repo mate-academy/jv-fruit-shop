@@ -3,7 +3,7 @@ package core.basesyntax.service.strategy.strategyimpl;
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;
 
-public class ReturnOperation implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     @Override
     public void apply(FruitRecord transaction) {
         int returnFruits = transaction.getQuantity();
@@ -11,6 +11,6 @@ public class ReturnOperation implements OperationHandler {
             throw new RuntimeException("Balance cannot be negative for fruit: "
                     + transaction.getFruit());
         }
-        Storage.storage.merge(transaction.getFruit(),returnFruits, Integer::sum);
+        Storage.storage.merge(transaction.getFruit(), returnFruits, Integer::sum);
     }
 }

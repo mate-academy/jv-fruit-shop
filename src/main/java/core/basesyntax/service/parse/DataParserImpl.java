@@ -12,14 +12,14 @@ public class DataParserImpl implements DataParser {
     @Override
     public List<FruitRecord> parseFruitRecords(List<String> lines) {
         List<FruitRecord> transactions = new ArrayList<>();
+        lines.remove(0);
 
-        for (int i = 1; i < lines.size(); i++) {
-            String line = lines.get(i);
+        for (String line: lines) {
             String[] parts = line.split(",");
 
-            String operationCode = parts[OPERATION_TYPE_POSITION].trim();
-            String fruit = parts[FRUIT_NAME_POSITION].trim();
-            int quantity = Integer.parseInt(parts[QUANTITY_POSITION].trim());
+            String operationCode = parts[OPERATION_TYPE_POSITION];
+            String fruit = parts[FRUIT_NAME_POSITION];
+            int quantity = Integer.parseInt(parts[QUANTITY_POSITION]);
 
             FruitRecord.Operation operation = FruitRecord.Operation.fromCode(operationCode);
             transactions.add(new FruitRecord(operation, fruit, quantity));

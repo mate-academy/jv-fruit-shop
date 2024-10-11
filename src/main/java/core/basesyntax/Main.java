@@ -9,11 +9,11 @@ import core.basesyntax.service.report.ReportService;
 import core.basesyntax.service.report.ReportServiceImpl;
 import core.basesyntax.service.strategy.TypeStrategy;
 import core.basesyntax.service.strategy.TypeStrategyImpl;
-import core.basesyntax.service.strategy.strategyimpl.BalanceOperation;
+import core.basesyntax.service.strategy.strategyimpl.BalanceOperationHandler;
 import core.basesyntax.service.strategy.strategyimpl.OperationHandler;
-import core.basesyntax.service.strategy.strategyimpl.PurchaseOperation;
-import core.basesyntax.service.strategy.strategyimpl.ReturnOperation;
-import core.basesyntax.service.strategy.strategyimpl.SupplyOperation;
+import core.basesyntax.service.strategy.strategyimpl.PurchaseOperationHandler;
+import core.basesyntax.service.strategy.strategyimpl.ReturnOperationHandler;
+import core.basesyntax.service.strategy.strategyimpl.SupplyOperationHandler;
 import core.basesyntax.service.write.FileWriter;
 import core.basesyntax.service.write.FileWriterImpl;
 import java.nio.file.Path;
@@ -31,10 +31,10 @@ public class Main {
         List<String> inputReport = fileReader.read(PATH_TO_READ);
 
         Map<FruitRecord.Operation, OperationHandler> typeServiceMap = new HashMap<>();
-        typeServiceMap.put(FruitRecord.Operation.BALANCE, new BalanceOperation());
-        typeServiceMap.put(FruitRecord.Operation.PURCHASE, new PurchaseOperation());
-        typeServiceMap.put(FruitRecord.Operation.RETURN, new ReturnOperation());
-        typeServiceMap.put(FruitRecord.Operation.SUPPLY, new SupplyOperation());
+        typeServiceMap.put(FruitRecord.Operation.BALANCE, new BalanceOperationHandler());
+        typeServiceMap.put(FruitRecord.Operation.PURCHASE, new PurchaseOperationHandler());
+        typeServiceMap.put(FruitRecord.Operation.RETURN, new ReturnOperationHandler());
+        typeServiceMap.put(FruitRecord.Operation.SUPPLY, new SupplyOperationHandler());
 
         TypeStrategy typeStrategy = new TypeStrategyImpl(typeServiceMap);
 
@@ -44,6 +44,5 @@ public class Main {
         String resultReport = reportService.getReport(fruitRecords);
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(PATH_TO_WRITE, resultReport);
-
     }
 }
