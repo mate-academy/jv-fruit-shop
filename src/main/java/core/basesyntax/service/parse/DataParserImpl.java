@@ -8,14 +8,16 @@ public class DataParserImpl implements DataParser {
     private static final int OPERATION_TYPE_POSITION = 0;
     private static final int FRUIT_NAME_POSITION = 1;
     private static final int QUANTITY_POSITION = 2;
+    private static final String COMMA = ",";
+    private static final int HEADER_INDEX = 0;
 
     @Override
     public List<FruitRecord> parseFruitRecords(List<String> lines) {
         List<FruitRecord> transactions = new ArrayList<>();
-        lines.remove(0);
+        lines.remove(HEADER_INDEX);
 
         for (String line: lines) {
-            String[] parts = line.split(",");
+            String[] parts = line.split(COMMA);
 
             String operationCode = parts[OPERATION_TYPE_POSITION];
             String fruit = parts[FRUIT_NAME_POSITION];

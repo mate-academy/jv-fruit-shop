@@ -3,8 +3,8 @@ package core.basesyntax;
 import core.basesyntax.model.FruitRecord;
 import core.basesyntax.service.parse.DataParser;
 import core.basesyntax.service.parse.DataParserImpl;
-import core.basesyntax.service.read.FileReader;
-import core.basesyntax.service.read.FileReaderImpl;
+import core.basesyntax.service.read.FileReading;
+import core.basesyntax.service.read.FileReadingImpl;
 import core.basesyntax.service.report.ReportService;
 import core.basesyntax.service.report.ReportServiceImpl;
 import core.basesyntax.service.strategy.TypeStrategy;
@@ -27,7 +27,7 @@ public class Main {
     private static final Path PATH_TO_WRITE = Paths.get("src/main/resources/report.csv");
 
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImpl();
+        FileReading fileReader = new FileReadingImpl();
         List<String> inputReport = fileReader.read(PATH_TO_READ);
 
         Map<FruitRecord.Operation, OperationHandler> typeServiceMap = new HashMap<>();
