@@ -5,7 +5,31 @@ public class FruitTransaction {
     private String fruit;
     private int amount;
 
-    enum Operation {
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
+        this.operation = operation;
+    }
+
+    public String getFruit() {
+        return fruit;
+    }
+
+    public void setFruit(String fruit) {
+        this.fruit = fruit;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
+
+    public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
         PURCHASE("p"),
@@ -18,14 +42,14 @@ public class FruitTransaction {
         Operation(String code) {
             this.code = code;
         }
-    }
 
-    public static Operation operationFromCode(String code) {
-        for (Operation operation : Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return operation;
+        public static Operation operationFromCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
             }
+            throw new RuntimeException("can't find operation");
         }
-        throw new RuntimeException("can't find operation");
     }
 }
