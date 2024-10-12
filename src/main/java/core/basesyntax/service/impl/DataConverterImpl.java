@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    private final DataValidator validator;
     private static final String COMMA = ",";
+    private final DataValidator validator;
 
     public DataConverterImpl(DataValidator validator) {
         this.validator = validator;
@@ -32,7 +32,8 @@ public class DataConverterImpl implements DataConverter {
 
                 fruitTransactions.add(new FruitTransaction(fruitOperation, fruit, quantity));
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid data in line: " + line + " - " + e.getMessage());
+                throw new IllegalArgumentException("Invalid data in line: " + line
+                        + " - " + e.getMessage());
             }
         }
         return fruitTransactions;
