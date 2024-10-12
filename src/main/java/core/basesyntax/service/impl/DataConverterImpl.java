@@ -9,6 +9,7 @@ import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
     private final DataValidator validator;
+    private static final String COMMA = ",";
 
     public DataConverterImpl(DataValidator validator) {
         this.validator = validator;
@@ -18,14 +19,31 @@ public class DataConverterImpl implements DataConverter {
     public List<FruitTransaction> convertToTransaction(List<String> inputData) {
         validator.validate(inputData);
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
+        for (String line : inputData) {
+            String[] partsOfData = line.split(COMMA);
+            if (partsOfData.length != 3) {
+                throw new IllegalArgumentException("Incorrect input data format in line: " + line);
+            }
 
-        for (String line : inputData.subList(1, inputData.size())) {
-            String[] partsOfData = line.split(",");
-            Operation fruitOperation = Operation.valueOf(partsOfData[0]);
-            String fruit = partsOfData[1];
-            int quantity = Integer.parseInt(partsOfData[2]);
-            fruitTransactions.add(new FruitTransaction(fruitOperation, fruit, quantity));
+            try {
+                Operation fruitOperation = getOperationByCode(partsOfData[0]);
+                String fruit = partsOfData[1];
+                int quantity = Integer.parseInt(partsOfData[2]);
+
+                fruitTransactions.add(new FruitTransaction(fruitOperation, fruit, quantity));
+            } catch (IllegalArgumentException e) {
+                throw new IllegalArgumentException("Invalid data in line: " + line + " - " + e.getMessage());
+            }
         }
         return fruitTransactions;
+    }
+
+    private Operation getOperationByCode(String code) {
+        for (Operation operation : Operation.values()) {
+            if (operation.getCode().equals(code)) {
+                return operation;
+            }
+        }
+        throw new IllegalArgumentException("No enum constant for code: " + code);
     }
 }

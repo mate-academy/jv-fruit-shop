@@ -18,10 +18,12 @@ public class FileReadImpl implements FileRead {
                 lines.add(line);
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("File doesn't exist!");
+            throw new RuntimeException("File doesn't exist: " + e.getMessage());
         } catch (IOException ioException) {
-            throw new RuntimeException("File cannot be read!");
+            throw new RuntimeException("Cannot read file '" + fileName
+                    + "': " + ioException.getMessage());
         }
+
         return lines;
     }
 }

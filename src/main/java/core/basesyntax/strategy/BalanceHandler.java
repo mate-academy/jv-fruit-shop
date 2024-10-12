@@ -6,7 +6,14 @@ import java.util.Map;
 public class BalanceHandler implements FruitOperationHandler {
     @Override
     public void executeOperation(FruitTransaction transaction, Map<String, Integer> inventory) {
-        inventory.put(transaction.getFruit(),
-                Math.max(transaction.getQuantity(), 0));
+        String fruit = transaction.getFruit();
+        int currentQuantity = inventory.getOrDefault(fruit, 0);
+        int newQuantity = currentQuantity + transaction.getQuantity();
+
+        if (newQuantity < 0) {
+            newQuantity = 0;
+        }
+
+        inventory.put(fruit, newQuantity);
     }
 }
