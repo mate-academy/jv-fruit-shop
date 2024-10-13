@@ -36,11 +36,13 @@ public class FruitTransaction {
         RETURN("r");
 
         private String code;
-        public String getCode() {
-            return code;
-        }
+
         Operation(String code) {
             this.code = code;
+        }
+
+        public String getCode() {
+            return code;
         }
 
         public static Operation operationFromCode(String code) {

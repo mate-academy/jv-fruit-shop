@@ -1,12 +1,10 @@
 package core.basesyntax.service.date;
 
 import core.basesyntax.service.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-public class DateConverterImpl implements DateConverter{
+public class DateConverterImpl implements DateConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> rawData) {
         List<FruitTransaction> transactions = new ArrayList<>();
@@ -15,16 +13,15 @@ public class DateConverterImpl implements DateConverter{
             return transactions;
         }
 
-        StringBuilder content = new StringBuilder();
         for (String line: rawData) {
 
-            if (line.startsWith("type,fruit,quantity")) {  // skip the first line
+            if (line.startsWith("type,fruit,quantity")) {
                 continue;
             }
 
             String[] parts = line.split(",");
 
-            if (parts.length != 3) {  // skip a line that has not 3 words
+            if (parts.length != 3) {
                 continue;
             }
 
@@ -32,13 +29,14 @@ public class DateConverterImpl implements DateConverter{
             String fruit = parts[1].trim().toLowerCase();
             String amountStr = parts[2].trim();
 
-            FruitTransaction.Operation operation = FruitTransaction.Operation.operationFromCode(type);
+            FruitTransaction.Operation operation
+                    = FruitTransaction.Operation.operationFromCode(type);
 
-            if (operation == null) {  // skip the line with invalid operation code
+            if (operation == null) {
                 continue;
             }
 
-            if (fruit.isEmpty()) {  // skip the line with empty fruit's name
+            if (fruit.isEmpty()) {
                 continue;
             }
 
