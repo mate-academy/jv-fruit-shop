@@ -4,9 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<String, Integer> assortment = new HashMap<>();
+    private static final Map<String, Integer> assortment = new HashMap<>();
 
     public static Map<String, Integer> getAssortment() {
-        return assortment;
+        return Map.copyOf(assortment);
+    }
+
+    public static void updateDataBase(Map<String, Integer> transactions) {
+        assortment.putAll(transactions);
     }
 }

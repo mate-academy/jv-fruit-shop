@@ -19,11 +19,8 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private FruitTransaction createFruitTransactionInstance(String lineFromFile) {
-        FruitTransaction fruitTransaction = new FruitTransaction();
         String[] fields = lineFromFile.split(",");
-        fruitTransaction.setOperation(fields[ZERO_ELEMENT].trim());
-        fruitTransaction.setFruit(fields[ONE_ELEMENT]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[TWO_ELEMENT]));
-        return fruitTransaction;
+        return new FruitTransaction(fields[ZERO_ELEMENT].trim(),
+                fields[ONE_ELEMENT], Integer.parseInt(fields[TWO_ELEMENT]));
     }
 }

@@ -4,7 +4,7 @@ import model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
     @Override
-    public int getQuantityToAdd(FruitTransaction fruitTransaction) {
+    public int getQuantityToCalculate(FruitTransaction fruitTransaction) {
         return fruitTransaction.getQuantity();
     }
 }

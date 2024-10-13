@@ -15,33 +15,28 @@ public class ShopServiceImpl implements ShopService {
         this.operationStrategy = operationStrategy;
     }
 
-    public OperationStrategy getOperationStrategy() {
-        return operationStrategy;
-    }
-
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
         Map<String, Integer> toStorage = fruitTransactions.stream()
                 .collect(Collectors.toMap(
                         FruitTransaction::getFruit,
-                        fruitTransaction -> operationStrategy.getOperationHandler(
-                                fruitTransaction.getOperation())
-                                .getQuantityToAdd(fruitTransaction),
+                        this::getQuantityOfTransaction,
                         Integer::sum
                 ));
         checkBalance(toStorage);
-        storageUpdate(toStorage);
+        Storage.updateDataBase(toStorage);
     }
 
-    private void storageUpdate(Map<String, Integer> transactions) {
-        Storage.getAssortment().putAll(transactions);
+    private int getQuantityOfTransaction(FruitTransaction transaction) {
+        return operationStrategy.getOperationHandler(transaction.getOperation())
+                .getQuantityToCalculate(transaction);
     }
 
     private void checkBalance(Map<String, Integer> transactions) {
-        boolean isNotPositive = transactions.entrySet().stream()
-                .allMatch(entry -> entry.getValue() <= 0);
-        if (isNotPositive) {
-            throw new RuntimeException("Balance is not positive");
+        boolean isNegative = transactions.entrySet().stream()
+                .anyMatch(entry -> entry.getValue() < 0);
+        if (isNegative) {
+            throw new RuntimeException("Balance is negative");
         }
     }
 }
