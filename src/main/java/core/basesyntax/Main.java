@@ -29,7 +29,6 @@ public class Main {
         }
 
         String inputFile = args[0];
-        String outputFile = args[1];
 
         FileReaderCsv fileReader = new FileReaderCsvImpl();
         List<String> inputReport = fileReader.read(inputFile);
@@ -49,6 +48,8 @@ public class Main {
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
+
+        String outputFile = args[1];
 
         FileWriterCsv fileWriter = new FileWriterCsvImpl();
         fileWriter.write(report, outputFile);

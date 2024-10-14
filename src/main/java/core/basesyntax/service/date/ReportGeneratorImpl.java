@@ -12,6 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     public ReportGeneratorImpl() {
     }
+
     @Override
     public String getReport() {
         return storage.entrySet()
