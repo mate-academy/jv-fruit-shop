@@ -1,4 +1,4 @@
-package core.basesyntax.service.strategy.strategyimpl;
+package core.basesyntax.service.strategy.impl;
 
 import core.basesyntax.dao.Storage;
 import core.basesyntax.model.FruitRecord;

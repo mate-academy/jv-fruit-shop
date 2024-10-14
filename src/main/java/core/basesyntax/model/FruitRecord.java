@@ -47,7 +47,7 @@ public class FruitRecord {
         }
 
         public static Operation fromCode(String code) {
-            for (Operation operation : values()) {
+            for (Operation operation : Operation.values()) {
                 if (operation.code.equals(code)) {
                     return operation;
                 }

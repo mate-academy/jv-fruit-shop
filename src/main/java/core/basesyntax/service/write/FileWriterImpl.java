@@ -1,15 +1,14 @@
 package core.basesyntax.service.write;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void write(Path filePath, String data) {
+    public void write(String filePath, String report) {
         try {
-            Files.write(filePath, data.getBytes(StandardCharsets.UTF_8));
+            Files.writeString(Path.of(filePath), report);
         } catch (IOException e) {
             throw new RuntimeException("Error writing the file: " + filePath, e);
         }

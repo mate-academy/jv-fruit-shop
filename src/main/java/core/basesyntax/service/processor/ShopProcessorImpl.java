@@ -14,7 +14,7 @@ public class ShopProcessorImpl implements ShopProcessor {
     @Override
     public void process(List<FruitRecord> transactions) {
         for (FruitRecord fruitRecord : transactions) {
-            typeStrategy.getType(fruitRecord.getOperation()).apply(fruitRecord);
+            typeStrategy.getHandler(fruitRecord.getOperation()).apply(fruitRecord);
         }
     }
 }

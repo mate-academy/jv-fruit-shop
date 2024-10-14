@@ -1,7 +1,7 @@
 package core.basesyntax.service.strategy;
 
 import core.basesyntax.model.FruitRecord;
-import core.basesyntax.service.strategy.strategyimpl.OperationHandler;
+import core.basesyntax.service.strategy.impl.OperationHandler;
 import java.util.Map;
 
 public class TypeStrategyImpl implements TypeStrategy {
@@ -12,7 +12,7 @@ public class TypeStrategyImpl implements TypeStrategy {
     }
 
     @Override
-    public OperationHandler getType(FruitRecord.Operation operation) {
+    public OperationHandler getHandler(FruitRecord.Operation operation) {
         return operationHandlers.get(operation);
     }
 }
