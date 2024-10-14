@@ -47,10 +47,8 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        Map<String, Integer> storage = new HashMap<>();
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String report = reportGenerator.getReport(storage);
+        String report = reportGenerator.getReport();
 
         FileWriterCsv fileWriter = new FileWriterCsvImpl();
         fileWriter.write(report, outputFile);
