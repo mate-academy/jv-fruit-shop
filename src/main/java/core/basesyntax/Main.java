@@ -7,6 +7,8 @@ import core.basesyntax.service.date.DateConverter;
 import core.basesyntax.service.date.DateConverterImpl;
 import core.basesyntax.service.date.ReportGenerator;
 import core.basesyntax.service.date.ReportGeneratorImpl;
+import core.basesyntax.service.db.StorageService;
+import core.basesyntax.service.db.StorageServiceImpl;
 import core.basesyntax.service.files.FileReaderCsv;
 import core.basesyntax.service.files.FileReaderCsvImpl;
 import core.basesyntax.service.files.FileWriterCsv;
@@ -34,10 +36,15 @@ public class Main {
         List<String> inputReport = fileReader.read(inputFile);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
-        operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandler.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandler.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
-        operationHandler.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        StorageService storageService = new StorageServiceImpl();
+        operationHandler.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(storageService));
+        operationHandler.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(storageService));
+        operationHandler.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(storageService));
+        operationHandler.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(storageService));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandler);
 
         DateConverter dateConverter = new DateConverterImpl();
