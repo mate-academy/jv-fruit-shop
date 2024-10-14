@@ -1,6 +1,6 @@
 package service.impl;
 
-import database.Storage;
+import database.StorageDealer;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -10,9 +10,11 @@ import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
+    private final StorageDealer storageDealer;
 
-    public ShopServiceImpl(OperationStrategy operationStrategy) {
+    public ShopServiceImpl(OperationStrategy operationStrategy, StorageDealer storageDealer) {
         this.operationStrategy = operationStrategy;
+        this.storageDealer = storageDealer;
     }
 
     @Override
@@ -23,20 +25,12 @@ public class ShopServiceImpl implements ShopService {
                         this::getQuantityOfTransaction,
                         Integer::sum
                 ));
-        checkBalance(toStorage);
-        Storage.updateDataBase(toStorage);
+        storageDealer.checkBalance(toStorage);
+        storageDealer.updateDatabase(toStorage);
     }
 
     private int getQuantityOfTransaction(FruitTransaction transaction) {
         return operationStrategy.getOperationHandler(transaction.getOperation())
                 .getQuantityToCalculate(transaction);
-    }
-
-    private void checkBalance(Map<String, Integer> transactions) {
-        boolean isNegative = transactions.entrySet().stream()
-                .anyMatch(entry -> entry.getValue() < 0);
-        if (isNegative) {
-            throw new RuntimeException("Balance is negative");
-        }
     }
 }

@@ -6,9 +6,9 @@ import model.FruitTransaction;
 import service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
-    private static final int ZERO_ELEMENT = 0;
-    private static final int ONE_ELEMENT = 1;
-    private static final int TWO_ELEMENT = 2;
+    private static final int OPERATION_TYPE_INDEX = 0;
+    private static final int FRUIT_TYPE_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> fileData) {
@@ -20,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
 
     private FruitTransaction createFruitTransactionInstance(String lineFromFile) {
         String[] fields = lineFromFile.split(",");
-        return new FruitTransaction(fields[ZERO_ELEMENT].trim(),
-                fields[ONE_ELEMENT], Integer.parseInt(fields[TWO_ELEMENT]));
+        return new FruitTransaction(fields[OPERATION_TYPE_INDEX].trim(),
+                fields[FRUIT_TYPE_INDEX], Integer.parseInt(fields[QUANTITY_INDEX]));
     }
 }

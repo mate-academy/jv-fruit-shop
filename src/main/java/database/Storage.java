@@ -10,7 +10,7 @@ public class Storage {
         return Map.copyOf(assortment);
     }
 
-    public static void updateDataBase(Map<String, Integer> transactions) {
+    public static void updateStorage(Map<String, Integer> transactions) {
         assortment.putAll(transactions);
     }
 }

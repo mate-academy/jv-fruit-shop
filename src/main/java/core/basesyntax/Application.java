@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import database.StorageDealer;
+import database.StorageDealerImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,7 +41,9 @@ public class Application {
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationHandlers);
 
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        StorageDealer storageDealer = new StorageDealerImpl();
+        ShopService shopService = new ShopServiceImpl(
+                operationStrategy, storageDealer);
         shopService.process(fruitTransactionList);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
