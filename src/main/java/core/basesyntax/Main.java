@@ -24,8 +24,15 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        if (args.length < 2) {
+            throw new RuntimeException("You must provide input and output file paths.");
+        }
+
+        String inputFile = args[0];
+        String outputFile = args[1];
+
         FileReaderCsv fileReader = new FileReaderCsvImpl();
-        List<String> inputReport = fileReader.read("fileToRead.csv");
+        List<String> inputReport = fileReader.read(inputFile);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
         operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
@@ -46,7 +53,7 @@ public class Main {
         String report = reportGenerator.getReport(storage);
 
         FileWriterCsv fileWriter = new FileWriterCsvImpl();
-        fileWriter.write(report, "fileToRead.csv");
+        fileWriter.write(report, outputFile);
 
     }
 }
