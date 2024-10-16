@@ -10,7 +10,9 @@ public class Storage {
         return Map.copyOf(assortment);
     }
 
-    public static void updateStorage(Map<String, Integer> transactions) {
-        assortment.putAll(transactions);
+    public static void updateStorage(String fruit, int quantity) {
+        int finalQuantity = assortment.containsKey(fruit)
+                ? assortment.get(fruit) + quantity : quantity;
+        assortment.put(fruit, finalQuantity);
     }
 }

@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import database.StorageDealer;
 import database.StorageDealerImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -25,19 +24,23 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Application {
+    private static final String INPUT_FILE_PATH = "src/main/resources/input.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
+
     public static void main(String[] args) {
         InputFileHandler inputHandler = new InputHandler();
-        List<String> input = inputHandler.readFile("src/main/resources/input.csv");
+        List<String> input = inputHandler.readFile(INPUT_FILE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> fruitTransactionList =
                 dataConverter.convertToTransaction(input);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of(
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+
         OperationStrategy operationStrategy =
                 new OperationStrategyImpl(operationHandlers);
 
@@ -50,6 +53,6 @@ public class Application {
         String report = reportGenerator.getReport();
 
         ReportWriter reportWriter = new ReportWriterImpl();
-        reportWriter.writeReport(report, "src/main/resources/finalReport.csv");
+        reportWriter.writeReport(report, OUTPUT_FILE_PATH);
     }
 }

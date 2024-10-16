@@ -1,21 +1,21 @@
 package database;
 
-import java.util.Map;
-
 public class StorageDealerImpl implements StorageDealer {
     @Override
-    public void checkBalance(Map<String, Integer> transactions) {
-        transactions.entrySet().stream()
-                .filter(entry -> entry.getValue() < 0)
-                .findAny()
-                .ifPresent(entry -> {
-                    throw new RuntimeException("Negative balance for fruit: " + entry.getKey()
-                            + " with quantity: " + entry.getValue());
-                });
+    public void updateDatabase(String fruit, int quantity) {
+        ensureNonNegativeBalance(fruit, quantity);
+        Storage.updateStorage(fruit, quantity);
     }
 
-    @Override
-    public void updateDatabase(Map<String, Integer> transactions) {
-        Storage.updateStorage(transactions);
+    private void ensureNonNegativeBalance(String fruit, int quantity) {
+        if (Storage.getAssortment().containsKey(fruit)) {
+            int currentBalanceForThisFruit = Storage.getAssortment().get(fruit);
+            if (currentBalanceForThisFruit + quantity < 0) {
+                throw new RuntimeException("Negative balance for fruit: " + fruit
+                        + " with quantity: " + quantity);
+            }
+        }
     }
 }
+
+

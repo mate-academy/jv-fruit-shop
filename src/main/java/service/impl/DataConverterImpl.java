@@ -9,6 +9,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_TYPE_INDEX = 0;
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> fileData) {
@@ -19,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private FruitTransaction createFruitTransactionInstance(String lineFromFile) {
-        String[] fields = lineFromFile.split(",");
+        String[] fields = lineFromFile.split(SEPARATOR);
         return new FruitTransaction(fields[OPERATION_TYPE_INDEX].trim(),
                 fields[FRUIT_TYPE_INDEX], Integer.parseInt(fields[QUANTITY_INDEX]));
     }

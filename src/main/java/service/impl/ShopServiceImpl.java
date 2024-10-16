@@ -2,10 +2,9 @@ package service.impl;
 
 import database.StorageDealer;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 import model.FruitTransaction;
 import service.ShopService;
+import strategy.OperationHandler;
 import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
@@ -19,18 +18,15 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
-        Map<String, Integer> toStorage = fruitTransactions.stream()
-                .collect(Collectors.toMap(
-                        FruitTransaction::getFruit,
-                        this::getQuantityOfTransaction,
-                        Integer::sum
-                ));
-        storageDealer.checkBalance(toStorage);
-        storageDealer.updateDatabase(toStorage);
+        for (FruitTransaction transaction : fruitTransactions) {
+            OperationHandler handler = getHandler(transaction);
+            String fruit = transaction.getFruit();
+            int quantity = handler.getQuantityToCalculate(transaction);
+            storageDealer.updateDatabase(fruit, quantity);
+        }
     }
 
-    private int getQuantityOfTransaction(FruitTransaction transaction) {
-        return operationStrategy.getOperationHandler(transaction.getOperation())
-                .getQuantityToCalculate(transaction);
+    private OperationHandler getHandler(FruitTransaction transaction) {
+        return operationStrategy.getOperationHandler(transaction.getOperation());
     }
 }

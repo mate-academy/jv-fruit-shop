@@ -7,7 +7,6 @@ import java.io.IOException;
 import service.ReportWriter;
 
 public class ReportWriterImpl implements ReportWriter {
-
     @Override
     public void writeReport(String report, String toFileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(toFileName))) {

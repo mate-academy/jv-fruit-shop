@@ -6,7 +6,7 @@ public class FruitTransaction {
     private final int quantity;
 
     public FruitTransaction(String symbol, String fruit, int quantity) {
-        this.operation = convertStringIntoOperation(symbol);
+        this.operation = Operation.fromCode(symbol);
         this.fruit = fruit;
         this.quantity = quantity;
     }
@@ -23,17 +23,6 @@ public class FruitTransaction {
         return quantity;
     }
 
-    private Operation convertStringIntoOperation(String symbol) {
-        return switch (symbol) {
-            case "b" -> Operation.BALANCE;
-            case "s" -> Operation.SUPPLY;
-            case "p" -> Operation.PURCHASE;
-            case "r" -> Operation.RETURN;
-            default -> throw new IllegalArgumentException(
-                    "There is no Enum element, corresponding to the argument " + symbol);
-        };
-    }
-
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -42,12 +31,22 @@ public class FruitTransaction {
 
         private final String transaction;
 
-        Operation(String lineFromFile) {
-            transaction = lineFromFile;
+        Operation(String symbol) {
+            transaction = symbol;
         }
 
         public String getOperatingSymbol() {
             return transaction;
+        }
+
+        public static Operation fromCode(String code) {
+            for (Operation operation : Operation.values()) {
+                if (operation.transaction.equals(code)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException(
+                    "There is no Enum element, corresponding to the argument " + code);
         }
     }
 }
