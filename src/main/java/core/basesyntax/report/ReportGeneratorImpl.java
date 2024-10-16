@@ -1,10 +1,14 @@
 package core.basesyntax.report;
 
-import core.basesyntax.operation.ShopService;
+import core.basesyntax.service.ShopService;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private ShopService shopService;
+
+    public void setShopService(ShopService shopService) {
+        this.shopService = shopService;
+    }
 
     @Override
     public String generateReport() {

@@ -1,4 +1,4 @@
-package core.basesyntax.operation;
+package core.basesyntax.service;
 
 import core.basesyntax.transaction.FruitTransaction;
 import java.util.List;
