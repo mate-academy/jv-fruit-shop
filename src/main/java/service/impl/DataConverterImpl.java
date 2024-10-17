@@ -10,11 +10,12 @@ public class DataConverterImpl implements DataConverter {
     private static final int FRUIT_TYPE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
     private static final String SEPARATOR = ",";
+    private static final int HEADER_INDEX = 1;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> fileData) {
         return fileData.stream()
-                .skip(1)
+                .skip(HEADER_INDEX)
                 .map(this::createFruitTransactionInstance)
                 .collect(Collectors.toList());
     }
