@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportGenerator;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

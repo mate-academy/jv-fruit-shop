@@ -20,7 +20,6 @@ import core.basesyntax.stategy.PurchaseOperation;
 import core.basesyntax.stategy.ReturnOperation;
 import core.basesyntax.stategy.SupplyOperation;
 import core.basesyntax.validator.DataValidator;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
