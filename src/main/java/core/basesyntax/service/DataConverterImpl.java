@@ -17,7 +17,7 @@ public class DataConverterImpl implements DataConverter {
         for (int i = 1; i < inputReport.size(); i++) {
             String line = inputReport.get(i);
             String[] parts = line.split(",");
-            Operation operation = Operation.fromCode(parts[TYPE_INDEX]);
+            Operation operation = Operation.getOperationFromCode(parts[TYPE_INDEX]);
             String fruit = parts[FRUIT_INDEX];
             int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
             transactions.add(new FruitTransaction(operation, fruit, quantity));

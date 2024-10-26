@@ -18,6 +18,7 @@ import core.basesyntax.service.ReportGeneratorImpl;
 import core.basesyntax.service.ReturnOperation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.Storage;
 import core.basesyntax.service.SupplyOperation;
 import java.util.List;
 import java.util.Map;
@@ -28,25 +29,29 @@ public class Main {
     private static final String OUTPUT_FILE_PATH = "./src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
+        Storage storage = new Storage();
 
-        FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
-        DataConverter dataConverter = new DataConverterImpl();
+        OperationHandler balanceOperation = new BalanceOperation(storage);
+        OperationHandler purchaseOperation = new PurchaseOperation(storage);
+        OperationHandler returnOperation = new ReturnOperation(storage);
+        OperationHandler supplyOperation = new SupplyOperation(storage);
+
         Map<Operation, OperationHandler> operationHandlers = Map.of(
-                Operation.BALANCE, new BalanceOperation(),
-                Operation.PURCHASE, new PurchaseOperation(),
-                Operation.RETURN, new ReturnOperation(),
-                Operation.SUPPLY, new SupplyOperation()
+                Operation.BALANCE, balanceOperation,
+                Operation.PURCHASE, purchaseOperation,
+                Operation.RETURN, returnOperation,
+                Operation.SUPPLY, supplyOperation
         );
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        FileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
+        DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         shopService.process(transactions);
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl(shopService);
         String resultingReport = reportGenerator.getReport();
-
         CustomFileWriter fileWriter = new CustomFileWriterImpl();
         fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
     }

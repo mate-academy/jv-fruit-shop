@@ -3,6 +3,7 @@ package core.basesyntax.service;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String REPORT_HEADER = "fruit,quantity";
     private final ShopService shopService;
 
     public ReportGeneratorImpl(ShopService shopService) {
@@ -10,9 +11,13 @@ public class ReportGeneratorImpl implements ReportGenerator {
     }
 
     public String getReport() {
-        StringBuilder report = new StringBuilder("fruit,quantity\n");
+        StringBuilder report = new StringBuilder(REPORT_HEADER)
+                .append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : shopService.getStorage().entrySet()) {
-            report.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
+            report.append(entry.getKey())
+                    .append(",")
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

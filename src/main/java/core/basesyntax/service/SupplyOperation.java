@@ -1,10 +1,14 @@
 package core.basesyntax.service;
 
-import java.util.Map;
-
 public class SupplyOperation implements OperationHandler {
-    public void apply(String fruit, int quantity, Map<String, Integer> storage) {
-        storage.merge(fruit, quantity, Integer::sum);
+    private final Storage storage;
+
+    public SupplyOperation(Storage storage) {
+        this.storage = storage;
+    }
+
+    @Override
+    public void apply(String fruit, int quantity) {
+        storage.addFruit(fruit, quantity);
     }
 }
-

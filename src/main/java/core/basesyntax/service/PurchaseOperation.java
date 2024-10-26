@@ -1,9 +1,20 @@
 package core.basesyntax.service;
 
-import java.util.Map;
-
 public class PurchaseOperation implements OperationHandler {
-    public void apply(String fruit, int quantity, Map<String, Integer> storage) {
-        storage.put(fruit, storage.getOrDefault(fruit, 0) - quantity);
+    private final Storage storage;
+
+    public PurchaseOperation(Storage storage) {
+        this.storage = storage;
+    }
+
+    @Override
+    public void apply(String fruit, int quantity) {
+        int currentQuantity = storage.getQuantity(fruit);
+        if (currentQuantity < quantity) {
+            throw new IllegalArgumentException("Not enough "
+                    + fruit
+                    + " in storage to complete the purchase.");
+        }
+        storage.removeFruit(fruit, quantity);
     }
 }

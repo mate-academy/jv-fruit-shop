@@ -16,7 +16,7 @@ public enum Operation {
         return code;
     }
 
-    public static Operation fromCode(String code) {
+    public static Operation getOperationFromCode(String code) {
         for (Operation op : values()) {
             if (op.getCode().equals(code)) {
                 return op;

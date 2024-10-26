@@ -11,8 +11,12 @@ public class OperationStrategyImpl implements OperationStrategy {
         this.operationHandlers = operationHandlers;
     }
 
-    public void applyOperation(Operation operation, String fruit,
-                               int quantity, Map<String, Integer> storage) {
-        operationHandlers.get(operation).apply(fruit, quantity, storage);
+    @Override
+    public void applyOperation(Operation operation, String fruit, int quantity) {
+        OperationHandler handler = operationHandlers.get(operation);
+        if (handler == null) {
+            throw new IllegalArgumentException("No handler found for operation: " + operation);
+        }
+        handler.apply(fruit, quantity);
     }
 }
