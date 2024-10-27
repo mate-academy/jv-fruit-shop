@@ -6,5 +6,5 @@ import java.util.Map;
 
 public interface ShopService {
     void processTransaction(List<FruitTransaction> fruitTransactions,
-                            Map<String,Integer> inventory);
+                            Map<String, Integer> inventory);
 }

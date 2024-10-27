@@ -17,20 +17,11 @@ public class DataValidator {
                 throw new IllegalArgumentException("Incorrect input data in line: " + line);
             }
             try {
-                getOperationByCode(partsOfData[0].trim());
+                Operation.getOperationByCode(partsOfData[0].trim());
                 Integer.parseInt(partsOfData[2]);
             } catch (IllegalArgumentException e) {
                 throw new IllegalArgumentException("Invalid data in line: " + line);
             }
         }
-    }
-
-    private void getOperationByCode(String code) {
-        for (Operation operation : Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return;
-            }
-        }
-        throw new IllegalArgumentException("No enum for code: " + code);
     }
 }

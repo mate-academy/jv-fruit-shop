@@ -3,13 +3,13 @@ package core.basesyntax;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileRead;
-import core.basesyntax.service.FileWrite;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.DataConverterImpl;
-import core.basesyntax.service.impl.FileReadImpl;
-import core.basesyntax.service.impl.FileWriteImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.stategy.BalanceHandler;
@@ -27,21 +27,23 @@ import java.util.Map;
 public class Main {
     private static final DataValidator validator = new DataValidator();
     private static final Map<String, Integer> inventory = new HashMap<>();
-    private static final FileRead fileRead = new FileReadImpl();
+    private static final FileReader FILE_READER = new FileReaderImpl();
     private static final DataConverter dataConverter = new DataConverterImpl(validator);
     private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
-    private static final FileWrite fileWriter = new FileWriteImpl();
+    private static final FileWriter fileWriter = new FileWriterImpl();
+    private static final String INPUT_FILE_NAME = "reportToRead.csv";
+    private static final String FINAL_REPORT_FILE_NAME = "finalReport.csv";
 
     public static void main(String[] arg) {
-        List<String> inputReport = readDataFromFile("reportToRead.csv");
+        List<String> inputReport = readDataFromFile(INPUT_FILE_NAME);
         List<FruitTransaction> transactions = convertToTransactions(inputReport);
         processTransactions(transactions);
         String resultingReport = generateReport();
-        writeReportToFile(resultingReport, "finalReport.csv");
+        writeReportToFile(resultingReport, FINAL_REPORT_FILE_NAME);
     }
 
     private static List<String> readDataFromFile(String fileName) {
-        return fileRead.read(fileName);
+        return FILE_READER.read(fileName);
     }
 
     private static List<FruitTransaction> convertToTransactions(List<String> inputReport) {

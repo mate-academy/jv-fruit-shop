@@ -15,6 +15,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
         for (Map.Entry<String, Integer> entry: inventoryData.entrySet()) {
             reportLines.add(entry.getKey() + "," + entry.getValue());
         }
-        return String.join("\n", reportLines);
+        return String.join(System.lineSeparator(), reportLines);
     }
 }

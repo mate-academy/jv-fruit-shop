@@ -1,18 +1,17 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.FileRead;
+import core.basesyntax.service.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReadImpl implements FileRead {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName))) {
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(fileName))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 lines.add(line);

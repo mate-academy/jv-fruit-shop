@@ -12,7 +12,8 @@ public class BalanceHandler implements FruitOperationHandler {
         int newQuantity = currentQuantity + fruitTransaction.getQuantity();
 
         if (newQuantity < 0) {
-            newQuantity = 0;
+            throw new IllegalArgumentException("Insufficient stock for "
+                    + fruitTransaction.getFruit());
         }
         inventory.put(fruit, newQuantity);
     }

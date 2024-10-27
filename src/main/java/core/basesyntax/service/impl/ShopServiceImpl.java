@@ -23,7 +23,7 @@ public class ShopServiceImpl implements ShopService {
             if (handler != null) {
                 handler.executeOperation(fruitTransaction, inventory);
             } else {
-                throw new IllegalArgumentException("No handler for"
+                throw new IllegalArgumentException("No handler for "
                         + fruitTransaction.getOperation());
             }
         }
