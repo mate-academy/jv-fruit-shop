@@ -25,6 +25,7 @@ public class DataConverterImpl implements DataConverter {
         validator.validate(inputData);
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (String line : inputData.subList(LIST_START, inputData.size())) {
+            validator.validate(List.of(line));
             String[] partsOfData = line.split(COMMA);
             if (partsOfData.length != DATA_LENGTH) {
                 throw new IllegalArgumentException("Incorrect input data " + line);

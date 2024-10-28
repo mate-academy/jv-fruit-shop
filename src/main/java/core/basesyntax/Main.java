@@ -4,13 +4,13 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.DataConverterImpl;
 import core.basesyntax.service.impl.FileReaderImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ReportWriterImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.stategy.BalanceHandler;
 import core.basesyntax.stategy.FruitOperationHandler;
@@ -30,7 +30,7 @@ public class Main {
     private static final FileReader FILE_READER = new FileReaderImpl();
     private static final DataConverter dataConverter = new DataConverterImpl(validator);
     private static final ReportGenerator reportGenerator = new ReportGeneratorImpl();
-    private static final FileWriter fileWriter = new FileWriterImpl();
+    private static final ReportWriter fileWriter = new ReportWriterImpl();
     private static final String INPUT_FILE_NAME = "reportToRead.csv";
     private static final String FINAL_REPORT_FILE_NAME = "finalReport.csv";
 

@@ -1,20 +1,23 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportGenerator;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String HEADER = "fruit" + "," + "quantity";
+    private static final String HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
+    private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
     public String generateReport(Map<String, Integer> inventoryData) {
-        List<String> reportLines = new ArrayList<>();
-        reportLines.add(HEADER);
-        for (Map.Entry<String, Integer> entry: inventoryData.entrySet()) {
-            reportLines.add(entry.getKey() + "," + entry.getValue());
+        StringBuilder reportBuilder = new StringBuilder();
+        reportBuilder.append(HEADER).append(LINE_SEPARATOR);
+        for (Map.Entry<String, Integer> entry : inventoryData.entrySet()) {
+            reportBuilder.append(entry.getKey())
+                    .append(COMMA)
+                    .append(entry.getValue())
+                    .append(LINE_SEPARATOR);
         }
-        return String.join(System.lineSeparator(), reportLines);
+        return reportBuilder.toString().trim();
     }
 }
