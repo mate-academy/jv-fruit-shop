@@ -1,4 +1,5 @@
 package core.basesyntax.WorkWithFileInterface;
+
 import java.util.List;
 
 public interface FileDataReader {

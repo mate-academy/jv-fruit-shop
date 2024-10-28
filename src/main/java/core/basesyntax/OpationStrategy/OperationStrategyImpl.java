@@ -1,4 +1,5 @@
 package core.basesyntax.OpationStrategy;
+
 import core.basesyntax.Operations.FruitTransaction;
 
 import java.util.Map;

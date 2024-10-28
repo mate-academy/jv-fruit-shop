@@ -1,4 +1,5 @@
 package core.basesyntax.ShopServiceAndReportGenerator;
+
 import core.basesyntax.OpationStrategy.OperationHandler;
 import core.basesyntax.OpationStrategy.OperationStrategy;
 import core.basesyntax.Operations.FruitTransaction;

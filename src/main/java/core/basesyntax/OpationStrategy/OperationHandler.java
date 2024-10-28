@@ -1,4 +1,5 @@
 package core.basesyntax.OpationStrategy;
+
 import java.util.Map;
 
 public interface OperationHandler {

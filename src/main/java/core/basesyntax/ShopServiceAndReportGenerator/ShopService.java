@@ -1,4 +1,5 @@
 package core.basesyntax.ShopServiceAndReportGenerator;
+
 import core.basesyntax.Operations.FruitTransaction;
 
 import java.util.List;

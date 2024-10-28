@@ -1,4 +1,5 @@
 package core.basesyntax.WorkWithFile;
+
 import core.basesyntax.WorkWithFileInterface.FileWriter;
 
 import java.io.IOException;
