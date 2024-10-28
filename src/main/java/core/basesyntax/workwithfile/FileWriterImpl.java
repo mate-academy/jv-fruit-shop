@@ -1,7 +1,6 @@
 package core.basesyntax.workwithfile;
 
 import core.basesyntax.workwithfileinterface.FileWriter;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;

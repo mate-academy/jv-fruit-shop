@@ -1,7 +1,6 @@
 package core.basesyntax.operations;
 
 import core.basesyntax.opationstrategy.OperationHandler;
-
 import java.util.Map;
 
 public class ReturnOperation implements OperationHandler {

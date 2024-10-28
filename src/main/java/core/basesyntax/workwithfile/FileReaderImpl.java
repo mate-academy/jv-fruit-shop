@@ -1,7 +1,6 @@
 package core.basesyntax.workwithfile;
 
 import core.basesyntax.workwithfileinterface.FileDataReader;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;

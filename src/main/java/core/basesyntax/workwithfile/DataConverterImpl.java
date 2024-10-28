@@ -2,7 +2,6 @@ package core.basesyntax.workwithfile;
 
 import core.basesyntax.operations.FruitTransaction;
 import core.basesyntax.workwithfileinterface.DataConverter;
-
 import java.util.ArrayList;
 import java.util.List;
 
