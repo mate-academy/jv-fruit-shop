@@ -28,7 +28,7 @@ public class Main {
         List<String> inputReport = fileReader.read("IDontKnowFileName.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport); // Объявлено как final
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());

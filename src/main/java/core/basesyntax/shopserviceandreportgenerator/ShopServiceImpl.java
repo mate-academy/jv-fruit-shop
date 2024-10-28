@@ -3,7 +3,6 @@ package core.basesyntax.shopserviceandreportgenerator;
 import core.basesyntax.opationstrategy.OperationHandler;
 import core.basesyntax.opationstrategy.OperationStrategy;
 import core.basesyntax.operations.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
