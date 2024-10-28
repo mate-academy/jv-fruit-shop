@@ -1,19 +1,19 @@
 package core.basesyntax;
 
-import core.basesyntax.OpationStrategy.OperationHandler;
-import core.basesyntax.OpationStrategy.OperationStrategy;
-import core.basesyntax.OpationStrategy.OperationStrategyImpl;
-import core.basesyntax.Operations.*;
-import core.basesyntax.ShopServiceAndReportGenerator.ReportGenerator;
-import core.basesyntax.ShopServiceAndReportGenerator.ReportGeneratorImpl;
-import core.basesyntax.ShopServiceAndReportGenerator.ShopService;
-import core.basesyntax.ShopServiceAndReportGenerator.ShopServiceImpl;
-import core.basesyntax.WorkWithFile.DataConverterImpl;
-import core.basesyntax.WorkWithFile.FileReaderImpl;
-import core.basesyntax.WorkWithFile.FileWriterImpl;
-import core.basesyntax.WorkWithFileInterface.DataConverter;
-import core.basesyntax.WorkWithFileInterface.FileDataReader;
-import core.basesyntax.WorkWithFileInterface.FileWriter;
+import core.basesyntax.opationstrategy.OperationHandler;
+import core.basesyntax.opationstrategy.OperationStrategy;
+import core.basesyntax.opationstrategy.OperationStrategyImpl;
+import core.basesyntax.operations.*;
+import core.basesyntax.shopserviceandreportgenerator.ReportGenerator;
+import core.basesyntax.shopserviceandreportgenerator.ReportGeneratorImpl;
+import core.basesyntax.shopserviceandreportgenerator.ShopService;
+import core.basesyntax.shopserviceandreportgenerator.ShopServiceImpl;
+import core.basesyntax.workwithfile.DataConverterImpl;
+import core.basesyntax.workwithfile.FileReaderImpl;
+import core.basesyntax.workwithfile.FileWriterImpl;
+import core.basesyntax.workwithfileinterface.DataConverter;
+import core.basesyntax.workwithfileinterface.FileDataReader;
+import core.basesyntax.workwithfileinterface.FileWriter;
 
 import java.util.HashMap;
 import java.util.List;

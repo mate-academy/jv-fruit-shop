@@ -1,6 +1,6 @@
-package core.basesyntax.Operations;
+package core.basesyntax.operations;
 
-import core.basesyntax.OpationStrategy.OperationHandler;
+import core.basesyntax.opationstrategy.OperationHandler;
 
 import java.util.Map;
 

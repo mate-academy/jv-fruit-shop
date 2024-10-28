@@ -1,6 +1,6 @@
-package core.basesyntax.WorkWithFile;
+package core.basesyntax.workwithfile;
 
-import core.basesyntax.WorkWithFileInterface.FileWriter;
+import core.basesyntax.workwithfileinterface.FileWriter;
 
 import java.io.IOException;
 import java.nio.file.Files;

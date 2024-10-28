@@ -1,6 +1,6 @@
-package core.basesyntax.WorkWithFileInterface;
+package core.basesyntax.workwithfileinterface;
 
-import core.basesyntax.Operations.FruitTransaction;
+import core.basesyntax.operations.FruitTransaction;
 
 import java.util.List;
 

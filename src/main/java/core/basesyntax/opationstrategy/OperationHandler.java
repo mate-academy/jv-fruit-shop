@@ -1,4 +1,4 @@
-package core.basesyntax.OpationStrategy;
+package core.basesyntax.opationstrategy;
 
 import java.util.Map;
 

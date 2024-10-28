@@ -1,8 +1,8 @@
-package core.basesyntax.ShopServiceAndReportGenerator;
+package core.basesyntax.shopserviceandreportgenerator;
 
-import core.basesyntax.OpationStrategy.OperationHandler;
-import core.basesyntax.OpationStrategy.OperationStrategy;
-import core.basesyntax.Operations.FruitTransaction;
+import core.basesyntax.opationstrategy.OperationHandler;
+import core.basesyntax.opationstrategy.OperationStrategy;
+import core.basesyntax.operations.FruitTransaction;
 
 import java.util.HashMap;
 import java.util.List;

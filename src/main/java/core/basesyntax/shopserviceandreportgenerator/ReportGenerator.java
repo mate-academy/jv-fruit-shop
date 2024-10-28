@@ -1,4 +1,4 @@
-package core.basesyntax.ShopServiceAndReportGenerator;
+package core.basesyntax.shopserviceandreportgenerator;
 
 import java.util.Map;
 

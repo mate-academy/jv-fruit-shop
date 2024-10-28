@@ -1,6 +1,6 @@
-package core.basesyntax.WorkWithFile;
+package core.basesyntax.workwithfile;
 
-import core.basesyntax.WorkWithFileInterface.FileDataReader;
+import core.basesyntax.workwithfileinterface.FileDataReader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

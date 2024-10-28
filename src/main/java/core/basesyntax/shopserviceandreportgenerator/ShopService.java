@@ -1,6 +1,6 @@
-package core.basesyntax.ShopServiceAndReportGenerator;
+package core.basesyntax.shopserviceandreportgenerator;
 
-import core.basesyntax.Operations.FruitTransaction;
+import core.basesyntax.operations.FruitTransaction;
 
 import java.util.List;
 

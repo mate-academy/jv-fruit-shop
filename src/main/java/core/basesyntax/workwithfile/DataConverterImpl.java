@@ -1,7 +1,7 @@
-package core.basesyntax.WorkWithFile;
+package core.basesyntax.workwithfile;
 
-import core.basesyntax.Operations.FruitTransaction;
-import core.basesyntax.WorkWithFileInterface.DataConverter;
+import core.basesyntax.operations.FruitTransaction;
+import core.basesyntax.workwithfileinterface.DataConverter;
 
 import java.util.ArrayList;
 import java.util.List;
