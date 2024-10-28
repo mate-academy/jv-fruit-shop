@@ -1,12 +1,13 @@
 package core.basesyntax;
 
+import core.basesyntax.opationstrategy.OperationHandler;
+import core.basesyntax.opationstrategy.OperationStrategy;
+import core.basesyntax.opationstrategy.OperationStrategyImpl;
+
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.FruitTransaction;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
-import core.basesyntax.opationstrategy.OperationHandler;
-import core.basesyntax.opationstrategy.OperationStrategy;
-import core.basesyntax.opationstrategy.OperationStrategyImpl;
 import core.basesyntax.operations.SupplyOperation;
 import core.basesyntax.shopserviceandreportgenerator.ReportGenerator;
 import core.basesyntax.shopserviceandreportgenerator.ReportGeneratorImpl;
