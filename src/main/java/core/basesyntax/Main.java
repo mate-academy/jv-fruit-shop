@@ -3,7 +3,6 @@ package core.basesyntax;
 import core.basesyntax.opationstrategy.OperationHandler;
 import core.basesyntax.opationstrategy.OperationStrategy;
 import core.basesyntax.opationstrategy.OperationStrategyImpl;
-
 import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.FruitTransaction;
 import core.basesyntax.operations.PurchaseOperation;
@@ -29,13 +28,14 @@ public class Main {
         List<String> inputReport = fileReader.read("IDontKnowFileName.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport); // Объявлено как final
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
@@ -47,6 +47,6 @@ public class Main {
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, "finalReport.csv");
 
-        System.out.println("Report is done and wrote to the finalReport.csv");
+        System.out.println("Report is done and written to finalReport.csv");
     }
 }
