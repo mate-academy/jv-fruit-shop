@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorage {
-    Map<String, Integer> fruits;
+    private Map<String, Integer> fruits;
 
     public FruitStorage() {
         this.fruits = new HashMap<>();
@@ -16,7 +16,7 @@ public class FruitStorage {
 
     public void removeFruit(String fruitName, int quantity) {
         if (!fruits.containsKey(fruitName)) {
-            throw new IllegalArgumentException("Fruit is not found: "+ fruitName);
+            throw new IllegalArgumentException("Fruit is not found: " + fruitName);
         }
         int currentQuantity = fruits.get(fruitName);
         if (currentQuantity < quantity) {
