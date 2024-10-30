@@ -16,6 +16,11 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
+            if (transaction.getQuantity() < 0) {
+                throw new IllegalArgumentException(
+                        "Transaction quantity cannot be negative for fruit: "
+                                + transaction.getFruit());
+            }
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             handler.apply(transaction);
         }

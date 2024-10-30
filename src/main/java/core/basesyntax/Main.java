@@ -36,7 +36,7 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        // 3. Create and feel the map with all OperationHandler implementations
+        // 3. Create and fill the map with all OperationHandler implementations
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperationHandler(fruitStorage));
         operationHandlers.put(Operation.PURCHASE, new PurchaseOperationHandler(fruitStorage));

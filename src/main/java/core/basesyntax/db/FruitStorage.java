@@ -11,18 +11,24 @@ public class FruitStorage {
     }
 
     public void addFruit(String fruitName, int quantity) {
-        fruits.put(fruitName, quantity);
+        fruits.put(fruitName, fruits.getOrDefault(fruitName, 0) + quantity);
     }
 
     public void removeFruit(String fruitName, int quantity) {
         if (!fruits.containsKey(fruitName)) {
-            throw new IllegalArgumentException("Fruit is not found: " + fruitName);
+            throw new IllegalArgumentException("Fruit not found: " + fruitName);
         }
         int currentQuantity = fruits.get(fruitName);
         if (currentQuantity < quantity) {
             throw new IllegalArgumentException("Not enough " + fruitName + " in stock");
         }
-        fruits.put(fruitName,currentQuantity - quantity);
+
+        int updatedQuantity = currentQuantity - quantity;
+        if (updatedQuantity == 0) {
+            fruits.remove(fruitName);
+        } else {
+            fruits.put(fruitName, updatedQuantity);
+        }
     }
 
     public Map<String, Integer> getFruits() {

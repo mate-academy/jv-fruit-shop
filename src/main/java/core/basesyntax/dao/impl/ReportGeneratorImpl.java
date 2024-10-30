@@ -16,7 +16,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
         fruitStorage.getFruits()
                 .forEach((fruit, quantity) -> report.append(fruit)
-                        .append(", ")
+                        .append(",")
                         .append(quantity)
                         .append("\n"));
         return report.toString();

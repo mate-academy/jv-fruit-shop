@@ -1,12 +1,14 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private String type;
     private Operation operation;
     private String fruit;
     private int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative: " + quantity);
+        }
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
