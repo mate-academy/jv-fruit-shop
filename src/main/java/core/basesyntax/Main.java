@@ -22,9 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
