@@ -23,12 +23,18 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String PATH_TO_FILE = "src/main/resources/balance.csv";
-    private static final String PATH_TO_REPORT_FILE = "src/main/resources/reportFile.csv";
-    private static final ReadCsvService readerService = new ReadCsvImpl();
-    private static final FruitTransactionMap parseService = new FruitTransactionMapImpl();
-    private static final ReportService reportService = new ReportServiceImpl();
-    private static final WriteCsv writerService = new WriteCsvImpl();
+    private static final String PATH_TO_FILE
+            = "src/main/resources/balance.csv";
+    private static final String PATH_TO_REPORT_FILE
+            = "src/main/resources/reportFile.csv";
+    private static final ReadCsvService readerService
+            = new ReadCsvImpl();
+    private static final FruitTransactionMap parseService
+            = new FruitTransactionMapImpl();
+    private static final ReportService reportService
+            = new ReportServiceImpl();
+    private static final WriteCsv writerService
+            = new WriteCsvImpl();
     private static StrategyOperationService strategyService;
     private static TransactionProcessor transactionService;
 
