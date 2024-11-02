@@ -13,7 +13,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try {
             Files.writeString(path, report, StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write file " + path, e);
+            throw new RuntimeException("Can't write file " + path, e);
         }
     }
 }

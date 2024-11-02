@@ -11,7 +11,8 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void doOperation(String fruitName, Integer quantity) {
-        if (storageDao.getQuantity(fruitName) < quantity) {
+        Integer fruitQuantity = storageDao.getQuantity(fruitName);
+        if (fruitQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruitName + " in the storage");
         }
         Integer previousQuantity = storageDao.getQuantity(fruitName);

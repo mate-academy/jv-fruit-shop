@@ -7,6 +7,7 @@ import java.util.List;
 
 public class DataConverterServiceImpl implements DataConverterService {
     public static final String SEPARATOR = ",";
+    public static final int ELEMENTS_IN_A_ROW = 3;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
@@ -16,8 +17,12 @@ public class DataConverterServiceImpl implements DataConverterService {
             String line = data.get(i);
             String[] parts = line.split(SEPARATOR);
 
-            if (parts.length != 3) {
-                throw new IllegalArgumentException("Invalid data format: " + line);
+            if (parts.length != ELEMENTS_IN_A_ROW) {
+                throw new IllegalArgumentException(
+                        "Invalid data format: "
+                                + line + ". Should be "
+                                + ELEMENTS_IN_A_ROW + " elements in a row."
+                );
             }
 
             try {
