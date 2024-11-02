@@ -1,15 +1,16 @@
 package core.basesyntax.dao.impl;
 
-import core.basesyntax.dao.FruitFileWriter;
+import core.basesyntax.dao.FileWriter;
 import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
+import java.nio.file.Paths;
 
-public class FileWriterImpl implements FruitFileWriter {
+public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String report, String filename) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(filename))) {
             writer.write(report);
         } catch (NoSuchFileException e) {
             throw new RuntimeException("File not found: " + filename, e);

@@ -9,7 +9,7 @@ import java.util.List;
 public class DataConverterImpl implements DataConverter {
     private static final String COMMA_SEPARATOR = ",";
     private static final int EXPECTED_PARTS_LENGTH = 3;
-    private static final int MINIMAL_QUANTITY = 1;
+    private static final int MINIMAL_QUANTITY = 0;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
@@ -20,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
                 throw new ArrayIndexOutOfBoundsException("Not enough "
                         + "information in report line: " + line);
             }
-            Operation operation = Operation.valueOf(values[0].toUpperCase());
+            Operation operation = Operation.valueOf(values[0]);
             String fruit = values[1];
             int quantity = Integer.parseInt(values[2]);
             if (quantity < MINIMAL_QUANTITY) {

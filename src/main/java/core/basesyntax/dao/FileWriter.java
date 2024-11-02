@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface FruitFileWriter {
+public interface FileWriter {
     void write(String report, String filename);
 }

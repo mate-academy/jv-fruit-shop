@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.FileReader;
-import core.basesyntax.dao.FruitFileWriter;
+import core.basesyntax.dao.FileWriter;
 import core.basesyntax.dao.ReportGenerator;
 import core.basesyntax.dao.impl.DataConverterImpl;
 import core.basesyntax.dao.impl.FileReaderImpl;
@@ -53,7 +53,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
-        FruitFileWriter fileWriter = new FileWriterImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, "finalReport.csv");
     }
 }
