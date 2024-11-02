@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public Map<String, Integer> process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            operationStrategy.get(transaction.getType()).getOperation(transaction);
+            operationStrategy.get(transaction.getType()).performOperation(transaction);
         }
         return storageDao.getAll();
     }

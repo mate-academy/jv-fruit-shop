@@ -51,7 +51,7 @@ public class FruitTransaction {
             return code;
         }
 
-        public static boolean startWithOperation(String line) {
+        public static boolean startsWithOperation(String line) {
             for (Operation operation : Operation.values()) {
                 if (line.startsWith(operation.getCode())) {
                     return true;
@@ -60,13 +60,13 @@ public class FruitTransaction {
             return false;
         }
 
-        public static Operation convertToOperaion(String data) {
+        public static Operation convertToOperation(String data) {
             for (Operation operation : Operation.values()) {
                 if (data.equals(operation.getCode())) {
                     return operation;
                 }
             }
-            throw new RuntimeException("Unknown operation code: " + data);
+            throw new UnknownOperationException("Unknown operation code" + data);
         }
     }
 }

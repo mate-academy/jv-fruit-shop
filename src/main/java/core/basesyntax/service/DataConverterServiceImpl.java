@@ -13,7 +13,7 @@ public class DataConverterServiceImpl implements DataConverterService {
     @Override
     public List<FruitTransaction> convert(List<String> data) {
         return data.stream()
-                .filter(FruitTransaction.Operation::startWithOperation)
+                .filter(FruitTransaction.Operation::startsWithOperation)
                 .map(this::convertToFruitTransaction)
                 .collect(Collectors.toList());
     }
@@ -21,7 +21,7 @@ public class DataConverterServiceImpl implements DataConverterService {
     private FruitTransaction convertToFruitTransaction(String data) {
         String[] dataSplit = data.split(COMMA_SEPARATOR);
         FruitTransaction.Operation operation
-                = FruitTransaction.Operation.convertToOperaion(dataSplit[OPERATION_TYPE_INDEX]);
+                = FruitTransaction.Operation.convertToOperation(dataSplit[OPERATION_TYPE_INDEX]);
         String fruit = dataSplit[FRUIT_INDEX];
         int quantity = Integer.parseInt(dataSplit[QUANTITY_INDEX]);
         return new FruitTransaction(operation, fruit, quantity);

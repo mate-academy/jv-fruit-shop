@@ -11,9 +11,11 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public Map<String, Integer> save(String fruit, int quantity) {
+    public void save(String fruit, int quantity) {
+        if (fruit == null) {
+            throw new RuntimeException("fruit cannot be null");
+        }
         storage.getFruitStorage().put(fruit, quantity);
-        return storage.getFruitStorage();
     }
 
     @Override
@@ -22,7 +24,7 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public int getQuantity(String key) {
+    public int getQuantityByFruitName(String key) {
         return storage.getFruitStorage().get(key);
     }
 }

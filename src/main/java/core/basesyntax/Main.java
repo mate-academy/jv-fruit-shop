@@ -49,6 +49,6 @@ public class Main {
         String report = reportService.getReport(storageDao.getAll());
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.write(report, "src/result");
+        fileWriterService.write(report, "src/result.csv");
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service.operation;
 import core.basesyntax.dao.StorageDao;
 import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
 
 public class SupplyOperationHandler implements OperationHandler {
     private StorageDao storageDao;
@@ -13,9 +12,9 @@ public class SupplyOperationHandler implements OperationHandler {
     }
 
     @Override
-    public Map<String, Integer> getOperation(FruitTransaction transaction) {
+    public void performOperation(FruitTransaction transaction) {
         storageDao.save(transaction.getFruit(),
-                storageDao.getQuantity(transaction.getFruit()) + transaction.getQuantity());
-        return storageDao.getAll();
+                storageDao.getQuantityByFruitName(transaction.getFruit())
+                        + transaction.getQuantity());
     }
 }
