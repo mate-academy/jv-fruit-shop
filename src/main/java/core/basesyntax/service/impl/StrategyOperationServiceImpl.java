@@ -3,6 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.OperationType;
 import core.basesyntax.service.StrategyOperationService;
 import core.basesyntax.strategy.OperationHandler;
+import exception.OperationException;
+
 import java.util.Map;
 
 public class StrategyOperationServiceImpl implements StrategyOperationService {
@@ -14,6 +16,9 @@ public class StrategyOperationServiceImpl implements StrategyOperationService {
 
     @Override
     public OperationHandler get(OperationType operationType) {
-        return operationHandlerMap.get(operationType);
+        if (operationHandlerMap.get(operationType) != null) {
+            return operationHandlerMap.get(operationType);
+        }
+        throw new OperationException("Operation type is not correct: " + operationType);
     }
 }
