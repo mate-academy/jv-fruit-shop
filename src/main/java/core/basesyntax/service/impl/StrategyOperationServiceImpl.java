@@ -4,7 +4,6 @@ import core.basesyntax.model.OperationType;
 import core.basesyntax.service.StrategyOperationService;
 import core.basesyntax.strategy.OperationHandler;
 import exception.OperationException;
-
 import java.util.Map;
 
 public class StrategyOperationServiceImpl implements StrategyOperationService {
