@@ -15,8 +15,9 @@ public class StrategyOperationServiceImpl implements StrategyOperationService {
 
     @Override
     public OperationHandler get(OperationType operationType) {
-        if (operationHandlerMap.get(operationType) != null) {
-            return operationHandlerMap.get(operationType);
+        OperationHandler handler = operationHandlerMap.get(operationType);
+        if (handler != null) {
+            return handler;
         }
         throw new OperationException("Operation type is not correct: " + operationType);
     }

@@ -7,13 +7,11 @@ import exception.OperationException;
 public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(ShopOperation shopOperation) {
-        try {
-            String fruit = shopOperation.getFruit();
-            int quantity = Storage.fruitsStorage.get(fruit);
-            Storage.fruitsStorage.put(fruit, quantity + shopOperation.getQuantity());
-        } catch (NullPointerException e) {
+        String fruit = shopOperation.getFruit();
+        if (!Storage.fruitsStorage.containsKey(fruit)) {
             throw new OperationException("Operation is not correct: " + shopOperation);
         }
-
+        int quantity = Storage.fruitsStorage.get(fruit);
+        Storage.fruitsStorage.put(fruit, quantity + shopOperation.getQuantity());
     }
 }
