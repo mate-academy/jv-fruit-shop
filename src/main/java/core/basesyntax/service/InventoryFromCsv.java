@@ -27,18 +27,25 @@ public class InventoryFromCsv implements Inventory {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
 
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME));
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
             String line = reader.readLine();
             while (line != null) {
                 String[] splitDataFromCurrentLine = line.split(",");
+                if (splitDataFromCurrentLine.length != 3) {
+                    throw new RuntimeException("wrong data format");
+                }
+                try {
+                    Integer.parseInt(splitDataFromCurrentLine[2]);
+                } catch (NumberFormatException e) {
+                    throw new RuntimeException("amount is not a number", e);
+                }
                 operationStrategy.getOperation(splitDataFromCurrentLine[0])
                         .update(splitDataFromCurrentLine[1],
                                 Integer.parseInt(splitDataFromCurrentLine[2]));
                 line = reader.readLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cant read from file", e);
         }
     }
 }

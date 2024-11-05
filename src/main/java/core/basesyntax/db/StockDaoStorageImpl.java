@@ -19,6 +19,9 @@ public class StockDaoStorageImpl implements StockDao {
     public void decrease(String product, Integer amount) {
         if (contain(product)) {
             Storage.stock.put(product, get(product) - amount);
+        } else if (get(product) - amount < 0) {
+            throw new RuntimeException(
+                    "the quantity being subtracted is greater than the stock value");
         } else {
             throw new RuntimeException("There was no such product before");
         }
@@ -26,10 +29,12 @@ public class StockDaoStorageImpl implements StockDao {
 
     @Override
     public void increase(String product, Integer amount) {
-        if (contain(product)) {
-            Storage.stock.put(product, get(product) + amount);
-        } else {
+        if (!contain(product)) {
             throw new RuntimeException("There was no such product before");
+        } else if (get(product) + amount < 0) {
+            throw new RuntimeException("amount out limit");
+        } else {
+            Storage.stock.put(product, get(product) + amount);
         }
     }
 

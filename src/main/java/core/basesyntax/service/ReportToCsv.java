@@ -12,17 +12,12 @@ public class ReportToCsv implements Report {
 
     @Override
     public void prepare() {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME));
-
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NAME))) {
             for (String product : stockDao.getProductsList()) {
                 writer.write(product + "," + stockDao.get(product) + System.lineSeparator());
             }
-
-            writer.close();
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Cant print to file", e);
         }
     }
 }

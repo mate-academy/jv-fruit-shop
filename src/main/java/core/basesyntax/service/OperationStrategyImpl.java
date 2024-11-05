@@ -12,6 +12,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public Operation getOperation(String operationSymbol) {
-        return operationMap.get(operationSymbol);
+        if (operationMap.containsKey(operationSymbol)) {
+            return operationMap.get(operationSymbol);
+        } else {
+            throw new RuntimeException("unknown operation symbol");
+        }
     }
 }
