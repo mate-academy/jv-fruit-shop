@@ -2,13 +2,10 @@ package core.basesyntax.dao;
 
 import core.basesyntax.storage.Storage;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 public class StorageDaoImpl implements StorageDao {
-    private Storage storage;
-
-    public StorageDaoImpl() {
-        storage = new Storage();
-    }
+    private final Storage storage = new Storage();
 
     @Override
     public void save(String fruit, int quantity) {
@@ -25,6 +22,9 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public int getQuantityByFruitName(String key) {
+        if (!storage.getFruitStorage().containsKey(key)) {
+            throw new NoSuchElementException("No such key in storage: " + key);
+        }
         return storage.getFruitStorage().get(key);
     }
 }
