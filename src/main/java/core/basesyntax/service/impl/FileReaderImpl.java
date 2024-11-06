@@ -11,9 +11,7 @@ public class FileReaderImpl implements Reader {
     @Override
     public List<String> readFile(String path) {
         List<String> rows = new ArrayList<>();
-        BufferedReader reader;
-        try {
-            reader = new BufferedReader(new FileReader(path));
+        try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
             String line = reader.readLine();
             while (line != null) {
                 line = reader.readLine();
@@ -21,10 +19,9 @@ public class FileReaderImpl implements Reader {
                     rows.add(line);
                 }
             }
-            reader.close();
         } catch (IOException e) {
-            throw new RuntimeException("The file by path " + path
-                    + " cannot be read or does not exist.", e);
+            throw new RuntimeException("The file by path "
+                    + path + " cannot be read or does not exist.", e);
         }
         return rows;
     }

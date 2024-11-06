@@ -2,14 +2,14 @@ package core.basesyntax.service.operation;
 
 import core.basesyntax.db.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitsForSale;
 
 public class BalanceOperation implements OperationHandler {
-    private static final String BANANA = "banana";
-    private static final String APPLE = "apple";
 
     @Override
     public void updateDataBase(FruitTransaction transaction) {
-        if (!transaction.getFruit().equals(BANANA) && !transaction.getFruit().equals(APPLE)) {
+        FruitsForSale fruitsForSale = new FruitsForSale();
+        if (fruitsForSale.isNotForSale(transaction.getFruit())) {
             throw new RuntimeException("We don't sell such fruit: " + transaction.getFruit());
         }
         if (transaction.getQuantity() < 0) {
