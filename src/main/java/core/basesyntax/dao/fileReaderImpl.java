@@ -11,8 +11,8 @@ public class fileReaderImpl implements fileReader {
 
     @Override
     public String[] read(String nameOfFile) {
-       List<String> textInFile = null;
-        try(BufferedReader reader = new BufferedReader(new FileReader(nameOfFile))) {
+        List<String> textInFile = null;
+        try (BufferedReader reader = new BufferedReader(new FileReader(nameOfFile))) {
             textInFile = Files.readAllLines(Path.of(nameOfFile));
              return textInFile.stream()
                     .filter(i -> i.startsWith("b") || i.startsWith("s")

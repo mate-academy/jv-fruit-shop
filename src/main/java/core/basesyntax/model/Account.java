@@ -1,12 +1,12 @@
 package core.basesyntax.model;
 
 public class Account {
+    private int bananaBalance = 0;
+    private int appleBalance = 0;
+
     public void setAppleBalance(int appleBalance) {
         this.appleBalance = appleBalance;
     }
-
-    private int bananaBalance = 0;
-    private int appleBalance = 0;
 
     public void setBananaBalance(int bananaBalance) {
         this.bananaBalance = bananaBalance;

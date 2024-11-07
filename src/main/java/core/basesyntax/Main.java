@@ -2,18 +2,20 @@ package core.basesyntax;
 
 import core.basesyntax.dao.fileReader;
 import core.basesyntax.dao.fileReaderImpl;
+import core.basesyntax.dao.writeReport;
 import core.basesyntax.dao.writeReportImpl;
 import core.basesyntax.model.Account;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.service.action.*;
-import core.basesyntax.dao.writeReport;
-
+import core.basesyntax.service.action.ActionHandler;
+import core.basesyntax.service.action.BalanceAction;
+import core.basesyntax.service.action.PurchaseAction;
+import core.basesyntax.service.action.ReturnAction;
+import core.basesyntax.service.action.SupplyAction;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,27 +25,29 @@ public class Main {
     private static final String nameOfShopDatabase = "database.csv";
     private static final String nameOfFinalReport = "finalReport.csv";
 
-    static ShopService shopService = new ShopServiceImpl();
-    static writeReport writeReport = new writeReportImpl();
+    private static ShopService shopService = new ShopServiceImpl();
+    private static writeReport writeReport = new writeReportImpl();
+
     public static void main(String[] arg) {
-        String databaseInfo = "type,fruit,quantity\n" +
-                "    b,banana,20\n" +
-                "    b,apple,100\n" +
-                "    s,banana,100\n" +
-                "    p,banana,13\n" +
-                "    r,apple,10\n" +
-                "    p,apple,20\n" +
-                "    p,banana,5\n" +
-                "    s,banana,50";
+        String databaseInfo = "type,fruit,quantity\n"
+                + "    b,banana,20\n"
+                + "    b,apple,100\n"
+                + "    s,banana,100\n"
+                + "    p,banana,13\n"
+                + "    r,apple,10\n"
+                + "    p,apple,20\n"
+                + "    p,banana,5\n"
+                + "    s,banana,50";
         File directoryForDatabases = new File("directoryForDatabases");
         directoryForDatabases.mkdir();
 
-        String filePathForDatabase = "directoryForDatabases" + File.separator + nameOfShopDatabase;
-        String filePathForFinalReport = "directoryForDatabases" + File.separator + nameOfFinalReport;
+        String filePathForDatabase = "directoryForDatabases"
+                + File.separator + nameOfShopDatabase;
+        String filePathForFinalReport = "directoryForDatabases"
+                + File.separator + nameOfFinalReport;
 
         File fileForDatabase = new File(filePathForDatabase);
         File fileForFinalReport = new File(filePathForFinalReport);
-
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileForDatabase))) {
             fileForDatabase.createNewFile();

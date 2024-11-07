@@ -4,6 +4,7 @@ import core.basesyntax.model.Account;
 
 public class BalanceAction implements ActionHandler {
     private Account account;
+
     @Override
     public void countBanana(int amount) {
         account.setBananaBalance(amount);

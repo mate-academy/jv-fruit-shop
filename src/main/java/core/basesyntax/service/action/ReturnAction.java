@@ -4,6 +4,7 @@ import core.basesyntax.model.Account;
 
 public class ReturnAction implements ActionHandler {
     private Account account;
+
     @Override
     public void countBanana(int amount) {
         int newBalance = account.getBananaBalance() + amount;
