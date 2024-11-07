@@ -16,6 +16,8 @@ public class FruitFileDaoReaderImpl implements FruitFileDaoReader {
                 fileLines.add(line);
             }
         } catch (IOException e) {
+            System.err.println("Cannot read from file: " + fileNameFrom
+                    + ". Error: " + e.getMessage());
             throw new RuntimeException("Can't read from file " + fileNameFrom, e);
         }
         return fileLines;

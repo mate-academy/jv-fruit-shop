@@ -12,7 +12,12 @@ public class PurchaseHandler implements FruitOperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        fruitStorage.put(transaction.getFruit(),
-                fruitStorage.getOrDefault(transaction.getFruit(), 0) - transaction.getQuantity());
+        int currentQuantity = fruitStorage.getOrDefault(transaction.getFruit(), 0);
+        if (currentQuantity - transaction.getQuantity() < 0) {
+            throw new IllegalArgumentException("Brak wystarczającej ilości owoców: "
+                    + transaction.getFruit() + ". Dostępna ilość: "
+                    + currentQuantity + ", żądana ilość: " + transaction.getQuantity());
+        }
+        fruitStorage.put(transaction.getFruit(), currentQuantity - transaction.getQuantity());
     }
 }

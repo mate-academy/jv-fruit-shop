@@ -18,7 +18,14 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction transaction : transactions) {
             FruitOperationHandler handler = operationHandlers.get(transaction.getOperation());
             if (handler != null) {
-                handler.handle(transaction);
+                try {
+                    handler.handle(transaction);
+                } catch (Exception e) {
+                    System.err.println("Error processing transaction " + transaction
+                            + ": " + e.getMessage());
+                }
+            } else {
+                System.err.println("No handler found for operation: " + transaction.getOperation());
             }
         }
     }

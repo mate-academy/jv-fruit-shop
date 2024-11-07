@@ -10,6 +10,8 @@ public class FruitFileDaoWriterImpl implements FruitFileDaoWriter {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileNameTo))) {
             bufferedWriter.write(report);
         } catch (IOException e) {
+            System.err.println("Cannot write to file: " + fileNameTo
+                    + ". Error: " + e.getMessage());
             throw new RuntimeException("Can't write to file " + fileNameTo, e);
         }
     }
