@@ -1,5 +1,6 @@
 package core.basesyntax.service.file;
 
+import core.basesyntax.exception.FileReadException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;

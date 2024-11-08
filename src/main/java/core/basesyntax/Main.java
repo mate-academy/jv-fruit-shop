@@ -6,7 +6,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverterService;
 import core.basesyntax.service.DataConverterServiceImpl;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.ReportService;
 import core.basesyntax.service.ReportServiceImpl;
 import core.basesyntax.service.ShopService;
@@ -25,21 +24,23 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        String dataBasePath = "src/DataBase.csv";
+    private static final String DATA_BASE_PATH
+            = "src/main/java/core/basesyntax/resources/DataBase.csv";
+    private static final String RESULT_PATH = "src/main/java/core/basesyntax/resources/result.csv";
 
+    public static void main(String[] args) {
         FileReaderService readerService = new FileReaderServiceImpl();
-        List<String> read = readerService.read(dataBasePath);
+        List<String> fileContent = readerService.read(DATA_BASE_PATH);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        OperationStrategy operationStrategy = new OperationStrategy(operationHandlers);
 
         DataConverterService dataConverterService = new DataConverterServiceImpl();
-        List<FruitTransaction> convert = dataConverterService.convert(read);
+        List<FruitTransaction> convert = dataConverterService.convert(fileContent);
 
         ShopService service = new ShopServiceImpl(operationStrategy);
         service.process(convert);
@@ -49,6 +50,6 @@ public class Main {
         String report = reportService.getReport(storageDao.getAll());
 
         FileWriterService fileWriterService = new FileWriterServiceImpl();
-        fileWriterService.write(report, "src/result.csv");
+        fileWriterService.write(report, RESULT_PATH);
     }
 }

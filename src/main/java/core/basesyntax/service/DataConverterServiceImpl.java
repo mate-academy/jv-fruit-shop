@@ -1,8 +1,10 @@
 package core.basesyntax.service;
 
+import static core.basesyntax.model.FruitTransaction.Operation.startsWithOperation;
+
+import core.basesyntax.exception.InvalidArraySplitLength;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataConverterServiceImpl implements DataConverterService {
     private static final String COMMA_SEPARATOR = ",";
@@ -14,9 +16,9 @@ public class DataConverterServiceImpl implements DataConverterService {
     @Override
     public List<FruitTransaction> convert(List<String> data) {
         return data.stream()
-                .filter(FruitTransaction.Operation::startsWithOperation)
+                .skip(1)
                 .map(this::convertToFruitTransaction)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private FruitTransaction convertToFruitTransaction(String data) {
@@ -33,6 +35,10 @@ public class DataConverterServiceImpl implements DataConverterService {
         if (dataSplit.length != VALID_ARRAY_LENGTH) {
             throw new InvalidArraySplitLength("Data split length is not 3, but: "
                     + dataSplit.length);
+        }
+        if (!startsWithOperation(dataSplit[OPERATION_TYPE_INDEX])) {
+            throw new IllegalArgumentException("Expected an operation code, but got: "
+                    + dataSplit[OPERATION_TYPE_INDEX]);
         }
         try {
             Integer.parseInt(dataSplit[QUANTITY_INDEX]);
