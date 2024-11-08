@@ -3,8 +3,8 @@ package core.basesyntax.service;
 import static core.basesyntax.model.FruitTransaction.Operation.convertToOperation;
 
 import core.basesyntax.exception.InvalidArraySplitLength;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.exception.UnknownOperationException;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class DataConverterServiceImpl implements DataConverterService {
