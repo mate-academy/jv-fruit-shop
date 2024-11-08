@@ -4,25 +4,20 @@ import core.basesyntax.service.Reader;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements Reader {
+    private static final int ROW_TO_SKIP = 1;
+
     @Override
     public List<String> readFile(String path) {
-        List<String> rows = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(path))) {
-            String line = reader.readLine();
-            while (line != null) {
-                line = reader.readLine();
-                if (line != null) {
-                    rows.add(line);
-                }
-            }
+            return reader.lines()
+                    .skip(ROW_TO_SKIP)
+                    .toList();
         } catch (IOException e) {
             throw new RuntimeException("The file by path "
                     + path + " cannot be read or does not exist.", e);
         }
-        return rows;
     }
 }
