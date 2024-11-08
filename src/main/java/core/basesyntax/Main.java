@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.fileReader;
-import core.basesyntax.dao.fileReaderImpl;
-import core.basesyntax.dao.writeReport;
-import core.basesyntax.dao.writeReportImpl;
+import core.basesyntax.dao.FileReader;
+import core.basesyntax.dao.FileReaderImpl;
+import core.basesyntax.dao.WriteReport;
+import core.basesyntax.dao.WriteReportImpl;
 import core.basesyntax.model.Account;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
@@ -21,12 +21,12 @@ import java.util.Map;
 
 public class Main {
     public static final Map<Account.Operation, ActionHandler> actionHandlerMap = new HashMap<>();
-    private static fileReader fileReader = new fileReaderImpl();
+    private static FileReader fileReader = new FileReaderImpl();
     private static final String nameOfShopDatabase = "database.csv";
     private static final String nameOfFinalReport = "finalReport.csv";
 
     private static ShopService shopService = new ShopServiceImpl();
-    private static writeReport writeReport = new writeReportImpl();
+    private static WriteReport writeReport = new WriteReportImpl();
 
     public static void main(String[] arg) {
         String databaseInfo = "type,fruit,quantity\n"

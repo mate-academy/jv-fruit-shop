@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface fileReader {
+public interface FileReader {
     String[] read(String nameOfFile);
 }

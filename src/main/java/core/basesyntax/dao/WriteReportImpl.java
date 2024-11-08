@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class writeReportImpl implements writeReport {
+public class WriteReportImpl implements WriteReport {
     private Account account = new Account();
 
     @Override

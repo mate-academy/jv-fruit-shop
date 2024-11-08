@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface fileWriter {
+public interface FileWriter {
     void write(String info, String nameOfFileForFinalReport);
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-public interface writeReport {
+public interface WriteReport {
     void writeReport(String nameOfFileToReport);
 
 }
