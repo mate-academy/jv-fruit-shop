@@ -50,21 +50,17 @@ public class FruitTransaction {
             return code;
         }
 
-        public static boolean startsWithOperation(String line) {
-            for (Operation operation : Operation.values()) {
-                if (line.startsWith(operation.getCode())) {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public static Operation convertToOperation(String data) {
+            if (data == null) {
+                throw new IllegalArgumentException("data cannot be null");
+            }
+
             for (Operation operation : Operation.values()) {
                 if (data.equals(operation.getCode())) {
                     return operation;
                 }
             }
+
             throw new UnknownOperationException("Unknown operation code" + data);
         }
     }

@@ -1,9 +1,10 @@
 package core.basesyntax.service;
 
-import static core.basesyntax.model.FruitTransaction.Operation.startsWithOperation;
+import static core.basesyntax.model.FruitTransaction.Operation.convertToOperation;
 
 import core.basesyntax.exception.InvalidArraySplitLength;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.UnknownOperationException;
 import java.util.List;
 
 public class DataConverterServiceImpl implements DataConverterService {
@@ -36,10 +37,14 @@ public class DataConverterServiceImpl implements DataConverterService {
             throw new InvalidArraySplitLength("Data split length is not 3, but: "
                     + dataSplit.length);
         }
-        if (!startsWithOperation(dataSplit[OPERATION_TYPE_INDEX])) {
-            throw new IllegalArgumentException("Expected an operation code, but got: "
+
+        try {
+            convertToOperation(dataSplit[OPERATION_TYPE_INDEX]);
+        } catch (UnknownOperationException e) {
+            throw new UnknownOperationException("Expected an operation code, but got: "
                     + dataSplit[OPERATION_TYPE_INDEX]);
         }
+
         try {
             Integer.parseInt(dataSplit[QUANTITY_INDEX]);
         } catch (NumberFormatException e) {
