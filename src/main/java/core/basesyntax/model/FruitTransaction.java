@@ -1,5 +1,7 @@
 package core.basesyntax.model;
 
+import core.basesyntax.exception.UnknownOperationException;
+
 public class FruitTransaction {
     private Operation type;
     private String fruit;

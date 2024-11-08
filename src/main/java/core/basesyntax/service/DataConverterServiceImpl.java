@@ -4,7 +4,7 @@ import static core.basesyntax.model.FruitTransaction.Operation.convertToOperatio
 
 import core.basesyntax.exception.InvalidArraySplitLength;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.UnknownOperationException;
+import core.basesyntax.exception.UnknownOperationException;
 import java.util.List;
 
 public class DataConverterServiceImpl implements DataConverterService {
