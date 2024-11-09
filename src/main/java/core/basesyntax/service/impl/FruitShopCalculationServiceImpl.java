@@ -20,10 +20,8 @@ public class FruitShopCalculationServiceImpl implements ShopCalculationService<F
     }
 
     private void processFruitTransaction(AbstractTransaction<Fruit> transaction) {
-        fruitShopStorage.save(
-                transaction.getItem(),
-                transaction.getQuantity(),
-                transaction.getOperationType()
+        fruitShopStorage.save(transaction.getItem(), transaction.getQuantity(),
+                              transaction.getOperationType()
         );
     }
 }

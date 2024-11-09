@@ -17,13 +17,10 @@ public class Main {
         CsvReaderService<Fruit> csvReaderService = new CsvReaderServiceImpl();
         List<AbstractTransaction<Fruit>> fruitsOperations = csvReaderService.parse(
                 "src" + "/main/resources/file.csv");
-        ShopCalculationService<Fruit> shopCalculationService =
-                new FruitShopCalculationServiceImpl(
-                        new FruitShopStorage());
-        ShopStorage<Fruit> fruitStorage = shopCalculationService.calculate(
-                fruitsOperations);
-        ReportGenerationService reportGenerationService =
-                new FruitReportGenerationServiceImpl(
+        ShopCalculationService<Fruit> shopCalculationService = new FruitShopCalculationServiceImpl(
+                new FruitShopStorage());
+        ShopStorage<Fruit> fruitStorage = shopCalculationService.calculate(fruitsOperations);
+        ReportGenerationService reportGenerationService = new FruitReportGenerationServiceImpl(
                 fruitStorage);
         reportGenerationService.generateReport("src/main/resources", "report.csv");
     }

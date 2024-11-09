@@ -9,7 +9,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class CsvReaderServiceImpl implements CsvReaderService<Fruit> {
     private static final String DELIMITER = ",";
@@ -19,14 +18,15 @@ public class CsvReaderServiceImpl implements CsvReaderService<Fruit> {
 
     @Override
     public List<AbstractTransaction<Fruit>> parse(String filePath) {
-        return readLines(filePath).skip(1).map(this::parseLine).toList();
-
+        return readLines(filePath).stream().skip(1).map(this::parseLine).toList();
     }
 
-    private Stream<String> readLines(String filePath) {
+    private List<String> readLines(String filePath) {
         try {
             FileReader fileReader = new FileReader(filePath);
-            return new BufferedReader(fileReader).lines();
+            try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+                return bufferedReader.lines().toList();
+            }
         } catch (IOException e) {
             throw new RuntimeException("Cannot read file: " + filePath, e);
         }
@@ -34,10 +34,9 @@ public class CsvReaderServiceImpl implements CsvReaderService<Fruit> {
 
     private AbstractTransaction<Fruit> parseLine(String line) {
         String[] tokens = line.split(DELIMITER);
-        return new FruitTransaction(
-                parseFruit(tokens[INDEX_OF_FRUIT]),
-                Integer.parseInt(tokens[INDEX_OF_COUNT]),
-                parseOperationType(tokens[INDEX_OF_OPERATION_TYPE])
+        return new FruitTransaction(parseFruit(tokens[INDEX_OF_FRUIT]),
+                                    Integer.parseInt(tokens[INDEX_OF_COUNT]),
+                                    parseOperationType(tokens[INDEX_OF_OPERATION_TYPE])
         );
     }
 

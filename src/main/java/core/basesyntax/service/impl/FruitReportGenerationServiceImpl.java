@@ -44,8 +44,7 @@ public class FruitReportGenerationServiceImpl implements ReportGenerationService
     private <T> void writeMainInfo(FileWriter fileWriter, ShopStorage<T> storage) {
         for (T item : storage.getAllItems()) {
             try {
-                fileWriter.write(
-                        item.toString().toLowerCase() + "," + storage.getAmount(item));
+                fileWriter.write(item.toString().toLowerCase() + "," + storage.getAmount(item));
                 fileWriter.write(System.lineSeparator());
                 fileWriter.flush();
             } catch (IOException e) {

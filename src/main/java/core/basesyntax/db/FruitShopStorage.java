@@ -17,11 +17,8 @@ public class FruitShopStorage implements ShopStorage<Fruit> {
 
     @Override
     public void save(Fruit fruit, int value, OperationType operationType) {
-        fruitStorage.compute(
-                fruit,
-                (k, oldValue) -> validateCalcualtion(operationType.getFunction()
-                        .applyAsInt(oldValue == null ? 0 : oldValue, value))
-        );
+        fruitStorage.compute(fruit, (k, oldValue) -> validateCalculation(
+                operationType.getFunction().applyAsInt(oldValue == null ? 0 : oldValue, value)));
     }
 
     @Override
@@ -29,7 +26,7 @@ public class FruitShopStorage implements ShopStorage<Fruit> {
         return fruitStorage.keySet();
     }
 
-    private int validateCalcualtion(int result) {
+    private int validateCalculation(int result) {
         if (result < 0) {
             throw new RuntimeException(STORAGE_VALUE_ERROR);
         }
