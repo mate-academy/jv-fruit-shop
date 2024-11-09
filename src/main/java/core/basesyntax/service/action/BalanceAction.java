@@ -1,17 +1,19 @@
 package core.basesyntax.service.action;
 
-import core.basesyntax.model.Account;
+import core.basesyntax.model.Apple;
+import core.basesyntax.model.Banana;
 
 public class BalanceAction implements ActionHandler {
-    private Account account;
+    private Banana banana = new Banana();
+    private Apple apple = new Apple();
 
     @Override
     public void countBanana(int amount) {
-        account.setBananaBalance(amount);
+        banana.setBalance(amount);
     }
 
     @Override
     public void countApple(int amount) {
-        account.setAppleBalance(amount);
+        apple.setBalance(amount);
     }
 }
