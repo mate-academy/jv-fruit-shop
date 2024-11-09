@@ -10,6 +10,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final String COMMA = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
@@ -19,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
 
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String item : inputReport) {
-            String[] arrayFromItem = item.split(",");
+            String[] arrayFromItem = item.split(COMMA);
             if (arrayFromItem.length > NUMBER_OF_ELEMENTS) {
                 throw new RuntimeException("The number of elements in a file line"
                         + " is greater than 3");
