@@ -11,8 +11,10 @@ public class DataConverterImpl {
             String type = parts[0];
             String fruit = parts[1];
             int quantity = Integer.parseInt(parts[2]);
-            FruitTransaction.Operation operation = FruitTransaction.Operation.valueOf(type.toUpperCase());
-            FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
+            FruitTransaction.Operation operation =
+                    FruitTransaction.Operation.valueOf(type.toUpperCase());
+            FruitTransaction transaction =
+                    new FruitTransaction(operation, fruit, quantity);
             transactions.add(transaction);
         }
         return transactions;

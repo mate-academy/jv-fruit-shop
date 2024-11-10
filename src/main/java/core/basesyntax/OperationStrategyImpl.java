@@ -5,7 +5,8 @@ import java.util.Map;
 public class OperationStrategyImpl extends OperationStrategy {
     private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
 
-    public OperationStrategyImpl(Map<FruitTransaction.Operation, OperationHandler> operationHandlers) {
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 
