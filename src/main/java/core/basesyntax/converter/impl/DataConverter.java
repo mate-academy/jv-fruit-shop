@@ -6,19 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverter {
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+    private static final int TWO = 2;
     private final Convertor<FruitTransaction.Operation> typeConverter = new TypeConverter();
     private final Convertor<Integer> quantityConverter = new QuantityConverter();
 
     public List<FruitTransaction> convertToTransaction(List<List<String>> report) {
         List<FruitTransaction> list = new ArrayList<>();
-        for (List<String> s : report) {
-            String type = s.get(0);
-            String fruit = s.get(1);
-            String quantity = s.get(2);
+        for (List<String> data : report) {
+            String type = data.get(ZERO);
+            String fruit = data.get(ONE);
+            String quantity = data.get(TWO);
 
-            FruitTransaction.Operation typeOfOperation = typeConverter.parseMethod(type.trim());
-            Integer quantityOfFruit = quantityConverter.parseMethod(quantity);
-
+            FruitTransaction.Operation typeOfOperation = typeConverter.convertor(type.trim());
+            Integer quantityOfFruit = quantityConverter.convertor(quantity);
             if (typeOfOperation != null && fruit != null && quantityOfFruit != null) {
                 list.add(new FruitTransaction(typeOfOperation, fruit, quantityOfFruit));
             }

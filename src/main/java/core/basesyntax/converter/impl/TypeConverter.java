@@ -5,7 +5,7 @@ import core.basesyntax.model.FruitTransaction;
 
 public class TypeConverter implements Convertor<FruitTransaction.Operation> {
     @Override
-    public FruitTransaction.Operation parseMethod(String string) {
+    public FruitTransaction.Operation convertor(String string) {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
             if (operation.getTypeOfOperation().trim().equals(string)) {
                 return operation;

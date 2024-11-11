@@ -1,12 +1,13 @@
-package core.basesyntax.reader;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileReaderService;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReaderImpl implements Reader {
+public class FileReaderServiceImpl implements FileReaderService {
     private static final String COMMA_DELIMITER = ",";
 
     @Override
@@ -19,7 +20,7 @@ public class ReaderImpl implements Reader {
                 records.add(List.of(values));
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error reading file at path :" + filePath, e);
         }
         return records;
     }
