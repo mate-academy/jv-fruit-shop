@@ -1,7 +1,7 @@
 package core.basesyntax.service.action;
 
-public interface ActionHandler {
-    void countBanana(int amount);
+import core.basesyntax.model.Fruit;
 
-    void countApple(int amount);
+public interface ActionHandler {
+    void count(Fruit fruit, int amount);
 }

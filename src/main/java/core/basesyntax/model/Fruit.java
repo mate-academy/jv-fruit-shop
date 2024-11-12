@@ -1,7 +1,7 @@
 package core.basesyntax.model;
 
-public class Apple {
-    private String name = "apple";
+public class Fruit {
+    private String name;
     private int balance = 0;
 
     public int getBalance() {
@@ -14,5 +14,9 @@ public class Apple {
 
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -1,11 +1,12 @@
 package core.basesyntax;
 
 import core.basesyntax.dao.FileCreator;
-import core.basesyntax.dao.ReadFile;
-import core.basesyntax.dao.ReadFileImpl;
-import core.basesyntax.dao.WriteReport;
-import core.basesyntax.dao.WriteReportImpl;
+import core.basesyntax.dao.FileReader;
+import core.basesyntax.dao.FileReaderImpl;
+import core.basesyntax.dao.ReportWriter;
+import core.basesyntax.dao.ReportWriterImpl;
 import core.basesyntax.model.Account;
+import core.basesyntax.model.Fruit;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.action.ActionHandler;
@@ -13,7 +14,6 @@ import core.basesyntax.service.action.BalanceAction;
 import core.basesyntax.service.action.PurchaseAction;
 import core.basesyntax.service.action.ReturnAction;
 import core.basesyntax.service.action.SupplyAction;
-import java.io.File;
 import java.util.Map;
 
 public class Main {
@@ -23,24 +23,23 @@ public class Main {
             Account.Operation.RETURN, new ReturnAction(),
             Account.Operation.SUPPLY, new SupplyAction()
     );
-    private static final String nameOfShopDatabase = "database.csv";
-    private static final String nameOfFinalReport = "finalReport.csv";
-    private static ReadFile fileReader = new ReadFileImpl();
+
+    public static Fruit apple = new Fruit();
+    public static Fruit banana = new Fruit();
+    private static FileReader fileReader = new FileReaderImpl();
 
     private static ShopService shopService = new ShopServiceImpl();
-    private static WriteReport writeReport = new WriteReportImpl();
+    private static ReportWriter reportWriter = new ReportWriterImpl();
     private static FileCreator fileCreator = new FileCreator();
 
     public static void main(String[] arg) {
         fileCreator.createAllFiles();
-        String filePathForDatabase = "src/main"
-                + File.separator + nameOfShopDatabase;
-        String filePathForFinalReport = "src/main"
-                + File.separator + nameOfFinalReport;
+        String filePathForDatabase = "src/main/directoryForDatabases/database.csv";
+        String filePathForFinalReport = "src/main/directoryForDatabases/finalReport.csv";
 
         String[] textFromDatabase = fileReader.read(filePathForDatabase);
         shopService.generate(textFromDatabase);
 
-        writeReport.writeReport(filePathForFinalReport);
+        reportWriter.writeReport(filePathForFinalReport);
     }
 }

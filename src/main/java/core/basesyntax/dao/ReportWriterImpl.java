@@ -1,14 +1,13 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Apple;
-import core.basesyntax.model.Banana;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriteReportImpl implements WriteReport {
-    private Banana banana = new Banana();
-    private Apple apple = new Apple();
+import static core.basesyntax.Main.apple;
+import static core.basesyntax.Main.banana;
+
+public class ReportWriterImpl implements ReportWriter {
 
     @Override
     public void writeReport(String nameOfFileToReport) {

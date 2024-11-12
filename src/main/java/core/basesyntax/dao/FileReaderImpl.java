@@ -2,19 +2,18 @@ package core.basesyntax.dao;
 
 import core.basesyntax.model.Account;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadFileImpl implements ReadFile {
+public class FileReaderImpl implements FileReader {
     private Account account = new Account();
 
     @Override
     public String[] read(String nameOfFile) {
         List<String> textInFile = null;
-        try (BufferedReader reader = new BufferedReader(new FileReader(nameOfFile))) {
+        try (BufferedReader reader = new BufferedReader(new java.io.FileReader(nameOfFile))) {
             textInFile = Files.readAllLines(Path.of(nameOfFile));
             return textInFile.stream()
                     .filter(this::startWithLetter)
