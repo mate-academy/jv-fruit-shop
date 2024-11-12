@@ -11,6 +11,6 @@ public class TypeConverter implements Convertor<FruitTransaction.Operation> {
                 return operation;
             }
         }
-        return null;
+        throw new RuntimeException("Operation with name " + string + " not found.");
     }
 }
