@@ -1,4 +1,4 @@
-package core.basesyntax.services.operationHandler;
+package core.basesyntax.services.operationhandler;
 
 import core.basesyntax.db.DB;
 

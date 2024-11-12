@@ -1,4 +1,4 @@
-package core.basesyntax.utils.fileReader;
+package core.basesyntax.utils.filereader;
 
 import java.nio.file.Path;
 import java.util.List;

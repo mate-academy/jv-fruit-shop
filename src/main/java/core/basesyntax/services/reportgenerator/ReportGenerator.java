@@ -1,4 +1,4 @@
-package core.basesyntax.services.reportGenerator;
+package core.basesyntax.services.reportgenerator;
 
 import core.basesyntax.db.DB;
 

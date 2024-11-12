@@ -1,4 +1,4 @@
-package core.basesyntax.services.shopService;
+package core.basesyntax.services.shopservice;
 
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.strategies.IOperationStrategy;
