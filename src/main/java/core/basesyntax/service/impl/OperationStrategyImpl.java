@@ -19,7 +19,7 @@ public class OperationStrategyImpl implements OperationStrategy {
         if (handler != null) {
             handler.execute(fruitTransaction);
         } else {
-            System.out.println(HANDLER_DOESNT_EXIST + fruitTransaction.getOperation());
+            throw new RuntimeException(HANDLER_DOESNT_EXIST + fruitTransaction.getOperation());
         }
     }
 }

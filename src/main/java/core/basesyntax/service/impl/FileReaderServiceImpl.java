@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    private static final String COMMA_DELIMITER = ",";
 
     @Override
     public List<List<String>> read(String filePath) {
@@ -16,9 +15,9 @@ public class FileReaderServiceImpl implements FileReaderService {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                String[] values = line.split(COMMA_DELIMITER);
-                records.add(List.of(values));
+                records.add(List.of(line));
             }
+
         } catch (IOException e) {
             throw new RuntimeException("Error reading file at path :" + filePath, e);
         }

@@ -10,7 +10,7 @@ public class QuantityConverter implements Convertor<Integer> {
                 return Integer.decode(string);
             }
         } catch (NumberFormatException n) {
-            return null;
+            throw new RuntimeException("Failed to convert string to Integer: " + string);
         }
         return null;
     }

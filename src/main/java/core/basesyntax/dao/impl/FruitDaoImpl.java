@@ -5,8 +5,10 @@ import static core.basesyntax.db.Storage.storage;
 import core.basesyntax.dao.FruitDao;
 
 public class FruitDaoImpl implements FruitDao {
-    private static final String MESSAGE_FRUIT_NOT_AVAILABLE = "Sorry, but we don't have ";
-    private static final String MESSAGE_NOT_ENOUGH_FRUIT = "Sorry, but we don't have enough fruit ";
+    private static final String MESSAGE_FRUIT_NOT_AVAILABLE = "The requested fruit is "
+            + "currently unavailable.";
+    private static final String MESSAGE_NOT_ENOUGH_FRUIT = "We do not have sufficient "
+            + "quantity of the requested fruit.";
     private static final String EXCEPTION_MESSAGE = "Quantity is not valid";
 
     public void supplyFruit(String fruit, int quantity) {
@@ -24,16 +26,13 @@ public class FruitDaoImpl implements FruitDao {
             throw new RuntimeException(EXCEPTION_MESSAGE);
         }
         if (!storage.containsKey(fruit)) {
-            System.out.println(MESSAGE_FRUIT_NOT_AVAILABLE + fruit);
-            return;
+            throw new RuntimeException(MESSAGE_FRUIT_NOT_AVAILABLE + fruit);
         }
         var balanceOfQuantity = storage.get(fruit);
         if (balanceOfQuantity < quantity) {
-            System.out.println(MESSAGE_NOT_ENOUGH_FRUIT + fruit);
+            throw new RuntimeException(MESSAGE_NOT_ENOUGH_FRUIT + fruit);
         }
-        if (balanceOfQuantity >= quantity) {
-            storage.replace(fruit, balanceOfQuantity - quantity);
-        }
+        storage.replace(fruit, balanceOfQuantity - quantity);
     }
 
     @Override

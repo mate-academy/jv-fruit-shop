@@ -13,17 +13,25 @@ public class DataConverter {
     private final Convertor<Integer> quantityConverter = new QuantityConverter();
 
     public List<FruitTransaction> convertToTransaction(List<List<String>> report) {
-        List<FruitTransaction> list = new ArrayList<>();
+        List<FruitTransaction> list = new ArrayList<>(report.size());
+        var counter = 0;
         for (List<String> data : report) {
-            String type = data.get(ZERO);
-            String fruit = data.get(ONE);
-            String quantity = data.get(TWO);
+            String[] split = String.valueOf(data).replace("[", "")
+                    .replace("]", "")
+                    .split(",");
+            if (counter >= 1) {
+                String type = split[ZERO];
+                String fruit = split[ONE];
+                String quantity = split[TWO];
 
-            FruitTransaction.Operation typeOfOperation = typeConverter.convertor(type.trim());
-            Integer quantityOfFruit = quantityConverter.convertor(quantity);
-            if (typeOfOperation != null && fruit != null && quantityOfFruit != null) {
-                list.add(new FruitTransaction(typeOfOperation, fruit, quantityOfFruit));
+                FruitTransaction.Operation typeOfOperation = typeConverter.convertor(type.trim());
+                Integer quantityOfFruit = quantityConverter.convertor(quantity);
+
+                if (typeOfOperation != null && fruit != null && quantityOfFruit != null) {
+                    list.add(new FruitTransaction(typeOfOperation, fruit, quantityOfFruit));
+                }
             }
+            counter++;
         }
         return list;
     }

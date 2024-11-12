@@ -7,7 +7,7 @@ public class TypeConverter implements Convertor<FruitTransaction.Operation> {
     @Override
     public FruitTransaction.Operation convertor(String string) {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getTypeOfOperation().trim().equals(string)) {
+            if (operation.getTypeOfOperation().equals(string)) {
                 return operation;
             }
         }
