@@ -1,7 +1,6 @@
 package core.basesyntax.services.reportgenerator;
 
 import core.basesyntax.db.DB;
-
 import java.util.Map;
 import java.util.Set;
 

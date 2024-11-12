@@ -1,7 +1,6 @@
 package core.basesyntax.services.operationhandler;
 
 import core.basesyntax.db.DB;
-
 import java.security.InvalidParameterException;
 
 public class PurchaseOperationHandler implements IOperationHandler {

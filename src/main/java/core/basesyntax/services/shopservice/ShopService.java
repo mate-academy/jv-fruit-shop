@@ -2,7 +2,6 @@ package core.basesyntax.services.shopservice;
 
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.strategies.IOperationStrategy;
-
 import java.util.List;
 
 public class ShopService implements IShopService {

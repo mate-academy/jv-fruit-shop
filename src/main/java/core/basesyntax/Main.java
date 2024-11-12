@@ -18,7 +18,6 @@ import core.basesyntax.utils.filereader.FileReader;
 import core.basesyntax.utils.filereader.IFileReader;
 import core.basesyntax.utils.fileswriter.FileWriter;
 import core.basesyntax.utils.fileswriter.IFileWriter;
-
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
