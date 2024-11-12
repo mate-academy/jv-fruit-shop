@@ -1,11 +1,11 @@
 package core.basesyntax;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.operationhandler.IOperationHandler;
 import core.basesyntax.services.operationhandler.BalanceOperationHandler;
-import core.basesyntax.services.operationhandler.SupplyOperationHandler;
+import core.basesyntax.services.operationhandler.IOperationHandler;
 import core.basesyntax.services.operationhandler.PurchaseOperationHandler;
 import core.basesyntax.services.operationhandler.ReturnOperationHandler;
+import core.basesyntax.services.operationhandler.SupplyOperationHandler;
 import core.basesyntax.services.reportgenerator.IReportGenerator;
 import core.basesyntax.services.reportgenerator.ReportGenerator;
 import core.basesyntax.services.shopservice.IShopService;
@@ -31,14 +31,29 @@ public class Main {
 
         Map<FruitTransaction.Operation, IOperationHandler> operationHandlerMap = new HashMap<>();
 
-        operationHandlerMap.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
-        operationHandlerMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlerMap.put(
+                FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler()
+        );
+
+        operationHandlerMap.put(
+                FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler()
+        );
+
+        operationHandlerMap.put(
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler()
+        );
+
+        operationHandlerMap.put(
+                FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler()
+        );
 
         IOperationStrategy operationStrategy = new OperationStrategy(operationHandlerMap);
 
-        List<String> transactionsStrings = fileReader.readCSVFile(Paths.get("inputFile.csv"));
+        List<String> transactionsStrings = fileReader.readCsvFile(Paths.get("inputFile.csv"));
         List<FruitTransaction> fruitTransactions = dataConverter
                 .toFruitTransactions(transactionsStrings);
 

@@ -15,7 +15,9 @@ public class ShopService implements IShopService {
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
         for (FruitTransaction transaction : fruitTransactions) {
-            operationStrategy.get(transaction.operation()).handleOperation(transaction.fruit(), transaction.quantity());
+            operationStrategy
+                    .get(transaction.operation())
+                    .handleOperation(transaction.fruit(), transaction.quantity());
         }
     }
 }

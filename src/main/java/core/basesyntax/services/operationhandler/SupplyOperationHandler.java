@@ -11,9 +11,11 @@ public class SupplyOperationHandler implements IOperationHandler {
             throw new InvalidParameterException("Supply quantity cannot be negative");
         }
 
-        Integer prevFruitQuantity = DB.fruitsDB.get(fruit);
-        Integer newFruitQuantity = prevFruitQuantity != null ? prevFruitQuantity + quantity : quantity;
+        Integer prevFruitQuantity = DB.getFruitsDB().get(fruit);
+        Integer newFruitQuantity = prevFruitQuantity != null
+                ? prevFruitQuantity + quantity
+                : quantity;
 
-        DB.fruitsDB.put(fruit, newFruitQuantity);
+        DB.getFruitsDB().put(fruit, newFruitQuantity);
     }
 }

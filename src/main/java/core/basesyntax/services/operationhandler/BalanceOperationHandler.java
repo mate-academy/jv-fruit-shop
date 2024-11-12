@@ -11,6 +11,6 @@ public class BalanceOperationHandler implements IOperationHandler {
             throw new InvalidParameterException("Initial fruit quantity cannot be negative");
         }
 
-        DB.fruitsDB.put(fruit, quantity);
+        DB.getFruitsDB().put(fruit, quantity);
     }
 }

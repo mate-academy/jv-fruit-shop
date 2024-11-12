@@ -4,5 +4,5 @@ import java.nio.file.Path;
 import java.util.List;
 
 public interface IFileReader {
-    List<String> readCSVFile(Path path);
+    List<String> readCsvFile(Path path);
 }

@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class FileReader implements IFileReader {
     @Override
-    public List<String> readCSVFile(Path path) {
+    public List<String> readCsvFile(Path path) {
         try (Stream<String> lines = Files.lines(path)) {
             return lines.skip(1).collect(Collectors.toList());
         } catch (IOException exception) {

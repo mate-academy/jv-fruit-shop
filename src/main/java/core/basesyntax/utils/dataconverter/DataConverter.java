@@ -16,7 +16,9 @@ public class DataConverter implements IDataConverter {
         Function<String, FruitTransaction> fruitTransactionMapper = (transactionString) -> {
             String[] transactionParts = transactionString.split(TRANSACTION_PARTS_SEPARATOR);
 
-            FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(transactionParts[TRANSACTION_OPERATION_INDEX]);
+            FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(
+                    transactionParts[TRANSACTION_OPERATION_INDEX]
+            );
             String fruit = transactionParts[TRANSACTION_FRUIT_INDEX];
             int quantity = Integer.parseInt(transactionParts[TRANSACTION_QUANTITY_INDEX]);
 

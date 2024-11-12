@@ -11,16 +11,18 @@ public class PurchaseOperationHandler implements IOperationHandler {
             throw new InvalidParameterException("Purchase quantity cannot be negative");
         }
 
-        Integer fruitQuantity = DB.fruitsDB.get(fruit);
+        Integer fruitQuantity = DB.getFruitsDB().get(fruit);
 
         if (fruitQuantity == null) {
             throw new InvalidParameterException("This fruit does not exist in the shop");
         }
 
         if (fruitQuantity < quantity) {
-            throw new InvalidParameterException("Don't have some many fruits. Reduce your appetite");
+            throw new InvalidParameterException(
+                    "Don't have some many fruits. Reduce your appetite"
+            );
         }
 
-        DB.fruitsDB.replace(fruit, fruitQuantity - quantity);
+        DB.getFruitsDB().replace(fruit, fruitQuantity - quantity);
     }
 }

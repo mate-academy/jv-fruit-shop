@@ -11,12 +11,12 @@ public class ReturnOperationHandler implements IOperationHandler {
             throw new InvalidParameterException("Куегкт quantity cannot be negative");
         }
 
-        Integer fruitQuantity = DB.fruitsDB.get(fruit);
+        Integer fruitQuantity = DB.getFruitsDB().get(fruit);
 
         if (fruitQuantity == null) {
             throw new InvalidParameterException("This fruit does not exist in the shop");
         }
 
-        DB.fruitsDB.replace(fruit, fruitQuantity + quantity);
+        DB.getFruitsDB().replace(fruit, fruitQuantity + quantity);
     }
 }

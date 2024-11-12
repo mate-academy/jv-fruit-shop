@@ -11,7 +11,7 @@ public class ReportGenerator implements IReportGenerator {
 
     @Override
     public String getReport() {
-        Set<Map.Entry<String, Integer>> fruitEntries = DB.fruitsDB.entrySet();
+        Set<Map.Entry<String, Integer>> fruitEntries = DB.getFruitsDB().entrySet();
         StringBuilder builder = new StringBuilder(REPORT_COLUMNS_NAMES);
 
         for (Map.Entry<String, Integer> entry : fruitEntries) {
