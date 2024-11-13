@@ -47,7 +47,7 @@ public class HelloWorld {
         // 4. Process the incoming transactions with applicable OperationHandler implementations
 
         List<FruitTransaction> transactions = dataConverter
-                .convertStringsDataToFruitTransactions(inputReport);
+                .convertToFruitTransactions(inputReport);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 

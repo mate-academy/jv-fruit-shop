@@ -8,10 +8,6 @@ import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
-
-    private static final String PATH_TO_INPUT_FILE = "transactions.csv";
-    private static final String PATH_TO_OUTPUT_FILE = "report.csv";
-
     @Override
     public List<String> read(String filePath) {
         File file = new File(filePath);
@@ -24,11 +20,8 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void write(String filePath, String data) {
-        File file = new File(filePath);
-        file.delete();
         try {
-            file.createNewFile();
-            Files.write(file.toPath(), data.getBytes(),
+            Files.write(new File(filePath).toPath(), data.getBytes(),
                     StandardOpenOption.APPEND);
 
         } catch (IOException e) {

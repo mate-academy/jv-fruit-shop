@@ -1,5 +1,6 @@
 package core.basesyntax.service.impl;
 
+import core.basesyntax.exception.InvalidInputException;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.enums.Operation;
 import core.basesyntax.service.DataConverter;
@@ -16,7 +17,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int START_ROW_INDEX = 0;
 
     @Override
-    public List<FruitTransaction> convertStringsDataToFruitTransactions(
+    public List<FruitTransaction> convertToFruitTransactions(
             List<String> stringsData) {
         List<FruitTransaction> list = new ArrayList<>();
         int index = START_ROW_INDEX;
@@ -27,7 +28,10 @@ public class DataConverterImpl implements DataConverter {
             String row = stringsData.get(index).trim();
             String[] arr = row.split(DATA_SPLITTER);
             if (arr.length != EXPECTED_ARRAY_LENGTH) {
-                throw new RuntimeException("Invalid input");
+                throw new InvalidInputException("Invalid input");
+            }
+            if (Integer.parseInt(arr[QUANTITY_INDEX]) < 0) {
+                throw new InvalidInputException("Quantity can't be less than 0");
             }
             FruitTransaction fruitTransaction = new FruitTransaction(
                     Operation.getByCode(arr[OPERATION_INDEX]),

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String DATA_SPLITTER = ",";
-    private static final String REPORT_FIRST_LINE = "fruit,quantity\n";
+    private static final String REPORT_FIRST_LINE = "fruit,quantity" + System.lineSeparator();
     private final FruitRepository repository;
 
     public ReportGeneratorImpl(FruitRepository repository) {
@@ -20,6 +20,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                     .entrySet()
                     .stream()
                     .map(entry -> entry.getKey() + DATA_SPLITTER + entry.getValue())
-                    .collect(Collectors.joining("\n"));
+                    .collect(Collectors.joining(System.lineSeparator()));
     }
 }

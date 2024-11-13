@@ -4,7 +4,7 @@ import core.basesyntax.dao.FruitRepository;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.handler.OperationHandler;
 
-public class SupplyOperationHandler extends BaseOperationHandler implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private final FruitRepository repository;
 
     public SupplyOperationHandler(FruitRepository repository) {
@@ -13,7 +13,6 @@ public class SupplyOperationHandler extends BaseOperationHandler implements Oper
 
     @Override
     public void handle(FruitTransaction transaction) {
-        checkTransaction(transaction);
         repository.add(transaction.getFruit(), transaction.getQuantity());
     }
 }

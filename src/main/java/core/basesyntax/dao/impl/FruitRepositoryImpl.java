@@ -2,6 +2,7 @@ package core.basesyntax.dao.impl;
 
 import core.basesyntax.dao.FruitRepository;
 import core.basesyntax.db.Database;
+import core.basesyntax.exception.StorageException;
 import java.util.Map;
 
 public class FruitRepositoryImpl implements FruitRepository {
@@ -9,16 +10,13 @@ public class FruitRepositoryImpl implements FruitRepository {
 
     @Override
     public void add(String fruit, int quantity) {
-        Integer newQuantity = db.containsKey(fruit)
-                ? db.get(fruit) + quantity
-                : quantity;
-        db.put(fruit, newQuantity);
+        db.merge(fruit, quantity, Integer::sum);
     }
 
     @Override
     public void remove(String fruit, int quantity) {
         if (db.get(fruit) - quantity < 0) {
-            throw new RuntimeException("Not enough " + fruit + " in storage to remove");
+            throw new StorageException("Not enough " + fruit + " in storage to remove");
         }
         db.put(fruit, db.get(fruit) - quantity);
     }

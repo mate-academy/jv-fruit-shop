@@ -1,5 +1,7 @@
 package core.basesyntax.model.enums;
 
+import java.util.NoSuchElementException;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -22,6 +24,6 @@ public enum Operation {
                 return operation;
             }
         }
-        return null;
+        throw new NoSuchElementException("Unsupported operation code: " + code);
     }
 }
