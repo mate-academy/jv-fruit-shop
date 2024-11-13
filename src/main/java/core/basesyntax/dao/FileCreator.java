@@ -8,12 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileCreator {
-    private static FileReader fileReader = new FileReaderImpl();
     public static final String nameOfShopDatabase = "database.csv";
     public static final String nameOfFinalReport = "finalReport.csv";
 
     private static ShopService shopService = new ShopServiceImpl();
     private static ReportWriter reportWriter = new ReportWriterImpl();
+    private static FileReader fileReader = new FileReaderImpl();
 
     public void createAllFiles() {
         String databaseInfo = "type,fruit,quantity\n"

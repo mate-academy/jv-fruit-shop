@@ -24,13 +24,20 @@ public class Main {
             Account.Operation.SUPPLY, new SupplyAction()
     );
 
-    public static Fruit apple = new Fruit();
-    public static Fruit banana = new Fruit();
     private static FileReader fileReader = new FileReaderImpl();
-
-    private static ShopService shopService = new ShopServiceImpl();
     private static ReportWriter reportWriter = new ReportWriterImpl();
+    private static ShopService shopService = new ShopServiceImpl();
+    private static Fruit apple = new Fruit();
+    private static Fruit banana = new Fruit();
     private static FileCreator fileCreator = new FileCreator();
+
+    public static Fruit getApple() {
+        return apple;
+    }
+
+    public static Fruit getBanana() {
+        return banana;
+    }
 
     public static void main(String[] arg) {
         fileCreator.createAllFiles();
