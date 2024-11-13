@@ -62,5 +62,14 @@ public class FruitTransaction {
         public String getTypeOfOperation() {
             return typeOfOperation;
         }
+
+        public static FruitTransaction.Operation convertor(String string) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.getTypeOfOperation().equals(string)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("Operation with name " + string + " not found.");
+        }
     }
 }

@@ -27,7 +27,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileReaderService fileReader = new FileReaderServiceImpl();
-        List<List<String>> inputReport = fileReader.read(PATH_TO_REPORT_READ);
+        List<String> inputReport = fileReader.read(PATH_TO_REPORT_READ);
 
         FruitDao fruitDao = new FruitDaoImpl();
         DataConverter dataConverter = new DataConverter();
@@ -37,7 +37,6 @@ public class Main {
         shopService.process(dataFromTransaction);
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
-
         FileWriterService fileWriter = new FileWriterServiceImpl();
         fileWriter.writeIntoFile(resultingReport, PATH_TO_FINAL_REPORT);
     }

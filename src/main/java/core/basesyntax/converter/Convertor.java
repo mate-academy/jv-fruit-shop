@@ -1,5 +1,8 @@
 package core.basesyntax.converter;
 
-public interface Convertor<T> {
-    T convertor(String string);
+import core.basesyntax.model.FruitTransaction;
+import java.util.List;
+
+public interface Convertor {
+    List<FruitTransaction> convertToTransaction(List<String> report);
 }

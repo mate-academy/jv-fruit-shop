@@ -1,39 +1,42 @@
 package core.basesyntax.converter.impl;
 
+import static core.basesyntax.model.FruitTransaction.Operation.convertor;
+
 import core.basesyntax.converter.Convertor;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataConverter {
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final int TWO = 2;
-    private final Convertor<FruitTransaction.Operation> typeConverter = new TypeConverter();
-    private final Convertor<Integer> quantityConverter = new QuantityConverter();
+public class DataConverter implements Convertor {
+    private static final int OPERATION_TYPE_INDEX = 0;
+    private static final int OPERATION_NAME_INDEX = 1;
+    private static final int REMOVE_REDUNDANT_FIRST_ROW = 1;
+    private static final int START_FROM_INDEX = 1;
+    private static final int OPERATION_QUANTITY_INDEX = 2;
 
-    public List<FruitTransaction> convertToTransaction(List<List<String>> report) {
-        List<FruitTransaction> list = new ArrayList<>(report.size());
-        var counter = 0;
-        for (List<String> data : report) {
-            String[] split = String.valueOf(data).replace("[", "")
+    @Override
+    public List<FruitTransaction> convertToTransaction(List<String> report) {
+        List<FruitTransaction> list =
+                new ArrayList<>(report.size() - REMOVE_REDUNDANT_FIRST_ROW);
+
+        for (int i = START_FROM_INDEX; i < report.size(); i++) {
+            String[] split = String.valueOf(report.get(i))
+                    .replace("[", "")
                     .replace("]", "")
                     .split(",");
-            if (counter >= 1) {
-                String type = split[ZERO];
-                String fruit = split[ONE];
-                String quantity = split[TWO];
 
-                FruitTransaction.Operation typeOfOperation = typeConverter.convertor(type.trim());
-                Integer quantityOfFruit = quantityConverter.convertor(quantity);
+            String type = split[OPERATION_TYPE_INDEX];
+            String fruit = split[OPERATION_NAME_INDEX];
+            String quantity = split[OPERATION_QUANTITY_INDEX];
 
-                if (typeOfOperation != null && fruit != null && quantityOfFruit != null) {
-                    list.add(new FruitTransaction(typeOfOperation, fruit, quantityOfFruit));
-                }
+            FruitTransaction.Operation fruitTransaction = convertor(type);
+            int quantityOfFruit = Integer.parseInt(quantity);
+
+            if (fruit != null) {
+                list.add(new FruitTransaction(fruitTransaction, fruit, quantityOfFruit));
             }
-            counter++;
         }
         return list;
     }
-
 }
+
