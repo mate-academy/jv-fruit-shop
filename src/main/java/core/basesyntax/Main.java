@@ -18,8 +18,8 @@ import core.basesyntax.utils.filereader.FileReader;
 import core.basesyntax.utils.filereader.IFileReader;
 import core.basesyntax.utils.fileswriter.FileWriter;
 import core.basesyntax.utils.fileswriter.IFileWriter;
+import java.io.File;
 import java.nio.file.Paths;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,31 +28,11 @@ public class Main {
         IFileReader fileReader = new FileReader();
         IDataConverter dataConverter = new DataConverter();
 
-        Map<FruitTransaction.Operation, IOperationHandler> operationHandlerMap = new HashMap<>();
+        IOperationStrategy operationStrategy = getOperationStrategy();
 
-        operationHandlerMap.put(
-                FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler()
+        List<String> transactionsStrings = fileReader.readCsvFile(Paths.get(
+                "resources" + File.separator + "inputFile.csv")
         );
-
-        operationHandlerMap.put(
-                FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler()
-        );
-
-        operationHandlerMap.put(
-                FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler()
-        );
-
-        operationHandlerMap.put(
-                FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler()
-        );
-
-        IOperationStrategy operationStrategy = new OperationStrategy(operationHandlerMap);
-
-        List<String> transactionsStrings = fileReader.readCsvFile(Paths.get("inputFile.csv"));
         List<FruitTransaction> fruitTransactions = dataConverter
                 .toFruitTransactions(transactionsStrings);
 
@@ -63,6 +43,27 @@ public class Main {
         String report = reportGenerator.getReport();
 
         IFileWriter fileWriter = new FileWriter();
-        fileWriter.writeToFile(Paths.get("outputFile.csv"), report.getBytes());
+        fileWriter.writeToFile(Paths.get(
+                "resources" + File.separator + "outputFile.csv"),
+                report.getBytes()
+        );
+    }
+
+    private static IOperationStrategy getOperationStrategy() {
+        Map<FruitTransaction.Operation, IOperationHandler> operationHandlerMap = Map.of(
+                FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(),
+
+                FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(),
+
+                FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(),
+
+                FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler()
+        );
+
+        return new OperationStrategy(operationHandlerMap);
     }
 }

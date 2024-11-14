@@ -15,7 +15,7 @@ public class ReportGenerator implements IReportGenerator {
 
         for (Map.Entry<String, Integer> entry : fruitEntries) {
             builder
-                    .append("\n")
+                    .append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(CSV_VALUES_SEPARATOR)
                     .append(entry.getValue());
