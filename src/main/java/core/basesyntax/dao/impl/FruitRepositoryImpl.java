@@ -6,7 +6,7 @@ import core.basesyntax.exception.StorageException;
 import java.util.Map;
 
 public class FruitRepositoryImpl implements FruitRepository {
-    private final Map<String, Integer> db = Database.getStorage();
+    private final Map<String, Integer> db = Database.storage;
 
     @Override
     public void add(String fruit, int quantity) {

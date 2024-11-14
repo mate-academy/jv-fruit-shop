@@ -10,9 +10,8 @@ import java.util.List;
 public class FileServiceImpl implements FileService {
     @Override
     public List<String> read(String filePath) {
-        File file = new File(filePath);
         try {
-            return Files.readAllLines(file.toPath());
+            return Files.readAllLines(new File(filePath).toPath());
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + filePath, e);
         }
@@ -23,9 +22,8 @@ public class FileServiceImpl implements FileService {
         try {
             Files.write(new File(filePath).toPath(), data.getBytes(),
                     StandardOpenOption.APPEND);
-
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Can't write data to file " + filePath, e);
         }
     }
 }
