@@ -7,6 +7,7 @@ import core.basesyntax.dao.ReportWriter;
 import core.basesyntax.dao.ReportWriterImpl;
 import core.basesyntax.model.Account;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.action.ActionHandler;
@@ -14,6 +15,8 @@ import core.basesyntax.service.action.BalanceAction;
 import core.basesyntax.service.action.PurchaseAction;
 import core.basesyntax.service.action.ReturnAction;
 import core.basesyntax.service.action.SupplyAction;
+
+import java.util.List;
 import java.util.Map;
 
 public class Main {
@@ -31,6 +34,8 @@ public class Main {
     private static Fruit banana = new Fruit();
     private static FileCreator fileCreator = new FileCreator();
 
+    private static FruitTransaction fruitTransaction = new FruitTransaction();
+
     public static Fruit getApple() {
         return apple;
     }
@@ -45,7 +50,7 @@ public class Main {
         String filePathForFinalReport = "src/main/directoryForDatabases/finalReport.csv";
 
         String[] textFromDatabase = fileReader.read(filePathForDatabase);
-        shopService.generate(textFromDatabase);
+        List<FruitTransaction> allTransactions = fruitTransaction.parseTransaction(textFromDatabase);
 
         reportWriter.writeReport(filePathForFinalReport);
     }
