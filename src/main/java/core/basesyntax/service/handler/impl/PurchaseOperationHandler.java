@@ -17,7 +17,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (repository.hasFruit(transaction.getFruit())) {
             repository.remove(transaction.getFruit(), transaction.getQuantity());
         } else {
-            throw new InvalidInputException("Can't return fruits that are/were not in storage");
+            throw new InvalidInputException("There are no " + transaction.getFruit() + " in storage");
         }
     }
 }
