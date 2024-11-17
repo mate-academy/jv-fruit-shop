@@ -12,9 +12,9 @@ public class ReportWriterImpl implements ReportWriter {
     public void writeReport(String nameOfFileToReport) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(nameOfFileToReport))) {
             writer.write("fruit,quantity" + System.lineSeparator());
-            writer.write("banana, " + fruitTransaction.banana.getBalance()
+            writer.write("banana, " + fruitTransaction.getBanana().getBalance()
                     + System.lineSeparator());
-            writer.write("apple, " + fruitTransaction.apple.getBalance()
+            writer.write("apple, " + fruitTransaction.getApple().getBalance()
                     + System.lineSeparator());
         } catch (IOException e) {
             throw new RuntimeException("Can't find file in direction: " + nameOfFileToReport, e);

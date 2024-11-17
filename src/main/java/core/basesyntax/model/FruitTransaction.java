@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransaction {
-    public static Fruit apple;
-    public static Fruit banana;
+    private Fruit apple;
+    private Fruit banana;
     private Operation operation;
     private Fruit fruit;
     private int quantity;
@@ -17,6 +17,14 @@ public class FruitTransaction {
     }
 
     public FruitTransaction() {
+    }
+
+    public Fruit getApple() {
+        return apple;
+    }
+
+    public Fruit getBanana() {
+        return banana;
     }
 
     public Operation getOperation() {
