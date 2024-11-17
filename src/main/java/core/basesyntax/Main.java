@@ -5,9 +5,9 @@ import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.ReportWriter;
 import core.basesyntax.dao.ReportWriterImpl;
-import core.basesyntax.model.Account;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.action.ActionHandler;
@@ -15,16 +15,15 @@ import core.basesyntax.service.action.BalanceAction;
 import core.basesyntax.service.action.PurchaseAction;
 import core.basesyntax.service.action.ReturnAction;
 import core.basesyntax.service.action.SupplyAction;
-
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final Map<Account.Operation, ActionHandler> actionHandlerMap = Map.of(
-            Account.Operation.BALANCE, new BalanceAction(),
-            Account.Operation.PURCHASE, new PurchaseAction(),
-            Account.Operation.RETURN, new ReturnAction(),
-            Account.Operation.SUPPLY, new SupplyAction()
+    public static final Map<Operation, ActionHandler> actionHandlerMap = Map.of(
+            Operation.BALANCE, new BalanceAction(),
+            Operation.PURCHASE, new PurchaseAction(),
+            Operation.RETURN, new ReturnAction(),
+            Operation.SUPPLY, new SupplyAction()
     );
 
     private static FileReader fileReader = new FileReaderImpl();
@@ -50,7 +49,10 @@ public class Main {
         String filePathForFinalReport = "src/main/directoryForDatabases/finalReport.csv";
 
         String[] textFromDatabase = fileReader.read(filePathForDatabase);
-        List<FruitTransaction> allTransactions = fruitTransaction.parseTransaction(textFromDatabase);
+        List<FruitTransaction> allTransactions = fruitTransaction
+                .parseTransaction(textFromDatabase);
+
+        shopService.generate(allTransactions);
 
         reportWriter.writeReport(filePathForFinalReport);
     }

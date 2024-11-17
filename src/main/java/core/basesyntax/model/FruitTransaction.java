@@ -1,16 +1,16 @@
 package core.basesyntax.model;
 
-import jdk.dynalink.Operation;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransaction {
+    public static Fruit apple;
+    public static Fruit banana;
     private Operation operation;
-    private String fruit;
+    private Fruit fruit;
     private int quantity;
 
-    public FruitTransaction(Operation operation, String fruit, int quantity) {
+    public FruitTransaction(Operation operation, Fruit fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -19,11 +19,15 @@ public class FruitTransaction {
     public FruitTransaction() {
     }
 
-    public String getFruit() {
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public Fruit getFruit() {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
+    public void setFruit(Fruit fruit) {
         this.fruit = fruit;
     }
 
@@ -43,7 +47,11 @@ public class FruitTransaction {
             String[] parts = transaction.split(",");
 
             Operation operation = Operation.getOperation(parts[0]);
-            String fruit = parts[1];
+            if (parts[1].startsWith("b")) {
+                fruit = banana;
+            } else {
+                fruit = apple;
+            }
             int quantity = Integer.parseInt(parts[2]);
 
             FruitTransaction fruitTransaction = new FruitTransaction(operation, fruit, quantity);
@@ -52,6 +60,4 @@ public class FruitTransaction {
         }
         return fruitTransactions;
     }
-
-
 }

@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.Account;
+import core.basesyntax.model.Operation;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private Account account = new Account();
 
     @Override
     public String[] read(String nameOfFile) {
@@ -24,10 +23,10 @@ public class FileReaderImpl implements FileReader {
     }
 
     private boolean startWithLetter(String word) {
-        if (word.startsWith(Account.Operation.BALANCE.getCode())
-                || word.startsWith(Account.Operation.PURCHASE.getCode())
-                || word.startsWith(Account.Operation.RETURN.getCode())
-                || word.startsWith(Account.Operation.SUPPLY.getCode())) {
+        if (word.startsWith(Operation.BALANCE.getCode())
+                || word.startsWith(Operation.PURCHASE.getCode())
+                || word.startsWith(Operation.RETURN.getCode())
+                || word.startsWith(Operation.SUPPLY.getCode())) {
             return true;
         }
         return false;

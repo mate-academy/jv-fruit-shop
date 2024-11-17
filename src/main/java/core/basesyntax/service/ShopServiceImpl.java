@@ -1,10 +1,6 @@
 package core.basesyntax.service;
 
-import static core.basesyntax.Main.actionHandlerMap;
-
-import core.basesyntax.Main;
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
@@ -18,8 +14,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     void generateByRow(FruitTransaction transaction) {
-        Main.getApple().setName("Apple");
-        Main.getApple().setName("Banana");
-        transaction.getFruit().getOperation()
+        strategy.get(transaction.getOperation())
+                .count(transaction.getFruit(), transaction.getQuantity());
     }
 }
