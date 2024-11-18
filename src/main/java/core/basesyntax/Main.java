@@ -20,7 +20,6 @@ public class Main {
         List<String> inputReport = fileReader.read("reportToRead.csv");
 
         StringToFruitTransactionConverter dataConverter = new StringToFruitTransactionConverter();
-        List<FruitTransaction> transactions = dataConverter.applyList(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -29,6 +28,7 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategy(operationHandlers);
 
+        List<FruitTransaction> transactions = dataConverter.applyList(inputReport);
         ShopService shopService = new ShopService(operationStrategy);
         shopService.process(transactions);
 

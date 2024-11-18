@@ -46,10 +46,16 @@ public class FruitDao {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        FruitDao fruitsDao = (FruitDao) o;
-        return Objects.equals(name, fruitsDao.name);
+        if (this != o) {
+            if (o != null && getClass() == o.getClass()) {
+                FruitDao fruitsDao = (FruitDao) o;
+                return Objects.equals(name, fruitsDao.name);
+            } else {
+                return false;
+            }
+        } else {
+            return true;
+        }
     }
 
     @Override
@@ -59,9 +65,12 @@ public class FruitDao {
 
     @Override
     public String toString() {
-        return "FruitDao{" +
-                "name='" + name + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitDao{"
+                + "name='"
+                + name
+                + '\''
+                + ", quantity="
+                + quantity
+                + '}';
     }
 }
