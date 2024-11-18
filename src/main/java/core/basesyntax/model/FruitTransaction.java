@@ -57,7 +57,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Cannot get Operation by operation string: " + code);
+            throw new IllegalArgumentException("Cannot get Operation by operation string: " + code);
         }
     }
 }

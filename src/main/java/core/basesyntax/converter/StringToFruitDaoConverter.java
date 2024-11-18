@@ -9,9 +9,10 @@ public class StringToFruitDaoConverter implements Function<String, FruitDao> {
 
     @Override
     public FruitDao apply(String s) {
+        StringToFruitValidator validator = new StringToFruitValidator();
         String[] arr = s.split(",");
-        if (arr.length != 3) {
-            throw new RuntimeException("Cannot convert string [" + s + "] to fruitDao");
+        if (!validator.validateInputData(arr)) {
+            throw new IllegalArgumentException("Error while parsing string [" + s + "]");
         }
         return new FruitDao(arr[1], Integer.parseInt(arr[2]));
     }

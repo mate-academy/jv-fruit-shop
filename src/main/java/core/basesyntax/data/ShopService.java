@@ -25,6 +25,6 @@ public class ShopService {
         List<String> report = reportGenerator.generateReport(inventory);
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(report, "finalReport.csv");
+        fileWriter.write(report, "src/main/resources/finalReport.csv");
     }
 }
