@@ -1,23 +1,27 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransactionParser;
+import core.basesyntax.model.Storage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class ReportWriterImpl implements ReportWriter {
-    private static FruitTransaction fruitTransaction = new FruitTransaction();
+    private static FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
+    private Storage storage = new Storage();
 
     @Override
-    public void writeReport(String nameOfFileToReport) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(nameOfFileToReport))) {
-            writer.write("fruit,quantity" + System.lineSeparator());
-            writer.write("banana, " + fruitTransaction.getBanana().getBalance()
-                    + System.lineSeparator());
-            writer.write("apple, " + fruitTransaction.getApple().getBalance()
-                    + System.lineSeparator());
+    public String generateReport(String fileName) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            String textInReport = "fruit,quantity\n"
+                    + "banana, " + storage.getStorageOfFruits()
+                    .get(fruitTransactionParser.getBanana()) + "\n"
+                    + "apple, " + storage.getStorageOfFruits()
+                    .get(fruitTransactionParser.getApple());
+            writer.write(textInReport);
+            return textInReport;
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file in direction: " + nameOfFileToReport, e);
+            throw new RuntimeException("Can't find file in direction: " + fileName, e);
         }
     }
 }

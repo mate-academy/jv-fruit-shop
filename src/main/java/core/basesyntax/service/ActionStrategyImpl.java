@@ -19,4 +19,3 @@ public class ActionStrategyImpl implements ActionStrategy {
         return actionHandlerMap.get(operation);
     }
 }
-

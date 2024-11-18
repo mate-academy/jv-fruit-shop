@@ -7,9 +7,9 @@ public class ShopServiceImpl implements ShopService {
     private ActionStrategy strategy = new ActionStrategyImpl();
 
     @Override
-    public void generate(List<FruitTransaction> listOfAllTransactions) {
-        for (int i = 0; i < listOfAllTransactions.size(); i++) {
-            generateByRow(listOfAllTransactions.get(i));
+    public void generate(List<FruitTransaction> transactions) {
+        for (int i = 0; i < transactions.size(); i++) {
+            generateByRow(transactions.get(i));
         }
     }
 

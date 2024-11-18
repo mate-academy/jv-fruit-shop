@@ -15,20 +15,13 @@ public class FileReaderImpl implements FileReader {
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(nameOfFile))) {
             textInFile = Files.readAllLines(Path.of(nameOfFile));
             return textInFile.stream()
-                    .filter(this::startWithLetter)
+                    .filter(word -> word.startsWith(Operation.BALANCE.getCode())
+                            || word.startsWith(Operation.PURCHASE.getCode())
+                            || word.startsWith(Operation.RETURN.getCode())
+                            || word.startsWith(Operation.SUPPLY.getCode()))
                     .toArray(String[]::new);
         } catch (IOException e) {
             throw new RuntimeException("Can't read the data from the file " + nameOfFile, e);
         }
-    }
-
-    private boolean startWithLetter(String word) {
-        if (word.startsWith(Operation.BALANCE.getCode())
-                || word.startsWith(Operation.PURCHASE.getCode())
-                || word.startsWith(Operation.RETURN.getCode())
-                || word.startsWith(Operation.SUPPLY.getCode())) {
-            return true;
-        }
-        return false;
     }
 }
