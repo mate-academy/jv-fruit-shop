@@ -1,5 +1,7 @@
 package core.basesyntax.dao;
 
+import static core.basesyntax.model.Storage.storageOfFruits;
+
 import core.basesyntax.model.FruitTransactionParser;
 import core.basesyntax.model.Storage;
 import java.io.BufferedWriter;
@@ -13,11 +15,12 @@ public class ReportWriterImpl implements ReportWriter {
     @Override
     public String generateReport(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            String textInReport = "fruit,quantity\n"
-                    + "banana, " + storage.getStorageOfFruits()
-                    .get(fruitTransactionParser.getBanana()) + "\n"
-                    + "apple, " + storage.getStorageOfFruits()
-                    .get(fruitTransactionParser.getApple());
+            StringBuilder builder = new StringBuilder();
+            builder.append("fruit,quantity" + System.lineSeparator())
+                    .append("banana, " + storageOfFruits.get(fruitTransactionParser.getBanana())
+                            + System.lineSeparator())
+                    .append("apple, " + storageOfFruits.get(fruitTransactionParser.getApple()));
+            String textInReport = builder.toString();
             writer.write(textInReport);
             return textInReport;
         } catch (IOException e) {
