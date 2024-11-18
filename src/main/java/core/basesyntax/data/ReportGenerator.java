@@ -7,7 +7,8 @@ import java.util.Map;
 public class ReportGenerator {
     public List<String> generateReport(Map<String, Integer> inventory) {
         if (validateInputMap(inventory)) {
-            throw new IllegalArgumentException("Error while generate report. Map cannot be null or empty!");
+            throw new IllegalArgumentException(
+                    "Error while generate report. Map cannot be null or empty!");
         }
         List<String> result = new ArrayList<>();
         result.add("fruit,quantity");
