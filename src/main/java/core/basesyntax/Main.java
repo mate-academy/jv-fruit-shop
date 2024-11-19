@@ -4,7 +4,6 @@ import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileReaderImpl;
 import core.basesyntax.dao.ReportWriter;
 import core.basesyntax.dao.ReportWriterImpl;
-import core.basesyntax.model.Fruit;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransactionParser;
 import core.basesyntax.model.Operation;
@@ -33,18 +32,7 @@ public class Main {
     private static FileReader fileReader = new FileReaderImpl();
     private static ReportWriter reportWriter = new ReportWriterImpl();
     private static ShopService shopService = new ShopServiceImpl();
-    private static Fruit apple = new Fruit();
-    private static Fruit banana = new Fruit();
-
     private static FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
-
-    public static Fruit getApple() {
-        return apple;
-    }
-
-    public static Fruit getBanana() {
-        return banana;
-    }
 
     public static void main(String[] arg) {
 

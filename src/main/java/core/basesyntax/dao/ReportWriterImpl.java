@@ -17,9 +17,9 @@ public class ReportWriterImpl implements ReportWriter {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             StringBuilder builder = new StringBuilder();
             builder.append("fruit,quantity" + System.lineSeparator())
-                    .append("banana, " + storageOfFruits.get(fruitTransactionParser.getBanana())
+                    .append("banana, " + storageOfFruits.get("banana")
                             + System.lineSeparator())
-                    .append("apple, " + storageOfFruits.get(fruitTransactionParser.getApple()));
+                    .append("apple, " + storageOfFruits.get("apple"));
             String textInReport = builder.toString();
             writer.write(textInReport);
             return textInReport;
