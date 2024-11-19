@@ -4,7 +4,11 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
-    private ActionStrategy strategy = new ActionStrategyImpl();
+    private ActionStrategy strategy;
+
+    public ShopServiceImpl(ActionStrategy strategy) {
+        this.strategy = new ActionStrategyImpl();;
+    }
 
     @Override
     public void generate(List<FruitTransaction> transactions) {

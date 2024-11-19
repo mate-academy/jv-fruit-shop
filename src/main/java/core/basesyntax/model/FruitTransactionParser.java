@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FruitTransactionParser {
-    private static final int OPERATION = 0;
-    private static final int Fruit = 1;
-    private static final int QUANTITY = 2;
+    private static final int OPERATION_INDEX = 0;
+    private static final int Fruit_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     public List<FruitTransaction> parseTransaction(String[] transactions) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
@@ -15,12 +15,12 @@ public class FruitTransactionParser {
             String transaction = transactions[i];
             String[] parts = transaction.split(",");
 
-            Operation operation = Operation.getOperation(parts[OPERATION]);
+            Operation operation = Operation.getOperation(parts[OPERATION_INDEX]);
 
-            int quantity = Integer.parseInt(parts[QUANTITY]);
+            int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
 
             FruitTransaction fruitTransaction = new FruitTransaction(operation,
-                    parts[Fruit], quantity);
+                    parts[Fruit_INDEX], quantity);
 
             fruitTransactions.add(fruitTransaction);
         }

@@ -1,12 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReader;
-import core.basesyntax.dao.FileReaderImpl;
-import core.basesyntax.dao.ReportWriter;
-import core.basesyntax.dao.ReportWriterImpl;
+import core.basesyntax.dao.CsvFileReader;
+import core.basesyntax.dao.CsvFileReaderImpl;
+import core.basesyntax.dao.CsvReportWriter;
+import core.basesyntax.dao.CsvReportWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransactionParser;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.ActionStrategy;
+import core.basesyntax.service.ActionStrategyImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.action.ActionHandler;
@@ -28,11 +30,6 @@ public class Main {
             Operation.RETURN, new ReturnAction(),
             Operation.SUPPLY, new SupplyAction()
     );
-
-    private static FileReader fileReader = new FileReaderImpl();
-    private static ReportWriter reportWriter = new ReportWriterImpl();
-    private static ShopService shopService = new ShopServiceImpl();
-    private static FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
 
     public static void main(String[] arg) {
 
@@ -62,12 +59,18 @@ public class Main {
             throw new RuntimeException("File was not created", e);
         }
 
+        CsvFileReader fileReader = new CsvFileReaderImpl();
         String[] textFromDatabase = fileReader.read(filePathForDatabase);
+
+        FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
         List<FruitTransaction> allTransactions = fruitTransactionParser
                 .parseTransaction(textFromDatabase);
 
+        ActionStrategy actionStrategy = new ActionStrategyImpl();
+        ShopService shopService = new ShopServiceImpl(actionStrategy);
         shopService.generate(allTransactions);
 
+        CsvReportWriter reportWriter = new CsvReportWriterImpl();
         reportWriter.generateReport(filePathForFinalReport);
     }
 }

@@ -2,16 +2,11 @@ package core.basesyntax.dao;
 
 import static core.basesyntax.model.Storage.storageOfFruits;
 
-import core.basesyntax.model.FruitTransactionParser;
-import core.basesyntax.model.Storage;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReportWriterImpl implements ReportWriter {
-    private static FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
-    private Storage storage = new Storage();
-
+public class CsvReportWriterImpl implements CsvReportWriter {
     @Override
     public String generateReport(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {

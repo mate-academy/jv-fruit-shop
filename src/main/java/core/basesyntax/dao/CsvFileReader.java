@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface FileReader {
+public interface CsvFileReader {
     String[] read(String nameOfFile);
 }

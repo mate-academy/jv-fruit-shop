@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface FileWriter {
+public interface CsvFileWriter {
     void write(String info, String fileName);
 }
