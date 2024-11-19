@@ -9,6 +9,11 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruit + " in inventory.");
         }
-        inventory.put(fruit, currentQuantity - quantity);
+        int newQuantity = currentQuantity - quantity;
+        if (newQuantity < 0) {
+            throw new RuntimeException("The resulting quantity of "
+                    + fruit + " cannot be negative.");
+        }
+        inventory.put(fruit, newQuantity);
     }
 }
