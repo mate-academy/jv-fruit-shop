@@ -6,9 +6,14 @@ import java.util.Map;
 
 public class ActionStrategyImpl implements ActionStrategy {
     private Map<Operation, ActionHandler> actionHandlerMap;
+    private ActionStrategy strategy;
 
     public ActionStrategyImpl(Map<Operation, ActionHandler> actionHandlerMap) {
         this.actionHandlerMap = actionHandlerMap;
+    }
+
+    public ActionStrategyImpl(ActionStrategy strategy) {
+        this.strategy = strategy;
     }
 
     public ActionStrategyImpl() {

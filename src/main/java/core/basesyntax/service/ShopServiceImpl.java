@@ -7,7 +7,7 @@ public class ShopServiceImpl implements ShopService {
     private ActionStrategy strategy;
 
     public ShopServiceImpl(ActionStrategy strategy) {
-        this.strategy = new ActionStrategyImpl();;
+        this.strategy = new ActionStrategyImpl(strategy);
     }
 
     @Override
