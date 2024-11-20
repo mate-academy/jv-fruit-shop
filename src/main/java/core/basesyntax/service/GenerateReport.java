@@ -1,21 +1,27 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 
-public class GenerateRaport {
-    private static final String RESULT_FILE_NAME = "EndDayRaport.csv";
+public class GenerateReport {
 
-    public void generateRaport(Map<String, Integer> fruitQuantity) {
-        File raport = new File(RESULT_FILE_NAME);
+    private String resultFileName;
+
+    public GenerateReport(String resultFileName) {
+        this.resultFileName = resultFileName;
+    }
+
+    public void generateReport(Map<String, Integer> fruitQuantity) {
+        File report = new File(resultFileName);
 
         try {
-            if (!raport.exists()) {
-                raport.createNewFile();
+            if (!report.exists()) {
+                report.createNewFile();
             }
-            try (FileWriter fileWriter = new FileWriter(raport)) {
+
+            try (FileWriter fileWriter = new FileWriter(report)) {
                 fileWriter.write("fruit,quantity\n");
 
                 for (Map.Entry<String, Integer> entry : fruitQuantity.entrySet()) {
