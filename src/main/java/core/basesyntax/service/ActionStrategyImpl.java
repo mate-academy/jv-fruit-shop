@@ -12,13 +12,6 @@ public class ActionStrategyImpl implements ActionStrategy {
         this.actionHandlerMap = actionHandlerMap;
     }
 
-    public ActionStrategyImpl(ActionStrategy strategy) {
-        this.strategy = strategy;
-    }
-
-    public ActionStrategyImpl() {
-    }
-
     @Override
     public ActionHandler get(Operation operation) {
         return actionHandlerMap.get(operation);

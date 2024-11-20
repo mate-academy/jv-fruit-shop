@@ -5,13 +5,15 @@ import java.util.List;
 
 public class FruitTransactionParser {
     private static final int OPERATION_INDEX = 0;
-    private static final int Fruit_INDEX = 1;
+    private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+
+    private static final int OFFSET = 1;
 
     public List<FruitTransaction> parseTransaction(String[] transactions) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
-        for (int i = 1; i < transactions.length; i++) {
+        for (int i = OFFSET; i < transactions.length; i++) {
             String transaction = transactions[i];
             String[] parts = transaction.split(",");
 
@@ -20,7 +22,7 @@ public class FruitTransactionParser {
             int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
 
             FruitTransaction fruitTransaction = new FruitTransaction(operation,
-                    parts[Fruit_INDEX], quantity);
+                    parts[FRUIT_INDEX], quantity);
 
             fruitTransactions.add(fruitTransaction);
         }

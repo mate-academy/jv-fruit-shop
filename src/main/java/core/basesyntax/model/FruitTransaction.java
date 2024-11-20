@@ -33,5 +33,4 @@ public class FruitTransaction {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
 }
