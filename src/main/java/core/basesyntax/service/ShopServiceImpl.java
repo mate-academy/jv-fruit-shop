@@ -4,7 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
-    private ActionStrategy strategy;
+    private final ActionStrategy strategy;
 
     public ShopServiceImpl(ActionStrategy strategy) {
         this.strategy = strategy;
@@ -12,8 +12,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void generate(List<FruitTransaction> transactions) {
-        for (int i = 0; i < transactions.size(); i++) {
-            generateByRow(transactions.get(i));
+        for (FruitTransaction transaction : transactions) {
+            generateByRow(transaction);
         }
     }
 
