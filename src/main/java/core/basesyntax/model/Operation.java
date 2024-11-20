@@ -5,7 +5,7 @@ public enum Operation {
     SUPPLY("s"),
     PURCHASE("p"),
     RETURN("r");
-    private String code;
+    private final String code;
 
     Operation(String code) {
         this.code = code;

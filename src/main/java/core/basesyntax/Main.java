@@ -21,9 +21,9 @@ import java.util.Map;
 
 public class Main {
     private static final String FILE_PATH_FOR_DATABASE =
-            "src/main/directoryForDatabases/database.csv";
+            "src/main/resources/data.csv";
     private static final String FILE_PATH_FOR_FINALREPORT =
-            "src/main/directoryForDatabases/finalReport.csv";
+            "src/main/resources/report.csv";
     private static final Map<Operation, ActionHandler> actionHandlerMap = Map.of(
             Operation.BALANCE, new BalanceAction(),
             Operation.PURCHASE, new PurchaseAction(),

@@ -1,10 +1,11 @@
 package core.basesyntax.dao;
 
-import static core.basesyntax.storage.Storage.storageOfFruits;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Map;
+
+import static core.basesyntax.storage.Storage.storageOfFruits;
 
 public class CsvReportWriterImpl implements CsvReportWriter {
 
@@ -13,14 +14,8 @@ public class CsvReportWriterImpl implements CsvReportWriter {
     @Override
     public String generateReport(String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
-            StringBuilder reportBuilder = new StringBuilder();
-            reportBuilder.append(HEADER)
-                    .append("banana, " + storageOfFruits.get("banana")
-                            + System.lineSeparator())
-                    .append("apple, " + storageOfFruits.get("apple"));
-            String textInReport = reportBuilder.toString();
-            writer.write(textInReport);
-            return textInReport;
+            writer.write(reportData);
+            return reportData;
         } catch (IOException e) {
             throw new RuntimeException("Can't find file in direction: " + fileName, e);
         }
