@@ -2,6 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.dao.CsvFileReader;
 import core.basesyntax.dao.CsvFileReaderImpl;
+import core.basesyntax.dao.CsvReportGenerator;
+import core.basesyntax.dao.CsvReportGeneratorImpl;
 import core.basesyntax.dao.CsvReportWriter;
 import core.basesyntax.dao.CsvReportWriterImpl;
 import core.basesyntax.model.FruitTransaction;
@@ -44,7 +46,10 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(actionStrategy);
         shopService.generate(allTransactions);
 
-        CsvReportWriter reportWriter = new CsvReportWriterImpl();
-        reportWriter.generateReport(FILE_PATH_FOR_FINALREPORT);
+        CsvReportGenerator reportWriter = new CsvReportGeneratorImpl();
+        String reportInfo = reportWriter.generateReport(FILE_PATH_FOR_FINALREPORT);
+
+        CsvReportWriter csvReportWriter = new CsvReportWriterImpl();
+        csvReportWriter.write(reportInfo, FILE_PATH_FOR_FINALREPORT);
     }
 }

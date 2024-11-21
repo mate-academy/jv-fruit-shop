@@ -1,30 +1,15 @@
 package core.basesyntax.dao;
 
-import static core.basesyntax.storage.Storage.storageOfFruits;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 public class CsvReportWriterImpl implements CsvReportWriter {
 
-    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
-    private static final String COMMA = ",";
-
     @Override
-    public String generateReport(String fileName) {
-        StringBuilder reportDataBuilder = new StringBuilder(HEADER);
-        for (Map.Entry<String, Integer> fruitNameQuantityEntry : storageOfFruits.entrySet()) {
-            String fruitName = fruitNameQuantityEntry.getKey();
-            Integer quantity = fruitNameQuantityEntry.getValue();
-            reportDataBuilder.append(fruitName).append(COMMA).append(quantity);
-        }
-        String reportData = reportDataBuilder.toString();
-
+    public void write(String reportData, String fileName) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(reportData);
-            return reportData;
         } catch (IOException e) {
             throw new RuntimeException("Can't find file in direction: " + fileName, e);
         }
