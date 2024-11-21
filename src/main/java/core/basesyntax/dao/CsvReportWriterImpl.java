@@ -1,11 +1,11 @@
 package core.basesyntax.dao;
 
+import static core.basesyntax.storage.Storage.storageOfFruits;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
-
-import static core.basesyntax.storage.Storage.storageOfFruits;
 
 public class CsvReportWriterImpl implements CsvReportWriter {
 
