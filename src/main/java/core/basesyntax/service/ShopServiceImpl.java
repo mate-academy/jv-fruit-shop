@@ -11,13 +11,13 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void generate(List<FruitTransaction> transactions) {
+    public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            generateByRow(transaction);
+            processTransaction(transaction);
         }
     }
 
-    void generateByRow(FruitTransaction transaction) {
+    private void processTransaction(FruitTransaction transaction) {
         strategy.get(transaction.getOperation())
                 .count(transaction.getFruit(), transaction.getQuantity());
     }

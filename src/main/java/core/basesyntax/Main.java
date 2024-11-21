@@ -36,7 +36,7 @@ public class Main {
     public static void main(String[] arg) {
 
         CsvFileReader fileReader = new CsvFileReaderImpl();
-        String[] textFromDatabase = fileReader.read(FILE_PATH_FOR_DATABASE);
+        List<String> textFromDatabase = fileReader.read(FILE_PATH_FOR_DATABASE);
 
         FruitTransactionParser fruitTransactionParser = new FruitTransactionParser();
         List<FruitTransaction> allTransactions = fruitTransactionParser
@@ -44,7 +44,7 @@ public class Main {
 
         ActionStrategy actionStrategy = new ActionStrategyImpl(actionHandlerMap);
         ShopService shopService = new ShopServiceImpl(actionStrategy);
-        shopService.generate(allTransactions);
+        shopService.process(allTransactions);
 
         CsvReportGenerator reportWriter = new CsvReportGeneratorImpl();
         String reportInfo = reportWriter.generateReport(FILE_PATH_FOR_FINALREPORT);

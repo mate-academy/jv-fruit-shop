@@ -5,7 +5,6 @@ import static core.basesyntax.storage.Storage.storageOfFruits;
 import java.util.Map;
 
 public class CsvReportGeneratorImpl implements CsvReportGenerator {
-
     private static final String HEADER = "fruit,quantity" + System.lineSeparator();
     private static final String COMMA = ",";
 
@@ -15,9 +14,9 @@ public class CsvReportGeneratorImpl implements CsvReportGenerator {
         for (Map.Entry<String, Integer> fruitNameQuantityEntry : storageOfFruits.entrySet()) {
             String fruitName = fruitNameQuantityEntry.getKey();
             Integer quantity = fruitNameQuantityEntry.getValue();
-            reportDataBuilder.append(fruitName).append(COMMA).append(quantity);
+            reportDataBuilder.append(fruitName).append(COMMA).append(quantity)
+                    .append(System.lineSeparator());
         }
-        String reportData = reportDataBuilder.toString();
-        return reportData;
+        return reportDataBuilder.toString();
     }
 }

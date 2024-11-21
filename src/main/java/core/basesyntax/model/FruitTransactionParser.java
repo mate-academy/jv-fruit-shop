@@ -9,11 +9,11 @@ public class FruitTransactionParser {
     private static final int QUANTITY_INDEX = 2;
     private static final int OFFSET = 1;
 
-    public List<FruitTransaction> parseTransaction(String[] transactions) {
+    public List<FruitTransaction> parseTransaction(List<String> transactions) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
 
-        for (int i = OFFSET; i < transactions.length; i++) {
-            String transaction = transactions[i];
+        for (int i = OFFSET; i < transactions.size(); i++) {
+            String transaction = transactions.get(i);
             String[] parts = transaction.split(",");
 
             Operation operation = Operation.getOperation(parts[OPERATION_INDEX]);

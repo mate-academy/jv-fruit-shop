@@ -8,6 +8,7 @@ public class PurchaseAction implements ActionHandler {
         checkAmount(amount);
 
         int newBalance = storageOfFruits.get(fruit) - amount;
+        checkAmount(newBalance);
         storageOfFruits.put(fruit, newBalance);
     }
 }
