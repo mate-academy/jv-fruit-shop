@@ -17,7 +17,7 @@ public class FileReaderServiceImpl implements FileReaderService {
         Path path = Paths.get(filename);
         try {
             Files.lines(path).skip(SKIP_LINE).forEach(linesFromFile::add);
-        }catch(IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException("Can't read data from file : " + filename);
         }
         return linesFromFile;

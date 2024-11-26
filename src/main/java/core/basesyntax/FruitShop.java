@@ -49,6 +49,4 @@ public class FruitShop {
         FileWriterService fileWriterService = new FileWriterServiceImpl();
         fileWriterService.writeToFile(OUTPUT_FILE_PATH, report);
     }
-    // HINT: In the `public static void main(String[] args)` it is better to create instances of your classes, 
-    // and call their methods, but do not write any business logic in the `main` method!
 }
