@@ -2,17 +2,20 @@ package core.basesyntax;
 
 import core.basesyntax.handlers.BalanceOperationHandler;
 import core.basesyntax.handlers.PurchaseOperationHandler;
-import core.basesyntax.handlers.SupplyOperationHandler;
 import core.basesyntax.handlers.ReturnOperationHandler;
+import core.basesyntax.handlers.SupplyOperationHandler;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.services.DataProcessorService;
+import core.basesyntax.services.FileReaderService;
+import core.basesyntax.services.FileWriterService;
+import core.basesyntax.services.OperationProcessor;
+import core.basesyntax.services.ReportCreatorService;
 import core.basesyntax.services.impl.DataProcessorServiceImpl;
 import core.basesyntax.services.impl.FileReaderServiceImpl;
 import core.basesyntax.services.impl.FileWriterServiceImpl;
 import core.basesyntax.services.impl.OperationProcessorImpl;
 import core.basesyntax.services.impl.ReportCreatorServiceImpl;
-import core.basesyntax.services.*;
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +39,8 @@ public class FruitShop {
         operationMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
 
         OperationProcessor operationService = new OperationProcessorImpl(operationMap);
-        List<FruitTransaction> fruitTransactionList = dataProcessorService.processInputData(lines);
+        List<FruitTransaction> fruitTransactionList
+                = dataProcessorService.processInputData(lines);
         operationService.manageTransactions(fruitTransactionList);
 
         ReportCreatorService reportCreatorService = new ReportCreatorServiceImpl();
