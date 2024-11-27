@@ -49,5 +49,6 @@ public class FruitShop {
         operationMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
         operationMap.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
         return operationMap;
+
     }
 }
