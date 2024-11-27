@@ -27,7 +27,7 @@ public class DataProcessorServiceImpl implements DataProcessorService {
         if (fruitQuantity < 0) {
             throw new InvalidDataException("Invalid Quantity, fruit quantity is: "
                     + fruitQuantity);
-        }
-        return new FruitTransaction(operation, fruitType, fruitQuantity);
+            }
+            return new FruitTransaction(operation, fruitType, fruitQuantity);
     }
 }
