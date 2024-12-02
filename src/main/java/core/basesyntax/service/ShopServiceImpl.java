@@ -13,6 +13,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void processTransaction(List<FruitTransaction> transitionList) {
-        transitionList.forEach(f -> operationStrategy.getOperationStrategy(f.getOperation()).apply(f));
+        transitionList.forEach(f ->
+                operationStrategy.getOperationStrategy(f.getOperation()).apply(f));
     }
 }
