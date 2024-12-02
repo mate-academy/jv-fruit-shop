@@ -6,7 +6,7 @@ import core.basesyntax.db.FruitDao;
 import core.basesyntax.transaction.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public ReturnOperation(FruitDao fruitDao) {
         this.fruitDao = fruitDao;

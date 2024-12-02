@@ -4,12 +4,12 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void addOrUpdateFruitToStorage(String fruitName, Integer quantity) {
-        FruitStorage.FRUITS_STORAGE.put(fruitName, quantity);
+        FruitStorage.fruitsStorage.put(fruitName, quantity);
 
     }
 
     @Override
     public Integer getFruitQuantity(String fruitName) {
-        return FruitStorage.FRUITS_STORAGE.get(fruitName);
+        return FruitStorage.fruitsStorage.get(fruitName);
     }
 }

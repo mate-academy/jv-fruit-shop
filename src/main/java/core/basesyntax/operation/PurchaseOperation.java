@@ -6,7 +6,7 @@ import core.basesyntax.transaction.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
     private static final int ZERO_VALUE = 0;
-    private FruitDao fruitDao;
+    private final FruitDao fruitDao;
 
     public PurchaseOperation(FruitDao fruitDao) {
         this.fruitDao = fruitDao;

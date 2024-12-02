@@ -10,7 +10,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String generateReport() {
         StringBuilder reportBuilder = new StringBuilder();
         reportBuilder.append(FIRST_LINE).append(System.lineSeparator());
-        FruitStorage.FRUITS_STORAGE.forEach(
+        FruitStorage.fruitsStorage.forEach(
                 (key, value) -> reportBuilder.append(key)
                         .append(SEPARATOR)
                         .append(value)
