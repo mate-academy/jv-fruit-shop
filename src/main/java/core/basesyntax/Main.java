@@ -4,7 +4,7 @@ import core.basesyntax.converter.DataConverter;
 import core.basesyntax.converter.DataConverterImpl;
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.db.FruitDaoImpl;
-import core.basesyntax.file.operations.FIleWriterImpl;
+import core.basesyntax.file.operations.FileWriterImpl;
 import core.basesyntax.file.operations.FileReader;
 import core.basesyntax.file.operations.FileReaderImpl;
 import core.basesyntax.file.operations.FileWriter;
@@ -51,7 +51,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.generateReport();
 
-        FileWriter fileWriter = new FIleWriterImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(OUTPUT_FILE_PATH, resultingReport);
     }
 }

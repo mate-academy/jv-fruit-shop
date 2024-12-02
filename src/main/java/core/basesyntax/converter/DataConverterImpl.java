@@ -71,11 +71,8 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private void nullCheckForInputData(List<String> inputData) {
-        for (String a : inputData) {
-            if (a == null || a.isEmpty()) {
-                throw new InvalidOperationException(
-                        "Input data can't be empty or contains null values!");
-            }
+        if (inputData == null || inputData.stream().anyMatch(a -> a == null || a.isEmpty())) {
+            throw new InvalidOperationException("Input data contains null or empty values!");
         }
     }
 }
