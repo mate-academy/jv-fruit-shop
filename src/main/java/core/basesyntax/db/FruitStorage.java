@@ -21,6 +21,7 @@ public class FruitStorage {
     public static Map<String, Integer> getFruitsStorage() {
         return Collections.unmodifiableMap(fruitsStorage);
     }
+
     private static void nullCheck(String fruitName) {
         if (fruitName == null || fruitName.isEmpty()) {
             throw new InvalidOperationException("Fruit name can't be null or empty!");
