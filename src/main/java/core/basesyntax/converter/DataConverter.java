@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface DataConverter {
 
-    List<FruitTransaction> convertDataFromInputCsvFile(List<String> inputData);
+    List<FruitTransaction> convertFromCsv(List<String> inputData);
 
 }

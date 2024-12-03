@@ -1,5 +1,6 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.exceptions.OperationException;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.transaction.FruitTransaction;
 import java.util.Map;
@@ -13,7 +14,15 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public OperationHandler getOperationStrategy(FruitTransaction.Operation operation) {
-        return operationHandlerMap.get(operation);
+    public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
+        OperationHandler operationHandler = operationHandlerMap.get(operation);
+        nullCheckInOperationHandler(operationHandler);
+        return operationHandler;
+    }
+
+    private void nullCheckInOperationHandler(OperationHandler operationHandler) {
+        if (operationHandler == null) {
+            throw new OperationException("Operation is not found in the map!");
+        }
     }
 }

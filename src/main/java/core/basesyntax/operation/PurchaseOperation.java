@@ -13,16 +13,17 @@ public class PurchaseOperation implements OperationHandler {
     }
 
     @Override
-    public void apply(FruitTransaction fruitTransition) {
-        String fruitName = fruitTransition.getFruitName();
-        Integer fruitQuantity = fruitDao.getFruitQuantity(fruitName);
-        int fruitTransitionQuantity = fruitTransition.getQuantity();
-        Integer purchaseResult = fruitQuantity - fruitTransitionQuantity;
-        canBePurchased(purchaseResult);
-        fruitDao.addOrUpdateFruitToStorage(fruitName, purchaseResult);
+    public void apply(FruitTransaction fruitTransaction) {
+        InputValidator.unexpectedNullOrEmptyFields(fruitTransaction);
+        String fruitName = fruitTransaction.getFruitName();
+        int fruitQuantity = fruitDao.getFruitQuantity(fruitName);
+        int fruitTransitionQuantity = fruitTransaction.getQuantity();
+        int purchaseResult = fruitQuantity - fruitTransitionQuantity;
+        checkPurchaseAvailability(purchaseResult);
+        fruitDao.saveOrUpdate(fruitName, purchaseResult);
     }
 
-    private void canBePurchased(Integer purchaseResult) {
+    private void checkPurchaseAvailability(Integer purchaseResult) {
         if (purchaseResult < ZERO_VALUE) {
             throw new NoSuchFruitInStorageException("Not enough fruits in storage!");
         }

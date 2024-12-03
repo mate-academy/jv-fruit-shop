@@ -1,7 +1,5 @@
 package core.basesyntax.operation;
 
-import static core.basesyntax.operation.InvalidInputFields.invalidInputFields;
-
 import core.basesyntax.db.FruitDao;
 import core.basesyntax.transaction.FruitTransaction;
 
@@ -13,12 +11,12 @@ public class SupplyOperation implements OperationHandler {
     }
 
     @Override
-    public void apply(FruitTransaction fruitTransition) {
-        invalidInputFields(fruitTransition);
-        String fruitName = fruitTransition.getFruitName();
+    public void apply(FruitTransaction fruitTransaction) {
+        InputValidator.unexpectedNullOrEmptyFields(fruitTransaction);
+        String fruitName = fruitTransaction.getFruitName();
         Integer fruitQuantity = fruitDao.getFruitQuantity(fruitName);
-        int fruitTransitionQuantity = fruitTransition.getQuantity();
-        Integer supplyResult = fruitQuantity + fruitTransitionQuantity;
-        fruitDao.addOrUpdateFruitToStorage(fruitName, supplyResult);
+        int fruitTransitionQuantity = fruitTransaction.getQuantity();
+        int supplyResult = fruitQuantity + fruitTransitionQuantity;
+        fruitDao.saveOrUpdate(fruitName, supplyResult);
     }
 }

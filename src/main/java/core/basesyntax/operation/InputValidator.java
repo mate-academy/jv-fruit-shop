@@ -3,9 +3,9 @@ package core.basesyntax.operation;
 import core.basesyntax.exceptions.InvalidOperationException;
 import core.basesyntax.transaction.FruitTransaction;
 
-public class InvalidInputFields {
+public class InputValidator {
 
-    protected static void invalidInputFields(FruitTransaction fruitTransition) {
+    protected static void unexpectedNullOrEmptyFields(FruitTransaction fruitTransition) {
 
         if (fruitTransition.getQuantity() < 0) {
             throw new InvalidOperationException("Quantity must be greater than 0!");

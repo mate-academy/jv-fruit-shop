@@ -14,7 +14,7 @@ public class DataConverterImpl implements DataConverter {
     private static final String SEPARATOR = ",";
 
     @Override
-    public List<FruitTransaction> convertDataFromInputCsvFile(List<String> inputData) {
+    public List<FruitTransaction> convertFromCsv(List<String> inputData) {
         return getSeparatedTransactions(inputData);
     }
 

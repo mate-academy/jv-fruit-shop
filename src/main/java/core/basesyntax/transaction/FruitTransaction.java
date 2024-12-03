@@ -11,9 +11,8 @@ public class FruitTransaction {
         return operation;
     }
 
-    public FruitTransaction setOperation(Operation operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
-        return this;
     }
 
     public String getFruitName() {
@@ -50,8 +49,26 @@ public class FruitTransaction {
         return Objects.hash(operation, fruitName, quantity);
     }
 
-    // b - BALANCE, p - PURCHASE, s - SUPPLY, R - return
     public enum Operation {
-        B, P, S, R
+        /**
+         * B Represents a balance operation where the initial
+         * stock of fruits is set.
+         */
+        B,
+        /**
+         * P Represents a purchase operation where fruits
+         * are purchased by a customer.
+         */
+        P,
+        /**
+         * S Represents a supply operation where fruits are
+         * supplied to increase the stock.
+         */
+        S,
+        /**
+         * R Represents a return operation where fruits are
+         * returned by the customer.
+         */
+        R
     }
 }

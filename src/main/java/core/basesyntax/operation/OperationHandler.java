@@ -4,5 +4,5 @@ import core.basesyntax.transaction.FruitTransaction;
 
 public interface OperationHandler {
 
-    void apply(FruitTransaction fruitTransition);
+    void apply(FruitTransaction fruitTransaction);
 }

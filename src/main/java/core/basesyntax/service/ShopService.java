@@ -5,6 +5,6 @@ import java.util.List;
 
 public interface ShopService {
 
-    void processTransaction(List<FruitTransaction> transitionList);
+    void processTransactions(List<FruitTransaction> transactionList);
 
 }

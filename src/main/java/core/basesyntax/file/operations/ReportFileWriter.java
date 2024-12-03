@@ -1,6 +1,6 @@
 package core.basesyntax.file.operations;
 
-public interface FileWriter {
+public interface ReportFileWriter {
 
     void writeToFile(String fileName, String report);
 
