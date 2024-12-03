@@ -3,19 +3,19 @@ package core.basesyntax.strategy;
 import core.basesyntax.exceptions.OperationException;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.transaction.FruitTransaction;
-import java.util.Map;
+import java.util.EnumMap;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap;
+    private final EnumMap<FruitTransaction.Operation, OperationHandler> operationOperationHandlerEnumMap;
 
-    public OperationStrategyImpl(Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlerMap) {
-        this.operationHandlerMap = operationHandlerMap;
+    public OperationStrategyImpl(EnumMap<FruitTransaction.Operation, OperationHandler> operationOperationHandlerEnumMap) {
+        this.operationOperationHandlerEnumMap = operationOperationHandlerEnumMap;
     }
+
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
-        OperationHandler operationHandler = operationHandlerMap.get(operation);
+        OperationHandler operationHandler = operationOperationHandlerEnumMap.get(operation);
         nullCheckInOperationHandler(operationHandler);
         return operationHandler;
     }

@@ -21,9 +21,8 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.transaction.FruitTransaction;
 import java.io.IOException;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "src/main/resources/reportToRead.csv";
@@ -37,7 +36,7 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
 
         FruitDao fruitDao = new FruitDaoImpl();
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        EnumMap<FruitTransaction.Operation, OperationHandler> operationHandlers = new EnumMap<>(FruitTransaction.Operation.class);
         operationHandlers.put(FruitTransaction.Operation.B, new BalanceOperation(fruitDao));
         operationHandlers.put(FruitTransaction.Operation.P, new PurchaseOperation(fruitDao));
         operationHandlers.put(FruitTransaction.Operation.R, new ReturnOperation(fruitDao));
