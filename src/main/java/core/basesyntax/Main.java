@@ -36,7 +36,8 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
 
         FruitDao fruitDao = new FruitDaoImpl();
-        EnumMap<FruitTransaction.Operation, OperationHandler> operationHandlers = new EnumMap<>(FruitTransaction.Operation.class);
+        EnumMap<FruitTransaction.Operation, OperationHandler> operationHandlers =
+                new EnumMap<>(FruitTransaction.Operation.class);
         operationHandlers.put(FruitTransaction.Operation.B, new BalanceOperation(fruitDao));
         operationHandlers.put(FruitTransaction.Operation.P, new PurchaseOperation(fruitDao));
         operationHandlers.put(FruitTransaction.Operation.R, new ReturnOperation(fruitDao));
