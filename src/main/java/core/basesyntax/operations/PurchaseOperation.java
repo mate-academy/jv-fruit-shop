@@ -10,7 +10,7 @@ public class PurchaseOperation implements OperationHandler {
         String fruits = transaction.getFruit();
         int quantity = transaction.getQuantity();
         if (!Storage.fruits.containsKey(fruits)) {
-           throw new IllegalArgumentException("Fruit: " + fruits + " is not available");
+            throw new IllegalArgumentException("Fruit: " + fruits + " is not available");
         }
         int currentQuantity = Storage.fruits.getOrDefault(fruits, 0);
         if (currentQuantity < quantity) {

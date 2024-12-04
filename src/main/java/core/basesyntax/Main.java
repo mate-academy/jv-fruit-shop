@@ -4,6 +4,8 @@ import core.basesyntax.converter.DataConverter;
 import core.basesyntax.converter.DataConverterImpl;
 import core.basesyntax.dao.FileReader;
 import core.basesyntax.dao.FileReaderImpl;
+import core.basesyntax.generator.ReportGenerator;
+import core.basesyntax.generator.ReportGeneratorImpl;
 import core.basesyntax.handler.OperationHandler;
 import core.basesyntax.handler.OperationStrategy;
 import core.basesyntax.handler.OperationStrategyImpl;
@@ -12,13 +14,10 @@ import core.basesyntax.operations.BalanceOperation;
 import core.basesyntax.operations.PurchaseOperation;
 import core.basesyntax.operations.ReturnOperation;
 import core.basesyntax.operations.SupplyOperation;
-import core.basesyntax.generator.ReportGenerator;
-import core.basesyntax.generator.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.writer.FileWriterService;
 import core.basesyntax.writer.FileWriterServiceImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +30,7 @@ public class Main {
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
