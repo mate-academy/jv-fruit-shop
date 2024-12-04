@@ -10,7 +10,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write a " + filePath);
+            throw new RuntimeException("Can't write a " + filePath, e);
         }
     }
 }

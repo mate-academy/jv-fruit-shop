@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] arg) {
+    public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFromFile("src/main/resources/reportToRead.csv");

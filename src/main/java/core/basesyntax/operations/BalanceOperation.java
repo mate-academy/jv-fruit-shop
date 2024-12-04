@@ -7,8 +7,8 @@ import core.basesyntax.model.FruitTransaction;
 public class BalanceOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        String fruits = transaction.getFruit();
+        String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        Storage.fruits.put(fruits, quantity);
+        Storage.fruits.put(fruit, quantity);
     }
 }
