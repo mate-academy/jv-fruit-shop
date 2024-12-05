@@ -20,7 +20,7 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         DataConverter dataConverter = new DataConverterImpl();
         MyFileReader fileReader = new FileReaderImpl();
-        //My IntelliJ version doesn't work with csv files, so I created it locally on my PC
+        //My IntelliJ version doesn't work with csv files, so I created a csv file locally on my PC
         String path = "C:/Users/hois/Desktop/toRead.csv";
         List<String> inputReport = fileReader.read(path);
         shopService.process(dataConverter.convertToTransaction(inputReport));
