@@ -5,26 +5,29 @@ import db.WareHouse;
 import java.util.Arrays;
 
 public class WareHouseDaoImpl implements WareHouseDao {
-    private static final int ZERO = 0;
+    private static final int FRUIT_NAME_INDEX = 0;
+    private static final int FRUIT_QUANTITY_INDEX = 1;
 
     @Override
     public int getStoredQuantity(String fruitName) {
         if (isFruitPresence(fruitName)) {
             String[] fruitLot = WareHouse.STORED_FRUITS
                     .stream()
-                    .filter(array -> array[0].equals(fruitName))
+                    .filter(array -> array[FRUIT_NAME_INDEX].equals(fruitName))
                     .findFirst().get();
             return Integer.parseInt(fruitLot[1]);
         }
-        return ZERO;
+        return 0;
     }
 
     @Override
     public void addFruitLot(String fruitName, Integer quantity) {
         if (isFruitPresence(fruitName)) {
             for (String[] fruitLot : WareHouse.STORED_FRUITS) {
-                if (fruitLot[0].equals(fruitName)) {
-                    fruitLot[1] = String.valueOf(Integer.parseInt(fruitLot[1]) + quantity);
+                if (fruitLot[FRUIT_NAME_INDEX].equals(fruitName)) {
+                    fruitLot[FRUIT_QUANTITY_INDEX]
+                            = String.valueOf(Integer.parseInt(fruitLot[FRUIT_QUANTITY_INDEX])
+                            + quantity);
                     break;
                 }
             }
@@ -36,9 +39,9 @@ public class WareHouseDaoImpl implements WareHouseDao {
 
     @Override
     public void removeFruitLot(String fruitName) {
-        int lotIndex = ZERO;
+        int lotIndex = FRUIT_NAME_INDEX;
         for (String[] fruitLot : WareHouse.STORED_FRUITS) {
-            if (fruitLot[0].equals(fruitName)) {
+            if (fruitLot[FRUIT_NAME_INDEX].equals(fruitName)) {
                 WareHouse.STORED_FRUITS.remove(lotIndex);
                 break;
             }

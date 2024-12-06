@@ -2,6 +2,6 @@ package service;
 
 import java.util.List;
 
-public interface FileWriter {
+public interface DataWriter {
     void writeToFile(List<String> report, String filename);
 }

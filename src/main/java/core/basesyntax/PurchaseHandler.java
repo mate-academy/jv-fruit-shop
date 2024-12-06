@@ -3,10 +3,15 @@ package core.basesyntax;
 import dao.WareHouseDao;
 import dao.impl.WareHouseDaoImpl;
 
-public class Purchase extends OperationStrategy {
+public class PurchaseHandler extends OperationHandler {
+    private WareHouseDao wareHouseDao;
+
+    public PurchaseHandler() {
+        this.wareHouseDao = new WareHouseDaoImpl();
+    }
+
     @Override
     public void makeOperation() {
-        WareHouseDao wareHouseDao = new WareHouseDaoImpl();
         int theRest;
         int storedFruits = wareHouseDao.getStoredQuantity(this.getFruit());
         if (this.getQuantity() > storedFruits) {

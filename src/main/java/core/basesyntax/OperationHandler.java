@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-public abstract class OperationStrategy {
+public abstract class OperationHandler {
     private FruitTransfer fruitTransfer;
 
     public void setFruitTransfer(FruitTransfer fruitTransfer) {

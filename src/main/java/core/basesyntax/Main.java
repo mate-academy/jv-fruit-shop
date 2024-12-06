@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Map;
 import service.DataConverter;
 import service.DataReader;
-import service.FileWriter;
+import service.DataWriter;
 import service.ReportGenerator;
 import service.ShopService;
 import service.impl.CsvDataReaderImpl;
-import service.impl.CsvFileWriterImpl;
+import service.impl.CsvDataWriterImpl;
 import service.impl.DataConverterImpl;
 import service.impl.ReportGeneratorImpl;
 import service.impl.ShopServiceImpl;
@@ -17,15 +17,16 @@ import service.impl.ShopServiceImpl;
 public class Main {
     public static void main(String[] args) {
         //Declare Map object "handlers" for determine operation
-        Map<Operations, OperationStrategy> handlers = new HashMap<>();
-        handlers.put(Operations.BALANCE, new Balance());
-        handlers.put(Operations.PURCHASE, new Purchase());
-        handlers.put(Operations.RETURN, new Return());
-        handlers.put(Operations.SUPPLY, new Supply());
+        Map<Operation, OperationHandler> handlers = new HashMap<>();
+        handlers.put(Operation.BALANCE, new BalanceHandler());
+        handlers.put(Operation.PURCHASE, new PurchaseHandler());
+        handlers.put(Operation.RETURN, new ReturnHandler());
+        handlers.put(Operation.SUPPLY, new SupplyHandler());
 
         //Read the data from source
         DataReader dataReader = new CsvDataReaderImpl();
-        List<String> inputReport = dataReader.getDataFromFile("src/main/resources/balance.csv");
+        final List<String> inputReport
+                = dataReader.getDataFromFile("src/main/resources/balance.csv");
 
         //Convert received data from reader to particular format
         DataConverter dataConverter = new DataConverterImpl();
@@ -40,7 +41,7 @@ public class Main {
         List<String> transitionalReport = reportGenerator.getReport();
 
         //Write report to file CSV format
-        FileWriter fileWriter = new CsvFileWriterImpl();
+        DataWriter fileWriter = new CsvDataWriterImpl();
         fileWriter.writeToFile(transitionalReport, "report");
     }
 }

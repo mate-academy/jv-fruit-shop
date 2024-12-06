@@ -1,7 +1,7 @@
 package service.impl;
 
 import core.basesyntax.FruitTransfer;
-import core.basesyntax.Operations;
+import core.basesyntax.Operation;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
                 .collect(Collectors.toList());
 
         for (String[] line : collectedLinesInfo) {
-            Operations operations = Operations.getOperations(line[0]);
+            Operation operations = Operation.getOperations(line[0]);
             String fruit = line[1];
             int quantity = Integer.parseInt(line[2]);
             transferList.add(new FruitTransfer(operations, fruit, quantity));

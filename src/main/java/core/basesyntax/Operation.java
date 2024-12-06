@@ -1,15 +1,14 @@
 package core.basesyntax;
 
-public enum Operations {
+public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
-    RETURN("r"),
-    NOT_FOUND("Not found");
+    RETURN("r");
 
     private String title;
 
-    Operations(String title) {
+    Operation(String title) {
         this.title = title;
     }
 
@@ -17,13 +16,13 @@ public enum Operations {
         return title;
     }
 
-    public static Operations getOperations(String title) {
-        for (Operations operations : Operations.values()) {
+    public static Operation getOperations(String title) {
+        for (Operation operations : Operation.values()) {
             if (operations.title.equals(title)) {
                 return operations;
             }
         }
-        return NOT_FOUND;
+        return null;
     }
 }
 
