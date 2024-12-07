@@ -20,7 +20,8 @@ public class ShopServiceImpl implements ShopService {
             if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE) {
                 calculatedTransactionsMap.put(fruitTransaction.getFruit(), fruitTransaction);
             } else {
-                FruitTransaction calculatedTransaction = calculatedTransactionsMap.get(fruitTransaction.getFruit());
+                FruitTransaction calculatedTransaction = calculatedTransactionsMap
+                        .get(fruitTransaction.getFruit());
                 if (calculatedTransaction != null) {
                     operationStrategy.makeOperation(
                             fruitTransaction.getOperation(),

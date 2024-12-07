@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private final static String DEFAULT_FIRST_LINE = "fruit,quantity\n";
+    private static final String DEFAULT_FIRST_LINE = "fruit,quantity\n";
 
     @Override
     public String getReport(List<FruitTransaction> fruitTransactionList) {
