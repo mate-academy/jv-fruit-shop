@@ -1,25 +1,32 @@
 package core.basesyntax;
 
-import dao.WareHouseDao;
-import dao.impl.WareHouseDaoImpl;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 
-public class PurchaseHandler extends OperationHandler {
-    private WareHouseDao wareHouseDao;
+public class PurchaseHandler implements OperationHandler {
+    private final StorageDao fruitDao;
+    private FruitTransfer fruitTransfer;
 
     public PurchaseHandler() {
-        this.wareHouseDao = new WareHouseDaoImpl();
+        this.fruitDao = new StorageDaoImpl();
+    }
+
+    @Override
+    public void setFruitTransfer(FruitTransfer fruitTransfer) {
+        this.fruitTransfer = fruitTransfer;
     }
 
     @Override
     public void makeOperation() {
-        int theRest;
-        int storedFruits = wareHouseDao.getStoredQuantity(this.getFruit());
-        if (this.getQuantity() > storedFruits) {
-            throw new RuntimeException("Invalid quantity, " + this.getFruit() + " balance is "
+        int updatedFruitBalance;
+        int storedFruits = fruitDao.getStoredQuantity(this.fruitTransfer.getFruit());
+        if (this.fruitTransfer.getQuantity() > storedFruits) {
+            throw new RuntimeException("Invalid quantity, " + this.fruitTransfer.getFruit()
+                    + " balance is "
                     + storedFruits);
         }
-        theRest = storedFruits - this.getQuantity();
-        wareHouseDao.removeFruitLot(this.getFruit());
-        wareHouseDao.addFruitLot(this.getFruit(), theRest);
+        updatedFruitBalance = storedFruits - this.fruitTransfer.getQuantity();
+        fruitDao.removeFruitLot(this.fruitTransfer.getFruit());
+        fruitDao.addFruit(this.fruitTransfer.getFruit(), updatedFruitBalance);
     }
 }

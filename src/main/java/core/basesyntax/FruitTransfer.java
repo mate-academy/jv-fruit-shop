@@ -5,6 +5,9 @@ public class FruitTransfer {
     private String fruit;
     private int quantity;
 
+    public FruitTransfer() {
+    }
+
     public FruitTransfer(Operation operations, String fruit, int quantity) {
         this.operations = operations;
         this.fruit = fruit;

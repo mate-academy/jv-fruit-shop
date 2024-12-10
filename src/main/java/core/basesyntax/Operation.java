@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import java.util.Arrays;
+
 public enum Operation {
     BALANCE("b"),
     SUPPLY("s"),
@@ -17,12 +19,10 @@ public enum Operation {
     }
 
     public static Operation getOperations(String title) {
-        for (Operation operations : Operation.values()) {
-            if (operations.title.equals(title)) {
-                return operations;
-            }
-        }
-        return null;
+        return Arrays.stream(Operation.values())
+                .filter(op -> op.getTitle().equals(title))
+                .findAny()
+                .orElseThrow(RuntimeException::new);
     }
 }
 

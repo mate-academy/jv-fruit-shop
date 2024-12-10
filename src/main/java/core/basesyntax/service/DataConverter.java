@@ -1,4 +1,4 @@
-package service;
+package core.basesyntax.service;
 
 import core.basesyntax.FruitTransfer;
 import java.util.List;

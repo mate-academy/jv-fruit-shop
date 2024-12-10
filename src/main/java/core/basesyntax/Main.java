@@ -1,20 +1,22 @@
 package core.basesyntax;
 
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.DataReader;
+import core.basesyntax.service.DataWriter;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.CsvDataReaderImpl;
+import core.basesyntax.service.impl.CsvDataWriterImpl;
+import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.DataConverter;
-import service.DataReader;
-import service.DataWriter;
-import service.ReportGenerator;
-import service.ShopService;
-import service.impl.CsvDataReaderImpl;
-import service.impl.CsvDataWriterImpl;
-import service.impl.DataConverterImpl;
-import service.impl.ReportGeneratorImpl;
-import service.impl.ShopServiceImpl;
 
 public class Main {
+    private static final String PATH = "src/main/resources/balance.csv";
+
     public static void main(String[] args) {
         //Declare Map object "handlers" for determine operation
         Map<Operation, OperationHandler> handlers = new HashMap<>();
@@ -26,15 +28,15 @@ public class Main {
         //Read the data from source
         DataReader dataReader = new CsvDataReaderImpl();
         final List<String> inputReport
-                = dataReader.getDataFromFile("src/main/resources/balance.csv");
+                = dataReader.getDataFromFile(PATH);
 
         //Convert received data from reader to particular format
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransfer> transfers = dataConverter.convertToTransfer(inputReport);
 
         //Process and store the data to DB
-        ShopService shopService = new ShopServiceImpl(handlers);
-        shopService.process(transfers);
+        ShopService shopService = new ShopServiceImpl();
+        shopService.process(transfers, handlers);
 
         //Generate a report
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
@@ -43,5 +45,6 @@ public class Main {
         //Write report to file CSV format
         DataWriter fileWriter = new CsvDataWriterImpl();
         fileWriter.writeToFile(transitionalReport, "report");
+
     }
 }

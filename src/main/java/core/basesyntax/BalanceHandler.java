@@ -1,17 +1,23 @@
 package core.basesyntax;
 
-import dao.WareHouseDao;
-import dao.impl.WareHouseDaoImpl;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.impl.StorageDaoImpl;
 
-public class BalanceHandler extends OperationHandler {
-    private WareHouseDao wareHouseDao;
+public class BalanceHandler implements OperationHandler {
+    private final StorageDao fruitDao;
+    private FruitTransfer fruitTransfer;
 
     public BalanceHandler() {
-        this.wareHouseDao = new WareHouseDaoImpl();
+        this.fruitDao = new StorageDaoImpl();
+    }
+
+    @Override
+    public void setFruitTransfer(FruitTransfer fruitTransfer) {
+        this.fruitTransfer = fruitTransfer;
     }
 
     @Override
     public void makeOperation() {
-        wareHouseDao.addFruitLot(this.getFruit(), this.getQuantity());
+        fruitDao.addFruit(this.fruitTransfer.getFruit(), this.fruitTransfer.getQuantity());
     }
 }
