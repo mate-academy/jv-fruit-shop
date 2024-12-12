@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.MyFileWriter;
-
 import java.io.FileWriter;
 import java.io.IOException;
 
