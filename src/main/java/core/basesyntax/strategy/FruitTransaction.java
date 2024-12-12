@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.strategy;
 
 public class FruitTransaction {
     private final Operation operation;

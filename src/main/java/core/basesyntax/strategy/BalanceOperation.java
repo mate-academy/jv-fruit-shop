@@ -1,6 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.strategy;
 
-public class ReturnOperation implements OperationHandler {
+import core.basesyntax.db.Storage;
+
+public class BalanceOperation implements OperationHandler {
     public void handle(FruitTransaction transaction) {
         Storage.add(transaction.getFruit(), transaction.getQuantity());
     }

@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
+
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     public static final String REPORT_TITLE = "fruit,quantity\n";
