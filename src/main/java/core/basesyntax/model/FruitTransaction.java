@@ -59,7 +59,7 @@ public class FruitTransaction {
             case "s" -> Operation.SUPPLY;
             case "p" -> Operation.PURCHASE;
             case "r" -> Operation.RETURN;
-            default -> throw new RuntimeException("Unexpected value: " + code);
+            default -> throw new IllegalArgumentException("Unexpected value: " + code);
         };
     }
 }
