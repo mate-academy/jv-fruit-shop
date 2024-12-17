@@ -17,8 +17,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Boolean process(List<FruitTransaction> transactions) {
-        for (FruitTransaction t : transactions) {
-            operationHandlerStrategy.getOperationHandler(t).executeOperation(t);
+        for (FruitTransaction transaction : transactions) {
+            operationHandlerStrategy.getOperationHandler(transaction)
+                    .executeOperation(transaction);
         }
         return true;
     }
