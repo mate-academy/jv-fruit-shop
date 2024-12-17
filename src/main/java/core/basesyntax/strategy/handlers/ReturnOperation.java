@@ -5,26 +5,21 @@ import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
     @Override
-    public Boolean executeOperation(FruitTransaction transaction) {
+    public void executeOperation(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
+        checkIfTransactionDataIsValid(fruit, quantity);
 
-        if (isValidTransactionData(fruit, quantity)) {
-            try {
-                if (FruitStorage.fruits.containsKey(fruit)) {
-                    quantity += FruitStorage.fruits.get(fruit);
-                    FruitStorage.fruits.put(fruit, quantity);
-                } else {
-                    FruitStorage.fruits.put(fruit, quantity);
-                }
-            } catch (Exception e) {
-                throw new RuntimeException("Can't add data: " + fruit
-                                           + "=" + quantity + " to fruitStorage", e);
+        try {
+            if (FruitStorage.fruits.containsKey(fruit)) {
+                quantity += FruitStorage.fruits.get(fruit);
+                FruitStorage.fruits.put(fruit, quantity);
+            } else {
+                FruitStorage.fruits.put(fruit, quantity);
             }
-        } else {
-            throw new RuntimeException("Not valid transactionData: " + transaction);
+        } catch (Exception e) {
+            throw new RuntimeException("Can't add data: " + fruit
+                    + "=" + quantity + " to fruitStorage", e);
         }
-
-        return FruitStorage.fruits.get(fruit) == quantity;
     }
 }
