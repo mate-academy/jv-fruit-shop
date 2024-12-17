@@ -2,11 +2,10 @@ package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.handlers.OperationHandler;
-import java.util.HashMap;
 import java.util.Map;
 
 public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of();
 
     public OperationHandlerStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlers) {
