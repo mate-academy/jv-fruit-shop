@@ -25,10 +25,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final Path INPUT_FILE = Paths.get("src/main/resources/input.csv");
+    public static final Path OUTPUT_FILE = Paths.get("src/main/resources/output.csv");
+
     public static void main(String[] args) {
-        Path inputFile = Paths.get("src/main/resources/input.csv");
         FileReader reader = new FileReaderImpl();
-        List<String> inputRecords = reader.read(inputFile);
+        List<String> inputRecords = reader.read(INPUT_FILE);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -48,8 +50,7 @@ public class Main {
         ReportGenerator generator = new ReportGeneratorImpl();
         String report = generator.getReport();
 
-        Path reportFile = Paths.get("src/main/resources/output.csv");
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(report, reportFile);
+        fileWriter.write(report, OUTPUT_FILE);
     }
 }
