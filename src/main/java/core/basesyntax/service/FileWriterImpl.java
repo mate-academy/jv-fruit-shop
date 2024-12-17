@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 
 public class FileWriterImpl implements FileWriter {
     @Override
@@ -12,9 +11,9 @@ public class FileWriterImpl implements FileWriter {
             if (Files.deleteIfExists(filePath)) {
                 Files.createFile(filePath);
             }
-            Files.write(filePath, report.getBytes(), StandardOpenOption.APPEND);
+            Files.write(filePath, report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write in file: " + "'" + filePath + "'.", e);
+            throw new RuntimeException(String.format("Can't write in file: '%s'.", filePath), e);
         }
         return filePath.toFile().canRead();
     }
