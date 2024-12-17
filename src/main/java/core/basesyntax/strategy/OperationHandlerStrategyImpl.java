@@ -5,15 +5,11 @@ import core.basesyntax.strategy.handlers.OperationHandler;
 import java.util.Map;
 
 public class OperationHandlerStrategyImpl implements OperationHandlerStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers = Map.of();
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
 
     public OperationHandlerStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlers) {
         this.operationHandlers = operationHandlers;
-    }
-
-    public Map<FruitTransaction.Operation, OperationHandler> getOperationHandlers() {
-        return operationHandlers;
     }
 
     @Override
