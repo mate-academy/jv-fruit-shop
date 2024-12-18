@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.models;
 
 import java.util.Arrays;
 
@@ -20,9 +20,9 @@ public enum Operation {
 
     public static Operation getOperations(String title) {
         return Arrays.stream(Operation.values())
-                .filter(op -> op.getTitle().equals(title))
+                .filter(operation -> operation.getTitle().equals(title))
                 .findAny()
-                .orElseThrow(RuntimeException::new);
+                .orElseThrow(()
+                        -> new RuntimeException("Invalid operation, check the title of operation"));
     }
 }
-

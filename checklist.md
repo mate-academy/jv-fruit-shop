@@ -22,7 +22,7 @@ Your project structure should consist the following packages:
 - `core.basesyntax.db` for holding Storage
 - `model` for holding models like Fruit (if necessary)
 - `core.basesyntax.service` for holding services, like Writer, Reader, Parser and so on
-- `core.basesyntax.service.impl` for holding implementations of services
+- `core.basesyntax.serviceImpl` for holding implementations of services
 - `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
 
 #### VCS usage

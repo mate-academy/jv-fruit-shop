@@ -4,5 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static final Map<String, Integer> STORED_FRUITS = new HashMap<>();
+    private static Map<String, Integer> storedFruits = new HashMap<>();
+
+    public static Map<String, Integer> getStoredFruits() {
+        return storedFruits;
+    }
 }

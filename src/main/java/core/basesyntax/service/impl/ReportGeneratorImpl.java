@@ -2,8 +2,9 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String TITLE = "fruit,quantity";
@@ -12,12 +13,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public List<String> getReport() {
-        List<String> report = Storage.STORED_FRUITS
-                .entrySet()
-                .stream()
-                .map(lot -> lot.getKey() + DELIMITER + lot.getValue())
-                .collect(Collectors.toList());
+        List<String> report = new ArrayList<>();
         report.add(TITLE_INDEX, TITLE);
+        for (Map.Entry<String, Integer> lot : Storage.getStoredFruits().entrySet()) {
+            report.add(lot.getKey() + DELIMITER + lot.getValue());
+        }
         return report;
     }
 }
