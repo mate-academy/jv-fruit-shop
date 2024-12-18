@@ -5,7 +5,7 @@ import core.basesyntax.db.FruitDaoImpl;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
-    public void getOperation(String fruit, int quantity) {
+    public void executeOperation(String fruit, int quantity) {
         FruitDao fruitDao = new FruitDaoImpl();
         fruitDao.subtract(fruit, quantity);
     }

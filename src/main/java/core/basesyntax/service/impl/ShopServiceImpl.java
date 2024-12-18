@@ -17,6 +17,6 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> fruits) {
         fruits.forEach((f -> operationStrategy
                 .getOperationStrategy(f.getOperation())
-                .getOperation(f.getFruit(), f.getQuantity())));
+                .executeOperation(f.getFruit(), f.getQuantity())));
     }
 }

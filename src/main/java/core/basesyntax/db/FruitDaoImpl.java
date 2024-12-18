@@ -15,10 +15,17 @@ public class FruitDaoImpl implements FruitDao {
 
     @Override
     public void subtract(String fruit, int quantity) {
+        int oldQuantity = Storage.fruits.get(fruit);
         if (!Storage.fruits.containsKey(fruit)) {
-            throw new RuntimeException("There is not enough " + fruit + " in Storage");
+            throw new RuntimeException("There isn't " + fruit + " in Storage");
         }
-        Storage.fruits.compute(fruit, (k, oldQuantity) -> oldQuantity - quantity);
+        if (quantity > oldQuantity) {
+            throw new RuntimeException("There isn't enough "
+                    + fruit
+                    + " in Storage, you can buy "
+                    + oldQuantity);
+        }
+        Storage.fruits.put(fruit,oldQuantity - quantity);
     }
 
     @Override

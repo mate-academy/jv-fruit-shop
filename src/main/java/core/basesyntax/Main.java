@@ -26,8 +26,8 @@ import java.util.Map;
 public class Main {
     public static void main(String[] arg) throws FileNotFoundException {
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        FileReader fileReader = new FileReaderImpl("reportToRead.csv");
+        List<String> inputReport = fileReader.read();
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -51,6 +51,6 @@ public class Main {
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl("finalReport.csv");
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport);
     }
 }

@@ -9,11 +9,11 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     private final Path filePath;
 
-    public FileReaderImpl() {
-        this.filePath = Path.of("reportToRead.csv");
+    public FileReaderImpl(String filename) {
+        this.filePath = Path.of(filename);
     }
 
-    public List<String> read(String filename) {
+    public List<String> read() {
         try {
             return Files.readAllLines(filePath);
         } catch (IOException e) {
