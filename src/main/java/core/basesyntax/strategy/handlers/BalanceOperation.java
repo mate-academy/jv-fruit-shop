@@ -9,12 +9,6 @@ public class BalanceOperation implements OperationHandler {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
         checkIfTransactionDataIsValid(fruit, quantity);
-
-        try {
-            FruitStorage.fruits.put(fruit, quantity);
-        } catch (Exception e) {
-            throw new RuntimeException("Can't add data: "
-                    + fruit + "=" + quantity + " to fruitStorage", e);
-        }
+        FruitStorage.fruits.put(fruit, quantity);
     }
 }
