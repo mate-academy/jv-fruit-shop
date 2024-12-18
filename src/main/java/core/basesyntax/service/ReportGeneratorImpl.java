@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.FruitStorage;
-import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     public static final String HEAD_LINE = "fruit,quantity";
@@ -9,13 +9,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
-        StringBuilder builder = new StringBuilder(HEAD_LINE);
-        List<String> fruits = FruitStorage.fruits.entrySet().stream()
+        return HEAD_LINE
+                + System.lineSeparator()
+                + FruitStorage.fruits.entrySet().stream()
                 .map(e -> e.getKey() + COMMA + e.getValue())
-                .toList();
-        for (String fruit : fruits) {
-            builder.append(System.lineSeparator()).append(fruit);
-        }
-        return builder.toString();
+                .collect(Collectors.joining(System.lineSeparator()));
     }
 }
