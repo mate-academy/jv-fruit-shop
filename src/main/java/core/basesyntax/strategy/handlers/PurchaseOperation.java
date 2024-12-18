@@ -11,21 +11,13 @@ public class PurchaseOperation implements OperationHandler {
         checkIfTransactionDataIsValid(fruit, quantity);
 
         if (!FruitStorage.fruits.containsKey(fruit)) {
-            throw new RuntimeException("Such fruit: " + fruit
-                    + " is absent at fruitStorage!!!");
+            throw new RuntimeException(String.format("Fruit: '%s' is absent.", fruit));
         }
         if (FruitStorage.fruits.get(fruit) < quantity) {
-            throw new RuntimeException("Fruit: " + fruit + "=" + quantity
-                    + " it is more than at fruitStorage!!! ");
+            throw new RuntimeException(String.format("Fruit: '%s' is not enough.", fruit));
         }
 
         int newQuantity = FruitStorage.fruits.get(fruit) - quantity;
-
-        try {
-            FruitStorage.fruits.put(fruit, newQuantity);
-        } catch (Exception e) {
-            throw new RuntimeException("Can't add data: "
-                    + fruit + "=" + quantity + " to fruitStorage", e);
-        }
+        FruitStorage.fruits.put(fruit, newQuantity);
     }
 }
