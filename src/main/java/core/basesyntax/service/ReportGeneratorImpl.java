@@ -4,8 +4,8 @@ import core.basesyntax.db.FruitStorage;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    public static final String HEAD_LINE = "fruit,quantity";
-    public static final String COMMA = ",";
+    private static final String HEAD_LINE = "fruit,quantity";
+    private static final String COMMA = ",";
 
     @Override
     public String getReport() {
