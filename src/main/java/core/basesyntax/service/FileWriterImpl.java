@@ -8,7 +8,7 @@ public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String report, Path filePath) {
         try {
-            if (Files.deleteIfExists(filePath)) {
+            if (!Files.exists(filePath)) {
                 Files.createFile(filePath);
             }
             Files.write(filePath, report.getBytes());
