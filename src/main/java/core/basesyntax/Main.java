@@ -25,8 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final Path INPUT_FILE = Paths.get("src/main/resources/input.csv");
-    public static final Path OUTPUT_FILE = Paths.get("src/main/resources/output.csv");
+    private static final Path INPUT_FILE = Paths.get("src/main/resources/input.csv");
+    private static final Path OUTPUT_FILE = Paths.get("src/main/resources/output.csv");
 
     public static void main(String[] args) {
         FileReader reader = new FileReaderImpl();
