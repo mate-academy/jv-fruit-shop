@@ -10,16 +10,11 @@ public class SupplyOperation implements OperationHandler {
         int quantity = transaction.getQuantity();
         checkIfTransactionDataIsValid(fruit, quantity);
 
-        try {
-            if (FruitStorage.fruits.containsKey(fruit)) {
-                quantity += FruitStorage.fruits.get(fruit);
-                FruitStorage.fruits.put(fruit, quantity);
-            } else {
-                FruitStorage.fruits.put(fruit, quantity);
-            }
-        } catch (Exception e) {
-            throw new RuntimeException("Can't add data: " + fruit
-                    + "=" + quantity + " to fruitStorage", e);
+        if (FruitStorage.fruits.containsKey(fruit)) {
+            int newQuantity = FruitStorage.fruits.get(fruit) + quantity;
+            FruitStorage.fruits.put(fruit, newQuantity);
+        } else {
+            FruitStorage.fruits.put(fruit, quantity);
         }
     }
 }
