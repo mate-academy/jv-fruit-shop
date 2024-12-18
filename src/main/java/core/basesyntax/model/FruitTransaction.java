@@ -53,13 +53,12 @@ public class FruitTransaction {
         }
     }
 
-    public FruitTransaction.Operation getOperationByCode(String code) {
-        return switch (code) {
-            case "b" -> Operation.BALANCE;
-            case "s" -> Operation.SUPPLY;
-            case "p" -> Operation.PURCHASE;
-            case "r" -> Operation.RETURN;
-            default -> throw new IllegalArgumentException("Unexpected value: " + code);
-        };
+    public static Operation getOperationByCode(String code) {
+        for (Operation value : Operation.values()) {
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException(String.format("Invalid Operation code: '%s'.", code));
     }
 }
