@@ -4,10 +4,10 @@ import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    public static final String COMMA = ",";
-    public static final int TYPE = 0;
-    public static final int FRUIT = 1;
-    public static final int QUANTITY = 2;
+    private static final String COMMA = ",";
+    private static final int TYPE = 0;
+    private static final int FRUIT = 1;
+    private static final int QUANTITY = 2;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
