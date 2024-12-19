@@ -53,7 +53,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
-        // 6. Write the received report into the destination file
+        // 6. Write the received report into the destination file/
         ReportWriter fileWriter = new ReportWriterImpl();
         fileWriter.write(resultingReport, "finalReport.csv");
     }
