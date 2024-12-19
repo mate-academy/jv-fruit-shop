@@ -20,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
     private FruitTransaction transactionFromString(String record) {
         FruitTransaction transaction = new FruitTransaction();
         String[] columns = record.split(COMMA);
-        transaction.setOperation(transaction.getOperationByCode(columns[TYPE]));
+        transaction.setOperation(FruitTransaction.getOperationByCode(columns[TYPE]));
         transaction.setFruit(columns[FRUIT]);
         transaction.setQuantity(Integer.parseInt(columns[QUANTITY]));
         return transaction;
