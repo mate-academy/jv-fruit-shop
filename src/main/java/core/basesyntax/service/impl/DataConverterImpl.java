@@ -27,12 +27,4 @@ public class DataConverterImpl implements DataConverter {
         }
         return transferList;
     }
-
-    public String convertToStringFormat(List<String> listReport) {
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String line : listReport) {
-            stringBuilder.append(line).append(System.lineSeparator());
-        }
-        return stringBuilder.toString();
-    }
 }

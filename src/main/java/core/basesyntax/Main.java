@@ -51,6 +51,5 @@ public class Main {
         //Write report to file CSV format
         DataWriter fileWriter = new CsvDataWriterImpl();
         fileWriter.writeToFile(transitionalReport, "report");
-
     }
 }
