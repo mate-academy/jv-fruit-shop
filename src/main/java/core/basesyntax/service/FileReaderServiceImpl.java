@@ -16,7 +16,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 lines.add(line);
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Can not read the file",e);
         }
         return lines;
     }
