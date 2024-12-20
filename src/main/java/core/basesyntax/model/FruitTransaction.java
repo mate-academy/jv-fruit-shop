@@ -10,7 +10,7 @@ public class FruitTransaction extends Fruit {
             case "s" -> this.operation = Operation.SUPPLY;
             case "p" -> this.operation = Operation.PURCHASE;
             case "r" -> this.operation = Operation.RETURN;
-            default -> throw new RuntimeException("Can't find operation");
+            default -> throw new RuntimeException("Invalid operation code: " + operation);
         }
     }
 

@@ -14,7 +14,6 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> listFromFile) {
-        inputDataValidation.validate(listFromFile);
         return listFromFile.stream()
                 .filter(s -> s.startsWith(FruitTransaction.Operation.BALANCE.getCode())
                         || s.startsWith(FruitTransaction.Operation.SUPPLY.getCode())
@@ -22,8 +21,8 @@ public class DataConverterImpl implements DataConverter {
                         || s.startsWith(FruitTransaction.Operation.RETURN.getCode()))
                 .map(s -> s.split(","))
                 .map(s -> new FruitTransaction(s[OPERATION_TYPE],
-                                                s[FRUIT_NAME],
-                                                Integer.parseInt(s[QUANTITY_OF_FRUITS])))
+                        s[FRUIT_NAME],
+                        inputDataValidation.validate(s[QUANTITY_OF_FRUITS])))
                 .toList();
     }
 }

@@ -18,7 +18,7 @@ public class FileWriterImpl implements FileWriter {
         try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(file))) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("can't save report", e);
+            throw new RuntimeException("Can't save report to file: " + file.getPath(), e);
         }
     }
 }

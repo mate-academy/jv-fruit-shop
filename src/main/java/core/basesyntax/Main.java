@@ -18,15 +18,17 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] arg) throws FileNotFoundException {
+    public static void main(String[] arg) {
+        final String inputFileName = "reportToRead.csv";
+        final String outputFileName = "finalReport.csv";
+
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl("reportToRead.csv");
+        FileReader fileReader = new FileReaderImpl(inputFileName);
         List<String> inputReport = fileReader.read();
 
         // 2. Convert the incoming data into FruitTransactions list
@@ -50,7 +52,8 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl("finalReport.csv");
+        FileWriter fileWriter = new FileWriterImpl(outputFileName);
         fileWriter.write(resultingReport);
+
     }
 }
