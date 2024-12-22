@@ -20,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
                 .toList();
 
         for (String[] line : collectedLinesInfo) {
-            Operation operations = Operation.getOperations(line[OPERATION_INDEX]);
+            Operation operations = Operation.getOperation(line[OPERATION_INDEX]);
             String fruit = line[FRUIT_INDEX];
             int quantity = Integer.parseInt(line[AMOUNT_INDEX]);
             transferList.add(new FruitTransfer(operations, fruit, quantity));

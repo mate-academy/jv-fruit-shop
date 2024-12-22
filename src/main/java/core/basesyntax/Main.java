@@ -5,11 +5,13 @@ import core.basesyntax.models.Operation;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataReader;
 import core.basesyntax.service.DataWriter;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.CsvDataReaderImpl;
 import core.basesyntax.service.impl.CsvDataWriterImpl;
 import core.basesyntax.service.impl.DataConverterImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceHandler;
@@ -39,14 +41,15 @@ public class Main {
         handlers.put(Operation.PURCHASE, new PurchaseHandler());
         handlers.put(Operation.RETURN, new ReturnHandler());
         handlers.put(Operation.SUPPLY, new SupplyHandler());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
 
         //Process and store the data to DB
-        ShopService shopService = new ShopServiceImpl();
-        shopService.process(transfers, handlers);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transfers);
 
         //Generate a report
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        List<String> transitionalReport = reportGenerator.getReport();
+        String transitionalReport = reportGenerator.getReport();
 
         //Write report to file CSV format
         DataWriter fileWriter = new CsvDataWriterImpl();

@@ -13,6 +13,11 @@ public class BalanceHandler implements OperationHandler {
 
     @Override
     public void performOperation(FruitTransfer fruitTransfer) {
+        if (fruitTransfer.getQuantity() < 0) {
+            throw new RuntimeException("It's not allowed negative amount. Amount is "
+                    + fruitTransfer.getQuantity());
+        }
+
         fruitDao.addFruit(fruitTransfer.getFruit(), fruitTransfer.getQuantity());
     }
 }

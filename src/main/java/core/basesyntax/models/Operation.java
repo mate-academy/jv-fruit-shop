@@ -18,7 +18,7 @@ public enum Operation {
         return title;
     }
 
-    public static Operation getOperations(String title) {
+    public static Operation getOperation(String title) {
         return Arrays.stream(Operation.values())
                 .filter(operation -> operation.getTitle().equals(title))
                 .findAny()

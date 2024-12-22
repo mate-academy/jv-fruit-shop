@@ -1,20 +1,24 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.models.FruitTransfer;
-import core.basesyntax.models.Operation;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationHandler;
 import java.util.List;
-import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
+    private OperationStrategy operationStrategy;
+
+    public ShopServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
+
     @Override
-    public void process(List<FruitTransfer> transferList,
-                        Map<Operation, OperationHandler> handlers) {
+    public void process(List<FruitTransfer> transferList) {
         for (FruitTransfer lotOfFruit : transferList) {
-            OperationHandler chosenStrategy = handlers.get(lotOfFruit.getOperations());
-            if (chosenStrategy != null) {
-                chosenStrategy.performOperation(lotOfFruit);
+            OperationHandler chosenHandler = operationStrategy.getStrategy(lotOfFruit);
+            if (chosenHandler != null) {
+                chosenHandler.performOperation(lotOfFruit);
             }
         }
     }

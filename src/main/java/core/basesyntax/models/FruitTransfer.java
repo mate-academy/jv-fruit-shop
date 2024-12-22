@@ -8,8 +8,8 @@ public class FruitTransfer {
     public FruitTransfer() {
     }
 
-    public FruitTransfer(Operation operations, String fruit, int quantity) {
-        this.operations = operations;
+    public FruitTransfer(Operation operation, String fruit, int quantity) {
+        this.operations = operation;
         this.fruit = fruit;
         this.quantity = quantity;
     }

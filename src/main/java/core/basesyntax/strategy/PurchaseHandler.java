@@ -13,6 +13,11 @@ public class PurchaseHandler implements OperationHandler {
 
     @Override
     public void performOperation(FruitTransfer fruitTransfer) {
+        if (fruitTransfer.getQuantity() < 0) {
+            throw new RuntimeException("It's not allowed negative amount. Amount is "
+                    + fruitTransfer.getQuantity());
+        }
+
         int storedFruits = fruitDao.getStoredQuantity(fruitTransfer.getFruit());
         if (fruitTransfer.getQuantity() > storedFruits) {
             throw new RuntimeException("Invalid quantity, " + fruitTransfer.getFruit()
