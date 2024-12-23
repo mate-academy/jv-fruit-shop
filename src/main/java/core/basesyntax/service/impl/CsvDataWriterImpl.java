@@ -8,9 +8,14 @@ import java.io.IOException;
 
 public class CsvDataWriterImpl implements DataWriter {
     private static final String PATH = "src/main/resources";
+    private String report;
+
+    public CsvDataWriterImpl(String report) {
+        this.report = report;
+    }
 
     @Override
-    public void writeToFile(String report, String filename) {
+    public void writeToFile(String filename) {
         File file = new File(PATH + File.separator + filename);
         try (BufferedWriter bufferedWriter
                      = new BufferedWriter(new FileWriter(file))) {

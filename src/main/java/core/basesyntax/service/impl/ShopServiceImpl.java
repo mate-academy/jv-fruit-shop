@@ -17,9 +17,7 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransfer> transferList) {
         for (FruitTransfer lotOfFruit : transferList) {
             OperationHandler chosenHandler = operationStrategy.getStrategy(lotOfFruit);
-            if (chosenHandler != null) {
-                chosenHandler.performOperation(lotOfFruit);
-            }
+            chosenHandler.performOperation(lotOfFruit);
         }
     }
 }

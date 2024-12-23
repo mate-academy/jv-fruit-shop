@@ -1,21 +1,21 @@
 package core.basesyntax.models;
 
 public class FruitTransfer {
-    private Operation operations;
+    private Operation action;
     private String fruit;
     private int quantity;
 
     public FruitTransfer() {
     }
 
-    public FruitTransfer(Operation operation, String fruit, int quantity) {
-        this.operations = operation;
+    public FruitTransfer(Operation action, String fruit, int quantity) {
+        this.action = action;
         this.fruit = fruit;
         this.quantity = quantity;
     }
 
-    public Operation getOperations() {
-        return operations;
+    public Operation getAction() {
+        return action;
     }
 
     public String getFruit() {

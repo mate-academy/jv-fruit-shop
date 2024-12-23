@@ -15,6 +15,11 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getStrategy(FruitTransfer fruitLot) {
-        return handlerMap.get(fruitLot.getOperations());
+        OperationHandler handler = handlerMap.get(fruitLot.getAction());
+        if (handler == null) {
+            throw new RuntimeException("Invalid operation, check the title of operation "
+                    + "'" + fruitLot.getAction() + "'");
+        }
+        return handler;
     }
 }

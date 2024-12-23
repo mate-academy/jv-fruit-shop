@@ -52,7 +52,7 @@ public class Main {
         String transitionalReport = reportGenerator.getReport();
 
         //Write report to file CSV format
-        DataWriter fileWriter = new CsvDataWriterImpl();
-        fileWriter.writeToFile(transitionalReport, "report");
+        DataWriter fileWriter = new CsvDataWriterImpl(transitionalReport);
+        fileWriter.writeToFile("report");
     }
 }

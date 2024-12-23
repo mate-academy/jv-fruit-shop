@@ -23,6 +23,6 @@ public enum Operation {
                 .filter(operation -> operation.getTitle().equals(title))
                 .findAny()
                 .orElseThrow(()
-                        -> new RuntimeException("Invalid operation, check the title of operation"));
+                        -> new RuntimeException("Check the title of operation"));
     }
 }

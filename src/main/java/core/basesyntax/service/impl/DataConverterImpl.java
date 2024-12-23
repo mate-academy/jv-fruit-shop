@@ -10,12 +10,13 @@ public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransfer> convertToTransfer(List<String> inputReport) {
         List<FruitTransfer> transferList = new ArrayList<>();
         List<String[]> collectedLinesInfo = inputReport.stream()
-                .map(s -> s.split(","))
+                .map(s -> s.split(SEPARATOR))
                 .skip(1)
                 .toList();
 
