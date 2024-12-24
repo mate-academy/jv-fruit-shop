@@ -31,10 +31,6 @@ public class Main {
         DataReader dataReader = new CsvDataReaderImpl();
         List<String> inputReport = dataReader.getDataFromFile(PATH);
 
-        //Convert received data from reader to particular format
-        DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransfer> transfers = dataConverter.convertToTransfer(inputReport);
-
         //Declare Map object "handlers" for determine operation
         Map<Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(Operation.BALANCE, new BalanceHandler());
@@ -42,6 +38,10 @@ public class Main {
         handlers.put(Operation.RETURN, new ReturnHandler());
         handlers.put(Operation.SUPPLY, new SupplyHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
+
+        //Convert received data from reader to particular format
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransfer> transfers = dataConverter.convertToTransfer(inputReport);
 
         //Process and store the data to DB
         ShopService shopService = new ShopServiceImpl(operationStrategy);
