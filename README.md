@@ -146,7 +146,7 @@ Remember the SOLID principles, think about which ones you might not be adhering 
 - Single Responsibility - does each class/method perform one function?
 - Open/Closed - think about it, if there is a need to add functionality, will you need to change the logic of the class/methods?
 - Interface segregation - review your code, do you have interfaces that should be divided into smaller ones?
-- Liskov substitution - for example, imagine that you have a class S, which is a subtype of class T. Make sure you can replace class S with class T without changing the desired properties of the program.
+- Liskov substitution - for example, imagine that you have a class S, which is a subtype of class T. Make sure you can replace class T with class S without changing the desired properties of the program.
 - Dependency Inversion - make sure that high-level modules do not depend on low-level modules. Both should depend on abstractions. Also, abstractions should not depend on details. Details should depend on abstractions.
 
 Bad practice example:
