@@ -6,15 +6,6 @@ import java.util.Map;
 public abstract class Fruits {
     private Map<String, Integer> fruitQuantities;
 
-    public int getFruitQuantities(String fruitType) {
-        return fruitQuantities.get(fruitType);
-    }
-
-    public void setFruitQuantities(String fruitType, int quantity) {
-        fruitQuantities.put(fruitType, quantity);
-    }
-
-    // Конструктор
     public Fruits() {
         fruitQuantities = new HashMap<>();
     }
@@ -28,9 +19,9 @@ public abstract class Fruits {
         fruitQuantities.put(fruitType,supplyAmount);
         return supplyAmount;
     }
-    public int purchase(String fruiType,int amount) {
-        int purchaseAmount = fruitQuantities.get(fruiType) - amount;
-        fruitQuantities.put(fruiType,purchaseAmount);
+    public int purchase(String fruitType,int amount) {
+        int purchaseAmount = fruitQuantities.get(fruitType) - amount;
+        fruitQuantities.put(fruitType,purchaseAmount);
         return purchaseAmount;
     }
     public int returnFruit(String fruitType,int amount) {
