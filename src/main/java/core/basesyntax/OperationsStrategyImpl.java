@@ -1,12 +1,11 @@
 package core.basesyntax;
 
 public class OperationsStrategyImpl implements OperationStrategy {
+    private final Fruits fruits;
 
     public OperationsStrategyImpl(Fruits fruits) {
         this.fruits = fruits;
     }
-
-    private final Fruits fruits;
 
     public int operation(String operation, String fruitType, int amount) {
         switch (operation) {

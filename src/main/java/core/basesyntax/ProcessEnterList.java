@@ -2,13 +2,12 @@ package core.basesyntax;
 
 import java.util.List;
 
-public class processEnterList {
+public class ProcessEnterList {
+    private final OperationsStrategyImpl operationsStrategyImpl;
 
-    public processEnterList(OperationsStrategyImpl operationsStrategyImpl) {
+    public ProcessEnterList(OperationsStrategyImpl operationsStrategyImpl) {
         this.operationsStrategyImpl = operationsStrategyImpl;
     }
-
-    private final OperationsStrategyImpl operationsStrategyImpl;
 
     public String workWithEnterList(List<String> enter) {
         StringBuilder str = new StringBuilder();

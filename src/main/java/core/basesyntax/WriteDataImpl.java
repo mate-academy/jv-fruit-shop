@@ -26,7 +26,7 @@ public class WriteDataImpl implements WriteData {
                 bufferedWriter.newLine(); // Додаємо новий рядок після кожного запису
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error writing data to a  file" ,e);
+            throw new RuntimeException("Error writing data to a  file",e);
         }
         return file;
     }
