@@ -20,7 +20,8 @@ public class ShopServiceImpl implements ShopService {
                     transaction.getOperation());
             if (handler == null) {
                 throw new IllegalArgumentException(
-                        "No handler found for operation: " + transaction.getOperation());
+                        "No handler found for operation: "
+                                + transaction.getOperation());
             }
             handler.handle(inventory, transaction);
         }

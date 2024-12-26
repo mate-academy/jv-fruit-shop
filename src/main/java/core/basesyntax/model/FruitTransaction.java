@@ -52,13 +52,13 @@ public class FruitTransaction {
         }
 
         public static Operation getOperation(String code) {
-            for (Operation value : values()) {
-                if (value.getCode().equals(code)) {
-                    return value;
+            for (Operation operation : values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
                 }
             }
             throw new IllegalArgumentException(
-                    code + " operation doesn't exist.");
+                    "Unknown operation code: " + code);
         }
     }
 }
