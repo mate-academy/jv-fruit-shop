@@ -20,8 +20,8 @@ public class Fruit {
     }
 
     public int supply(String fruitType, int amount) {
-       int newAmount = fruitMap.get(fruitType) + amount;
-       fruitMap.put(fruitType,newAmount);
+        int newAmount = fruitMap.get(fruitType) + amount;
+        fruitMap.put(fruitType,newAmount);
         return newAmount;
     }
 
