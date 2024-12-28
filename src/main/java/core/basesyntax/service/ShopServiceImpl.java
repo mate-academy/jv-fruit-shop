@@ -2,9 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.Storage;
 import core.basesyntax.model.FruitTransaction;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ShopServiceImpl implements ShopService {
@@ -18,9 +16,9 @@ public class ShopServiceImpl implements ShopService {
     public List<FruitTransaction> process(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
             FruitTransaction calculatedTransaction =
-                    Storage.calculatedTransactions.get(fruitTransaction.getFruit());
+                    Storage.getCalculatedTransactions().get(fruitTransaction.getFruit());
             if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE
-            && !Storage.calculatedTransactions.containsKey(fruitTransaction.getFruit())) {
+                && !Storage.getCalculatedTransactions().containsKey(fruitTransaction.getFruit())) {
                 if (calculatedTransaction != null) {
                     operationStrategy.makeOperation(
                             fruitTransaction.getOperation(),
@@ -28,7 +26,7 @@ public class ShopServiceImpl implements ShopService {
                             fruitTransaction.getQuantity()
                     );
                 }
-                Storage.calculatedTransactions.put(fruitTransaction.getFruit(), fruitTransaction);
+                Storage.getCalculatedTransactions().put(fruitTransaction.getFruit(), fruitTransaction);
             } else {
                 if (calculatedTransaction != null) {
                     operationStrategy.makeOperation(
@@ -40,6 +38,6 @@ public class ShopServiceImpl implements ShopService {
             }
         }
 
-        return Storage.calculatedTransactions.values().stream().collect(Collectors.toList());
+        return Storage.getCalculatedTransactions().values().stream().collect(Collectors.toList());
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     private static final String csvSeparator = ",";
-    SkipHeader skipHeader = new SkipHeaderImpl();
+    private SkipHeader skipHeader = new SkipHeaderImpl();
 
     @Override
     public List<String> read(String fileName) {

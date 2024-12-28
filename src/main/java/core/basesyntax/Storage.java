@@ -7,9 +7,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Storage {
-    public static Map<String, FruitTransaction> calculatedTransactions = new HashMap<>();
+    private static Map<String, FruitTransaction> calculatedTransactions = new HashMap<>();
 
     public static List<FruitTransaction> getFruitTransactionList() {
         return calculatedTransactions.values().stream().collect(Collectors.toList());
+    }
+
+    public static Map<String, FruitTransaction> getCalculatedTransactions() {
+        return calculatedTransactions;
     }
 }
