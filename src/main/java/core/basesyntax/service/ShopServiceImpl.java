@@ -1,9 +1,11 @@
 package core.basesyntax.service;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.Storage;
+import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
@@ -13,15 +15,21 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void process(List<FruitTransaction> transactions) {
-        Map<String, FruitTransaction> calculatedTransactionsMap = new HashMap<>();
-
+    public List<FruitTransaction> process(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
-            if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE) {
-                calculatedTransactionsMap.put(fruitTransaction.getFruit(), fruitTransaction);
+            FruitTransaction calculatedTransaction =
+                    Storage.calculatedTransactions.get(fruitTransaction.getFruit());
+            if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE
+            && !Storage.calculatedTransactions.containsKey(fruitTransaction.getFruit())) {
+                if (calculatedTransaction != null) {
+                    operationStrategy.makeOperation(
+                            fruitTransaction.getOperation(),
+                            calculatedTransaction,
+                            fruitTransaction.getQuantity()
+                    );
+                }
+                Storage.calculatedTransactions.put(fruitTransaction.getFruit(), fruitTransaction);
             } else {
-                FruitTransaction calculatedTransaction = calculatedTransactionsMap
-                        .get(fruitTransaction.getFruit());
                 if (calculatedTransaction != null) {
                     operationStrategy.makeOperation(
                             fruitTransaction.getOperation(),
@@ -32,15 +40,6 @@ public class ShopServiceImpl implements ShopService {
             }
         }
 
-        transactions.clear();
-        transactions.addAll(calculatedTransactionsMap.values());
-    }
-
-    public OperationStrategy getOperationStrategy() {
-        return operationStrategy;
-    }
-
-    public void setOperationStrategy(OperationStrategy operationStrategy) {
-        this.operationStrategy = operationStrategy;
+        return Storage.calculatedTransactions.values().stream().collect(Collectors.toList());
     }
 }

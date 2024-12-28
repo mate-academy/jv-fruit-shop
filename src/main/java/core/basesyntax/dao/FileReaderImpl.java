@@ -2,19 +2,22 @@ package core.basesyntax.dao;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
+    private static final String csvSeparator = ",";
+    SkipHeader skipHeader = new SkipHeaderImpl();
+
     @Override
     public List<String> read(String fileName) {
         List<String> file;
         try {
-            file = Files.readAllLines(Path.of(fileName));
+            file = Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             throw new RuntimeException("Can't read from file " + fileName);
         }
-        file.remove(0); // deleting first example line of the report
+        skipHeader.skip(file);
         return file;
     }
 }

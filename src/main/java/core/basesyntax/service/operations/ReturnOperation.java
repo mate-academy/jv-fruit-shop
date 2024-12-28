@@ -1,6 +1,6 @@
 package core.basesyntax.service.operations;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
     @Override

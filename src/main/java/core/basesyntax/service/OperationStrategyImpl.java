@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.operations.OperationHandler;
 import java.util.Map;
 
@@ -19,12 +19,12 @@ public class OperationStrategyImpl implements OperationStrategy {
         operationHandlers.get(operation).doOperation(fruitTransaction, quantity);
     }
 
-    public Map<FruitTransaction.Operation, OperationHandler> getOperationHandlers() {
-        return operationHandlers;
-    }
-
-    public void setOperationHandlers(Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlers) {
-        this.operationHandlers = operationHandlers;
+    public static FruitTransaction.Operation getOperation(String code) {
+        for (FruitTransaction.Operation value : FruitTransaction.Operation.values()) {
+            if (value.getCode().equals(code)) {
+                return value;
+            }
+        }
+        throw new IllegalArgumentException(code + " operation doesn't exist.");
     }
 }

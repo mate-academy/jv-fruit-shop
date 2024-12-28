@@ -1,6 +1,6 @@
 package core.basesyntax.service;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface OperationStrategy {
     void makeOperation(FruitTransaction.Operation operation,

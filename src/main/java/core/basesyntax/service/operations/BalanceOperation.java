@@ -1,6 +1,6 @@
 package core.basesyntax.service.operations;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
     @Override
