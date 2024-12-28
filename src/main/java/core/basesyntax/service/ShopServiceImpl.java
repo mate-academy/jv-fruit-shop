@@ -18,7 +18,8 @@ public class ShopServiceImpl implements ShopService {
             FruitTransaction calculatedTransaction =
                     Storage.getCalculatedTransactions().get(fruitTransaction.getFruit());
             if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE
-                && !Storage.getCalculatedTransactions().containsKey(fruitTransaction.getFruit())) {
+                    && !Storage.getCalculatedTransactions()
+                    .containsKey(fruitTransaction.getFruit())) {
                 if (calculatedTransaction != null) {
                     operationStrategy.makeOperation(
                             fruitTransaction.getOperation(),
@@ -26,7 +27,8 @@ public class ShopServiceImpl implements ShopService {
                             fruitTransaction.getQuantity()
                     );
                 }
-                Storage.getCalculatedTransactions().put(fruitTransaction.getFruit(), fruitTransaction);
+                Storage.getCalculatedTransactions()
+                        .put(fruitTransaction.getFruit(), fruitTransaction);
             } else {
                 if (calculatedTransaction != null) {
                     operationStrategy.makeOperation(
