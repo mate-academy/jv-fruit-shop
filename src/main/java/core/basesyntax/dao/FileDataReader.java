@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.dao;
 
 import java.nio.file.Path;
 import java.util.List;

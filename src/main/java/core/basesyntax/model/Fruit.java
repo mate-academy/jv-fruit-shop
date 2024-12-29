@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import java.util.HashMap;
 import java.util.Map;

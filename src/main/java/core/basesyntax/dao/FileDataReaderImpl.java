@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.dao;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -18,6 +18,7 @@ public class FileDataReaderImpl implements FileDataReader {
     public List<String> readData(Path path) {
         List<String> list = new ArrayList<>();
         try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            bufferedReader.readLine();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 list.add(line);

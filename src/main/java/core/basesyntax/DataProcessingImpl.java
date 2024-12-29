@@ -1,5 +1,7 @@
 package core.basesyntax;
 
+import core.basesyntax.strategy.FruitStrategyImpl;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
