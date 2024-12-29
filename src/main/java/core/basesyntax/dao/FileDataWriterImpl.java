@@ -8,7 +8,7 @@ import java.util.List;
 
 public class FileDataWriterImpl implements FileDataWriter {
     private final String newPath;
-    private static final String REPORT_HEADER = "fruit,quantity";
+    private final static String REPORT_HEADER = "fruit,quantity";
 
     public FileDataWriterImpl(String newPath) {
         this.newPath = newPath;

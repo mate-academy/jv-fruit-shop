@@ -1,7 +1,6 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -23,7 +22,8 @@ public class FruitStrategyImpl implements FruitStrategy {
     @Override
     public int operation(String operation, String fruitType, int amount) {
 
-        BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction = operationMap.get(operation);
+        BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction =
+                operationMap.get(operation);
         if (stringIntegerIntegerBiFunction == null) {
             throw new IllegalArgumentException("Invalid operation: " + operation);
         }
