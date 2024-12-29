@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.strategy.FruitStrategyImpl;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +9,9 @@ import java.util.Map;
 public class DataProcessingImpl implements DataProcessing {
     private final FruitStrategyImpl fruitStrategy;
     private Map<String,Integer> map;
-    private final static  int CONSTANT_0 = 0;
-    private final static  int CONSTANT_1 = 1;
-    private final static  int CONSTANT_2 = 2;
+    private static final int CONSTANT_0 = 0;
+    private static final int CONSTANT_1 = 1;
+    private static final int CONSTANT_2 = 2;
 
     public DataProcessingImpl(FruitStrategyImpl fruitStrategy) {
         this.fruitStrategy = fruitStrategy;

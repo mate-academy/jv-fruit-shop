@@ -12,8 +12,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Path inputPath = Paths.get("C:\\Users\\yarik\\IdeaProjects" +
-                "\\jv-fruit-shop\\src\\main\\java\\core\\basesyntax\\input.csv");
+        Path inputPath = Paths.get("C:\\Users\\yarik\\IdeaProjects"
+                + "\\jv-fruit-shop\\src\\main\\java\\core\\basesyntax\\input.csv");
 
         FileDataReaderImpl fileDataReader = new FileDataReaderImpl(
                 new java.io.FileReader(String.valueOf(inputPath)));
