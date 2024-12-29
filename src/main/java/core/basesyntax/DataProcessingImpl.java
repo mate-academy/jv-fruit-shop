@@ -5,11 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ProcessDataImpl implements ProcessData {
+public class DataProcessingImpl implements DataProcessing {
     private final FruitStrategyImpl fruitStrategy;
     private Map<String,Integer> map;
+    private static final int CONSTANT_0 = 0;
+    private static final int CONSTANT_1 = 1;
+    private static final int CONSTANT_2 = 2;
 
-    public ProcessDataImpl(FruitStrategyImpl fruitStrategy) {
+
+    public DataProcessingImpl(FruitStrategyImpl fruitStrategy) {
         this.fruitStrategy = fruitStrategy;
         map = new HashMap<>();
     }
@@ -18,9 +22,9 @@ public class ProcessDataImpl implements ProcessData {
     public List<String> processData(List<String> enterList) {
         for (String enter : enterList) {
             String[] split = enter.split(",");
-            String operation = split[0];
-            String fruitType = split[1];
-            int amount = Integer.parseInt(split[2]);
+            String operation = split[CONSTANT_0];
+            String fruitType = split[CONSTANT_1];
+            int amount = Integer.parseInt(split[CONSTANT_2]);
 
             int updatedAmount = fruitStrategy.operation(operation, fruitType, amount);
             map.put(fruitType, updatedAmount);

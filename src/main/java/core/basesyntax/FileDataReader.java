@@ -3,6 +3,6 @@ package core.basesyntax;
 import java.nio.file.Path;
 import java.util.List;
 
-public interface ReadDataFromFile {
+public interface FileDataReader {
     List<String> readData(Path path);
 }

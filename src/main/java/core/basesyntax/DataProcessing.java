@@ -2,6 +2,6 @@ package core.basesyntax;
 
 import java.util.List;
 
-public interface ProcessData {
+public interface DataProcessing {
     List<String> processData(List<String> enterList);
 }

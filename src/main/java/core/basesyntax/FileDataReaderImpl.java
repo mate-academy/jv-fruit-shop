@@ -7,10 +7,10 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReadDataFromFileImpl implements ReadDataFromFile {
+public class FileDataReaderImpl implements FileDataReader {
     private FileReader fileReader;
 
-    public ReadDataFromFileImpl(FileReader fileReader) {
+    public FileDataReaderImpl(FileReader fileReader) {
         this.fileReader = fileReader;
     }
 
@@ -23,7 +23,7 @@ public class ReadDataFromFileImpl implements ReadDataFromFile {
                 list.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can not read data from a file",e);
+            throw new RuntimeException("Can not read data from a file" + path.toString(),e);
         }
         return list;
     }
