@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 public class DataProcessingImpl implements DataProcessing {
-    private final FruitStrategyImpl fruitStrategy;
-    private Map<String,Integer> map;
     private static final int CONSTANT_0 = 0;
     private static final int CONSTANT_1 = 1;
     private static final int CONSTANT_2 = 2;
+    private final FruitStrategyImpl fruitStrategy;
+    private Map<String,Integer> map;
 
     public DataProcessingImpl(FruitStrategyImpl fruitStrategy) {
         this.fruitStrategy = fruitStrategy;
