@@ -1,4 +1,4 @@
-package core.basesyntax.Storage;
+package core.basesyntax.storage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,7 @@ public class Storage {
     public Storage() {
         storage = new HashMap<>();
     }
+
     public int getCurrentAmount(String fruitType) {
         return storage.getOrDefault(fruitType, 0);
     }

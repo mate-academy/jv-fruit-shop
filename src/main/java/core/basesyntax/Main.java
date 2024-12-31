@@ -2,8 +2,8 @@ package core.basesyntax;
 
 import core.basesyntax.services.impl.DataProcessingImpl;
 import core.basesyntax.services.impl.FileDataReaderImpl;
-import core.basesyntax.services.impl.FileDataWriterImpl;
 import core.basesyntax.model.Fruit;
+import core.basesyntax.services.impl.FileDataWriterImpl;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import java.io.File;
 import java.io.FileNotFoundException;

@@ -1,10 +1,11 @@
 package core.basesyntax.model;
 
-import core.basesyntax.Storage.Storage;
+import core.basesyntax.storage.Storage;
 
 public class Fruit {
     private Storage storage;
-    public Fruit () {
+
+    public Fruit() {
         storage = new Storage();
     }
 
