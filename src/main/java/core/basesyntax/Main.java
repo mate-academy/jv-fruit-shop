@@ -1,7 +1,8 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileDataReaderImpl;
-import core.basesyntax.dao.FileDataWriterImpl;
+import core.basesyntax.services.impl.DataProcessingImpl;
+import core.basesyntax.services.impl.FileDataReaderImpl;
+import core.basesyntax.services.impl.FileDataWriterImpl;
 import core.basesyntax.model.Fruit;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import java.io.File;
@@ -12,12 +13,12 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Path inputPath = Paths.get("C:\\Users\\yarik\\IdeaProjects"
-                + "\\jv-fruit-shop\\src\\main\\java\\core\\basesyntax\\input.csv");
+        Path inputPath = Paths.get("src/main/java/core/basesyntax/resources/input.csv");
 
         FileDataReaderImpl fileDataReader = new FileDataReaderImpl(
                 new java.io.FileReader(String.valueOf(inputPath)));
-        FileDataWriterImpl fileDataWriter = new FileDataWriterImpl("output.csv");
+        FileDataWriterImpl fileDataWriter = new FileDataWriterImpl("src/main/java/core/basesyntax"
+                + "/resources/output.csv");
 
         Fruit fruit = new Fruit();
 
