@@ -1,9 +1,13 @@
 package core.basesyntax;
 
 import core.basesyntax.model.Fruit;
+import core.basesyntax.services.DataProcessing;
+import core.basesyntax.services.FileDataReader;
+import core.basesyntax.services.FileDataWriter;
 import core.basesyntax.services.impl.DataProcessingImpl;
 import core.basesyntax.services.impl.FileDataReaderImpl;
 import core.basesyntax.services.impl.FileDataWriterImpl;
+import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,16 +19,16 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         Path inputPath = Paths.get("src/main/java/core/basesyntax/resources/input.csv");
 
-        FileDataReaderImpl fileDataReader = new FileDataReaderImpl(
+        FileDataReader fileDataReader = new FileDataReaderImpl(
                 new java.io.FileReader(String.valueOf(inputPath)));
-        FileDataWriterImpl fileDataWriter = new FileDataWriterImpl("src/main/java/core/basesyntax"
+        FileDataWriter fileDataWriter = new FileDataWriterImpl("src/main/java/core/basesyntax"
                 + "/resources/output.csv");
 
         Fruit fruit = new Fruit();
 
-        FruitStrategyImpl fruitStrategy = new FruitStrategyImpl(fruit);
+        FruitStrategy fruitStrategy = new FruitStrategyImpl(fruit);
 
-        DataProcessingImpl dataProcessing = new DataProcessingImpl(fruitStrategy);
+        DataProcessing dataProcessing = new DataProcessingImpl((FruitStrategyImpl) fruitStrategy);
 
         List<String> inputData = fileDataReader.readData(inputPath);
 
