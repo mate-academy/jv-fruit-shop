@@ -1,6 +1,5 @@
-package core.basesyntax.operationHandlers;
+package core.basesyntax.operationhandlers;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.storage.Storage;
 
 public class BalanceOperationHandler {

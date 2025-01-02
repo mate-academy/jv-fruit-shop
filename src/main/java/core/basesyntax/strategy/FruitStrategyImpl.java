@@ -1,13 +1,11 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.Operations;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.operationHandlers.BalanceOperationHandler;
-import core.basesyntax.operationHandlers.PurchaseOperationHandler;
-import core.basesyntax.operationHandlers.ReturnOperationHandler;
-import core.basesyntax.operationHandlers.SupplyOperationHandler;
+import core.basesyntax.operationhandlers.BalanceOperationHandler;
+import core.basesyntax.operationhandlers.PurchaseOperationHandler;
+import core.basesyntax.operationhandlers.ReturnOperationHandler;
+import core.basesyntax.operationhandlers.SupplyOperationHandler;
 import core.basesyntax.storage.Storage;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
@@ -28,10 +26,14 @@ public class FruitStrategyImpl implements FruitStrategy {
         returnFruit = new ReturnOperationHandler(storage);
         supply = new SupplyOperationHandler(storage);
 
-        operationMap.put(Operations.B, (fruitType, amount) -> balance.balance(fruitType, amount));
-        operationMap.put(Operations.S, (fruitType, amount) -> supply.supply(fruitType, amount));
-        operationMap.put(Operations.P, (fruitType, amount) -> purchase.purchase(fruitType, amount));
-        operationMap.put(Operations.R, (fruitType, amount) -> returnFruit.returnFruit(fruitType, amount));
+        operationMap.put(Operations.B, (fruitType, amount)
+                -> balance.balance(fruitType, amount));
+        operationMap.put(Operations.S, (fruitType, amount)
+                -> supply.supply(fruitType, amount));
+        operationMap.put(Operations.P, (fruitType, amount)
+                -> purchase.purchase(fruitType, amount));
+        operationMap.put(Operations.R, (fruitType, amount)
+                -> returnFruit.returnFruit(fruitType, amount));
     }
 
     @Override

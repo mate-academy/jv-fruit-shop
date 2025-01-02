@@ -1,4 +1,4 @@
-package core.basesyntax.operationHandlers;
+package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
 

@@ -19,7 +19,7 @@ public class Main {
     private static final String outputPath = "src/main/java/core/basesyntax"
             + "/resources/output.csv";
 
-    public static void main(String[] args)  {
+    public static void main(String[] args) {
         Path inPath = Path.of(inputPath);
 
         FileDataReader fileDataReader = null;
