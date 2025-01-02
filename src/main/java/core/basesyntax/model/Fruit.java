@@ -9,7 +9,7 @@ public class Fruit {
         storage = new Storage();
     }
 
-    public int balance(String fruitType, int amount) {
+    /*public int balance(String fruitType, int amount) {
         storage.put(fruitType,amount);
         return amount;
     }
@@ -34,5 +34,5 @@ public class Fruit {
         int newAmount = storage.get(fruitType) - amount;
         storage.put(fruitType,newAmount);
         return newAmount;
-    }
+    }*/
 }

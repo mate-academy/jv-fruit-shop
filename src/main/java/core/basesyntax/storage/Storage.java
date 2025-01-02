@@ -15,7 +15,7 @@ public class Storage {
     }
 
     public void put(String fruitType, int amount) {
-        storage.put(fruitType,amount);
+        storage.put(fruitType, amount);
     }
 
     public int get(String fruitType) {
@@ -23,6 +23,6 @@ public class Storage {
     }
 
     public int getOrDefault(String fruitType, int i) {
-        return storage.getOrDefault(fruitType,i);
+        return storage.getOrDefault(fruitType, i);
     }
 }

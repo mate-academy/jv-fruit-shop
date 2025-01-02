@@ -5,19 +5,20 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 public class FileDataWriterImpl implements FileDataWriter {
     private static final String REPORT_HEADER = "fruit,quantity";
-    private final String newPath;
+    private final Path newPath;
 
-    public FileDataWriterImpl(String newPath) {
+    public FileDataWriterImpl(Path newPath) {
         this.newPath = newPath;
     }
 
     @Override
     public File writeData(List<String> processedList) {
-        File file = new File(newPath);
+        File file = new File(String.valueOf(newPath));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
             bufferedWriter.write(REPORT_HEADER);
             bufferedWriter.newLine();

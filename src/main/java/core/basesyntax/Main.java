@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.model.Fruit;
 import core.basesyntax.services.DataProcessing;
 import core.basesyntax.services.FileDataReader;
 import core.basesyntax.services.FileDataWriter;
@@ -11,26 +10,32 @@ import core.basesyntax.strategy.FruitStrategy;
 import core.basesyntax.strategy.FruitStrategyImpl;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
-        Path inputPath = Paths.get("src/main/java/core/basesyntax/resources/input.csv");
+    private static final String inputPath = "src/main/java/core/basesyntax/resources/input.csv";
+    private static final String outputPath = "src/main/java/core/basesyntax"
+            + "/resources/output.csv";
 
-        FileDataReader fileDataReader = new FileDataReaderImpl(
-                new java.io.FileReader(String.valueOf(inputPath)));
-        FileDataWriter fileDataWriter = new FileDataWriterImpl("src/main/java/core/basesyntax"
-                + "/resources/output.csv");
+    public static void main(String[] args)  {
+        Path inPath = Path.of(inputPath);
 
-        Fruit fruit = new Fruit();
+        FileDataReader fileDataReader = null;
+        try {
+            fileDataReader = new FileDataReaderImpl(
+                    new FileReader(String.valueOf(inPath)));
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        FileDataWriter fileDataWriter = new FileDataWriterImpl(Path.of(outputPath));
 
-        FruitStrategy fruitStrategy = new FruitStrategyImpl(fruit);
+        FruitStrategy fruitStrategy = new FruitStrategyImpl();
 
         DataProcessing dataProcessing = new DataProcessingImpl((FruitStrategyImpl) fruitStrategy);
 
-        List<String> inputData = fileDataReader.readData(inputPath);
+        List<String> inputData = fileDataReader.readData(inPath);
 
         List<String> processedData = dataProcessing.processData(inputData);
 
