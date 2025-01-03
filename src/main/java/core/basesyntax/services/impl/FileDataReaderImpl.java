@@ -25,7 +25,7 @@ public class FileDataReaderImpl implements FileDataReader {
                 list.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can not read data from a file" + path.toString(),e);
+            throw new RuntimeException("Can not read data from a file" + path.toString(), e);
         }
         return list;
     }

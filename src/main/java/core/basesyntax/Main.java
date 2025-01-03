@@ -15,27 +15,23 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Main {
-    private static final String inputPath = "src/main/java/core/basesyntax/resources/input.csv";
+    private static final String INPUT_PATH  = "src/main/java/core/basesyntax/resources/input.csv";
     private static final String outputPath = "src/main/java/core/basesyntax"
             + "/resources/output.csv";
 
     public static void main(String[] args) {
-        Path inPath = Path.of(inputPath);
-
         FileDataReader fileDataReader = null;
         try {
-            fileDataReader = new FileDataReaderImpl(
-                    new FileReader(String.valueOf(inPath)));
+            fileDataReader = new FileDataReaderImpl(new FileReader(INPUT_PATH));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
+        List<String> inputData = fileDataReader.readData(Path.of(INPUT_PATH));
         FileDataWriter fileDataWriter = new FileDataWriterImpl(Path.of(outputPath));
 
         FruitStrategy fruitStrategy = new FruitStrategyImpl();
 
         DataProcessing dataProcessing = new DataProcessingImpl((FruitStrategyImpl) fruitStrategy);
-
-        List<String> inputData = fileDataReader.readData(inPath);
 
         List<String> processedData = dataProcessing.processData(inputData);
 

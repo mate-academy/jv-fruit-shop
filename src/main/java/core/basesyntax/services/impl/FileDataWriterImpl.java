@@ -9,7 +9,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileDataWriterImpl implements FileDataWriter {
-    private static final String REPORT_HEADER = "fruit,quantity";
     private final Path newPath;
 
     public FileDataWriterImpl(Path newPath) {
@@ -20,8 +19,6 @@ public class FileDataWriterImpl implements FileDataWriter {
     public File writeData(List<String> processedList) {
         File file = new File(String.valueOf(newPath));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            bufferedWriter.write(REPORT_HEADER);
-            bufferedWriter.newLine();
             for (String string : processedList) {
                 bufferedWriter.write(string);
                 bufferedWriter.newLine();

@@ -1,6 +1,6 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.Operations;
+import core.basesyntax.Operation;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
 import core.basesyntax.operationhandlers.PurchaseOperationHandler;
 import core.basesyntax.operationhandlers.ReturnOperationHandler;
@@ -12,7 +12,7 @@ import java.util.function.BiFunction;
 
 public class FruitStrategyImpl implements FruitStrategy {
     private Storage storage;
-    private Map<Operations, BiFunction<String,Integer,Integer>> operationMap;
+    private Map<Operation, BiFunction<String,Integer,Integer>> operationMap;
     private BalanceOperationHandler balance;
     private PurchaseOperationHandler purchase;
     private ReturnOperationHandler returnFruit;
@@ -26,39 +26,27 @@ public class FruitStrategyImpl implements FruitStrategy {
         returnFruit = new ReturnOperationHandler(storage);
         supply = new SupplyOperationHandler(storage);
 
-        operationMap.put(Operations.B, (fruitType, amount)
+        operationMap.put(Operation.BALANCE, (fruitType, amount)
                 -> balance.balance(fruitType, amount));
-        operationMap.put(Operations.S, (fruitType, amount)
+        operationMap.put(Operation.SUPPLY, (fruitType, amount)
                 -> supply.supply(fruitType, amount));
-        operationMap.put(Operations.P, (fruitType, amount)
+        operationMap.put(Operation.PURCHASE, (fruitType, amount)
                 -> purchase.purchase(fruitType, amount));
-        operationMap.put(Operations.R, (fruitType, amount)
+        operationMap.put(Operation.RETURN, (fruitType, amount)
                 -> returnFruit.returnFruit(fruitType, amount));
     }
 
     @Override
     public int operation(String operation, String fruitType, int amount) {
-
-        Operations op = Operations.valueOf(operation.toUpperCase());
-
-        BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction =
-                operationMap.get(op);
-        if (stringIntegerIntegerBiFunction == null) {
-            throw new IllegalArgumentException("Invalid operation: " + operation);
+        try {
+            Operation op = Operation.getOperation(operation);
+            BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction = operationMap.get(op);
+            if (stringIntegerIntegerBiFunction == null) {
+                throw new IllegalArgumentException("Invalid operation: " + operation);
+            }
+            return stringIntegerIntegerBiFunction.apply(fruitType, amount);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Invalid operation code: " + operation + ". Please use a valid operation code.", e);
         }
-
-        return stringIntegerIntegerBiFunction.apply(fruitType,amount);
-        /*switch (operation) {
-            case "b" :
-                return fruit.balance(fruitType,amount);
-            case "s" :
-                return fruit.supply(fruitType,amount);
-            case "p" :
-                return fruit.purchase(fruitType,amount);
-            case "r" :
-                return fruit.returnFruit(fruitType,amount);
-            default:
-                throw new IllegalArgumentException("Incorrect operation: " + operation);*/
     }
 }
-
