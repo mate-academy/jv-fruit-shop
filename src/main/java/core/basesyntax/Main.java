@@ -1,9 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.service.dao.FileReader;
-import core.basesyntax.service.dao.FileReaderImpl;
-import core.basesyntax.service.dao.FileWriter;
-import core.basesyntax.service.dao.FileWriterImpl;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
@@ -14,6 +10,10 @@ import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.dao.FileReader;
+import core.basesyntax.service.dao.FileReaderImpl;
+import core.basesyntax.service.dao.FileWriter;
+import core.basesyntax.service.dao.FileWriterImpl;
 import core.basesyntax.service.operations.BalanceOperation;
 import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperation;
