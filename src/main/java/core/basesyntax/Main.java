@@ -1,9 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReader;
-import core.basesyntax.dao.FileReaderImpl;
-import core.basesyntax.dao.FileWriter;
-import core.basesyntax.dao.FileWriterImpl;
+import core.basesyntax.service.dao.FileReader;
+import core.basesyntax.service.dao.FileReaderImpl;
+import core.basesyntax.service.dao.FileWriter;
+import core.basesyntax.service.dao.FileWriterImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataConverterImpl;
@@ -23,7 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_PATH = "reportToRead.csv";
+    private static final String FILE_PATH = "src/main/resources/reportToRead.csv";
+    private static final String REPORT_PATH = "src/main/resources/finalReport.csv";
     private static FileReader fileReader = new FileReaderImpl();
 
     public static void main(String[] args) {
@@ -46,6 +48,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport(Storage.getFruitTransactionList());
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, REPORT_PATH);
     }
 }

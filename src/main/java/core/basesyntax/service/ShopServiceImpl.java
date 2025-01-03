@@ -1,9 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
@@ -40,6 +39,6 @@ public class ShopServiceImpl implements ShopService {
             }
         }
 
-        return Storage.getCalculatedTransactions().values().stream().collect(Collectors.toList());
+        return Storage.getCalculatedTransactions().values().stream().toList();
     }
 }
