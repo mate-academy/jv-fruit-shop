@@ -40,13 +40,15 @@ public class FruitStrategyImpl implements FruitStrategy {
     public int operation(String operation, String fruitType, int amount) {
         try {
             Operation op = Operation.getOperation(operation);
-            BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction = operationMap.get(op);
+            BiFunction<String, Integer, Integer> stringIntegerIntegerBiFunction
+                    = operationMap.get(op);
             if (stringIntegerIntegerBiFunction == null) {
                 throw new IllegalArgumentException("Invalid operation: " + operation);
             }
             return stringIntegerIntegerBiFunction.apply(fruitType, amount);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Invalid operation code: " + operation + ". Please use a valid operation code.", e);
+            throw new IllegalArgumentException("Invalid operation code: "
+                    + operation + ". Please use a valid operation code.", e);
         }
     }
 }

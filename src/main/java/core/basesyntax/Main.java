@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Main {
-    private static final String INPUT_PATH  = "src/main/java/core/basesyntax/resources/input.csv";
+    private static final String INPUT_PATH = "src/main/java/core/basesyntax/resources/input.csv";
     private static final String outputPath = "src/main/java/core/basesyntax"
             + "/resources/output.csv";
 
