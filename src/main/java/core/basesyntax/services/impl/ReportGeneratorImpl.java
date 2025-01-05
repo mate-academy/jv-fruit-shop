@@ -1,7 +1,6 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.services.ReportGenerator;
-
 import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGenerator {

@@ -4,5 +4,5 @@ import core.basesyntax.Operation;
 import core.basesyntax.operationhandlers.OperationHandler;
 
 public interface OperationStrategy {
-   OperationHandler getOperationHandler(Operation operation);
+    OperationHandler getOperationHandler(Operation operation);
 }

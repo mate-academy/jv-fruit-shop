@@ -1,6 +1,10 @@
 package core.basesyntax;
 
-import core.basesyntax.operationhandlers.*;
+import core.basesyntax.operationhandlers.ReturnOperationHandler;
+import core.basesyntax.operationhandlers.BalanceOperationHandler;
+import core.basesyntax.operationhandlers.OperationHandler;
+import core.basesyntax.operationhandlers.PurchaseOperationHandler;
+import core.basesyntax.operationhandlers.SupplyOperationHandler;
 import core.basesyntax.services.DataProcessing;
 import core.basesyntax.services.FileDataReader;
 import core.basesyntax.services.FileDataWriter;
@@ -12,7 +16,6 @@ import core.basesyntax.services.impl.ReportGeneratorImpl;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.io.File;
 import java.nio.file.Path;
 import java.util.HashMap;
@@ -42,7 +45,8 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
 
         // 5. Ініціалізація обробки даних
-        DataProcessing dataProcessing = new DataProcessingImpl((OperationStrategyImpl) operationStrategy, storage);
+        DataProcessing dataProcessing = new DataProcessingImpl((OperationStrategyImpl)
+                operationStrategy, storage);
 
         // 6. Обробка вхідних даних
         List<String> processedData = dataProcessing.processData(inputData);

@@ -4,10 +4,8 @@ import core.basesyntax.Operation;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.services.DataProcessing;
 import core.basesyntax.storage.Storage;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.OperationStrategy;
-
-import java.util.ArrayList;
+import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +30,8 @@ public class DataProcessingImpl implements DataProcessing {
             String fruitType = split[FRUIT_TYPE];
             int amount = Integer.parseInt(split[AMOUNT]);
 
-            OperationHandler handler = fruitStrategy.getOperationHandler(Operation.getOperation(operation));
+            OperationHandler handler = fruitStrategy
+                    .getOperationHandler(Operation.getOperation(operation));
             handler.apply(fruitType, amount);
         });
 
@@ -48,7 +47,8 @@ public class DataProcessingImpl implements DataProcessing {
             String fruitType = split[FRUIT_TYPE];
             int amount = Integer.parseInt(split[AMOUNT]);
 
-            OperationHandler handler = fruitStrategy.getOperationHandler(Operation.getOperation(operation));
+            OperationHandler handler = fruitStrategy
+            .getOperationHandler(Operation.getOperation(operation));
             int updatedAmount = handler.apply(fruitType, amount);
             storage.put(fruitType, updatedAmount);
         }

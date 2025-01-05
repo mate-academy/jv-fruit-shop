@@ -2,7 +2,7 @@ package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
 
-public class SupplyOperationHandler implements OperationHandler{
+public class SupplyOperationHandler implements OperationHandler {
     private Storage storage;
 
     public SupplyOperationHandler(Storage storage) {

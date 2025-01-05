@@ -18,8 +18,8 @@ public class FileDataWriterImpl implements FileDataWriter {
     public File writeData(String processedList) {
         File file = new File(String.valueOf(newPath));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-                bufferedWriter.write(processedList);
-                bufferedWriter.newLine();
+            bufferedWriter.write(processedList);
+            bufferedWriter.newLine();
         } catch (IOException e) {
             throw new RuntimeException("Can not write data to a file" + file.getName(), e);
         }
