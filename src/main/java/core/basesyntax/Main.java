@@ -1,7 +1,7 @@
 package core.basesyntax;
 
-import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
+import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.operationhandlers.PurchaseOperationHandler;
 import core.basesyntax.operationhandlers.ReturnOperationHandler;
 import core.basesyntax.operationhandlers.SupplyOperationHandler;
