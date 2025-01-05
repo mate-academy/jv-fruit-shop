@@ -25,4 +25,8 @@ public class Storage {
     public int getOrDefault(String fruitType, int i) {
         return storage.getOrDefault(fruitType, i);
     }
+
+    public Map<String, Integer> getStorage() {
+        return storage;
+    }
 }

@@ -9,23 +9,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileDataReaderImpl implements FileDataReader {
-    private FileReader fileReader;
-
-    public FileDataReaderImpl(FileReader fileReader) {
-        this.fileReader = fileReader;
-    }
-
     @Override
     public List<String> readData(Path path) {
         List<String> list = new ArrayList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path.toFile()))) {
             bufferedReader.readLine();
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 list.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can not read data from a file" + path.toString(), e);
+            throw new RuntimeException("Cannot read data from file " + path.toString(), e);
         }
         return list;
     }

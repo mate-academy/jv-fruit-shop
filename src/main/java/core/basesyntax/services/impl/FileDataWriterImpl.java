@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.List;
 
 public class FileDataWriterImpl implements FileDataWriter {
     private final Path newPath;
@@ -16,13 +15,11 @@ public class FileDataWriterImpl implements FileDataWriter {
     }
 
     @Override
-    public File writeData(List<String> processedList) {
+    public File writeData(String processedList) {
         File file = new File(String.valueOf(newPath));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            for (String string : processedList) {
-                bufferedWriter.write(string);
+                bufferedWriter.write(processedList);
                 bufferedWriter.newLine();
-            }
         } catch (IOException e) {
             throw new RuntimeException("Can not write data to a file" + file.getName(), e);
         }
