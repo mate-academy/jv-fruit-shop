@@ -1,7 +1,7 @@
-package operationHandler;
+package operation.handler;
 
-import transaction.FruitTransaction;
 import java.util.Map;
+import transaction.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
 

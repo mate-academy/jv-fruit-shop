@@ -4,7 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class WriterImpl implements Writer{
+public class WriterImpl implements Writer {
     @Override
     public void writeDate(String report, String path) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {

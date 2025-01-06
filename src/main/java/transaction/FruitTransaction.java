@@ -47,14 +47,15 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getCode () {
+        public String getCode() {
             return code;
         }
-        public static Operation checkCode (String code) {
+
+        public static Operation checkCode(String code) {
             for (Operation operation : values()) {
-               if (operation.code.equals(code)) {
-                   return operation;
-               }
+                if (operation.code.equals(code)) {
+                    return operation;
+                }
             }
             throw new IllegalArgumentException("Operation " + code + " does not exist");
         }

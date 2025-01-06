@@ -1,8 +1,7 @@
 package converted;
 
-import transaction.FruitTransaction;
-
 import java.util.List;
+import transaction.FruitTransaction;
 
 public interface Converter {
     List<FruitTransaction> converterToTransaction(List<String> listIn);

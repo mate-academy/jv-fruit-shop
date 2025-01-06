@@ -2,7 +2,7 @@ package report;
 
 import java.util.Map;
 
-public class ReportImpl implements Report{
+public class ReportImpl implements Report {
     @Override
     public String getReport(Map<String, Integer> storage) {
         StringBuilder report = new StringBuilder("fruit,quantity\n");

@@ -1,11 +1,10 @@
 package converted;
 
-import transaction.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
+import transaction.FruitTransaction;
 
-public class ConverterImpl implements Converter{
+public class ConverterImpl implements Converter {
     @Override
     public List<FruitTransaction> converterToTransaction(List<String> listIn) {
         List<FruitTransaction> transactions = new ArrayList<>();

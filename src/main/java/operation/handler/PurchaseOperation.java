@@ -1,10 +1,9 @@
-package operationHandler;
-
-import transaction.FruitTransaction;
+package operation.handler;
 
 import java.util.Map;
+import transaction.FruitTransaction;
 
-public class PurchaseOperation implements OperationHandler{
+public class PurchaseOperation implements OperationHandler {
     @Override
     public void operation(FruitTransaction transaction, Map<String, Integer> storage) {
         storage.merge(transaction.getFruit(), -transaction.getQuantity(), Integer::sum);

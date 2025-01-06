@@ -1,14 +1,13 @@
 package service;
 
-import operationHandler.OperationHandler;
-import operationStrategy.OperationStrategy;
-import transaction.FruitTransaction;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import operation.handler.OperationHandler;
+import operation.strategy.OperationStrategy;
+import transaction.FruitTransaction;
 
-public class ShopServiceImpl implements ShopService{
+public class ShopServiceImpl implements ShopService {
     private final Map<String, Integer> storage = new HashMap<>();
     private final OperationStrategy operation;
 

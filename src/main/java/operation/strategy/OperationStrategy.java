@@ -1,6 +1,6 @@
-package operationStrategy;
+package operation.strategy;
 
-import operationHandler.OperationHandler;
+import operation.handler.OperationHandler;
 import transaction.FruitTransaction;
 
 public interface OperationStrategy {
