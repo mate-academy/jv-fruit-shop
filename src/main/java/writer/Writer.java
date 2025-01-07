@@ -1,5 +1,5 @@
 package writer;
 
 public interface Writer {
-    void writeDate(String report, String path);
+    void writeData(String report, String path);
 }

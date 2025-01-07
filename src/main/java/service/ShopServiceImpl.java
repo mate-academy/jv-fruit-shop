@@ -19,6 +19,9 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operation.getOperation(transaction.getOperation());
+            if (handler == null) {
+                throw new IllegalStateException("No handler found for operation");
+            }
             handler.operation(transaction, storage);
         }
     }

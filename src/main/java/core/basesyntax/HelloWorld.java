@@ -25,7 +25,7 @@ import writer.WriterImpl;
 public class HelloWorld {
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> input = fileReader.read("/Users/promaksua/Downloads/Book");
+        List<String> input = fileReader.read("reportToRead.csv");
 
         Converter dataConverter = new ConverterImpl();
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
@@ -44,6 +44,6 @@ public class HelloWorld {
         String result = report.getReport(shopService.getStorage());
 
         Writer writer = new WriterImpl();
-        writer.writeDate(result, "/Users/promaksua/Downloads/Book2");
+        writer.writeData(result,"finalReport.csv");
     }
 }

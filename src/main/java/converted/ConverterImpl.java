@@ -10,6 +10,9 @@ public class ConverterImpl implements Converter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String lines : listIn.subList(1, listIn.size())) {
             String[] parts = lines.split(",");
+            if (parts.length < 2) {
+                throw new IllegalArgumentException("Invalid line format " + lines);
+            }
             transactions.add(new FruitTransaction(
                     FruitTransaction.Operation.checkCode(parts[0]),
                     Integer.parseInt(parts[2]),
