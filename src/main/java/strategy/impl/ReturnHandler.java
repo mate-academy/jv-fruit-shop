@@ -1,14 +1,16 @@
 package strategy.impl;
 
-import db.Storage;
+import static db.Storage.getFruitStock;
+import static db.Storage.modifyFruitStock;
+
 import model.FruitTransaction;
 import strategy.OperationHandler;
 
 public class ReturnHandler implements OperationHandler {
     @Override
     public void doOperation(FruitTransaction transaction) {
-        int currentQuantity = Storage.getDb().get(transaction.getFruit());
-        Storage.getDb().put(transaction.getFruit(),
+        int currentQuantity = getFruitStock().getOrDefault(transaction.getFruit(), 0);
+        modifyFruitStock(transaction.getFruit(),
                 currentQuantity + transaction.getQuantity());
     }
 }

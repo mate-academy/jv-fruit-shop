@@ -10,14 +10,10 @@ public class DataConverterImpl implements DataConverter {
     static final int OPERATION_INDEX = 0;
     static final int FRUIT_INDEX = 1;
     static final int QUANTITY_INDEX = 2;
-    static final String BALANCE_ABBR = "b";
-    static final String SUPPLY_ABBR = "s";
-    static final String PURCHASE_ABBR = "p";
-    static final String RETURN_ABBR = "r";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> readerOutput) {
-        if (readerOutput == null) {
+        if (readerOutput.isEmpty()) {
             return new ArrayList<>();
         }
         List<FruitTransaction> converterOutput = new ArrayList<>();
@@ -26,27 +22,23 @@ public class DataConverterImpl implements DataConverter {
             if (parts.length != 3) {
                 throw new IllegalArgumentException("Incorrect format of data");
             }
-            FruitTransaction.Operation transactionOperation = getOperation(parts);
+            int quantity;
+            try {
+                quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid quantity format of given quantity: "
+                        + parts[QUANTITY_INDEX]);
+            }
             converterOutput.add(new FruitTransaction(
-                    transactionOperation,
+                    getOperation(parts[OPERATION_INDEX]),
                     parts[FRUIT_INDEX].trim(),
-                    Integer.parseInt(parts[QUANTITY_INDEX].trim()
-                    )));
+                    quantity
+            ));
         }
         return converterOutput;
     }
 
-    private static FruitTransaction.Operation getOperation(String[] parts) {
-        String transactionString = parts[OPERATION_INDEX].trim();
-        FruitTransaction.Operation transactionOperation = null;
-        switch (transactionString) {
-            case BALANCE_ABBR -> transactionOperation = FruitTransaction.Operation.BALANCE;
-            case SUPPLY_ABBR -> transactionOperation = FruitTransaction.Operation.SUPPLY;
-            case PURCHASE_ABBR -> transactionOperation = FruitTransaction.Operation.PURCHASE;
-            case RETURN_ABBR -> transactionOperation = FruitTransaction.Operation.RETURN;
-            default -> throw new IllegalArgumentException("Invalid operation: "
-                    + transactionString);
-        }
-        return transactionOperation;
+    private FruitTransaction.Operation getOperation(String operationCode) {
+        return FruitTransaction.Operation.fromCode(operationCode);
     }
 }

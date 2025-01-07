@@ -15,8 +15,19 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new IllegalArgumentException("Empty list of transactions!");
+        }
         for (FruitTransaction transaction : transactions) {
-            operationHandlers.get(transaction.getOperation()).doOperation(transaction);
+            FruitTransaction.Operation currentOperation = transaction.getOperation();
+            if (currentOperation == null) {
+                continue;
+            }
+            OperationHandler handler = operationHandlers.get(currentOperation);
+            if (handler == null) {
+                throw new IllegalArgumentException("Unsupported operation: " + currentOperation);
+            }
+            handler.doOperation(transaction);
         }
     }
 }

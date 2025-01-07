@@ -1,15 +1,17 @@
 package db;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Storage {
-    private static final HashMap<String, Integer> db = new HashMap<>();
+    private static final Map<String, Integer> fruitStock = new HashMap<>();
 
-    public static HashMap<String, Integer> getDb() {
-        return db;
+    public static Map<String, Integer> getFruitStock() {
+        return Collections.unmodifiableMap(fruitStock);
     }
 
-    boolean isDbEmpty() {
-        return db.isEmpty();
+    public static void modifyFruitStock(String fruit, int quantity) {
+        fruitStock.put(fruit, quantity);
     }
 }
