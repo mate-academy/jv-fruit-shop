@@ -11,7 +11,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int INDEX_OF_QUANTITY = 2;
 
     @Override
-    public List<FruitTransaction> convertToTransaction(List<String> dataToParse) {
+    public List<FruitTransaction> convertToTransactions(List<String> dataToParse) {
         List<FruitTransaction> newList = new ArrayList<>();
 
         for (String line : dataToParse) {

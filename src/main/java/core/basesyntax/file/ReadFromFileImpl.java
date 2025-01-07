@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
+public class ReadFromFileImpl implements ReadFromFile {
 
     @Override
     public List<String> read(String fileName) {
@@ -18,7 +18,7 @@ public class FileReaderImpl implements FileReader {
                 data.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Cant read a file", e);
+            throw new RuntimeException("Cant read a file inputValue", e);
         }
         return data;
     }
