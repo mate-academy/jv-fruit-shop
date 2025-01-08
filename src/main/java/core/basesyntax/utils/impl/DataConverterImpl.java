@@ -16,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> list) {
         List<FruitTransaction> result = new ArrayList<>();
-        list.remove(0);
+        list.remove(0); // removing header
         for (String line : list) {
             String[] parts = line.split(",");
             result.add(new FruitTransaction(

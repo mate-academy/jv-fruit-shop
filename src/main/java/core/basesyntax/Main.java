@@ -8,7 +8,7 @@ import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.OperationDefStrategyImpl;
 import core.basesyntax.service.impl.OperationStrategyImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
-import core.basesyntax.service.operation.BalanceOperationHadler;
+import core.basesyntax.service.operation.BalanceOperationHandler;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
@@ -44,7 +44,7 @@ public class Main {
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHadler());
+                new BalanceOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler());
         operationHandlerMap.put(FruitTransaction.Operation.SUPPLY,

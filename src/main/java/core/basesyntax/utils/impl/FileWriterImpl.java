@@ -8,6 +8,7 @@ import java.io.IOException;
 public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String line, String filePath) {
+
         File file = new File(filePath);
         if (!file.getName().endsWith(".csv")) {
             throw new RuntimeException("This is not CSV file!");
@@ -19,12 +20,10 @@ public class FileWriterImpl implements FileWriter {
                 throw new RuntimeException("Cannot create file " + file.getAbsolutePath());
             }
         }
-        try {
-            BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file));
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(file))) {
             bufferedWriter.append(line);
-            bufferedWriter.close();
         } catch (IOException e) {
-            System.out.println("Cannot write to " + file.getAbsolutePath());
+            throw new RuntimeException("Cannot write to " + file.getAbsolutePath());
         }
     }
 }

@@ -3,7 +3,7 @@ package core.basesyntax.service.operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.ResultData;
 
-public class BalanceOperationHadler implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     @Override
     public ResultData handle(FruitTransaction transaction) {
         return new ResultData(transaction.getFruit(), transaction.getQuantity());

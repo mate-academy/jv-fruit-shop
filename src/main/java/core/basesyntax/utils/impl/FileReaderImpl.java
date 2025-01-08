@@ -19,17 +19,15 @@ public class FileReaderImpl implements FileReader {
             throw new RuntimeException("This is not CSV file!");
         }
         List<String> result = new ArrayList<>();
-        try {
-            BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file));
+        try (BufferedReader bufferedReader = new BufferedReader(new java.io.FileReader(file))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 result.add(line);
             }
-            bufferedReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("Cannot find the file " + file.getAbsolutePath());
+            throw new RuntimeException("Cannot find the file " + file.getAbsolutePath());
         } catch (IOException e) {
-            System.out.println("Cannot read " + file.getAbsolutePath());
+            throw new RuntimeException("Cannot read " + file.getAbsolutePath());
         }
         return result;
     }
