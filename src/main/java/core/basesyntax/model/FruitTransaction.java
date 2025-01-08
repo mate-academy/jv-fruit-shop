@@ -4,6 +4,7 @@ public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
+
     public Operation getOperation() {
         return operation;
     }

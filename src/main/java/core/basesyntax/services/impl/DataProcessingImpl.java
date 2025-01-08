@@ -7,11 +7,9 @@ import core.basesyntax.services.DataProcessing;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 public class DataProcessingImpl implements DataProcessing {
     private static final int OPERATION_TYPE = 0;
