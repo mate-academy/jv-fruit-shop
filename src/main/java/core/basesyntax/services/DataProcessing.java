@@ -1,7 +1,9 @@
 package core.basesyntax.services;
 
+import core.basesyntax.model.FruitTransaction;
+
 import java.util.List;
 
 public interface DataProcessing {
-    List<String> processData(List<String> enterList);
+    List<FruitTransaction> processData(List<String> enterList);
 }

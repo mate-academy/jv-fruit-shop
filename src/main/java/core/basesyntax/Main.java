@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.operationhandlers.PurchaseOperationHandler;
@@ -43,13 +44,13 @@ public class Main {
         DataProcessing dataProcessing = new DataProcessingImpl((OperationStrategyImpl)
                 operationStrategy, storage);
 
-        List<String> processedData = dataProcessing.processData(inputData);
+        List<FruitTransaction> processedData = dataProcessing.processData(inputData);
 
         ReportGenerator generator = new ReportGeneratorImpl();
         String report = generator.getReport(processedData);
 
         FileDataWriter fileDataWriter = new FileDataWriterImpl(Path.of(OUTPUT_PATH));
-        File outputFile = fileDataWriter.writeData(report);
+        File outputFile = fileDataWriter.writeData(report, OUTPUT_PATH);
 
         System.out.println("Data processing complete. Output file: "
                 + outputFile.getAbsolutePath());

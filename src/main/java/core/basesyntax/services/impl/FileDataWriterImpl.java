@@ -15,10 +15,10 @@ public class FileDataWriterImpl implements FileDataWriter {
     }
 
     @Override
-    public File writeData(String processedList) {
+    public File writeData(String report, String path) {
         File file = new File(String.valueOf(newPath));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-            bufferedWriter.write(processedList);
+            bufferedWriter.write(report);
             bufferedWriter.newLine();
         } catch (IOException e) {
             throw new RuntimeException("Can not write data to a file" + file.getName(), e);

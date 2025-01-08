@@ -1,12 +1,16 @@
 package core.basesyntax.services.impl;
 
 import core.basesyntax.Operation;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.services.DataProcessing;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class DataProcessingImpl implements DataProcessing {
@@ -23,7 +27,8 @@ public class DataProcessingImpl implements DataProcessing {
     }
 
     @Override
-    public List<String> processData(List<String> enterList) {
+    public List<FruitTransaction> processData(List<String> enterList) {
+        List<FruitTransaction> list = new ArrayList<>();
         enterList.forEach(enter -> {
             String[] split = enter.split(COMMA);
             String operation = split[OPERATION_TYPE];
@@ -34,33 +39,14 @@ public class DataProcessingImpl implements DataProcessing {
                     .getOperationHandler(Operation.getOperation(operation));
             handler.apply(fruitType, amount);
         });
-
-        return storage.getStorage().entrySet().stream()
-                .map(entry -> entry.getKey() + COMMA + entry.getValue())
-                .collect(Collectors.toList());
+        Map<String, Integer> storage1 = storage.getStorage();
+        for (Map.Entry<String, Integer> entry : storage1.entrySet()) {
+            Integer i = storage1.get(entry.getKey());
+            FruitTransaction fruitTransaction = new FruitTransaction();
+            fruitTransaction.setQuantity(i);
+            fruitTransaction.setFruit(entry.getKey());
+            list.add(fruitTransaction);
+        }
+        return list;
     }
 }
-        /*List<String> processedData = new ArrayList<>();
-        for (String enter : enterList) {
-            String[] split = enter.split(COMMA);
-            String operation = split[OPERATION_TYPE];
-            String fruitType = split[FRUIT_TYPE];
-            int amount = Integer.parseInt(split[AMOUNT]);
-
-            OperationHandler handler = fruitStrategy
-            .getOperationHandler(Operation.getOperation(operation));
-            int updatedAmount = handler.apply(fruitType, amount);
-            storage.put(fruitType, updatedAmount);
-        }
-        for (String enter : enterList) {
-            String[] split = enter.split(COMMA);
-            String fruitType = split[FRUIT_TYPE];
-            int currentAmount = storage.getCurrentAmount(fruitType);
-            processedData.add(fruitType + COMMA + currentAmount);
-        }
-        List<String> collect = processedData.stream()
-                .distinct()
-                .collect(Collectors.toList());
-        return collect;
-   }*/
-// What is better to use?
