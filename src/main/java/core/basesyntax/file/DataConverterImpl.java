@@ -1,6 +1,7 @@
 package core.basesyntax.file;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,8 @@ public class DataConverterImpl implements DataConverter {
         for (String line : dataToParse) {
             FruitTransaction transaction = new FruitTransaction();
             String[] separatedData = line.split(DELIMITER);
-            FruitTransaction.Operation operation
-                    = FruitTransaction.Operation.fromCode(separatedData[INDEX_OF_OPERATION]);
+            Operation operation
+                    = Operation.fromCode(separatedData[INDEX_OF_OPERATION]);
             transaction.setOperation(operation);
             transaction.setFruit(separatedData[INDEX_OF_FRUIT]);
             transaction.setQuantity(Integer.parseInt(separatedData[INDEX_OF_QUANTITY]));

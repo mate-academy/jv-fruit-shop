@@ -18,7 +18,7 @@ public class ReadFromFileImpl implements ReadFromFile {
                 data.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Cant read a file inputValue", e);
+            throw new RuntimeException("Cant read a file with path " + fileName, e);
         }
         return data;
     }
