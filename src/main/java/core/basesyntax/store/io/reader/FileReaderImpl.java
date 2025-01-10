@@ -1,5 +1,6 @@
 package core.basesyntax.store.io.reader;
 
+import core.basesyntax.store.io.Logger;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,7 +13,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            e.printStackTrace();
+            Logger.logError("Error reading file: " + fileName, e); // Логуємо помилку
             return Collections.emptyList();
         }
     }
