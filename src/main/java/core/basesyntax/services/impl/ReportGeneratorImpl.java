@@ -18,7 +18,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder str = new StringBuilder();
         str.append(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> map : storage.getStorage().entrySet()) {
-            str.append(map.getKey()).append(COMMA).append(map.getValue()).append(System.lineSeparator());
+            str.append(map.getKey()).append(COMMA)
+                    .append(map.getValue()).append(System.lineSeparator());
         }
         return str.toString();
     }
