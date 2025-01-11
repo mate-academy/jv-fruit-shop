@@ -23,7 +23,7 @@ public class DataProcessingImpl implements DataProcessing {
         this.fruitStrategy = fruitStrategy;
         this.storage = storage;
     }
-
+    // return FruitTransaction list and in another new class create login with TransactionHandling
     @Override
     public List<FruitTransaction> processData(List<String> enterList) {
         List<FruitTransaction> list = new ArrayList<>();

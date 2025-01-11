@@ -6,14 +6,8 @@ import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.operationhandlers.PurchaseOperationHandler;
 import core.basesyntax.operationhandlers.ReturnOperationHandler;
 import core.basesyntax.operationhandlers.SupplyOperationHandler;
-import core.basesyntax.services.DataProcessing;
-import core.basesyntax.services.FileDataReader;
-import core.basesyntax.services.FileDataWriter;
-import core.basesyntax.services.ReportGenerator;
-import core.basesyntax.services.impl.DataProcessingImpl;
-import core.basesyntax.services.impl.FileDataReaderImpl;
-import core.basesyntax.services.impl.FileDataWriterImpl;
-import core.basesyntax.services.impl.ReportGeneratorImpl;
+import core.basesyntax.services.*;
+import core.basesyntax.services.impl.*;
 import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
@@ -44,10 +38,12 @@ public class Main {
         DataProcessing dataProcessing = new DataProcessingImpl((OperationStrategyImpl)
                 operationStrategy, storage);
 
+        ShopService shopService = new ShopServiceImpl(storage);
         List<FruitTransaction> processedData = dataProcessing.processData(inputData);
+        shopService.operations(processedData);
 
-        ReportGenerator generator = new ReportGeneratorImpl();
-        String report = generator.getReport(processedData);
+        ReportGenerator generator = new ReportGeneratorImpl(storage);
+        String report = generator.getReport();
 
         FileDataWriter fileDataWriter = new FileDataWriterImpl(Path.of(OUTPUT_PATH));
         File outputFile = fileDataWriter.writeData(report, OUTPUT_PATH);
