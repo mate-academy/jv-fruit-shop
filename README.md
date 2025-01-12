@@ -95,6 +95,7 @@ public class FruitTransaction {
 ```
 
 Also, here is an example of what the `main` method may look like:
+
 ```java
 public class Main {
     public static void main(String[] arg) {
