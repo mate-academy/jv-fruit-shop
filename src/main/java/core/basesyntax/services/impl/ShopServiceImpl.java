@@ -4,6 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.services.ShopService;
 import core.basesyntax.storage.Storage;
 import java.util.List;
+import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private Storage storage;
@@ -14,8 +15,9 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void operations(List<FruitTransaction> fruitTransactions) {
-        for (FruitTransaction fr : fruitTransactions) {
-            storage.put(fr.getFruit(), fr.getQuantity());
+        Map<String, Integer> storage1 = storage.getStorage();
+        for (FruitTransaction fruitTransaction : fruitTransactions) {
+            storage1.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
         }
     }
 }

@@ -1,6 +1,7 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.operationhandlers.PurchaseOperationHandler;
@@ -36,10 +37,10 @@ public class Main {
 
         Storage storage = new Storage();
 
-        operationMap.put(Operation.BALANCE, new BalanceOperationHandler(storage));
-        operationMap.put(Operation.SUPPLY, new SupplyOperationHandler(storage));
-        operationMap.put(Operation.PURCHASE, new PurchaseOperationHandler(storage));
-        operationMap.put(Operation.RETURN, new ReturnOperationHandler(storage));
+        operationMap.put(Operation.BALANCE, new BalanceOperationHandler());
+        operationMap.put(Operation.SUPPLY, new SupplyOperationHandler());
+        operationMap.put(Operation.PURCHASE, new PurchaseOperationHandler());
+        operationMap.put(Operation.RETURN, new ReturnOperationHandler());
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationMap);
 

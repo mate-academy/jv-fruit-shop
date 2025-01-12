@@ -2,17 +2,16 @@ package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
 
-public class SupplyOperationHandler implements OperationHandler {
-    private Storage storage;
+import java.util.Map;
 
-    public SupplyOperationHandler(Storage storage) {
-        this.storage = storage;
-    }
+public class SupplyOperationHandler implements OperationHandler {
+    private Storage storage = new Storage();
 
     @Override
     public int apply(String fruitType, int amount) {
-        int newAmount = storage.get(fruitType) + amount;
-        storage.put(fruitType,newAmount);
+        Map<String, Integer> storage1 = storage.getStorage();
+        int newAmount = storage1.get(fruitType) + amount;
+        storage1.put(fruitType,newAmount);
         return newAmount;
     }
 }

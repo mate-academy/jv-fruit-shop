@@ -2,21 +2,20 @@ package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
 
-public class PurchaseOperationHandler implements OperationHandler {
-    private Storage storage;
+import java.util.Map;
 
-    public PurchaseOperationHandler(Storage storage) {
-        this.storage = storage;
-    }
+public class PurchaseOperationHandler implements OperationHandler {
+    private Storage storage = new Storage();
 
     @Override
     public int apply(String fruitType, int amount) {
-        int purchaseAmount = storage.getOrDefault(fruitType, 0);
+        Map<String, Integer> storage1 = storage.getStorage();
+        int purchaseAmount = storage1.getOrDefault(fruitType, 0);
         if (purchaseAmount < amount) {
             throw new IllegalStateException("Not enough fruits");
         }
-        int newAmount = storage.get(fruitType) - amount;
-        storage.put(fruitType,newAmount);
+        int newAmount = storage1.get(fruitType) - amount;
+        storage1.put(fruitType,newAmount);
         return newAmount;
     }
 }

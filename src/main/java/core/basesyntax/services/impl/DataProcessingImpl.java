@@ -1,6 +1,6 @@
 package core.basesyntax.services.impl;
 
-import core.basesyntax.Operation;
+import core.basesyntax.model.Operation;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.services.DataProcessing;
