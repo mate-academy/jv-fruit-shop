@@ -1,7 +1,6 @@
 package core.basesyntax.operationhandlers;
 
 import core.basesyntax.storage.Storage;
-
 import java.util.Map;
 
 public class SupplyOperationHandler implements OperationHandler {
