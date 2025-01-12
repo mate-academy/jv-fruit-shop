@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.fao.FileReaderImpl;
 import core.basesyntax.fao.FileReaderMy;
-import core.basesyntax.fao.FileWriterImps;
+import core.basesyntax.fao.FileWriterImpl;
 import core.basesyntax.fao.FileWriterMy;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.ReportGenerator;
@@ -43,7 +43,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(storage);
 
-        FileWriterMy fileWriter = new FileWriterImps();
+        FileWriterMy fileWriter = new FileWriterImpl();
         fileWriter.write("finalReport.csv",resultingReport);
     }
 

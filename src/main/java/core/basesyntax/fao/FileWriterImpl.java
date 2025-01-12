@@ -3,7 +3,7 @@ package core.basesyntax.fao;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class FileWriterImps implements FileWriterMy {
+public class FileWriterImpl implements FileWriterMy {
     @Override
     public void write(String fileName,String info) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(fileName))) {

@@ -7,6 +7,6 @@ public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(Map<String, Integer> storage, FruitTransaction transaction) {
         storage.put(transaction.getFruit(),
-                storage.get(transaction.getFruit()) + transaction.getQuantity());
+                storage.getOrDefault(transaction.getFruit(), 0) + transaction.getQuantity());
     }
 }
