@@ -15,9 +15,19 @@ public class Storage {
     }
 
     public void remove(String fruit, int quantity) {
-        if (inventory.get(fruit) >= quantity) {
-            inventory.put(fruit, inventory.get(fruit) - quantity);
+        if (!inventory.containsKey(fruit)) {
+            throw new IllegalArgumentException("Fruit " + fruit + " not found in inventory");
         }
+
+        int currentQuantity = inventory.get(fruit);
+
+        if (currentQuantity < quantity) {
+            throw new IllegalArgumentException("Insufficient quantity of " + fruit
+                    + " in inventory. " + "Current quantity: " + currentQuantity);
+        }
+
+        inventory.put(fruit, currentQuantity - quantity);
+
     }
 
     public Map<String, Integer> getInventory() {

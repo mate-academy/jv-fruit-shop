@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class FileWriterImpl implements FileWriter {
+public class CsvFileWriterImpl implements FileWriter {
     @Override
     public void write(String data, String filePath) {
         try {

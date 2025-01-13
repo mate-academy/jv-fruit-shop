@@ -68,5 +68,4 @@ public class FruitTransaction {
             throw new IllegalArgumentException("Invalid operation code: " + code);
         }
     }
-
 }

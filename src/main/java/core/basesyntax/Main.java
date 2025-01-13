@@ -2,20 +2,20 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.ProductDaoCsvImpl;
 import core.basesyntax.service.Converter;
 import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.ConverterImpl;
-import core.basesyntax.service.impl.FileWriterImpl;
+import core.basesyntax.service.impl.CsvFileReaderImpl;
+import core.basesyntax.service.impl.CsvFileWriterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
 import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperation;
-import core.basesyntax.strategy.ReportGenerator;
-import core.basesyntax.strategy.ReportGeneratorImpl;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
 import java.util.HashMap;
@@ -23,13 +23,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String SOURCE_FILE = "product-data.csv";
-    private static final String DESTINATION_FILE = "result.csv";
+    private static final String SOURCE_FILE = "src/main/resources/product-data.csv";
+    private static final String DESTINATION_FILE = "src/main/resources/result.csv";
 
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         Storage storage = new Storage();
-        ProductDaoCsvImpl dao = new ProductDaoCsvImpl(SOURCE_FILE);
+        CsvFileReaderImpl dao = new CsvFileReaderImpl(SOURCE_FILE);
 
         // 2. Convert the incoming data into FruitTransactions list
         List<String> res = dao.getAll();
@@ -53,7 +53,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(storage);
 
         // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl();
+        FileWriter fileWriter = new CsvFileWriterImpl();
         fileWriter.write(resultingReport, DESTINATION_FILE);
     }
 }
