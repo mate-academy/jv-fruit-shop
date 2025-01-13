@@ -1,17 +1,13 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.ProductDaoCsvImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.Converter;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ConverterImpl implements Converter {
-    public static ProductDaoCsvImpl dao;
+    public ConverterImpl() {
 
-    public ConverterImpl(ProductDaoCsvImpl daoImpl) {
-        dao = daoImpl;
     }
 
     @Override

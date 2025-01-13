@@ -15,7 +15,9 @@ public class Storage {
     }
 
     public void remove(String fruit, int quantity) {
-        inventory.put(fruit, inventory.get(fruit) - quantity);
+        if (inventory.get(fruit) >= quantity) {
+            inventory.put(fruit, inventory.get(fruit) - quantity);
+        }
     }
 
     public Map<String, Integer> getInventory() {
