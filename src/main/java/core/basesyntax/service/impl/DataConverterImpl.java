@@ -11,6 +11,7 @@ public class DataConverterImpl implements DataConverter {
     public static final int OPERATION_POSITION = 0;
     public static final int FRUIT_POSITION = 1;
     public static final int QUANTITY_POSITION = 2;
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         return data.stream()
