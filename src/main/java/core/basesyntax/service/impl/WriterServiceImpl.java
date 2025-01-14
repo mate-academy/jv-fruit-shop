@@ -11,7 +11,7 @@ public class WriterServiceImpl implements WriterService {
         try (FileWriter writer = new FileWriter(fileName)) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Error writing the report to file: " + fileName, e);
         }
     }
 }

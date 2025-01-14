@@ -9,8 +9,12 @@ public class ReturnStrategyImpl implements OperationHandler {
     @Override
     public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
         FruitDaoImpl fruitDao = new FruitDaoImpl();
-        int newFruitQuantity =
-                fruitDao.get(fruitTransaction.getFruit()) + fruitTransaction.getQuantity();
-        fruitDao.add(fruitTransaction.getFruit(), newFruitQuantity);
+
+        int currentQuantity = fruitDao.contains(fruitTransaction.getFruit())
+                ? fruitDao.get(fruitTransaction.getFruit()) : 0;
+
+        int newQuantity = currentQuantity + fruitTransaction.getQuantity();
+
+        fruitDao.add(fruitTransaction.getFruit(), newQuantity);
     }
 }

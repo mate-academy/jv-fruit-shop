@@ -12,4 +12,9 @@ public class FruitDaoImpl implements FruitDao {
     public int get(String fruit) {
         return StorageFruit.storage.get(fruit);
     }
+
+    @Override
+    public boolean contains(String fruit) {
+        return StorageFruit.storage.containsKey(fruit);
+    }
 }
