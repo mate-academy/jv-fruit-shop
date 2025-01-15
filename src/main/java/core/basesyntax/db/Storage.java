@@ -4,14 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
+    private static Storage instance;
     private final Map<String, Integer> inventory;
+    private static final int DEFAULT_INVENTORY_VALUE = 0;
 
-    public Storage() {
+    private Storage() {
         inventory = new HashMap<>();
     }
 
+    public static Storage getInstance() {
+        if (instance == null) {
+            instance = new Storage();
+        }
+        return instance;
+    }
+
     public int getQuantity(String fruit) {
-        return inventory.getOrDefault(fruit, 0);
+        return inventory.getOrDefault(fruit, DEFAULT_INVENTORY_VALUE);
     }
 
     public void setQuantity(String fruit, int quantity) {

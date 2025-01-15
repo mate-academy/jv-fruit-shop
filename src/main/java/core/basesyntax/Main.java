@@ -36,7 +36,7 @@ public class Main {
         List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
 
         // 3. Create a storage for managing how many products quantity available
-        Storage storage = new Storage();
+        Storage storage = Storage.getInstance();
 
         // 4. Create and fill the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
