@@ -1,6 +1,7 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 
 public class FruitTransaction {
     private Operation operation;
@@ -57,7 +58,8 @@ public class FruitTransaction {
             return Arrays.stream(Operation.values())
                     .filter(o -> o.getCode().equals(code))
                     .findFirst()
-                    .get();
+                    .orElseThrow(() -> new NoSuchElementException("code"
+                            + code + "does not match any operation"));
         }
     }
 

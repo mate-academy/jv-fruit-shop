@@ -14,6 +14,10 @@ public class TransactionStrategyImpl implements TransactionStrategy {
 
     @Override
     public TransactionHandler get(FruitTransaction.Operation operation) {
-        return transactionHandlerMap.get(operation);
+        if (transactionHandlerMap.containsKey(operation)) {
+            return transactionHandlerMap.get(operation);
+        }
+        throw new RuntimeException("operation " + operation
+                + " is not present in the transactionHandlerMap");
     }
 }
