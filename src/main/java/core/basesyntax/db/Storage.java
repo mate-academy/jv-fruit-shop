@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
+    private static final int DEFAULT_INVENTORY_VALUE = 0;
     private static Storage instance;
     private final Map<String, Integer> inventory;
-    private static final int DEFAULT_INVENTORY_VALUE = 0;
 
     private Storage() {
         inventory = new HashMap<>();
