@@ -40,10 +40,14 @@ public class Main {
 
         // 4. Create and fill the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(storage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperationHandler(storage));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 2. Convert the incoming data into FruitTransactions list
