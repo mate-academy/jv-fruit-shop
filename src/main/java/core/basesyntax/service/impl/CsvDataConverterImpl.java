@@ -3,14 +3,8 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class CsvDataConverterImpl implements DataConverter {
     private static final String COMMA_DELIMITER = ",";
@@ -43,7 +37,6 @@ public class CsvDataConverterImpl implements DataConverter {
                 .fromString(values.get(OPERATION_INDEX)));
         fruitTransaction.setFruit(values.get(FRUIT_INDEX));
         fruitTransaction.setQuantity(Integer.parseInt(values.get(QUANTITY_INDEX)));
-
         return fruitTransaction;
     }
 }

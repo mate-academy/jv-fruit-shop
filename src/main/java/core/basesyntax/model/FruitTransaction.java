@@ -10,6 +10,9 @@ public class FruitTransaction {
     }
 
     public void setFruit(String fruit) {
+        if (fruit == null || fruit.equals("")) {
+            throw new NullPointerException("Fruit cannot be null or empty");
+        }
         this.fruit = fruit;
     }
 
