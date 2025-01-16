@@ -2,9 +2,15 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
+
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CsvDataConverterImpl implements DataConverter {
     private static final String COMMA_DELIMITER = ",";
@@ -28,9 +34,9 @@ public class CsvDataConverterImpl implements DataConverter {
     }
 
     private FruitTransaction formFruitTransaction(String line) {
-        List<String> values = getRecordFromLine(line);
+        List<String> values = List.of(line.split(COMMA_DELIMITER));
         if (values.size() != VALUES_IN_LINE) {
-            throw new RuntimeException("Wrong number of values in line: " + line);
+            throw new RuntimeException("Wrong data format: " + line);
         }
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation
@@ -39,16 +45,4 @@ public class CsvDataConverterImpl implements DataConverter {
         fruitTransaction.setQuantity(Integer.parseInt(values.get(QUANTITY_INDEX)));
         return fruitTransaction;
     }
-
-    private List<String> getRecordFromLine(String line) {
-        List<String> records = new ArrayList<>();
-        try (Scanner rowScanner = new Scanner(line)) {
-            rowScanner.useDelimiter(COMMA_DELIMITER);
-            while (rowScanner.hasNext()) {
-                records.add(rowScanner.next());
-            }
-        }
-        return records;
-    }
-
 }
