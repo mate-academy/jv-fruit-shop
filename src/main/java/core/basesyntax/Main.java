@@ -3,10 +3,10 @@ package core.basesyntax;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
-import core.basesyntax.model.operation.BalanceOperation;
-import core.basesyntax.model.operation.PurchaseOperation;
-import core.basesyntax.model.operation.ReturnOperation;
-import core.basesyntax.model.operation.SupplyOperation;
+import core.basesyntax.model.operation.BalanceOperationHandler;
+import core.basesyntax.model.operation.PurchaseOperationHandler;
+import core.basesyntax.model.operation.ReturnOperationHandler;
+import core.basesyntax.model.operation.SupplyOperationHandler;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -40,10 +40,10 @@ public class Main {
 
         // 4. Create and fill the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(storage));
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler(storage));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler(storage));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 2. Convert the incoming data into FruitTransactions list

@@ -4,10 +4,10 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
 
-public class SupplyOperation implements OperationHandler {
+public class ReturnOperationHandler implements OperationHandler {
     private final Storage storage;
 
-    public SupplyOperation(Storage storage) {
+    public ReturnOperationHandler(Storage storage) {
         this.storage = storage;
     }
 

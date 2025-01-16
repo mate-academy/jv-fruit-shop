@@ -4,15 +4,15 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
 
-public class BalanceOperation implements OperationHandler {
+public class SupplyOperationHandler implements OperationHandler {
     private final Storage storage;
 
-    public BalanceOperation(Storage storage) {
+    public SupplyOperationHandler(Storage storage) {
         this.storage = storage;
     }
 
     @Override
     public void handle(FruitTransaction transaction) {
-        storage.setQuantity(transaction.getFruit(), transaction.getQuantity());
+        storage.addQuantity(transaction.getFruit(), transaction.getQuantity());
     }
 }
