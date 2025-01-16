@@ -13,6 +13,9 @@ public class PurchaseOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        storage.subtractQuantity(transaction.getFruit(), transaction.getQuantity());
+        int currentAmount = storage.getInventory().getOrDefault(transaction.getFruit(),
+                storage.getDefaultInventoryValue());
+        storage.getInventory().put(transaction.getFruit(),
+                currentAmount - transaction.getQuantity());
     }
 }

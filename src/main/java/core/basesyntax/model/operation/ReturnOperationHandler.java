@@ -13,6 +13,10 @@ public class ReturnOperationHandler implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        storage.addQuantity(transaction.getFruit(), transaction.getQuantity());
+        int currentAmount = storage.getInventory().getOrDefault(transaction.getFruit(),
+                storage.getDefaultInventoryValue());
+        storage.getInventory().put(transaction.getFruit(),
+                transaction.getQuantity() + currentAmount);
     }
+
 }

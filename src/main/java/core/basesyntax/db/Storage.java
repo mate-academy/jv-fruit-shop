@@ -19,23 +19,11 @@ public class Storage {
         return instance;
     }
 
-    public int getQuantity(String fruit) {
-        return inventory.getOrDefault(fruit, DEFAULT_INVENTORY_VALUE);
-    }
-
-    public void setQuantity(String fruit, int quantity) {
-        inventory.put(fruit, quantity);
-    }
-
-    public void addQuantity(String fruit, int quantity) {
-        inventory.put(fruit, getQuantity(fruit) + quantity);
-    }
-
-    public void subtractQuantity(String fruit, int quantity) {
-        inventory.put(fruit, getQuantity(fruit) - quantity);
-    }
-
     public Map<String, Integer> getInventory() {
         return inventory;
+    }
+
+    public int getDefaultInventoryValue() {
+        return DEFAULT_INVENTORY_VALUE;
     }
 }
