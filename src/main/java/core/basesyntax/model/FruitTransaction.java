@@ -12,7 +12,7 @@ public class FruitTransaction {
 
     public void setFruit(String fruit) {
         if (fruit == null || fruit.isEmpty()) {
-            throw new NullPointerException("Fruit cannot be null or empty");
+            throw new RuntimeException("Fruit cannot be null or empty");
         }
         this.fruit = fruit;
     }
@@ -58,7 +58,7 @@ public class FruitTransaction {
                     return op;
                 }
             }
-            throw new IllegalArgumentException("Unknown operation code: " + value);
+            throw new RuntimeException("Unknown operation code: " + value);
         }
     }
 }
