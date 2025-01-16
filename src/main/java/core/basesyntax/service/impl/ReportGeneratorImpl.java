@@ -6,6 +6,9 @@ import core.basesyntax.service.ReportGenerator;
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReport() {
-        return Storage.getInventory().toString();
+        StringBuilder report = new StringBuilder("Fruit   Quantity\n");
+        Storage.getInventory().forEach((fruit, quantity) ->
+                report.append(fruit).append(" - ").append(quantity).append("\n"));
+        return report.toString();
     }
 }
