@@ -15,7 +15,8 @@ public class DataConverterImpl implements DataConverter {
                 if (parts.length != 3) {
                     throw new IllegalArgumentException("Invalid data format: " + line);
                 }
-                FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(parts[0]);
+                FruitTransaction.Operation operation
+                        = FruitTransaction.Operation.fromCode(parts[0]);
                 String fruit = parts[1];
                 int quantity = Integer.parseInt(parts[2]);
                 FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
