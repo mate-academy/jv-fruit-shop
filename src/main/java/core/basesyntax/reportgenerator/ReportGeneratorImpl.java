@@ -1,6 +1,6 @@
 package core.basesyntax.reportgenerator;
 
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -13,14 +13,14 @@ public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReport() {
         StringBuilder report = new StringBuilder();
-        report.append("fruit, quantity\n");
+        report.append("fruit, quantity").append(System.lineSeparator());
 
         Map<String, Integer> fruits = storage.getFruits();
 
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
             String fruit = entry.getKey();
             Integer quantity = entry.getValue();
-            report.append(String.format("%s,%d\n", fruit, quantity));
+            report.append(String.format("%s,%d%s", fruit, quantity, System.lineSeparator()));
         }
 
         return report.toString();

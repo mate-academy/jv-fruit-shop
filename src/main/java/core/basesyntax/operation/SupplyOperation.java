@@ -1,7 +1,7 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 
 public class SupplyOperation implements OperationHandler {
 

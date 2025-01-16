@@ -2,10 +2,13 @@ package core.basesyntax;
 
 import core.basesyntax.dataconverter.DataConverter;
 import core.basesyntax.dataconverter.DataConverterImpl;
+import core.basesyntax.db.Storage;
+import core.basesyntax.db.StorageFactory;
 import core.basesyntax.filereader.FileReader;
 import core.basesyntax.filereader.FileReaderImpl;
 import core.basesyntax.filewriter.FileWriter;
 import core.basesyntax.filewriter.FileWriterImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
@@ -41,7 +44,7 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        Storage storage = new Storage();
+        Storage storage = StorageFactory.getInstance();
         ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
         shopService.process(transactions);
 

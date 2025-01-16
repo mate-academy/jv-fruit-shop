@@ -1,7 +1,7 @@
 package core.basesyntax.shopservice;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationStrategy;
 import java.util.List;
 

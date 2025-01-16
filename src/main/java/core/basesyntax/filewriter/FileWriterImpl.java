@@ -8,6 +8,8 @@ public class FileWriterImpl implements FileWriter {
     public void write(String content, String fileName) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(fileName))) {
             writer.write(content);
+        } catch (IOException e) {
+            throw new IOException("Can't write data to file: " + fileName, e);
         }
     }
 }
