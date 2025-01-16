@@ -43,6 +43,7 @@ public class CsvDataConverterImpl implements DataConverter {
                 .fromString(values.get(OPERATION_INDEX)));
         fruitTransaction.setFruit(values.get(FRUIT_INDEX));
         fruitTransaction.setQuantity(Integer.parseInt(values.get(QUANTITY_INDEX)));
+
         return fruitTransaction;
     }
 }

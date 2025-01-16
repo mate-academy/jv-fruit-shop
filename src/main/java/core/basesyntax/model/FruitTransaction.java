@@ -18,6 +18,9 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("Quantity cannot be negative");
+        }
         this.quantity = quantity;
     }
 
@@ -45,13 +48,13 @@ public class FruitTransaction {
             return operation;
         }
 
-        public static Operation fromString(String code) {
+        public static Operation fromString(String value) {
             for (Operation op : values()) {
-                if (op.getOperation().equalsIgnoreCase(code)) {
+                if (op.getOperation().equalsIgnoreCase(value)) {
                     return op;
                 }
             }
-            throw new IllegalArgumentException("Unknown operation code: " + code);
+            throw new IllegalArgumentException("Unknown operation code: " + value);
         }
     }
 }
