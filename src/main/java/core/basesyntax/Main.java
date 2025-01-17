@@ -2,8 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dataconverter.DataConverter;
 import core.basesyntax.dataconverter.DataConverterImpl;
-import core.basesyntax.db.Storage;
-import core.basesyntax.db.StorageFactory;
 import core.basesyntax.filereader.FileReader;
 import core.basesyntax.filereader.FileReaderImpl;
 import core.basesyntax.filewriter.FileWriter;
@@ -20,16 +18,15 @@ import core.basesyntax.reportgenerator.ReportGenerator;
 import core.basesyntax.reportgenerator.ReportGeneratorImpl;
 import core.basesyntax.shopservice.ShopService;
 import core.basesyntax.shopservice.ShopServiceImpl;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] arg) throws IOException {
+    public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(FileConstants.INPUT_FILE);
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -44,20 +41,15 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        Storage storage = StorageFactory.getInstance();
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(shopService);
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();
-        try {
-            fileWriter.write(resultingReport, "finalReport.csv");
-        } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
-        }
+        fileWriter.write(resultingReport, FileConstants.OUTPUT_FILE);
     }
 }

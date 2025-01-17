@@ -1,23 +1,22 @@
 package core.basesyntax.operation;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
-    private Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlers) {
-        this.operationHandlers = operationHandlers;
+            OperationHandler> handlers) {
+        this.operationHandlers = handlers;
     }
 
     @Override
-    public void process(FruitTransaction transaction, Storage storage) {
-        OperationHandler handler = operationHandlers.get(transaction.getOperation());
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        OperationHandler handler = operationHandlers.get(operation);
         if (handler == null) {
-            throw new IllegalArgumentException("Unknown operation: " + transaction.getOperation());
+            throw new IllegalArgumentException("Unknown operation: " + operation);
         }
-        handler.handle(transaction, storage);
+        return handler;
     }
 }
