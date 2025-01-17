@@ -6,6 +6,7 @@ import core.basesyntax.model.OperationHandler;
 
 public class SupplyOperationHandler implements OperationHandler {
     private final Storage storage;
+    private static final int DEFAULT_AMOUNT = 0;
 
     public SupplyOperationHandler(Storage storage) {
         this.storage = storage;
@@ -14,7 +15,7 @@ public class SupplyOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         int currentAmount = storage.getInventory().getOrDefault(transaction.getFruit(),
-                storage.getDefaultInventoryValue());
+                DEFAULT_AMOUNT);
         storage.getInventory().put(transaction.getFruit(),
                 transaction.getQuantity() + currentAmount);
     }
