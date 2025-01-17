@@ -5,8 +5,8 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.OperationHandler;
 
 public class PurchaseOperationHandler implements OperationHandler {
-    private final Storage storage;
     private static final int DEFAULT_AMOUNT = 0;
+    private final Storage storage;
 
     public PurchaseOperationHandler(Storage storage) {
         this.storage = storage;
