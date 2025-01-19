@@ -6,7 +6,12 @@ public class PurchaseOperation implements OperationHandler {
     @Override
     public void handle(String fruitName, int amount) {
         int currentAmount = Storage.get(fruitName);
-        int newAmount = currentAmount - amount;
-        Storage.save(fruitName, newAmount);
+        if (currentAmount >= amount) {
+            int newAmount = currentAmount - amount;
+            Storage.save(fruitName, newAmount);
+        } else {
+            throw new RuntimeException(
+                    "Not enough %s on balance to make this purchase.".formatted(fruitName));
+        }
     }
 }
