@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit, quantity";
-    private static final String FORMAT = "%s,%d%s";
+    private static final String FORMAT = "%s,%d";
     private static final String LINE_SEPARATOR = System.lineSeparator();
     private final ShopService shopService;
 
@@ -23,7 +23,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             String fruit = entry.getKey();
             Integer quantity = entry.getValue();
-            report.append(String.format(FORMAT, fruit, quantity, LINE_SEPARATOR));
+            report.append(String.format(FORMAT, fruit, quantity))
+                    .append(LINE_SEPARATOR);
         }
 
         return report.toString();

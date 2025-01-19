@@ -20,7 +20,17 @@ public class DataConverterImpl implements DataConverter {
             String[] array = line.split(COMMA_DELIMITER);
             Operation operation = Operation.getOperation(array[OPERATION_INDEX]);
             String fruit = array[FRUIT_INDEX];
-            int quantity = Integer.parseInt(array[QUANTITY_INDEX]);
+
+            int quantity;
+            try {
+                quantity = Integer.parseInt(array[QUANTITY_INDEX]);
+                if (quantity < 0) {
+                    throw new IllegalArgumentException("Quantity cannot be negative for line: "
+                            + line);
+                }
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid quantity format in line: " + line);
+            }
 
             FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
             transactions.add(transaction);

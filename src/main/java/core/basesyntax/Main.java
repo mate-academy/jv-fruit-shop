@@ -2,10 +2,10 @@ package core.basesyntax;
 
 import core.basesyntax.dataconverter.DataConverter;
 import core.basesyntax.dataconverter.DataConverterImpl;
-import core.basesyntax.filereader.FileReader;
-import core.basesyntax.filereader.FileReaderImpl;
-import core.basesyntax.filewriter.FileWriter;
-import core.basesyntax.filewriter.FileWriterImpl;
+import core.basesyntax.filereader.CsvFileReader;
+import core.basesyntax.filereader.CsvFileReaderImpl;
+import core.basesyntax.filewriter.CsvFileWriter;
+import core.basesyntax.filewriter.CsvFileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
@@ -25,7 +25,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl();
+        CsvFileReader fileReader = new CsvFileReaderImpl();
         List<String> inputReport = fileReader.read(FileConstants.INPUT_FILE);
 
         // 2. Convert the incoming data into FruitTransactions list
@@ -49,7 +49,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl();
+        CsvFileWriter fileWriter = new CsvFileWriterImpl();
         fileWriter.write(resultingReport, FileConstants.OUTPUT_FILE);
     }
 }
