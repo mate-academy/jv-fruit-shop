@@ -6,6 +6,12 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
-        Storage.remove(transaction.getFruit(), transaction.getQuantity());
+        String fruit = transaction.getFruit();
+        int quantityToRemove = transaction.getQuantity();
+        int currentQuantity = Storage.getInventory().getOrDefault(fruit, 0);
+        if (quantityToRemove > currentQuantity) {
+            throw new IllegalStateException("Not enough " + fruit + " in stock.");
+        }
+        Storage.remove(fruit, quantityToRemove);
     }
 }

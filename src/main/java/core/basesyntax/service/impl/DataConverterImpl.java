@@ -16,8 +16,7 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line : data) {
             if (line == null || line.isEmpty()) {
-                System.err.println("Skipping empty or null line");
-                continue;
+                throw new IllegalArgumentException("Skipping empty or null line");
             }
             try {
                 String[] parts = line.split(COMMA);
@@ -30,16 +29,16 @@ public class DataConverterImpl implements DataConverter {
                 int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
 
                 if (operation == null || fruit == null) {
-                    System.err.println("Null values found in line: " + line);
-                    continue;
+                    throw new IllegalArgumentException("Null values found in line: " + line);
                 }
 
                 FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
                 transactions.add(transaction);
             } catch (NumberFormatException e) {
-                System.err.println("Invalid number format in line: " + line);
+                throw new IllegalArgumentException("Invalid number format in line: " + line);
             } catch (IllegalArgumentException e) {
-                System.err.println("Error processing line: " + line + " - " + e.getMessage());
+                throw new IllegalArgumentException("Error processing line: "
+                        + line + " - " + e.getMessage());
             }
         }
         return transactions;

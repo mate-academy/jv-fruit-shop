@@ -10,7 +10,6 @@ public class FileWriterImpl implements FileWriter {
     public void write(String data, String filePath) {
         try {
             Files.writeString(Path.of(filePath), data);
-            System.out.println("Data successfully written to file: " + filePath);
         } catch (IOException e) {
             throw new RuntimeException("Unable to write data to file: " + filePath, e);
         }
