@@ -7,9 +7,9 @@ import core.basesyntax.model.operation.BalanceOperationHandler;
 import core.basesyntax.model.operation.PurchaseOperationHandler;
 import core.basesyntax.model.operation.ReturnOperationHandler;
 import core.basesyntax.model.operation.SupplyOperationHandler;
+import core.basesyntax.service.CsvFileReader;
+import core.basesyntax.service.CsvFileWriter;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.FileReader;
-import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.impl.CsvDataConverterImpl;
@@ -32,8 +32,8 @@ public class Main {
 
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new CsvFileReaderImpl();
-        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
+        CsvFileReader csvFileReader = new CsvFileReaderImpl();
+        List<String> inputReport = csvFileReader.read(INPUT_FILE_PATH);
 
         // 3. Create a storage for managing how many products quantity available
         Storage storage = new Storage();
@@ -63,7 +63,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 7. Write the received report into the destination file
-        FileWriter fileWriter = new CsvFileWriterImpl();
-        fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
+        CsvFileWriter csvFileWriter = new CsvFileWriterImpl();
+        csvFileWriter.write(resultingReport, OUTPUT_FILE_PATH);
     }
 }

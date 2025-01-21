@@ -15,13 +15,8 @@ public class CsvDataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
         List<FruitTransaction> fruitTransactionsList = new ArrayList<>();
-        boolean isFirstLine = true;
-        for (String line : lines) {
-            if (isFirstLine) {
-                isFirstLine = false;
-                continue;
-            }
-            fruitTransactionsList.add(formFruitTransaction(line));
+        for (int i = 1; i < lines.size(); i++) {
+            fruitTransactionsList.add(formFruitTransaction(lines.get(i)));
         }
         return fruitTransactionsList;
     }
@@ -34,6 +29,9 @@ public class CsvDataConverterImpl implements DataConverter {
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation
                 .fromString(values.get(OPERATION_INDEX)));
+        if (values.get(FRUIT_INDEX) == null || values.get(FRUIT_INDEX).isEmpty()) {
+            throw new RuntimeException("Fruit cannot be null or empty");
+        }
         fruitTransaction.setFruit(values.get(FRUIT_INDEX));
         fruitTransaction.setQuantity(Integer.parseInt(values.get(QUANTITY_INDEX)));
         return fruitTransaction;
