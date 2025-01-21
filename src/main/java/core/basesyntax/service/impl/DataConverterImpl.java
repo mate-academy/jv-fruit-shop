@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransaction.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
     private static final int OPERATION_INDEX = 0;
@@ -17,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
         inputReport.remove(HEADERS_POSITION);
         return inputReport.stream()
                 .map(e -> mapToTransaction(e.split(SEPARATOR)))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private FruitTransaction mapToTransaction(String[] splitedReport) {

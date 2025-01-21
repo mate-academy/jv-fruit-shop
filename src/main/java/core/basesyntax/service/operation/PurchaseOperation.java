@@ -9,9 +9,8 @@ public class PurchaseOperation implements OperationHandler {
         if (currentAmount < amount) {
             throw new RuntimeException(
                     "Not enough %s on balance to make this purchase.".formatted(fruitName));
-        } else {
-            int newAmount = currentAmount - amount;
-            Storage.save(fruitName, newAmount);
         }
+        int newAmount = currentAmount - amount;
+        Storage.save(fruitName, newAmount);
     }
 }
