@@ -2,13 +2,14 @@ package core.basesyntax.services;
 
 import core.basesyntax.ActivityStrategy;
 import core.basesyntax.models.Product;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
 
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     private ActivityStrategy activityStrategy;
 

@@ -51,7 +51,7 @@ public class Product {
             return false;
         }
         Product product = (Product) o;
-        return Double.compare(product.quantity, quantity) == 0
+        return product.quantity == quantity
                 && type == product.type
                 && Objects.equals(name, product.name);
     }
