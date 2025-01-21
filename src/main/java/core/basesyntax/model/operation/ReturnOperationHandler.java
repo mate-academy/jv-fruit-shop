@@ -12,12 +12,16 @@ public class ReturnOperationHandler implements OperationHandler {
         this.storage = storage;
     }
 
+    //Gets amount of fruit from storage or 0
+    // adds return amount to current
     @Override
     public void handle(FruitTransaction transaction) {
         int currentAmount = storage.getInventory().getOrDefault(transaction.getFruit(),
                 DEFAULT_AMOUNT);
+        if (transaction.getQuantity() <= 0) {
+            throw new RuntimeException("Return operation requires at least one fruit quantity");
+        }
         storage.getInventory().put(transaction.getFruit(),
                 transaction.getQuantity() + currentAmount);
     }
-
 }

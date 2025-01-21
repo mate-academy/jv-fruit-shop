@@ -11,6 +11,7 @@ public class BalanceOperationHandler implements OperationHandler {
         this.storage = storage;
     }
 
+    //Adds amount of fruit to storage. if contains fruit - changes a value
     @Override
     public void handle(FruitTransaction transaction) {
         storage.getInventory().put(transaction.getFruit(), transaction.getQuantity());
