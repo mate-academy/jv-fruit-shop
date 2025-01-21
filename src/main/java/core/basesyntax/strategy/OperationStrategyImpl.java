@@ -15,11 +15,10 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public void execute(FruitTransaction transaction) {
         OperationHandler handler = operationHandlers.get(transaction.getOperation());
-        if (handler != null) {
-            handler.handle(transaction);
-        } else {
+        if (handler == null) {
             throw new UnsupportedOperationException("Operation not supported: "
                     + transaction.getOperation());
         }
+        handler.handle(transaction);
     }
 }
