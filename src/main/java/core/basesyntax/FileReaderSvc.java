@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderSvc {
-    public static List<String> readFile(String src) {
-        try (FileReader fileReader = new FileReader(src);
+    public static List<String> readFile(String source) {
+        try (FileReader fileReader = new FileReader(source);
                 BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 
             List<String> result = new ArrayList<>();
@@ -22,7 +22,7 @@ public class FileReaderSvc {
             return result;
 
         } catch (IOException e) {
-            throw new RuntimeException("Error reading to file: " + src, e);
+            throw new RuntimeException("Error reading to file: " + source, e);
         }
     }
 }

@@ -17,14 +17,14 @@ import java.util.Map;
 /**
  * Feel free to remove this class and create your own.
  */
-public class HelloWorld {
+public class Main {
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
     // and call their methods, but do not write any business logic in the `main` method!
     public static void main(String[] args) {
 
         List<String> productsInString = FileReaderSvc
-                .readFile("src/main/java/core/basesyntax/db/reportToRead.csv");
+                .readFile("src/main/resources/reportToRead.csv");
 
         DataConverter dataConverter = new DataConverterImpl();
 
@@ -42,7 +42,7 @@ public class HelloWorld {
 
         String report = shopService.getReport();
 
-        FileWriterSvc.write("src/main/java/core/basesyntax/db/finalReport.csv", report);
+        FileWriterSvc.write("src/main/resources/finalReport.csv", report);
 
     }
 }

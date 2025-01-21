@@ -19,7 +19,7 @@ public class DataConverterImpl implements DataConverter {
             Product.TypeOfActivity typeOfActivity = Arrays.stream(Product.TypeOfActivity.values())
                     .filter(type -> type.getCode().equals(splitString[0]))
                     .findFirst()
-                    .orElseThrow(IllegalArgumentException::new);
+                    .orElseThrow(() -> new IllegalArgumentException("exception here"));
 
             products.add(Product.of(
                     typeOfActivity,
