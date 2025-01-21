@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private static final int ZERO = 0;
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -11,9 +10,6 @@ public class FruitTransaction {
     }
 
     public void setFruit(String fruit) {
-        if (fruit == null || fruit.isEmpty()) {
-            throw new RuntimeException("Fruit cannot be null or empty");
-        }
         this.fruit = fruit;
     }
 
@@ -22,9 +18,6 @@ public class FruitTransaction {
     }
 
     public void setQuantity(int quantity) {
-        if (quantity < ZERO) {
-            throw new RuntimeException("Quantity cannot be negative");
-        }
         this.quantity = quantity;
     }
 
