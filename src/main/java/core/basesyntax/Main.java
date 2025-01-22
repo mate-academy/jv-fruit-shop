@@ -2,7 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
-import core.basesyntax.models.Product;
+import core.basesyntax.models.Fruit;
 import core.basesyntax.models.activities.ActivityHandler;
 import core.basesyntax.models.activities.BalanceActivityHandler;
 import core.basesyntax.models.activities.PurchaseActivityHandler;
@@ -21,28 +21,31 @@ public class Main {
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
     // and call their methods, but do not write any business logic in the `main` method!
+
+    private static final String PATH_REPORT_TO_READ = "src/main/resources/reportToRead.csv";
+    private static final String PATH_FINAL_REPORT = "src/main/resources/finalReport.csv";
+
     public static void main(String[] args) {
 
         List<String> productsInString = FileReaderSvc
-                .readFile("src/main/resources/reportToRead.csv");
+                .readFile(PATH_REPORT_TO_READ);
 
-        DataConverter dataConverter = new DataConverterImpl();
-
-        Map<Product.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(Product.TypeOfActivity.BALANCE, new BalanceActivityHandler());
-        activityHandlerMap.put(Product.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
-        activityHandlerMap.put(Product.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
-        activityHandlerMap.put(Product.TypeOfActivity.RETURN, new ReturnActivityHandler());
+        Map<Fruit.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
+        activityHandlerMap.put(Fruit.TypeOfActivity.BALANCE, new BalanceActivityHandler());
+        activityHandlerMap.put(Fruit.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
+        activityHandlerMap.put(Fruit.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
+        activityHandlerMap.put(Fruit.TypeOfActivity.RETURN, new ReturnActivityHandler());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
 
         ShopService shopService = new ShopServiceImpl(activityStrategy);
+        DataConverter dataConverter = new DataConverterImpl();
 
-        List<Product> products = dataConverter.convertToTransaction(productsInString);
-        shopService.process(products);
+        List<Fruit> fruits = dataConverter.convertToTransaction(productsInString);
+        shopService.process(fruits);
 
         String report = shopService.getReport();
 
-        FileWriterSvc.write("src/main/resources/finalReport.csv", report);
+        FileWriterSvc.write(PATH_FINAL_REPORT, report);
 
     }
 }

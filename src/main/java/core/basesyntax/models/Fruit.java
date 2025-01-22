@@ -2,20 +2,20 @@ package core.basesyntax.models;
 
 import java.util.Objects;
 
-public class Product {
+public class Fruit {
 
     private TypeOfActivity type;
     private String name;
     private int quantity;
 
-    private Product(TypeOfActivity type, String name, int quantity) {
+    private Fruit(TypeOfActivity type, String name, int quantity) {
         this.type = type;
         this.name = name;
         this.quantity = quantity;
     }
 
-    public static Product of(TypeOfActivity type, String name, int quantity) {
-        return new Product(type, name, quantity);
+    public static Fruit of(TypeOfActivity type, String name, int quantity) {
+        return new Fruit(type, name, quantity);
     }
 
     public TypeOfActivity getType() {
@@ -50,10 +50,10 @@ public class Product {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Product product = (Product) o;
-        return product.quantity == quantity
-                && type == product.type
-                && Objects.equals(name, product.name);
+        Fruit fruit = (Fruit) o;
+        return fruit.quantity == quantity
+                && type == fruit.type
+                && Objects.equals(name, fruit.name);
     }
 
     @Override
@@ -66,7 +66,9 @@ public class Product {
         SUPPLY("s"),
         PURCHASE("p"),
         RETURN("r");
+
         private String code;
+
         TypeOfActivity(String code) {
             this.code = code;
         }
@@ -78,7 +80,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{"
+        return "Fruit{"
                 + "type=" + type
                 + ", name='" + name + '\''
                 + ", quantity=" + quantity

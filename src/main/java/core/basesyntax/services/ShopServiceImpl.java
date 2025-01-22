@@ -1,7 +1,7 @@
 package core.basesyntax.services;
 
 import core.basesyntax.ActivityStrategy;
-import core.basesyntax.models.Product;
+import core.basesyntax.models.Fruit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
 
-    private List<Product> products = new ArrayList<>();
+    private List<Fruit> fruits = new ArrayList<>();
 
     private ActivityStrategy activityStrategy;
 
@@ -21,8 +21,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void process(List<Product> products) {
-        this.products = products;
+    public void process(List<Fruit> fruits) {
+        this.fruits = fruits;
     }
 
     @Override
@@ -32,15 +32,15 @@ public class ShopServiceImpl implements ShopService {
 
         Map<String, Integer> reportsOfProducts = new HashMap<>();
 
-        for (Product product : products) {
-            if (!reportsOfProducts.containsKey(product.getName())) {
-                reportsOfProducts.put(product.getName(), 0);
+        for (Fruit fruit : fruits) {
+            if (!reportsOfProducts.containsKey(fruit.getName())) {
+                reportsOfProducts.put(fruit.getName(), 0);
             }
             Integer newQuantity = activityStrategy
-                    .getActivity(product.getType())
-                    .apply(product.getQuantity(),
-                        reportsOfProducts.get(product.getName()));
-            reportsOfProducts.put(product.getName(), newQuantity);
+                    .getActivity(fruit.getType())
+                    .apply(fruit.getQuantity(),
+                        reportsOfProducts.get(fruit.getName()));
+            reportsOfProducts.put(fruit.getName(), newQuantity);
         }
 
         report.append("fruit,quantity").append(System.lineSeparator());
