@@ -9,7 +9,7 @@ public class FileWriterImpl implements FileWriterMy {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(fileName))) {
             bufferedWriter.write(info);
         } catch (IOException e) {
-            throw new RuntimeException("Impossible to write in this file " + fileName);
+            throw new RuntimeException("Impossible to write in this file " + fileName, e);
         }
     }
 }

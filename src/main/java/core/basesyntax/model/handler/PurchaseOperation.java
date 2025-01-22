@@ -7,7 +7,13 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void handle(Map<String, Integer> storage, FruitTransaction transaction) {
-        storage.put(transaction.getFruit(),
-                storage.getOrDefault(transaction.getFruit(), 0) - transaction.getQuantity());
+        int currentBalance = storage.getOrDefault(transaction.getFruit(), 0);
+        int newBalance = currentBalance - transaction.getQuantity();
+
+        if (newBalance < 0) {
+            throw new RuntimeException("Insufficient balance for fruit: " + transaction.getFruit());
+        }
+
+        storage.put(transaction.getFruit(), newBalance);
     }
 }
