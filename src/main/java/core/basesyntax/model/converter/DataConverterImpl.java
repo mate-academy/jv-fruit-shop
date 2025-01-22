@@ -10,7 +10,7 @@ public class DataConverterImpl implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
 
         inputReport.stream()
-                .skip(1)
+                .skip(1L)
                 .map(line -> line.split(","))
                 .filter(parts -> parts.length == 3)
                 .map(parts -> new FruitTransaction(

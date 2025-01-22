@@ -12,43 +12,41 @@ public class FruitTransaction {
     }
 
     public Operation getOperation() {
-        return operation;
+        return this.operation;
     }
 
     public String getFruit() {
-        return fruit;
+        return this.fruit;
     }
 
     public int getQuantity() {
-        return quantity;
+        return this.quantity;
     }
 
     public enum Operation {
         BALANCE("b"),
-        SUPPLY("s"),
         PURCHASE("p"),
-        RETURN("r");
+        RETURN("r"),
+        SUPPLY("s");
 
-        private String code;
+        private final String code;
 
-        Operation(String code) {
-
+        private Operation(String code) {
             this.code = code;
         }
 
         public String getCode() {
-
-            return code;
+            return this.code;
         }
 
         public static Operation fromCode(String code) {
-            for (Operation operation : Operation.values()) {
+            for (Operation operation : values()) {
                 if (operation.getCode().equals(code)) {
                     return operation;
                 }
             }
+
             throw new IllegalArgumentException("No enum constant with code " + code);
         }
-
     }
 }
