@@ -7,6 +7,10 @@ public class PurchaseOperation implements OperationHandler {
     public void resultOfOperation(String fruitName, int amount) {
         int currentAmount = DateFruits.get(fruitName);
         int newAmount = currentAmount - amount;
-        DateFruits.save(fruitName, newAmount);
+        if (newAmount >= 0) {
+            DateFruits.save(fruitName, newAmount);
+        } else {
+            throw new RuntimeException("New amount can`t be negative");
+        }
     }
 }

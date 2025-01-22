@@ -1,4 +1,4 @@
-package core.basesyntax.fileservise;
+package core.basesyntax.fileservice;
 
 import java.util.List;
 
