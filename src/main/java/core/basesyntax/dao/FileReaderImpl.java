@@ -14,7 +14,7 @@ public class FileReaderImpl implements FileReaderMy {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + fileName);
+            throw new RuntimeException("Error reading file: " + fileName, e);
         }
         return lines;
     }
