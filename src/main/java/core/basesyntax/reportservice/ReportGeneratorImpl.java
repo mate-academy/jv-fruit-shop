@@ -1,4 +1,4 @@
-package core.basesyntax.reportService;
+package core.basesyntax.reportservice;
 
 import core.basesyntax.storage.DateFruits;
 import java.util.stream.Collectors;

@@ -1,6 +1,5 @@
 package core.basesyntax.transactions;
 
-
 import core.basesyntax.storage.DateFruits;
 
 public class BalanceOperation implements OperationHandler {

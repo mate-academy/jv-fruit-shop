@@ -1,4 +1,4 @@
-package core.basesyntax.dataService;
+package core.basesyntax.dataservice;
 
 import core.basesyntax.transactions.FruitTransaction;
 import java.util.ArrayList;

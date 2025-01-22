@@ -1,4 +1,4 @@
-package core.basesyntax.dataService;
+package core.basesyntax.dataservice;
 
 import core.basesyntax.transactions.FruitTransaction;
 import core.basesyntax.transactions.OperationHandler;
@@ -18,8 +18,8 @@ public class ShopServiceImpl implements ShopService {
                 .forEach(transaction -> {
                     OperationHandler operationHandler = operationStrategy
                             .getOperation(transaction.getOperation());
-                    operationHandler.resultOfOperation(transaction.getFruit()
-                            , transaction.getQuantity());
+                    operationHandler.resultOfOperation(transaction.getFruit(),
+                            transaction.getQuantity());
 
                 });
     }
