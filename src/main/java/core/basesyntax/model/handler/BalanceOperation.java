@@ -1,7 +1,6 @@
 package core.basesyntax.model.handler;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.Map;
 
 public class BalanceOperation implements OperationHandler {

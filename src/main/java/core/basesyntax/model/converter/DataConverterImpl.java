@@ -1,11 +1,8 @@
 package core.basesyntax.model.converter;
 
 import core.basesyntax.model.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.String.valueOf;
 
 public class DataConverterImpl implements DataConverter {
     @Override

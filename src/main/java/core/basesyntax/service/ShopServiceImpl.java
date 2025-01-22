@@ -2,13 +2,12 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.strategy.OperationStrategy;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
