@@ -1,8 +1,8 @@
-package core.basesyntax.tranasctions;
+package core.basesyntax.transactions;
 
-import core.basesyntax.Storage.DateFruits;
+import core.basesyntax.storage.DateFruits;
 
-public class ReturnOperation implements OperationHandler{
+public class SupplyOperation implements OperationHandler {
     @Override
     public void resultOfOperation(String fruitName, int amount) {
         int currentAmount = DateFruits.get(fruitName);

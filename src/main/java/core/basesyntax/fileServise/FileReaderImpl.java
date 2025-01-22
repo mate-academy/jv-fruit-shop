@@ -1,4 +1,4 @@
-package core.basesyntax.FileServise;
+package core.basesyntax.fileServise;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader{
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFile(String nameOfFile) {
         File file = new File(nameOfFile);

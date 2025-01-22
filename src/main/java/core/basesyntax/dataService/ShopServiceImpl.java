@@ -1,12 +1,11 @@
-package core.basesyntax.DataService;
+package core.basesyntax.dataService;
 
-import core.basesyntax.tranasctions.FruitTransaction;
-import core.basesyntax.tranasctions.OperationHandler;
-import core.basesyntax.tranasctions.OperationStrategy;
-
+import core.basesyntax.transactions.FruitTransaction;
+import core.basesyntax.transactions.OperationHandler;
+import core.basesyntax.transactions.OperationStrategy;
 import java.util.List;
 
-public class ShopServiceImpl implements ShopService{
+public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
@@ -19,7 +18,8 @@ public class ShopServiceImpl implements ShopService{
                 .forEach(transaction -> {
                     OperationHandler operationHandler = operationStrategy
                             .getOperation(transaction.getOperation());
-                    operationHandler.resultOfOperation(transaction.getFruit(), transaction.getQuantity());
+                    operationHandler.resultOfOperation(transaction.getFruit()
+                            , transaction.getQuantity());
 
                 });
     }

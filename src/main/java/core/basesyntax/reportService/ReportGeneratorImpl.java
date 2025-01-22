@@ -1,10 +1,9 @@
-package core.basesyntax.ReportService;
+package core.basesyntax.reportService;
 
-import core.basesyntax.Storage.DateFruits;
-
+import core.basesyntax.storage.DateFruits;
 import java.util.stream.Collectors;
 
-public class ReportGeneratorImpl implements ReportGenerator{
+public class ReportGeneratorImpl implements ReportGenerator {
     @Override
     public String getReport() {
         return "fruit,quantity" + "\n" + DateFruits.getAll().entrySet().stream()

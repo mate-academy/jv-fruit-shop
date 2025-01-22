@@ -1,16 +1,24 @@
 package core.basesyntax;
 
-import core.basesyntax.DataService.DataConverter;
-import core.basesyntax.DataService.DataConverterImpl;
-import core.basesyntax.DataService.ShopService;
-import core.basesyntax.DataService.ShopServiceImpl;
-import core.basesyntax.FileServise.FileReader;
-import core.basesyntax.FileServise.FileReaderImpl;
-import core.basesyntax.FileServise.FileWriter;
-import core.basesyntax.FileServise.FileWriterImpl;
-import core.basesyntax.ReportService.ReportGenerator;
-import core.basesyntax.ReportService.ReportGeneratorImpl;
-import core.basesyntax.tranasctions.*;
+import core.basesyntax.dataService.DataConverter;
+import core.basesyntax.dataService.DataConverterImpl;
+import core.basesyntax.dataService.ShopService;
+import core.basesyntax.dataService.ShopServiceImpl;
+import core.basesyntax.fileServise.FileReader;
+import core.basesyntax.fileServise.FileReaderImpl;
+import core.basesyntax.fileServise.FileWriter;
+import core.basesyntax.fileServise.FileWriterImpl;
+import core.basesyntax.reportService.ReportGenerator;
+import core.basesyntax.reportService.ReportGeneratorImpl;
+import core.basesyntax.transactions.BalanceOperation;
+import core.basesyntax.transactions.FruitTransaction;
+import core.basesyntax.transactions.OperationHandler;
+import core.basesyntax.transactions.OperationStrategy;
+import core.basesyntax.transactions.OperationStrategyImpl;
+import core.basesyntax.transactions.PurchaseOperation;
+import core.basesyntax.transactions.ReturnOperation;
+import core.basesyntax.transactions.SupplyOperation;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,14 +27,14 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class HelloWorld {
-    // HINT: In the `public static void main(String[] args)` it is better to create instances of your classes, 
+    // HINT: In the `public static void main(String[] args)`
+    // it is better to create instances of your classes,
     // and call their methods, but do not write any business logic in the `main` method!
     public static void main(String[] args) {
 
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFile("reportToRead.csv");
-
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();

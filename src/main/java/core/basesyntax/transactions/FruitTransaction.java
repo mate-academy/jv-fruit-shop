@@ -1,4 +1,4 @@
-package core.basesyntax.tranasctions;
+package core.basesyntax.transactions;
 
 import java.util.Arrays;
 
@@ -10,11 +10,11 @@ public class FruitTransaction {
     // getters, setters, ...
     @Override
     public String toString() {
-        return "FruitTransaction{" +
-                "operation=" + operation +
-                ", fruit='" + fruit + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        return "FruitTransaction{"
+                + "operation=" + operation
+                + ", fruit='" + fruit + '\''
+                + ", quantity=" + quantity
+                + '}';
     }
 
     public Operation getOperation() {
