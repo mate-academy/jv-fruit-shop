@@ -2,12 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
+import core.basesyntax.dao.FruitDao;
+import core.basesyntax.dao.FruitDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.models.Fruit;
 import core.basesyntax.models.activities.ActivityHandler;
 import core.basesyntax.models.activities.BalanceActivityHandler;
 import core.basesyntax.models.activities.PurchaseActivityHandler;
 import core.basesyntax.models.activities.ReturnActivityHandler;
 import core.basesyntax.models.activities.SupplyActivityHandler;
+import core.basesyntax.services.DataProcessorImpl;
+import core.basesyntax.services.ReportGeneratorImpl;
 import core.basesyntax.services.ShopService;
 import core.basesyntax.services.ShopServiceImpl;
 import java.util.HashMap;
@@ -27,8 +32,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        List<String> productsInString = FileReaderSvc
-                .readFile(PATH_REPORT_TO_READ);
+        FileReaderCsv fileReaderCsv = new FileReaderCsvImpl();
+        List<String> productsInString = fileReaderCsv.readFile(PATH_REPORT_TO_READ);
+
+        DataConverter dataConverter = new DataConverterImpl();
+
+        List<Fruit> fruits = dataConverter.convertToTransaction(productsInString);
+        Storage.fruitStorage.addAll(fruits);
 
         Map<Fruit.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
         activityHandlerMap.put(Fruit.TypeOfActivity.BALANCE, new BalanceActivityHandler());
@@ -37,15 +47,17 @@ public class Main {
         activityHandlerMap.put(Fruit.TypeOfActivity.RETURN, new ReturnActivityHandler());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
 
-        ShopService shopService = new ShopServiceImpl(activityStrategy);
-        DataConverter dataConverter = new DataConverterImpl();
+        FruitDao fruitDao = new FruitDaoImpl();
+        DataProcessorImpl dataProcessorImpl = new DataProcessorImpl(activityStrategy, fruitDao);
 
-        List<Fruit> fruits = dataConverter.convertToTransaction(productsInString);
-        shopService.process(fruits);
+        ReportGeneratorImpl reportGeneratorImpl = new ReportGeneratorImpl();
+
+        ShopService shopService = new ShopServiceImpl(dataProcessorImpl, reportGeneratorImpl);
 
         String report = shopService.getReport();
 
-        FileWriterSvc.write(PATH_FINAL_REPORT, report);
+        FileWriterCsv fileWriterCsv = new FileWriterCsvImpl();
+        fileWriterCsv.write(PATH_FINAL_REPORT, report);
 
     }
 }

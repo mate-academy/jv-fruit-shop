@@ -119,8 +119,8 @@ public class Main {
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+        ReportGenerator reportGeneratorImpl = new ReportGeneratorImpl();
+        String resultingReport = reportGeneratorImpl.getReport();
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();

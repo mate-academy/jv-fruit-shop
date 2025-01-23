@@ -6,8 +6,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderSvc {
-    public static List<String> readFile(String source) {
+public class FileReaderCsvImpl implements FileReaderCsv {
+    @Override
+    public List<String> readFile(String source) {
         try (FileReader fileReader = new FileReader(source);
                 BufferedReader bufferedReader = new BufferedReader(fileReader)) {
 
