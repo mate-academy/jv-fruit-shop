@@ -26,13 +26,11 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class HelloWorld {
-    // HINT: In the `public static void main(String[] args)`
-    // it is better to create instances of your classes,
-    // and call their methods, but do not write any business
-    // logic in the `main` method!
+    private static final String INPUT_FILE = "reportToRead.csv";
+    private static final String OUTPUT_FILE = "finalReport.csv";
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.readFile("reportToRead.csv");
+        List<String> inputReport = fileReader.readFile(INPUT_FILE);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -49,6 +47,6 @@ public class HelloWorld {
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeFile(resultingReport, "finalReport.csv");
+        fileWriter.writeFile(resultingReport, OUTPUT_FILE);
     }
 }

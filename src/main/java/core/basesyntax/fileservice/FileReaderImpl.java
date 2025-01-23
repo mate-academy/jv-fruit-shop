@@ -2,7 +2,6 @@ package core.basesyntax.fileservice;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +18,8 @@ public class FileReaderImpl implements FileReader {
                 value = bufferedReader.readLine();
             }
             bufferedReader.read();
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("File is not found");
         }
         return dataOfFile;
     }

@@ -7,7 +7,6 @@ public class FruitTransaction {
     private String fruit;
     private int quantity;
 
-    // getters, setters, ...
     @Override
     public String toString() {
         return "FruitTransaction{"
