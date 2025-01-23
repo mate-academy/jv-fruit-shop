@@ -3,13 +3,13 @@ package core.basesyntax.dao;
 import java.io.BufferedWriter;
 import java.io.IOException;
 
-public class FileWriterImpl implements FileWriterMy {
+public class CustomFileWriterImpl implements CustomFileWriter {
     @Override
     public void write(String fileName,String info) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new java.io.FileWriter(fileName))) {
             bufferedWriter.write(info);
         } catch (IOException e) {
-            throw new RuntimeException("Impossible to write in this file " + fileName, e);
+            throw new RuntimeException("Can't write file with path:" + fileName, e);
         }
     }
 }

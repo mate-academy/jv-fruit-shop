@@ -2,6 +2,6 @@ package core.basesyntax.dao;
 
 import java.util.List;
 
-public interface FileReaderMy {
+public interface CustomFileReader {
     List<String> read(String fileName);
 }

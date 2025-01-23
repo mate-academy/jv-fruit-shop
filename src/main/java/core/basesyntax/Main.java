@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.FileReaderImpl;
-import core.basesyntax.dao.FileReaderMy;
-import core.basesyntax.dao.FileWriterImpl;
-import core.basesyntax.dao.FileWriterMy;
+import core.basesyntax.dao.CustomFileReader;
+import core.basesyntax.dao.CustomFileReaderImpl;
+import core.basesyntax.dao.CustomFileWriter;
+import core.basesyntax.dao.CustomFileWriterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.ReportGenerator;
 import core.basesyntax.model.ReportGeneratorImpl;
@@ -29,7 +29,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        FileReaderMy fileReader = new FileReaderImpl();
+        CustomFileReader fileReader = new CustomFileReaderImpl();
         List<String> inputReport = fileReader.read(REPORT_TO_READ);
 
         DataConverter dataConverter = new DataConverterImpl();
@@ -43,12 +43,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
-        Map<String, Integer> storage = shopService.process(transactions);
+        shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(storage);
+        String resultingReport = reportGenerator.getReport();
 
-        FileWriterMy fileWriter = new FileWriterImpl();
+        CustomFileWriter fileWriter = new CustomFileWriterImpl();
         fileWriter.write(FINAL_REPORT,resultingReport);
     }
 
