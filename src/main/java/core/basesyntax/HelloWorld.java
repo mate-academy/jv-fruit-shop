@@ -5,7 +5,7 @@ import core.basesyntax.dao.DataConverterImpl;
 import core.basesyntax.dao.FruitDao;
 import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.db.Storage;
-import core.basesyntax.models.Fruit;
+import core.basesyntax.models.Product;
 import core.basesyntax.models.activities.ActivityHandler;
 import core.basesyntax.models.activities.BalanceActivityHandler;
 import core.basesyntax.models.activities.PurchaseActivityHandler;
@@ -22,7 +22,7 @@ import java.util.Map;
 /**
  * Feel free to remove this class and create your own.
  */
-public class Main {
+public class HelloWorld {
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
     // and call their methods, but do not write any business logic in the `main` method!
@@ -37,14 +37,14 @@ public class Main {
 
         DataConverter dataConverter = new DataConverterImpl();
 
-        List<Fruit> fruits = dataConverter.convertToTransaction(productsInString);
-        Storage.fruitStorage.addAll(fruits);
+        List<Product> products = dataConverter.convertToTransaction(productsInString);
+        Storage.PRODUCT_STORAGE.addAll(products);
 
-        Map<Fruit.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(Fruit.TypeOfActivity.BALANCE, new BalanceActivityHandler());
-        activityHandlerMap.put(Fruit.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
-        activityHandlerMap.put(Fruit.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
-        activityHandlerMap.put(Fruit.TypeOfActivity.RETURN, new ReturnActivityHandler());
+        Map<Product.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
+        activityHandlerMap.put(Product.TypeOfActivity.BALANCE, new BalanceActivityHandler());
+        activityHandlerMap.put(Product.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
+        activityHandlerMap.put(Product.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
+        activityHandlerMap.put(Product.TypeOfActivity.RETURN, new ReturnActivityHandler());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
 
         FruitDao fruitDao = new FruitDaoImpl();

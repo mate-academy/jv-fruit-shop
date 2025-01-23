@@ -2,7 +2,7 @@ package core.basesyntax.services;
 
 import core.basesyntax.ActivityStrategy;
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.models.Fruit;
+import core.basesyntax.models.Product;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,13 +18,13 @@ public class DataProcessorImpl implements DataProcessor {
     @Override
     public Map<String, Integer> process() {
         Map<String, Integer> reportsOfProducts = new HashMap<>();
-        for (Fruit fruit : fruitDao.getAll()) {
-            reportsOfProducts.putIfAbsent(fruit.getName(), 0);
+        for (Product product : fruitDao.getAll()) {
+            reportsOfProducts.putIfAbsent(product.getName(), 0);
             Integer newQuantity = activityStrategy
-                    .getActivity(fruit.getType())
-                    .apply(reportsOfProducts.get(fruit.getName()), fruit.getQuantity());
+                    .getActivity(product.getType())
+                    .apply(reportsOfProducts.get(product.getName()), product.getQuantity());
 
-            reportsOfProducts.put(fruit.getName(), newQuantity);
+            reportsOfProducts.put(product.getName(), newQuantity);
         }
         return reportsOfProducts;
     }

@@ -1,18 +1,18 @@
 package core.basesyntax;
 
-import core.basesyntax.models.Fruit;
+import core.basesyntax.models.Product;
 import core.basesyntax.models.activities.ActivityHandler;
 import java.util.Map;
 
 public class ActivityStrategyImpl implements ActivityStrategy {
-    private Map<Fruit.TypeOfActivity, ActivityHandler> handlerMap;
+    private Map<Product.TypeOfActivity, ActivityHandler> handlerMap;
 
-    public ActivityStrategyImpl(Map<Fruit.TypeOfActivity, ActivityHandler> handlerMap) {
+    public ActivityStrategyImpl(Map<Product.TypeOfActivity, ActivityHandler> handlerMap) {
         this.handlerMap = handlerMap;
     }
 
     @Override
-    public ActivityHandler getActivity(Fruit.TypeOfActivity type) {
+    public ActivityHandler getActivity(Product.TypeOfActivity type) {
         return handlerMap.get(type);
     }
 }
