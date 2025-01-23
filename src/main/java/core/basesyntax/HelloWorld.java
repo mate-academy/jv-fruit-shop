@@ -28,6 +28,7 @@ import java.util.Map;
 public class HelloWorld {
     private static final String INPUT_FILE = "reportToRead.csv";
     private static final String OUTPUT_FILE = "finalReport.csv";
+
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFile(INPUT_FILE);
