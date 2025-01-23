@@ -28,14 +28,11 @@ import java.util.Map;
 public class HelloWorld {
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
-    // and call their methods, but do not write any business logic in the `main` method!
+    // and call their methods, but do not write any business
+    // logic in the `main` method!
     public static void main(String[] args) {
-
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFile("reportToRead.csv");
-
-        DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -43,7 +40,8 @@ public class HelloWorld {
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
