@@ -1,5 +1,7 @@
 package core.basesyntax.services;
 
+import core.basesyntax.db.Storage;
+
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
@@ -7,10 +9,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String COMMA = ",";
 
     @Override
-    public String generate(Map<String, Integer> data) {
+    public String generate() {
         StringBuilder report = new StringBuilder();
         report.append(HEADER).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : data.entrySet()) {
+        for (Map.Entry<String, Integer> entry :
+                Storage.FRUIT_TRANSACTION_STORAGE.entrySet()) {
             report.append(entry.getKey())
                     .append(COMMA)
                     .append(entry.getValue())

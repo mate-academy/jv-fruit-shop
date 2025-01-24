@@ -2,19 +2,16 @@ package core.basesyntax;
 
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
-import core.basesyntax.db.Storage;
-import core.basesyntax.models.Product;
+
+import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.models.activities.ActivityHandler;
 import core.basesyntax.models.activities.BalanceActivityHandler;
 import core.basesyntax.models.activities.PurchaseActivityHandler;
 import core.basesyntax.models.activities.ReturnActivityHandler;
 import core.basesyntax.models.activities.SupplyActivityHandler;
+import core.basesyntax.services.DataProcessor;
 import core.basesyntax.services.DataProcessorImpl;
 import core.basesyntax.services.ReportGeneratorImpl;
-import core.basesyntax.services.ShopService;
-import core.basesyntax.services.ShopServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,26 +32,24 @@ public class HelloWorld {
         FileReaderCsv fileReaderCsv = new FileReaderCsvImpl();
         List<String> productsInString = fileReaderCsv.readFile(PATH_REPORT_TO_READ);
 
-        DataConverter dataConverter = new DataConverterImpl();
-
-        List<Product> products = dataConverter.convertToTransaction(productsInString);
-        Storage.PRODUCT_STORAGE.addAll(products);
-
-        Map<Product.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(Product.TypeOfActivity.BALANCE, new BalanceActivityHandler());
-        activityHandlerMap.put(Product.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
-        activityHandlerMap.put(Product.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
-        activityHandlerMap.put(Product.TypeOfActivity.RETURN, new ReturnActivityHandler());
+        Map<FruitTransaction.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.BALANCE, new BalanceActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.RETURN, new ReturnActivityHandler());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
 
-        FruitDao fruitDao = new FruitDaoImpl();
-        DataProcessorImpl dataProcessorImpl = new DataProcessorImpl(activityStrategy, fruitDao);
+        // З файлу у Ліст Фруктів
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransaction> fruitTransactionList = dataConverter.convertToTransaction(productsInString);
 
+        // Порахувати все і засунуть в сторедж
+        DataProcessor dataProcessorImpl = new DataProcessorImpl(activityStrategy);
+        dataProcessorImpl.process(fruitTransactionList);
+        // Отримати репорт
         ReportGeneratorImpl reportGeneratorImpl = new ReportGeneratorImpl();
 
-        ShopService shopService = new ShopServiceImpl(dataProcessorImpl, reportGeneratorImpl);
-
-        String report = shopService.getReport();
+        String report = reportGeneratorImpl.generate();
 
         FileWriterCsv fileWriterCsv = new FileWriterCsvImpl();
         fileWriterCsv.write(PATH_FINAL_REPORT, report);

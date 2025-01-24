@@ -1,8 +1,8 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.models.Product;
+import core.basesyntax.models.FruitTransaction;
 import java.util.List;
 
 public interface DataConverter {
-    List<Product> convertToTransaction(List<String> productsInString);
+    List<FruitTransaction> convertToTransaction(List<String> productsInString);
 }

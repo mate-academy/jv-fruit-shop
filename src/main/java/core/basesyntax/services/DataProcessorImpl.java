@@ -1,31 +1,26 @@
 package core.basesyntax.services;
 
 import core.basesyntax.ActivityStrategy;
-import core.basesyntax.dao.FruitDao;
-import core.basesyntax.models.Product;
-import java.util.HashMap;
-import java.util.Map;
+import core.basesyntax.db.Storage;
+import core.basesyntax.models.FruitTransaction;
+import java.util.List;
 
 public class DataProcessorImpl implements DataProcessor {
     private final ActivityStrategy activityStrategy;
-    private final FruitDao fruitDao;
-
-    public DataProcessorImpl(ActivityStrategy activityStrategy, FruitDao fruitDao) {
+    public DataProcessorImpl(ActivityStrategy activityStrategy) {
         this.activityStrategy = activityStrategy;
-        this.fruitDao = fruitDao;
     }
 
     @Override
-    public Map<String, Integer> process() {
-        Map<String, Integer> reportsOfProducts = new HashMap<>();
-        for (Product product : fruitDao.getAll()) {
-            reportsOfProducts.putIfAbsent(product.getName(), 0);
+    public void process(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
+            Integer currentQuantity = Storage.FRUIT_TRANSACTION_STORAGE
+                    .getOrDefault(transaction.getName(), 0);
             Integer newQuantity = activityStrategy
-                    .getActivity(product.getType())
-                    .apply(reportsOfProducts.get(product.getName()), product.getQuantity());
-
-            reportsOfProducts.put(product.getName(), newQuantity);
+                    .getActivity(transaction.getType())
+                    .apply(currentQuantity, transaction.getQuantity());
+            Storage.FRUIT_TRANSACTION_STORAGE.put(transaction.getName(), newQuantity);
         }
-        return reportsOfProducts;
     }
+
 }

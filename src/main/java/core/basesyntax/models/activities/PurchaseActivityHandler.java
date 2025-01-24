@@ -6,7 +6,7 @@ public class PurchaseActivityHandler implements ActivityHandler {
     public Integer apply(Integer currentQuantity, Integer operationQuantity) {
         int result = currentQuantity - operationQuantity;
         if (result < 0) {
-            return currentQuantity;
+            throw new RuntimeException("Not enough product in Storage");
         }
         return currentQuantity - operationQuantity;
     }
