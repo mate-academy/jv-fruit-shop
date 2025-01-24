@@ -1,5 +1,6 @@
 package core.basesyntax.models;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class FruitTransaction {
@@ -76,6 +77,15 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static TypeOfActivity fromCode(String code) {
+            return Arrays.stream(TypeOfActivity.values())
+                    .filter(type -> type.getCode().equals(code))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException(
+                            "Unknown type of activity: " + code));
+        }
+
     }
 
     @Override

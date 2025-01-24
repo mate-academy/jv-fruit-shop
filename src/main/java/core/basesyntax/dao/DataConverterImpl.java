@@ -2,33 +2,29 @@ package core.basesyntax.dao;
 
 import core.basesyntax.models.FruitTransaction;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    private static final String HEADER = "type,product,quantity";
+
+    private static final int INDEX_TYPE = 0;
+    private static final int INDEX_NAME = 1;
+    private static final int INDEX_QUANTITY = 2;
+    private static final int HEADER_LINE_INDEX = 1;
     private static final String SPLITTER = ",";
 
     public List<FruitTransaction> convertToTransaction(List<String> productsInString) {
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
-        for (String productStr : productsInString) {
-            if (productStr.equals(HEADER)) {
-                continue;
-            }
-            String[] splitString = productStr.split(SPLITTER);
+        for (int i = HEADER_LINE_INDEX; i < productsInString.size(); i++) {
 
-            FruitTransaction.TypeOfActivity typeOfActivity = Arrays.stream(
-                        FruitTransaction.TypeOfActivity.values())
-                    .filter(type -> type.getCode().equals(splitString[0]))
-                    .findFirst()
-                    .orElseThrow(() ->
-                            new IllegalArgumentException("Unknown type of activity: "
-                                    + splitString[0]));
+            String[] splitString = productsInString.get(i).split(SPLITTER);
+
+            FruitTransaction.TypeOfActivity typeOfActivity =
+                    FruitTransaction.TypeOfActivity.fromCode(splitString[INDEX_TYPE]);
 
             fruitTransactions.add(FruitTransaction.of(
                     typeOfActivity,
-                    splitString[1],
-                    Integer.parseInt(splitString[2]))
+                    splitString[INDEX_NAME],
+                    Integer.parseInt(splitString[INDEX_QUANTITY]))
             );
         }
         return fruitTransactions;

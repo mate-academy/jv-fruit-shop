@@ -15,12 +15,12 @@ public class DataProcessorImpl implements DataProcessor {
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            Integer currentQuantity = Storage.FRUIT_TRANSACTION_STORAGE
+            Integer currentQuantity = Storage.FruitTransactionStorage
                     .getOrDefault(transaction.getName(), 0);
             Integer newQuantity = activityStrategy
                     .getActivity(transaction.getType())
                     .apply(currentQuantity, transaction.getQuantity());
-            Storage.FRUIT_TRANSACTION_STORAGE.put(transaction.getName(), newQuantity);
+            Storage.FruitTransactionStorage.put(transaction.getName(), newQuantity);
         }
     }
 
