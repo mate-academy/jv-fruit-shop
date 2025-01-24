@@ -4,14 +4,15 @@ import core.basesyntax.storage.DateFruits;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String FRUIT = "fruit";
-    private static final String QUANTITY = "quantity";
+    private static final String HEADERS = "fruit, amount" + System.lineSeparator();
+    private static final String SEPARATOR = ",";
 
     @Override
     public String getReport() {
-        return FRUIT + "," + QUANTITY + System.lineSeparator()
-                + DateFruits.getAll().entrySet().stream()
-                .map(element -> element.getKey() + "," + element.getValue())
-                .collect(Collectors.joining(System.lineSeparator()));
+        StringBuilder stringBuilder = new StringBuilder(HEADERS);
+        stringBuilder.append(DateFruits.getAll().entrySet().stream()
+                .map(entry -> entry.getKey() + SEPARATOR + entry.getValue())
+                .collect(Collectors.joining(System.lineSeparator())));
+        return stringBuilder.toString();
     }
 }
