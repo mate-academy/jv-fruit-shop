@@ -1,7 +1,6 @@
 package core.basesyntax.dao;
 
 import core.basesyntax.models.FruitTransaction;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

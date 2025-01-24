@@ -7,6 +7,7 @@ import java.util.List;
 
 public class DataProcessorImpl implements DataProcessor {
     private final ActivityStrategy activityStrategy;
+
     public DataProcessorImpl(ActivityStrategy activityStrategy) {
         this.activityStrategy = activityStrategy;
     }

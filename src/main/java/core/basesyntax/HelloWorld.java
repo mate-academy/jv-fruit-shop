@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
-
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.models.activities.ActivityHandler;
 import core.basesyntax.models.activities.BalanceActivityHandler;
@@ -33,19 +32,25 @@ public class HelloWorld {
         List<String> productsInString = fileReaderCsv.readFile(PATH_REPORT_TO_READ);
 
         Map<FruitTransaction.TypeOfActivity, ActivityHandler> activityHandlerMap = new HashMap<>();
-        activityHandlerMap.put(FruitTransaction.TypeOfActivity.BALANCE, new BalanceActivityHandler());
-        activityHandlerMap.put(FruitTransaction.TypeOfActivity.SUPPLY, new SupplyActivityHandler());
-        activityHandlerMap.put(FruitTransaction.TypeOfActivity.PURCHASE, new PurchaseActivityHandler());
-        activityHandlerMap.put(FruitTransaction.TypeOfActivity.RETURN, new ReturnActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.BALANCE,
+                new BalanceActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.SUPPLY,
+                new SupplyActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.PURCHASE,
+                new PurchaseActivityHandler());
+        activityHandlerMap.put(FruitTransaction.TypeOfActivity.RETURN,
+                new ReturnActivityHandler());
         ActivityStrategy activityStrategy = new ActivityStrategyImpl(activityHandlerMap);
 
         // З файлу у Ліст Фруктів
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> fruitTransactionList = dataConverter.convertToTransaction(productsInString);
+        List<FruitTransaction> fruitTransactionList = dataConverter
+                .convertToTransaction(productsInString);
 
         // Порахувати все і засунуть в сторедж
         DataProcessor dataProcessorImpl = new DataProcessorImpl(activityStrategy);
         dataProcessorImpl.process(fruitTransactionList);
+
         // Отримати репорт
         ReportGeneratorImpl reportGeneratorImpl = new ReportGeneratorImpl();
 
