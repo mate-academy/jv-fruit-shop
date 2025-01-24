@@ -30,7 +30,6 @@ public class DataConverterImpl implements DataConverter {
                     splitString[1],
                     Integer.parseInt(splitString[2]))
             );
-
         }
         return fruitTransactions;
     }
