@@ -1,22 +1,27 @@
 package core.basesyntax;
 
-import core.basesyntax.Converter.DataConverter;
-import core.basesyntax.Converter.DataConverterImpl;
-import core.basesyntax.IO.FileReader;
-import core.basesyntax.IO.FileReaderImpl;
-import core.basesyntax.IO.FileWriter;
-import core.basesyntax.IO.FileWriterImpl;
-import core.basesyntax.Model.FruitTransaction;
-import core.basesyntax.Operation.*;
-import core.basesyntax.Service.ShopService;
-import core.basesyntax.Service.ShopServiceImpl;
-import result.ReportGenerator;
-import result.ReportGeneratorImpl;
-
+import core.basesyntax.converter.DataConverter;
+import core.basesyntax.converter.DataConverterImpl;
+import core.basesyntax.io.FileReader;
+import core.basesyntax.io.FileReaderImpl;
+import core.basesyntax.io.FileWriter;
+import core.basesyntax.io.FileWriterImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.operation.BalanceOperation;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.OperationStrategy;
+import core.basesyntax.operation.OperationStrategyImpl;
+import core.basesyntax.operation.PurchaseOperation;
+import core.basesyntax.operation.ReturnOperation;
+import core.basesyntax.operation.SupplyOperation;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.ShopServiceImpl;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import result.ReportGenerator;
+import result.ReportGeneratorImpl;
 
 public class Main {
     public static void main(String[] args) {
