@@ -20,40 +20,32 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import result.ReportGenerator;
-import result.ReportGeneratorImpl;
+import report.ReportGenerator;
+import report.ReportGeneratorImpl;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            FileReader fileReader = new FileReaderImpl();
-            DataConverter dataConverter = new DataConverterImpl();
+    private static final String READ_PATH = "reportToRead.csv";
+    private static final String WRITE_PATH = "finalReport.csv";
 
-            Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-            operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-            operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-            operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-            operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+    public static void main(String[] args) throws IOException {
+        FileReader fileReader = new FileReaderImpl();
+        DataConverter dataConverter = new DataConverterImpl();
 
-            OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-            ShopService shopService = new ShopServiceImpl(operationStrategy);
-            ReportGenerator reportGenerator = new ReportGeneratorImpl();
-            FileWriter fileWriter = new FileWriterImpl();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
 
-            List<String> inputLines = fileReader.read("C:/Users/WeakRitta/IdeaProjects"
-                    + "/jv-fruit-shop/src/main/java/result/reportToRead.csv");
-            List<FruitTransaction> transactions = dataConverter.convertToTransactions(inputLines);
-            Map<String, Integer> finalStorage = shopService.process(transactions);
-            String report = reportGenerator.generateReport(finalStorage);
-            fileWriter.write(report, "C:/Users/WeakRitta/IdeaProjects/jv-fruit-shop/src"
-                    + "/main/java/result/finalReport.csv");
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        FileWriter fileWriter = new FileWriterImpl();
 
-        } catch (IOException e) {
-            System.err.println("Error processing file: " + e.getMessage());
-        } catch (IllegalArgumentException e) {
-            System.err.println("Invalid input data: " + e.getMessage());
-        } catch (IllegalStateException e) {
-            System.err.println("Processing error: " + e.getMessage());
-        }
+        List<String> inputLines = fileReader.read(READ_PATH);
+        List<FruitTransaction> transactions = dataConverter.convertToTransactions(inputLines);
+        Map<String, Integer> finalStorage = shopService.process(transactions);
+        String report = reportGenerator.generateReport(finalStorage);
+        fileWriter.write(report, WRITE_PATH);
     }
 }

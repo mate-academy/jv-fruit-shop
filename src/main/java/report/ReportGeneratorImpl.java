@@ -1,12 +1,14 @@
-package result;
+package report;
 
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String HEADER = "fruit,quantity";
+
     @Override
     public String generateReport(Map<String, Integer> storage) {
         StringBuilder report = new StringBuilder();
-        report.append("fruit,quantity\n");
+        report.append(HEADER).append(System.lineSeparator());
 
         storage.entrySet()
                 .stream()
@@ -15,7 +17,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
                         .append(entry.getKey())
                         .append(",")
                         .append(entry.getValue())
-                        .append("\n"));
+                        .append(System.lineSeparator()));
 
         return report.toString();
     }

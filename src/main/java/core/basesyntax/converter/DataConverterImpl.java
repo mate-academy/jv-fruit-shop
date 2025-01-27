@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String COMMA = ",";
+
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> lines) {
         if (lines == null || lines.isEmpty()) {
@@ -12,9 +14,8 @@ public class DataConverterImpl implements DataConverter {
         }
 
         List<FruitTransaction> transactions = new ArrayList<>();
-        // Skip header
         for (int i = 1; i < lines.size(); i++) {
-            String[] parts = lines.get(i).split(",");
+            String[] parts = lines.get(i).split("COMMA");
             if (parts.length != 3) {
                 throw new IllegalArgumentException("Invalid line format at line " + (i + 1));
             }

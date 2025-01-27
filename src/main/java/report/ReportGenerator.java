@@ -1,4 +1,4 @@
-package result;
+package report;
 
 import java.util.Map;
 
