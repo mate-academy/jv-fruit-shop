@@ -13,7 +13,7 @@ public class FileWriterImpl implements FileWriter {
         try (BufferedWriter writer = new BufferedWriter(new java.io.FileWriter(filePath))) {
             writer.write(content);
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file: " + e.getMessage());
+            throw new IOException("An error occurred while writing to the file: " + e.getMessage());
         }
     }
 }

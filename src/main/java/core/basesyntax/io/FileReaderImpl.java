@@ -8,7 +8,7 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String filePath) throws IOException {
-        if (filePath == null || filePath.trim().isEmpty()) {
+        if (filePath == null || filePath.isEmpty()) {
             throw new IllegalArgumentException("File path cannot be null or empty ");
         }
 

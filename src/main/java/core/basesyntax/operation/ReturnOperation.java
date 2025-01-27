@@ -1,11 +1,10 @@
 package core.basesyntax.operation;
 
 import core.basesyntax.model.FruitTransaction;
-import java.util.Map;
 
 public class ReturnOperation implements OperationHandler {
     @Override
-    public void handle(Map<String, Integer> storage, FruitTransaction transaction) {
-        storage.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
+    public void handle(FruitTransaction transaction) {
+        Storage.storage.merge(transaction.getFruit(), transaction.getQuantity(), Integer::sum);
     }
 }

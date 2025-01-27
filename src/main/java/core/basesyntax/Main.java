@@ -24,8 +24,8 @@ import report.ReportGenerator;
 import report.ReportGeneratorImpl;
 
 public class Main {
-    private static final String READ_PATH = "reportToRead.csv";
-    private static final String WRITE_PATH = "finalReport.csv";
+    private static final String READ_PATH = "recources/reportToRead.csv";
+    private static final String WRITE_PATH = "recources/finalReport.csv";
 
     public static void main(String[] args) throws IOException {
         FileReader fileReader = new FileReaderImpl();

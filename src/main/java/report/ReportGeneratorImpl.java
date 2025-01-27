@@ -4,6 +4,7 @@ import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
 
     @Override
     public String generateReport(Map<String, Integer> storage) {
@@ -12,13 +13,11 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
         storage.entrySet()
                 .stream()
-                .sorted(Map.Entry.comparingByKey())
                 .forEach(entry -> report
                         .append(entry.getKey())
-                        .append(",")
+                        .append(COMMA)
                         .append(entry.getValue())
                         .append(System.lineSeparator()));
-
         return report.toString();
     }
 }

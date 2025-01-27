@@ -20,11 +20,11 @@ public class DataConverterImpl implements DataConverter {
                 throw new IllegalArgumentException("Invalid line format at line " + (i + 1));
             }
 
-            String operationCode = parts[0].trim();
+            String operationCode = parts[0];
             String fruit = parts[1].trim();
             int quantity;
             try {
-                quantity = Integer.parseInt(parts[2].trim());
+                quantity = Integer.parseInt(parts[2]);
                 if (quantity < 0) {
                     throw new IllegalArgumentException("Quantity cannot be negative at line "
                             + (i + 1));

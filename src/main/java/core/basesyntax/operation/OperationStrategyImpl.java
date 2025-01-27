@@ -12,11 +12,12 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void processTransaction(Map<String, Integer> storage, FruitTransaction transaction) {
-        OperationHandler handler = handlers.get(transaction.getOperation());
+    public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        OperationHandler handler = handlers.get(operation);
         if (handler == null) {
-            throw new IllegalArgumentException("No handler found" + transaction.getOperation());
+            throw new IllegalArgumentException("No handler found for "
+                    + operation);
         }
-        handler.handle(storage, transaction);
+        return handler;
     }
 }
