@@ -1,7 +1,7 @@
-package core.basesyntax.operations.operationstrategy;
+package core.basesyntax.operation.operationstrategy;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.operations.operationhandlers.OperationHandler;
+import core.basesyntax.operation.handler.OperationHandler;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -15,6 +15,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
+        if (operation == null) {
+            throw new RuntimeException("Operation cannot be null");
+        }
         return operationHandler.get(operation);
     }
 }

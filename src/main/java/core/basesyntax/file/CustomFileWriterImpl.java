@@ -1,4 +1,4 @@
-package core.basesyntax.workwithfile;
+package core.basesyntax.file;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -15,4 +15,3 @@ public class CustomFileWriterImpl implements CustomFileWriter {
         }
     }
 }
-

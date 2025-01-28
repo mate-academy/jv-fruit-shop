@@ -52,6 +52,7 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
     }
 
     @Override
@@ -69,4 +70,14 @@ public class FruitTransaction {
     public int hashCode() {
         return Objects.hash(operation, fruit, quantity);
     }
+
+    public static Operation getOperationFromType(String operationType) {
+        for (Operation operation : Operation.values()) {
+            if (operationType.startsWith(operation.getCode())) {
+                return operation;
+            }
+        }
+        throw new RuntimeException("Operation not found");
+    }
+
 }

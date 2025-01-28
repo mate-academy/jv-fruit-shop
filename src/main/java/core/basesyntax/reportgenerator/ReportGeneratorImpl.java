@@ -8,11 +8,10 @@ import java.util.Map;
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String DEFAULT_START_STRING = "fruit,quantity";
     private static final String STRING_SEPARATOR = ",";
-    private Map<String, Integer> storage = Storage.storage;
 
     @Override
     public String getReport() {
-        List<Map.Entry<String, Integer>> entries = new ArrayList<>(storage.entrySet());
+        List<Map.Entry<String, Integer>> entries = new ArrayList<>(Storage.storage.entrySet());
         entries.sort(Map.Entry.comparingByKey());
         List<String> report = new ArrayList<>();
         report.add(DEFAULT_START_STRING);

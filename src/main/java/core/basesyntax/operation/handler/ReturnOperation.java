@@ -1,6 +1,6 @@
-package core.basesyntax.operations.operationhandlers;
+package core.basesyntax.operation.handler;
 
-public class SupplyOperation implements OperationHandler {
+public class ReturnOperation extends AbstractOperationHandler {
     @Override
     public void handle(String fruit, int quantity) {
         storageDao.add(fruit, quantity);

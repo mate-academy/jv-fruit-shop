@@ -2,30 +2,33 @@ package core.basesyntax;
 
 import core.basesyntax.converter.DataConverter;
 import core.basesyntax.converter.DataConverterImpl;
-import core.basesyntax.operations.operationhandlers.BalanceOperation;
-import core.basesyntax.operations.operationhandlers.OperationHandler;
-import core.basesyntax.operations.operationhandlers.PurchaseOperation;
-import core.basesyntax.operations.operationhandlers.ReturnOperation;
-import core.basesyntax.operations.operationhandlers.SupplyOperation;
-import core.basesyntax.operations.operationstrategy.OperationStrategy;
-import core.basesyntax.operations.operationstrategy.OperationStrategyImpl;
+import core.basesyntax.file.CustomFileReader;
+import core.basesyntax.file.CustomFileReaderImpl;
+import core.basesyntax.file.CustomFileWriter;
+import core.basesyntax.file.CustomFileWriterImpl;
+import core.basesyntax.operation.handler.BalanceOperation;
+import core.basesyntax.operation.handler.OperationHandler;
+import core.basesyntax.operation.handler.PurchaseOperation;
+import core.basesyntax.operation.handler.ReturnOperation;
+import core.basesyntax.operation.handler.SupplyOperation;
+import core.basesyntax.operation.operationstrategy.OperationStrategy;
+import core.basesyntax.operation.operationstrategy.OperationStrategyImpl;
 import core.basesyntax.reportgenerator.ReportGenerator;
 import core.basesyntax.reportgenerator.ReportGeneratorImpl;
 import core.basesyntax.shopservice.ShopService;
 import core.basesyntax.shopservice.ShopServiceImpl;
-import core.basesyntax.workwithfile.CustomFileReader;
-import core.basesyntax.workwithfile.CustomFileReaderImpl;
-import core.basesyntax.workwithfile.CustomFileWriter;
-import core.basesyntax.workwithfile.CustomFileWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_TO_READ = "src/main/resources/reportToRead.csv";
+    private static final String FILE_TO_WRITE = "src/main/resources/finalReport.csv";
+
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         CustomFileReader fileReader = new CustomFileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(FILE_TO_READ);
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -49,6 +52,6 @@ public class Main {
 
         // 6. Write the received report into the destination file
         CustomFileWriter fileWriter = new CustomFileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, FILE_TO_WRITE);
     }
 }

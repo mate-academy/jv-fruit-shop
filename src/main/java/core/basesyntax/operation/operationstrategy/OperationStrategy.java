@@ -1,7 +1,7 @@
-package core.basesyntax.operations.operationstrategy;
+package core.basesyntax.operation.operationstrategy;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.operations.operationhandlers.OperationHandler;
+import core.basesyntax.operation.handler.OperationHandler;
 
 public interface OperationStrategy {
     OperationHandler getHandler(FruitTransaction.Operation operation);
