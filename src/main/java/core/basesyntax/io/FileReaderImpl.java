@@ -18,6 +18,8 @@ public class FileReaderImpl implements FileReader {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
+        } catch (IOException e) {
+            throw new IOException("An error occurred while readint this file: " + e);
         }
         return lines;
     }

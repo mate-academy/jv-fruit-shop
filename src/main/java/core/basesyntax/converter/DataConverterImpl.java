@@ -21,7 +21,7 @@ public class DataConverterImpl implements DataConverter {
             }
 
             String operationCode = parts[0];
-            String fruit = parts[1].trim();
+            String fruit = parts[1];
             int quantity;
             try {
                 quantity = Integer.parseInt(parts[2]);

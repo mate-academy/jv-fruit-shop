@@ -24,8 +24,8 @@ import report.ReportGenerator;
 import report.ReportGeneratorImpl;
 
 public class Main {
-    private static final String READ_PATH = "recources/reportToRead.csv";
-    private static final String WRITE_PATH = "recources/finalReport.csv";
+    private static final String READ_PATH = "src/main/resources/reportToRead.csv";
+    private static final String WRITE_PATH = "src/main/resources/reportToRead.csv";
 
     public static void main(String[] args) throws IOException {
         FileReader fileReader = new FileReaderImpl();
@@ -44,8 +44,8 @@ public class Main {
 
         List<String> inputLines = fileReader.read(READ_PATH);
         List<FruitTransaction> transactions = dataConverter.convertToTransactions(inputLines);
-        Map<String, Integer> finalStorage = shopService.process(transactions);
-        String report = reportGenerator.generateReport(finalStorage);
+        shopService.process(transactions);
+        String report = reportGenerator.generateReport();
         fileWriter.write(report, WRITE_PATH);
     }
 }
