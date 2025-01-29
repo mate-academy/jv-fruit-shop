@@ -7,9 +7,9 @@ import java.util.List;
 
 public class FileReaderImpl implements FileReader {
     @Override
-    public List<String> read(String filePath) throws IOException {
+    public List<String> read(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
-            throw new IllegalArgumentException("File path cannot be null or empty ");
+            throw new IllegalArgumentException("File path cannot be null or empty");
         }
 
         List<String> lines = new ArrayList<>();
@@ -18,9 +18,10 @@ public class FileReaderImpl implements FileReader {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
+            return lines;
         } catch (IOException e) {
-            throw new IOException("An error occurred while readint this file: " + e);
+            throw new RuntimeException("An error occurred while reading the file: "
+                    + filePath, e);
         }
-        return lines;
     }
 }
