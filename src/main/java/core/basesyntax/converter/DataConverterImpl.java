@@ -6,7 +6,9 @@ import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
     private static final String COMMA = ",";
+    private static final int ZERO = 0;
     private static final int HEADER_INDEX = 1;
+    private static final int SECOND = 2;
     private static final int EXPECTED_PARTS_COUNT = 3;
 
     @Override
@@ -17,7 +19,7 @@ public class DataConverterImpl implements DataConverter {
 
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = HEADER_INDEX; i < lines.size(); i++) {
-            transactions.add(parseTransactionLine(lines.get(i), i + 1));
+            transactions.add(parseTransactionLine(lines.get(i), i + HEADER_INDEX));
         }
         return transactions;
     }
@@ -28,9 +30,9 @@ public class DataConverterImpl implements DataConverter {
             throw new IllegalArgumentException("Invalid line format at line " + lineNumber);
         }
 
-        String operationCode = parts[0];
-        String fruit = parts[1];
-        int quantity = parseQuantity(parts[2], lineNumber);
+        String operationCode = parts[ZERO];
+        String fruit = parts[HEADER_INDEX];
+        int quantity = parseQuantity(parts[SECOND], lineNumber);
 
         return new FruitTransaction(
                 FruitTransaction.Operation.fromCode(operationCode),
@@ -42,7 +44,7 @@ public class DataConverterImpl implements DataConverter {
     private int parseQuantity(String quantityStr, int lineNumber) {
         try {
             int quantity = Integer.parseInt(quantityStr);
-            if (quantity < 0) {
+            if (quantity < ZERO) {
                 throw new IllegalArgumentException("Quantity cannot be negative at line "
                         + lineNumber);
             }
