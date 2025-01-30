@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
     public static final int TITLE_POSITION = 1;
@@ -23,6 +22,6 @@ public class DataConverterImpl implements DataConverter {
                     int quantity = Integer.parseInt(fields[QUANTITY_POSITION]);
                     return new FruitTransaction(operation, fruit, quantity);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 }
