@@ -1,19 +1,27 @@
 package core.basesyntax;
 
-import core.basesyntax.data.Storage;
-import core.basesyntax.operation.BalanceOperation;
-import core.basesyntax.operation.OperationHandler;
-import core.basesyntax.operation.PurchaseOperation;
-import core.basesyntax.operation.ReturnOperation;
-import core.basesyntax.operation.SupplyOperation;
+import core.basesyntax.db.Storage;
+import core.basesyntax.strategy.operation.BalanceOperation;
+import core.basesyntax.strategy.operation.OperationHandler;
+import core.basesyntax.strategy.operation.PurchaseOperation;
+import core.basesyntax.strategy.operation.ReturnOperation;
+import core.basesyntax.strategy.operation.SupplyOperation;
+import core.basesyntax.service.*;
+import core.basesyntax.service.impl.*;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.OperationStrategyImpl;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String INPUT_DATA_PATH = "src/main/resources/input-data.csv";
+    public static final String OUTPUT_DATA_PATH = "src/main/resources/final-report.csv";
+
     public static void main(String[] args) {
         FileReader fileReader = new CsvFileReader();
-        List<String> inputReport = fileReader.read("");
+        List<String> inputReport = fileReader.read(INPUT_DATA_PATH);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -33,6 +41,6 @@ public class Main {
         String resultingReport = reportGenerator.generateReport(Storage.fruitStorage);
 
         FileWriter fileWriter = new CsvFileWriter();
-        fileWriter.writeReport(resultingReport, "finalReport.csv");
+        fileWriter.writeReport(resultingReport, OUTPUT_DATA_PATH);
     }
 }

@@ -1,9 +1,9 @@
-package core.basesyntax.operation;
+package core.basesyntax.strategy.operation;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.data.Storage;
+import core.basesyntax.db.Storage;
 
-public class SupplyOperation implements OperationHandler {
+public class ReturnOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
