@@ -1,11 +1,12 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.Main.COMMA_SEPARATOR;
+
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.FruitTransaction.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
-import static core.basesyntax.Main.COMMA_SEPARATOR;
 
 public class CsvDataConverter implements DataConverter {
     @Override

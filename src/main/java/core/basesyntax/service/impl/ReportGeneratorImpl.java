@@ -1,9 +1,10 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.Main.COMMA_SEPARATOR;
+
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerator;
 import java.util.stream.Collectors;
-import static core.basesyntax.Main.COMMA_SEPARATOR;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     public static final String SCV_FILE_HEADER = "fruit,quantity" + System.lineSeparator();
