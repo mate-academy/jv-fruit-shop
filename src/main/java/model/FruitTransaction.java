@@ -2,8 +2,6 @@ package model;
 
 public class FruitTransaction extends Fruit {
     private Operation operation;
-    private String fruit;
-    private int quantity;
 
     public FruitTransaction(String fruit, int quantity,Operation operation) {
         setOperation(operation);

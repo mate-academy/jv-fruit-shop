@@ -1,11 +1,11 @@
 import dao.TransactionDaoImpl;
-import service.CSVProcessor;
+import service.CsvProcessor;
 
 public class FruitStore {
     public static void main(String[] args) {
         TransactionDaoImpl inventoryDAO = new TransactionDaoImpl();
-        CSVProcessor csvProcessor = new CSVProcessor(inventoryDAO);
-        csvProcessor.processCSV("src/main/java/testFruitsReport");
-        inventoryDAO.exportToCSV("src/main/java/output");
+        CsvProcessor csvProcessor = new CsvProcessor(inventoryDAO);
+        csvProcessor.processCsv("src/main/java/testFruitsReport");
+        inventoryDAO.exportToCsv("src/main/java/output");
     }
 }

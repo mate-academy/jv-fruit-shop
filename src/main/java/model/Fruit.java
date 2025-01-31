@@ -1,8 +1,8 @@
 package model;
 
 public abstract class Fruit {
-    String fruit;
-    int quantity;
+    private String fruit;
+    private int quantity;
 
     public String getFruit() {
         return fruit;

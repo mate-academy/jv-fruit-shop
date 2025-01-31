@@ -1,11 +1,10 @@
 package dao;
 
 import db.Storage;
-import model.FruitTransaction;
-
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Optional;
+import java.io.IOException;
+import java.io.FileWriter;
+import model.FruitTransaction;
 
 public class TransactionDaoImpl implements TransactionsDao {
 
@@ -13,23 +12,21 @@ public class TransactionDaoImpl implements TransactionsDao {
     public void processTransaction(FruitTransaction transaction) {
         FruitTransaction fruit = findOrCreateFruit(transaction);
 
-            switch (transaction.getOperation()) {
-                case BALANCE:
-                    fruit.setQuantity(transaction.getQuantity());
-                    break;
-                case SUPPLY:
-                    fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
-                    break;
-                case PURCHASE:
-                    fruit.setQuantity(Math.max(0, fruit.getQuantity() - transaction.getQuantity()));
-                    break;
-                case RETURN:
-                    fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
-                    break;
-//                default:
-//                    System.out.println("Unknown operation: " + transaction.getOperation());
-            }
+        switch (transaction.getOperation()) {
+            case BALANCE:
+                fruit.setQuantity(transaction.getQuantity());
+                break;
+            case SUPPLY:
+                fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
+                break;
+            case PURCHASE:
+                fruit.setQuantity(Math.max(0, fruit.getQuantity() - transaction.getQuantity()));
+                break;
+            case RETURN:
+                fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
+                break;
         }
+    }
 
     @Override
     public void addTransactionInfo(FruitTransaction transaction) {
@@ -50,17 +47,16 @@ public class TransactionDaoImpl implements TransactionsDao {
                     addTransactionInfo(transaction);
                     return transaction;
                 });
-        }
+    }
 
-        public void exportToCSV(String filePath) {
-            try (FileWriter writer = new FileWriter(filePath)) {
-                writer.append("fruit,quantity\n");
-                for (FruitTransaction fruit : Storage.transactions) {
-                    writer.append(fruit.getFruit()).append(",").append(String.valueOf(fruit.getQuantity())).append("\n");
-                }
-                System.out.println("Exported inventory to " + filePath);
-            } catch (IOException e) {
-                throw new RuntimeException("Error writing to CSV file: " + filePath, e);
+    public void exportToCsv(String filePath) {
+        try (FileWriter writer = new FileWriter(filePath)) {
+            writer.append("fruit,quantity\n");
+            for (FruitTransaction fruit : Storage.transactions) {
+                writer.append(fruit.getFruit()).append(",").append(String.valueOf(fruit.getQuantity())).append("\n");
             }
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing to CSV file: " + filePath, e);
         }
+    }
 }
