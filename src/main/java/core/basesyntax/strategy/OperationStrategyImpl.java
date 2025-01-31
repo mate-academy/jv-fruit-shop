@@ -15,6 +15,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
+        if (operationHandlers.get(operation) == null) {
+            throw new IllegalArgumentException("Unknown operation: " + operation);
+        }
         return operationHandlers.get(operation);
     }
 }
