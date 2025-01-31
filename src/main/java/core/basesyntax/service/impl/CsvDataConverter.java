@@ -12,7 +12,7 @@ public class CsvDataConverter implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {
             String line = data.get(i);
-            String[] parts = line.trim().split(",");
+            String[] parts = line.split(",");
             if (parts.length != 3) {
                 continue;
             }
@@ -23,13 +23,13 @@ public class CsvDataConverter implements DataConverter {
             } catch (IllegalArgumentException e) {
                 throw new RuntimeException(e.getMessage(), e);
             }
-            String fruit = parts[1].trim();
+            String fruit = parts[1];
             if (fruit.isEmpty()) {
                 continue;
             }
             int quantity;
             try {
-                quantity = Integer.parseInt(parts[2].trim());
+                quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
                 continue;
             }
