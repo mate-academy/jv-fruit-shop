@@ -1,15 +1,15 @@
 package dao;
 
 import db.Storage;
-import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import model.FruitTransaction;
 import strategy.BalanceStrategy;
+import strategy.PurchaseStrategy;
 import strategy.ReturnStrategy;
 import strategy.SupplyStrategy;
-import strategy.PurchaseStrategy;
 import strategy.TransactionStrategy;
 
 public class TransactionDaoImpl implements TransactionsDao {
