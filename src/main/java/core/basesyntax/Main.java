@@ -46,7 +46,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.generateReport(Storage.fruitStorage);
+        String resultingReport = reportGenerator.generateReport();
 
         FileWriter fileWriter = new CsvFileWriter();
         fileWriter.writeReport(resultingReport, OUTPUT_DATA_PATH);
