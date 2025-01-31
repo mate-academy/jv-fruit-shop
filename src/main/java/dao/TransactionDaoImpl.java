@@ -1,8 +1,8 @@
 package dao;
 
 import db.Storage;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Optional;
 import model.FruitTransaction;
 
@@ -25,6 +25,7 @@ public class TransactionDaoImpl implements TransactionsDao {
             case RETURN:
                 fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
                 break;
+            default: throw new RuntimeException("Unknown transaction type");
         }
     }
 
