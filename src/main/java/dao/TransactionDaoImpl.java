@@ -1,9 +1,9 @@
 package dao;
 
 import db.Storage;
-import java.util.Optional;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.util.Optional;
 import model.FruitTransaction;
 
 public class TransactionDaoImpl implements TransactionsDao {
@@ -53,7 +53,10 @@ public class TransactionDaoImpl implements TransactionsDao {
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.append("fruit,quantity\n");
             for (FruitTransaction fruit : Storage.transactions) {
-                writer.append(fruit.getFruit()).append(",").append(String.valueOf(fruit.getQuantity())).append("\n");
+                writer.append(fruit.getFruit())
+                        .append(",")
+                        .append(String.valueOf(fruit.getQuantity()))
+                        .append("\n");
             }
         } catch (IOException e) {
             throw new RuntimeException("Error writing to CSV file: " + filePath, e);
