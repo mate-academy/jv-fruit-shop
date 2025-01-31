@@ -3,30 +3,38 @@ package dao;
 import db.Storage;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import model.FruitTransaction;
 
 public class TransactionDaoImpl implements TransactionsDao {
 
+    private final Map<FruitTransaction.Operation, BiConsumer<FruitTransaction, FruitTransaction>> operationHandlers
+            = new HashMap<>();
+
+    public TransactionDaoImpl() {
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, (
+                fruit,
+                transaction) -> fruit.setQuantity(transaction.getQuantity()));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, (
+                fruit,
+                transaction) -> fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity()));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, (
+                fruit,
+                transaction) -> fruit.setQuantity(Math.max(0, fruit.getQuantity() - transaction.getQuantity())));
+        operationHandlers.put(FruitTransaction.Operation.RETURN, (
+                fruit,
+                transaction) -> fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity()));
+    }
+
     @Override
     public void processTransaction(FruitTransaction transaction) {
         FruitTransaction fruit = findOrCreateFruit(transaction);
-
-        switch (transaction.getOperation()) {
-            case BALANCE:
-                fruit.setQuantity(transaction.getQuantity());
-                break;
-            case SUPPLY:
-                fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
-                break;
-            case PURCHASE:
-                fruit.setQuantity(Math.max(0, fruit.getQuantity() - transaction.getQuantity()));
-                break;
-            case RETURN:
-                fruit.setQuantity(fruit.getQuantity() + transaction.getQuantity());
-                break;
-            default: throw new RuntimeException("Unknown transaction type");
-        }
+        operationHandlers.getOrDefault(transaction.getOperation(), (f, t) -> {
+            throw new IllegalArgumentException("Unknown operation: " + t.getOperation());
+        }).accept(fruit, transaction);
     }
 
     @Override

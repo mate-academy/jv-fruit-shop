@@ -6,6 +6,6 @@ public class FruitStore {
         TransactionDaoImpl inventoryDao = new TransactionDaoImpl();
         CsvProcessor csvProcessor = new CsvProcessor(inventoryDao);
         csvProcessor.processCsv("src/main/resources/testFruitsReport");
-        inventoryDao.exportToCsv("src/main/rec]sources/output");
+        inventoryDao.exportToCsv("src/main/resources/output");
     }
 }
