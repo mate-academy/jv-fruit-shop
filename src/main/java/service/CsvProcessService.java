@@ -1,26 +1,31 @@
 package service;
 
 import dao.TransactionsDao;
+import model.FruitTransaction;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
-import model.FruitTransaction;
 
-public class CsvProcessor {
+public class CsvProcessService implements Processor, Reader, Parser {
     private final TransactionsDao transactionsDao;
 
-    public CsvProcessor(TransactionsDao transactionsDao) {
+    public CsvProcessService(TransactionsDao transactionsDao) {
         this.transactionsDao = transactionsDao;
     }
 
-    public void processCsv(String filePath) {
-        List<FruitTransaction> transactions = readTransactionsFromCsv(filePath);
+    @Override
+    public void processCsv(String fileName) {
+        List<FruitTransaction> transactions = readTransactionsFromCsv(fileName);
         transactions.forEach(transactionsDao::processTransaction);
     }
 
-    private List<FruitTransaction> readTransactionsFromCsv(String filePath) {
+    @Override
+    public List<FruitTransaction> readTransactionsFromCsv(String fileName) {
+        String filePath = Paths.get("src", "main", "resources", fileName).toString();;
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             return br.lines()
                     .skip(1) // Skip header
@@ -31,7 +36,8 @@ public class CsvProcessor {
         }
     }
 
-    private FruitTransaction parseTransaction(String line) {
+    @Override
+    public FruitTransaction parseTransaction(String line) {
         int fruitNameIndex = 1;
         int quantityIndex = 2;
         int operationTypeIndex = 0;

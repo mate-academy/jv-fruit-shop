@@ -2,11 +2,17 @@ package dao;
 
 import model.FruitTransaction;
 
+import java.util.List;
+
 public interface TransactionsDao {
 
     void processTransaction(FruitTransaction transaction);
 
-    void addTransactionInfo(FruitTransaction transaction);
+    void updateTransactionInfo(FruitTransaction transaction);
 
-    FruitTransaction getTransaction(String fruitName);
+    List<FruitTransaction> getAll();
+
+    FruitTransaction getTransactionByName(String fruitName);
+
+    FruitTransaction findOrCreateFruit(FruitTransaction transaction);
 }
