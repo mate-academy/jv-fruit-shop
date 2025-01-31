@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String COMMA_SEPARATOR = ",";
     public static final String INPUT_DATA_PATH = "src/main/resources/input-data.csv";
     public static final String OUTPUT_DATA_PATH = "src/main/resources/final-report.csv";
 

@@ -5,6 +5,7 @@ import core.basesyntax.FruitTransaction.Operation;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
+import static core.basesyntax.Main.COMMA_SEPARATOR;
 
 public class CsvDataConverter implements DataConverter {
     @Override
@@ -12,7 +13,7 @@ public class CsvDataConverter implements DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < data.size(); i++) {
             String line = data.get(i);
-            String[] parts = line.split(",");
+            String[] parts = line.split(COMMA_SEPARATOR);
             if (parts.length != 3) {
                 continue;
             }
