@@ -1,8 +1,7 @@
 package dao;
 
-import model.FruitTransaction;
-
 import java.util.List;
+import model.FruitTransaction;
 
 public interface TransactionsDao {
 

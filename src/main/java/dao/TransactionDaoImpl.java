@@ -2,16 +2,16 @@ package dao;
 
 import db.Storage;
 import model.FruitTransaction;
-import strategy.*;
-
+import java.util.Optional;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import strategy.*;
 
 public class TransactionDaoImpl implements TransactionsDao {
 
-    private final Map<FruitTransaction.Operation, TransactionStrategy> operationHandlers = new HashMap<>();
+    private final Map<FruitTransaction.Operation, TransactionStrategy> operationHandlers
+            = new HashMap<>();
 
     public TransactionDaoImpl() {
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceStrategy());

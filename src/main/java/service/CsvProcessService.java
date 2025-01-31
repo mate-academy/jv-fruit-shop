@@ -1,14 +1,13 @@
 package service;
 
 import dao.TransactionsDao;
-import model.FruitTransaction;
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import model.FruitTransaction;
 
 public class CsvProcessService implements Processor, Reader, Parser {
     private final TransactionsDao transactionsDao;

@@ -1,11 +1,10 @@
 package service;
 
 import dao.TransactionsDao;
-import model.FruitTransaction;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
+import model.FruitTransaction;
 
 public class CsvReportGeneratorService implements Exporter {
     private final TransactionsDao transactionsDao;
