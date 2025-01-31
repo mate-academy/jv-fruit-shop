@@ -15,24 +15,22 @@ public class CsvDataConverter implements DataConverter {
             String line = data.get(i);
             String[] parts = line.split(COMMA_SEPARATOR);
             if (parts.length != 3) {
-                continue;
+                throw new IllegalArgumentException("Invalid data format: " + line);
             }
             String operationCode = parts[0];
             Operation operation;
-            try {
-                operation = Operation.getOperationByCode(operationCode);
-            } catch (IllegalArgumentException e) {
-                throw new RuntimeException(e.getMessage(), e);
-            }
+            operation = Operation.getOperationByCode(operationCode);
             String fruit = parts[1];
             if (fruit.isEmpty()) {
-                continue;
+                throw new IllegalArgumentException(
+                        "Invalid data format. Fruit must not be empty: " + line);
             }
             int quantity;
             try {
                 quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
-                continue;
+                throw new IllegalArgumentException(
+                        "Invalid data format. Provide valid fruits quantity: " + line);
             }
             FruitTransaction transaction = new FruitTransaction();
             transaction.setOperation(operation);
