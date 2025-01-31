@@ -11,7 +11,7 @@ public class OperationStrategyImpl implements OperationStrategy {
         this.operationHandlers = operationHandlers;
     }
 
-    public void execute(FruitTransaction transaction) {
+    public void applyOperation(FruitTransaction transaction) {
         OperationHandler handler = operationHandlers.get(transaction.getOperation());
         if (handler != null) {
             handler.handle(transaction);

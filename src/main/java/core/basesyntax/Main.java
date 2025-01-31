@@ -39,13 +39,13 @@ public class Main {
         TransactionProcessorService transactionService
                 = new TransactionProcessorServiceImpl(operationStrategy);
 
-        List<String> inputData = readerService.read("reportToRead.csv");
+        List<String> inputData = readerService.read("src/main/resources");
 
         List<FruitTransaction> transactions = readerService.parseTransactions(inputData);
         transactionService.processTransactions(transactions);
 
         String report = reportService.generateReport();
 
-        writerService.write("finalReport.csv", report);
+        writerService.write("src/main/resources", report);
     }
 }

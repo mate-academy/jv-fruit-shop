@@ -17,7 +17,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         if (currentQuantity >= transaction.getQuantity()) {
             storage.updateInventory(transaction.getFruit(), -transaction.getQuantity());
         } else {
-            throw new RuntimeException("Не вистачає фруктів для купівлі: "
+            throw new RuntimeException("Not enough fruits for purchase: "
                     + transaction.getFruit());
         }
     }

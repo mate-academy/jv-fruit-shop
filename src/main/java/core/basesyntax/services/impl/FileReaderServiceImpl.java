@@ -18,7 +18,7 @@ public class FileReaderServiceImpl implements FileReaderService {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Помилка читання файлу: " + fileName, e);
+            throw new RuntimeException("Error reading file: " + fileName, e);
         }
         return lines;
     }
@@ -28,10 +28,28 @@ public class FileReaderServiceImpl implements FileReaderService {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (String line: lines.subList(1, lines.size())) {
             String[] parts = line.split(",");
-            FruitTransaction.Operation operation = FruitTransaction
-                    .Operation.valueOf(parts[0].toUpperCase());
+            if (parts.length != 3) {
+                throw new RuntimeException("Invalid line (must be split into 3 parts): " + line);
+            }
+            FruitTransaction.Operation operation;
+            try {
+                operation = FruitTransaction.Operation.valueOf(parts[0].toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Incorrect operation: " + parts[0] + " in line: "
+                        + line, e);
+            }
             String fruit = parts[1];
-            int quantity = Integer.parseInt(parts[2]);
+            int quantity;
+            try {
+                quantity = Integer.parseInt(parts[2]);
+                if (quantity < 0) {
+                    throw new RuntimeException("The quantity cannot be negative: "
+                            + parts[2] + " in line: " + line);
+                }
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Invalid quantity (not number): "
+                        + parts[2] + " in line: " + line, e);
+            }
             transactions.add(new FruitTransaction(operation,fruit,quantity));
         }
         return transactions;

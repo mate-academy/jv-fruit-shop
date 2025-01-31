@@ -15,7 +15,7 @@ public class TransactionProcessorServiceImpl implements TransactionProcessorServ
     @Override
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction: transactions) {
-            operationStrategy.execute(transaction);
+            operationStrategy.applyOperation(transaction);
         }
     }
 }

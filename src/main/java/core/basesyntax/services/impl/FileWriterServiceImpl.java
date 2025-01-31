@@ -11,7 +11,7 @@ public class FileWriterServiceImpl implements FileWriterService {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(content);
         } catch (IOException e) {
-            throw new RuntimeException("Помилка при записі у файл: " + fileName, e);
+            throw new RuntimeException("Error writing to file: " + fileName, e);
         }
     }
 }
