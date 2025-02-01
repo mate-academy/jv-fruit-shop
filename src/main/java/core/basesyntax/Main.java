@@ -5,10 +5,10 @@ import core.basesyntax.model.Operation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 import core.basesyntax.operation.OperationStrategyImpl;
-import core.basesyntax.operation.impl.BalanceStrategyImpl;
-import core.basesyntax.operation.impl.PurchaseStrategyImpl;
-import core.basesyntax.operation.impl.ReturnStrategyImpl;
-import core.basesyntax.operation.impl.SuppliersStrategyImpl;
+import core.basesyntax.operation.impl.BalanceHandlerImpl;
+import core.basesyntax.operation.impl.PurchaseHandlerImpl;
+import core.basesyntax.operation.impl.ReturnHandlerImpl;
+import core.basesyntax.operation.impl.SuppliersHandlerImpl;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.ReaderService;
 import core.basesyntax.service.ReportGenerator;
@@ -32,10 +32,10 @@ public class Main {
         List<String> inputReport = fileReader.readTheReport(READ_PATH);
 
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(Operation.BALANCE, new BalanceStrategyImpl());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseStrategyImpl());
-        operationHandlers.put(Operation.RETURN, new ReturnStrategyImpl());
-        operationHandlers.put(Operation.SUPPLY, new SuppliersStrategyImpl());
+        operationHandlers.put(Operation.BALANCE, new BalanceHandlerImpl());
+        operationHandlers.put(Operation.PURCHASE, new PurchaseHandlerImpl());
+        operationHandlers.put(Operation.RETURN, new ReturnHandlerImpl());
+        operationHandlers.put(Operation.SUPPLY, new SuppliersHandlerImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl();

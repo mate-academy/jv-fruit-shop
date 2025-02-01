@@ -4,10 +4,11 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 
-public class BalanceStrategyImpl implements OperationHandler {
+public class BalanceHandlerImpl implements OperationHandler {
+    private final FruitDaoImpl fruitDao = new FruitDaoImpl();
+
     @Override
     public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
-        FruitDaoImpl fruitDao = new FruitDaoImpl();
         fruitDao.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

@@ -4,12 +4,11 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 
-public class ReturnStrategyImpl implements OperationHandler {
+public class ReturnHandlerImpl implements OperationHandler {
+    private final FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
     public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
-        FruitDaoImpl fruitDao = new FruitDaoImpl();
-
         int currentQuantity = fruitDao.contains(fruitTransaction.getFruit())
                 ? fruitDao.get(fruitTransaction.getFruit()) : 0;
 

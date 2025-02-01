@@ -4,11 +4,11 @@ import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 
-public class PurchaseStrategyImpl implements OperationHandler {
+public class PurchaseHandlerImpl implements OperationHandler {
+    private final FruitDaoImpl fruitDao = new FruitDaoImpl();
 
     @Override
     public void updateNumberOfFruit(FruitTransaction fruitTransaction) {
-        FruitDaoImpl fruitDao = new FruitDaoImpl();
         if (fruitDao.contains(fruitTransaction.getFruit())) {
             int newFruitQuantity =
                     fruitDao.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity();
