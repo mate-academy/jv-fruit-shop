@@ -1,9 +1,8 @@
 package service;
 
 import dao.TransactionsDao;
-import model.FruitTransaction;
-
 import java.util.List;
+import model.FruitTransaction;
 
 public class CsvTransactionService implements Processor {
     private static final String INPUT_FILE_NAME = "inputFile";
@@ -18,7 +17,8 @@ public class CsvTransactionService implements Processor {
 
     @Override
     public void processCsv() {
-        List<FruitTransaction> transactions = csvReadService.readTransactionsFromCsv(INPUT_FILE_NAME);
+        List<FruitTransaction> transactions
+                = csvReadService.readTransactionsFromCsv(INPUT_FILE_NAME);
         transactions.forEach(transactionsDao::processTransaction);
     }
 }

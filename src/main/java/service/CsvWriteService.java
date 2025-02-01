@@ -7,8 +7,8 @@ import java.nio.file.Paths;
 import model.FruitTransaction;
 
 public class CsvWriteService implements Exporter {
-    private final TransactionsDao transactionsDao;
     private static final String OUTPUT_FILE_NAME = "outputFile";
+    private final TransactionsDao transactionsDao;
 
     public CsvWriteService(TransactionsDao transactionsDao) {
         this.transactionsDao = transactionsDao;

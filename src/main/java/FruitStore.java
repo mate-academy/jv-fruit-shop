@@ -11,7 +11,8 @@ public class FruitStore {
         CsvWriteService reportGenerator = new CsvWriteService(transactionDao);
         CsvParseService csvParseService = new CsvParseService();
         CsvReadService csvReadService = new CsvReadService(csvParseService);
-        CsvTransactionService csvTransactionService = new CsvTransactionService(transactionDao, csvReadService);
+        CsvTransactionService csvTransactionService =
+                new CsvTransactionService(transactionDao, csvReadService);
 
         csvTransactionService.processCsv();
         reportGenerator.exportToCsv();
