@@ -1,18 +1,19 @@
 import dao.TransactionDaoImpl;
 import dao.TransactionsDao;
-import service.CsvProcessService;
-import service.CsvReportGeneratorService;
+import service.CsvParseService;
+import service.CsvReadService;
+import service.CsvTransactionService;
+import service.CsvWriteService;
 
 public class FruitStore {
-    private static final String INPUT_PATH = "testFruitsReport";
-    private static final String OUTPUT_PATH = "output";
-
     public static void main(String[] args) {
-        TransactionsDao inventoryDao = new TransactionDaoImpl();
-        CsvProcessService csvProcessService = new CsvProcessService(inventoryDao);
-        CsvReportGeneratorService reportGenerator = new CsvReportGeneratorService(inventoryDao);
+        TransactionsDao transactionDao = new TransactionDaoImpl();
+        CsvWriteService reportGenerator = new CsvWriteService(transactionDao);
+        CsvParseService csvParseService = new CsvParseService();
+        CsvReadService csvReadService = new CsvReadService(csvParseService);
+        CsvTransactionService csvTransactionService = new CsvTransactionService(transactionDao, csvReadService);
 
-        csvProcessService.processCsv(INPUT_PATH);
-        reportGenerator.exportToCsv(OUTPUT_PATH);
+        csvTransactionService.processCsv();
+        reportGenerator.exportToCsv();
     }
 }

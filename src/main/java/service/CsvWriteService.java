@@ -6,16 +6,17 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import model.FruitTransaction;
 
-public class CsvReportGeneratorService implements Exporter {
+public class CsvWriteService implements Exporter {
     private final TransactionsDao transactionsDao;
+    private static final String OUTPUT_FILE_NAME = "outputFile";
 
-    public CsvReportGeneratorService(TransactionsDao transactionsDao) {
+    public CsvWriteService(TransactionsDao transactionsDao) {
         this.transactionsDao = transactionsDao;
     }
 
     @Override
-    public void exportToCsv(String fileName) {
-        String filePath = Paths.get("src", "main", "resources", fileName).toString();
+    public void exportToCsv() {
+        String filePath = Paths.get("src", "main", "resources", OUTPUT_FILE_NAME).toString();
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.append("fruit,quantity\n");
             for (FruitTransaction fruit : transactionsDao.getAll()) {
