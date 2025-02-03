@@ -42,5 +42,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation fromCode(String code) {
+            for (Operation operation : values()) {
+                if (operation.getCode().equalsIgnoreCase(code)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("No operation found from code: " + code);
+        }
     }
 }

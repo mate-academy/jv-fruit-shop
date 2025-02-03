@@ -11,12 +11,11 @@ public class OperationStrategyImpl implements OperationStrategy {
         this.operationHandlers = operationHandlers;
     }
 
-    public void applyOperation(FruitTransaction transaction) {
+    public OperationHandler getHandler(FruitTransaction transaction) {
         OperationHandler handler = operationHandlers.get(transaction.getOperation());
-        if (handler != null) {
-            handler.handle(transaction);
-        } else {
+        if (handler == null) {
             throw new RuntimeException("Unknown operation: " + transaction.getOperation());
         }
+        return handler;
     }
 }

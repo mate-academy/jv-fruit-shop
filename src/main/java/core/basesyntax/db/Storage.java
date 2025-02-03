@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private final Map<String, Integer> inventory = new HashMap<>();
+    private static final Map<String, Integer> inventory = new HashMap<>();
 
     public void updateInventory(String fruit, int quantity) {
         inventory.put(fruit, inventory.getOrDefault(fruit,0) + quantity);

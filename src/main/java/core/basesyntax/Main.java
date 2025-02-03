@@ -6,6 +6,7 @@ import core.basesyntax.services.FileReaderService;
 import core.basesyntax.services.FileWriterService;
 import core.basesyntax.services.ReportGeneratorService;
 import core.basesyntax.services.TransactionProcessorService;
+import core.basesyntax.services.impl.DataConverter;
 import core.basesyntax.services.impl.FileReaderServiceImpl;
 import core.basesyntax.services.impl.FileWriterServiceImpl;
 import core.basesyntax.services.impl.ReportGeneratorServiceImpl;
@@ -39,13 +40,14 @@ public class Main {
         TransactionProcessorService transactionService
                 = new TransactionProcessorServiceImpl(operationStrategy);
 
-        List<String> inputData = readerService.read("src/main/resources");
-
-        List<FruitTransaction> transactions = readerService.parseTransactions(inputData);
+        List<String> inputData = readerService.read(Constants.RESOURSE_PATH);
+        
+        DataConverter dataConverter = new DataConverter();
+        List<FruitTransaction> transactions = dataConverter.parseTransactions(inputData);
         transactionService.processTransactions(transactions);
 
         String report = reportService.generateReport();
 
-        writerService.write("src/main/resources", report);
+        writerService.write(Constants.FINAL_REPORT_PATH, report);
     }
 }
