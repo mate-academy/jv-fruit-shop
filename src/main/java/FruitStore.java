@@ -12,7 +12,7 @@ public class FruitStore {
         CsvParseService csvParseService = new CsvParseService();
         CsvReadService csvReadService = new CsvReadService(csvParseService);
         CsvTransactionService csvTransactionService =
-                new CsvTransactionService(transactionDao, csvReadService);
+                new CsvTransactionService(transactionDao, csvReadService, csvParseService);
 
         csvTransactionService.processCsv();
         reportGenerator.exportToCsv();
