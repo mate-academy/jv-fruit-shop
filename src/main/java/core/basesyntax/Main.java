@@ -24,8 +24,9 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        String resourсePath = "src/main/resources";
-        String finalReportPath = "src/main/resources";
+        final String resourсePath = "src/main/resources";
+        final String finalReportPath = "src/main/resources";
+
         Storage storage = new Storage();
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
@@ -49,7 +50,6 @@ public class Main {
         transactionService.processTransactions(transactions);
 
         String report = reportService.generateReport();
-
         writerService.write(finalReportPath, report);
     }
 }
