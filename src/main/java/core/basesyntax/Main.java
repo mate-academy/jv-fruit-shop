@@ -24,6 +24,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        String resourсePath = "src/main/resources";
+        String finalReportPath = "src/main/resources";
         Storage storage = new Storage();
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
@@ -40,7 +42,7 @@ public class Main {
         TransactionProcessorService transactionService
                 = new TransactionProcessorServiceImpl(operationStrategy);
 
-        List<String> inputData = readerService.read(Constants.RESOURSE_PATH);
+        List<String> inputData = readerService.read(resourсePath);
         
         DataConverter dataConverter = new DataConverter();
         List<FruitTransaction> transactions = dataConverter.parseTransactions(inputData);
@@ -48,6 +50,6 @@ public class Main {
 
         String report = reportService.generateReport();
 
-        writerService.write(Constants.FINAL_REPORT_PATH, report);
+        writerService.write(finalReportPath, report);
     }
 }

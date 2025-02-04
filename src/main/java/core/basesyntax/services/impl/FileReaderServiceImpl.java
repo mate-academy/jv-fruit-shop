@@ -12,9 +12,10 @@ public class FileReaderServiceImpl implements FileReaderService {
     public List<String> read(String fileName) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (line != null) {
                 lines.add(line);
+                line = br.readLine();
             }
         } catch (IOException e) {
             throw new RuntimeException("Error reading file: " + fileName, e);
