@@ -24,8 +24,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final String resourсePath = "src/main/resources";
-        final String finalReportPath = "src/main/resources";
+        final String resourсePath = "src/main/resources/input.csv";
+        final String finalReportPath = "src/main/resources/output.csv";
 
         Storage storage = new Storage();
 

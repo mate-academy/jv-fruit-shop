@@ -16,10 +16,10 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
     public String generateReport() {
         Map<String, Integer> inventory = storage.getInventory();
         StringBuilder report = new StringBuilder();
-        report.append(Constants.HEADER).append(Constants.NEW_LINE);
+        report.append(Constants.HEADER).append(System.lineSeparator());
         for (Map.Entry<String,Integer> entry : inventory.entrySet()) {
             report.append(entry.getKey()).append(Constants.SEPARATOR)
-                    .append(entry.getValue()).append(Constants.NEW_LINE);
+                    .append(entry.getValue()).append(System.lineSeparator());
         }
         return report.toString();
     }
