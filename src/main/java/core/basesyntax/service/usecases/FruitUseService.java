@@ -2,6 +2,6 @@ package core.basesyntax.service.usecases;
 
 public interface FruitUseService {
 
-    void run(String fruitNam, int amount);
+    void run(String fruitName, int amount);
 
 }

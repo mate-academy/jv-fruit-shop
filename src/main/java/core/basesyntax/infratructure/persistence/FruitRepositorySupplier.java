@@ -9,7 +9,7 @@ public class FruitRepositorySupplier {
     private static final int FRUIT_NAME_INDEX = 0;
     private static final int FRUIT_AMOUNT_INDEX = 1;
 
-    public static Map<String, Fruit> get(List<String> fruitsDb) {
+    public Map<String, Fruit> get(List<String> fruitsDb) {
         Map<String, Fruit> fruitMap = new HashMap<>();
 
         String[] info = new String[2];

@@ -30,7 +30,8 @@ public class Main {
         }
 
         // 2. Convert the incoming data into FruitTransactions list
-        Map<String, Fruit> fruitMap = FruitRepositorySupplier.get(allData);
+        FruitRepositorySupplier fruitRepositorySupplier = new FruitRepositorySupplier();
+        Map<String, Fruit> fruitMap = fruitRepositorySupplier.get(allData);
         FruitRepository fruitRepository = new FruitRepositoryImpl(fruitMap);
 
         // 3. Create and feel the map with all OperationHandler implementations

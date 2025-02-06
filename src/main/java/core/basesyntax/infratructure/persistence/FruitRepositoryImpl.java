@@ -33,11 +33,19 @@ public class FruitRepositoryImpl implements FruitRepository {
 
     @Override
     public void deleteFruit(String fruitName) {
+        Fruit fruit = fruitMap.get(fruitName);
+        if (fruit == null) {
+            throw new NoSuchElementException("Can't delete fruit");
+        }
         fruitMap.remove(fruitName);
     }
 
     @Override
     public Fruit getFruit(String fruitName) {
+        Fruit fruit = fruitMap.get(fruitName);
+        if (fruit == null) {
+            throw new NoSuchElementException("Can't get fruit");
+        }
         return fruitMap.get(fruitName);
     }
 }
