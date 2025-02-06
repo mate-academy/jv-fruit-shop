@@ -1,15 +1,19 @@
 package core.basesyntax.infratructure.persistence;
 
 import core.basesyntax.model.Fruit;
-
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class FruitRepositoryImpl implements FruitRepository{
+public class FruitRepositoryImpl implements FruitRepository {
     private final Map<String, Fruit> fruitMap;
 
     public FruitRepositoryImpl(Map<String, Fruit> fruitMap) {
         this.fruitMap = fruitMap;
+    }
+
+    @Override
+    public Map<String, Fruit> getFruitMap() {
+        return fruitMap;
     }
 
     @Override
@@ -19,7 +23,7 @@ public class FruitRepositoryImpl implements FruitRepository{
 
     @Override
     public void updateFruit(String fruitName, int amount) {
-        Fruit fruit  = fruitMap.get(fruitName);
+        Fruit fruit = fruitMap.get(fruitName);
         if (fruit == null) {
             throw new NoSuchElementException("Can't update fruit");
         }
