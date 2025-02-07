@@ -18,7 +18,6 @@ import core.basesyntax.service.operations.OperationHandler;
 import core.basesyntax.service.operations.PurchaseOperation;
 import core.basesyntax.service.operations.ReturnOperation;
 import core.basesyntax.service.operations.SupplyOperation;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read();
+        List<String> inputReport = fileReader.read("src/main/java/operationslist.csv");
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -47,15 +46,11 @@ public class Main {
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        List<String> resultingReport = reportGenerator.getReport(shopService.getFruitRepository());
-        resultingReport.stream().forEach(System.out::println);
+        String resultingReport = reportGenerator.getReport();
+        System.out.println(resultingReport);
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();
-        try {
-            fileWriter.write(resultingReport);
-        } catch (IOException e) {
-            throw new RuntimeException("Can't write report into db");
-        }
+        fileWriter.write(resultingReport, "src/main/java/database.csv");
     }
 }

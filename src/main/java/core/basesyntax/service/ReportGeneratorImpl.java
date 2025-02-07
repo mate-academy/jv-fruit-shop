@@ -1,13 +1,16 @@
 package core.basesyntax.service;
 
-import java.util.List;
-import java.util.Map;
+import core.basesyntax.infrastructure.db.Storage;
+import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String SEPARATOR = ",";
+
     @Override
-    public List<String> getReport(Map<String, Integer> fruitRepository) {
-        return fruitRepository.entrySet().stream()
-                .map(f -> f.getKey() + "," + f.getValue())
-                .toList();
+    public String getReport() {
+        return Storage.STORAGE.entrySet().stream()
+                .map(f -> f.getKey() + SEPARATOR + f.getValue())
+                .collect(Collectors.joining(System.lineSeparator()));
+
     }
 }

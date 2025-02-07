@@ -12,8 +12,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void execute(FruitTransaction fruitTransaction, Map<String, Integer> fruitRepository) {
-        operationHandlerMap.get(fruitTransaction.getOperation())
-                .run(fruitTransaction, fruitRepository);
+    public OperationHandler execute(FruitTransaction fruitTransaction) {
+        return operationHandlerMap.get(fruitTransaction.getOperation());
     }
 }

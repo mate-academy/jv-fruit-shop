@@ -1,17 +1,20 @@
 package core.basesyntax.service.operations;
 
+import core.basesyntax.infrastructure.db.Storage;
 import core.basesyntax.service.FruitTransaction;
-import java.util.Map;
 import java.util.NoSuchElementException;
 
 public class PurchaseOperation implements OperationHandler {
 
     @Override
-    public void run(FruitTransaction fruitTransaction, Map<String, Integer> fruitRepository) {
-        if (fruitRepository.get(fruitTransaction.getFruit()) == null) {
-            throw new NoSuchElementException();
+    public void run(FruitTransaction fruitTransaction) {
+        if (Storage.STORAGE.get(fruitTransaction.getFruit()) == null) {
+            throw new NoSuchElementException("Can't find fruit: " + fruitTransaction.getFruit());
         }
-        fruitRepository.replace(fruitTransaction.getFruit(),
-                fruitRepository.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
+        if (Storage.STORAGE.get(fruitTransaction.getFruit()) < fruitTransaction.getQuantity()) {
+            throw new RuntimeException("Too little of product: " + fruitTransaction.getFruit());
+        }
+        Storage.STORAGE.replace(fruitTransaction.getFruit(),
+                Storage.STORAGE.get(fruitTransaction.getFruit()) - fruitTransaction.getQuantity());
     }
 }

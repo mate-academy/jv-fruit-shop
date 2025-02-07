@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
-import java.util.Map;
+import core.basesyntax.service.operations.OperationHandler;
 
 public interface OperationStrategy {
-    void execute(FruitTransaction fruitTransaction, Map<String, Integer> fruitRepository);
+    OperationHandler execute(FruitTransaction fruitTransaction);
 }
