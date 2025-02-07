@@ -1,18 +1,23 @@
 package core.basesyntax;
 
-import core.basesyntax.infratructure.db.FruitsDao;
-import core.basesyntax.infratructure.db.FruitsDaoImpl;
-import core.basesyntax.infratructure.persistence.FruitRepository;
-import core.basesyntax.infratructure.persistence.FruitRepositoryImpl;
-import core.basesyntax.infratructure.persistence.FruitRepositorySupplier;
-import core.basesyntax.model.Fruit;
-import core.basesyntax.service.FruitService;
-import core.basesyntax.service.FruitServiceImpl;
-import core.basesyntax.service.Operation;
-import core.basesyntax.service.usecases.FruitUseService;
-import core.basesyntax.service.usecases.PushareFruitImpl;
-import core.basesyntax.service.usecases.ReturnFruitToBalanceImpl;
-import core.basesyntax.service.usecases.SupplyFruitToBalanceImpl;
+import core.basesyntax.infrastructure.DataConverter;
+import core.basesyntax.infrastructure.DataConverterImpl;
+import core.basesyntax.infrastructure.db.FileReader;
+import core.basesyntax.infrastructure.db.FileReaderImpl;
+import core.basesyntax.infrastructure.db.FileWriter;
+import core.basesyntax.infrastructure.db.FileWriterImpl;
+import core.basesyntax.service.FruitTransaction;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.OperationStrategyImpl;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportGeneratorImpl;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.service.ShopServiceImpl;
+import core.basesyntax.service.operations.BalanceOperation;
+import core.basesyntax.service.operations.OperationHandler;
+import core.basesyntax.service.operations.PurchaseOperation;
+import core.basesyntax.service.operations.ReturnOperation;
+import core.basesyntax.service.operations.SupplyOperation;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -21,37 +26,36 @@ import java.util.Map;
 public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
-        FruitsDao fruitsDao = new FruitsDaoImpl();
-        List<String> allData;
-        try {
-            allData = fruitsDao.getFruits();
-        } catch (IOException e) {
-            throw new RuntimeException("Can't read from DB");
-        }
+        FileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read();
 
         // 2. Convert the incoming data into FruitTransactions list
-        FruitRepositorySupplier fruitRepositorySupplier = new FruitRepositorySupplier();
-        Map<String, Fruit> fruitMap = fruitRepositorySupplier.get(allData);
-        FruitRepository fruitRepository = new FruitRepositoryImpl(fruitMap);
+        DataConverter dataConverter = new DataConverterImpl();
 
         // 3. Create and feel the map with all OperationHandler implementations
-        Map<Operation, FruitUseService> fruitUseServiceMap = new HashMap<>();
-        fruitUseServiceMap
-                .put(Operation.SUPPLY, new SupplyFruitToBalanceImpl(fruitRepository));
-        fruitUseServiceMap
-                .put(Operation.PURCHASE, new PushareFruitImpl(fruitRepository));
-        fruitUseServiceMap
-                .put(Operation.RETURN, new ReturnFruitToBalanceImpl(fruitRepository));
-        FruitService fruitService = new FruitServiceImpl(fruitRepository, fruitUseServiceMap);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        fruitService.makeOperation(Operation.RETURN, "banana", 10);
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transactions);
 
+        // 5.Generate report based on the current Storage state
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        List<String> resultingReport = reportGenerator.getReport(shopService.getFruitRepository());
+        resultingReport.stream().forEach(System.out::println);
+
+        // 6. Write the received report into the destination file
+        FileWriter fileWriter = new FileWriterImpl();
         try {
-            fruitsDao.setFruits(fruitService.getFruitRepository().getFruitMap());
+            fileWriter.write(resultingReport);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write into DB");
+            throw new RuntimeException("Can't write report into db");
         }
-
     }
 }

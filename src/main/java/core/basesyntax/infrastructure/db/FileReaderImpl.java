@@ -1,4 +1,4 @@
-package core.basesyntax.infratructure.db;
+package core.basesyntax.infrastructure.db;
 
 import core.basesyntax.model.Fruit;
 import java.io.BufferedWriter;
@@ -9,8 +9,8 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.Map;
 
-public class FruitsDaoImpl implements FruitsDao {
-    private static final String FILE_NAME = "src/main/java/database.csv";
+public class FileReaderImpl implements FileReader {
+    private static final String FILE_NAME = "src/main/java/operationslist.csv";
 
     @Override
     public void setFruits(Map<String, Fruit> fruitMap) throws IOException {
@@ -27,7 +27,11 @@ public class FruitsDaoImpl implements FruitsDao {
     }
 
     @Override
-    public List<String> getFruits() throws IOException {
-        return Files.readAllLines(Path.of(FILE_NAME));
+    public List<String> read() {
+        try {
+            return Files.readAllLines(Path.of(FILE_NAME));
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read from file");
+        }
     }
 }
