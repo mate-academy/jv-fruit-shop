@@ -4,11 +4,15 @@ import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.StorageService;
 
-public class ReturnOperation implements OperationHandler {
-    private final StorageService storageService;
+public class ReturnOperation implements OperationHandler,
+        core.basesyntax.strategy.OperationHandler {
+    private StorageService storageService;
 
     public ReturnOperation(StorageService storageService) {
         this.storageService = storageService;
+    }
+
+    public ReturnOperation() {
     }
 
     @Override

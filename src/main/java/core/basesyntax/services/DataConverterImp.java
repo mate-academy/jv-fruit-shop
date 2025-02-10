@@ -1,7 +1,6 @@
 package core.basesyntax.services;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.models.Operation;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,11 +10,13 @@ public class DataConverterImp implements DataConverter {
         return data.stream()
                 .map(line -> {
                     String[] parts = line.split(",");
-                    Operation operation = Operation.valueOf(parts[0].toUpperCase());
-                    String fruit = parts[1];
-                    int quantity = Integer.parseInt(parts[2]);
+                    FruitTransaction.Operation operation = FruitTransaction.Operation
+                            .fromString(parts[0].trim().toLowerCase());
+                    String fruit = parts[1].trim();
+                    int quantity = Integer.parseInt(parts[2].trim());
                     return new FruitTransaction(operation, fruit, quantity);
                 })
                 .collect(Collectors.toList());
     }
 }
+
