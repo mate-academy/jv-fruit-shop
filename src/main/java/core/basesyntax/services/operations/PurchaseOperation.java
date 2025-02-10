@@ -1,19 +1,25 @@
 package core.basesyntax.services.operations;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.models.Storage;
 import core.basesyntax.services.OperationHandler;
+import core.basesyntax.services.StorageService;
 
 public class PurchaseOperation implements OperationHandler {
+    private final StorageService storageService;
+
+    public PurchaseOperation(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
     @Override
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        Integer quantity = transaction.getQuantity();
-        Integer currentQuantity = Storage.getFruits().getOrDefault(fruit, 0);
-        if (Storage.getFruits().containsKey(fruit) && currentQuantity >= quantity) {
-            Storage.getFruits().put(fruit, currentQuantity - quantity);
+        int quantity = transaction.getQuantity();
+        int currentQuantity = storageService.getQuantity(fruit);
+        if (currentQuantity >= quantity) {
+            storageService.remove(fruit, quantity);
         } else {
-            throw new RuntimeException("Not enough fruits: " + fruit + " in storage");
+            throw new RuntimeException("Not enough " + fruit + " in storage");
         }
     }
 }

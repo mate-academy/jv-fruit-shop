@@ -1,17 +1,18 @@
 package core.basesyntax.services.operations;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.models.Storage;
 import core.basesyntax.services.OperationHandler;
+import core.basesyntax.services.StorageService;
 
 public class SupplyOperation implements OperationHandler {
+    private final StorageService storageService;
+
+    public SupplyOperation(StorageService storageService) {
+        this.storageService = storageService;
+    }
+
     @Override
     public void apply(FruitTransaction transaction) {
-        String fruit = transaction.getFruit();
-        int currentQuantity = transaction.getQuantity();
-        if (Storage.getFruits().containsKey(fruit)) {
-            Integer result = Storage.getFruits().get(fruit) + currentQuantity;
-            Storage.getFruits().put(fruit, result);
-        }
+        storageService.add(transaction.getFruit(), transaction.getQuantity());
     }
 }

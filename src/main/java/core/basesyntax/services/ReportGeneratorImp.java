@@ -1,6 +1,6 @@
 package core.basesyntax.services;
 
-import core.basesyntax.models.Storage;
+import core.basesyntax.db.Storage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
