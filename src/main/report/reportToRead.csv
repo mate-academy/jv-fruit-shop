@@ -1,0 +1,15 @@
+type,fruit,quantity
+b,banana,100
+b,apple,150
+b,orange,75
+b,mango,50
+b,kiwi,30
+s,banana,50
+s,apple,100
+p,banana,25
+p,apple,50
+r,banana,5
+p,orange,20
+s,kiwi,15
+p,mango,10
+r,apple,8
