@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/java/core/basesyntax"
+    private static final String INPUT_FILE = "src/main/java/"
             + "/resources/reportToRead.csv";
-    private static final String OUTPUT_FILE = "src/main/java/core/basesyntax"
+    private static final String OUTPUT_FILE = "src/main/java/"
             + "/resources/finalReport.csv";
 
     public static void main(String[] args) {

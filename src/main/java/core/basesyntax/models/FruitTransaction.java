@@ -29,15 +29,15 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private final String abbreviation;
+        private final String code;
 
-        Operation(String abbreviation) {
-            this.abbreviation = abbreviation;
+        Operation(String code) {
+            this.code = code;
         }
 
         public static Operation fromString(String value) {
             for (Operation op : Operation.values()) {
-                if (op.abbreviation.equalsIgnoreCase(value)) {
+                if (op.code.equalsIgnoreCase(value)) {
                     return op;
                 }
             }

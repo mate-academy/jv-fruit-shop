@@ -1,18 +1,14 @@
 package core.basesyntax.services.operations;
 
 import core.basesyntax.models.FruitTransaction;
-import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.StorageService;
+import core.basesyntax.strategy.OperationHandler;
 
-public class ReturnOperation implements OperationHandler,
-        core.basesyntax.strategy.OperationHandler {
+public class ReturnOperation implements OperationHandler {
     private StorageService storageService;
 
     public ReturnOperation(StorageService storageService) {
         this.storageService = storageService;
-    }
-
-    public ReturnOperation() {
     }
 
     @Override

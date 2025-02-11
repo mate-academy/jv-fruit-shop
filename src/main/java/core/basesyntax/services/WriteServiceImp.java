@@ -6,10 +6,12 @@ import java.io.IOException;
 import java.util.List;
 
 public class WriteServiceImp implements WriteService {
+    private static final String header = "fruit,quantity";
+
     @Override
     public void write(String filePath, List<String> data) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
-            bufferedWriter.write("fruit,quantity");
+            bufferedWriter.write(header);
             bufferedWriter.newLine();
             for (String line : data) {
                 bufferedWriter.write(line);
