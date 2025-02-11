@@ -24,9 +24,9 @@ import java.util.Map;
 
 public class Main {
     private static final String OPERATION_LIST_FILE_PATH
-            = "src/main/java/core/basesyntax/resources/operationslist.csv";
+            = "src/main/resources/operationslist.csv";
     private static final String DB_FILE_PATH
-            = "src/main/java/core/basesyntax/resources/database.csv";
+            = "src/main/resources/database.csv";
 
     public static void main(String[] arg) {
         FileReader fileReader = new FileReaderImpl();

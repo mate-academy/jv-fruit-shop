@@ -25,7 +25,8 @@ public class DataConverterImpl implements DataConverter {
             Integer.parseInt(str);
             return true;
         } catch (NumberFormatException e) {
-            return false;
+            throw new NumberFormatException("Invalid number format: '"
+                    + str + "'. Expected an integer value.");
         }
     }
 }
