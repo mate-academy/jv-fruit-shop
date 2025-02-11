@@ -2,6 +2,6 @@ package core.basesyntax.services;
 
 import java.util.List;
 
-public interface ReadService {
+public interface ReaderService {
     List<String> read(String filePath);
 }

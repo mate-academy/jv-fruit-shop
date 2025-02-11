@@ -1,8 +1,6 @@
 package core.basesyntax.services;
 
-import core.basesyntax.models.FruitTransaction;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class StorageServiceImp implements StorageService {
@@ -35,24 +33,5 @@ public class StorageServiceImp implements StorageService {
     @Override
     public Map<String, Integer> getAll() {
         return new HashMap<>(fruitMap);
-    }
-
-    @Override
-    public void processTransactions(List<FruitTransaction> transactions) {
-        for (FruitTransaction transaction : transactions) {
-            switch (transaction.getOperation()) {
-                case BALANCE:
-                case SUPPLY:
-                    add(transaction.getFruit(), transaction.getQuantity());
-                    break;
-                case PURCHASE:
-                case RETURN:
-                    remove(transaction.getFruit(), transaction.getQuantity());
-                    break;
-                default:
-                    throw new IllegalArgumentException("Unknown operation: "
-                            + transaction.getOperation());
-            }
-        }
     }
 }

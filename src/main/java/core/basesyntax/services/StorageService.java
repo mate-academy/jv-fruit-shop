@@ -1,7 +1,5 @@
 package core.basesyntax.services;
 
-import core.basesyntax.models.FruitTransaction;
-import java.util.List;
 import java.util.Map;
 
 public interface StorageService {
@@ -12,6 +10,4 @@ public interface StorageService {
     int getQuantity(String fruit);
 
     Map<String, Integer> getAll();
-
-    void processTransactions(List<FruitTransaction> transactions);
 }

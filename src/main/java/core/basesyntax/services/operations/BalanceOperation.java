@@ -1,8 +1,8 @@
 package core.basesyntax.services.operations;
 
 import core.basesyntax.models.FruitTransaction;
+import core.basesyntax.services.OperationHandler;
 import core.basesyntax.services.StorageService;
-import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceOperation implements OperationHandler {
     private StorageService storageServiceImp;

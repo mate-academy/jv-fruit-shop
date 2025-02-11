@@ -1,11 +1,12 @@
 package core.basesyntax.services;
 
+import core.basesyntax.exceptions.WriteDataToFileException;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-public class WriteServiceImp implements WriteService {
+public class WriterServiceImp implements WriterService {
     private static final String HEADER = "fruit,quantity";
 
     @Override
@@ -18,7 +19,7 @@ public class WriteServiceImp implements WriteService {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file: " + filePath);
+            throw new WriteDataToFileException("Can't write data to file: " + filePath);
         }
     }
 }

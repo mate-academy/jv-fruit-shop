@@ -3,31 +3,31 @@ package core.basesyntax;
 import core.basesyntax.models.FruitTransaction;
 import core.basesyntax.services.DataConverter;
 import core.basesyntax.services.DataConverterImp;
-import core.basesyntax.services.ReadService;
-import core.basesyntax.services.ReadServiceImp;
+import core.basesyntax.services.OperationHandler;
+import core.basesyntax.services.ReaderService;
+import core.basesyntax.services.ReaderServiceImp;
 import core.basesyntax.services.ReportGenerator;
 import core.basesyntax.services.ReportGeneratorImp;
 import core.basesyntax.services.StorageService;
 import core.basesyntax.services.StorageServiceImp;
-import core.basesyntax.services.WriteService;
-import core.basesyntax.services.WriteServiceImp;
+import core.basesyntax.services.TransactionProcessor;
+import core.basesyntax.services.WriterService;
+import core.basesyntax.services.WriterServiceImp;
 import core.basesyntax.services.operations.BalanceOperation;
 import core.basesyntax.services.operations.PurchaseOperation;
 import core.basesyntax.services.operations.ReturnOperation;
 import core.basesyntax.services.operations.SupplyOperation;
-import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/java/resources/reportToRead.csv";
-    private static final String OUTPUT_FILE = "src/main/java/resources/finalReport.csv";
+    private static final String INPUT_FILE = "src/main/resources/reportToRead.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
         try {
-            ReadService readService = new ReadServiceImp();
+            ReaderService readService = new ReaderServiceImp();
             DataConverter dataConverter = new DataConverterImp();
             StorageService storageService = new StorageServiceImp();
 
@@ -41,13 +41,13 @@ public class Main {
             operationHandlers.put(FruitTransaction.Operation.RETURN,
                     new ReturnOperation(storageService));
 
-            OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
+            TransactionProcessor transactionProcessor = new TransactionProcessor(operationHandlers);
             ReportGenerator reportGenerator = new ReportGeneratorImp(storageService);
-            WriteService writeService = new WriteServiceImp();
+            WriterService writeService = new WriterServiceImp();
 
             List<String> fileData = readService.read(INPUT_FILE);
             List<FruitTransaction> transactions = dataConverter.convertToTransaction(fileData);
-            storageService.processTransactions(transactions);
+            transactionProcessor.processTransactions(transactions);
 
             List<String> report = reportGenerator.generateReport();
             writeService.write(OUTPUT_FILE, report);
