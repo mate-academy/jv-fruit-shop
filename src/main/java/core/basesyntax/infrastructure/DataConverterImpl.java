@@ -12,11 +12,11 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
         return inputReport.stream()
-                .map(s -> s.split(SEPARATOR))
-                .filter(s -> s.length == 3 && isNumeric(s[2]))
-                .map(string -> new FruitTransaction(
-                        FruitTransaction.getOperation(string[OPERATION_INDEX]),
-                        string[FRUIT_NAME_INDEX], Integer.parseInt(string[CAPACITY_INDEX])))
+                .map(line -> line.split(SEPARATOR))
+                .filter(dataArray -> dataArray.length == 3 && isNumeric(dataArray[2]))
+                .map(dataArray -> new FruitTransaction(
+                        FruitTransaction.getOperation(dataArray[OPERATION_INDEX]),
+                        dataArray[FRUIT_NAME_INDEX], Integer.parseInt(dataArray[CAPACITY_INDEX])))
                 .toList();
     }
 
