@@ -6,6 +6,7 @@ import core.basesyntax.impl.FileWriterImpl;
 import core.basesyntax.impl.OperationStrategyImpl;
 import core.basesyntax.impl.ReportGeneratorImpl;
 import core.basesyntax.impl.ShopServiceImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.BalanceOperation;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
@@ -23,7 +24,7 @@ import java.util.Map;
 
 public class Main {
     public static final String INPUT_DATA_PATH = "src/main/resources/reportToRead.csv";
-    public static final String OUTPUT_DATA_PATH = "finalReport.csv";
+    public static final String OUTPUT_DATA_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] arg) {
         FileReader fileReader = new FileReaderImpl();

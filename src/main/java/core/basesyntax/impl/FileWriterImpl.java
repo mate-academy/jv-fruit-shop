@@ -12,7 +12,5 @@ public class FileWriterImpl implements FileWriter {
         } catch (IOException e) {
             throw new RuntimeException("Failed to write report to file: " + path, e);
         }
-
     }
-
 }

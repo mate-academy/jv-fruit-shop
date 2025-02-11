@@ -1,6 +1,6 @@
 package core.basesyntax.impl;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
@@ -15,9 +15,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
-        if (operationHandlerMap.get(operation) == null) {
-            throw new NullPointerException("Operation doesn't exist");
+        OperationHandler operationHandler = operationHandlerMap.get(operation);
+        if (operationHandler == null) {
+            throw new RuntimeException("Operation doesn't exist by number : " + operation);
         }
-        return operationHandlerMap.get(operation);
+        return operationHandler;
     }
 }
