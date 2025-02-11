@@ -22,37 +22,37 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/java/"
-            + "/resources/reportToRead.csv";
-    private static final String OUTPUT_FILE = "src/main/java/"
-            + "/resources/finalReport.csv";
+    private static final String INPUT_FILE = "src/main/java/resources/reportToRead.csv";
+    private static final String OUTPUT_FILE = "src/main/java/resources/finalReport.csv";
 
     public static void main(String[] args) {
-        ReadService readService = new ReadServiceImp();
-        DataConverter dataConverter = new DataConverterImp();
-        StorageService storageService = new StorageServiceImp();
+        try {
+            ReadService readService = new ReadServiceImp();
+            DataConverter dataConverter = new DataConverterImp();
+            StorageService storageService = new StorageServiceImp();
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                new BalanceOperation(storageService));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                new SupplyOperation(storageService));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation(storageService));
-        operationHandlers.put(FruitTransaction.Operation.RETURN,
-                new ReturnOperation(storageService));
+            Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+            operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                    new BalanceOperation(storageService));
+            operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                    new SupplyOperation(storageService));
+            operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                    new PurchaseOperation(storageService));
+            operationHandlers.put(FruitTransaction.Operation.RETURN,
+                    new ReturnOperation(storageService));
 
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
-        ReportGenerator reportGenerator = new ReportGeneratorImp(storageService);
-        WriteService writeService = new WriteServiceImp();
+            OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
+            ReportGenerator reportGenerator = new ReportGeneratorImp(storageService);
+            WriteService writeService = new WriteServiceImp();
 
-        List<String> fileData = readService.read(INPUT_FILE);
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(fileData);
-        for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            handler.apply(transaction);
+            List<String> fileData = readService.read(INPUT_FILE);
+            List<FruitTransaction> transactions = dataConverter.convertToTransaction(fileData);
+            storageService.processTransactions(transactions);
+
+            List<String> report = reportGenerator.generateReport();
+            writeService.write(OUTPUT_FILE, report);
+        } catch (Exception e) {
+            System.err.println("An error occurred: " + e.getMessage());
         }
-        List<String> report = reportGenerator.generateReport();
-        writeService.write(OUTPUT_FILE, report);
     }
 }

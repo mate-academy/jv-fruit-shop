@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ReportGeneratorImp implements ReportGenerator {
+    private static final String COMMA = ",";
     private final StorageService storageService;
 
     public ReportGeneratorImp(StorageService storageService) {
@@ -16,7 +17,7 @@ public class ReportGeneratorImp implements ReportGenerator {
         Map<String, Integer> fruits = storageService.getAll();
         List<String> data = new ArrayList<>();
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            data.add(entry.getKey() + "," + entry.getValue());
+            data.add(entry.getKey() + COMMA + entry.getValue());
         }
         return data;
     }
