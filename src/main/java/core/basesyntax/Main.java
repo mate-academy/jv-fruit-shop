@@ -27,7 +27,7 @@ import strategy.OperationStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImpl("src/main/java/db/reportToRead.csv");
+        FileReader fileReader = new FileReaderImpl("reportToRead.csv");
         List<String> inputReport = null;
         try {
             inputReport = fileReader.read("reportToRead.csv");
@@ -51,17 +51,11 @@ public class Main {
         Storage storage = new Storage();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String resultingReport = reportGenerator.getReport();
-
-        FileWriter fileWriter = null;
         try {
-            fileWriter = new FileWriterImpl("finalReport.csv");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        try {
+            FileWriter fileWriter = new FileWriterImpl("finalReport.csv");
             fileWriter.write(resultingReport);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Enable to create FileWriter for finalReport.csv", e);
         }
     }
 }

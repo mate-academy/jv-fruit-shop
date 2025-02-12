@@ -17,7 +17,7 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> fruitTransactionList) {
         for (FruitTransaction transaction : fruitTransactionList) {
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
-            handler.getOperation(transaction);
+            handler.performOperation(transaction);
         }
     }
 }

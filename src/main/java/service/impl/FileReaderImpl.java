@@ -18,24 +18,28 @@ public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String fileName) throws FileNotFoundException {
         List<String> data = new ArrayList<>();
-        Scanner scanner = new Scanner(new File(filePath));
-        if (scanner.hasNext()) {
-            scanner.nextLine();
+        try (Scanner scanner = new Scanner(new File(filePath))) {
+            if (scanner.hasNext()) {
+                scanner.nextLine();
+            }
+            while (scanner.hasNext()) {
+                data.add(scanner.nextLine());
+            }
         }
-        while (scanner.hasNext()) {
-            data.add(scanner.nextLine());
-        }
-        scanner.close();
         return data;
     }
 
     @Override
-    public FruitTransaction getFromCsvRow(String fileName) {
-        String[] fields = fileName.split(",");
+    public FruitTransaction parseCsvRow(String csvRow) {
+        String[] fields = csvRow.split(",");
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.valueOf(fields[0]));
         fruitTransaction.setFruit(fields[1]);
-        fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
+        try {
+            fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("Invalid quantity format: " + fields[2], e);
+        }
         return fruitTransaction;
     }
 }
