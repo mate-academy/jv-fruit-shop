@@ -27,12 +27,12 @@ import strategy.OperationStrategy;
 
 public class Main {
     public static void main(String[] args) {
-        FileReader fileReader = new FileReaderImpl("reportToRead.csv");
         List<String> inputReport = null;
         try {
+            FileReader fileReader = new FileReaderImpl("reportToRead.csv");
             inputReport = fileReader.read("reportToRead.csv");
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("File not found: reportToRead.csv", e);
         }
 
         DataConverter dataConverter = new DataConverterImpl();
@@ -55,7 +55,7 @@ public class Main {
             FileWriter fileWriter = new FileWriterImpl("finalReport.csv");
             fileWriter.write(resultingReport);
         } catch (IOException e) {
-            throw new RuntimeException("Enable to create FileWriter for finalReport.csv", e);
+            throw new RuntimeException("Unable to create FileWriter for finalReport.csv", e);
         }
     }
 }
