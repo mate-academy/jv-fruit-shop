@@ -1,12 +1,12 @@
 package service.impl;
 
 import db.Storage;
-import service.ReportGenerator;
-
 import java.util.Map;
+import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private final Storage storage;
+
     public ReportGeneratorImpl(Storage storage) {
         this.storage = storage;
     }

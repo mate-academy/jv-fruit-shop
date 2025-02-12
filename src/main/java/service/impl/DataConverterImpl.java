@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
 import service.DataConverter;
-import service.FileReader;
 
 public class DataConverterImpl implements DataConverter {
     @Override

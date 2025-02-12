@@ -1,20 +1,28 @@
 package core.basesyntax;
 
+import db.Storage;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import db.Storage;
 import model.FruitTransaction;
 import service.DataConverter;
 import service.FileReader;
 import service.ReportGenerator;
 import service.ShopService;
-import service.impl.*;
-import service.operation.*;
+import service.impl.DataConverterImpl;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
+import service.impl.OperationStrategyImpl;
+import service.impl.ReportGeneratorImpl;
+import service.impl.ShopServiceImpl;
+import service.operation.BalanceOperation;
+import service.operation.OperationHandler;
+import service.operation.PurchaseOperation;
+import service.operation.ReturnOperation;
+import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 public class Main {
@@ -26,10 +34,8 @@ public class Main {
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
-        Storage storage = new Storage();
 
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -38,9 +44,11 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
+        Storage storage = new Storage();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String resultingReport = reportGenerator.getReport();
 
