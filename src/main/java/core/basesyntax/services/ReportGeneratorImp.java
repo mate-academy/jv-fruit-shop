@@ -1,7 +1,5 @@
 package core.basesyntax.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class ReportGeneratorImp implements ReportGenerator {
@@ -13,12 +11,15 @@ public class ReportGeneratorImp implements ReportGenerator {
     }
 
     @Override
-    public List<String> generateReport() {
+    public String generateReport() {
         Map<String, Integer> fruits = storageService.getAll();
-        List<String> data = new ArrayList<>();
+        StringBuilder report = new StringBuilder();
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            data.add(entry.getKey() + COMMA + entry.getValue());
+            report.append(entry.getKey())
+                    .append(COMMA)
+                    .append(entry.getValue())
+                    .append(System.lineSeparator());
         }
-        return data;
+        return report.toString();
     }
 }

@@ -4,34 +4,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageServiceImp implements StorageService {
-    private final Map<String, Integer> fruitMap = new HashMap<>();
+    private static class Storage {
+        static final Map<String, Integer> fruits = new HashMap<>();
+    }
 
     @Override
     public void add(String fruit, int quantity) {
         if (fruit != null) {
-            fruitMap.put(fruit, fruitMap.getOrDefault(fruit, 0) + quantity);
+            Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) + quantity);
         }
     }
 
     @Override
     public void remove(String fruit, int quantity) {
-        if (fruit == null || !fruitMap.containsKey(fruit)) {
+        if (fruit == null || !Storage.fruits.containsKey(fruit)) {
             throw new RuntimeException("Fruit not found in storage: " + fruit);
         }
-        int currentQuantity = fruitMap.get(fruit);
+        int currentQuantity = Storage.fruits.get(fruit);
         if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruit + " in storage to remove " + quantity);
         }
-        fruitMap.put(fruit, currentQuantity - quantity);
+        Storage.fruits.put(fruit, currentQuantity - quantity);
     }
 
     @Override
     public int getQuantity(String fruit) {
-        return fruitMap.getOrDefault(fruit, 0);
+        return Storage.fruits.getOrDefault(fruit, 0);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return new HashMap<>(fruitMap);
+        return new HashMap<>(Storage.fruits);
     }
 }

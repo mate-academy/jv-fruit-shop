@@ -15,12 +15,11 @@ public class TransactionProcessor {
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationHandlers.get(transaction.getOperation());
-            if (handler != null) {
-                handler.apply(transaction);
-            } else {
+            if (handler == null) {
                 throw new IllegalArgumentException("Unknown operation: "
                         + transaction.getOperation());
             }
+            handler.apply(transaction);
         }
     }
 }

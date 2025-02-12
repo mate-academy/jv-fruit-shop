@@ -49,7 +49,7 @@ public class Main {
             List<FruitTransaction> transactions = dataConverter.convertToTransaction(fileData);
             transactionProcessor.processTransactions(transactions);
 
-            List<String> report = reportGenerator.generateReport();
+            String report = reportGenerator.generateReport();
             writeService.write(OUTPUT_FILE, report);
         } catch (Exception e) {
             System.err.println("An error occurred: " + e.getMessage());
