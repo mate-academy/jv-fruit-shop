@@ -9,6 +9,7 @@ import model.FruitTransaction;
 import service.FileReader;
 
 public class FileReaderImpl implements FileReader {
+    private final static String COMMA_SEPARATOR = ",";
     private final String filePath;
 
     public FileReaderImpl(String filePath) {
@@ -31,7 +32,7 @@ public class FileReaderImpl implements FileReader {
 
     @Override
     public FruitTransaction parseCsvRow(String csvRow) {
-        String[] fields = csvRow.split(",");
+        String[] fields = csvRow.split(COMMA_SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
         fruitTransaction.setOperation(FruitTransaction.Operation.valueOf(fields[0]));
         fruitTransaction.setFruit(fields[1]);
