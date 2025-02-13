@@ -21,7 +21,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
         report.append(HEADER).append(NEW_LINE);
         for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
-            report.append(entry.getKey()).append(COMMA_DELIMITER).append(entry.getValue()).append(NEW_LINE);
+            report.append(entry.getKey())
+                    .append(COMMA_DELIMITER)
+                    .append(entry.getValue())
+                    .append(NEW_LINE);
         }
 
         return report.toString();

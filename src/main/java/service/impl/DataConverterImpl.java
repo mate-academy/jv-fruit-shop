@@ -6,7 +6,7 @@ import model.FruitTransaction;
 import service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
-    private final static String COMMA_SEPARATOR = ",";
+    private static final String COMMA_SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {

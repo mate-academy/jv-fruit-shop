@@ -1,14 +1,10 @@
 package core.basesyntax;
 
 import db.Storage;
-
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import model.FruitTransaction;
 import service.DataConverter;
 import service.FileReader;
@@ -28,8 +24,8 @@ import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 public class Main {
-    private final static String REPORT_TO_READ_FILE = "src/main/java/resources/reportToRead.csv";
-    private final static String FINAL_REPORT_FILE = "src/main/java/resources/finalReport.csv";
+    private static final String REPORT_TO_READ_FILE = "src/main/java/resources/reportToRead.csv";
+    private static final String FINAL_REPORT_FILE = "src/main/java/resources/finalReport.csv";
 
     public static void main(String[] args) throws FileNotFoundException {
         FileReader fileReader = new FileReaderImpl();
