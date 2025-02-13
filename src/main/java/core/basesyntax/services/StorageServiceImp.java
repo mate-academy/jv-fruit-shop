@@ -1,39 +1,43 @@
 package core.basesyntax.services;
 
-import java.util.HashMap;
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class StorageServiceImp implements StorageService {
-    private static class Storage {
-        static final Map<String, Integer> fruits = new HashMap<>();
-    }
-
     @Override
     public void add(String fruit, int quantity) {
-        if (fruit != null) {
-            Storage.fruits.put(fruit, Storage.fruits.getOrDefault(fruit, 0) + quantity);
+        if (fruit == null || quantity < 0) {
+            throw new IllegalArgumentException("Fruit name cannot be null and "
+                    + "quantity must be non-negative");
         }
+        Storage.fruitMap.put(fruit, Storage.fruitMap.getOrDefault(fruit, 0) + quantity);
     }
 
     @Override
     public void remove(String fruit, int quantity) {
-        if (fruit == null || !Storage.fruits.containsKey(fruit)) {
+        if (fruit == null || !Storage.fruitMap.containsKey(fruit)) {
             throw new RuntimeException("Fruit not found in storage: " + fruit);
         }
-        int currentQuantity = Storage.fruits.get(fruit);
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity to remove cannot be negative");
+        }
+        int currentQuantity = Storage.fruitMap.get(fruit);
         if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruit + " in storage to remove " + quantity);
         }
-        Storage.fruits.put(fruit, currentQuantity - quantity);
+        Storage.fruitMap.put(fruit, currentQuantity - quantity);
     }
 
     @Override
     public int getQuantity(String fruit) {
-        return Storage.fruits.getOrDefault(fruit, 0);
+        if (fruit == null) {
+            throw new IllegalArgumentException("Fruit name cannot be null");
+        }
+        return Storage.fruitMap.getOrDefault(fruit, 0);
     }
 
     @Override
     public Map<String, Integer> getAll() {
-        return new HashMap<>(Storage.fruits);
+        return Map.copyOf(Storage.fruitMap);
     }
 }
