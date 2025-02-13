@@ -2,7 +2,6 @@ package core.basesyntax.services;
 
 import core.basesyntax.models.FruitTransaction;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataConverterImp implements DataConverter {
     private static final String COMMA = ",";
@@ -30,6 +29,6 @@ public class DataConverterImp implements DataConverter {
 
                     return new FruitTransaction(operation, fruit, quantity);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 }

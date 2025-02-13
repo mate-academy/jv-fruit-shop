@@ -16,10 +16,9 @@ public class PurchaseOperation implements OperationHandler {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
         int currentQuantity = storageService.getQuantity(fruit);
-        if (currentQuantity >= quantity) {
-            storageService.remove(fruit, quantity);
-        } else {
+        if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough " + fruit + " in storage");
         }
+        storageService.remove(fruit, quantity);
     }
 }

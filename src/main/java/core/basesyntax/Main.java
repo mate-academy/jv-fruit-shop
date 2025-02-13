@@ -26,33 +26,55 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
+        ReaderService readService = new ReaderServiceImp();
+        DataConverter dataConverter = new DataConverterImp();
+        StorageService storageService = new StorageServiceImp();
+
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
+                new BalanceOperation(storageService));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
+                new SupplyOperation(storageService));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
+                new PurchaseOperation(storageService));
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
+                new ReturnOperation(storageService));
+
+        TransactionProcessor transactionProcessor = new TransactionProcessor(operationHandlers);
+        ReportGenerator reportGenerator = new ReportGeneratorImp(storageService);
+        WriterService writeService = new WriterServiceImp();
+
+        List<String> fileData;
         try {
-            ReaderService readService = new ReaderServiceImp();
-            DataConverter dataConverter = new DataConverterImp();
-            StorageService storageService = new StorageServiceImp();
+            fileData = readService.read(INPUT_FILE);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to read input file: " + INPUT_FILE, e);
+        }
 
-            Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-            operationHandlers.put(FruitTransaction.Operation.BALANCE,
-                    new BalanceOperation(storageService));
-            operationHandlers.put(FruitTransaction.Operation.SUPPLY,
-                    new SupplyOperation(storageService));
-            operationHandlers.put(FruitTransaction.Operation.PURCHASE,
-                    new PurchaseOperation(storageService));
-            operationHandlers.put(FruitTransaction.Operation.RETURN,
-                    new ReturnOperation(storageService));
+        List<FruitTransaction> transactions;
+        try {
+            transactions = dataConverter.convertToTransaction(fileData);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to convert data to transactions", e);
+        }
 
-            TransactionProcessor transactionProcessor = new TransactionProcessor(operationHandlers);
-            ReportGenerator reportGenerator = new ReportGeneratorImp(storageService);
-            WriterService writeService = new WriterServiceImp();
-
-            List<String> fileData = readService.read(INPUT_FILE);
-            List<FruitTransaction> transactions = dataConverter.convertToTransaction(fileData);
+        try {
             transactionProcessor.processTransactions(transactions);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to process transactions", e);
+        }
 
-            String report = reportGenerator.generateReport();
+        String report;
+        try {
+            report = reportGenerator.generateReport();
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to generate report", e);
+        }
+
+        try {
             writeService.write(OUTPUT_FILE, report);
         } catch (Exception e) {
-            System.err.println("An error occurred: " + e.getMessage());
+            throw new RuntimeException("Failed to write report to file: " + OUTPUT_FILE, e);
         }
     }
 }
