@@ -26,11 +26,14 @@ import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 public class Main {
+    private final static String REPORT_TO_READ_FILE = "reportToRead.csv";
+    private final static String FINAL_REPORT_FILE = "finalReport.csv";
+
     public static void main(String[] args) {
         List<String> inputReport = null;
         try {
-            FileReader fileReader = new FileReaderImpl("reportToRead.csv");
-            inputReport = fileReader.read("reportToRead.csv");
+            FileReader fileReader = new FileReaderImpl(REPORT_TO_READ_FILE);
+            inputReport = fileReader.read(REPORT_TO_READ_FILE);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("File not found: reportToRead.csv", e);
         }
@@ -52,7 +55,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String resultingReport = reportGenerator.getReport();
         try {
-            FileWriter fileWriter = new FileWriterImpl("finalReport.csv");
+            FileWriter fileWriter = new FileWriterImpl(FINAL_REPORT_FILE);
             fileWriter.write(resultingReport);
         } catch (IOException e) {
             throw new RuntimeException("Unable to create FileWriter for finalReport.csv", e);
