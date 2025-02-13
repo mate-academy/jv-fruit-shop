@@ -6,6 +6,8 @@ import model.FruitTransaction;
 import service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
+    private final static String COMMA_SEPARATOR = ",";
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
@@ -17,21 +19,12 @@ public class DataConverterImpl implements DataConverter {
     }
 
     private FruitTransaction getFromCsvRow(String row) {
-        String[] fields = row.split(",");
+        String[] fields = row.split(COMMA_SEPARATOR);
         FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(getOperationFromCode(fields[0]));
+        fruitTransaction.setOperation(FruitTransaction.Operation.getOperationFromCode(fields[0]));
         fruitTransaction.setFruit(fields[1]);
         fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
         return fruitTransaction;
-    }
-
-    private FruitTransaction.Operation getOperationFromCode(String code) {
-        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
-            if (operation.getCode().equals(code)) {
-                return operation;
-            }
-        }
-        throw new IllegalArgumentException("Unknown operation: " + code);
     }
 }
 

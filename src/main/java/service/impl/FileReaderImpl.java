@@ -2,6 +2,8 @@ package service.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -17,30 +19,17 @@ public class FileReaderImpl implements FileReader {
     }
 
     @Override
-    public List<String> read(String fileName) throws FileNotFoundException {
-        List<String> data = new ArrayList<>();
-        try (Scanner scanner = new Scanner(new File(filePath))) {
-            if (scanner.hasNext()) {
-                scanner.nextLine();
-            }
-            while (scanner.hasNext()) {
-                data.add(scanner.nextLine());
-            }
+    public List<String> read(String fileName) {
+        File file = new File(fileName);
+        if (!file.exists()) {
+            throw new IllegalArgumentException("File not found: " + fileName);
         }
-        return data;
-    }
-
-    @Override
-    public FruitTransaction parseCsvRow(String csvRow) {
-        String[] fields = csvRow.split(COMMA_SEPARATOR);
-        FruitTransaction fruitTransaction = new FruitTransaction();
-        fruitTransaction.setOperation(FruitTransaction.Operation.valueOf(fields[0]));
-        fruitTransaction.setFruit(fields[1]);
         try {
-            fruitTransaction.setQuantity(Integer.parseInt(fields[2]));
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Invalid quantity format: " + fields[2], e);
+            List<String> lines = Files.readAllLines(file.toPath());
+            return lines.subList(1, lines.size());
         }
-        return fruitTransaction;
+        catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + fileName, e);
+        }
     }
 }

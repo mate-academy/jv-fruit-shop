@@ -26,17 +26,12 @@ import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 public class Main {
-    private final static String REPORT_TO_READ_FILE = "reportToRead.csv";
+    private final static String REPORT_TO_READ_FILE = "src/main/java/resources/reportToRead.csv";
     private final static String FINAL_REPORT_FILE = "finalReport.csv";
 
-    public static void main(String[] args) {
-        List<String> inputReport = null;
-        try {
-            FileReader fileReader = new FileReaderImpl(REPORT_TO_READ_FILE);
-            inputReport = fileReader.read(REPORT_TO_READ_FILE);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException("File not found: reportToRead.csv", e);
-        }
+    public static void main(String[] args) throws FileNotFoundException {
+        FileReader fileReader = new FileReaderImpl(REPORT_TO_READ_FILE);
+        List<String> inputReport = fileReader.read(REPORT_TO_READ_FILE);
 
         DataConverter dataConverter = new DataConverterImpl();
 
