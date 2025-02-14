@@ -11,7 +11,7 @@ public class FileWriterImpl implements FileWriterMet {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)))) {
             bw.write(text);
         } catch (IOException e) {
-            throw new RuntimeException("Can`t write data to file " + fileName);
+            throw new RuntimeException("Can`t write data to file " + fileName, e);
         }
     }
 }

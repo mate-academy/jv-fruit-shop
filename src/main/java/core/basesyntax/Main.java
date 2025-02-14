@@ -6,18 +6,17 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         FileReaderMet fileReaderMet = new FileReaderImpl();
-        DataProcessingMet dataProcessingMet = new DataProcessingImpl();
+        OperationStrategy strategy = new OperationStrategy();
+        DataProcessingMet dataProcessingMet = new DataProcessingImpl(strategy);
         ReportGenerationMet reportGenerationMet = new ReportGenerationImpl();
         FileWriterMet fileWriterMet = new FileWriterImpl();
 
-        List<String> fruits = fileReaderMet.readFile("D:\\Project_Mate_Academy\\jv-fruit-shop"
-                + "\\src\\main\\java\\core\\basesyntax\\fruits.csv");
+        List<String> fruits = fileReaderMet.readFile("fruits.csv");
 
         Map<String, Integer> updateFruits = dataProcessingMet.processData(fruits);
 
         String textToFile = reportGenerationMet.reportGeneration(updateFruits);
 
-        fileWriterMet.writeToFile("D:\\Project_Mate_Academy\\jv-fruit-shop"
-                + "\\src\\main\\java\\core\\basesyntax\\result.csv", textToFile);
+        fileWriterMet.writeToFile("target/result.csv", textToFile);
     }
 }
