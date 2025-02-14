@@ -1,4 +1,4 @@
-package core.basesyntax.main;
+package core.basesyntax;
 
 import core.basesyntax.data.DataConverter;
 import core.basesyntax.data.DataConverterImpl;
@@ -23,9 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
+    public static final String REPORT_TO_READ_CSV = "reportToRead.csv";
+    public static final String FINAL_REPORT_CSV = "finalReport.csv";
+
     public static void main(String[] args) {
         Reader reader = new ReaderImpl();
-        List<String> inputReport = reader.read("reportToRead.csv");
+        List<String> inputReport = reader.read(REPORT_TO_READ_CSV);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -44,6 +47,6 @@ public class Application {
         String resultingReport = reportGenerator.getReport();
 
         FileWriterInterface fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, FINAL_REPORT_CSV);
     }
 }
