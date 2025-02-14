@@ -7,4 +7,5 @@ public interface Storage {
 
     void purchaseItem(String item, int quantity);
 
+    int getAmount(String item);
 }

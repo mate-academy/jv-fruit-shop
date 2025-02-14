@@ -18,7 +18,8 @@ public class ReaderImpl implements Reader {
                 data.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error processing files: can't read file", e);
+            throw new RuntimeException("Error processing file "
+                    + filePath + " - can't read file", e);
         }
 
         return data;

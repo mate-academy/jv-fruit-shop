@@ -20,4 +20,9 @@ public class FruitStorage implements Storage {
     public void purchaseItem(String fruit, int quantity) {
         fruitStorage.put(fruit, fruitStorage.getOrDefault(fruit, 0) - quantity);
     }
+
+    @Override
+    public int getAmount(String item) {
+        return fruitStorage.get(item);
+    }
 }

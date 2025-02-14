@@ -15,7 +15,7 @@ public class FileWriterImpl implements FileWriterInterface {
             writer.newLine();
             System.out.println("Report written successfully to " + fileName);
         } catch (IOException e) {
-            System.err.println("Error writing to file: " + e.getMessage());
+            throw new RuntimeException("Error generating file " + fileName, e);
         }
     }
 }
