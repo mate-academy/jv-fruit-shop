@@ -17,7 +17,7 @@ public class DataConverterImpl implements DataConverter {
             String[] value = line.split(SEPARATOR);
             if (value.length != 3) {
                 throw new IllegalArgumentException("There should be 3 values in line and not: "
-                        `+ value.length);
+                        + value.length);
             }
             try {
                 fruitReport.add(new FruitTransaction(
