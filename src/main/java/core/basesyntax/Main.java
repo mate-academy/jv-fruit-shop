@@ -1,11 +1,14 @@
 package core.basesyntax;
 
-import core.basesyntax.operation.*;
+import core.basesyntax.operation.BalanceOperation;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.PurchaseOperation;
+import core.basesyntax.operation.ReturnOperation;
+import core.basesyntax.operation.SupplyOperation;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +22,7 @@ public class Main {
         List<String> readFruits = fileReader.readFile(INPUT_FILE);
 
         DataConverterMet dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(readFruits);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(readFruits);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
         operationHandler.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());

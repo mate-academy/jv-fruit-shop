@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
-
 import java.util.List;
 import java.util.Map;
 
