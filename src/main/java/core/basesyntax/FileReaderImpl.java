@@ -11,8 +11,13 @@ public class FileReaderImpl implements FileReaderMet {
     @Override
     public List<String> readFile(String fileName) {
         List<String> fruits = new ArrayList<>();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
-                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(fileName);
+        if (inputStream == null) {
+            throw new RuntimeException("File not found: " + fileName);
+        }
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             String line = br.readLine();
             while ((line = br.readLine()) != null) {
                 fruits.add(line);
