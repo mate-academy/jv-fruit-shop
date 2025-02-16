@@ -1,21 +1,12 @@
 package core.basesyntax;
 
 import dao.FileReader;
-import dao.FileReaderImpl;
 import dao.FileWriter;
-import dao.FileWriterImpl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import model.OperationType;
 import service.FruitShopService;
 import service.FruitTransactionParser;
-import strategy.BalanceOperationHandler;
-import strategy.OperationHandler;
-import strategy.PurchaseOperationHandler;
-import strategy.ReturnOperationHandler;
-import strategy.SupplyOperationHandler;
 
 public class TransactionProcessingService {
     private final FileReader fileReader;
@@ -23,24 +14,32 @@ public class TransactionProcessingService {
     private final FruitShopService fruitShopService;
     private final FileWriter fileWriter;
 
-    public TransactionProcessingService() {
-        this.fileReader = new FileReaderImpl();
-        this.parser = new FruitTransactionParser();
-
-        Map<OperationType, OperationHandler> operationStrategy = new HashMap<>();
-        operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
-        operationStrategy.put(OperationType.SUPPLY, new SupplyOperationHandler());
-        operationStrategy.put(OperationType.PURCHASE, new PurchaseOperationHandler());
-        operationStrategy.put(OperationType.RETURN, new ReturnOperationHandler());
-
-        this.fruitShopService = new FruitShopService(operationStrategy);
-        this.fileWriter = new FileWriterImpl();
+    public TransactionProcessingService(FileReader fileReader,
+                                        FruitTransactionParser parser,
+                                        FruitShopService fruitShopService,
+                                        FileWriter fileWriter) {
+        this.fileReader = fileReader;
+        this.parser = parser;
+        this.fruitShopService = fruitShopService;
+        this.fileWriter = fileWriter;
     }
 
     public void processTransactions(String sourceFilePath, String targetFilePath) {
-        List<String> lines = fileReader.readFile(sourceFilePath);
-        List<FruitTransaction> transactions = parser.parse(lines);
+        List<FruitTransaction> transactions = readAndParseTransactions(sourceFilePath);
+        processTransactions(transactions);
+        writeInventoryToFile(targetFilePath);
+    }
+
+    private void processTransactions(List<FruitTransaction> transactions) {
         fruitShopService.processTransactions(transactions);
+    }
+
+    private List<FruitTransaction> readAndParseTransactions(String sourceFilePath) {
+        List<String> lines = fileReader.readFile(sourceFilePath);
+        return parser.parse(lines);
+    }
+
+    private void writeInventoryToFile(String targetFilePath) {
         Map<String, Integer> inventory = fruitShopService.getInventory();
         fileWriter.writeFile(targetFilePath, inventory);
     }

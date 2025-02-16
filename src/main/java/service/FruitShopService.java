@@ -1,5 +1,6 @@
 package service;
 
+import core.basesyntax.strategy.OperationHandler;
 import exception.OperationException;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
 import model.OperationType;
-import strategy.OperationHandler;
 
 public class FruitShopService {
     private final Map<String, Integer> fruitInventory = new HashMap<>();
