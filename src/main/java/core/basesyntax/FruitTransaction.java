@@ -11,6 +11,18 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    public String getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),
@@ -35,17 +47,5 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("Invalid operation type: " + code);
         }
-    }
-
-    public String getFruit() {
-        return fruit;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public Operation getOperation() {
-        return operation;
     }
 }

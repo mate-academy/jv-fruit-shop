@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverterMet {
+    private final String comma = ",";
+    private final int requiredArrayLength = 3;
     private final int operationIndex = 0;
     private final int nameIndex = 1;
     private final int quantityIndex = 2;
@@ -13,9 +15,9 @@ public class DataConverterImpl implements DataConverterMet {
         List<FruitTransaction> result = new ArrayList<>();
 
         for (String fruit : readedFruits) {
-            String[] fruitInArr = fruit.split(",");
+            String[] fruitInArr = fruit.split(comma);
 
-            if (fruitInArr.length != 3) {
+            if (fruitInArr.length != requiredArrayLength) {
                 throw new RuntimeException("Array length must be 3");
             }
 

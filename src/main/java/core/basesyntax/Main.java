@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE = "fruits.csv";
-    private static final String OUTPUT_FILE = "target/result.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/result.csv";
 
     public static void main(String[] args) {
         FileReaderMet fileReader = new FileReaderImpl();
