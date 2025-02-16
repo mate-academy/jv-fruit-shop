@@ -1,11 +1,11 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileWriterImpl implements FileWriterMet {
+public class FileWriterImpl implements FileWriterMethods {
     @Override
     public void writeToFile(String fileName, String text) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File(fileName)))) {

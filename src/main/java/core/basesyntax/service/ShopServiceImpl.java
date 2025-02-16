@@ -1,10 +1,10 @@
 package core.basesyntax.service;
 
 import core.basesyntax.FruitTransaction;
-import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
@@ -18,13 +18,11 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
-        for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            if (handler != null) {
-                handler.apply(transaction, storage);
-            } else {
-                throw new RuntimeException("No handler found for operation: " + transaction);
-            }
-        }
+        transactions
+                .forEach(transaction -> Optional.ofNullable(operationStrategy
+                                .getHandler(transaction.getOperation()))
+                        .orElseThrow(() -> new RuntimeException("No handler found for operation: "
+                                + transaction))
+                        .apply(transaction, storage));
     }
 }

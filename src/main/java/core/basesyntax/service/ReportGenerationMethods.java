@@ -1,7 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.util.Map;
 
-public interface ReportGenerationMet {
+public interface ReportGenerationMethods {
     String reportGeneration(Map<String, Integer> storage);
 }
