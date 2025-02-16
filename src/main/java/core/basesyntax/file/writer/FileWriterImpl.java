@@ -13,7 +13,6 @@ public class FileWriterImpl implements FileWriterInterface {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             writer.write(report);
             writer.newLine();
-            System.out.println("Report written successfully to " + fileName);
         } catch (IOException e) {
             throw new RuntimeException("Error generating file " + fileName, e);
         }
