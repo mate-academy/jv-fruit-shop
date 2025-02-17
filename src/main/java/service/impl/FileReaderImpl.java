@@ -10,7 +10,6 @@ public class FileReaderImpl implements FileReader {
 
     public FileReaderImpl() {
 
-
     }
 
     @Override
