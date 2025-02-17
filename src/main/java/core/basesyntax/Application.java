@@ -24,6 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 public class Application {
+    public static final String REPORT_TO_READ_CSV = "reportToRead.csv";
+    public static final String FINAL_REPORT_CSV = "finalReport.csv";
+
     public static void main(String[] args) {
         Reader reader = new ReaderImpl();
         List<String> inputReport = reader.read(Resources.REPORT_TO_READ_CSV);
@@ -36,7 +39,7 @@ public class Application {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        List<FruitTransaction> transactions = dataConverter.convert(inputReport);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);

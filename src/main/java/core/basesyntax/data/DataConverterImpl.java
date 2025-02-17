@@ -11,7 +11,7 @@ public class DataConverterImpl implements DataConverter {
     private static final int QUANTITY_INDEX = 2;
 
     @Override
-    public List<FruitTransaction> convertToTransaction(List<String> readReport) {
+    public List<FruitTransaction> convert(List<String> readReport) {
         List<FruitTransaction> fruitReport = new ArrayList<>();
         for (String line : readReport) {
             String[] value = line.split(SEPARATOR);
