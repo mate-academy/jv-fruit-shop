@@ -9,6 +9,7 @@ import service.FileReader;
 public class FileReaderImpl implements FileReader {
     public FileReaderImpl() {
 
+
     }
 
     @Override
@@ -18,8 +19,7 @@ public class FileReaderImpl implements FileReader {
             throw new IllegalArgumentException("File not found: " + fileName);
         }
         try {
-            List<String> lines = Files.readAllLines(file.toPath());
-            return lines.subList(1, lines.size());
+            return Files.readAllLines(file.toPath());
         } catch (IOException e) {
             throw new RuntimeException("Error reading file: " + fileName, e);
         }

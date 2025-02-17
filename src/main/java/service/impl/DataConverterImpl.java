@@ -11,8 +11,8 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
-        for (String line : report) {
-            FruitTransaction fruitTransaction = getFromCsvRow(line);
+        for (int i = 1; i < report.size(); i++) {
+            FruitTransaction fruitTransaction = getFromCsvRow(report.get(i));
             fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
@@ -27,4 +27,3 @@ public class DataConverterImpl implements DataConverter {
         return fruitTransaction;
     }
 }
-

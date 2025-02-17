@@ -24,8 +24,8 @@ import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 public class Main {
-    private static final String REPORT_TO_READ_FILE = "src/main/java/resources/reportToRead.csv";
-    private static final String FINAL_REPORT_FILE = "src/main/java/resources/finalReport.csv";
+    private static final String REPORT_TO_READ_FILE = "src/main/resources/reportToRead.csv";
+    private static final String FINAL_REPORT_FILE = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) throws FileNotFoundException {
         FileReader fileReader = new FileReaderImpl();
