@@ -4,7 +4,7 @@ import core.basesyntax.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataConverterImpl implements DataConverterMethods {
+public class DataConverterImpl implements DataConverter {
     private static final String COMMA = ",";
     private static final int REQUIRED_ARRAY_LENGTH = 3;
     private static final int OPERATION_INDEX = 0;

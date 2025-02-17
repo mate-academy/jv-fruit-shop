@@ -4,13 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> storage;
+    private static Map<String, Integer> storage = new HashMap<>();
 
-    public Storage() {
-        this.storage = new HashMap<>();
-    }
-
-    public Map<String, Integer> getStorage() {
+    public static Map<String, Integer> getStorage() {
         return storage;
     }
 }

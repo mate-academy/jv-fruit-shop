@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReaderMethods {
+public class FileReaderImpl implements FileReader {
     @Override
     public List<String> readFile(String fileName) {
         List<String> fruits = new ArrayList<>();

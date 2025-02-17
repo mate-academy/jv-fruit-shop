@@ -5,17 +5,16 @@ import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.PurchaseOperation;
 import core.basesyntax.operation.ReturnOperation;
 import core.basesyntax.operation.SupplyOperation;
+import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataConverterImpl;
-import core.basesyntax.service.DataConverterMethods;
+import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
-import core.basesyntax.service.FileReaderMethods;
+import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
-import core.basesyntax.service.FileWriterMethods;
+import core.basesyntax.service.ReportGeneration;
 import core.basesyntax.service.ReportGenerationImpl;
-import core.basesyntax.service.ReportGenerationMethods;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.storage.Storage;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.HashMap;
@@ -27,10 +26,10 @@ public class Main {
     private static final String OUTPUT_FILE = "src/main/resources/result.csv";
 
     public static void main(String[] args) {
-        FileReaderMethods fileReader = new FileReaderImpl();
+        FileReader fileReader = new FileReaderImpl();
         List<String> readFruits = fileReader.readFile(INPUT_FILE);
 
-        DataConverterMethods dataConverter = new DataConverterImpl();
+        DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(readFruits);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandler = new HashMap<>();
@@ -41,15 +40,13 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandler);
 
-        Storage storage = new Storage();
-
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage.getStorage());
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        ReportGenerationMethods reportGeneration = new ReportGenerationImpl();
-        String resultingReport = reportGeneration.reportGeneration(storage.getStorage());
+        ReportGeneration reportGeneration = new ReportGenerationImpl();
+        String resultingReport = reportGeneration.reportGeneration();
 
-        FileWriterMethods fileWriter = new FileWriterImpl();
+        FileWriter fileWriter = new FileWriterImpl();
         fileWriter.writeToFile(OUTPUT_FILE, resultingReport);
     }
 }
