@@ -24,9 +24,12 @@ import java.util.Map;
 
 public class Application {
 
+    public static final String FINAL_REPORT_CSV = "src/main/resources/finalReport.csv";
+    public static final String REPORT_TO_READ_CSV = "src/main/resources/reportToRead.csv";
+
     public static void main(String[] args) {
         Reader reader = new ReaderImpl();
-        List<String> inputReport = reader.read("src/main/resources/reportToRead.csv");
+        List<String> inputReport = reader.read(REPORT_TO_READ_CSV);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -45,6 +48,6 @@ public class Application {
         String resultingReport = reportGenerator.getReport();
 
         FileWriterInterface fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "src/main/resources/finalReport.csv");
+        fileWriter.write(resultingReport, FINAL_REPORT_CSV);
     }
 }
