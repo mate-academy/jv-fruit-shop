@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
+import core.basesyntax.service.ReportGeneration;
 import java.util.Map;
 
 public class ReportGenerationImpl implements ReportGeneration {
@@ -10,7 +11,7 @@ public class ReportGenerationImpl implements ReportGeneration {
     @Override
     public String reportGeneration() {
         final StringBuilder strBuild = new StringBuilder(HEADER_FOR_RESULT);
-        for (Map.Entry<String, Integer> entry : Storage.getStorage().entrySet()) {
+        for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             strBuild.append(System.lineSeparator())
                     .append(entry.getKey())
                     .append(COMMA)
