@@ -2,35 +2,34 @@ package service;
 
 import core.basesyntax.strategy.OperationHandler;
 import exception.OperationException;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
-import model.OperationType;
 
 public class FruitShopService {
-    private final Map<String, Integer> fruitInventory = new HashMap<>();
-    private final Map<OperationType, OperationHandler> operationStrategy;
+    private final InventoryService inventoryService;
+    private final Map<FruitTransaction.OperationType, OperationHandler> operationStrategy;
 
-    public FruitShopService(Map<OperationType, OperationHandler> operationStrategy) {
+    public FruitShopService(InventoryService inventoryService,
+                            Map<FruitTransaction.OperationType,
+                                    OperationHandler> operationStrategy) {
+        this.inventoryService = inventoryService;
         this.operationStrategy = operationStrategy;
     }
 
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationType operation = transaction.getOperation();
-            String fruit = transaction.getFruit();
-            int quantity = transaction.getQuantity();
-            OperationHandler handler = operationStrategy.get(operation);
+            OperationHandler handler = operationStrategy.get(transaction.getOperation());
             if (handler == null) {
-                throw new OperationException("Unknown operation type: " + operation);
+                throw new OperationException("Unknown operation type: "
+                        + transaction.getOperation());
             }
-            handler.apply(fruitInventory, fruit, quantity);
+            handler.apply(inventoryService.getInventory(), transaction.getFruit(),
+                    transaction.getQuantity());
         }
     }
 
     public Map<String, Integer> getInventory() {
-        return Collections.unmodifiableMap(fruitInventory);
+        return inventoryService.getInventory();
     }
 }

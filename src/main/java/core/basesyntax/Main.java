@@ -1,14 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.strategy.OperationStrategyProvider;
+import dao.CsvFileWriter;
 import dao.FileReader;
 import dao.FileReaderImpl;
-import dao.FileWriter;
 import dao.FileWriterImpl;
+import java.util.HashMap;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import service.FruitShopService;
 import service.FruitTransactionParser;
+import service.InventoryService;
 
 public class Main {
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -21,13 +23,15 @@ public class Main {
 
         final String sourceFilePath = args[0];
         final String targetFilePath = args[1];
-        
+
         FileReader fileReader = new FileReaderImpl();
-        FileWriter fileWriter = new FileWriterImpl();
+        CsvFileWriter fileWriter = new FileWriterImpl();
         FruitTransactionParser parser = new FruitTransactionParser();
         OperationStrategyProvider strategyProvider = new OperationStrategyProvider();
-        FruitShopService fruitShopService = new FruitShopService(strategyProvider
-                .getOperationStrategy());
+        InventoryService inventoryService = new InventoryService(new HashMap<>());
+
+        FruitShopService fruitShopService = new FruitShopService(inventoryService,
+                strategyProvider.getOperationStrategy());
 
         TransactionProcessingService transactionProcessingService =
                 new TransactionProcessingService(fileReader, parser, fruitShopService, fileWriter);

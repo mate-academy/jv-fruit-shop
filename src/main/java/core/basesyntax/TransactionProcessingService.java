@@ -1,7 +1,7 @@
 package core.basesyntax;
 
+import dao.CsvFileWriter;
 import dao.FileReader;
-import dao.FileWriter;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -12,12 +12,12 @@ public class TransactionProcessingService {
     private final FileReader fileReader;
     private final FruitTransactionParser parser;
     private final FruitShopService fruitShopService;
-    private final FileWriter fileWriter;
+    private final CsvFileWriter fileWriter;
 
     public TransactionProcessingService(FileReader fileReader,
                                         FruitTransactionParser parser,
                                         FruitShopService fruitShopService,
-                                        FileWriter fileWriter) {
+                                        CsvFileWriter fileWriter) {
         this.fileReader = fileReader;
         this.parser = parser;
         this.fruitShopService = fruitShopService;

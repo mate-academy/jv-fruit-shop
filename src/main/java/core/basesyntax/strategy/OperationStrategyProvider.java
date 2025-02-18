@@ -2,23 +2,28 @@ package core.basesyntax.strategy;
 
 import java.util.HashMap;
 import java.util.Map;
-import model.OperationType;
+import model.FruitTransaction;
 
 public class OperationStrategyProvider {
-    private final Map<OperationType, OperationHandler> operationStrategy = new HashMap<>();
+    private final Map<FruitTransaction.OperationType, OperationHandler>
+            operationStrategy = new HashMap<>();
 
     public OperationStrategyProvider() {
-        operationStrategy.put(OperationType.BALANCE, new BalanceOperationHandler());
-        operationStrategy.put(OperationType.SUPPLY, new SupplyOperationHandler());
-        operationStrategy.put(OperationType.PURCHASE, new PurchaseOperationHandler());
-        operationStrategy.put(OperationType.RETURN, new ReturnOperationHandler());
+        operationStrategy.put(FruitTransaction.OperationType.BALANCE,
+                new BalanceOperationHandler());
+        operationStrategy.put(FruitTransaction.OperationType.SUPPLY,
+                new SupplyOperationHandler());
+        operationStrategy.put(FruitTransaction.OperationType.PURCHASE, new
+                PurchaseOperationHandler());
+        operationStrategy.put(FruitTransaction.OperationType.RETURN,
+                new ReturnOperationHandler());
     }
 
-    public OperationHandler getHandler(OperationType operationType) {
+    public OperationHandler getHandler(FruitTransaction.OperationType operationType) {
         return operationStrategy.get(operationType);
     }
 
-    public Map<OperationType, OperationHandler> getOperationStrategy() {
+    public Map<FruitTransaction.OperationType, OperationHandler> getOperationStrategy() {
         return operationStrategy;
     }
 }
