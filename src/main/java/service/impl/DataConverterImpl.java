@@ -7,6 +7,9 @@ import service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
     private static final String COMMA_SEPARATOR = ",";
+    private static final int OPERATION_PARAMETER = 0;
+    private static final int FRUIT_PARAMETER = 1;
+    private static final int QUANTITY_PARAMETER = 2;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> report) {
