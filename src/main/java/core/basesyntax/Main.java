@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileWriter;
@@ -48,7 +49,7 @@ public class Main {
 
         // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+        String resultingReport = reportGenerator.generateReport();
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();

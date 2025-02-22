@@ -4,13 +4,13 @@ import core.basesyntax.db.FruitStorage;
 import core.basesyntax.service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String COLUMNS = "fruit,quantity";
+    private static final String HEADERS = "fruit,quantity";
     private static final String COMMA = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
-    public String getReport() {
-        StringBuilder builder = new StringBuilder().append(COLUMNS);
+    public String generateReport() {
+        StringBuilder builder = new StringBuilder().append(HEADERS);
         FruitStorage.storage.forEach((key, value) -> builder
                 .append(LINE_SEPARATOR)
                 .append(key)

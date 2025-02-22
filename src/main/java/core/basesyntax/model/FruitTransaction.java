@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import java.util.Objects;
 
@@ -59,8 +59,13 @@ public class FruitTransaction {
             this.code = code;
         }
 
-        public String getCode() {
-            return code;
+        public static Operation getByCode(String inputCode) {
+            for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
+                if (operation.code.equals(inputCode)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("No operation with code " + inputCode + "found");
         }
     }
 }
