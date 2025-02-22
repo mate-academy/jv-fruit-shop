@@ -6,41 +6,35 @@ import dao.FileReader;
 import dao.FileReaderImpl;
 import dao.FileWriterImpl;
 import java.util.HashMap;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import service.FruitShopService;
 import service.FruitTransactionParser;
 import service.InventoryService;
+import service.ReportGeneratorService;
 
 public class Main {
-    private static final Logger logger = LogManager.getLogger(Main.class);
-
     public static void main(String[] args) {
         if (args.length < 2) {
-            logger.error("Please provide both source and target file paths as arguments.");
+            System.err.println("Please provide both source and target file paths as arguments.");
             return;
         }
-
-        final String sourceFilePath = args[0];
-        final String targetFilePath = args[1];
 
         FileReader fileReader = new FileReaderImpl();
         CsvFileWriter fileWriter = new FileWriterImpl();
         FruitTransactionParser parser = new FruitTransactionParser();
+
         OperationStrategyProvider strategyProvider = new OperationStrategyProvider();
+
+        ReportGeneratorService reportGeneratorService = new ReportGeneratorService();
+
         InventoryService inventoryService = new InventoryService(new HashMap<>());
-
         FruitShopService fruitShopService = new FruitShopService(inventoryService,
-                strategyProvider.getOperationStrategy());
-
+                strategyProvider);
         TransactionProcessingService transactionProcessingService =
-                new TransactionProcessingService(fileReader, parser, fruitShopService, fileWriter);
+                new TransactionProcessingService(fileReader, parser, fruitShopService, fileWriter,
+                        reportGeneratorService);
 
-        try {
-            transactionProcessingService.processTransactions(sourceFilePath, targetFilePath);
-            logger.info(String.format("Report was successfully written to: %s", targetFilePath));
-        } catch (Exception e) {
-            logger.error("An error occurred while processing transactions.", e);
-        }
+        transactionProcessingService.processTransactions(args[0], args[1]);
+
+        System.out.println("Report was successfully written to: " + args[1]);
     }
 }

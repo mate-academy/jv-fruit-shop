@@ -1,35 +1,27 @@
 package service;
 
 import core.basesyntax.strategy.OperationHandler;
-import exception.OperationException;
+import core.basesyntax.strategy.OperationStrategyProvider;
 import java.util.List;
-import java.util.Map;
 import model.FruitTransaction;
 
 public class FruitShopService {
     private final InventoryService inventoryService;
-    private final Map<FruitTransaction.OperationType, OperationHandler> operationStrategy;
+    private final OperationStrategyProvider strategyProvider;
 
     public FruitShopService(InventoryService inventoryService,
-                            Map<FruitTransaction.OperationType,
-                                    OperationHandler> operationStrategy) {
+                            OperationStrategyProvider strategyProvider) {
         this.inventoryService = inventoryService;
-        this.operationStrategy = operationStrategy;
+        this.strategyProvider = strategyProvider;
     }
 
     public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.get(transaction.getOperation());
-            if (handler == null) {
-                throw new OperationException("Unknown operation type: "
-                        + transaction.getOperation());
-            }
+            OperationHandler handler = strategyProvider
+                    .getHandler(transaction.getOperation());
             handler.apply(inventoryService.getInventory(), transaction.getFruit(),
                     transaction.getQuantity());
         }
     }
 
-    public Map<String, Integer> getInventory() {
-        return inventoryService.getInventory();
-    }
 }

@@ -7,27 +7,34 @@ import java.util.Map;
 import model.FruitTransaction;
 import service.FruitShopService;
 import service.FruitTransactionParser;
+import service.InventoryService;
+import service.ReportGeneratorService;
 
 public class TransactionProcessingService {
     private final FileReader fileReader;
     private final FruitTransactionParser parser;
     private final FruitShopService fruitShopService;
     private final CsvFileWriter fileWriter;
+    private final ReportGeneratorService reportGeneratorService;
+    private InventoryService inventoryService;
 
     public TransactionProcessingService(FileReader fileReader,
                                         FruitTransactionParser parser,
                                         FruitShopService fruitShopService,
-                                        CsvFileWriter fileWriter) {
+                                        CsvFileWriter fileWriter,
+                                        ReportGeneratorService reportGeneratorService) {
         this.fileReader = fileReader;
         this.parser = parser;
         this.fruitShopService = fruitShopService;
         this.fileWriter = fileWriter;
+        this.reportGeneratorService = reportGeneratorService;
     }
 
     public void processTransactions(String sourceFilePath, String targetFilePath) {
         List<FruitTransaction> transactions = readAndParseTransactions(sourceFilePath);
         processTransactions(transactions);
-        writeInventoryToFile(targetFilePath);
+        String reportContent = generateReport();
+        writeInventoryToFile(targetFilePath, reportContent);
     }
 
     private void processTransactions(List<FruitTransaction> transactions) {
@@ -39,8 +46,12 @@ public class TransactionProcessingService {
         return parser.parse(lines);
     }
 
-    private void writeInventoryToFile(String targetFilePath) {
-        Map<String, Integer> inventory = fruitShopService.getInventory();
-        fileWriter.writeFile(targetFilePath, inventory);
+    private String generateReport() {
+        Map<String, Integer> inventory = inventoryService.getInventory();
+        return reportGeneratorService.generateReport(inventory);
+    }
+
+    private void writeInventoryToFile(String targetFilePath, String reportContent) {
+        fileWriter.writeFile(targetFilePath, reportContent);
     }
 }
