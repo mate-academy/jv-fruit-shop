@@ -25,6 +25,9 @@ public class BalanceCalculatorImpl implements OperationHandler {
                     balance = operationService.operate(fruit.getQuantity(), balance);
                 }
             }
+            if (balance < 0) {
+                throw new RuntimeException("Balance is less than 0, please check your file");
+            }
             fruitsMap.put(fruitFromSet, balance);
         }
         return fruitsMap;
