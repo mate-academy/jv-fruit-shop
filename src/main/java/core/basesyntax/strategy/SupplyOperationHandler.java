@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.service.InventoryService;
 import java.util.Map;
-import service.InventoryService;
 
 public class SupplyOperationHandler implements OperationHandler {
     @Override

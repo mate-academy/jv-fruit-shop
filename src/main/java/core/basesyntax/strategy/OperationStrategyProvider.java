@@ -1,9 +1,9 @@
 package core.basesyntax.strategy;
 
-import exception.OperationException;
+import core.basesyntax.exception.OperationException;
+import core.basesyntax.model.FruitTransaction;
 import java.util.HashMap;
 import java.util.Map;
-import model.FruitTransaction;
 
 public class OperationStrategyProvider {
     private final Map<FruitTransaction.OperationType, OperationHandler> operationStrategy =

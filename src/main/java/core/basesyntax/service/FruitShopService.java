@@ -1,9 +1,9 @@
-package service;
+package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategyProvider;
 import java.util.List;
-import model.FruitTransaction;
 
 public class FruitShopService {
     private final InventoryService inventoryService;

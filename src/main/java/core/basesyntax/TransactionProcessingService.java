@@ -1,14 +1,14 @@
 package core.basesyntax;
 
-import dao.CsvFileWriter;
-import dao.FileReader;
+import core.basesyntax.dao.CsvFileWriter;
+import core.basesyntax.dao.FileReader;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.FruitShopService;
+import core.basesyntax.service.FruitTransactionParser;
+import core.basesyntax.service.InventoryService;
+import core.basesyntax.service.ReportGeneratorService;
 import java.util.List;
 import java.util.Map;
-import model.FruitTransaction;
-import service.FruitShopService;
-import service.FruitTransactionParser;
-import service.InventoryService;
-import service.ReportGeneratorService;
 
 public class TransactionProcessingService {
     private final FileReader fileReader;

@@ -1,8 +1,8 @@
-package service;
+package core.basesyntax.service;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-import model.FruitTransaction;
 
 public class FruitTransactionParser {
     private static final String DELIMITER = ",";
