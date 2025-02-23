@@ -65,10 +65,10 @@ We are expecting to see how many fruits are available today after the work shift
 ```
 The line above means you have 152 bananas, and 90 apples in your Fruit store after the work shift.
 
-**Hint: Think about creating some FruitTransaction model to store info from file line for more convenient data processing 
+**Hint: Think about creating some core.basesyntax.model.FruitTransaction core.basesyntax.model to store info from file line for more convenient data processing 
 (this is only a recommendation, you can use other classes/approaches to solve this task at your discretion):**
 ```java
-public class FruitTransaction {
+public class core.basesyntax.model.FruitTransaction {
   private Operation operation;
   private String fruit;
   private int quantity;
@@ -95,37 +95,40 @@ public class FruitTransaction {
 ```
 
 Also, here is an example of what the `main` method may look like:
+
 ```java
+import core.basesyntax.model.FruitTransaction;
+
 public class Main {
-    public static void main(String[] arg) {
-        // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+   public static void main(String[] arg) {
+      // 1. Read the data from the input CSV file
+      FileReader fileReader = new FileReaderImpl();
+      List<String> inputReport = fileReader.read("reportToRead.csv");
 
-        // 2. Convert the incoming data into FruitTransactions list
-        DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+      // 2. Convert the incoming data into FruitTransactions list
+      DataConverter dataConverter = new DataConverterImpl();
+      List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        // 3. Create and feel the map with all OperationHandler implementations
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+      // 3. Create and feel the map with all OperationHandler implementations
+      Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+      operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+      operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+      operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+      operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+      OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
+      // 4. Process the incoming transactions with applicable OperationHandler implementations
+      ShopService shopService = new ShopServiceImpl(operationStrategy);
+      shopService.process(transactions);
 
-        // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+      // 5.Generate report based on the current Storage state
+      ReportGenerator reportGenerator = new ReportGeneratorImpl();
+      String resultingReport = reportGenerator.getReport();
 
-        // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
-    }
+      // 6. Write the received report into the destination file
+      FileWriter fileWriter = new FileWriterImpl();
+      fileWriter.write(resultingReport, "finalReport.csv");
+   }
 }
 ```
 
@@ -141,7 +144,7 @@ You are presented with a diagram describing an algorithm for the creation of a p
 
 While carrying out this task, please pay attention to the following points:
 
-All services should be invoked from the main() method. In each service, you should have a method that returns a specific type of data and passes this data to the method of the next service. In this way, your services will be independent of each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
+All services should be invoked from the main() method. In each core.basesyntax.service, you should have a method that returns a specific type of data and passes this data to the method of the next core.basesyntax.service. In this way, your services will be independent of each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
 Remember the SOLID principles, think about which ones you might not be adhering to and how to fix this:
 - Single Responsibility - does each class/method perform one function?
 - Open/Closed - think about it, if there is a need to add functionality, will you need to change the logic of the class/methods?
@@ -188,7 +191,7 @@ public class UserServiceImpl implements UserService {
 Don't forget that your code will need to be tested, so try to anticipate all invalid input data and handle it in advance.
 For example:
 1. Incorrect file path
-2. Incorrect data in the input file, for example, quantity less than zero or incorrect strategy
+2. Incorrect data in the input file, for example, quantity less than zero or incorrect core.basesyntax.strategy
 3. Null parameters
 4. Providing the right names for your classes, methods, and variables is important. You can find examples here: [Link](https://mate-academy.github.io/style-guides/java/java.html#s5-naming)
 
