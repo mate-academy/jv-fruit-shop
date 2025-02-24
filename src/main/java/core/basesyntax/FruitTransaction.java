@@ -3,7 +3,7 @@ package core.basesyntax;
 public class FruitTransaction {
     private String fruit;
     private int quantity;
-    private String operation;
+    private Operation operation;
 
     public String getFruit() {
         return fruit;
@@ -21,11 +21,11 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public String getOperation() {
+    public Operation getOperation() {
         return operation;
     }
 
-    public void setOperation(String operation) {
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 }
