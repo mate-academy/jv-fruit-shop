@@ -27,7 +27,7 @@ public class Main {
     private static final DstTypes DEFINED_DST_TYPE = DstTypes.FILE;
     private static final String DST_FILE_PATH = ".\\src\\main\\resources\\dst\\report.txt";
 
-    public static void main(String [] args) {
+    public static void main(String[] args) {
         SrcDao srcDao = new SrcDaoStrategyImpl().getSrcDao(DEFINED_SOURCE_TYPE);
         List<String> srcContents = new ArrayList<>();
         if (srcDao.openSrc(SRC_FILE_PATH)) {

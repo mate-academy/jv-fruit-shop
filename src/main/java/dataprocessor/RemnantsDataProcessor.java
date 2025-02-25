@@ -29,10 +29,10 @@ public class RemnantsDataProcessor implements DataProcessor {
         }
         for (String[] record : records) {
             if (record[typeColIndex].equals(ProcessAnchors.p.toString())) {
-                retList.add(new String[] {record[goodColIndex],
+                retList.add(new String[]{record[goodColIndex],
                         (Integer.parseInt(record[qnttColIndex]) * -1) + ""});
             } else {
-                retList.add(new String[] {record[goodColIndex],
+                retList.add(new String[]{record[goodColIndex],
                         Integer.parseInt(record[qnttColIndex]) + ""});
             }
         }
