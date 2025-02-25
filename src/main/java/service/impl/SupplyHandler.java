@@ -1,8 +1,8 @@
 package service.impl;
 
-import service.OperationService;
+import service.OperationHandler;
 
-public class ReturnService implements OperationService {
+public class SupplyHandler implements OperationHandler {
     @Override
     public int operate(int operationAmount, int balanceAmount) {
         return operationAmount + balanceAmount;

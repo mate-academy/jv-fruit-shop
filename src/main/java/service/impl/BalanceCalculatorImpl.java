@@ -1,38 +1,25 @@
 package service.impl;
 
-import java.util.HashMap;
-import java.util.HashSet;
+import db.Storage;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import model.FruitTransaction;
+import service.Operation;
 import service.OperationHandler;
-import service.OperationService;
 import strategy.OperationStrategy;
 
-public class BalanceCalculatorImpl implements OperationHandler {
+public class BalanceCalculatorImpl implements Operation {
     @Override
     public Map<String, Integer> update(List<FruitTransaction> data) {
-        Set<String> fruitsSet = new HashSet<>();
-        for (FruitTransaction fruit : data) {
-            fruitsSet.add(fruit.getFruit());
-        }
-        Map<String, Integer> fruitsMap = new HashMap<>();
         OperationStrategy strategy = new OperationStrategy();
-        for (String fruitFromSet : fruitsSet) {
-            int balance = 0;
-            for (FruitTransaction fruit : data) {
-                if (fruit.getFruit().equals(fruitFromSet)) {
-                    OperationService operationService = strategy
-                            .getOperationService(fruit.getOperation());
-                    balance = operationService.operate(fruit.getQuantity(), balance);
-                }
-            }
-            if (balance < 0) {
-                throw new RuntimeException("Balance is less than 0, please check your file");
-            }
-            fruitsMap.put(fruitFromSet, balance);
+        for (FruitTransaction fruit : data) {
+            String fruitName = fruit.getFruit();
+            int quantity = fruit.getQuantity();
+            OperationHandler operationService = strategy.getOperationService(fruit.getOperation());
+            int updatedBalance = operationService
+                    .operate(quantity, Storage.fruitsStorage.getOrDefault(fruitName, 0));
+            Storage.fruitsStorage.put(fruitName, updatedBalance);
         }
-        return fruitsMap;
+        return Storage.fruitsStorage;
     }
 }

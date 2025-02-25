@@ -3,28 +3,28 @@ package strategy;
 import java.util.HashMap;
 import java.util.Map;
 import model.Operation;
-import service.OperationService;
-import service.impl.BalanceService;
-import service.impl.PurchaseService;
-import service.impl.ReturnService;
-import service.impl.SupplyService;
+import service.OperationHandler;
+import service.impl.BalanceHandler;
+import service.impl.PurchaseHandler;
+import service.impl.ReturnHandler;
+import service.impl.SupplyHandler;
 
 public class OperationStrategy {
-    private final Map<Operation, OperationService> serviceMap = new HashMap<>();
+    private final Map<Operation, OperationHandler> serviceMap = new HashMap<>();
 
     public OperationStrategy() {
-        serviceMap.put(Operation.BALANCE, new BalanceService());
-        serviceMap.put(Operation.SUPPLY, new SupplyService());
-        serviceMap.put(Operation.PURCHASE, new PurchaseService());
-        serviceMap.put(Operation.RETURN, new ReturnService());
+        serviceMap.put(Operation.BALANCE, new BalanceHandler());
+        serviceMap.put(Operation.SUPPLY, new SupplyHandler());
+        serviceMap.put(Operation.PURCHASE, new PurchaseHandler());
+        serviceMap.put(Operation.RETURN, new ReturnHandler());
     }
 
-    public OperationService getOperationService(Operation operation) {
-        OperationService operationService = serviceMap.get(operation);
-        if (operationService == null) {
+    public OperationHandler getOperationService(Operation operation) {
+        OperationHandler operationHandler = serviceMap.get(operation);
+        if (operationHandler == null) {
             throw new IllegalArgumentException("Unknown service type " + operation);
         }
-        return operationService;
+        return operationHandler;
     }
 
     public Operation getOperationFromCode(String code) {

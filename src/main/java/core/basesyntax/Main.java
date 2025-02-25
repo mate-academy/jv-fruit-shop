@@ -7,7 +7,7 @@ import dao.CustomFileWriter;
 import java.util.List;
 import model.FruitTransaction;
 import service.DataConverter;
-import service.OperationHandler;
+import service.Operation;
 import service.ReportCreator;
 import service.impl.BalanceCalculatorImpl;
 import service.impl.DataFruitConverterImpl;
@@ -24,10 +24,10 @@ public class Main {
         DataConverter dataConverter = new DataFruitConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        OperationHandler operationHandler = new BalanceCalculatorImpl();
+        Operation operation = new BalanceCalculatorImpl();
         ReportCreator reportCreator = new ReportGeneratorImpl();
         List<String[]> finalReport = reportCreator
-                .createReport(operationHandler.update(transactions));
+                .createReport(operation.update(transactions));
         CustomFileWriter fileWriter = new CsvWriterImpl();
         fileWriter.writeFile(OUTPUT_FILE_NAME, finalReport);
     }
