@@ -1,11 +1,14 @@
-package service;
+package service.impl;
 
-import core.basesyntax.FruitTransaction;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import model.FruitTransaction;
+import service.OperationHandler;
+import service.OperationService;
+import strategy.OperationStrategy;
 
 public class BalanceCalculatorImpl implements OperationHandler {
     @Override

@@ -5,12 +5,17 @@ import dao.CsvWriterImpl;
 import dao.CustomFileReader;
 import dao.CustomFileWriter;
 import java.util.List;
-import service.BalanceCalculatorImpl;
+import model.FruitTransaction;
+import service.DataConverter;
 import service.OperationHandler;
+import service.ReportCreator;
+import service.impl.BalanceCalculatorImpl;
+import service.impl.DataFruitConverterImpl;
+import service.impl.ReportGeneratorImpl;
 
 public class Main {
-    public static final String INPUT_FILE_NAME = "reportToRead.csv";
-    public static final String OUTPUT_FILE_NAME = "reportToWrite.csv";
+    public static final String INPUT_FILE_NAME = "src/main/resources/reportToRead.csv";
+    public static final String OUTPUT_FILE_NAME = "src/main/resources/reportToWrite.csv";
 
     public static void main(String[] args) {
         CustomFileReader fileReader = new CsvReaderImpl();

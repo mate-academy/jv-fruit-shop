@@ -1,7 +1,10 @@
-package core.basesyntax;
+package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.FruitTransaction;
+import model.Operation;
+import service.DataConverter;
 
 public class DataFruitConverterImpl implements DataConverter<FruitTransaction> {
     public static final int OPERATION_POSITION = 0;

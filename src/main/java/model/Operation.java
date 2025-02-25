@@ -1,4 +1,4 @@
-package core.basesyntax;
+package model;
 
 public enum Operation {
     BALANCE("b"),
@@ -18,7 +18,7 @@ public enum Operation {
 
     public static Operation fromCode(String code) {
         for (Operation op : values()) {
-            if (op.getCode().equalsIgnoreCase(code)) { // Сравнение без учета регистра
+            if (op.getCode().equalsIgnoreCase(code)) {
                 return op;
             }
         }

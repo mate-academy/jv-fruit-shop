@@ -1,4 +1,6 @@
-package service;
+package service.impl;
+
+import service.OperationService;
 
 public class PurchaseService implements OperationService {
     @Override

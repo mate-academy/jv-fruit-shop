@@ -1,8 +1,13 @@
-package service;
+package strategy;
 
-import core.basesyntax.Operation;
 import java.util.HashMap;
 import java.util.Map;
+import model.Operation;
+import service.OperationService;
+import service.impl.BalanceService;
+import service.impl.PurchaseService;
+import service.impl.ReturnService;
+import service.impl.SupplyService;
 
 public class OperationStrategy {
     private final Map<Operation, OperationService> serviceMap = new HashMap<>();

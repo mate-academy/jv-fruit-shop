@@ -1,4 +1,4 @@
-package core.basesyntax;
+package model;
 
 public class FruitTransaction {
     private String fruit;

@@ -1,6 +1,8 @@
-package service;
+package service.impl;
 
-public class ReturnService implements OperationService {
+import service.OperationService;
+
+public class BalanceService implements OperationService {
     @Override
     public int operate(int operationAmount, int balanceAmount) {
         return operationAmount + balanceAmount;

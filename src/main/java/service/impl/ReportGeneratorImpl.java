@@ -1,8 +1,9 @@
-package core.basesyntax;
+package service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import service.ReportCreator;
 
 public class ReportGeneratorImpl implements ReportCreator {
     public static final String FIRST_COLUMN_UPDATED_UPDATED = "fruit";
