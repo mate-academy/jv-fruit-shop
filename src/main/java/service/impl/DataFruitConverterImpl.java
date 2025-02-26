@@ -3,7 +3,7 @@ package service.impl;
 import java.util.ArrayList;
 import java.util.List;
 import model.FruitTransaction;
-import model.Operation;
+import model.OperationsList;
 import service.DataConverter;
 
 public class DataFruitConverterImpl implements DataConverter<FruitTransaction> {
@@ -24,9 +24,9 @@ public class DataFruitConverterImpl implements DataConverter<FruitTransaction> {
             } catch (RuntimeException e) {
                 throw new RuntimeException("Quantity is not a number, please check it", e);
             }
-            Operation operation = Operation.fromCode(operationCode);
+            OperationsList operationsList = OperationsList.fromCode(operationCode);
             FruitTransaction transaction = new FruitTransaction();
-            transaction.setOperation(operation);
+            transaction.setOperation(operationsList);
             transaction.setFruit(fruit);
             transaction.setQuantity(quantity);
             fruitTransactions.add(transaction);

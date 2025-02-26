@@ -9,9 +9,15 @@ import service.OperationHandler;
 import strategy.OperationStrategy;
 
 public class BalanceCalculatorImpl implements Operation {
+    private final OperationStrategy strategy;
+
+    // Конструктор для инъекции зависимости
+    public BalanceCalculatorImpl(OperationStrategy strategy) {
+        this.strategy = strategy;
+    }
+
     @Override
     public Map<String, Integer> update(List<FruitTransaction> data) {
-        OperationStrategy strategy = new OperationStrategy();
         for (FruitTransaction fruit : data) {
             String fruitName = fruit.getFruit();
             int quantity = fruit.getQuantity();

@@ -11,18 +11,19 @@ public class CsvReaderImpl implements CustomFileReader {
     public static final String CSV_DELIMITOR = ",";
 
     @Override
-    public List<String[]> readFile(String filePath) {
+    public String readFile(String filePath) {
+        StringBuilder sb = new StringBuilder();
         List<String[]> data = new ArrayList<>();
         String line;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             while ((line = bufferedReader.readLine()) != null) {
-                data.add(line.split(CSV_DELIMITOR));
+                sb.append(line).append(CSV_DELIMITOR);
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(filePath + " doesn`t exist");
         } catch (IOException e) {
             throw new RuntimeException(filePath + " is not readable");
         }
-        return data;
+        return sb.toString();
     }
 }

@@ -1,35 +1,27 @@
 package strategy;
 
-import java.util.HashMap;
 import java.util.Map;
-import model.Operation;
+import model.OperationsList;
 import service.OperationHandler;
-import service.impl.BalanceHandler;
-import service.impl.PurchaseHandler;
-import service.impl.ReturnHandler;
-import service.impl.SupplyHandler;
 
 public class OperationStrategy {
-    private final Map<Operation, OperationHandler> serviceMap = new HashMap<>();
+    private final Map<OperationsList, OperationHandler> serviceMap;
 
-    public OperationStrategy() {
-        serviceMap.put(Operation.BALANCE, new BalanceHandler());
-        serviceMap.put(Operation.SUPPLY, new SupplyHandler());
-        serviceMap.put(Operation.PURCHASE, new PurchaseHandler());
-        serviceMap.put(Operation.RETURN, new ReturnHandler());
+    public OperationStrategy(Map<OperationsList, OperationHandler> serviceMap) {
+        this.serviceMap = serviceMap;
     }
 
-    public OperationHandler getOperationService(Operation operation) {
-        OperationHandler operationHandler = serviceMap.get(operation);
+    public OperationHandler getOperationService(OperationsList operationsList) {
+        OperationHandler operationHandler = serviceMap.get(operationsList);
         if (operationHandler == null) {
-            throw new IllegalArgumentException("Unknown service type " + operation);
+            throw new IllegalArgumentException("Unknown service type " + operationsList);
         }
         return operationHandler;
     }
 
-    public Operation getOperationFromCode(String code) {
+    public OperationsList getOperationFromCode(String code) {
         try {
-            return Operation.fromCode(code);
+            return OperationsList.fromCode(code);
         } catch (IllegalArgumentException e) {
             throw new RuntimeException("Invalid operation code: " + code, e);
         }

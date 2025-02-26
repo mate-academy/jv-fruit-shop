@@ -4,14 +4,25 @@ import dao.CsvReaderImpl;
 import dao.CsvWriterImpl;
 import dao.CustomFileReader;
 import dao.CustomFileWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
+import model.OperationsList;
 import service.DataConverter;
+import service.FileFormater;
 import service.Operation;
+import service.OperationHandler;
 import service.ReportCreator;
 import service.impl.BalanceCalculatorImpl;
+import service.impl.BalanceHandler;
 import service.impl.DataFruitConverterImpl;
+import service.impl.FileFormaterForCsvReader;
+import service.impl.PurchaseHandler;
 import service.impl.ReportGeneratorImpl;
+import service.impl.ReturnHandler;
+import service.impl.SupplyHandler;
+import strategy.OperationStrategy;
 
 public class Main {
     public static final String INPUT_FILE_NAME = "src/main/resources/reportToRead.csv";
@@ -19,12 +30,20 @@ public class Main {
 
     public static void main(String[] args) {
         CustomFileReader fileReader = new CsvReaderImpl();
-        List<String[]> inputReport = fileReader.readFile(INPUT_FILE_NAME);
+        FileFormater fileFormater = new FileFormaterForCsvReader();
+        List<String[]> inputReport = fileFormater.format(fileReader.readFile(INPUT_FILE_NAME));
 
         DataConverter dataConverter = new DataFruitConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        Operation operation = new BalanceCalculatorImpl();
+        Map<OperationsList, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(OperationsList.BALANCE, new BalanceHandler());
+        operationHandlers.put(OperationsList.PURCHASE, new PurchaseHandler());
+        operationHandlers.put(OperationsList.RETURN, new ReturnHandler());
+        operationHandlers.put(OperationsList.SUPPLY, new SupplyHandler());
+        OperationStrategy operationStrategy = new OperationStrategy(operationHandlers);
+
+        Operation operation = new BalanceCalculatorImpl(operationStrategy);
         ReportCreator reportCreator = new ReportGeneratorImpl();
         List<String[]> finalReport = reportCreator
                 .createReport(operation.update(transactions));
