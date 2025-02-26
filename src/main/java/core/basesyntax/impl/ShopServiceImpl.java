@@ -9,7 +9,6 @@ public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
-
         this.operationStrategy = operationStrategy;
     }
 
