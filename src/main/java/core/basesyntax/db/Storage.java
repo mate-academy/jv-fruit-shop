@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,10 +24,6 @@ public class Storage {
         } else {
             fruits.put(fruit, newQuantity);
         }
-    }
-
-    public static Map<String, Integer> getFruits() {
-        return fruits;
     }
 }
 

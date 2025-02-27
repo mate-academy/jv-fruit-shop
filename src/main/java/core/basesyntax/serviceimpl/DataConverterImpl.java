@@ -1,17 +1,22 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
 import java.util.List;
-import java.util.stream.Collectors;
 
-class DataConverterImpl implements DataConverter {
+public class DataConverterImpl implements DataConverter {
+    private static final String SEPARATOR_SIGN = ",";
+    private static final int OPERATOR_PART = 0;
+    private static final int FRUIT_PART = 1;
+    private static final int QUANTITY_PART = 2;
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
-        // Пропускаем первую строку с заголовками
         return data.stream()
                 .skip(1)
                 .map(line -> {
-                    String[] parts = line.split(",");
-                    String opCode = parts[0];
+                    String[] parts = line.split(SEPARATOR_SIGN);
+                    String opCode = parts[OPERATOR_PART];
                     FruitTransaction.Operation op = switch (opCode) {
                         case "b" -> FruitTransaction.Operation.BALANCE;
                         case "s" -> FruitTransaction.Operation.SUPPLY;
@@ -20,11 +25,11 @@ class DataConverterImpl implements DataConverter {
                         default -> throw new IllegalArgumentException("Invalid operation code: "
                                 + opCode);
                     };
-                    String fruit = parts[1];
-                    int quantity = Integer.parseInt(parts[2]);
+                    String fruit = parts[FRUIT_PART];
+                    int quantity = Integer.parseInt(parts[QUANTITY_PART]);
                     return new FruitTransaction(op, fruit, quantity);
                 })
-                .collect(Collectors.toList());
+                .toList();
     }
 }
 

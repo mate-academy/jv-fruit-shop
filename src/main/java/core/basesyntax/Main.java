@@ -1,15 +1,36 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.serviceimpl.DataConverterImpl;
+import core.basesyntax.serviceimpl.FileReaderImpl;
+import core.basesyntax.serviceimpl.FileWriterImpl;
+import core.basesyntax.serviceimpl.OperationStrategyImpl;
+import core.basesyntax.serviceimpl.ReportGeneratorImpl;
+import core.basesyntax.serviceimpl.ShopServiceImpl;
+import core.basesyntax.strategy.BalanceOperation;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.PurchaseOperation;
+import core.basesyntax.strategy.ReturnOperation;
+import core.basesyntax.strategy.SupplyOperation;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String REPORT_TO_READ_FILE_PATH = "reportToRead.csv";
+    private static final String FINAL_REPORT_PATH_FILE = "finalReport.csv";
+
     public static void main(String[] arg) throws IOException {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(REPORT_TO_READ_FILE_PATH);
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -33,6 +54,6 @@ public class Main {
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, FINAL_REPORT_PATH_FILE);
     }
 }
