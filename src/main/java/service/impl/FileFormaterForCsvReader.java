@@ -1,24 +1,23 @@
 package service.impl;
 
+import dao.CustomFileReader;
 import java.util.ArrayList;
 import java.util.List;
-import service.FileFormater;
 
-public class FileFormaterForCsvReader implements FileFormater {
-    private static final int COLUMNS_AMOUNT = 3;
+public class FileFormaterForCsvReader {
+    private final CustomFileReader fileReaderService;
 
-    @Override
-    public List<String[]> format(String data) {
-        List<String[]> result = new ArrayList<>();
-        String[] columns = data.split(",");
-        if (columns.length % COLUMNS_AMOUNT != 0) {
-            throw new IllegalArgumentException("Missing data in one of the row, please check it");
+    public FileFormaterForCsvReader(CustomFileReader fileReaderService) {
+        this.fileReaderService = fileReaderService;
+    }
+
+    public List<String[]> parseCsv(String filePath) {
+        String fileContent = fileReaderService.readFile(filePath);
+        List<String[]> data = new ArrayList<>();
+        String[] lines = fileContent.split("\n");
+        for (String line : lines) {
+            data.add(line.split(","));
         }
-        for (int i = 0; i < columns.length; i += COLUMNS_AMOUNT) {
-            String[] row = new String[COLUMNS_AMOUNT];
-            System.arraycopy(columns, i, row, 0, COLUMNS_AMOUNT);
-            result.add(row);
-        }
-        return result;
+        return data;
     }
 }

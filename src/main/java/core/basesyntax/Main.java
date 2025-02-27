@@ -10,7 +10,6 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.OperationsList;
 import service.DataConverter;
-import service.FileFormater;
 import service.Operation;
 import service.OperationHandler;
 import service.ReportCreator;
@@ -30,11 +29,11 @@ public class Main {
 
     public static void main(String[] args) {
         CustomFileReader fileReader = new CsvReaderImpl();
-        FileFormater fileFormater = new FileFormaterForCsvReader();
-        List<String[]> inputReport = fileFormater.format(fileReader.readFile(INPUT_FILE_NAME));
+        FileFormaterForCsvReader fileFormater = new FileFormaterForCsvReader(fileReader);
 
         DataConverter dataConverter = new DataFruitConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(
+                fileFormater.parseCsv(INPUT_FILE_NAME));
 
         Map<OperationsList, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(OperationsList.BALANCE, new BalanceHandler());
