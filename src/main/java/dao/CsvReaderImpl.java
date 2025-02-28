@@ -12,7 +12,7 @@ public class CsvReaderImpl implements CustomFileReader {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                sb.append(line).append("\n");
+                sb.append(line).append(System.lineSeparator());
             }
         } catch (IOException e) {
             throw new RuntimeException(filePath + " doesn't exist", e);

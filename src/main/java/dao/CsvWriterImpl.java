@@ -18,10 +18,6 @@ public class CsvWriterImpl implements CustomFileWriter {
             throw new RuntimeException("Сan`t write a file" + e);
         }
     }
-
-    private String formatRow(String[] row) {
-        return String.join(",", row);
-    }
 }
 
 
