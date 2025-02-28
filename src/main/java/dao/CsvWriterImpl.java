@@ -15,7 +15,7 @@ public class CsvWriterImpl implements CustomFileWriter {
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
-            throw new RuntimeException("Сan`t write a file" + e);
+            throw new RuntimeException("Сan`t write a file " + e);
         }
     }
 }
