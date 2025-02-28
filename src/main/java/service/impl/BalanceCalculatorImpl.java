@@ -11,7 +11,6 @@ import strategy.OperationStrategy;
 public class BalanceCalculatorImpl implements Operation {
     private final OperationStrategy strategy;
 
-    // Конструктор для инъекции зависимости
     public BalanceCalculatorImpl(OperationStrategy strategy) {
         this.strategy = strategy;
     }

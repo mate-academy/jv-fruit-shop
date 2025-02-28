@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileFormaterForCsvReader {
+    private static final String DELIMITOR = ",";
     private final CustomFileReader fileReaderService;
 
     public FileFormaterForCsvReader(CustomFileReader fileReaderService) {
@@ -16,7 +17,7 @@ public class FileFormaterForCsvReader {
         List<String[]> data = new ArrayList<>();
         String[] lines = fileContent.split("\n");
         for (String line : lines) {
-            data.add(line.split(","));
+            data.add(line.split(DELIMITOR));
         }
         return data;
     }

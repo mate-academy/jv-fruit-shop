@@ -44,7 +44,7 @@ public class Main {
 
         Operation operation = new BalanceCalculatorImpl(operationStrategy);
         ReportCreator reportCreator = new ReportGeneratorImpl();
-        List<String[]> finalReport = reportCreator
+        List<String> finalReport = reportCreator
                 .createReport(operation.update(transactions));
         CustomFileWriter fileWriter = new CsvWriterImpl();
         fileWriter.writeFile(OUTPUT_FILE_NAME, finalReport);

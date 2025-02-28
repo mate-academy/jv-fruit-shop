@@ -8,11 +8,10 @@ import java.util.List;
 public class CsvWriterImpl implements CustomFileWriter {
 
     @Override
-    public void writeFile(String filePath, List<String[]> data) {
+    public void writeFile(String filePath, List<String> data) {
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath))) {
-            for (String[] row : data) {
-                String formattedRow = formatRow(row);
-                bufferedWriter.write(formattedRow);
+            for (String row : data) {
+                bufferedWriter.write(row);
                 bufferedWriter.newLine();
             }
         } catch (IOException e) {
