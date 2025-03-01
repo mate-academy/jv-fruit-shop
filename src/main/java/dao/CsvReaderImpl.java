@@ -15,7 +15,7 @@ public class CsvReaderImpl implements CustomFileReader {
                 sb.append(line).append(System.lineSeparator());
             }
         } catch (IOException e) {
-            throw new RuntimeException(filePath + " doesn't exist", e);
+            throw new RuntimeException(filePath + " doesn't exist ", e);
         }
         return sb.toString();
     }
