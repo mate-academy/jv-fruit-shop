@@ -104,11 +104,11 @@ public class FruitTransaction {
 }
 ```
 
-Also, here is an example of what the `main` method may look like:
+Also, here is an example of what the `core.basesyntax.main` method may look like:
 
 ```java
 public class Main {
-    public static void main(String[] arg) {
+    public static void core.basesyntax.main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read("reportToRead.csv");
@@ -152,7 +152,7 @@ implement it.
 
 While carrying out this task, please pay attention to the following points:
 
-All services should be invoked from the main() method. In each service, you should have a method that returns a specific
+All services should be invoked from the core.basesyntax.main() method. In each service, you should have a method that returns a specific
 type of data and passes this data to the method of the next service. In this way, your services will be independent of
 each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about
 what types of data the methods in each of the services should return.
