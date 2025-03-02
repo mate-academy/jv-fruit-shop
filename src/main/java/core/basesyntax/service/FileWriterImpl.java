@@ -7,11 +7,11 @@ import java.nio.file.Path;
 public class FileWriterImpl implements FileWriter {
 
     @Override
-    public void write(String report, Path filePath) {
+    public void write(String report, Path filePath) throws IOException {
         try {
             Files.writeString(filePath, report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't find file by path:" + filePath, e);
+            throw new IOException("Can't find file by path: " + filePath, e);
         }
     }
 }

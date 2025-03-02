@@ -33,7 +33,6 @@ public class Main {
         List<String> inputReport = fileReader.read(REPORT_TO_READ_FILE);
 
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -41,6 +40,8 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);

@@ -11,6 +11,9 @@ public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+        if (inputReport.isEmpty()) {
+            throw new RuntimeException("No Transactions in file");
+        }
         if (inputReport.size() > 1) {
             for (int i = 1; i < inputReport.size(); i++) {
                 String[] inputReportData = inputReport.get(i).split(",");

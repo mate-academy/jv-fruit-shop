@@ -6,6 +6,9 @@ public class ShopDaoImpl implements ShopDao {
 
     @Override
     public void addFruit(String fruit, Integer quantity) {
+        if (quantity < 0) {
+            throw new RuntimeException("The quantity is negative");
+        }
         shop.put(fruit, quantity);
     }
 
