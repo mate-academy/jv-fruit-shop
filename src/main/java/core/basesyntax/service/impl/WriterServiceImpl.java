@@ -10,7 +10,7 @@ public class WriterServiceImpl implements WriterService {
     public void writeToFile(String path, List<String> report) {
         try (FileWriter writer = new FileWriter(path)) {
             for (String line : report) {
-               writer.write(line);
+                writer.write(line);
             }
         } catch (IOException e) {
             throw new RuntimeException("Can't write to the file: ", e);

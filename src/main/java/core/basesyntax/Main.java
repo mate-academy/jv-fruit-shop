@@ -32,12 +32,6 @@ public class Main {
                 FruitTransaction.Operation.PURCHASE, new PurchaseHandler(),
                 FruitTransaction.Operation.RETURN, new ReturnHandler()
         );
-        List<String> report = getStrings(operationHandlerMap);
-        WriterService writerService = new WriterServiceImpl();
-        writerService.writeToFile(FILE_NAME_REPORT_DATA, report);
-    }
-
-    private static List<String> getStrings(Map<FruitTransaction.Operation, OperationHandler> operationHandlerMap) {
         ReaderService readerService = new ReaderServiceImpl();
         List<String> dataFromFile = readerService.readFromFile(FILE_NAME_INPUT_DATA);
         ParserService parserService = new ParserServiceImpl();
@@ -47,6 +41,7 @@ public class Main {
         proceduresData.procedureData(fruitTransactions);
         ReportCreationService reportCreationService = new ReportCreationServiceImpl();
         List<String> report = reportCreationService.createReport();
-        return report;
+        WriterService writerService = new WriterServiceImpl();
+        writerService.writeToFile(FILE_NAME_REPORT_DATA, report);
     }
 }

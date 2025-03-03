@@ -37,7 +37,7 @@ public class FruitTransaction {
 
         private String code;
 
-        Operation (String code) {
+        Operation(String code) {
             this.code = code;
         }
 
@@ -52,6 +52,6 @@ public class FruitTransaction {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Unsuitable name of operation"  + code);
+        throw new IllegalArgumentException("Unsuitable name of operation" + code);
     }
 }
