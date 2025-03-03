@@ -11,7 +11,7 @@ public class FileWriterImpl implements FileWriter {
         try {
             Files.writeString(filePath, report);
         } catch (IOException e) {
-            throw new IOException("Can't find file by path: " + filePath, e);
+            throw new IOException("Error writing to file at path: " + filePath, e);
         }
     }
 }

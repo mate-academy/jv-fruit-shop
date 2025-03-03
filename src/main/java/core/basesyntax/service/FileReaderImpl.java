@@ -14,7 +14,7 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(path);
         } catch (IOException e) {
-            throw new IOException("Can't read/find " + fileName + " file", e);
+            throw new IOException("Error writing to file at path: " + path, e);
         }
     }
 }

@@ -8,9 +8,9 @@ public class BalanceOperation implements OperationHandler {
     private final ShopDao shopDao = new ShopDaoImpl();
 
     @Override
-    public void update(FruitTransaction fruitTransaction) {
+    public void processTransaction(FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        shopDao.addFruit(fruit, quantity);
+        shopDao.addFruitFromBalance(fruit, quantity);
     }
 }

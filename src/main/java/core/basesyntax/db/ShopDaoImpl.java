@@ -5,7 +5,7 @@ import static core.basesyntax.storage.Storage.shop;
 public class ShopDaoImpl implements ShopDao {
 
     @Override
-    public void addFruit(String fruit, Integer quantity) {
+    public void addFruitFromBalance(String fruit, Integer quantity) {
         if (quantity < 0) {
             throw new RuntimeException("The quantity is negative");
         }
@@ -13,7 +13,7 @@ public class ShopDaoImpl implements ShopDao {
     }
 
     @Override
-    public void changeFruitQuantity(String fruit, Integer quantity) {
+    public void updateFruitQuantity(String fruit, Integer quantity) {
         if (!shop.containsKey(fruit) && quantity > 0) {
             throw new RuntimeException("There is no such fruit in shop");
         }

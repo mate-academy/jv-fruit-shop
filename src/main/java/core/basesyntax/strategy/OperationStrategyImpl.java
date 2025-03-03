@@ -14,6 +14,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getOperationHandler(FruitTransaction.Operation operation) {
+        if (!operationHandlerMap.containsKey(operation)) {
+            throw new RuntimeException("Operation" + operation + " is incorrect");
+        }
         return operationHandlerMap.get(operation);
     }
 }

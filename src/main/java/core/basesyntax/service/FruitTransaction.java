@@ -1,7 +1,7 @@
 package core.basesyntax.service;
 
 public class FruitTransaction {
-    private FruitTransaction.Operation operation;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
@@ -51,7 +51,7 @@ public class FruitTransaction {
         PURCHASE("p"),
         RETURN("r");
 
-        private String code;
+        private final String code;
 
         Operation(String code) {
             this.code = code;

@@ -41,13 +41,13 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        List<FruitTransaction> transactions = dataConverter.convertToTransactions(inputReport);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+        String resultingReport = reportGenerator.generateReport();
 
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, Path.of(REPORT_TO_WRITE_FILE));

@@ -12,7 +12,10 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> fruitTransactions) {
+        if(fruitTransactions == null) {
+            throw new RuntimeException("fruitTransactions in null");
+        }
         fruitTransactions.forEach(f -> operationStrategy
-                .getOperationHandler(f.getOperation()).update(f));
+                .getOperationHandler(f.getOperation()).processTransaction(f));
     }
 }
