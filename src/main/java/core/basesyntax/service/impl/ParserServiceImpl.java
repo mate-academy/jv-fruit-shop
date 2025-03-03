@@ -26,7 +26,8 @@ public class ParserServiceImpl implements ParserService {
             fruitTransaction
                     .setFruit(transactionArray[INDEX_OF_FRUIT_NAME]);
             try {
-                fruitTransaction.setQuantity(Integer.parseInt(transactionArray[INDEX_OF_QUANTITY_VALUE]));
+                fruitTransaction
+                        .setQuantity(Integer.parseInt(transactionArray[INDEX_OF_QUANTITY_VALUE]));
             } catch (NumberFormatException e) {
                 System.err.println("The quantity value is not a number.");
             }
