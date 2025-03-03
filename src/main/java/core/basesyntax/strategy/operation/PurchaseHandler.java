@@ -7,6 +7,9 @@ public class PurchaseHandler implements OperationHandler {
     @Override
     public void getOperation(FruitTransaction transaction) {
         int previousValueBeforeOperation = Storage.storage.get(transaction.getFruit());
+        if (previousValueBeforeOperation < 0) {
+            throw new IllegalArgumentException("The fruit is not present in the storage.");
+        }
         int currentValueAfterOperationPerforming =
                 previousValueBeforeOperation - transaction.getQuantity();
         if (currentValueAfterOperationPerforming <= 0) {

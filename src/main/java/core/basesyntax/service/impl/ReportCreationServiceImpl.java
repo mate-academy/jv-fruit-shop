@@ -14,10 +14,10 @@ public class ReportCreationServiceImpl implements ReportCreationService {
         List<String> report = new ArrayList<>();
         report.add("fruit,quantity");
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
-            report.add(System.lineSeparator()
-                    + entry.getKey()
+            report.add(entry.getKey()
                     + SEPARATOR
-                    + entry.getValue());
+                    + entry.getValue()
+                    + System.lineSeparator());
         }
         return report;
     }
