@@ -50,5 +50,15 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static boolean isValidCode(String code) {
+            for (Operation operation : values()) {
+                if (operation.getCode().equals(code)) {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
+
 }

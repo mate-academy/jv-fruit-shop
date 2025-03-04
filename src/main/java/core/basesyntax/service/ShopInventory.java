@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShopInventory {
+    private static final int DEFAULT_MAP_VALUE = 0;
+
     private HashMap<String, Integer> inventory = new HashMap<>();
 
     public void setFruitQuantity(String fruit, int quantity) {
@@ -11,11 +13,11 @@ public class ShopInventory {
     }
 
     public void addFruitQuantity(String fruit, int quantity) {
-        inventory.put(fruit, inventory.getOrDefault(fruit, 0) + quantity);
+        inventory.put(fruit, inventory.getOrDefault(fruit, DEFAULT_MAP_VALUE) + quantity);
     }
 
     public void deductFruitQuantity(String fruit, int quantity) {
-        int currentQuantity = inventory.getOrDefault(fruit, 0);
+        int currentQuantity = inventory.getOrDefault(fruit, DEFAULT_MAP_VALUE);
         if (currentQuantity < quantity) {
             throw new RuntimeException("Not enough quantity to purchase. Current quantity is: "
                     + currentQuantity);

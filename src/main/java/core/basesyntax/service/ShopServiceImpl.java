@@ -20,4 +20,9 @@ public class ShopServiceImpl implements ShopService {
                     .handle(transaction, shopInventory);
         }
     }
+
+    @Override
+    public ShopInventory getInventory() {
+        return shopInventory;
+    }
 }

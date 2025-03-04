@@ -41,7 +41,7 @@ public class HelloWorld {
             shopService.process(transactions);
 
             ReportGenerator reportGenerator = new ReportGeneratorImpl();
-            String resultingReport = reportGenerator.getReport();
+            String resultingReport = reportGenerator.getReport(shopService.getInventory());
 
             FileWriter fileWriter = new FileWriterImpl();
             fileWriter.write(resultingReport, "finalReport.csv");

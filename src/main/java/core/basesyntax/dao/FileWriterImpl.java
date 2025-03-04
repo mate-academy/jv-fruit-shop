@@ -12,7 +12,7 @@ public class FileWriterImpl implements FileWriter {
         try {
             Files.write(Paths.get(filePath), data.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
-            throw new RuntimeException("Error writing data to file " + e);
+            throw new RuntimeException("Error writing data to file " + e + filePath);
         }
     }
 }
