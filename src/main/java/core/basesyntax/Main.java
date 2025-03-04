@@ -10,6 +10,7 @@ import core.basesyntax.strategy.impl.BalanceOperation;
 import core.basesyntax.strategy.impl.SupplyOperation;
 import core.basesyntax.strategy.impl.PurchaseOperation;
 import core.basesyntax.strategy.impl.ReturnOperation;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -29,16 +30,25 @@ public class Main {
             );
             transakcje.add(transakcja);
         }
-        HashMap<FruitTransaction.Operation, OperationHandler> obslugiwaczeOperacji = new HashMap<>();
-        obslugiwaczeOperacji.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        obslugiwaczeOperacji.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        obslugiwaczeOperacji.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        obslugiwaczeOperacji.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        ShopServiceImpl serwisSklepu = new ShopServiceImpl(obslugiwaczeOperacji);
+        HashMap<FruitTransaction.Operation,
+                OperationHandler> obslugiwaczeOperacji = new HashMap<>();
+        obslugiwaczeOperacji.put(FruitTransaction
+                .Operation.BALANCE, new BalanceOperation());
+        obslugiwaczeOperacji.put(FruitTransaction
+                .Operation.SUPPLY, new SupplyOperation());
+        obslugiwaczeOperacji.put(FruitTransaction
+                .Operation.PURCHASE, new PurchaseOperation());
+        obslugiwaczeOperacji.put(FruitTransaction
+                .Operation.RETURN, new ReturnOperation());
+        ShopServiceImpl serwisSklepu
+                = new ShopServiceImpl(obslugiwaczeOperacji);
         serwisSklepu.process(transakcje);
-        ReportGeneratorImpl generatorRaportu = new ReportGeneratorImpl();
-        List<String> raport = Collections.singletonList(generatorRaportu.getReport(serwisSklepu.getStorage()));
+        ReportGeneratorImpl generatorRaportu
+                = new ReportGeneratorImpl();
+        List<String> raport = Collections.singletonList(generatorRaportu
+                .getReport(serwisSklepu.getStorage()));
         FileWriterImpl pisarzPliku = new FileWriterImpl();
-        pisarzPliku.write(String.valueOf(raport), "src/main/resources/finalReport.csv");
+        pisarzPliku.write(String.valueOf(raport)
+                , "src/main/resources/finalReport.csv");
     }
 }
