@@ -1,5 +1,5 @@
-# Fruit shop
-Let's imagine that we have a fruit store. Every day in the store there are a number of activities, 
+# Fruit Shop
+Let's imagine that we have a fruit store. Every day in the store, there are a number of activities, 
 information about which is recorded in a file during the day.
 The current input file is sent to the program in CSV format (it is recommended to use standard libraries for parsing).
 
@@ -133,20 +133,20 @@ public class Main {
 #### [Try to avoid these common mistakes while solving task](./checklist.md)
 
 <details>
-  <summary>Additional tips (IMPORTANT: before viewing create a solution architecture and check it against these tips)</summary>
+  <summary>Additional tips (IMPORTANT: before viewing, create a solution architecture and check it against these tips)</summary>
  
  ![FruitShop Schema](https://mate-academy-images.s3.eu-central-1.amazonaws.com/Fruit_Shop_1_c3855912d4.png)
 
-You are presented with a diagram describing an algorithm for the creation of a project structure. Your task is to implement it.
+You are presented with a diagram describing an algorithm for creating a project structure. Your task is to implement it.
 
 While carrying out this task, please pay attention to the following points:
 
-All services should be invoked from the main() method. In each service, you should have a method that returns a specific type of data and passes this data to the method of the next service. In this way, your services will be independent of each other and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
-Remember the SOLID principles, think about which ones you might not be adhering to and how to fix this:
-- Single Responsibility - does each class/method perform one function?
-- Open/Closed - think about it, if there is a need to add functionality, will you need to change the logic of the class/methods?
-- Interface segregation - review your code, do you have interfaces that should be divided into smaller ones?
-- Liskov substitution - for example, imagine that you have a class S, which is a subtype of class T. Make sure you can replace class S with class T without changing the desired properties of the program.
+All services should be invoked from the main() method. In each service, you should have a method that returns a specific type of data and passes this data to the method of the next service. In this way, your services will be independent of each other, and your solution will adhere to SOLID principles. Moreover, such methods are easier to test. Think about what types of data the methods in each of the services should return.
+Remember the SOLID principles; think about which ones you might not be adhering to and how to fix this:
+- Single Responsibility — does each class/method perform one function?
+- Open/Closed — think about it: if there is a need to add functionality, will you need to change the logic of the class/methods?
+- Interface segregation — review your code. Do you have interfaces that should be divided into smaller ones?
+- Liskov substitution — for example, imagine that you have a class S, which is a subtype of class T. Make sure you can replace class T with class S without changing the desired properties of the program.
 - Dependency Inversion - make sure that high-level modules do not depend on low-level modules. Both should depend on abstractions. Also, abstractions should not depend on details. Details should depend on abstractions.
 
 Bad practice example:
@@ -185,7 +185,7 @@ public class UserServiceImpl implements UserService {
    }
 }
 ````
-Don't forget that your code will need to be tested, so try to anticipate all invalid input data and handle it in advance.
+Remember that your code will need to be tested, so try to anticipate and handle all invalid input data in advance.
 For example:
 1. Incorrect file path
 2. Incorrect data in the input file, for example, quantity less than zero or incorrect strategy
