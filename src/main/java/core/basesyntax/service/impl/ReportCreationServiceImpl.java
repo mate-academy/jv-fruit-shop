@@ -8,11 +8,12 @@ import java.util.Map;
 
 public class ReportCreationServiceImpl implements ReportCreationService {
     private static final String SEPARATOR = ",";
+    private static final String HEADER = "fruit,quantity";
 
     @Override
     public List<String> createReport() {
         List<String> report = new ArrayList<>();
-        report.add("fruit,quantity");
+        report.add(HEADER);
         for (Map.Entry<String, Integer> entry : Storage.storage.entrySet()) {
             report.add(entry.getKey()
                     + SEPARATOR
