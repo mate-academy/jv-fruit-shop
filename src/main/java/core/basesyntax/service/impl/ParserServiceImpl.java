@@ -14,7 +14,7 @@ public class ParserServiceImpl implements ParserService {
     @Override
     public List<FruitTransaction> parse(List<String> dataFromFile) {
         if (dataFromFile.isEmpty()) {
-            throw new IllegalArgumentException("The start data file is empty.");
+            throw new IllegalArgumentException("The started data file is empty.");
         }
         List<FruitTransaction> listOfTransactions = new ArrayList<>();
         for (String transactions : dataFromFile) {
