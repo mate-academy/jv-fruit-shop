@@ -50,5 +50,15 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+
+        public static Operation getOperation(String code) {
+            return switch (code) {
+                case "b" -> Operation.BALANCE;
+                case "s" -> Operation.SUPPLY;
+                case "p" -> Operation.PURCHASE;
+                case "r" -> Operation.RETURN;
+                default -> throw new IllegalArgumentException("Unknown operation: " + code);
+            };
+        }
     }
 }

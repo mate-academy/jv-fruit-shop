@@ -17,14 +17,7 @@ public class DataConverterImpl implements DataConverter {
                 .map(line -> {
                     String[] parts = line.split(SEPARATOR_SIGN);
                     String opCode = parts[OPERATOR_PART];
-                    FruitTransaction.Operation op = switch (opCode) {
-                        case "b" -> FruitTransaction.Operation.BALANCE;
-                        case "s" -> FruitTransaction.Operation.SUPPLY;
-                        case "p" -> FruitTransaction.Operation.PURCHASE;
-                        case "r" -> FruitTransaction.Operation.RETURN;
-                        default -> throw new IllegalArgumentException("Invalid operation code: "
-                                + opCode);
-                    };
+                    FruitTransaction.Operation op = FruitTransaction.Operation.getOperation(opCode);
                     String fruit = parts[FRUIT_PART];
                     int quantity = Integer.parseInt(parts[QUANTITY_PART]);
                     return new FruitTransaction(op, fruit, quantity);
