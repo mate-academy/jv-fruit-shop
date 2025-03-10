@@ -13,7 +13,8 @@ public class DataConverterImpl implements DataConverter {
 
     private FruitTransaction parseLine(String line) {
         String[] parts = line.split(",");
-        FruitTransaction.Operation operation = FruitTransaction.Operation.valueOf(parts[0].toUpperCase());
+        FruitTransaction.Operation operation = FruitTransaction.Operation
+                .valueOf(parts[0].toUpperCase());
         String fruit = parts[1];
         int quantity = Integer.parseInt(parts[2]);
         return new FruitTransaction(operation, fruit, quantity);
