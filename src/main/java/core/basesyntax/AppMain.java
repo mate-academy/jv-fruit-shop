@@ -29,8 +29,8 @@ public class AppMain {
     // HINT: In the `public static void main(String[] args)`
     // it is better to create instances of your classes,
     // and call their methods, but do not write any business logic in the `main` method!
-    private static final String FILE_READ_SRC = "src/main/java/core/basesyntax/reportToRead.csv";
-    private static final String FILE_WRITE_SRC = "finalReport.csv";
+    private static final String FILE_READ_SRC = "src/main/resources/reportToRead.csv";
+    private static final String FILE_WRITE_SRC = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
