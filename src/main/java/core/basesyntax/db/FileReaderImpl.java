@@ -23,7 +23,7 @@ public class FileReaderImpl implements FileReader {
             if (!Files.exists(inputFile)) {
                 throw new FileNotFoundException("File not found: " + fileName);
             }
-            return Files.readAllLines(Paths.get(fileName));
+            return Files.readAllLines(inputFile);
         } catch (IOException e) {
             throw new RuntimeException("Something is wrong with reading file, "
                     + "see description below.",e);
