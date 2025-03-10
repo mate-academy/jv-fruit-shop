@@ -2,7 +2,7 @@ package core.basesyntax.model;
 
 public class BalanceOperation implements OperationHandler {
     @Override
-    public Integer makeOperation(Integer quantity) {
+    public Integer handle(Integer quantity) {
         return quantity;
     }
 }

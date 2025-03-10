@@ -27,7 +27,7 @@ public class ShopServiceImpl implements ShopService {
                     fruitTransaction.getQuantity(),
                     (oldValue, newValue) -> {
                     newValue = operationStrategy.getOperation(fruitTransaction
-                                    .getOperation()).makeOperation(newValue);
+                                    .getOperation()).handle(newValue);
                     int result = oldValue + newValue;
                         if (result < 0) {
                             throw new RuntimeException("You couldn't sell more fruits then you "
