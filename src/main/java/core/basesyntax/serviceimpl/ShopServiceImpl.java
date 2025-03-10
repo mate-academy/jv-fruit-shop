@@ -1,6 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.serviceimpl;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.db.ShopInventory;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
@@ -19,10 +21,5 @@ public class ShopServiceImpl implements ShopService {
             operationStrategy.getHandler(transaction.getOperation())
                     .handle(transaction, shopInventory);
         }
-    }
-
-    @Override
-    public ShopInventory getInventory() {
-        return shopInventory;
     }
 }

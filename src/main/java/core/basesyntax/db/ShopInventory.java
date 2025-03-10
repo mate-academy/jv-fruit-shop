@@ -1,12 +1,12 @@
-package core.basesyntax.service;
+package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ShopInventory {
-    private static final int DEFAULT_MAP_VALUE = 0;
+    public static final Map<String, Integer> inventory = new HashMap<>();
 
-    private HashMap<String, Integer> inventory = new HashMap<>();
+    private static final int DEFAULT_MAP_VALUE = 0;
 
     public void setFruitQuantity(String fruit, int quantity) {
         inventory.put(fruit, quantity);
@@ -23,9 +23,5 @@ public class ShopInventory {
                     + currentQuantity);
         }
         inventory.put(fruit, currentQuantity - quantity);
-    }
-
-    public Map<String, Integer> getFruitQuantity() {
-        return inventory;
     }
 }

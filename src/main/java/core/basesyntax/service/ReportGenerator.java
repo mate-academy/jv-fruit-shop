@@ -1,5 +1,5 @@
 package core.basesyntax.service;
 
 public interface ReportGenerator {
-    String getReport(ShopInventory shopInventory);
+    String getReport();
 }

@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
@@ -58,6 +58,15 @@ public class FruitTransaction {
                 }
             }
             return false;
+        }
+
+        public static Operation fromCode(String code) {
+            for (Operation operation : values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("No enum constant for code: " + code);
         }
     }
 

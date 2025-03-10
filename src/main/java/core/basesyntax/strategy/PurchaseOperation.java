@@ -1,7 +1,7 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.FruitTransaction;
-import core.basesyntax.service.ShopInventory;
+import core.basesyntax.db.ShopInventory;
+import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
 
