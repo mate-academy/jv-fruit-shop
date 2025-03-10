@@ -11,9 +11,17 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-    public Operation getOperation() { return operation; }
-    public String getFruit() { return fruit; }
-    public int getQuantity() { return quantity; }
+    public Operation getOperation() {
+        return operation;
+
+    }
+    public String getFruit() {
+        return fruit;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 
     public enum Operation {
         BALANCE("b"),
