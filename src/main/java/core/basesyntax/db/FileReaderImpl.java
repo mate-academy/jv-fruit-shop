@@ -15,7 +15,7 @@ public class FileReaderImpl implements FileReader {
         } catch (IOException e) {
             throw new RuntimeException("Can't read the file: "
                     + fileName
-                    + ", see description below.",e);
+                    + ", see description below." + System.lineSeparator(), e);
         }
     }
 }
