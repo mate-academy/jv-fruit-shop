@@ -18,12 +18,11 @@ public class OperationStrategyImpl implements OperationStrategy {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationHandlers.get(transaction.getOperation());
-            if (handler != null) {
-                handler.apply(transaction);
-            } else {
+            if (handler == null) {
                 throw new IllegalArgumentException("No handler for operation: "
                         + transaction.getOperation());
             }
+            handler.apply(transaction);
         }
     }
 }

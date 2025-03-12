@@ -24,8 +24,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String REPORT_TO_READ_FILE_PATH = "reportToRead.csv";
-    private static final String FINAL_REPORT_PATH_FILE = "finalReport.csv";
+    private static final String REPORT_TO_READ_FILE_PATH = "src\\main\\java\\core"
+            + "\\basesyntax\\resources\\reportToRead.csv";
+    private static final String FINAL_REPORT_PATH_FILE = "src\\main\\java\\core"
+            + "\\basesyntax\\resources\\finalReport.csv";
 
     public static void main(String[] arg) throws IOException {
         // 1. Read the data from the input CSV file

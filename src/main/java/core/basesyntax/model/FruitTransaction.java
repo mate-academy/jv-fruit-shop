@@ -51,14 +51,13 @@ public class FruitTransaction {
             return code;
         }
 
-        public static Operation getOperation(String code) {
-            return switch (code) {
-                case "b" -> Operation.BALANCE;
-                case "s" -> Operation.SUPPLY;
-                case "p" -> Operation.PURCHASE;
-                case "r" -> Operation.RETURN;
-                default -> throw new IllegalArgumentException("Unknown operation: " + code);
-            };
+        public static Operation fromCode(String code) {
+            for (Operation operation : values()) {
+                if (operation.getCode().equals(code)) {
+                    return operation;
+                }
+            }
+            throw new RuntimeException("No enum constant for code: " + code);
         }
     }
 }
