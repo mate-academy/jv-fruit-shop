@@ -4,10 +4,6 @@ import core.basesyntax.service.db.Storage;
 import core.basesyntax.service.model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
-    @Override
-    public FruitTransaction.Operation getOperation(String operation) {
-        return FruitTransaction.Operation.RETURN;
-    }
 
     @Override
     public void apply(FruitTransaction transaction) {

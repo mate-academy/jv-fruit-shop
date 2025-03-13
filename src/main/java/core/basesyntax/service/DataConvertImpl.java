@@ -12,7 +12,7 @@ public class DataConvertImpl implements DataConverter {
         for (int i = 0; i < lines.size(); i++) {
             String[] components = lines.get(i).split(",");
             if (components.length != 3) {
-                throw new IllegalArgumentException("Invalid line format: " + lines);
+                throw new IllegalArgumentException("Invalid line format: " + lines.get(i));
             }
 
             FruitTransaction.Operation operation = FruitTransaction.Operation
