@@ -8,7 +8,7 @@ public class PurchaseOperation implements OperationHandler {
     @Override
     public FruitStorage operation(FruitTransaction fruitTransaction, FruitStorage fruitStorage) {
         if (fruitTransaction.getFruit().equals(fruitStorage.getFruit())) {
-            fruitStorage.subFruit(fruitTransaction.getQuantity());
+            fruitStorage.subtractFruit(fruitTransaction.getQuantity());
         }
         return fruitStorage;
     }

@@ -29,7 +29,7 @@ public class FruitStorage {
         this.quantity += quantityAdd;
     }
 
-    public void subFruit(int quantityAdd) {
+    public void subtractFruit(int quantityAdd) {
         this.quantity -= quantityAdd;
     }
 }

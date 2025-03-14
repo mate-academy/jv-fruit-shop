@@ -9,7 +9,7 @@ import core.basesyntax.io.FileWriterImpl;
 import core.basesyntax.service.FruitStorage;
 import core.basesyntax.service.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
-import core.basesyntax.service.OperationStrategyImp;
+import core.basesyntax.service.OperationStrategyImpl;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
@@ -38,12 +38,12 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
 
-        OperationStrategy operationStrategy = new OperationStrategyImp(operationHandlers);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         List<FruitStorage> fruitStorageList = shopService.process(fruitTransactions);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(fruitStorageList);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         List<String> report = reportGenerator.report(fruitStorageList);
 
         FileWriter fileWriter = new FileWriterImpl();

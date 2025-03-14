@@ -6,7 +6,6 @@ import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
 
-    private static final FruitStorage EMPTY_STORAGE = new FruitStorage("empty", 0);
     private OperationStrategy operationStrategy;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
@@ -21,14 +20,17 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction t : transactions) {
             if (t.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
                 OperationHandler strategy = operationStrategy.strategy(t.getOperation());
-                FruitStorage startDayCondition = strategy.operation(t, EMPTY_STORAGE);
+                FruitStorage startDayCondition = strategy.operation(t, new FruitStorage(t.getFruit(), 0));
                 fruitStorages.add(startDayCondition);
             }
-            for (int i = 0; i < fruitStorages.size(); i++) {
-                FruitStorage s = fruitStorages.get(i);
-                if (t.getFruit().equals(s.getFruit())) {
+        }
+
+        for (FruitTransaction t : transactions) {
+            for (FruitStorage s : fruitStorages) {
+                if (t.getFruit().equals(s.getFruit()) && !t.getOperation()
+                        .equals(FruitTransaction.Operation.BALANCE)) {
                     OperationHandler strategy = operationStrategy.strategy(t.getOperation());
-                    fruitStorages.set(i, strategy.operation(t, s));
+                    s = strategy.operation(t, s);
                 }
             }
         }

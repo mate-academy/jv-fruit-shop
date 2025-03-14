@@ -5,12 +5,6 @@ import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
 
-    private List<FruitStorage> fruitStorageList;
-
-    public ReportGeneratorImpl(List<FruitStorage> fruitStorageList) {
-        this.fruitStorageList = fruitStorageList;
-    }
-
     @Override
     public List<String> report(List<FruitStorage> fruitStorageList) {
 
