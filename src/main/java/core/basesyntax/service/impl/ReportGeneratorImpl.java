@@ -7,7 +7,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity\n";
     private static final String NEW_LINE = System.lineSeparator();
 
-
     @Override
     public String getReport() {
         StringBuilder report = new StringBuilder(HEADER);
