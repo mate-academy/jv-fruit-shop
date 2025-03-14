@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
 
-    private static final Set<String> ALLOWED_OPERATIONS = Arrays.stream(FruitTransaction.Operation.values())
+    private static final Set<String> ALLOWED_OPERATIONS = Arrays.stream(
+            FruitTransaction.Operation.values())
             .map(FruitTransaction.Operation::getCode)
             .collect(Collectors.toSet());
-
 
     @Override
     public List<FruitTransaction> fruitTransaction(List<String> reader) {

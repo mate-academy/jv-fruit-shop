@@ -20,7 +20,8 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction t : transactions) {
             if (t.getOperation().equals(FruitTransaction.Operation.BALANCE)) {
                 OperationHandler strategy = operationStrategy.strategy(t.getOperation());
-                FruitStorage startDayCondition = strategy.operation(t, new FruitStorage(t.getFruit(), 0));
+                FruitStorage startDayCondition = strategy.operation(
+                        t, new FruitStorage(t.getFruit(), 0));
                 fruitStorages.add(startDayCondition);
             }
         }
