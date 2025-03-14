@@ -50,5 +50,3 @@ public class Main {
         fileWriter.write(resultingReport, REPORT_FILE_PATH);
     }
 }
-
-

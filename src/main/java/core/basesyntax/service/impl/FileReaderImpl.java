@@ -17,17 +17,12 @@ public class FileReaderImpl implements FileReader {
                 throw new FileNotFoundException("The file path is empty,"
                         + " please provide a file name");
             }
-            if (!inputFile.getParent().toFile().exists()) {
-                throw new FileNotFoundException("The directory of input file not found: "
-                        + filePath);
-            }
             if (!Files.exists(inputFile)) {
                 throw new FileNotFoundException("File not found: " + filePath);
             }
             return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Something is wrong with reading file, "
-                    + "see description below.",e);
+            throw new RuntimeException("Error reading file:" + filePath, e);
         }
     }
 }
