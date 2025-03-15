@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
-import core.basesyntax.service.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.operation.OperationHandler;
 import java.util.Map;
 
@@ -20,5 +21,4 @@ public class OperationStrategyImpl implements OperationStrategy {
         }
         throw new RuntimeException("Operation " + operation + " not supported");
     }
-
 }

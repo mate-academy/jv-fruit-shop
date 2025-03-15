@@ -1,23 +1,36 @@
-package core.basesyntax.service;
+package core.basesyntax;
 
-import core.basesyntax.service.dao.FileWriter;
-import core.basesyntax.service.dao.FileWriterImpl;
-import core.basesyntax.service.model.FruitTransaction;
+import core.basesyntax.dao.FileWriter;
+import core.basesyntax.dao.FileWriterImpl;
+import core.basesyntax.impl.DataConvertImpl;
+import core.basesyntax.impl.FileReaderImpl;
+import core.basesyntax.impl.OperationStrategyImpl;
+import core.basesyntax.impl.ReportGeneratorImpl;
+import core.basesyntax.impl.ShopServiceImpl;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.MyFileReader;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.service.operation.BalanceOperation;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
 import core.basesyntax.service.operation.ReturnOperation;
 import core.basesyntax.service.operation.SupplyOperation;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        final String filePath = "reportToRead.csv";
-        final String endFilePath = "finalReport.csv";
+    static final String filePath = "reportToRead.csv";
+    static final Path endFilePath = Paths.get("src/main/resources", "finalReport.csv");
 
-        FileReader fileReader = new FileReaderImpl();
+    public static void main(String[] args) {
+
+        MyFileReader fileReader = new FileReaderImpl();
 
         List<String> inputReport = fileReader.read(filePath);
 
@@ -39,6 +52,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, endFilePath);
+        fileWriter.write(resultingReport, String.valueOf(endFilePath));
     }
 }

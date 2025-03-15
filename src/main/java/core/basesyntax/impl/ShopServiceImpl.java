@@ -1,6 +1,8 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
-import core.basesyntax.service.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.OperationStrategy;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.service.operation.OperationHandler;
 import java.util.List;
 
@@ -17,12 +19,7 @@ public class ShopServiceImpl implements ShopService {
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
             if (handler != null) {
                 handler.apply(transaction);
-            } else {
-                throw new IllegalArgumentException("Unknown operation: "
-                        + transaction.getOperation());
             }
-
         }
     }
-
 }

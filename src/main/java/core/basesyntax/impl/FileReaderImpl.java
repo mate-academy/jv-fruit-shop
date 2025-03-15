@@ -1,26 +1,24 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
+import core.basesyntax.service.MyFileReader;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
+public class FileReaderImpl implements MyFileReader {
+    static final char SEPARATOR = ',';
+    static final int SEPARATOR_INDEX = 1;
 
     public List<String> read(String fileName) {
-        List<String> list = new ArrayList<>(); // Ініціалізація списку перед використанням
+        List<String> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new java.io.FileReader(fileName))) {
-            int count = 0;
             String str;
             while ((str = br.readLine()) != null) {
-                if (count != 0) {
+                if (str.charAt(SEPARATOR_INDEX) == SEPARATOR) {
                     list.add(str);
                 }
-                count++;
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("File " + fileName + " does not exist.");
         } catch (IOException e) {
             throw new RuntimeException("Error reading file: " + fileName);
         }

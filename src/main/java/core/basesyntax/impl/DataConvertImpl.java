@@ -1,16 +1,18 @@
-package core.basesyntax.service;
+package core.basesyntax.impl;
 
-import core.basesyntax.service.model.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DataConvertImpl implements DataConverter {
+    static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
-            String[] components = lines.get(i).split(",");
+            String[] components = lines.get(i).split(SEPARATOR);
             if (components.length != 3) {
                 throw new IllegalArgumentException("Invalid line format: " + lines.get(i));
             }

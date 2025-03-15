@@ -1,4 +1,4 @@
-package core.basesyntax.service.model;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
@@ -59,7 +59,5 @@ public class FruitTransaction {
             }
             throw new IllegalArgumentException("Unknown operation: " + code);
         }
-
     }
-
 }
