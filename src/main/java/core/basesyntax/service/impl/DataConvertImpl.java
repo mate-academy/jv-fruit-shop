@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConvertImpl implements DataConverter {
-    static final String SEPARATOR = ",";
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {

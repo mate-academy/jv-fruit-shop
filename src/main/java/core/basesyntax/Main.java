@@ -2,17 +2,17 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FileWriter;
 import core.basesyntax.dao.FileWriterImpl;
-import core.basesyntax.impl.DataConvertImpl;
-import core.basesyntax.impl.FileReaderImpl;
-import core.basesyntax.impl.OperationStrategyImpl;
-import core.basesyntax.impl.ReportGeneratorImpl;
-import core.basesyntax.impl.ShopServiceImpl;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CustomFileReader;
 import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.MyFileReader;
 import core.basesyntax.service.OperationStrategy;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ShopService;
+import core.basesyntax.service.impl.DataConvertImpl;
+import core.basesyntax.service.impl.FileReaderImpl;
+import core.basesyntax.service.impl.OperationStrategyImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ShopServiceImpl;
 import core.basesyntax.service.operation.BalanceOperation;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
@@ -25,14 +25,14 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    static final String filePath = "reportToRead.csv";
-    static final Path endFilePath = Paths.get("src/main/resources", "finalReport.csv");
+    private static final Path filePath = Paths.get("src/main/resources", "reportToRead.csv");
+    private static final Path endFilePath = Paths.get("src/main/resources", "finalReport.csv");
 
     public static void main(String[] args) {
 
-        MyFileReader fileReader = new FileReaderImpl();
+        CustomFileReader fileReader = new FileReaderImpl();
 
-        List<String> inputReport = fileReader.read(filePath);
+        List<String> inputReport = fileReader.read(String.valueOf(filePath));
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());

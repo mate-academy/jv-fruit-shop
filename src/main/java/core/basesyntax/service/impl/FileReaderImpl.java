@@ -1,26 +1,23 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
-import core.basesyntax.service.MyFileReader;
+import core.basesyntax.service.CustomFileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements MyFileReader {
-    static final char SEPARATOR = ',';
-    static final int SEPARATOR_INDEX = 1;
-
+public class FileReaderImpl implements CustomFileReader {
     public List<String> read(String fileName) {
         List<String> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new java.io.FileReader(fileName))) {
+            br.readLine();
+
             String str;
             while ((str = br.readLine()) != null) {
-                if (str.charAt(SEPARATOR_INDEX) == SEPARATOR) {
-                    list.add(str);
-                }
+                list.add(str);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + fileName);
+            throw new RuntimeException("Error reading file: " + fileName, e);
         }
         return list;
     }

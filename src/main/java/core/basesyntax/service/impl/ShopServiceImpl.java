@@ -1,4 +1,4 @@
-package core.basesyntax.impl;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.OperationStrategy;
@@ -17,9 +17,8 @@ public class ShopServiceImpl implements ShopService {
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
-            if (handler != null) {
-                handler.apply(transaction);
-            }
+
+            handler.apply(transaction);
         }
     }
 }
