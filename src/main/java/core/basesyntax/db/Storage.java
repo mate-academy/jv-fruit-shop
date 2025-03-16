@@ -13,12 +13,15 @@ public class Storage {
     public static void removeFruit(String fruit, int quantity) {
         if (!fruits.containsKey(fruit) || fruits.get(fruit) < quantity) {
             throw new IllegalArgumentException("Недостатньо " + fruit + "в наявності");
-        } else {
-            fruits.put(fruit, fruits.get(fruit) - quantity);
         }
+        fruits.put(fruit, fruits.get(fruit) - quantity);
     }
 
-    public static Map<String,Integer> getFruits() {
-        return fruits;
+    public static String getFruits() {
+        StringBuilder sb = new StringBuilder();
+        for (Map.Entry<String, Integer> entry : fruits.entrySet()) {
+            sb.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
+        }
+        return sb.toString();
     }
 }

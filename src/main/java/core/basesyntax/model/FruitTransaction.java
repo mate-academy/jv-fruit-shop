@@ -12,6 +12,4 @@ public interface FruitTransaction {
     int getQuantity();
 
     void setQuantity(int quantity);
-
-    String getCode();
 }

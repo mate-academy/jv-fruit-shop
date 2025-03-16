@@ -6,15 +6,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterImpl implements CustomFileWriter {
-    private static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";
+    private String outputFile;
+
+    public FileWriterImpl(String outputFile) {
+        this.outputFile = outputFile;
+    }
 
     public void write(String resultingReport) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(OUTPUT_FILE))) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFile))) {
             bufferedWriter.write(resultingReport);
             System.out.println(resultingReport);
         } catch (IOException e) {
             throw new RuntimeException("Не можна записати файл", e);
         }
     }
-
 }

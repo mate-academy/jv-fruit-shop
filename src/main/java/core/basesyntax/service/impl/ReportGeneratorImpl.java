@@ -5,6 +5,6 @@ import core.basesyntax.service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport() {
-        return Storage.getFruits().toString();
+        return "fruit,quantity\n" + Storage.getFruits();
     }
 }

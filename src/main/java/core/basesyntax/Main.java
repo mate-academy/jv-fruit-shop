@@ -23,10 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
-        CustomFileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/reportToRead.csv");
+        String filePathInputFile = "src/main/resources/reportToRead.csv";
+        CustomFileReader fileReader = new FileReaderImpl(filePathInputFile);
+        List<String> inputReport = fileReader.read();
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -54,7 +56,8 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
-        CustomFileWriter fileWriter = new FileWriterImpl();
+        String filePathOutputFile = "src/main/resources/finalReport.csv";
+        CustomFileWriter fileWriter = new FileWriterImpl(filePathOutputFile);
         fileWriter.write(resultingReport);
     }
 }

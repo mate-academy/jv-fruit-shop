@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements CustomFileReader {
-    private static final String INPUT_FILE = "src/main/resources/reportToRead.csv";
+    private String inputFile;
 
-    public List<String> read(String args) {
-        File myFile = new File(INPUT_FILE);
+    public FileReaderImpl(String inputFile) {
+        this.inputFile = inputFile;
+    }
+
+    public List<String> read() {
+        File myFile = new File(inputFile);
 
         if (!myFile.exists()) {
             System.out.println("Файл не знайдено " + myFile.getAbsolutePath());
@@ -27,7 +31,8 @@ public class FileReaderImpl implements CustomFileReader {
             }
             System.out.println("Відкрито та знайдено файл " + myFile.getName());
         } catch (IOException e) {
-            System.out.println("Помилка при відкритті файлу " + myFile.getName() + e.getMessage());
+            throw new IllegalArgumentException("Помилка при відкритті файлу "
+                    + myFile.getName() + e.getMessage());
         }
         return lines;
     }
