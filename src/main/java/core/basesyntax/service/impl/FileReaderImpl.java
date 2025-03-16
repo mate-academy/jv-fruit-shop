@@ -9,30 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements CustomFileReader {
-    private String inputFile;
 
-    public FileReaderImpl(String inputFile) {
-        this.inputFile = inputFile;
-    }
+    @Override
+    public List<String> read(String filePathInputFile) {
+        File file = new File(filePathInputFile);
 
-    public List<String> read() {
-        File myFile = new File(inputFile);
-
-        if (!myFile.exists()) {
-            System.out.println("Файл не знайдено " + myFile.getAbsolutePath());
+        if (!file.exists()) {
+            System.out.println("Файл не знайдено: " + file.getAbsolutePath());
             return new ArrayList<>();
         }
 
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(myFile))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-            System.out.println("Відкрито та знайдено файл " + myFile.getName());
+            System.out.println("Файл успішно відкрито: " + file.getName());
         } catch (IOException e) {
-            throw new IllegalArgumentException("Помилка при відкритті файлу "
-                    + myFile.getName() + e.getMessage());
+            throw new RuntimeException("Помилка при відкритті файлу "
+                    + file.getName() + ": " + e.getMessage(), e);
         }
         return lines;
     }

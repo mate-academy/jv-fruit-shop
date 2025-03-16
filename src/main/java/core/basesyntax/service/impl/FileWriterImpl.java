@@ -6,14 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class FileWriterImpl implements CustomFileWriter {
-    private String outputFile;
-
-    public FileWriterImpl(String outputFile) {
-        this.outputFile = outputFile;
-    }
-
-    public void write(String resultingReport) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(outputFile))) {
+    public void write(String resultingReport, String filePathOutputFile) {
+        try (BufferedWriter bufferedWriter =
+                     new BufferedWriter(new FileWriter(filePathOutputFile))) {
             bufferedWriter.write(resultingReport);
             System.out.println(resultingReport);
         } catch (IOException e) {

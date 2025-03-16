@@ -11,7 +11,7 @@ public class Storage {
     }
 
     public static void removeFruit(String fruit, int quantity) {
-        if (!fruits.containsKey(fruit) || fruits.get(fruit) < quantity) {
+        if (fruits.get(fruit) < 0 || !fruits.containsKey(fruit) || fruits.get(fruit) < quantity) {
             throw new IllegalArgumentException("Недостатньо " + fruit + "в наявності");
         }
         fruits.put(fruit, fruits.get(fruit) - quantity);

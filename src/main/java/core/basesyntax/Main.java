@@ -27,8 +27,8 @@ public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         String filePathInputFile = "src/main/resources/reportToRead.csv";
-        CustomFileReader fileReader = new FileReaderImpl(filePathInputFile);
-        List<String> inputReport = fileReader.read();
+        CustomFileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read(filePathInputFile);
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -57,7 +57,7 @@ public class Main {
 
         // 6. Write the received report into the destination file
         String filePathOutputFile = "src/main/resources/finalReport.csv";
-        CustomFileWriter fileWriter = new FileWriterImpl(filePathOutputFile);
-        fileWriter.write(resultingReport);
+        CustomFileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, filePathOutputFile);
     }
 }
