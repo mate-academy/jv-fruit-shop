@@ -32,7 +32,7 @@ public class Main {
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter
+        final List<FruitTransaction> transactions = dataConverter
                 .convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations

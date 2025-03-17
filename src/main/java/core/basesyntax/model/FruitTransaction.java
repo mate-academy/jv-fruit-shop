@@ -19,11 +19,14 @@ public interface FruitTransaction {
     }
 
     Operation getOperation();
+
     void setOperation(Operation operation);
 
     String getFruit();
+
     void setFruit(String fruit);
 
     int getQuantity();
+
     void setQuantity(int quantity);
 }
