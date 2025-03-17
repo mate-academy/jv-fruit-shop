@@ -1,10 +1,10 @@
 package core.basesyntax.operationhandlers;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransactionImpl;
+import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperationHandler implements OperationHandler {
-    public void apply(FruitTransactionImpl transaction) {
+    public void apply(FruitTransaction transaction) {
         Storage.addFruit(transaction.getFruit(), transaction.getQuantity());
     }
 }

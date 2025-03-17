@@ -1,6 +1,6 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransactionImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -14,8 +14,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void process(List<FruitTransactionImpl> transactions) {
-        for (FruitTransactionImpl transaction : transactions) {
+    public void process(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
             if (handler == null) {
                 throw new IllegalArgumentException("Невідома операція: "

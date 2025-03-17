@@ -1,6 +1,6 @@
 package core.basesyntax;
 
-import core.basesyntax.model.FruitTransactionImpl;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operationhandlers.BalanceOperationHandler;
 import core.basesyntax.operationhandlers.OperationHandler;
 import core.basesyntax.operationhandlers.PurchaseOperationHandler;
@@ -32,18 +32,18 @@ public class Main {
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransactionImpl> transactions = dataConverter
+        List<FruitTransaction> transactions = dataConverter
                 .convertToTransaction(inputReport);
 
         // 3. Create and feel the map with all OperationHandler implementations
-        Map<FruitTransactionImpl.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransactionImpl.Operation.BALANCE,
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler());
-        operationHandlers.put(FruitTransactionImpl.Operation.PURCHASE,
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE,
                 new PurchaseOperationHandler());
-        operationHandlers.put(FruitTransactionImpl.Operation.RETURN,
+        operationHandlers.put(FruitTransaction.Operation.RETURN,
                 new ReturnOperationHandler());
-        operationHandlers.put(FruitTransactionImpl.Operation.SUPPLY,
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
