@@ -1,5 +1,7 @@
 package core.basesyntax.service.impl;
 
+import static core.basesyntax.Main.FILE_PATH_INPUT_FILE;
+
 import core.basesyntax.service.CustomFileReader;
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,11 +13,11 @@ import java.util.List;
 public class FileReaderImpl implements CustomFileReader {
 
     @Override
-    public List<String> read(String filePathInputFile) {
-        File file = new File(filePathInputFile);
+    public List<String> read() {
+        File file = new File(FILE_PATH_INPUT_FILE);
 
         if (!file.exists()) {
-            System.out.println("Файл не знайдено: " + file.getAbsolutePath());
+            System.out.println("File did not found: " + file.getAbsolutePath());
             return new ArrayList<>();
         }
 
@@ -25,9 +27,8 @@ public class FileReaderImpl implements CustomFileReader {
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
-            System.out.println("Файл успішно відкрито: " + file.getName());
         } catch (IOException e) {
-            throw new RuntimeException("Помилка при відкритті файлу "
+            throw new RuntimeException("Error while opening file "
                     + file.getName() + ": " + e.getMessage(), e);
         }
         return lines;

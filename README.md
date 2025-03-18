@@ -105,14 +105,14 @@ public class Main {
 
       // 2. Convert the incoming data into FruitTransactions list
       DataConverter dataConverter = new DataConverterImpl();
-      List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+      List<FruitTransactionImpl> transactions = dataConverter.convertToTransaction(inputReport);
 
       // 3. Create and feel the map with all OperationHandler implementations
-      Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-      operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-      operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-      operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-      operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+      Map<FruitTransactionImpl.Operation, OperationHandler> operationHandlers = new HashMap<>();
+      operationHandlers.put(FruitTransactionImpl.Operation.BALANCE, new BalanceOperation());
+      operationHandlers.put(FruitTransactionImpl.Operation.PURCHASE, new PurchaseOperation());
+      operationHandlers.put(FruitTransactionImpl.Operation.RETURN, new ReturnOperation());
+      operationHandlers.put(FruitTransactionImpl.Operation.SUPPLY, new SupplyOperation());
       OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
       // 4. Process the incoming transactions with applicable OperationHandler implementations

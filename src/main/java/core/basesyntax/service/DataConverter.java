@@ -1,10 +1,8 @@
 package core.basesyntax.service;
 
-import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.FruitTransactionImpl;
 import java.util.List;
 
 public interface DataConverter {
-    List<FruitTransaction> convertToTransaction(List<String> inputReport);
-
-    FruitTransaction.Operation getOperationByCode(String code);
+    List<FruitTransactionImpl> convertToTransaction(List<String> inputReport);
 }

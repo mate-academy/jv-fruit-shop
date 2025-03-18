@@ -1,6 +1,5 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.FruitTransactionImpl;
 import core.basesyntax.service.DataConverter;
 import java.util.ArrayList;
@@ -11,43 +10,35 @@ public class DataConverterImpl implements DataConverter {
     public static final int OPERATION_PART = 0;
     public static final int FRUIT_PART = 1;
     public static final int QUANTITY_PART = 2;
+    public static final String COMMA = ",";
 
     @Override
-    public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
-        List<FruitTransaction> fruitTransactionList = new ArrayList<>();
+    public List<FruitTransactionImpl> convertToTransaction(List<String> inputReport) {
+        List<FruitTransactionImpl> fruitTransactionList = new ArrayList<>();
 
         for (String line : inputReport) {
             if (line == null || line.isEmpty()) {
                 continue;
             }
 
-            String[] parts = line.split(",");
+            String[] parts = line.split(COMMA);
 
             if (parts.length != PARTS_LENGTH) {
-                System.out.println("Запис не повний: " + line);
+                System.out.println("Record is incomplete: " + line);
                 continue;
             }
 
             try {
-                FruitTransaction fruitTransaction = new FruitTransactionImpl();
-                fruitTransaction.setOperation(getOperationByCode(parts[OPERATION_PART].trim()));
-                fruitTransaction.setFruit(parts[FRUIT_PART].trim());
-                fruitTransaction.setQuantity(Integer.parseInt(parts[QUANTITY_PART].trim()));
-                fruitTransactionList.add(fruitTransaction);
+                FruitTransactionImpl fruitTransactionImpl = new FruitTransactionImpl();
+                fruitTransactionImpl.setOperation(FruitTransactionImpl
+                        .Operation.getOperationByCode(parts[OPERATION_PART].trim()));
+                fruitTransactionImpl.setFruit(parts[FRUIT_PART].trim());
+                fruitTransactionImpl.setQuantity(Integer.parseInt(parts[QUANTITY_PART].trim()));
+                fruitTransactionList.add(fruitTransactionImpl);
             } catch (NumberFormatException e) {
-                System.out.println("Некоректне число в записі: " + line);
+                throw new RuntimeException("Invalid number in record: " + line);
             }
         }
         return fruitTransactionList;
-    }
-
-    @Override
-    public FruitTransaction.Operation getOperationByCode(String code) {
-        for (FruitTransaction.Operation op : FruitTransaction.Operation.values()) {
-            if (op.getCode().equals(code)) {
-                return op;
-            }
-        }
-        throw new IllegalArgumentException("Невідомий код операції: " + code);
     }
 }
