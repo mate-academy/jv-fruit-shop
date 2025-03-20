@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    public static final int PARTS_LENGTH = 3;
-    public static final int OPERATION_PART = 0;
-    public static final int FRUIT_PART = 1;
-    public static final int QUANTITY_PART = 2;
-    public static final String COMMA = ",";
+    private static final int PARTS_LENGTH = 3;
+    private static final int OPERATION_PART = 0;
+    private static final int FRUIT_PART = 1;
+    private static final int QUANTITY_PART = 2;
+    private static final String COMMA = ",";
 
     @Override
     public List<FruitTransactionImpl> convertToTransaction(List<String> inputReport) {
@@ -24,16 +24,15 @@ public class DataConverterImpl implements DataConverter {
             String[] parts = line.split(COMMA);
 
             if (parts.length != PARTS_LENGTH) {
-                System.out.println("Record is incomplete: " + line);
                 continue;
             }
 
             try {
                 FruitTransactionImpl fruitTransactionImpl = new FruitTransactionImpl();
                 fruitTransactionImpl.setOperation(FruitTransactionImpl
-                        .Operation.getOperationByCode(parts[OPERATION_PART].trim()));
-                fruitTransactionImpl.setFruit(parts[FRUIT_PART].trim());
-                fruitTransactionImpl.setQuantity(Integer.parseInt(parts[QUANTITY_PART].trim()));
+                        .Operation.getOperationByCode(parts[OPERATION_PART]));
+                fruitTransactionImpl.setFruit(parts[FRUIT_PART]);
+                fruitTransactionImpl.setQuantity(Integer.parseInt(parts[QUANTITY_PART]));
                 fruitTransactionList.add(fruitTransactionImpl);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid number in record: " + line);

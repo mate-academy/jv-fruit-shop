@@ -5,15 +5,16 @@ import core.basesyntax.service.ReportGenerator;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    public static final String HEADER = "fruit,quantity";
-    public static final String COMMA = ",";
+    private static final String HEADER = "fruit,quantity";
+    private static final String COMMA = ",";
 
     public String getReport() {
         StringBuilder sb = new StringBuilder();
+        StringBuilder sbWithHeader = sb.append(HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : Storage.fruits.entrySet()) {
-            sb.append(HEADER).append(entry.getKey()).append(COMMA)
+            sbWithHeader.append(entry.getKey()).append(COMMA)
                     .append(entry.getValue()).append(System.lineSeparator());
         }
-        return sb.toString();
+        return sbWithHeader.toString();
     }
 }
