@@ -16,13 +16,8 @@ public class FileReaderImpl implements CustomFileReader {
     public List<String> read() {
         File file = new File(FILE_PATH_INPUT_FILE);
 
-        if (!file.exists()) {
-            System.out.println("File did not found: " + file.getAbsolutePath());
-            return new ArrayList<>();
-        }
-
         List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH_INPUT_FILE))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 lines.add(line);
