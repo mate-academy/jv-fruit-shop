@@ -3,7 +3,7 @@ package core.basesyntax.operationservice;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.storage.Storage;
 
-public class SupplyOperation implements OperationHandler {
+public class ReturnOperationImpl implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
@@ -11,6 +11,5 @@ public class SupplyOperation implements OperationHandler {
 
         int currentAmount = Storage.getQuantity(fruit);
         Storage.putFruit(fruit, currentAmount + quantity);
-
     }
 }

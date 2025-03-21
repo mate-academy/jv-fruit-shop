@@ -1,11 +1,11 @@
 package core.basesyntax.operationstrategy;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operationservice.BalanceOperation;
+import core.basesyntax.operationservice.BalanceOperationImpl;
 import core.basesyntax.operationservice.OperationHandler;
-import core.basesyntax.operationservice.PurchaseOperation;
-import core.basesyntax.operationservice.ReturnOperation;
-import core.basesyntax.operationservice.SupplyOperation;
+import core.basesyntax.operationservice.PurchaseOperationImpl;
+import core.basesyntax.operationservice.ReturnOperationImpl;
+import core.basesyntax.operationservice.SupplyOperationImpl;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,13 +15,13 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationStrategyImpl() {
         operationOperationHandlerHashMap.put(FruitTransaction.Operation
-                .BALANCE, new BalanceOperation());
+                .BALANCE, new BalanceOperationImpl());
         operationOperationHandlerHashMap.put(FruitTransaction.Operation
-                .SUPPLY, new SupplyOperation());
+                .SUPPLY, new SupplyOperationImpl());
         operationOperationHandlerHashMap.put(FruitTransaction.Operation
-                .PURCHASE, new PurchaseOperation());
+                .PURCHASE, new PurchaseOperationImpl());
         operationOperationHandlerHashMap.put(FruitTransaction.Operation
-                .RETURN, new ReturnOperation());
+                .RETURN, new ReturnOperationImpl());
     }
 
     @Override
