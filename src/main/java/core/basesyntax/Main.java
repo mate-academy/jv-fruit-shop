@@ -22,7 +22,7 @@ import core.basesyntax.service.strategy.impl.BalanceOperation;
 import core.basesyntax.service.strategy.impl.PurchaseOperation;
 import core.basesyntax.service.strategy.impl.ReturnOperation;
 import core.basesyntax.service.strategy.impl.SupplyOperation;
-import java.io.File;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +31,14 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
+    private static final String INPUT_FILE_PATH = Paths.get("src", "main",
+            "resources", "reportToRead.csv").toString();
+    private static final String OUTPUT_FILE_PATH = Paths.get("src", "main",
+            "resources", "finalReport.csv").toString();
+
     public static void main(String[] args) {
-        String inputFilePath = "src" + File.separator + "main" + File.separator + "resources"
-                + File.separator + "reportToRead.csv";
         FileReaderService fileReader = new FileReaderServiceImpl();
-        List<String> inputReport = fileReader.read(inputFilePath);
+        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -55,9 +58,7 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl(new FruitBalanceDaoImpl());
         String resultingReport = reportGenerator.getReport();
 
-        String outputFilePath = "src" + File.separator + "main" + File.separator + "resources"
-                + File.separator + "finalReport.csv";
         FileWriterService fileWriter = new FileWriterServiceImpl();
-        fileWriter.write(resultingReport, outputFilePath);
+        fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
     }
 }
