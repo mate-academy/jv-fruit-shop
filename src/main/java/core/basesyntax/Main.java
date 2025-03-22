@@ -22,7 +22,6 @@ import core.basesyntax.service.strategy.impl.BalanceOperation;
 import core.basesyntax.service.strategy.impl.PurchaseOperation;
 import core.basesyntax.service.strategy.impl.ReturnOperation;
 import core.basesyntax.service.strategy.impl.SupplyOperation;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,10 +30,8 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class Main {
-    private static final String INPUT_FILE_PATH = Paths.get("src", "main",
-            "resources", "reportToRead.csv").toString();
-    private static final String OUTPUT_FILE_PATH = Paths.get("src", "main",
-            "resources", "finalReport.csv").toString();
+    private static final String INPUT_FILE_PATH = "src/main/resources/reportToRead.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
         FileReaderService fileReader = new FileReaderServiceImpl();
