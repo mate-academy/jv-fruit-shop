@@ -24,8 +24,8 @@ import service.operation.SupplyOperation;
 import strategy.OperationStrategy;
 
 public class Main {
-    private static final String INPUT_FILE = "src/main/reports/inputReport.csv";
-    private static final String OUTPUT_FILE = "src/main/reports/outputReport.csv";
+    private static final String INPUT_FILE = "src/main/resources/inputReport.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/outputReport.csv";
 
     public static void main(String[] args) throws FileNotFoundException {
         FileReader fileReader = new FileReaderImpl();
@@ -33,6 +33,7 @@ public class Main {
 
         Converter converter = new ConverterImpl();
 
+        Storage storage = new Storage();
         Map<Transaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Transaction.Operation.BALANCE, new BalanceOperation());
         operationHandlerMap.put(Transaction.Operation.SUPPLY, new SupplyOperation());
@@ -41,10 +42,9 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         List<Transaction> transactionList = converter.convertTransaction(inputReport);
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
         shopService.procedure(transactionList);
 
-        Storage storage = new Storage();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String reportResult = reportGenerator.getReport();
 

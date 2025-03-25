@@ -6,6 +6,7 @@ import model.Transaction;
 public class PurchaseOperation implements OperationHandler {
     @Override
     public void performOperation(Transaction transaction) {
-        Storage.remove(transaction.getFruit(), transaction.getQuantity());
+        Storage storage = new Storage();
+        storage.remove(transaction.getFruit(), transaction.getQuantity());
     }
 }
