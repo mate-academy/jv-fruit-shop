@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputFile) {
-        if (inputFile == null && inputFile.size() <= 1) {
+        if (inputFile == null || inputFile.size() <= 1) {
             return List.of();
         }
         return inputFile.stream()

@@ -9,10 +9,8 @@ public class FileWriterImpl implements FileWriter {
 
     @Override
     public void write(String report, String fileName) {
-        try {
-            BufferedWriter writer = Files.newBufferedWriter(Path.of(fileName));
-            writer.write(report);
-            writer.flush();
+        try (BufferedWriter bw = Files.newBufferedWriter(Path.of(fileName))) {
+            bw.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Can not write to file: " + fileName, e);
         }

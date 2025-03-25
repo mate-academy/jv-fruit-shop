@@ -7,7 +7,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport(Map<String, Integer> fruitStorage) {
         StringBuilder report = new StringBuilder("fruit,quantity" + "\n");
         for (Map.Entry<String, Integer> entry : fruitStorage.entrySet()) {
-            report.append(entry.getKey()).append(",").append(entry.getValue()).append("\n");
+            report.append("\n").append(entry.getKey()).append(",")
+                    .append(entry.getValue()).append("\n");
         }
         return report.toString();
     }
