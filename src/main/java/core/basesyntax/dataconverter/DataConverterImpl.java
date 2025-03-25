@@ -5,21 +5,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String SPLITTER = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
 
-        for (String line : data) {
-            String[] fields = line.split(",");
+        data.stream()
+                .skip(1)
+                .forEach(line -> {
+                    try {
+                        String[] fields = line.split(SPLITTER);
 
-            FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(fields[0]);
-            String fruit = fields[1];
-            int quantity = Integer.parseInt(fields[2]);
+                        FruitTransaction.Operation operation = FruitTransaction
+                                .Operation.fromCode(fields[0].trim());
+                        String fruit = fields[1].trim();
+                        int quantity = Integer.parseInt(fields[2].trim());
 
-            FruitTransaction fruitTransaction = new FruitTransaction(operation, fruit, quantity);
-            transactions.add(fruitTransaction);
-        }
+                        transactions.add(new FruitTransaction(operation, fruit, quantity));
+                    } catch (Exception e) {
+                        System.err.println("Term processing error: " + line);
+                    }
+                });
+
         return transactions;
     }
 }

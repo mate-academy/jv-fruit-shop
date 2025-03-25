@@ -16,8 +16,10 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        final String PathToRead = "src/main/java/resources/reportToRead.csv";
+
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/java/resources/reportToRead.csv");
+        List<String> inputReport = fileReader.read(PathToRead);
 
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -30,6 +32,6 @@ public class Main {
         String report = reportGenerator.getReport();
 
         FileWriterImpl fileWriter = new FileWriterImpl();
-        fileWriter.write(report, "src/main/java/resources/reportToRead.csv");
+        fileWriter.write(report, PathToRead);
     }
 }
