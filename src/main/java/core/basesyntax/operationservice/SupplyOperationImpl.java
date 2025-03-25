@@ -11,6 +11,5 @@ public class SupplyOperationImpl implements OperationHandler {
 
         int currentAmount = Storage.getQuantity(fruit);
         Storage.putFruit(fruit, currentAmount + quantity);
-
     }
 }

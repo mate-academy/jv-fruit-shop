@@ -9,7 +9,7 @@ public class FileWriterImpl implements FileWriterInt {
         try (FileWriter writer = new FileWriter(filePath)) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Ошибка записи файла: " + filePath, e);
+            throw new RuntimeException("Cant write file " + filePath, e);
         }
     }
 }
