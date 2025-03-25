@@ -12,7 +12,6 @@ import core.basesyntax.reportgenerator.ReportGenerator;
 import core.basesyntax.reportgenerator.ReportGeneratorImpl;
 import core.basesyntax.shopservice.ShopService;
 import core.basesyntax.shopservice.ShopServiceImpl;
-import core.basesyntax.storage.Storage;
 import java.util.List;
 
 public class Main {
