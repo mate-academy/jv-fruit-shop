@@ -22,16 +22,16 @@ public class Storage {
         this.fruits = fruits;
     }
 
-    public void plusFruit(String fruit, int quantity) {
+    public void addFruit(String fruit, int quantity) {
         fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
     }
 
-    public void minusFruit(String fruit, int quantity) {
+    public void removeFruit(String fruit, int quantity) {
         if (fruits.get(fruit) == null
                 || fruits.get(fruit) == 0
                 || quantity > fruits.get(fruit)) {
             throw new RuntimeException("No this fruit on the storage! Avaiable: "
-                    + fruits.getOrDefault(fruit, 0) + "Requested: " + quantity);
+                    + fruits.getOrDefault(fruit, 0) + "   Requested: " + quantity);
         }
         fruits.put(fruit, fruits.get(fruit) - quantity);
     }

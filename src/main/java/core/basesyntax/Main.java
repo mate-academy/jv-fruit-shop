@@ -18,15 +18,19 @@ import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperationHandler;
 import core.basesyntax.service.operation.ReturnOperationHandler;
 import core.basesyntax.service.operation.SupplyOperationHandler;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final Path FILE_READ = Path.of("src/main/resources/reportToRead.csv");
+    private static final Path FILE_WRITE = Path.of("src/main/resources/reportFinal.csv");
+
     public static void main(String[] args) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/resources/reportToRead.csv");
+        List<String> inputReport = fileReader.read(String.valueOf(FILE_READ));
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
@@ -51,6 +55,6 @@ public class Main {
 
         // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "src/main/resources/reportFinal.csv");
+        fileWriter.write(resultingReport, String.valueOf(FILE_WRITE));
     }
 }

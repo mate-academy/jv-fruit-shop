@@ -6,6 +6,6 @@ import core.basesyntax.model.FruitTransaction;
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
     public void handle(FruitTransaction fruitTransaction, Storage fruitStorage) {
-        fruitStorage.minusFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        fruitStorage.removeFruit(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

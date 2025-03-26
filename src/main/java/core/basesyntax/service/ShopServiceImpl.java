@@ -6,23 +6,22 @@ import core.basesyntax.service.operation.OperationHandler;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
+    private static final Storage FRUIT_STORAGE = new Storage();
     private final OperationStrategy operationStrategy;
-    private final Storage fruitStorage = new Storage();
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
 
     public Storage getFruitStorage() {
-        return fruitStorage;
+        return FRUIT_STORAGE;
     }
 
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            handler.handle(transaction, fruitStorage);
+            handler.handle(transaction, FRUIT_STORAGE);
         }
     }
-
 }
