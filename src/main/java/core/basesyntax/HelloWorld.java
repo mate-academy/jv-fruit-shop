@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import java.util.HashMap;
-import java.util.List;
 import java.io.*;
 import java.util.*;
 
@@ -9,7 +8,7 @@ import java.util.*;
  * Feel free to remove this class and create your own.
  */
 public class HelloWorld {
-    public class Main {
+    public static class Main {
         public static void main(String[] arg) {
             // 1. Read the data from the input CSV file
             String inputFile = "input.csv";
@@ -22,7 +21,6 @@ public class HelloWorld {
                 while ((line = read.readLine()) != null) {
                     String[] parts = line.split(",");
                     String operation = parts[0].trim();
-                    String fruit = parts[1].trim();
                     int quantity = Integer.parseInt(parts[2].trim());
 
                     int current = fruitShop.getOrDefault(operation, 0);
