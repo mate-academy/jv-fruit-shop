@@ -4,7 +4,11 @@ import db.Storage;
 import model.Transaction;
 
 public class ReturnOperation implements OperationHandler {
-    Storage storage = new Storage();
+    private Storage storage = new Storage();
+
+    public Storage getStorage() {
+        return storage;
+    }
 
     @Override
     public void performOperation(Transaction transaction) {

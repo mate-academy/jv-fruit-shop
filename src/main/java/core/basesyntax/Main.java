@@ -43,7 +43,7 @@ public class Main {
 
         List<Transaction> transactionList = converter.convertTransaction(inputReport);
         ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
-        shopService.procedure(transactionList);
+        shopService.process(transactionList);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String reportResult = reportGenerator.getReport();
