@@ -1,7 +1,6 @@
 package service.impl;
 
 import db.StorageService;
-import db.StorageServiceImpl;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -15,7 +14,7 @@ public class ShopServiceImpl implements ShopService {
 
     public ShopServiceImpl(StorageService storage,
             Map<FruitTransaction.Operation, Operation> operationMap) {
-        this.storage = new StorageServiceImpl();
+        this.storage = storage;
         this.operationMap = operationMap;
     }
 

@@ -11,9 +11,11 @@ import report.ReportFormatter;
 import report.ReportGenerator;
 import report.impl.CsvReportFormatter;
 import report.impl.ReportGenerationImpl;
+import service.ParseService;
 import service.ReaderService;
 import service.ShopService;
 import service.WriterService;
+import service.impl.ParseServiceImpl;
 import service.impl.ReaderServiceImpl;
 import service.impl.ShopServiceImpl;
 import service.impl.WriterServiceImpl;
@@ -27,7 +29,8 @@ public class HelloWorld {
     private static final String OUTPUT_FILE_PATH = "fileReport.csv";
 
     public static void main(String[] args) {
-        ReaderService readerService = new ReaderServiceImpl();
+        ParseService parseService = new ParseServiceImpl();
+        ReaderService readerService = new ReaderServiceImpl(parseService);
         List<FruitTransaction> transactions = readerService.readFromFile(INPUT_FILE_PATH);
 
         Map<Operation, strategy.Operation> operationHandlers = new HashMap<>();
