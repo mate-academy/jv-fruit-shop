@@ -4,9 +4,10 @@ import db.Storage;
 import model.Transaction;
 
 public class BalanceOperation implements OperationHandler {
+    Storage storage = new Storage();
+
     @Override
     public void performOperation(Transaction transaction) {
-        Storage storage = new Storage();
         storage.add(transaction.getFruit(), transaction.getQuantity());
     }
 }

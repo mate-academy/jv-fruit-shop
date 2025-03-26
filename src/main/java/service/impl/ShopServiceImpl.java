@@ -17,7 +17,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void procedure(List<Transaction> transactionList) {
+    public void process(List<Transaction> transactionList) {
         for (Transaction transaction : transactionList) {
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
             handler.performOperation(transaction);

@@ -30,7 +30,8 @@ public class ConverterImpl implements Converter {
         try {
             transaction.setQuantity(Integer.parseInt(fields[QUANTITY_PARAMETER]));
         } catch (NumberFormatException e) {
-            throw new RuntimeException("Cannot define quantity. Invalid number found.");
+            throw new RuntimeException("Cannot define quantity. Invalid number found "
+                    + fields[QUANTITY_PARAMETER]);
         }
         return transaction;
     }
