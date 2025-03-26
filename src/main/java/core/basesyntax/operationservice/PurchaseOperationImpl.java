@@ -12,8 +12,12 @@ public class PurchaseOperationImpl implements OperationHandler {
         int currentAmount = Storage.getQuantity(fruit);
 
         if (currentAmount < quantity) {
-            throw new RuntimeException("Ошибка: Недостаточно " + fruit + " на складе! Требуется: "
-                    + quantity + ", доступно: " + currentAmount);
+            throw new RuntimeException(String.format(
+                    "Error: Not enough %s in storage! Required: %d, \n"
+                            +
+                            "available: %d",
+                    fruit, quantity, currentAmount
+            ));
         }
 
         Storage.putFruit(fruit, currentAmount - quantity);

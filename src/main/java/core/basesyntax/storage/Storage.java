@@ -25,5 +25,4 @@ public class Storage {
     public static void clearStorage() {
         fruitStorage.clear();
     }
-
 }
