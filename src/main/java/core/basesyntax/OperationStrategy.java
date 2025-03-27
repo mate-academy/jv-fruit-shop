@@ -7,6 +7,7 @@ interface OperationStrategy {
 }
 
     class Balance implements OperationStrategy {
+
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
         fruitShop.put(fruit, quantity);
@@ -14,6 +15,7 @@ interface OperationStrategy {
 }
 
     class Supply implements OperationStrategy {
+
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
         int currentQuantity = fruitShop.getOrDefault(fruit, 0);
@@ -25,6 +27,7 @@ interface OperationStrategy {
 }
 
     class Purchase implements OperationStrategy {
+
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
         int currentQuantity = fruitShop.getOrDefault(fruit, 0);
@@ -36,6 +39,7 @@ interface OperationStrategy {
 }
 
     class Return implements OperationStrategy {
+
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
         int currentQuantity = fruitShop.getOrDefault(fruit, 0);
