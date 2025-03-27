@@ -4,36 +4,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private Map<String, Integer> fruits = new HashMap<>();
+    private static Map<String, Integer> FRUIT = new HashMap<>();
 
     public Storage(Map<String, Integer> fruits) {
-        this.fruits = fruits;
+        this.FRUIT = fruits;
     }
 
     public Storage() {
-        this.fruits = fruits;
+        this.FRUIT = FRUIT;
     }
 
     public Map<String, Integer> getFruits() {
-        return fruits;
+        return FRUIT;
     }
 
     public void setFruits(Map<String, Integer> fruits) {
-        this.fruits = fruits;
+        this.FRUIT = fruits;
     }
 
     public void addFruit(String fruit, int quantity) {
-        fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
+        FRUIT.put(fruit, FRUIT.getOrDefault(fruit, 0) + quantity);
     }
 
     public void removeFruit(String fruit, int quantity) {
-        if (fruits.get(fruit) == null
-                || fruits.get(fruit) == 0
-                || quantity > fruits.get(fruit)) {
+        if (FRUIT.get(fruit) == null
+                || FRUIT.get(fruit) == 0
+                || quantity > FRUIT.get(fruit)) {
             throw new RuntimeException("No this fruit on the storage! Avaiable: "
-                    + fruits.getOrDefault(fruit, 0) + "   Requested: " + quantity);
+                    + FRUIT.getOrDefault(fruit, 0) + "   Requested: " + quantity);
         }
-        fruits.put(fruit, fruits.get(fruit) - quantity);
+        FRUIT.put(fruit, FRUIT.get(fruit) - quantity);
     }
 
 }
