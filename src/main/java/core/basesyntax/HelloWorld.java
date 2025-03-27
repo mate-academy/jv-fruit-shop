@@ -28,13 +28,13 @@ public class HelloWorld {
         static class FruitShopService {
 
             private Map<String, Integer> fruitShop = new HashMap<>();
-            private final Map<String, OperationStrategy> operation = new HashMap<>();
+            private final Map<String, OperationStrategy> operationsMap = new HashMap<>();
 
             public FruitShopService() {
-                operation.put("b", new Balance());
-                operation.put("s", new Supply());
-                operation.put("p", new Purchase());
-                operation.put("r", new Return());
+                operationsMap.put("b", new Balance());
+                operationsMap.put("s", new Supply());
+                operationsMap.put("p", new Purchase());
+                operationsMap.put("r", new Return());
             }
 
             public void processFile(String inputFile) throws IOException {
