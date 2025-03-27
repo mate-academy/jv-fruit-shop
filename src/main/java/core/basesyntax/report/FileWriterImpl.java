@@ -4,11 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class FileWriterImpl extends FileWriter implements core.basesyntax.report.FileWriter {
-
-    public FileWriterImpl(String fileName) throws IOException {
-        super(fileName);
-    }
+public class FileWriterImpl implements FileWriterCustom {
 
     @Override
     public void write(String report, String fileName) {

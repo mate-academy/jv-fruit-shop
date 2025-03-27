@@ -4,9 +4,9 @@ import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
-import core.basesyntax.report.FileReader;
+import core.basesyntax.report.FileReaderCustom;
 import core.basesyntax.report.FileReaderImpl;
-import core.basesyntax.report.FileWriter;
+import core.basesyntax.report.FileWriterCustom;
 import core.basesyntax.report.FileWriterImpl;
 import core.basesyntax.report.ReportGenerator;
 import core.basesyntax.report.ReportGeneratorImpl;
@@ -28,7 +28,7 @@ public class Main {
     private static final String FILE_WRITE = "src/main/resources/reportFinal.csv";
 
     public static void main(String[] args) throws IOException {
-        FileReader fileReader = new FileReaderImpl();
+        FileReaderCustom fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(FILE_READ);
 
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
@@ -47,7 +47,7 @@ public class Main {
         String resultingReport = reportGenerator.getReport(shopService.getFruitStorage()
                 .getFruits());
 
-        FileWriter fileWriter = new FileWriterImpl(FILE_WRITE);
+        FileWriterCustom fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, FILE_WRITE);
     }
 }

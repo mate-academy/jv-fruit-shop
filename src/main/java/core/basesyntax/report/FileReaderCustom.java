@@ -2,6 +2,6 @@ package core.basesyntax.report;
 
 import java.util.List;
 
-public interface FileReader {
+public interface FileReaderCustom {
     List<String> read(String fileName);
 }
