@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.dao.DataConverter;
 import core.basesyntax.dao.DataConverterImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.report.FileReaderCustom;
@@ -44,7 +45,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(shopService.getFruitStorage());
+        String resultingReport = reportGenerator.getReport(Storage.getStorage());
 
         FileWriterCustom fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, FILE_WRITE);
