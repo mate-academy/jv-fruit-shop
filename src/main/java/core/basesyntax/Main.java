@@ -31,10 +31,8 @@ public class Main {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(pathToRead);
 
-        // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
 
-        // 3. Create and feel the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationImpl());
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationImpl());
@@ -42,16 +40,13 @@ public class Main {
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl());
         OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
 
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        // 5.Generate report based on the current Storage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
-        // 6. Write the received report into the destination file
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, pathToWrite);
     }

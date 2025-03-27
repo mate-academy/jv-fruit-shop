@@ -22,7 +22,7 @@ public class ShopServiceImpl implements ShopService {
         handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationImpl());
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationImpl());
 
-        this.operationStrategy = new OperationStrategyImpl(handlers); // ✅ Теперь передаём Map!
+        this.operationStrategy = new OperationStrategyImpl(handlers);
     }
 
     @Override

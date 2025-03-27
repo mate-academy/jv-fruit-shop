@@ -36,7 +36,7 @@ public class DataConverterImpl implements DataConverter {
                             quantity = Integer.parseInt(fields[QUANTITY_INDEX].trim());
                             if (quantity < 0) {
                                 throw new DataProcessingException(
-                                        "\n"
+                                        System.lineSeparator()
                                                 +
                                                 "Error: negative amount of fruit in the line: "
                                                 +
@@ -52,7 +52,7 @@ public class DataConverterImpl implements DataConverter {
                         transactions.add(new FruitTransaction(operation, fruit, quantity));
 
                     } catch (DataProcessingException e) {
-                        System.err.println(e.getMessage());
+                        throw new DataProcessingException(e.getMessage());
                     }
                 });
 
