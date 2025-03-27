@@ -6,7 +6,7 @@ interface OperationStrategy {
     void execute(Map<String, Integer> fruitShop, String fruit, int quantity);
 }
 
-    class Balance implements OperationStrategy {
+class Balance implements OperationStrategy {
 
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
@@ -14,7 +14,7 @@ interface OperationStrategy {
     }
 }
 
-    class Supply implements OperationStrategy {
+class Supply implements OperationStrategy {
 
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
@@ -26,7 +26,7 @@ interface OperationStrategy {
     }
 }
 
-    class Purchase implements OperationStrategy {
+class Purchase implements OperationStrategy {
 
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
@@ -38,7 +38,7 @@ interface OperationStrategy {
     }
 }
 
-    class Return implements OperationStrategy {
+class Return implements OperationStrategy {
 
     @Override
     public void execute(Map<String, Integer> fruitShop, String fruit, int quantity) {
