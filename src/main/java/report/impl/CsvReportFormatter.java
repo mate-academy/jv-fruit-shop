@@ -4,18 +4,17 @@ import java.util.Map;
 import report.ReportFormatter;
 
 public class CsvReportFormatter implements ReportFormatter {
-    private static final String First_LINE = "fruit,quantity\n";
-    private static final String SEPARATION = ",";
-    private static final String NEXT_LINE = "\n";
+    private static final String FIRST_LINE = "fruit,quantity\n";
+    private static final String SEPARATOR = ",";
 
     @Override
     public String format(Map<String, Integer> storage) {
         StringBuilder builder = new StringBuilder();
-        builder.append(First_LINE);
+        builder.append(FIRST_LINE);
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             String fruit = entry.getKey();
             int quantity = entry.getValue();
-            builder.append(fruit).append(SEPARATION).append(quantity).append(NEXT_LINE);
+            builder.append(fruit).append(SEPARATOR).append(quantity).append(System.lineSeparator());
         }
         return builder.toString();
     }

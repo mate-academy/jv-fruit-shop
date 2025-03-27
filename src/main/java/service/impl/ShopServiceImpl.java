@@ -1,6 +1,6 @@
 package service.impl;
 
-import db.StorageService;
+import db.Storage;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -9,28 +9,22 @@ import strategy.Operation;
 
 public class ShopServiceImpl implements ShopService {
     private static final String Error = "No handler for operation: ";
-    private final StorageService storage;
     private final Map<FruitTransaction.Operation, strategy.Operation> operationMap;
 
-    public ShopServiceImpl(StorageService storage,
-            Map<FruitTransaction.Operation, Operation> operationMap) {
-        this.storage = storage;
+    public ShopServiceImpl(Map<FruitTransaction.Operation, Operation> operationMap) {
         this.operationMap = operationMap;
     }
 
     @Override
     public Map<String, Integer> processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction1 : transactions) {
-            Operation operation = operationMap.get(transaction1.getOperation());
-            String fruit = transaction1.getFruit();
-            int quantity = transaction1.getQuantity();
-
-            if (operation != null) {
-                operation.execute(storage, fruit, quantity);
+            Operation handler = operationMap.get(transaction1.getOperation());
+            if (handler != null) {
+                handler.execute(transaction1.getFruit(), transaction1.getQuantity());
             } else {
-                System.out.println(Error + transaction1.getOperation());
+                throw new RuntimeException(Error + transaction1.getOperation());
             }
         }
-        return storage.getStorageCopy();
+        return Storage.storage;
     }
 }

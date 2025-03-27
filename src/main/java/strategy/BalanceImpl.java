@@ -1,11 +1,11 @@
 package strategy;
 
-import db.StorageService;
+import db.Storage;
 
 public class BalanceImpl implements Operation {
 
     @Override
-    public void execute(StorageService storage, String fruit, int quantity) {
-        storage.put(fruit, quantity);
+    public void execute(String fruit, int quantity) {
+        Storage.storage.put(fruit, quantity);
     }
 }

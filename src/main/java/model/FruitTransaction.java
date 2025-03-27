@@ -2,6 +2,7 @@ package model;
 
 public class FruitTransaction {
 
+    private static final String ERROR = "Unsupported operation code: ";
     private Operation operation;
     private String fruit;
     private int quantity;
@@ -31,7 +32,10 @@ public class FruitTransaction {
     }
 
     public enum Operation {
-        BALANCE("b"), SUPPLY("s"), PURCHASE("p"), RETURN("r");
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
 
         private final String code;
 
@@ -49,7 +53,7 @@ public class FruitTransaction {
                     return op;
                 }
             }
-            throw new RuntimeException(code);
+            throw new IllegalArgumentException(ERROR + code);
         }
     }
 }
