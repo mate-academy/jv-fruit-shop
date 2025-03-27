@@ -1,11 +1,14 @@
 package core.basesyntax;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
 
-import java.io.*;
-
-class FruitShopService {
+public class FruitShopService {
 
     private Map<String, Integer> fruitShop = new HashMap<>();
     private final Map<String, OperationStrategy> operationsMap = new HashMap<>();
