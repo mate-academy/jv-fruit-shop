@@ -1,8 +1,8 @@
 package core.basesyntax;
 
-import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.io.*;
 
 class FruitShopService {
 
