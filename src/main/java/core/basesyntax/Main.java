@@ -44,8 +44,7 @@ public class Main {
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(shopService.getFruitStorage()
-                .getFruits());
+        String resultingReport = reportGenerator.getReport(shopService.getFruitStorage());
 
         FileWriterCustom fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, FILE_WRITE);

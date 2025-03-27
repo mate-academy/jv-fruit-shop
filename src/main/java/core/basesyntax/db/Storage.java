@@ -4,36 +4,35 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<String, Integer> FRUIT = new HashMap<>();
+    private static Map<String, Integer> storage = new HashMap<>();
 
     public Storage(Map<String, Integer> fruits) {
-        this.FRUIT = fruits;
+        this.storage = fruits;
     }
 
-    public Storage() {
-        this.FRUIT = FRUIT;
+    public static Map<String, Integer> getStorage() {
+        return storage;
     }
 
-    public Map<String, Integer> getFruits() {
-        return FRUIT;
+    public static void setStorage(Map<String, Integer> storage) {
+        Storage.storage = storage;
     }
 
-    public void setFruits(Map<String, Integer> fruits) {
-        this.FRUIT = fruits;
+    public static Map<String, Integer> getFruits() {
+        return storage;
     }
 
-    public void addFruit(String fruit, int quantity) {
-        FRUIT.put(fruit, FRUIT.getOrDefault(fruit, 0) + quantity);
+    public static void addFruit(String fruit, int quantity) {
+        storage.put(fruit, storage.getOrDefault(fruit, 0) + quantity);
     }
 
-    public void removeFruit(String fruit, int quantity) {
-        if (FRUIT.get(fruit) == null
-                || FRUIT.get(fruit) == 0
-                || quantity > FRUIT.get(fruit)) {
+    public static void removeFruit(String fruit, int quantity) {
+        if (storage.get(fruit) == null
+                || storage.get(fruit) == 0
+                || quantity > storage.get(fruit)) {
             throw new RuntimeException("No this fruit on the storage! Avaiable: "
-                    + FRUIT.getOrDefault(fruit, 0) + "   Requested: " + quantity);
+                    + storage.getOrDefault(fruit, 0) + "   Requested: " + quantity);
         }
-        FRUIT.put(fruit, FRUIT.get(fruit) - quantity);
+        storage.put(fruit, storage.get(fruit) - quantity);
     }
-
 }
