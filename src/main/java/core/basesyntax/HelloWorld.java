@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-
 import java.util.HashMap;
 import java.io.*;
 import java.util.*;
