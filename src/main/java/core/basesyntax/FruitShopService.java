@@ -31,7 +31,7 @@ public class FruitShopService {
             if (operationStrategy != null) {
                 inventory.applyOperation(operationStrategy, fruit, quantity);
             } else {
-                throw new RuntimeException("Неизвестная операция: " + operation);
+                throw new RuntimeException("Unknown operation: " + operation);
             }
         }
     }

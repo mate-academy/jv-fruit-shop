@@ -12,10 +12,10 @@ public class HelloWorld {
             fruitShopService.processFile(inputFile);
             fruitShopService.generateReport(outputFile);
 
-            System.out.println("Отчёт успешно записан в файл " + outputFile);
+            System.out.println("The report has been written to file. " + outputFile);
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Ошибка при обработке файла: " + e.getMessage());
+            System.out.println("Error processing file: " + e.getMessage());
         }
     }
 }
