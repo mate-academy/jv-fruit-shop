@@ -1,6 +1,5 @@
 package service.impl;
 
-import db.Storage;
 import java.util.List;
 import java.util.Map;
 import model.FruitTransaction;
@@ -16,7 +15,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public Map<String, Integer> processTransactions(List<FruitTransaction> transactions) {
+    public void processTransactions(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction1 : transactions) {
             Operation handler = operationMap.get(transaction1.getOperation());
             if (handler != null) {
@@ -25,6 +24,5 @@ public class ShopServiceImpl implements ShopService {
                 throw new RuntimeException(Error + transaction1.getOperation());
             }
         }
-        return Storage.storage;
     }
 }

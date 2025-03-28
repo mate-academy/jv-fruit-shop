@@ -7,8 +7,7 @@ import java.util.Map;
 import model.FruitTransaction;
 import model.FruitTransaction.Operation;
 import report.ReportGenerator;
-import report.impl.ReportGenerationImpl;
-import service.ParseService;
+import report.impl.ReportGeneratorImpl;
 import service.ReaderService;
 import service.ShopService;
 import service.WriterService;
@@ -26,7 +25,7 @@ public class Application {
     public void run(String inputFilePath, String outputFilePath) {
         Storage.storage.clear();
 
-        ParseService parseService = new ParseServiceImpl();
+        ParseServiceImpl parseService = new ParseServiceImpl();
         ReaderService readerService = new ReaderServiceImpl(parseService);
 
         Map<FruitTransaction.Operation, strategy.Operation>
@@ -40,7 +39,7 @@ public class Application {
         ShopService shopService = new ShopServiceImpl(operationHandlers);
         shopService.processTransactions(transactions);
 
-        ReportGenerator generator = new ReportGenerationImpl();
+        ReportGenerator generator = new ReportGeneratorImpl();
         WriterService writerService = new WriterServiceImpl();
         String report = generator.generateReport();
         writerService.writeReport(report, outputFilePath);

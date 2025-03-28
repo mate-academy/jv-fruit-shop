@@ -1,14 +1,13 @@
 package report.impl;
 
 import db.Storage;
-import report.ReportFormatter;
 import report.ReportGenerator;
 
-public class ReportGenerationImpl implements ReportGenerator {
+public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String generateReport() {
-        ReportFormatter formatter = new CsvReportFormatter();
+        ReportFormatter formatter = new ReportFormatter();
         return formatter.format(Storage.storage);
     }
 }

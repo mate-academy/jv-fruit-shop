@@ -5,14 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import model.FruitTransaction;
-import service.ParseService;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
     private static final String ERROR = "Error reading file: ";
-    private final ParseService parseService;
+    private final ParseServiceImpl parseService;
 
-    public ReaderServiceImpl(ParseService parseService) {
+    public ReaderServiceImpl(ParseServiceImpl parseService) {
         this.parseService = parseService;
     }
 
@@ -21,7 +20,7 @@ public class ReaderServiceImpl implements ReaderService {
         try {
             return Files.lines(Paths.get(filePath))
                 .skip(1)
-                .map(parseService::parseLine)
+                .map(parseService::parseCsvLine)
                 .toList();
         } catch (IOException e) {
             throw new RuntimeException(ERROR + filePath, e);
