@@ -12,7 +12,8 @@ public class ReportWriter {
             writer.newLine();
 
             for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
-                writer.write(entry.getKey() + "," + entry.getValue());
+                writer.write(entry.getKey() + "," +
+                        entry.getValue());
                 writer.newLine();
             }
         }

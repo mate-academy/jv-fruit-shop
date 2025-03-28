@@ -35,6 +35,7 @@ public class FruitShopService {
             }
         }
     }
+
     public void generateReport(String outputFile) throws IOException {
         ReportWriter.writeReport(inventory.getInventory(), outputFile);
     }
