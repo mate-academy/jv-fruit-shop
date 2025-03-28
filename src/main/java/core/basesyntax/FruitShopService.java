@@ -1,16 +1,14 @@
 package core.basesyntax;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class FruitShopService {
-
-    private Map<String, Integer> fruitShop = new HashMap<>();
+    private final FileProcessor fileProcessor = new FileProcessor();
+    private final ReportWriter reportWriter = new ReportWriter();
+    private final FruitShopInventory inventory = new FruitShopInventory();
     private final Map<String, OperationStrategy> operationsMap = new HashMap<>();
 
     public FruitShopService() {
@@ -21,34 +19,23 @@ public class FruitShopService {
     }
 
     public void processFile(String inputFile) throws IOException {
-        try (BufferedReader reader = new BufferedReader(new FileReader(inputFile))) {
-            String line;
+        List<String[]> data = FileProcessor.processFile(inputFile);
 
-            while ((line = reader.readLine()) != null) {
-                String[] lines = line.split(",");
-                String operation = lines[0].trim();
-                int quantity = Integer.parseInt(lines[2].trim());
+        for (String[] row : data) {
+            String operation = row[0].trim();
+            String fruit = row[1].trim();
+            int quantity = Integer.parseInt(row[2].trim());
 
-                OperationStrategy operationStrategy = operationsMap.get(operation);
+            OperationStrategy operationStrategy = operationsMap.get(operation);
 
-                if (operationStrategy != null) {
-                    operationStrategy.execute(fruitShop, lines[1].trim(), quantity);
-                } else {
-                    throw new RuntimeException("Неизвестная операция: " + operation);
-                }
+            if (operationStrategy != null) {
+                inventory.applyOperation(operationStrategy, fruit, quantity);
+            } else {
+                throw new RuntimeException("Неизвестная операция: " + operation);
             }
         }
     }
-
-    public void writeToFile(String outputFile) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            writer.write("fruit,quantity");
-            writer.newLine();
-
-            for (Map.Entry<String, Integer> entry : fruitShop.entrySet()) {
-                writer.write(entry.getKey() + "," + entry.getValue());
-                writer.newLine();
-            }
-        }
+    public void generateReport(String outputFile) throws IOException {
+        ReportWriter.writeReport(inventory.getInventory(), outputFile);
     }
 }
