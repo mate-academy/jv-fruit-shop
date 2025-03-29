@@ -1,7 +1,6 @@
 package core.basesyntax;
 
 import db.Storage;
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +26,7 @@ public class Main {
     private static final String INPUT_FILE = "src/main/resources/inputReport.csv";
     private static final String OUTPUT_FILE = "src/main/resources/outputReport.csv";
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE);
 
