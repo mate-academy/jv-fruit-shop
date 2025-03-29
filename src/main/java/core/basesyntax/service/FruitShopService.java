@@ -1,7 +1,11 @@
 package core.basesyntax.service;
 
+import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.db.FruitShopInventory;
-import core.basesyntax.strategy.*;
+import core.basesyntax.strategy.Balance;
+import core.basesyntax.strategy.Supply;
+import core.basesyntax.strategy.Purchase;
+import core.basesyntax.strategy.Return;
 
 import java.io.IOException;
 import java.util.HashMap;
