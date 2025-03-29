@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.service;
+
+import core.basesyntax.db.FruitShopInventory;
+import core.basesyntax.strategy.*;
 
 import java.io.IOException;
 import java.util.HashMap;

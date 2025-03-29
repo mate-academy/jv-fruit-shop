@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.service.FruitShopService;
 import java.io.IOException;
 
 public class HelloWorld {
@@ -12,10 +13,9 @@ public class HelloWorld {
             fruitShopService.processFile(inputFile);
             fruitShopService.generateReport(outputFile);
 
-            System.out.println("The report has been written to file. " + outputFile);
+            System.out.println("The report has been written to file: " + outputFile);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Error processing file: " + e.getMessage());
+            throw new RuntimeException("Error processing file: " + e.getMessage(), e);
         }
     }
 }

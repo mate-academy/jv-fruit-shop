@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ReportWriter {
-    public static void writeReport(
-            Map<String, Integer> inventory, String outputFile) throws IOException {
+    public static void writeReport(Map<String, Integer> inventory, String outputFile) throws IOException {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write("fruit,quantity");
             writer.newLine();
@@ -16,6 +15,9 @@ public class ReportWriter {
                 writer.write(entry.getKey() + "," + entry.getValue());
                 writer.newLine();
             }
+        } catch (IOException e) {
+            throw new RuntimeException("Error writing report to file: " + outputFile, e);
         }
     }
 }
+

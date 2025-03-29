@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,6 +15,8 @@ public class FileProcessor {
                 String[] fields = line.split(",");
                 data.add(fields);
             }
+        } catch (IOException e) {
+            throw new RuntimeException("Error reading file: " + filePath, e);
         }
         return data;
     }
