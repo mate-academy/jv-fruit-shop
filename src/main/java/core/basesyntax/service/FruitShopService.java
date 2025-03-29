@@ -1,9 +1,9 @@
 package core.basesyntax.service;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import core.basesyntax.db.FruitShopInventory;
 import core.basesyntax.strategy.OperationStrategy;
