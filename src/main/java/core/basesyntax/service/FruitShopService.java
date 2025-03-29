@@ -1,16 +1,16 @@
 package core.basesyntax.service;
 
-import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.db.FruitShopInventory;
-import core.basesyntax.strategy.Balance;
-import core.basesyntax.strategy.Supply;
-import core.basesyntax.strategy.Purchase;
-import core.basesyntax.strategy.Return;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import core.basesyntax.db.FruitShopInventory;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategy.Balance;
+import core.basesyntax.strategy.Supply;
+import core.basesyntax.strategy.Purchase;
+import core.basesyntax.strategy.Return;
 
 public class FruitShopService {
     private final FileProcessor fileProcessor = new FileProcessor();
