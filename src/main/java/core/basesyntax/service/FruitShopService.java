@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopService {
-    private final FileProcessor fileProcessor = new FileProcessor();
+    private final FileReaderImpl fileProcessor = new FileReaderImpl();
     private final ReportWriter reportWriter = new ReportWriter();
     private final FruitShopInventory inventory = new FruitShopInventory();
     private final Map<String, OperationStrategy> operationsMap = new HashMap<>();
@@ -25,7 +25,7 @@ public class FruitShopService {
     }
 
     public void processFile(String inputFile) throws IOException {
-        List<String[]> data = FileProcessor.processFile(inputFile);
+        List<String[]> data = FileReaderImpl.processFile(inputFile);
 
         for (String[] row : data) {
             String operation = row[0].trim();
@@ -40,9 +40,5 @@ public class FruitShopService {
                 throw new RuntimeException("Unknown operation: " + operation);
             }
         }
-    }
-
-    public void generateReport(String outputFile) throws IOException {
-        ReportWriter.writeReport(inventory.getInventory(), outputFile);
     }
 }
