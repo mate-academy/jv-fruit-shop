@@ -1,4 +1,4 @@
-package core.basesyntax.reportGenerator;
+package core.basesyntax.reportgenerator;
 
 import core.basesyntax.storage.Storage;
 
@@ -7,10 +7,10 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport() {
         StringBuilder sb = new StringBuilder();
 
-        for (String fruit : Storage.fruitStorage.keySet()) {
+        for (String fruit : Storage.getFruitStorage().keySet()) {
             sb.append(fruit)
                     .append(",")
-                    .append(Storage.fruitStorage.get(fruit))
+                    .append(Storage.getFruitStorage().get(fruit))
                     .append(" ");
         }
 

@@ -1,8 +1,8 @@
-package core.basesyntax.operationHandling.operation;
+package core.basesyntax.operationhandler.operation;
 
 import core.basesyntax.storage.StorageDaoImpl;
 
-public class ReturnOperation implements OperationHandler {
+public class SupplyOperation implements OperationHandler {
     @Override
     public void handleOperation(String fruit, int quantity) {
         StorageDaoImpl storageDao = new StorageDaoImpl();

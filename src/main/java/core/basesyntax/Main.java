@@ -1,23 +1,23 @@
 package core.basesyntax;
 
-import core.basesyntax.convertdatatoobject.DataConverter;
-import core.basesyntax.convertdatatoobject.DataConverterImpl;
+import core.basesyntax.dataconverter.DataConverter;
+import core.basesyntax.dataconverter.DataConverterImpl;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.operationHandling.OperationStrategy;
-import core.basesyntax.operationHandling.OperationStrategyImpl;
-import core.basesyntax.operationHandling.operation.BalanceOperation;
-import core.basesyntax.operationHandling.operation.OperationHandler;
-import core.basesyntax.operationHandling.operation.PurchaseOperation;
-import core.basesyntax.operationHandling.operation.ReturnOperation;
-import core.basesyntax.operationHandling.operation.SupplyOperation;
-import core.basesyntax.readfromfile.FileReader;
-import core.basesyntax.readfromfile.FileReaderImpl;
-import core.basesyntax.reportGenerator.ReportGenerator;
-import core.basesyntax.reportGenerator.ReportGeneratorImpl;
-import core.basesyntax.service.ShopService;
-import core.basesyntax.service.ShopServiceImpl;
-import core.basesyntax.writefinalreport.FileWriter;
-import core.basesyntax.writefinalreport.FileWriterImpl;
+import core.basesyntax.operationhandler.OperationStrategy;
+import core.basesyntax.operationhandler.OperationStrategyImpl;
+import core.basesyntax.operationhandler.operation.BalanceOperation;
+import core.basesyntax.operationhandler.operation.OperationHandler;
+import core.basesyntax.operationhandler.operation.PurchaseOperation;
+import core.basesyntax.operationhandler.operation.ReturnOperation;
+import core.basesyntax.operationhandler.operation.SupplyOperation;
+import core.basesyntax.filereader.FileReader;
+import core.basesyntax.filereader.FileReaderImpl;
+import core.basesyntax.reportgenerator.ReportGenerator;
+import core.basesyntax.reportgenerator.ReportGeneratorImpl;
+import core.basesyntax.shopservice.ShopService;
+import core.basesyntax.shopservice.ShopServiceImpl;
+import core.basesyntax.filewriter.FileWriter;
+import core.basesyntax.filewriter.FileWriterImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +30,7 @@ public class Main {
 
         // 2. Convert the incoming data into FruitTransactions list
         DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         // 3. Create and fill the map with all OperationHandler implementations
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();

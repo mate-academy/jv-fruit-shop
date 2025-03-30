@@ -1,4 +1,4 @@
-package core.basesyntax.writefinalreport;
+package core.basesyntax.filewriter;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

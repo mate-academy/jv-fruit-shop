@@ -1,4 +1,4 @@
-package core.basesyntax.writefinalreport;
+package core.basesyntax.filewriter;
 
 public interface FileWriter {
     void write(String resultingReport, String s);

@@ -1,4 +1,4 @@
-package core.basesyntax.readfromfile;
+package core.basesyntax.filereader;
 
 import java.io.BufferedReader;
 import java.io.IOException;

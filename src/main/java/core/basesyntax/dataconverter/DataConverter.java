@@ -1,4 +1,4 @@
-package core.basesyntax.convertdatatoobject;
+package core.basesyntax.dataconverter;
 
 import core.basesyntax.model.FruitTransaction;
 import java.util.List;
