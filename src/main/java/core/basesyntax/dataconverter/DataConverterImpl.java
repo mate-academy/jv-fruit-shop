@@ -18,8 +18,7 @@ public class DataConverterImpl implements DataConverter {
                 case "b" -> operation = FruitTransaction.Operation.BALANCE;
                 case "s" -> operation = FruitTransaction.Operation.SUPPLY;
                 case "p" -> operation = FruitTransaction.Operation.PURCHASE;
-                case "r" -> operation = FruitTransaction.Operation.RETURN;
-                default -> throw new NoSuchElementException("No such operation");
+                default -> operation = FruitTransaction.Operation.RETURN;
             }
 
             String fruit = reportAsBits[1];

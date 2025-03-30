@@ -13,7 +13,13 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void remove(String fruit, int quantity) {
+        if (!Storage.getFruitStorage().containsKey(fruit)) {
+            throw new RuntimeException("There's no " + fruit + "in storage.");
+        }
         int result = Storage.getFruitStorage().get(fruit) - quantity;
+        if (result < 0) {
+            throw new RuntimeException(fruit + " quantity can't be " + result);
+        }
         Storage.getFruitStorage().put(fruit, result);
     }
 }
