@@ -3,7 +3,6 @@ package core.basesyntax.dataconverter;
 import core.basesyntax.model.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class DataConverterImpl implements DataConverter {
     @Override
