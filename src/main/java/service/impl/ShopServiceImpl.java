@@ -1,7 +1,7 @@
 package service.impl;
 
-import db.Storage;
 import java.util.List;
+import java.util.Map;
 import model.Transaction;
 import service.ShopService;
 import service.operation.OperationHandler;
@@ -9,11 +9,11 @@ import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
-    private final Storage storage;
+    private final Map<String, Integer> fruitList;
 
-    public ShopServiceImpl(OperationStrategy operationStrategy, Storage storage) {
+    public ShopServiceImpl(OperationStrategy operationStrategy, Map<String, Integer> fruitList) {
         this.operationStrategy = operationStrategy;
-        this.storage = storage;
+        this.fruitList = fruitList;
     }
 
     @Override

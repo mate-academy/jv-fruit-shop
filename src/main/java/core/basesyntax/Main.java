@@ -1,6 +1,5 @@
 package core.basesyntax;
 
-import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,7 +31,7 @@ public class Main {
 
         Converter converter = new ConverterImpl();
 
-        Storage storage = new Storage();
+        Map<String, Integer> fruitList = new HashMap<>();
         Map<Transaction.Operation, OperationHandler> operationHandlerMap = new HashMap<>();
         operationHandlerMap.put(Transaction.Operation.BALANCE, new BalanceOperation());
         operationHandlerMap.put(Transaction.Operation.SUPPLY, new SupplyOperation());
@@ -41,10 +40,10 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlerMap);
 
         List<Transaction> transactionList = converter.convertTransaction(inputReport);
-        ShopService shopService = new ShopServiceImpl(operationStrategy, storage);
+        ShopService shopService = new ShopServiceImpl(operationStrategy, fruitList);
         shopService.process(transactionList);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(fruitList);
         String reportResult = reportGenerator.getReport();
 
         FileWriterImpl fileWriter = new FileWriterImpl();

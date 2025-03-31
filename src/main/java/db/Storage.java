@@ -21,7 +21,7 @@ public class Storage {
         return fruitList.getOrDefault(fruit, 0);
     }
 
-    public Map<String, Integer> getAllFruit() {
+    public static Map<String, Integer> getAllFruit() {
         return new HashMap<>(fruitList);
     }
 }
