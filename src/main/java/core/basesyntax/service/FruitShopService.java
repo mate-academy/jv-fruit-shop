@@ -1,13 +1,9 @@
 package core.basesyntax.service;
 
 import core.basesyntax.db.FruitShopInventory;
-import core.basesyntax.strategy.Balance;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
-import core.basesyntax.strategy.Purchase;
-import core.basesyntax.strategy.Return;
-import core.basesyntax.strategy.Supply;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,22 +11,23 @@ public class FruitShopService {
     private final FileReaderImpl fileProcessor = new FileReaderImpl();
     private final ReportWriter reportWriter = new ReportWriter();
     private final FruitShopInventory inventory = new FruitShopInventory();
-    private final Map<String, OperationStrategy> operationsMap = new HashMap<>();
+    private final DataConverter dataConverter = new DataConverter();
 
-    public FruitShopService() {
-        operationsMap.put("b", new Balance());
-        operationsMap.put("s", new Supply());
-        operationsMap.put("p", new Purchase());
-        operationsMap.put("r", new Return());
+    private Map<String, OperationStrategy> operationsMap;
+
+    public FruitShopService(Map<String, OperationStrategy> operationsMap) {
+        this.operationsMap = operationsMap;
     }
 
     public void processFile(String inputFile) throws IOException {
         List<String[]> data = FileReaderImpl.processFile(inputFile);
 
-        for (String[] row : data) {
-            String operation = row[0].trim();
-            String fruit = row[1].trim();
-            int quantity = Integer.parseInt(row[2].trim());
+        List<FruitTransaction> transactions = dataConverter.convertDataToTransactions(data);
+
+        for (FruitTransaction transaction : transactions) {
+            String operation = transaction.getOperation();
+            String fruit = transaction.getFruit();
+            int quantity = transaction.getQuantity();
 
             OperationStrategy operationStrategy = operationsMap.get(operation);
 
@@ -40,5 +37,10 @@ public class FruitShopService {
                 throw new RuntimeException("Unknown operation: " + operation);
             }
         }
+    }
+
+    public void generateAndWriteReport(String outputFile) throws IOException {
+        reportWriter.writeReport(outputFile);
+
     }
 }

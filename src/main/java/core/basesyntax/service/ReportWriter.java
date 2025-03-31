@@ -3,19 +3,15 @@ package core.basesyntax.service;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
 
 public class ReportWriter {
-    public static void writeReport(
-            Map<String, Integer> inventory, String outputFile) throws IOException {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
-            writer.write("fruit,quantity");
-            writer.newLine();
+    private final ReportContentGenerator reportContentGenerator = new ReportContentGenerator();
 
-            for (Map.Entry<String, Integer> entry : inventory.entrySet()) {
-                writer.write(entry.getKey() + "," + entry.getValue());
-                writer.newLine();
-            }
+    public void writeReport(String outputFile) throws IOException {
+
+        String reportContent = reportContentGenerator.generateReportContent();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            writer.write(reportContent);
         } catch (IOException e) {
             throw new RuntimeException("Error writing report to file: " + outputFile, e);
         }
