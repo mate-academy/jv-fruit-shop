@@ -8,39 +8,38 @@ import java.util.List;
 import java.util.Map;
 
 public class FruitShopService {
-    private final FileReaderImpl fileProcessor = new FileReaderImpl();
+
     private final ReportWriter reportWriter = new ReportWriter();
     private final FruitShopInventory inventory = new FruitShopInventory();
     private final DataConverter dataConverter = new DataConverter();
+    private final Map<FruitTransaction.OperationType, OperationStrategy> operationsMap;
 
-    private Map<String, OperationStrategy> operationsMap;
-
-    public FruitShopService(Map<String, OperationStrategy> operationsMap) {
+    public FruitShopService(Map<FruitTransaction.OperationType, OperationStrategy> operationsMap) {
         this.operationsMap = operationsMap;
     }
 
-    public void processFile(String inputFile) throws IOException {
-        List<String[]> data = FileReaderImpl.processFile(inputFile);
+    public void processFile(String inputFilePath) throws IOException {
+        List<String[]> data = FileReaderImpl.processFile(inputFilePath);
 
         List<FruitTransaction> transactions = dataConverter.convertDataToTransactions(data);
 
         for (FruitTransaction transaction : transactions) {
-            String operation = transaction.getOperation();
+            FruitTransaction.OperationType operationType
+                    = FruitTransaction.OperationType.fromCode(transaction.getOperation());
             String fruit = transaction.getFruit();
             int quantity = transaction.getQuantity();
 
-            OperationStrategy operationStrategy = operationsMap.get(operation);
+            OperationStrategy operationStrategy = operationsMap.get(operationType);
 
             if (operationStrategy != null) {
                 inventory.applyOperation(operationStrategy, fruit, quantity);
             } else {
-                throw new RuntimeException("Unknown operation: " + operation);
+                throw new RuntimeException("Unknown operation: " + operationType);
             }
         }
     }
 
-    public void generateAndWriteReport(String outputFile) throws IOException {
-        reportWriter.writeReport(outputFile);
-
+    public void generateAndWriteReport(String outputFilePath) throws IOException {
+        reportWriter.writeReport(outputFilePath);
     }
 }

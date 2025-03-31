@@ -5,17 +5,23 @@ import java.util.Map;
 
 public class ReportContentGenerator {
 
+    private static final String HEADER = "fruit,quantity\n";
+    private static final String SEPARATOR = ",";
+    private static final String NEW_LINE = "\n";
+
     public String generateReportContent() {
         StringBuilder reportContent = new StringBuilder();
-        reportContent.append("fruit,quantity\n");
+
+        reportContent.append(HEADER);
 
         for (Map.Entry<String, Integer> entry : Storage.inventory.entrySet()) {
             reportContent.append(entry.getKey())
-                    .append(",")
+                    .append(SEPARATOR)
                     .append(entry.getValue())
-                    .append("\n");
+                    .append(NEW_LINE);
         }
 
         return reportContent.toString();
     }
 }
+

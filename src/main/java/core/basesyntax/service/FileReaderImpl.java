@@ -7,16 +7,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl {
+
     public static List<String[]> processFile(String filePath) throws IOException {
         List<String[]> data = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] fields = line.split(",");
-                data.add(fields);
+                String[] row = line.split(",");
+                if (row.length == 3) {
+                    data.add(row);
+                } else {
+                    System.err.println("Invalid row format, skipping: " + line);
+                }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Error reading file: " + filePath, e);
+            throw new IOException("Error reading file: " + filePath, e);
         }
         return data;
     }
