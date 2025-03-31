@@ -23,6 +23,10 @@ public class ConverterImpl implements Converter {
 
     private Transaction getFromCsvRow(String row) {
         String[] fields = row.split(SEPARATOR);
+        if (fields.length != 3) {
+            throw new IllegalArgumentException("Invalid CSV format. "
+                    + "The file must contain 3 columns");
+        }
         Transaction transaction = new Transaction();
         transaction.setOperation(Transaction.Operation
                 .operationFromCode(fields[OPERATION_PARAMETER]));
@@ -32,6 +36,9 @@ public class ConverterImpl implements Converter {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Cannot define quantity. Invalid number found "
                     + fields[QUANTITY_PARAMETER]);
+        }
+        if (transaction.getQuantity() < 0) {
+            throw new RuntimeException("Invalid quantity. Quantity must be a positive integer");
         }
         return transaction;
     }

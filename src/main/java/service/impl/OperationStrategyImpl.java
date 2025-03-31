@@ -14,8 +14,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(Transaction.Operation operationType) {
-        if (operationHandlerMap == null) {
-            throw new RuntimeException("Cannot retrieve operation handler map.");
+        if (operationHandlerMap.get(operationType) == null) {
+            throw new IllegalArgumentException("Cannot retrieve operation handler map by type: "
+                    + operationType.getOperationCode());
         }
         return operationHandlerMap.get(operationType);
     }

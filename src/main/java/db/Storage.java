@@ -12,7 +12,7 @@ public class Storage {
 
     public static void remove(String fruit, Integer amount) {
         if (!fruitList.containsKey(fruit) || fruitList.get(fruit) < amount) {
-            throw new RuntimeException("There's not enough " + fruit + " in storage.");
+            throw new IllegalArgumentException("There's not enough " + fruit + " in storage.");
         }
         fruitList.put(fruit, fruitList.get(fruit) - amount);
     }
