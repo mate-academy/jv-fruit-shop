@@ -12,4 +12,9 @@ public class PurchaseHandler implements OperationStrategy {
             throw new RuntimeException("Not enough product to purchase: " + fruit);
         }
     }
+
+    @Override
+    public boolean isValid(String fruit, int quantity) {
+        return quantity > 0;
+    }
 }

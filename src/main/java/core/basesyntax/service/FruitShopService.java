@@ -9,17 +9,21 @@ import java.util.Map;
 
 public class FruitShopService {
 
-    private final ReportWriter reportWriter = new ReportWriter();
-    private final FruitShopInventory inventory = new FruitShopInventory();
-    private final DataConverter dataConverter = new DataConverter();
+    private final FileReader fileReader;
+    private final DataConverter dataConverter;
     private final Map<FruitTransaction.OperationType, OperationStrategy> operationsMap;
 
-    public FruitShopService(Map<FruitTransaction.OperationType, OperationStrategy> operationsMap) {
+    public FruitShopService(
+            FileReader fileReader,
+            DataConverter dataConverter,
+            Map<FruitTransaction.OperationType, OperationStrategy> operationsMap) {
+        this.fileReader = fileReader;
+        this.dataConverter = dataConverter;
         this.operationsMap = operationsMap;
     }
 
     public void processFile(String inputFilePath) throws IOException {
-        List<String[]> data = FileReaderImpl.processFile(inputFilePath);
+        List<String[]> data = fileReader.processFile(inputFilePath);
 
         List<FruitTransaction> transactions = dataConverter.convertDataToTransactions(data);
 
@@ -31,15 +35,11 @@ public class FruitShopService {
 
             OperationStrategy operationStrategy = operationsMap.get(operationType);
 
-            if (operationStrategy != null) {
-                inventory.applyOperation(operationStrategy, fruit, quantity);
+            if (operationStrategy != null && operationStrategy.isValid(fruit, quantity)) {
+                FruitShopInventory.applyOperation(operationStrategy, fruit, quantity);
             } else {
-                throw new RuntimeException("Unknown operation: " + operationType);
+                throw new RuntimeException("Invalid or unknown operation: " + operationType);
             }
         }
-    }
-
-    public void generateAndWriteReport(String outputFilePath) throws IOException {
-        reportWriter.writeReport(outputFilePath);
     }
 }

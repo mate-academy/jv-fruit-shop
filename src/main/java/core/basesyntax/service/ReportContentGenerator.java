@@ -5,9 +5,8 @@ import java.util.Map;
 
 public class ReportContentGenerator {
 
-    private static final String HEADER = "fruit,quantity\n";
+    private static final String HEADER = "fruit,quantity" + System.lineSeparator();
     private static final String SEPARATOR = ",";
-    private static final String NEW_LINE = "\n";
 
     public String generateReportContent() {
         StringBuilder reportContent = new StringBuilder();
@@ -18,10 +17,9 @@ public class ReportContentGenerator {
             reportContent.append(entry.getKey())
                     .append(SEPARATOR)
                     .append(entry.getValue())
-                    .append(NEW_LINE);
+                    .append(System.lineSeparator());
         }
 
         return reportContent.toString();
     }
 }
-
