@@ -22,7 +22,7 @@ public class FruitShopService {
         this.operationsMap = operationsMap;
     }
 
-    public void processFile(String inputFilePath) throws IOException {
+    public void processFile(List<String> readData) {
         List<String[]> data = fileReader.processFile(inputFilePath);
 
         List<FruitTransaction> transactions = dataConverter.convertDataToTransactions(data);
