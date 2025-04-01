@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,26 +10,14 @@ public class DataConverter {
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
-    public static List<String[]> convertLinesToData(BufferedReader reader) throws IOException {
-        List<String[]> data = new ArrayList<>();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            String[] row = line.split(",");
-            if (row.length == 3) {
-                data.add(row);
-            } else {
-                System.err.println("Invalid row format, skipping: " + line);
-            }
-        }
-        return data;
-    }
-
-    public List<FruitTransaction> convertDataToTransactions(List<String[]> data) {
+    public List<FruitTransaction> convertDataToTransactions(List<String> data) {
         List<FruitTransaction> transactions = new ArrayList<>();
 
-        for (String[] row : data) {
+        for (String line : data) {
+            String[] row = line.split(",");
             if (row.length != 3) {
-                throw new IllegalArgumentException("Invalid data format, expected per row, got: "
+                throw new IllegalArgumentException("\n"
+                        + "Invalid data format, expected 3 fields per line but received: "
                         + row.length);
             }
 

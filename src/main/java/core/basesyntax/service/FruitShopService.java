@@ -1,6 +1,5 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.FruitShopInventory;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.strategy.OperationStrategy;
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class FruitShopService {
     }
 
     public void processFile(String inputFilePath) throws IOException {
-        List<String[]> data = fileReader.processFile(inputFilePath);
+        List<String> data = fileReader.processFile(inputFilePath);
 
         List<FruitTransaction> transactions = dataConverter.convertDataToTransactions(data);
 
@@ -36,7 +35,7 @@ public class FruitShopService {
             OperationStrategy operationStrategy = operationsMap.get(operationType);
 
             if (operationStrategy != null && operationStrategy.isValid(fruit, quantity)) {
-                FruitShopInventory.applyOperation(operationStrategy, fruit, quantity);
+                operationStrategy.execute(fruit, quantity);
             } else {
                 throw new RuntimeException("Invalid or unknown operation: " + operationType);
             }
