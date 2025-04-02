@@ -8,7 +8,7 @@ import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 
 public class TransactionProcessImpl implements TransactionProcess {
-    private ReportDao reportDao;
+    private final ReportDao reportDao;
     private OperationStrategy operationStrategy;
 
     public TransactionProcessImpl(OperationStrategy operationStrategy, ReportDao reportDao) {
