@@ -9,7 +9,7 @@ import java.util.List;
 public class FileReaderImpl implements core.basesyntax.service.FileReader {
 
     @Override
-    public List<String> processFile(String filePath) throws IOException {
+    public List<String> processFile(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -17,7 +17,11 @@ public class FileReaderImpl implements core.basesyntax.service.FileReader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new IOException("Error reading file: " + filePath, e);
+            try {
+                throw new IOException("Error reading file: " + filePath, e);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
         return lines;
     }

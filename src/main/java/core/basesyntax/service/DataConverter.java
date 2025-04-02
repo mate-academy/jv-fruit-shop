@@ -6,6 +6,8 @@ import java.util.List;
 
 public class DataConverter {
 
+    private static final String DELIMITER = ",";
+
     private static final int OPERATION_INDEX = 0;
     private static final int FRUIT_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -14,10 +16,10 @@ public class DataConverter {
         List<FruitTransaction> transactions = new ArrayList<>();
 
         for (String line : data) {
-            String[] row = line.split(",");
+            String[] row = line.split(DELIMITER);
             if (row.length != 3) {
-                throw new IllegalArgumentException("\n"
-                        + "Invalid data format, expected 3 fields per line but received: "
+                throw new IllegalArgumentException(
+                        "Invalid data format, expected 3 fields per line but received: "
                         + row.length);
             }
 
