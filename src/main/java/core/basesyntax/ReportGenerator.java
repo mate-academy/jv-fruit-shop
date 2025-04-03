@@ -7,11 +7,12 @@ import java.util.Map;
 public class ReportGenerator {
 
     private final Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
+    private final FruitStock fruitStock = new FruitStock(); // Створюємо екземпляр FruitStock
 
     public ReportGenerator() {
-        operationHandlers.put(Operation.SUPPLY, new SupplyHandler());
-        operationHandlers.put(Operation.PURCHASE, new PurchaseHandler());
-        operationHandlers.put(Operation.RETURN, new ReturnHandler());
+        operationHandlers.put(Operation.SUPPLY, new SupplyHandler(fruitStock));
+        operationHandlers.put(Operation.PURCHASE, new PurchaseHandler(fruitStock));
+        operationHandlers.put(Operation.RETURN, new ReturnHandler(fruitStock));
     }
 
     public String generateReport(List<FruitTransaction> transactions) {
