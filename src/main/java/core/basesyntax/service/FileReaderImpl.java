@@ -5,9 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements core.basesyntax.service.FileReader {
-    // без этого код не хочет работать implements core.basesyntax.service.FileReader;
-    @Override
+public class FileReaderImpl {
+
     public List<String> processFile(String filePath) {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(filePath))) {

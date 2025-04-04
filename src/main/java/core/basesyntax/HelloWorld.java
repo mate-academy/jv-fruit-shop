@@ -22,7 +22,7 @@ public class HelloWorld {
     private static final String OUTPUT_REPORT = "src/main/java/resources/finalReport.csv";
 
     public static void main(String[] arg) {
-        FileReader fileReader = new FileReaderImpl();
+        FileReader fileReader = (FileReader) new FileReaderImpl();
         List<String> inputReport = fileReader.processFile(INPUT_REPORT);
 
         DataConverter dataConverter = new DataConverter();
