@@ -3,7 +3,7 @@ package core.basesyntax;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataConverterImpl implements DataConverter{
+public class DataConverterImpl implements DataConverter {
     private static final String DELIMITER = ",";
 
     @Override

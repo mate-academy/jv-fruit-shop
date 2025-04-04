@@ -1,8 +1,21 @@
 package core.basesyntax;
 
-public class OperationStrategyImpl implements OperationStrategy{
+import java.util.Map;
+
+public class OperationStrategyImpl implements OperationStrategy {
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
+
+    public OperationStrategyImpl(Map<FruitTransaction.Operation,
+            OperationHandler> operationHandlers) {
+        this.operationHandlers = operationHandlers;
+    }
+
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
-        return null;
+        OperationHandler handler = operationHandlers.get(operation);
+        if (handler == null) {
+            throw new IllegalArgumentException("");
+        }
+        return handler;
     }
 }
