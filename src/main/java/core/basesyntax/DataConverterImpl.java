@@ -19,7 +19,14 @@ public class DataConverterImpl implements DataConverter {
 
             FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(parts[0]);
             String fruit = parts[1];
-            int quantity = Integer.parseInt(parts[2]);
+            int quantity;
+
+            try {
+                quantity = Integer.parseInt(parts[2]);
+            } catch (NumberFormatException e) {
+                throw new IllegalArgumentException("Invalid quantity format: expected an integer but found "
+                        + parts[2] + ". Line: " + line, e);
+            }
 
             transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
