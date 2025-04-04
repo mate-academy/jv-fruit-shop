@@ -4,8 +4,9 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReportWriter {
+public class ReportWriter implements FileWriter {
 
+    @Override
     public void writeReport(String report, String outputFile) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             writer.write(report);
