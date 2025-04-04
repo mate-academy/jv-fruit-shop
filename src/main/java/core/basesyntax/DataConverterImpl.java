@@ -13,7 +13,8 @@ public class DataConverterImpl implements DataConverter {
         for (String line : lines) {
             String[] parts = line.split(DELIMITER);
             if (parts.length != 3) {
-                throw new IllegalArgumentException("!!");
+                throw new IllegalArgumentException("Invalid line format:expected 3 parts but found "
+                        + parts.length + ". Line: " + line);
             }
 
             FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(parts[0]);

@@ -12,10 +12,6 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
-        OperationHandler handler = operationHandlers.get(operation);
-        if (handler == null) {
-            throw new IllegalArgumentException("");
-        }
-        return handler;
+        return operationHandlers.get(operation);
     }
 }

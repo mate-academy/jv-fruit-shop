@@ -23,7 +23,8 @@ public class FileReaderImpl implements FileReader {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e + "Файл не найден");
+            throw new RuntimeException("Error reading file at path: "
+                    + filePath + ". " + e.getMessage());
         }
         return lines;
     }

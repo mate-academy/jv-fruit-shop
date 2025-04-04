@@ -12,12 +12,14 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
+            FruitTransaction.Operation operation = transaction.getOperation();
+            OperationHandler handler = operationStrategy.getHandler(operation);
 
-            if (handler == null) {
-                throw new RuntimeException("!");
+            if (handler != null) {
+                handler.apply(transaction);
+            } else {
+                throw new IllegalArgumentException("No handler found for operation: " + operation);
             }
-            handler.apply(transaction);
         }
     }
 }
