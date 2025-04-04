@@ -1,13 +1,12 @@
 package core.basesyntax.service;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileReaderImpl implements FileReader {
-    // без этого код не хочет работать import core.basesyntax.service.FileReader;
+public class FileReaderImpl implements core.basesyntax.service.FileReader {
+    // без этого код не хочет работать implements core.basesyntax.service.FileReader;
     @Override
     public List<String> processFile(String filePath) {
         List<String> lines = new ArrayList<>();

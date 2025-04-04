@@ -4,6 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
 import core.basesyntax.service.FileReaderImpl;
+import core.basesyntax.service.FruitShopService;
 import core.basesyntax.service.ReportContentGenerator;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.strategy.BalanceHandler;
@@ -11,7 +12,6 @@ import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseHandler;
 import core.basesyntax.strategy.ReturnHandler;
 import core.basesyntax.strategy.SupplyHandler;
-import core.basesyntax.service.FruitShopService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +26,8 @@ public class HelloWorld {
         List<String> inputReport = fileReader.processFile(INPUT_REPORT);
 
         DataConverter dataConverter = new DataConverter();
-        List<FruitTransaction> transactions = dataConverter.convertDataToTransactions(inputReport);
+        final List<FruitTransaction> transactions =
+                dataConverter.convertDataToTransactions(inputReport);
 
         Map<FruitTransaction.OperationType, OperationStrategy> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.OperationType.BALANCE, new BalanceHandler());
