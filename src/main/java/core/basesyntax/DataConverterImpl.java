@@ -24,7 +24,8 @@ public class DataConverterImpl implements DataConverter {
             try {
                 quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException("Invalid quantity format: expected an integer but found "
+                throw new IllegalArgumentException("Invalid quantity format:"
+                        + " expected an integer but found "
                         + parts[2] + ". Line: " + line, e);
             }
 
