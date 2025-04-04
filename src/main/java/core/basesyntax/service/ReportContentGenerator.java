@@ -10,7 +10,6 @@ public class ReportContentGenerator {
 
     public String generateReportContent() {
         StringBuilder reportContent = new StringBuilder();
-
         reportContent.append(HEADER);
 
         for (Map.Entry<String, Integer> entry : Storage.inventory.entrySet()) {
@@ -19,7 +18,6 @@ public class ReportContentGenerator {
                     .append(entry.getValue())
                     .append(System.lineSeparator());
         }
-
         return reportContent.toString();
     }
 }
