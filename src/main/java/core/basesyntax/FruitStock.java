@@ -4,31 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStock {
-
     private final Map<String, Integer> stock = new HashMap<>();
 
     public void add(String fruit, int quantity) {
         stock.put(fruit, stock.getOrDefault(fruit, 0) + quantity);
     }
 
-    public int get(String fruit) {
-        return stock.getOrDefault(fruit, 0);
-    }
-
-    public void remove(String fruit, int quantity) {
-        int currentQuantity = stock.getOrDefault(fruit, 0);
-        if (currentQuantity >= quantity) {
-            stock.put(fruit, currentQuantity - quantity);
-        } else {
-            throw new IllegalArgumentException("Недостатньо фруктів для операції.");
+    public void subtract(String fruit, int quantity) {
+        int current = stock.getOrDefault(fruit, 0);
+        int result = current - quantity;
+        if (result < 0) {
+            throw new RuntimeException("Not enough " + fruit + " in stock.");
         }
+        stock.put(fruit, result);
     }
 
-    public int getFruitQuantity(String fruit) {
+    public int getQuantity(String fruit) {
         return stock.getOrDefault(fruit, 0);
+    }
+
+    public Map<String, Integer> getAll() {
+        return new HashMap<>(stock);
     }
 
     public void updateFruitQuantity(String fruit, int newQuantity) {
+        if (fruit == null || !stock.containsKey(fruit)) {
+            throw new IllegalArgumentException("Fruit not found: " + fruit);
+        }
         stock.put(fruit, newQuantity);
     }
 }

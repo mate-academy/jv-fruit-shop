@@ -22,7 +22,8 @@ public enum Operation {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Невідома операція: " + code);
+        throw new IllegalArgumentException("Unknown operation: " + code);
     }
 }
+
 

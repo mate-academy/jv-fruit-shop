@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.Map;
-
 public class PurchaseHandler implements OperationHandler {
     private final FruitStock fruitStock;
 
@@ -10,11 +8,11 @@ public class PurchaseHandler implements OperationHandler {
     }
 
     @Override
-    public void handle(Map<String, Integer> report, String fruit, int quantity) {
-        int currentBalance = fruitStock.get(fruit);
+    public void handle(String fruit, int quantity) {
+        int currentBalance = fruitStock.getQuantity(fruit);
 
         if (currentBalance < quantity) {
-            throw new RuntimeException("Недостатньо фруктів для покупки: " + fruit);
+            throw new RuntimeException("Not enough fruit to buy: " + fruit);
         }
         fruitStock.updateFruitQuantity(fruit, currentBalance - quantity);
     }

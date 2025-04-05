@@ -13,11 +13,16 @@ public class OperationStrategyImpl implements OperationStrategy {
     public void executeOperation(FruitTransaction transaction, Map<String, Integer> report) {
         OperationHandler handler = handlers.get(transaction.getOperation());
         if (handler != null) {
-            handler.handle(report, transaction.getFruit(), transaction.getQuantity());
+            handler.handle(transaction.getFruit(), transaction.getQuantity());
         } else {
-            throw new UnsupportedOperationException("Операція не підтримується: "
+            throw new UnsupportedOperationException("Operation not supported: "
                     + transaction.getOperation());
         }
+    }
+
+    @Override
+    public OperationHandler getHandler(Operation operation) {
+        return handlers.get(operation);
     }
 }
 

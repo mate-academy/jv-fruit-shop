@@ -21,7 +21,7 @@ public class DataConverterImpl implements DataConverter {
                 FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
                 transactions.add(transaction);
             } else {
-                System.out.println("Невірний формат рядка: " + inputReport.get(i));
+                throw new RuntimeException("Invalid string format: " + inputReport.get(i));
             }
         }
 

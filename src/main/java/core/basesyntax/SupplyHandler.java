@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.Map;
-
 public class SupplyHandler implements OperationHandler {
     private final FruitStock fruitStock;
 
@@ -10,8 +8,7 @@ public class SupplyHandler implements OperationHandler {
     }
 
     @Override
-    public void handle(Map<String, Integer> report, String fruit, int quantity) {
+    public void handle(String fruit, int quantity) {
         fruitStock.add(fruit, quantity);
-        report.put(fruit, report.getOrDefault(fruit, 0) + quantity);
     }
 }

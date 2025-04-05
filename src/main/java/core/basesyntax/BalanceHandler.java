@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import java.util.Map;
-
 public class BalanceHandler implements OperationHandler {
     private final FruitStock fruitStock;
 
@@ -10,9 +8,8 @@ public class BalanceHandler implements OperationHandler {
     }
 
     @Override
-    public void handle(Map<String, Integer> report, String fruit, int quantity) {
-        int currentBalance = fruitStock.get(fruit);
-        System.out.println("Поточний баланс для " + fruit + ": " + currentBalance);
-        report.put(fruit, currentBalance);
+    public void handle(String fruit, int quantity) {
+        int currentBalance = fruitStock.getQuantity(fruit);
+        System.out.println("Current balance for " + fruit + ": " + currentBalance);
     }
 }

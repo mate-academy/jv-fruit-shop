@@ -1,19 +1,35 @@
 package core.basesyntax;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
+    private final FruitStock fruitStock;
+    private final OperationStrategy operationStrategy;
 
-    private final Map<String, Integer> fruitStock = new HashMap<>();
+    public ShopServiceImpl(FruitStock fruitStock, OperationStrategy operationStrategy) {
+        this.fruitStock = fruitStock;
+        this.operationStrategy = operationStrategy;
+    }
 
     @Override
     public void addFruit(String fruit, int quantity) {
-        fruitStock.put(fruit, fruitStock.getOrDefault(fruit, 0) + quantity);
+        fruitStock.add(fruit, quantity);
     }
 
     @Override
     public int getFruitQuantity(String fruit) {
-        return fruitStock.getOrDefault(fruit, 0);
+        return fruitStock.getQuantity(fruit);
+    }
+
+    @Override
+    public void process(List<FruitTransaction> transactions) {
+        for (FruitTransaction transaction : transactions) {
+            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
+            if (handler != null) {
+                handler.handle(transaction.getFruit(), transaction.getQuantity());
+            } else {
+                System.out.println("No handler found for operation: " + transaction.getOperation());
+            }
+        }
     }
 }
