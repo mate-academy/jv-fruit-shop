@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.converter;
 
+import core.basesyntax.FruitTransaction;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,8 +26,7 @@ public class DataConverterImpl implements DataConverter {
                 quantity = Integer.parseInt(parts[2]);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid quantity format:"
-                        + " expected an integer but found "
-                        + parts[2] + ". Line: " + line, e);
+                        + " expected an integer");
             }
 
             transactions.add(new FruitTransaction(operation, fruit, quantity));

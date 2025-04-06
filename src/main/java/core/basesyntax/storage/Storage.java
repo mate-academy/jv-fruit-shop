@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.storage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +11,9 @@ public class Storage {
     }
 
     public static void addFruit(String fruit, int quanity) {
+        if (quanity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
         fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quanity);
     }
 
@@ -24,7 +27,4 @@ public class Storage {
         }
     }
 
-    public static Map<String, Integer> getAllFruits() {
-        return new HashMap<>(fruits);
-    }
 }

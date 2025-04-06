@@ -1,15 +1,34 @@
 package core.basesyntax;
 
+import core.basesyntax.converter.DataConverter;
+import core.basesyntax.converter.DataConverterImpl;
+import core.basesyntax.file.FileReader;
+import core.basesyntax.file.FileReaderImpl;
+import core.basesyntax.file.FileWriter;
+import core.basesyntax.file.FileWriterImpl;
+import core.basesyntax.operation.OperationHandler;
+import core.basesyntax.operation.OperationStrategy;
+import core.basesyntax.operation.OperationStrategyImpl;
+import core.basesyntax.operation.handler.BalanceOperation;
+import core.basesyntax.operation.handler.PurchaseOperation;
+import core.basesyntax.operation.handler.ReturnOperation;
+import core.basesyntax.operation.handler.SupplyOperation;
+import core.basesyntax.reportgenerator.ReportGenerator;
+import core.basesyntax.reportgenerator.ReportGeneratorImpl;
+import core.basesyntax.shopservice.ShopService;
+import core.basesyntax.shopservice.ShopServiceImpl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_TO_READ = "src/main/reportToRead.csv";
+    private static final String FILE_TO_WRITE = "src/main/finalReport.csv";
+
     public static void main(String[] arg) {
-        String filePath = (arg.length > 0) ? arg[0] : "reportToRead.csv";
 
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read(filePath);
+        List<String> inputReport = fileReader.read(FILE_TO_READ);
 
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
@@ -28,6 +47,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, FILE_TO_WRITE);
     }
 }
