@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    private static final String FILE_TO_READ = "src/main/reportToRead.csv";
-    private static final String FILE_TO_WRITE = "src/main/finalReport.csv";
+    private static final String FILE_TO_READ = "src/main/filesResourse/reportToRead.csv";
+    private static final String FILE_TO_WRITE = "src/main/filesResourse/finalReport.csv";
 
     public static void main(String[] arg) {
 
