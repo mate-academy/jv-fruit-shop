@@ -13,7 +13,7 @@ public class FileReaderImpl implements FileReaderInterface {
     @Override
     public List<String> read(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
-            throw new IllegalArgumentException("File path cannot be null or empty");
+            throw new RuntimeException("File path cannot be null or empty");
         }
 
         try (Stream<String> lines = Files.lines(Path.of(filePath))) {

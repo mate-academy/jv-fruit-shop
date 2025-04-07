@@ -9,7 +9,7 @@ public class PurchaseOperation implements OperationHandler {
         int current = Storage.get(fruit);
         int result = current - transaction.getQuantity();
         if (result < 0) {
-            throw new IllegalArgumentException("Not enough " + fruit + " in stock");
+            throw new RuntimeException("Not enough " + fruit + " in stock");
         }
         Storage.put(fruit, result);
     }
