@@ -33,4 +33,12 @@ public class DataConverterImpl implements DataConverter {
         }
         return transactions;
     }
+
+    @Override
+    public List<String> removeHeader(List<String> lines) {
+        if (lines.isEmpty()) {
+            return lines;
+        }
+        return lines.subList(1, lines.size());
+    }
 }

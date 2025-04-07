@@ -14,12 +14,7 @@ public class FileReaderImpl implements FileReader {
         List<String> lines = new ArrayList<>();
         try (BufferedReader reader = Files.newBufferedReader(Paths.get(filePath))) {
             String line;
-            boolean isFirstLine = true;
             while ((line = reader.readLine()) != null) {
-                if (isFirstLine) {
-                    isFirstLine = false;
-                    continue;
-                }
                 lines.add(line);
             }
         } catch (IOException e) {

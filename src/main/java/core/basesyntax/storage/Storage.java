@@ -10,11 +10,11 @@ public class Storage {
         return fruits.getOrDefault(fruit, 0);
     }
 
-    public static void addFruit(String fruit, int quanity) {
-        if (quanity < 0) {
+    public static void addFruit(String fruit, int quantity) {
+        if (quantity < 0) {
             throw new IllegalArgumentException("Quantity cannot be negative");
         }
-        fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quanity);
+        fruits.put(fruit, fruits.getOrDefault(fruit, 0) + quantity);
     }
 
     public static void removeFruit(String fruit, int quantity) {
@@ -26,5 +26,4 @@ public class Storage {
             fruits.put(fruit, 0);
         }
     }
-
 }
