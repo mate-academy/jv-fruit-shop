@@ -11,7 +11,6 @@ public class FileWriterImpl implements FruitFileWriter {
     public void write(List<String> report, String fileName) {
         try {
             Files.write(Path.of(fileName),report);
-            System.out.println("CSV file created successfully!");
         } catch (IOException e) {
             throw new RuntimeException("Can't write into the file " + fileName);
         }

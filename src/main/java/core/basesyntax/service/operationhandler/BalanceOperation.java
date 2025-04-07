@@ -1,11 +1,12 @@
 package core.basesyntax.service.operationhandler;
 
-import core.basesyntax.db.ShopDataBase;
+import static core.basesyntax.db.ShopDataBase.SHOP_DATA;
+
 import core.basesyntax.service.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {
     @Override
     public void process(FruitTransaction fruitTransaction) {
-        ShopDataBase.put(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
+        SHOP_DATA.put(fruitTransaction.getFruit(),fruitTransaction.getQuantity());
     }
 }

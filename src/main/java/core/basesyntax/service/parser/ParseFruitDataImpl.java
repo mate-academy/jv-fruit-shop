@@ -1,5 +1,7 @@
 package core.basesyntax.service.parser;
 
+import static core.basesyntax.service.reportgenerator.ReportGeneratorImpl.DELIMITER;
+
 import core.basesyntax.dao.FruitFileReader;
 import core.basesyntax.service.FruitTransaction;
 import java.util.List;
@@ -16,7 +18,7 @@ public class ParseFruitDataImpl implements ParseFruitData {
         List<String> inputArray = fileReader.read(fileName);
         inputArray.remove(0);
         return inputArray.stream()
-                .map(s -> s.split(","))
+                .map(s -> s.split(DELIMITER))
                 .map(s -> new FruitTransaction(s[0],s[1],Integer.parseInt(s[2])))
                 .toList();
     }
