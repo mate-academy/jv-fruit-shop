@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.resources;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,8 +8,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class FileReaderImpl implements FileReaderInterface {
-    private static final int FIRST_LINE_SKIP = 1;
-
     @Override
     public List<String> read(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
@@ -17,8 +15,7 @@ public class FileReaderImpl implements FileReaderInterface {
         }
 
         try (Stream<String> lines = Files.lines(Path.of(filePath))) {
-            return lines.skip(FIRST_LINE_SKIP)
-                    .collect(Collectors.toList());
+            return lines.collect(Collectors.toList());
         } catch (IOException e) {
             throw new RuntimeException("Error reading file " + filePath, e);
         }

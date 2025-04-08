@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.resources;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -8,7 +8,7 @@ public class FileWriterImpl implements FileWriterInterface {
     @Override
     public void write(String data, String filePath) {
         if (filePath == null || filePath.isEmpty()) {
-            throw new IllegalArgumentException("File path cannot be nul or empty");
+            throw new IllegalArgumentException("File path cannot be null or empty");
         }
         try {
             Files.write(Path.of(filePath), data.getBytes());

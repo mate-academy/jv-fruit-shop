@@ -1,7 +1,8 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.handler.OperationHandler;
 import java.util.Map;
-import model.Operation;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<Operation, OperationHandler> handlers;

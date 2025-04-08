@@ -1,19 +1,20 @@
-package core.basesyntax;
+package core.basesyntax.converter;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
 import java.util.List;
-import java.util.stream.Collectors;
-import model.FruitTransaction;
-import model.Operation;
 
 public class DataConverterImpl implements DataConverter {
+    private static final int FIRST_LINE_SKIP = 1;
     private static final String LINE_SEPARATOR = ",";
     private static final int MAX_LINE_FORMAT = 3;
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
         return lines.stream()
+                .skip(FIRST_LINE_SKIP)
                 .map(this::parseLine)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private FruitTransaction parseLine(String line) {
