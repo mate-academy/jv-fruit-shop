@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.database;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,5 +32,9 @@ public class FruitStock {
             throw new IllegalArgumentException("Fruit not found: " + fruit);
         }
         stock.put(fruit, newQuantity);
+    }
+
+    public Map<String, Integer> getStock() {
+        return stock;
     }
 }

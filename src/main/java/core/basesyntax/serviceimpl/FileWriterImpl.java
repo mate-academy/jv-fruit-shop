@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -11,9 +12,7 @@ public class FileWriterImpl implements FileWriter {
         try {
             Files.write(Paths.get(fileName), data.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Error while writing to file: " + fileName, e);
+            throw new RuntimeException("Can’t write to the file: " + fileName, e);
         }
     }
 }
-
-

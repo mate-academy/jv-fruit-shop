@@ -1,5 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.strategyimpl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -12,12 +16,12 @@ public class OperationStrategyImpl implements OperationStrategy {
     @Override
     public void executeOperation(FruitTransaction transaction, Map<String, Integer> report) {
         OperationHandler handler = handlers.get(transaction.getOperation());
-        if (handler != null) {
-            handler.handle(transaction.getFruit(), transaction.getQuantity());
-        } else {
+        if (handler == null) {
             throw new UnsupportedOperationException("Operation not supported: "
                     + transaction.getOperation());
+
         }
+        handler.handle(transaction.getFruit(), transaction.getQuantity());
     }
 
     @Override
@@ -25,4 +29,3 @@ public class OperationStrategyImpl implements OperationStrategy {
         return handlers.get(operation);
     }
 }
-

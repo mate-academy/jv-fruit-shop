@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.strategyimpl;
+
+import core.basesyntax.database.FruitStock;
+import core.basesyntax.strategy.OperationHandler;
 
 public class BalanceHandler implements OperationHandler {
     private final FruitStock fruitStock;
@@ -10,6 +13,5 @@ public class BalanceHandler implements OperationHandler {
     @Override
     public void handle(String fruit, int quantity) {
         int currentBalance = fruitStock.getQuantity(fruit);
-        System.out.println("Current balance for " + fruit + ": " + currentBalance);
     }
 }

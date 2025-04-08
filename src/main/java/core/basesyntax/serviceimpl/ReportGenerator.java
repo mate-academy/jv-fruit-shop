@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
+import core.basesyntax.database.FruitStock;
 import java.util.Map;
 
 public class ReportGenerator {

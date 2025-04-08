@@ -1,5 +1,9 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
+import core.basesyntax.database.FruitStock;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
@@ -24,12 +28,7 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
-            OperationHandler handler = operationStrategy.getHandler(transaction.getOperation());
-            if (handler != null) {
-                handler.handle(transaction.getFruit(), transaction.getQuantity());
-            } else {
-                System.out.println("No handler found for operation: " + transaction.getOperation());
-            }
+            operationStrategy.executeOperation(transaction, fruitStock.getStock());
         }
     }
 }

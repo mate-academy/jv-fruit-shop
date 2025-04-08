@@ -1,12 +1,33 @@
 package core.basesyntax;
 
+import core.basesyntax.database.FruitStock;
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.model.Operation;
+import core.basesyntax.service.DataConverter;
+import core.basesyntax.service.FileReader;
+import core.basesyntax.service.FileWriter;
+import core.basesyntax.service.ShopService;
+import core.basesyntax.serviceimpl.DataConverterImpl;
+import core.basesyntax.serviceimpl.FileReaderImpl;
+import core.basesyntax.serviceimpl.FileWriterImpl;
+import core.basesyntax.serviceimpl.ReportGenerator;
+import core.basesyntax.serviceimpl.ShopServiceImpl;
+import core.basesyntax.strategy.OperationHandler;
+import core.basesyntax.strategy.OperationStrategy;
+import core.basesyntax.strategyimpl.BalanceHandler;
+import core.basesyntax.strategyimpl.OperationStrategyImpl;
+import core.basesyntax.strategyimpl.PurchaseHandler;
+import core.basesyntax.strategyimpl.ReturnHandler;
+import core.basesyntax.strategyimpl.SupplyHandler;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
+    private static final String INPUT_FILE_PATH = "src/main/resources/reportToRead.csv";
+    private static final String OUTPUT_FILE_PATH = "src/main/resources/finalReport.csv";
 
+    public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read("reportToRead.csv");
 

@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.basesyntax.strategyimpl;
+
+import core.basesyntax.database.FruitStock;
+import core.basesyntax.strategy.OperationHandler;
 
 public class PurchaseHandler implements OperationHandler {
     private final FruitStock fruitStock;

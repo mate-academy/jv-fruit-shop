@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.serviceimpl;
 
+import core.basesyntax.service.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -12,8 +13,9 @@ public class FileReaderImpl implements FileReader {
         try {
             return Files.readAllLines(Paths.get(filePath));
         } catch (IOException e) {
-            throw new RuntimeException("Error while saving file: " + filePath, e);
+            throw new RuntimeException("Can’t  read the file by path: " + filePath, e);
         }
     }
 }
+
 
