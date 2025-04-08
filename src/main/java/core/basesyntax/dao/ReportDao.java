@@ -6,7 +6,9 @@ import java.util.Map;
 public interface ReportDao {
     Map<String, Integer> getReport();
 
-    void updateReport(FruitTransaction fruitTransaction);
+    void updateReportBalance(FruitTransaction fruitTransaction);
+
+    void updateReport(FruitTransaction fruitTransaction, int balanceAfter);
 
     int getBalanceFruitTransaction(FruitTransaction fruitTransaction);
 }

@@ -11,6 +11,10 @@ public class Storage {
         fruitStorage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 
+    public void addFruit(String fruit, int quantity) {
+        fruitStorage.put(fruit, quantity);
+    }
+
     public Map<String, Integer> getFruitTransactionInfo() {
         return fruitStorage;
     }

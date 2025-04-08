@@ -18,6 +18,6 @@ public class BalanceSetterImpl implements BalanceSetter {
         fruitTransactions.stream()
                 .filter(fruitTransaction
                         -> fruitTransaction.getOperation() == Operation.BALANCE)
-                .forEach(reportDao::updateReport);
+                .forEach(reportDao::updateReportBalance);
     }
 }

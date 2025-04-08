@@ -13,8 +13,13 @@ public class ReportDaoImpl implements ReportDao {
     }
 
     @Override
-    public void updateReport(FruitTransaction fruitTransaction) {
+    public void updateReportBalance(FruitTransaction fruitTransaction) {
         storage.addFruit(fruitTransaction);
+    }
+
+    @Override
+    public void updateReport(FruitTransaction fruitTransaction, int balanceAfter) {
+        storage.addFruit(fruitTransaction.getFruit(), balanceAfter);
     }
 
     @Override

@@ -9,7 +9,7 @@ import core.basesyntax.strategy.OperationStrategy;
 
 public class TransactionProcessImpl implements TransactionProcess {
     private final ReportDao reportDao;
-    private OperationStrategy operationStrategy;
+    private final OperationStrategy operationStrategy;
 
     public TransactionProcessImpl(OperationStrategy operationStrategy, ReportDao reportDao) {
         this.reportDao = reportDao;
@@ -26,7 +26,7 @@ public class TransactionProcessImpl implements TransactionProcess {
         int balanceBefore = reportDao.getBalanceFruitTransaction(fruitTransaction);
         int balanceAfter = operationHandler
                 .warehouse(balanceBefore, fruitTransaction.getQuantity());
-        fruitTransaction.setQuantity(balanceAfter);
-        reportDao.updateReport(fruitTransaction);
+        //fruitTransaction.setQuantity(balanceAfter);
+        reportDao.updateReport(fruitTransaction, balanceAfter);
     }
 }
