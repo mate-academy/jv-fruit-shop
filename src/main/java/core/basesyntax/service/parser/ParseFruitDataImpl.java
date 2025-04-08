@@ -21,7 +21,7 @@ public class ParseFruitDataImpl implements ParseFruitData {
 
         return dataLines.stream()
                 .map(this::parseLine)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private FruitTransaction parseLine(String line) {

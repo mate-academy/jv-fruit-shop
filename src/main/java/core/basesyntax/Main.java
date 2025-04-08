@@ -23,8 +23,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static final String INPUT_FILE = "src/main/resources/FruitInput.csv";
-    public static final String OUTPUT_FILE = "src/main/resources/OutputReport.csv";
+    private static final String INPUT_FILE = "src/main/resources/FruitInput.csv";
+    private static final String OUTPUT_FILE = "src/main/resources/OutputReport.csv";
 
     public static void main(String[] args) {
         FruitFileReader fileReader = new FileReaderCsvImpl();
