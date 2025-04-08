@@ -1,8 +1,5 @@
 package core.basesyntax;
 
-import static core.basesyntax.db.ShopDataBase.INPUT_FILE;
-import static core.basesyntax.db.ShopDataBase.OUTPUT_FILE;
-
 import core.basesyntax.dao.FileReaderCsvImpl;
 import core.basesyntax.dao.FileWriterImpl;
 import core.basesyntax.dao.FruitFileReader;
@@ -26,10 +23,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
+    public static final String INPUT_FILE = "src/main/resources/FruitInput.csv";
+    public static final String OUTPUT_FILE = "src/main/resources/OutputReport.csv";
 
+    public static void main(String[] args) {
         FruitFileReader fileReader = new FileReaderCsvImpl();
-        ParseFruitData parseFruitData = new ParseFruitDataImpl(fileReader);
+        List<String> fileInput = fileReader.read(INPUT_FILE);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -38,7 +37,8 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        List<FruitTransaction> parsedData = parseFruitData.parseData(INPUT_FILE);
+        ParseFruitData parseFruitData = new ParseFruitDataImpl();
+        List<FruitTransaction> parsedData = parseFruitData.parseData(fileInput);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(parsedData);
 
@@ -46,6 +46,6 @@ public class Main {
         List<String> report = reportGenerator.generateReport();
 
         FruitFileWriter fruitFileWriter = new FileWriterImpl();
-        fruitFileWriter.write(report,OUTPUT_FILE);
+        fruitFileWriter.write(report, OUTPUT_FILE);
     }
 }

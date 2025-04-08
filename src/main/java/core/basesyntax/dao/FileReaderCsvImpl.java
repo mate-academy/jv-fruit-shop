@@ -13,7 +13,7 @@ public class FileReaderCsvImpl implements FruitFileReader {
         try {
             inputArray = Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file " + fileName);
+            throw new RuntimeException("Can't read the file by path: " + fileName, e);
         }
         return inputArray;
     }

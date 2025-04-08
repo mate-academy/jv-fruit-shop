@@ -12,7 +12,7 @@ public class FileWriterImpl implements FruitFileWriter {
         try {
             Files.write(Path.of(fileName),report);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write into the file " + fileName);
+            throw new RuntimeException("Can't write into the file by path: " + fileName, e);
         }
     }
 }
