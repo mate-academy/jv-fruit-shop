@@ -4,7 +4,6 @@ import static core.basesyntax.service.reportgenerator.ReportGeneratorImpl.DELIMI
 
 import core.basesyntax.service.FruitTransaction;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ParseFruitDataImpl implements ParseFruitData {
     private static final int REQUIRED_COLUMNS = 3;
