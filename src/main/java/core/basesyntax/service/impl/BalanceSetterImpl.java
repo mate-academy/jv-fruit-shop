@@ -1,23 +1,27 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.ReportDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceSetter;
 import java.util.List;
 
 public class BalanceSetterImpl implements BalanceSetter {
-    private final ReportDao reportDao;
+    private final Storage storage;
 
-    public BalanceSetterImpl(ReportDao reportDao) {
-        this.reportDao = reportDao;
+    public BalanceSetterImpl(Storage storage) {
+        this.storage = storage;
     }
 
     @Override
     public void setBalance(List<FruitTransaction> fruitTransactions) {
         fruitTransactions.stream()
                 .filter(fruitTransaction
-                        -> fruitTransaction.getOperation() == Operation.BALANCE)
-                .forEach(reportDao::updateReportBalance);
+                        -> fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE)
+                .forEach(fruitTransaction
+                        -> storage.updateFruitBalance(
+                                fruitTransaction.getFruit(),
+                                fruitTransaction.getQuantity()
+                        )
+                );
     }
 }

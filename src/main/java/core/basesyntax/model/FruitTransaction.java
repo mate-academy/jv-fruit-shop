@@ -29,6 +29,32 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
+    public enum Operation {
+        BALANCE("b"),
+        SUPPLY("s"),
+        PURCHASE("p"),
+        RETURN("r");
+
+        private String code;
+
+        Operation(String code) {
+            this.code = code;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public static Operation fromCode(String code) {
+            for (Operation operation : values()) {
+                if (operation.code.equals(code)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Unknown operation code: " + code);
+        }
+    }
+
     @Override
     public String toString() {
         return "FruitTransaction{"

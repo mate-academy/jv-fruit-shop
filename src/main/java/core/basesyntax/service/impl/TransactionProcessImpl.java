@@ -1,32 +1,32 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.ReportDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.TransactionProcess;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 
 public class TransactionProcessImpl implements TransactionProcess {
-    private final ReportDao reportDao;
+    private final Storage storage;
     private final OperationStrategy operationStrategy;
 
-    public TransactionProcessImpl(OperationStrategy operationStrategy, ReportDao reportDao) {
-        this.reportDao = reportDao;
+    public TransactionProcessImpl(OperationStrategy operationStrategy, Storage storage) {
+        this.storage = storage;
         this.operationStrategy = operationStrategy;
     }
 
     @Override
     public void process(FruitTransaction fruitTransaction) {
-        if (fruitTransaction.getOperation() == Operation.BALANCE) {
-            return;
+        OperationHandler operationHandler =
+                operationStrategy.operationHandler(fruitTransaction.getOperation());
+        int balanceBefore = storage.getFruitBalance(fruitTransaction.getFruit());
+        int balanceAfter = operationHandler.warehouse(balanceBefore,
+                fruitTransaction.getQuantity());
+
+        if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE) {
+            storage.setFruitBalance(fruitTransaction.getFruit(), balanceAfter);
+        } else {
+            storage.updateFruitBalance(fruitTransaction.getFruit(), balanceAfter - balanceBefore);
         }
-        OperationHandler operationHandler = operationStrategy
-                .operationHandler(fruitTransaction.getOperation());
-        int balanceBefore = reportDao.getBalanceFruitTransaction(fruitTransaction);
-        int balanceAfter = operationHandler
-                .warehouse(balanceBefore, fruitTransaction.getQuantity());
-        //fruitTransaction.setQuantity(balanceAfter);
-        reportDao.updateReport(fruitTransaction, balanceAfter);
     }
 }

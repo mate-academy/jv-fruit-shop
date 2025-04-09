@@ -1,21 +1,20 @@
 package core.basesyntax;
 
-import core.basesyntax.dao.ReportDao;
-import core.basesyntax.dao.ReportDaoImpl;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.BalanceSetter;
 import core.basesyntax.service.ConverterFruitTransaction;
 import core.basesyntax.service.FileReaderService;
-import core.basesyntax.service.ReportCreate;
 import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.TransactionProcess;
 import core.basesyntax.service.impl.BalanceSetterImpl;
 import core.basesyntax.service.impl.ConverterFruitTransactionImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
-import core.basesyntax.service.impl.ReportCreateImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.service.impl.ReportWriterImpl;
 import core.basesyntax.service.impl.TransactionProcessImpl;
+import core.basesyntax.strategy.BalanceOperation;
 import core.basesyntax.strategy.OperationHandler;
 import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.PurchaseOperation;
@@ -30,30 +29,34 @@ public class Main {
             = "src/main/resources/read.csv";
     private static final String REPORT_FILE_PATH
             = "src/main/resources/report.csv";
-    private static final Map<Operation, OperationHandler> operations =
-            Map.of(Operation.SUPPLY, new SupplyOperation(),
-                    Operation.PURCHASE, new PurchaseOperation(),
-                    Operation.RETURN, new ReturnOperation());
 
     public static void main(String[] args) {
+
         FileReaderService fileReaderService = new FileReaderServiceImpl();
-        List<String> reader = fileReaderService.readFile(TRANSACTIONS_FILE_PATH);
+        List<String> inputReport = fileReaderService.readFile(TRANSACTIONS_FILE_PATH);
 
         ConverterFruitTransaction converterFruitTransaction = new ConverterFruitTransactionImpl();
         List<FruitTransaction> transactions = converterFruitTransaction
-                .converterFruitTransaction(reader);
+                .converterFruitTransaction(inputReport);
 
-        ReportDao reportDao = new ReportDaoImpl();
+        Storage storage = new Storage();
 
-        BalanceSetter balanceSetter = new BalanceSetterImpl(reportDao);
+        BalanceSetter balanceSetter = new BalanceSetterImpl(storage);
         balanceSetter.setBalance(transactions);
+
+        Map<FruitTransaction.Operation, OperationHandler> operations = Map.of(
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(),
+                FruitTransaction.Operation.BALANCE, new BalanceOperation()
+        );
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
         TransactionProcess transactionProcess =
-                new TransactionProcessImpl(operationStrategy, reportDao);
+                new TransactionProcessImpl(operationStrategy, storage);
 
-        ReportCreate reportCreate = new ReportCreateImpl();
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(reportDao);
+        ReportWriter reportCreate = new ReportWriterImpl();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
 
         transactions.forEach(transactionProcess::process);
         String report = reportGenerator.generate();

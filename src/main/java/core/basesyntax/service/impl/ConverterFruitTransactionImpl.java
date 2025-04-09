@@ -1,9 +1,9 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.model.Operation;
 import core.basesyntax.service.ConverterFruitTransaction;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConverterFruitTransactionImpl implements ConverterFruitTransaction {
     private static final String SEPARATOR = ",";
@@ -15,18 +15,38 @@ public class ConverterFruitTransactionImpl implements ConverterFruitTransaction 
     public List<FruitTransaction> converterFruitTransaction(List<String> readFruitTransaction) {
         return readFruitTransaction.stream()
                 .map(this::getTransaction)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private FruitTransaction getTransaction(String fromFile) {
-        FruitTransaction fruitTransaction = new FruitTransaction();
         String[] fruitTransactionArray = fromFile.split(SEPARATOR);
-        fruitTransaction.setOperation(Operation
-                .fromCode(fruitTransactionArray[OPERATION_INDEX].trim()));
-        fruitTransaction.setFruit(fruitTransactionArray[FRUIT_INDEX].trim());
-        fruitTransaction.setQuantity(Integer
-                .parseInt(fruitTransactionArray[QUANTITY_INDEX].trim()));
+        if (fruitTransactionArray.length != 3) {
+            throw new IllegalArgumentException(
+                    "Invalid line structure: Expected 3 values but found "
+                            + fruitTransactionArray.length + ". Line content: "
+                            + fromFile);
+        }
 
-        return fruitTransaction;
+        try {
+            FruitTransaction fruitTransaction = new FruitTransaction();
+            fruitTransaction.setOperation(FruitTransaction.Operation
+                    .fromCode(fruitTransactionArray[OPERATION_INDEX].trim()));
+            fruitTransaction.setFruit(fruitTransactionArray[FRUIT_INDEX].trim());
+
+            int quantity = Integer.parseInt(fruitTransactionArray[QUANTITY_INDEX].trim());
+            if (quantity < 0) {
+                throw new IllegalArgumentException(
+                        "Quantity cannot be negative. Line content: " + fromFile);
+            }
+            fruitTransaction.setQuantity(quantity);
+
+            return fruitTransaction;
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(
+                    "Invalid number format for quantity. Line content: " + fromFile, e);
+        } catch (IllegalArgumentException e) {
+            System.err.println(e.getMessage());
+            throw e;
+        }
     }
 }

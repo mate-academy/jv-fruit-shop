@@ -1,11 +1,11 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.service.ReportCreate;
+import core.basesyntax.service.ReportWriter;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class ReportCreateImpl implements ReportCreate {
+public class ReportWriterImpl implements ReportWriter {
     @Override
     public void send(String path, String report) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(path))) {
