@@ -14,7 +14,6 @@ public class FileReaderServiceImpl implements FileReaderService {
         List<String> fruitTransaction;
         try {
             fruitTransaction = Files.readAllLines(Path.of(filePath));
-            fruitTransaction.remove(TITLE_INDEX);
         } catch (IOException e) {
             throw new RuntimeException("Cant read file: " + filePath, e);
         }

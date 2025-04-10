@@ -1,12 +1,21 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+
 public class PurchaseOperation implements OperationHandler {
+    private final Storage storage = Storage.getInstance();
 
     @Override
-    public int warehouse(int balance, int quantity) {
-        if (balance < quantity) {
-            throw new RuntimeException("Fruits balance less than " + quantity);
+    public void warehouse(FruitTransaction fruitTransaction) {
+        String fruit = fruitTransaction.getFruit();
+        int currentBalance = storage.getFruitBalance(fruit);
+        int newBalance = currentBalance - fruitTransaction.getQuantity();
+
+        if (newBalance < 0) {
+            throw new RuntimeException("Fruits balance less than "
+                    + fruitTransaction.getQuantity());
         }
-        return balance - quantity;
+        storage.setFruitBalance(fruit, newBalance);
     }
 }

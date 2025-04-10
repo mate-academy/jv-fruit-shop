@@ -1,5 +1,7 @@
 package core.basesyntax.strategy;
 
+import core.basesyntax.model.FruitTransaction;
+
 public interface OperationHandler {
-    int warehouse(int balance, int quantity);
+    void warehouse(FruitTransaction fruitTransaction);
 }

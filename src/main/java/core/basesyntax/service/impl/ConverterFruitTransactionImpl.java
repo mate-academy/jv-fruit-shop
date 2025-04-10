@@ -3,7 +3,6 @@ package core.basesyntax.service.impl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ConverterFruitTransaction;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ConverterFruitTransactionImpl implements ConverterFruitTransaction {
     private static final String SEPARATOR = ",";
@@ -15,7 +14,7 @@ public class ConverterFruitTransactionImpl implements ConverterFruitTransaction 
     public List<FruitTransaction> converterFruitTransaction(List<String> readFruitTransaction) {
         return readFruitTransaction.stream()
                 .map(this::getTransaction)
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private FruitTransaction getTransaction(String fromFile) {
@@ -45,8 +44,7 @@ public class ConverterFruitTransactionImpl implements ConverterFruitTransaction 
             throw new IllegalArgumentException(
                     "Invalid number format for quantity. Line content: " + fromFile, e);
         } catch (IllegalArgumentException e) {
-            System.err.println(e.getMessage());
-            throw e;
+            throw new IllegalArgumentException("Invalid quantity. Line content: " + fromFile, e);
         }
     }
 }

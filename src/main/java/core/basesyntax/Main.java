@@ -2,13 +2,11 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.BalanceSetter;
 import core.basesyntax.service.ConverterFruitTransaction;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportWriter;
 import core.basesyntax.service.TransactionProcess;
-import core.basesyntax.service.impl.BalanceSetterImpl;
 import core.basesyntax.service.impl.ConverterFruitTransactionImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.ReportGeneratorImpl;
@@ -35,14 +33,11 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> inputReport = fileReaderService.readFile(TRANSACTIONS_FILE_PATH);
 
+        inputReport.remove(0);
+
         ConverterFruitTransaction converterFruitTransaction = new ConverterFruitTransactionImpl();
         List<FruitTransaction> transactions = converterFruitTransaction
                 .converterFruitTransaction(inputReport);
-
-        Storage storage = new Storage();
-
-        BalanceSetter balanceSetter = new BalanceSetterImpl(storage);
-        balanceSetter.setBalance(transactions);
 
         Map<FruitTransaction.Operation, OperationHandler> operations = Map.of(
                 FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
@@ -52,14 +47,16 @@ public class Main {
         );
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
+
+        Storage storage = Storage.getInstance();
         TransactionProcess transactionProcess =
                 new TransactionProcessImpl(operationStrategy, storage);
-
-        ReportWriter reportCreate = new ReportWriterImpl();
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
-
         transactions.forEach(transactionProcess::process);
-        String report = reportGenerator.generate();
-        reportCreate.send(REPORT_FILE_PATH, report);
+
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String report = reportGenerator.generateReport();
+
+        ReportWriter reportWriter = new ReportWriterImpl();
+        reportWriter.writeIntoFile(REPORT_FILE_PATH, report);
     }
 }

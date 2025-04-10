@@ -16,17 +16,8 @@ public class TransactionProcessImpl implements TransactionProcess {
     }
 
     @Override
-    public void process(FruitTransaction fruitTransaction) {
-        OperationHandler operationHandler =
-                operationStrategy.operationHandler(fruitTransaction.getOperation());
-        int balanceBefore = storage.getFruitBalance(fruitTransaction.getFruit());
-        int balanceAfter = operationHandler.warehouse(balanceBefore,
-                fruitTransaction.getQuantity());
-
-        if (fruitTransaction.getOperation() == FruitTransaction.Operation.BALANCE) {
-            storage.setFruitBalance(fruitTransaction.getFruit(), balanceAfter);
-        } else {
-            storage.updateFruitBalance(fruitTransaction.getFruit(), balanceAfter - balanceBefore);
-        }
+    public void process(FruitTransaction transaction) {
+        OperationHandler handler = operationStrategy.operationHandler(transaction.getOperation());
+        handler.warehouse(transaction);
     }
 }
