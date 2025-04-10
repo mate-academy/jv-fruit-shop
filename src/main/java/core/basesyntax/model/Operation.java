@@ -25,5 +25,3 @@ public enum Operation {
         throw new IllegalArgumentException("Unknown operation: " + code);
     }
 }
-
-

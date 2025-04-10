@@ -29,7 +29,7 @@ public class Main {
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
         FruitStock fruitStock = new FruitStock();
@@ -50,6 +50,6 @@ public class Main {
         String resultingReport = reportGenerator.generateReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
+        fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
     }
 }
