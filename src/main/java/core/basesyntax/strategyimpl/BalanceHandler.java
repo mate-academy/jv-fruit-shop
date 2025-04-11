@@ -12,6 +12,6 @@ public class BalanceHandler implements OperationHandler {
 
     @Override
     public void handle(String fruit, int quantity) {
-        int currentBalance = fruitStock.getQuantity(fruit);
+        fruitStock.updateFruitQuantity(fruit, quantity);
     }
 }

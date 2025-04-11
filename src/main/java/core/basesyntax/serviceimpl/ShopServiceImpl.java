@@ -16,16 +16,6 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void addFruit(String fruit, int quantity) {
-        fruitStock.add(fruit, quantity);
-    }
-
-    @Override
-    public int getFruitQuantity(String fruit) {
-        return fruitStock.getQuantity(fruit);
-    }
-
-    @Override
     public void process(List<FruitTransaction> transactions) {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.executeOperation(transaction, fruitStock.getStock());
