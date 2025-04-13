@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStock {
-    private final Map<String, Integer> stock = new HashMap<>();
+    public static final Map<String, Integer> stock = new HashMap<>();
 
     public void add(String fruit, int quantity) {
         stock.put(fruit, stock.getOrDefault(fruit, 0) + quantity);
@@ -23,7 +23,7 @@ public class FruitStock {
         return stock.getOrDefault(fruit, 0);
     }
 
-    public Map<String, Integer> getAll() {
+    public static Map<String, Integer> getAll() {
         return new HashMap<>(stock);
     }
 
