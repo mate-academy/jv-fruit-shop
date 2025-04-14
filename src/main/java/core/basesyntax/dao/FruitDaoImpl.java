@@ -20,7 +20,12 @@ public class FruitDaoImpl implements FruitDao {
     @Override
     public void remove(String fruitName, int amount) {
         Storage.getFruitStorage().compute(fruitName, (k, amountInStorage) -> {
-            return amountInStorage >= amount ? amountInStorage - amount : amountInStorage;
+            if (amountInStorage < amount) {
+                throw new RuntimeException("Insufficient stock: attempting to remove "
+                        + amount + " units of " + fruitName
+                        + ", but only " + amountInStorage + " available.");
+            }
+            return amountInStorage - amount;
         });
     }
 
