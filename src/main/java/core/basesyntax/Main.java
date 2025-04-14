@@ -34,17 +34,18 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
         final List<FruitTransaction> listOfTransactions = dataConverter.convert(readData);
 
+        FruitDao fruitDao = new FruitDaoImpl();
+
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(fruitDao));
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(fruitDao));
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(fruitDao));
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(fruitDao));
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(listOfTransactions);
 
-        FruitDao fruitDao = new FruitDaoImpl();
         ReportGenerator reportGenerator = new ReportGeneratorImpl(fruitDao);
         String resultingReport = reportGenerator.getReport();
 

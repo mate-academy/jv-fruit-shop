@@ -1,11 +1,14 @@
 package core.basesyntax.strategy.operation;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 
 public class ReturnOperation implements OperationHandler {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+
+    public ReturnOperation(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public void apply(FruitTransaction transaction) {
