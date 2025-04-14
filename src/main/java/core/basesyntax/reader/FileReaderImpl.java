@@ -1,4 +1,4 @@
-package core.basesyntax.resources;
+package core.basesyntax.reader;
 
 import java.io.IOException;
 import java.nio.file.Files;
