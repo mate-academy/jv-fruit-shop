@@ -13,8 +13,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder("fruit,quantity")
                 .append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : ((ShopServiceImpl)shopService)
-                .getStorage().entrySet()) {
+        for (Map.Entry<String, Integer> entry : shopService.getStorage().entrySet()) {
             stringBuilder
                     .append(entry.getKey())
                     .append(",")
