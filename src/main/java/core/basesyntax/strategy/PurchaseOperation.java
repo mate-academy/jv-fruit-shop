@@ -4,7 +4,11 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
-    private final Storage storage = Storage.getInstance();
+    private final Storage storage;
+
+    public PurchaseOperation(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public void warehouse(FruitTransaction fruitTransaction) {

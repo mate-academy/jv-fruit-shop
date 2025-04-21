@@ -33,27 +33,25 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         List<String> inputReport = fileReaderService.readFile(TRANSACTIONS_FILE_PATH);
 
-        inputReport.remove(0);
-
         ConverterFruitTransaction converterFruitTransaction = new ConverterFruitTransactionImpl();
         List<FruitTransaction> transactions = converterFruitTransaction
                 .converterFruitTransaction(inputReport);
 
+        Storage storage = new Storage();
+
         Map<FruitTransaction.Operation, OperationHandler> operations = Map.of(
-                FruitTransaction.Operation.SUPPLY, new SupplyOperation(),
-                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(),
-                FruitTransaction.Operation.RETURN, new ReturnOperation(),
-                FruitTransaction.Operation.BALANCE, new BalanceOperation()
+                FruitTransaction.Operation.SUPPLY, new SupplyOperation(storage),
+                FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storage),
+                FruitTransaction.Operation.RETURN, new ReturnOperation(storage),
+                FruitTransaction.Operation.BALANCE, new BalanceOperation(storage)
         );
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(operations);
-
-        Storage storage = Storage.getInstance();
         TransactionProcess transactionProcess =
                 new TransactionProcessImpl(operationStrategy, storage);
         transactions.forEach(transactionProcess::process);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
         String report = reportGenerator.generateReport();
 
         ReportWriter reportWriter = new ReportWriterImpl();

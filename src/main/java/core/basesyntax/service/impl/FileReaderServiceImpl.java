@@ -7,7 +7,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderServiceImpl implements FileReaderService {
-    private static final int TITLE_INDEX = 0;
 
     @Override
     public List<String> readFile(String filePath) {

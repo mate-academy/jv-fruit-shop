@@ -12,6 +12,8 @@ public class ConverterFruitTransactionImpl implements ConverterFruitTransaction 
 
     @Override
     public List<FruitTransaction> converterFruitTransaction(List<String> readFruitTransaction) {
+        readFruitTransaction.remove(OPERATION_INDEX);
+
         return readFruitTransaction.stream()
                 .map(this::getTransaction)
                 .toList();
@@ -29,10 +31,10 @@ public class ConverterFruitTransactionImpl implements ConverterFruitTransaction 
         try {
             FruitTransaction fruitTransaction = new FruitTransaction();
             fruitTransaction.setOperation(FruitTransaction.Operation
-                    .fromCode(fruitTransactionArray[OPERATION_INDEX].trim()));
-            fruitTransaction.setFruit(fruitTransactionArray[FRUIT_INDEX].trim());
+                    .fromCode(fruitTransactionArray[OPERATION_INDEX]));
+            fruitTransaction.setFruit(fruitTransactionArray[FRUIT_INDEX]);
 
-            int quantity = Integer.parseInt(fruitTransactionArray[QUANTITY_INDEX].trim());
+            int quantity = Integer.parseInt(fruitTransactionArray[QUANTITY_INDEX]);
             if (quantity < 0) {
                 throw new IllegalArgumentException(
                         "Quantity cannot be negative. Line content: " + fromFile);

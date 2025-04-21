@@ -6,18 +6,21 @@ import core.basesyntax.service.ReportGenerator;
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String SEPARATOR = ",";
     private static final String TITLE_REPORT = "fruit,quantity";
-    private static final String LINE_SEPARATOR = System.lineSeparator();
 
-    private final Storage storage = Storage.getInstance(); // используй Singleton
+    private final Storage storage;
+
+    public ReportGeneratorImpl(Storage storage) {
+        this.storage = storage;
+    }
 
     @Override
     public String generateReport() {
-        StringBuilder finalReport = new StringBuilder(TITLE_REPORT).append(LINE_SEPARATOR);
+        StringBuilder finalReport = new StringBuilder(TITLE_REPORT).append(System.lineSeparator());
         storage.getAll().forEach((fruit, quantity) ->
                 finalReport.append(fruit)
                         .append(SEPARATOR)
                         .append(quantity)
-                        .append(LINE_SEPARATOR));
+                        .append(System.lineSeparator()));
         return finalReport.toString();
     }
 }
