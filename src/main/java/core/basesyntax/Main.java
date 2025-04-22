@@ -4,10 +4,10 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.DataConverterImpl;
-import core.basesyntax.service.FileReaderImpl;
+import core.basesyntax.service.FileReaderService;
+import core.basesyntax.service.FileReaderServiceImpl;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.FileWriterImpl;
-import core.basesyntax.service.ReaderFromFile;
 import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.ReportGeneratorImpl;
 import core.basesyntax.service.ShopService;
@@ -25,8 +25,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        ReaderFromFile fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        List<String> inputReport = fileReader.read("fruit_shop_input.csv");
         DataConverter dataConverter = new DataConverterImpl();
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());
@@ -37,9 +37,9 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(strategy);
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         shopService.proces(transactions);
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(shopService);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(report, "finalReport.csv");
+        fileWriter.write(report);
     }
 }

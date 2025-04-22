@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class DataConverterImpl implements DataConverter {
     @Override
@@ -21,7 +20,7 @@ public class DataConverterImpl implements DataConverter {
             if (splitedLine.length != 3) {
                 throw new IllegalArgumentException("Invalid line format: " + line);
             }
-            Operation operation = getOperationByCode(splitedLine[0]);
+            Operation operation = Operation.getOperationByCode(splitedLine[0]);
             int quantity;
             try {
                 quantity = Integer.parseInt(splitedLine[2]);
@@ -33,12 +32,5 @@ public class DataConverterImpl implements DataConverter {
             fruitTransactionList.add(fruitTransaction);
         }
         return fruitTransactionList;
-    }
-
-    public Operation getOperationByCode(String code) {
-        return Stream.of(Operation.values())
-                .filter(op -> op.getCode().equals(code.trim()))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown operation: " + code));
     }
 }

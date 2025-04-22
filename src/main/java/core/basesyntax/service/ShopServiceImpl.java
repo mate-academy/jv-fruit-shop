@@ -8,22 +8,21 @@ import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
-    private Map<String, Integer> storage;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
-        storage = new HashMap<>();
+        Storage.setStorage(new HashMap<>());
     }
 
     public Map<String, Integer> getStorage() {
-        return storage;
+        return Storage.getStorage();
     }
 
     @Override
     public void proces(List<FruitTransaction> transactions) {
         for (FruitTransaction fruitTransaction : transactions) {
             operationStrategy.getHandler(fruitTransaction.getOperation())
-                    .handle(fruitTransaction, storage);
+                    .handle(fruitTransaction);
         }
     }
 }
