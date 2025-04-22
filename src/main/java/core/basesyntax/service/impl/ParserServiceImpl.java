@@ -21,13 +21,15 @@ public class ParserServiceImpl implements ParserService {
             String[] transactionArray = transactions
                     .split(SEPARATOR);
             FruitTransaction fruitTransaction = new FruitTransaction();
-            fruitTransaction.setOperation(FruitTransaction
+            fruitTransaction
+                    .setOperation(FruitTransaction
                     .getOperationByCode(transactionArray[INDEX_OF_OPERATION_CODE]));
             fruitTransaction
                     .setFruit(transactionArray[INDEX_OF_FRUIT_NAME]);
             try {
-                fruitTransaction.setQuantity(Integer
-                        .parseInt(transactionArray[INDEX_OF_QUANTITY_VALUE]));
+                fruitTransaction
+                    .setQuantity(Integer
+                    .parseInt(transactionArray[INDEX_OF_QUANTITY_VALUE]));
             } catch (NumberFormatException e) {
                 System.err.println("The quantity value is not a number.");
             }
