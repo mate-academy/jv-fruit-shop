@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.ReportGenerationService;
-
 import java.util.Map;
 
 public class ReportGenerationServiceImpl implements ReportGenerationService {

@@ -3,7 +3,7 @@ package core.basesyntax.strategy;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
-public class PurchaseOperation implements OperationHandler{
+public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void handle(Storage storage, FruitTransaction fruitTransaction) {
@@ -16,10 +16,12 @@ public class PurchaseOperation implements OperationHandler{
             storage.fruits.put(fruit, newQuantity);
 
             if (newQuantity < 0) {
-                throw new RuntimeException("Incorrect quantity " + fruit + " quantity can't has negative value");
+                throw new RuntimeException("Incorrect quantity "
+                        + fruit + " quantity can't has negative value");
             }
         } else {
-            System.err.println("Not enough " + fruit + " available for purchase. Current stock: " + currentQuantity);
+            System.err.println("Not enough "
+                    + fruit + " available for purchase. Current stock: " + currentQuantity);
         }
     }
 }

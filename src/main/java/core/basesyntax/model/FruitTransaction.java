@@ -53,7 +53,7 @@ public class FruitTransaction {
 
         public static Operation getOperationByCode(String code) {
             for (Operation op : Operation.values()) {
-                if  (op.getCode().equalsIgnoreCase(code)) {
+                if (op.getCode().equalsIgnoreCase(code)) {
                     return op;
                 }
             }
