@@ -13,14 +13,11 @@ public class PurchaseOperation implements OperationHandler {
 
         if (currentQuantity >= quantityToBuy) {
             int newQuantity = currentQuantity - quantityToBuy;
-            storage.fruits.put(fruit, newQuantity);
-
-            if (newQuantity < 0) {
-                throw new RuntimeException("Incorrect quantity "
-                        + fruit + " quantity can't has negative value");
+            if (newQuantity >= 0) {
+                storage.fruits.put(fruit, newQuantity);
             }
         } else {
-            System.err.println("Not enough "
+            throw new RuntimeException("Not enough "
                     + fruit + " available for purchase. Current stock: " + currentQuantity);
         }
     }

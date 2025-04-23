@@ -8,6 +8,6 @@ public class BalanceOperation implements OperationHandler {
     public void handle(Storage storage, FruitTransaction fruitTransaction) {
         String fruit = fruitTransaction.getFruit();
         int quantity = fruitTransaction.getQuantity();
-        Storage.fruits.put(fruit, quantity);
+        storage.fruits.put(fruit, quantity);
     }
 }

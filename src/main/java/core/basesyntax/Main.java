@@ -24,7 +24,8 @@ public class Main {
         FileReaderService fileReaderService = new FileReaderServiceImpl();
         DataConvertService dataConvertService = new DataConvertServiceImpl();
         OperationStrategyService operationStrategyService = new OperationStrategyServiceImpl();
-        ShopService service = new ShopServiceImpl(operationStrategyService);
+        Storage storage = new Storage();
+        ShopService service = new ShopServiceImpl(operationStrategyService, storage);
         ReportGenerationService generationService = new ReportGenerationServiceImpl();
         FileWriterService fileWriterService = new FileWriterServiceImpl();
 

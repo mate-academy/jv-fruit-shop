@@ -22,7 +22,7 @@ public class DataConvertServiceImpl implements DataConvertService {
                 try {
                     operation = FruitTransaction.Operation.getOperationByCode(operationCode);
                 } catch (IllegalArgumentException e) {
-                    throw new IllegalArgumentException("Unknown operation code " + operationCode);
+                    throw new IllegalArgumentException("Unknown operation code: '" + operationCode + "' at line: " + (i + 1));
                 }
                 String fruit = parts[1].trim();
                 String strQuantity = parts[2].trim();

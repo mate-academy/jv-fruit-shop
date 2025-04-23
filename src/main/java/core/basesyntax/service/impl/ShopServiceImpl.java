@@ -10,10 +10,11 @@ import java.util.List;
 public class ShopServiceImpl implements ShopService {
 
     private final OperationStrategyService operationStrategyService;
-    private final Storage storage = new Storage();
+    private final Storage storage;
 
-    public ShopServiceImpl(OperationStrategyService operationStrategyService) {
+    public ShopServiceImpl(OperationStrategyService operationStrategyService, Storage storage) {
         this.operationStrategyService = operationStrategyService;
+        this.storage = storage;
     }
 
     @Override
