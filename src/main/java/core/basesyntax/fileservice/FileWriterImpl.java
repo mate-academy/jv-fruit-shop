@@ -11,8 +11,10 @@ public class FileWriterImpl implements FileWriter {
     @Override
     public void write(String report, String reportPath) {
 
+        List<String> split = List.of(report.split(System.lineSeparator()));
+
         List<String> linesWithHeader = new ArrayList<>();
-        linesWithHeader.add(report);
+        linesWithHeader.addAll(split);
 
         try {
             Files.write(Path.of(reportPath), linesWithHeader);
