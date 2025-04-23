@@ -25,8 +25,10 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
+        final String inputFilePath = "src/main/resources/fruit_shop_input.csv";
+        final String outputFilePath = "src/main/resources/fruit_shop_output.csv";
         FileReaderService fileReader = new FileReaderServiceImpl();
-        List<String> inputReport = fileReader.read("fruit_shop_input.csv");
+        List<String> inputReport = fileReader.read(inputFilePath);
         DataConverter dataConverter = new DataConverterImpl();
         Map<Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(Operation.BALANCE, new BalanceOperation());
@@ -40,6 +42,6 @@ public class Main {
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(report);
+        fileWriter.write(report, outputFilePath);
     }
 }

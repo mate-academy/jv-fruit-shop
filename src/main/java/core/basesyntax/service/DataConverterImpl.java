@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String CSV_SEPARATOR = ",";
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
         if (inputReport == null) {
@@ -13,10 +15,10 @@ public class DataConverterImpl implements DataConverter {
         }
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
         for (String line : inputReport) {
-            if (line == null || line.trim().isEmpty()) {
+            if (line == null || line.isBlank()) {
                 continue;
             }
-            String[] splitedLine = line.trim().split(",");
+            String[] splitedLine = line.split(CSV_SEPARATOR);
             if (splitedLine.length != 3) {
                 throw new IllegalArgumentException("Invalid line format: " + line);
             }

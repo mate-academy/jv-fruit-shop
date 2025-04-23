@@ -5,14 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
-    private static final String OUTPUT_FILE = "src/main/resources/fruit_shop_output.csv";
 
     @Override
-    public void write(String report) {
+    public void write(String report, String path) {
         try {
-            Files.write(Path.of(OUTPUT_FILE), report.getBytes());
+            Files.write(Path.of(path), report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't write file" + OUTPUT_FILE, e);
+            throw new RuntimeException("Can't write file" + path, e);
         }
     }
 }

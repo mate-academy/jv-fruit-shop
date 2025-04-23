@@ -20,7 +20,7 @@ public enum Operation {
 
     public static Operation getOperationByCode(String code) {
         return Stream.of(Operation.values())
-                .filter(op -> op.getCode().equals(code.trim()))
+                .filter(op -> op.getCode().equals(code))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException("Unknown operation: " + code));
     }

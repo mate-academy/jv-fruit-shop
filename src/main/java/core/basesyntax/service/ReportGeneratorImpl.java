@@ -4,18 +4,19 @@ import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     public static final String header = "fruit,quantity";
-    public static final String separator = System.lineSeparator();
+    public static final String lineSeparator = System.lineSeparator();
+    public static final String commaSeparator = ",";
 
     @Override
     public String getReport() {
         StringBuilder stringBuilder = new StringBuilder(header)
-                .append(separator);
+                .append(lineSeparator);
         for (Map.Entry<String, Integer> entry : Storage.getStorage().entrySet()) {
             stringBuilder
                     .append(entry.getKey())
-                    .append(",")
+                    .append(commaSeparator)
                     .append(entry.getValue())
-                    .append(separator);
+                    .append(lineSeparator);
         }
         return stringBuilder.toString();
     }
