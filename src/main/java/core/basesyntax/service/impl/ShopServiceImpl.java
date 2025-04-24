@@ -22,7 +22,7 @@ public class ShopServiceImpl implements ShopService {
         for (String fruit : getFruits(transactions)) {
             int sumOfOperationValues = transactions.stream()
                     .filter(transaction -> transaction
-                            .getfruit().equalsIgnoreCase(fruit))
+                            .getFruit().equalsIgnoreCase(fruit))
                     .map(transaction -> {
                         FruitTransaction.Operation operation = transaction
                                 .getOperation();
@@ -43,7 +43,7 @@ public class ShopServiceImpl implements ShopService {
 
     private List<String> getFruits(List<FruitTransaction> transactions) {
         return transactions.stream()
-                .map(FruitTransaction::getfruit)
+                .map(FruitTransaction::getFruit)
                 .distinct()
                 .toList();
     }
