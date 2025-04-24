@@ -11,14 +11,12 @@ import java.io.IOException;
 import java.util.*;
 
 public class Main {
+    private static final String INPUT_FILE = "src/main/resources/reportToRead.csv";
+
     public static void main(String[] arg) throws IOException {
-        String input = "src/main/resources/reportToRead.csv";
-        String output = "src/main/resources/finalReport.csv";
 
         FileReader fileReader = new FileReaderImpl();
         DataConverter dataConverter = new DataConverterImpl();
-        FileWriter fileWriter = new FileWriterImpl();
-        ReportGenerator reportService = new ReportGeneratorImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> strategy = new HashMap<>();
         strategy.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
@@ -28,17 +26,12 @@ public class Main {
 
         OperationStrategy operationStrategy = new OperationStrategyImpl(strategy);
 
-        List<String> readingFile = fileReader.read(input);
+        List<String> readingFile = fileReader.read(INPUT_FILE);
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(readingFile);
 
         for (FruitTransaction transaction : transactions) {
             OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
             operationHandler.apply(transaction);
         }
-
-        String report = reportService.getReport();
-        fileWriter.write(output, report);
-
-        System.out.println(report);
     }
 }
