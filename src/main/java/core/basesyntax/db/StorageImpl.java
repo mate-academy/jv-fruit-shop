@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageImpl implements Storage {
-    private static final Map<String, Integer> fruitStorage = new HashMap<>();
+    public static final Map<String, Integer> fruitStorage = new HashMap<>();
 
     @Override
     public void updateFruitBalance(String fruit, int quantity) {

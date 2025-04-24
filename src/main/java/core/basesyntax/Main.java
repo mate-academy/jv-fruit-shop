@@ -1,7 +1,5 @@
 package core.basesyntax;
 
-import core.basesyntax.db.Storage;
-import core.basesyntax.db.StorageImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverter;
 import core.basesyntax.service.FileReader;
@@ -24,9 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Feel free to remove this class and create your own.
- */
 public class Main {
     private static final String START_FILE = "src/main/resources/reportToRead.csv";
     private static final String FINAL_FILE = "src/main/resources/finalReport.csv";
@@ -39,18 +34,18 @@ public class Main {
         DataConverter dataConverter = new DataConverterImpl();
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        Storage storage = new StorageImpl();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation(storage));
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation(storage));
+
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
