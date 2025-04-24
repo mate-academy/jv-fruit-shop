@@ -1,9 +1,9 @@
 package core.basesyntax.strategy;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
 
 public interface OperationHandler {
 
-    void handle(Storage storage, FruitTransaction fruitTransaction);
+    void handle(ShopService shopService, FruitTransaction fruitTransaction);
 }

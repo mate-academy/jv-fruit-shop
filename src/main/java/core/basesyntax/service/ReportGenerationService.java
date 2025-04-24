@@ -1,8 +1,7 @@
 package core.basesyntax.service;
 
-import core.basesyntax.db.Storage;
+import java.util.Map;
 
 public interface ReportGenerationService {
-    String generateReport(Storage storage);
-
+    String generateReport(Map<String, Integer> fruitQuantities);
 }
