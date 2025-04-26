@@ -9,7 +9,6 @@ public class PurchaseOperation implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int purchase = transaction.getQuantity();
-
         int current = Storage.storage.getOrDefault(fruit, 0);
         Storage.storage.put(fruit, current - purchase);
     }
