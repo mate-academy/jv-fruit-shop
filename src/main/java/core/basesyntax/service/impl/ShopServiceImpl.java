@@ -1,7 +1,7 @@
 package core.basesyntax.service.impl;
 
-import core.basesyntax.dao.FinalDataDao;
-import core.basesyntax.dao.FinalDataDaoImpl;
+import core.basesyntax.dao.StorageDao;
+import core.basesyntax.dao.StorageDaoImpl;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
     private OperationStrategy operationStrategy;
-    private FinalDataDao finalDataDao;
+    private StorageDao storageDao;
 
     public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
-        this.finalDataDao = new FinalDataDaoImpl();
+        this.storageDao = new StorageDaoImpl();
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ShopServiceImpl implements ShopService {
                 throw new RuntimeException("The resulting balance of "
                         + fruit + " is negative");
             }
-            finalDataDao.add(fruit, sumOfOperationValues);
+            storageDao.add(fruit, sumOfOperationValues);
         }
     }
 

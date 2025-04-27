@@ -6,11 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class FileWriterImpl implements FileWriter {
-    private static final String PATH_TO_FILE = "src/resources/";
 
     @Override
     public void write(String resultingReport, String fileName) {
-        File file = new File(PATH_TO_FILE + fileName);
+        File file = new File(fileName);
         try {
             Files.write(file.toPath(), resultingReport.getBytes());
         } catch (IOException e) {

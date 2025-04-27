@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private static final String PATH_TO_FILE = "src/resources/";
 
     @Override
     public List<String> read(String fileName) {
         List<String> dataList = new ArrayList<>();
-        File file = new File(PATH_TO_FILE + fileName);
+        File file = new File(fileName);
         try {
             dataList = Files.readAllLines(file.toPath());
         } catch (IOException e) {

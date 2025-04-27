@@ -40,7 +40,16 @@ public class FruitTransaction {
         }
 
         public String getCode() {
-            return code;
+            return this.code;
+        }
+
+        public static Operation getOperation(String code) {
+            for (Operation currentOperation : values()) {
+                if (currentOperation.getCode().equals(code)) {
+                    return currentOperation;
+                }
+            }
+            throw new RuntimeException("Invalid operation designation");
         }
     }
 }

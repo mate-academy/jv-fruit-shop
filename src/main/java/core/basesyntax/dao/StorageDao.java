@@ -1,5 +1,5 @@
 package core.basesyntax.dao;
 
-public interface FinalDataDao {
+public interface StorageDao {
     void add(String fruit, Integer amount);
 }
