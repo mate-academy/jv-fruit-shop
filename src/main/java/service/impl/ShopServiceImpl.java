@@ -1,15 +1,16 @@
 package service.impl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import model.FruitTransaction;
-import service.*;
+import service.OperationHandler;
+import service.OperationStrategy;
+import service.ShopService;
 import strategy.BalanceOperation;
 import strategy.PurchaseOperation;
 import strategy.ReturnOperation;
 import strategy.SupplyOperation;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;

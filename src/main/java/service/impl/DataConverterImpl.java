@@ -1,8 +1,8 @@
 package service.impl;
 
+import java.util.List;
 import model.FruitTransaction;
 import service.DataConverter;
-import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
     private static final String COMMA = ",";
@@ -16,8 +16,10 @@ public class DataConverterImpl implements DataConverter {
         return lines.stream()
                 .skip(MAGIC_NUMBER_ONE)
                 .map(line -> line.split(COMMA))
-                .map(parts -> new FruitTransaction(FruitTransaction.Operation.getByCode(parts[OPERATION_TYPE].trim()),
-                        parts[OPERATION_FRUIT].trim(), Integer.parseInt(parts[OPERATION_QUANTITY].trim())))
+                .map(parts -> new FruitTransaction(FruitTransaction.Operation
+                                .getByCode(parts[OPERATION_TYPE].trim()),
+                        parts[OPERATION_FRUIT].trim(),
+                        Integer.parseInt(parts[OPERATION_QUANTITY].trim())))
                 .toList();
     }
 }

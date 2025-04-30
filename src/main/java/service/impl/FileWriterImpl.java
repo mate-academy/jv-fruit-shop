@@ -1,10 +1,11 @@
 package service.impl;
 
-import service.FileWriter;
-
+import java.io.BufferedWriter;
 import java.io.FileOutputStream;
-import java.io.*;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
+import service.FileWriter;
 
 public class FileWriterImpl implements FileWriter {
     private static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";

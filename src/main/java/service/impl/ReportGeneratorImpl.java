@@ -1,8 +1,8 @@
 package service.impl;
 
 import db.Storage;
-import service.ReportGenerator;
 import java.util.Map;
+import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity";
