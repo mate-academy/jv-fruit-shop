@@ -49,7 +49,7 @@ public class FruitTransaction {
                     return currentOperation;
                 }
             }
-            throw new RuntimeException("Invalid operation designation");
+            throw new RuntimeException("Invalid operation designation: " + code);
         }
     }
 }

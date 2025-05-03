@@ -1,12 +1,13 @@
 type,fruit,quantity
 s,banana,100
 b,strawberry,15
+b,strawberry,15
 s,pineapple,3
 b,pineapple,8
 r,banana,100
 b,banana,300
 b,raspberry,7
-p,banana,10
+p,banana,34
 s,strawberry,20
 r,strawberry,5
 p,strawberry,5

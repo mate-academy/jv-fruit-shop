@@ -20,7 +20,8 @@ public class DataConverterImpl implements DataConverter {
         for (String currentString : inputReport) {
             String[] splittedReportItem = currentString.split(COMMA);
             if (splittedReportItem.length != REPORT_ITEM_LENGTH) {
-                throw new RuntimeException("Input string has invalid format");
+                throw new RuntimeException("input string has invalid format: "
+                        + currentString);
             }
             try {
                 fruitTransactions
@@ -30,7 +31,8 @@ public class DataConverterImpl implements DataConverter {
                                 splittedReportItem[FRUIT_INDEX],
                                 Integer.parseInt(splittedReportItem[QUANTITY_INDEX])));
             } catch (NumberFormatException e) {
-                throw new NumberFormatException("Input string has invalid format");
+                throw new NumberFormatException("input string has invalid format: "
+                        + currentString);
             }
         }
         return fruitTransactions;
