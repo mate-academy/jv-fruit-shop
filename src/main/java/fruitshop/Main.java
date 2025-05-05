@@ -23,11 +23,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String FILE_INPUT_PATH = "src/main/resources/inputReport.csv";
+    private static final String FILE_OUTPUT_PATH = "src/main/resources/outputReport.csv";
     private static List<FruitTransaction> transactions;
 
     public static void main(String[] args) {
         FileReaderService reader = new FileReaderServiceImpl();
-        List<String> rawData = reader.read("src/main/resources/inputReport.csv");
+        List<String> rawData = reader.read(FILE_INPUT_PATH);
 
         DataConverter converter = new DataConverterImpl();
         transactions = converter.convertToTransactions(rawData);
@@ -46,6 +48,6 @@ public class Main {
         String report = reportGenerator.getReport();
 
         FileWriterService writer = new FileWriterServiceImpl();
-        writer.write(report, "src/main/resources/outputReport.csv");
+        writer.write(report, FILE_OUTPUT_PATH);
     }
 }

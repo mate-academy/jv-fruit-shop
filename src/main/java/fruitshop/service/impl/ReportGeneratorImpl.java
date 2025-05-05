@@ -6,6 +6,7 @@ import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity";
+    private static final String SEPARATOR = ",";
 
     @Override
     public String getReport() {
@@ -13,7 +14,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         for (Map.Entry<String, Integer> entry : Storage.getAll().entrySet()) {
             report.append(System.lineSeparator())
                     .append(entry.getKey())
-                    .append(",")
+                    .append(SEPARATOR)
                     .append(entry.getValue());
         }
         return report.toString();

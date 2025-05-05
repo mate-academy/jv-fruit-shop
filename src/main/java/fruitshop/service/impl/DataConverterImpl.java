@@ -7,6 +7,7 @@ import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
     private static final String HEADER = "type,fruit,quantity";
+    private static final String SEPARATOR = ",";
 
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> lines) {
@@ -15,7 +16,7 @@ public class DataConverterImpl implements DataConverter {
             if (line.equals(HEADER)) {
                 continue;
             }
-            String[] parts = line.split(",");
+            String[] parts = line.split(SEPARATOR);
             if (parts.length != 3) {
                 throw new RuntimeException("Invalid line: " + line);
             }
