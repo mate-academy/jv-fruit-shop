@@ -15,13 +15,11 @@ public class DataConverterImpl implements DataConverter {
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
         return lines.stream()
                 .skip(MAGIC_NUMBER_ONE)
-                //.filter(line -> !line.isBlank())
                 .map(line -> line.split(COMMA))
-                //.filter(parts-> parts.length == 3)
                 .map(parts -> new FruitTransaction(FruitTransaction.Operation
-                            .getByCode(parts[OPERATION_TYPE]),
-                            parts[OPERATION_FRUIT],
-                            Integer.parseInt(parts[OPERATION_QUANTITY])))
+                            .getByCode(parts[OPERATION_TYPE].trim()),
+                            parts[OPERATION_FRUIT].trim(),
+                            Integer.parseInt(parts[OPERATION_QUANTITY].trim())))
                 .toList();
     }
 }

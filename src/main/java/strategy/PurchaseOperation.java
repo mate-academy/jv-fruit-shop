@@ -10,6 +10,11 @@ public class PurchaseOperation implements OperationHandler {
         String fruit = transaction.getFruit();
         int purchase = transaction.getQuantity();
         int current = Storage.storage.getOrDefault(fruit, 0);
+
+        if (current < purchase) {
+            throw new RuntimeException("Not enough " + fruit + "in the storage! "
+                   + "Available: " + current + " Need: " + purchase);
+        }
         Storage.storage.put(fruit, current - purchase);
     }
 }
