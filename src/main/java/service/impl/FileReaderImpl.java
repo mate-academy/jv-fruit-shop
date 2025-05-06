@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import service.FileReader;
 
 public class FileReaderImpl implements FileReader {
-
     @Override
     public List<String> read(String filePath) {
         try (BufferedReader bufferedReader =
