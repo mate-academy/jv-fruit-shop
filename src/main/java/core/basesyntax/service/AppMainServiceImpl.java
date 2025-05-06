@@ -6,18 +6,16 @@ import core.basesyntax.report.convertdata.DataConvertor;
 import core.basesyntax.report.input.Reader;
 import core.basesyntax.report.output.Writer;
 import core.basesyntax.report.report.ReportGenerator;
-
 import java.util.List;
 
 public class AppMainServiceImpl implements AppMainService {
+    private static final String FILE_READ_SRC = "src/main/resources/reportToRead.csv";
+    private static final String FILE_WRITE_SRC = "src/main/resources/finalReport.csv";
     private final Reader reader;
     private final DataConvertor dataConvertor;
     private final ShopService shopService;
     private final ReportGenerator reportGenerator;
     private final Writer writer;
-
-    private static final String FILE_READ_SRC = "src/main/resources/reportToRead.csv";
-    private static final String FILE_WRITE_SRC = "src/main/resources/finalReport.csv";
 
     public AppMainServiceImpl(
             Reader reader,

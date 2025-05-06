@@ -22,7 +22,8 @@ public class DataConvertorImpl implements DataConvertor {
 
             String fruitName = fruitInfo[FRUIT_NAME_INDEX];
             if (fruitName.isEmpty()) {
-                throw new RuntimeException("Skipping line with empty fruit name: " + fruitInfoList.get(i));
+                throw new RuntimeException("Skipping line with empty fruit name: "
+                        + fruitInfoList.get(i));
             }
 
             FruitOperation.Operation operation

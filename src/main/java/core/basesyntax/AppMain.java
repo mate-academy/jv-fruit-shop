@@ -11,8 +11,8 @@ import core.basesyntax.report.output.FileWriterImpl;
 import core.basesyntax.report.output.Writer;
 import core.basesyntax.report.report.ReportGenerator;
 import core.basesyntax.report.report.ReportGeneratorImpl;
-import core.basesyntax.service.AppMainServiceImpl;
 import core.basesyntax.service.AppMainService;
+import core.basesyntax.service.AppMainServiceImpl;
 import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.strategy.OperationStrategy;
@@ -22,7 +22,6 @@ import core.basesyntax.strategy.operation.OperationHandler;
 import core.basesyntax.strategy.operation.PurchaseOperationHandler;
 import core.basesyntax.strategy.operation.ReturnOperationHandler;
 import core.basesyntax.strategy.operation.SupplyOperationHandler;
-
 import java.util.Map;
 
 public class AppMain {
