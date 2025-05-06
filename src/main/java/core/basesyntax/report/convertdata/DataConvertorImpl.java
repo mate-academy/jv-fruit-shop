@@ -17,28 +17,32 @@ public class DataConvertorImpl implements DataConvertor {
         for (int i = REPORT_START_POSITION; i < fruitInfoList.size(); i++) {
             String[] fruitInfo = fruitInfoList.get(i).split(CSV_SEPARATOR);
             if (fruitInfo.length != 3) {
-                System.err.println("Skipping invalid line (wrong column count): "
-                        + fruitInfoList.get(i));
-                continue;
+                throw new IllegalArgumentException(
+                        "Invalid line (wrong column count) at line " + i
+                                + ": " + fruitInfoList.get(i)
+                );
             }
 
             String fruitName = fruitInfo[FRUIT_NAME_INDEX];
             if (fruitName.isEmpty()) {
-                System.err.println("Skipping line with empty fruit name: " + fruitInfoList.get(i));
-                continue;
+                throw new IllegalArgumentException(
+                        "Invalid line: empty fruit name at line " + i + ": " + fruitInfoList.get(i)
+                );
             }
 
-            FruitOperation.Operation operation
-                    = FruitOperation.Operation.getOperation(fruitInfo[OPERATION_INDEX]);
+            FruitOperation.Operation operation = FruitOperation.Operation
+                    .getOperation(fruitInfo[OPERATION_INDEX]);
             if (operation == null) {
-                System.err.println("Skipping line with invalid operation: " + fruitInfoList.get(i));
-                continue;
+                throw new IllegalArgumentException(
+                        "Invalid line: unknown operation at line " + i + ": " + fruitInfoList.get(i)
+                );
             }
 
             int fruitQuantity = Integer.parseInt(fruitInfo[QUANTITY_INDEX]);
             if (fruitQuantity < 0) {
-                System.err.println("Skipping line with negative quantity: " + fruitInfoList.get(i));
-                continue;
+                throw new IllegalArgumentException(
+                        "Invalid line: negative quantity at line " + i + ": " + fruitInfoList.get(i)
+                );
             }
 
             fruitTransactions.add(new FruitOperation(operation, fruitName, fruitQuantity));

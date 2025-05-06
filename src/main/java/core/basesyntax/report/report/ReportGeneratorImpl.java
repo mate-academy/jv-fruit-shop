@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String SEPARATOR = ",";
-    private static final String HEADER = "fruit" + SEPARATOR + "quantity";
+    private static final String HEADER = "fruit,quantity";
     private final StringBuilder stringBuilder;
 
     public ReportGeneratorImpl() {

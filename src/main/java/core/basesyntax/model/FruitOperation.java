@@ -1,7 +1,6 @@
 package core.basesyntax.model;
 
 import java.util.Arrays;
-import java.util.function.Supplier;
 
 public class FruitOperation {
     private Operation operation;
@@ -54,15 +53,11 @@ public class FruitOperation {
         }
 
         public static Operation getOperation(String code) {
-            try {
-                return Arrays.stream(Operation.values())
-                        .filter(operation -> operation.code.equals(code))
-                        .findFirst()
-                        .orElseThrow((Supplier<Throwable>) ()
-                                -> new RuntimeException("operation code not found."));
-            } catch (Throwable e) {
-                throw new RuntimeException(e);
-            }
+            return Arrays.stream(Operation.values())
+                    .filter(operation -> operation.code.equals(code))
+                    .findFirst()
+                    .orElse(null);
+
         }
 
         public String getCode() {
