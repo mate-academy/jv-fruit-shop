@@ -12,8 +12,10 @@ public class PurchaseOperation implements OperationHandler {
         int current = Storage.storage.getOrDefault(fruit, 0);
 
         if (current < purchase) {
-            throw new RuntimeException("Not enough " + fruit + "in the storage! "
+            throw new RuntimeException("Not enough " + fruit + " in the storage! "
                    + "Available: " + current + " Need: " + purchase);
+        } else if (!Storage.storage.containsKey(fruit)) {
+            throw new RuntimeException("There is no such fruit in the storage!: " + fruit);
         }
         Storage.storage.put(fruit, current - purchase);
     }
