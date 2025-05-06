@@ -22,7 +22,7 @@ public class ShopServiceImpl implements ShopService {
             }
             FruitOperation currentFruit = fruitOperationDao.get(fruit.getFruit());
             int newValueFrom = strategy.get(fruit.getOperation())
-                    .getQuantity(currentFruit.getQuantity(), fruit.getQuantity());
+                    .getQuantityFromStore(currentFruit.getQuantity(), fruit.getQuantity());
             currentFruit.setQuantity(newValueFrom);
             fruitOperationDao.update(currentFruit);
         }
