@@ -16,12 +16,31 @@ public class DataConvertorImpl implements DataConvertor {
         List<FruitOperation> fruitTransactions = new ArrayList<>();
         for (int i = REPORT_START_POSITION; i < fruitInfoList.size(); i++) {
             String[] fruitInfo = fruitInfoList.get(i).split(CSV_SEPARATOR);
+            if (fruitInfo.length != 3) {
+                throw new RuntimeException("Invalid line: " + fruitInfoList.get(i));
+            }
+
             String fruitName = fruitInfo[FRUIT_NAME_INDEX];
+            if (fruitName.isEmpty()) {
+                throw new RuntimeException("Skipping line with empty fruit name: " + fruitInfoList.get(i));
+            }
+
             FruitOperation.Operation operation
                     = FruitOperation.Operation.getOperation(fruitInfo[OPERATION_INDEX]);
+            if (operation == null) {
+                System.err.println("Skipping line with invalid operation: " + fruitInfoList.get(i));
+                continue;
+            }
+
             int fruitQuantity = Integer.parseInt(fruitInfo[QUANTITY_INDEX]);
+            if (fruitQuantity < 0) {
+                System.err.println("Skipping line with negative quantity: " + fruitInfoList.get(i));
+                continue;
+            }
+
             fruitTransactions.add(new FruitOperation(operation, fruitName, fruitQuantity));
         }
+
         return fruitTransactions;
     }
 }

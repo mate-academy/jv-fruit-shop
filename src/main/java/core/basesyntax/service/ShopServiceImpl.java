@@ -20,7 +20,12 @@ public class ShopServiceImpl implements ShopService {
             if (fruit.getOperation() == FruitOperation.Operation.BALANCE) {
                 fruitOperationDao.add(fruit);
             }
-            FruitOperation currentFruit = fruitOperationDao.get(fruit.getFruit());
+            FruitOperation currentFruit = null;
+            try {
+                currentFruit = fruitOperationDao.get(fruit.getFruit());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
             int newValueFrom = strategy.get(fruit.getOperation())
                     .getQuantityFromStore(currentFruit.getQuantity(), fruit.getQuantity());
             currentFruit.setQuantity(newValueFrom);
