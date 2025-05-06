@@ -30,28 +30,27 @@ public class AppMain {
     private static final String FILE_WRITE_SRC = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
-        Reader reader = new FileReaderImpl(); // 1. Read the data from the input CSV file
+        Reader reader = new FileReaderImpl();
         List<String> inputReport = reader.read(FILE_READ_SRC);
-        // 2. Convert the incoming data into FruitTransactions list
+
         DataConvertor dataConvertor = new DataConvertorImpl();
         final List<FruitOperation>
                 fruitOperations = dataConvertor.convertToTransaction(inputReport);
-        // 3. Create and feel the map with
-        // all OperationHandler implementations
+
         Map<FruitOperation.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitOperation.Operation.BALANCE, new BalanceOperationHandler());
         operationHandlers.put(FruitOperation.Operation.PURCHASE, new PurchaseOperationHandler());
         operationHandlers.put(FruitOperation.Operation.RETURN, new ReturnOperationHandler());
         operationHandlers.put(FruitOperation.Operation.SUPPLY, new SupplyOperationHandler());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
+
         FruitOperationDao repository = new FruitOperationDaoImpl();
         ShopService shopService = new ShopServiceImpl(repository,operationStrategy);
         shopService.changeQuantityStore(fruitOperations);
-        // 5.Generate report based on the current Storage state
+
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport(Storage.SHOP_STORE);
-        // 6. Write report
+
         Writer fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, FILE_WRITE_SRC);
 
