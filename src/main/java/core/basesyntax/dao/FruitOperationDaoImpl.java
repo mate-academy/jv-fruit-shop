@@ -2,7 +2,7 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitOperation;
-import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class FruitOperationDaoImpl implements FruitOperationDao {
     @Override
@@ -11,18 +11,16 @@ public class FruitOperationDaoImpl implements FruitOperationDao {
     }
 
     @Override
-    public FruitOperation get(String fruit) {
+    public Optional<FruitOperation> get(String fruit) {
         return Storage.SHOP_STORE.stream()
                 .filter(fruitOperation -> fruitOperation.getFruit().equals(fruit))
-                .findFirst()
-                .orElseThrow(()
-                        -> new NoSuchElementException("Fruit operation not found for: " + fruit));
+                .findFirst();
     }
 
     @Override
     public void update(FruitOperation fruitOperation) {
-        FruitOperation fruitOperationFromDb = get(fruitOperation.getFruit());
-        Storage.SHOP_STORE.remove(fruitOperationFromDb);
+        Optional<FruitOperation> existing = get(fruitOperation.getFruit());
+        existing.ifPresent(Storage.SHOP_STORE::remove);
         add(fruitOperation);
     }
 }

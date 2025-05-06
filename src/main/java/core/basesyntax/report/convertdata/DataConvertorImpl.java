@@ -17,13 +17,15 @@ public class DataConvertorImpl implements DataConvertor {
         for (int i = REPORT_START_POSITION; i < fruitInfoList.size(); i++) {
             String[] fruitInfo = fruitInfoList.get(i).split(CSV_SEPARATOR);
             if (fruitInfo.length != 3) {
-                throw new RuntimeException("Invalid line: " + fruitInfoList.get(i));
+                System.err.println("Skipping invalid line (wrong column count): "
+                        + fruitInfoList.get(i));
+                continue;
             }
 
             String fruitName = fruitInfo[FRUIT_NAME_INDEX];
             if (fruitName.isEmpty()) {
-                throw new RuntimeException("Skipping line with empty fruit name: "
-                        + fruitInfoList.get(i));
+                System.err.println("Skipping line with empty fruit name: " + fruitInfoList.get(i));
+                continue;
             }
 
             FruitOperation.Operation operation
