@@ -49,6 +49,5 @@ public class Main {
 
         FileWriter fileWriterService = new FileWriterImpl();
         fileWriterService.write(OUTPUT_FILE, report);
-        System.out.println(report);
     }
 }
