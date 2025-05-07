@@ -56,7 +56,8 @@ public class FruitOperation {
             return Arrays.stream(Operation.values())
                     .filter(operation -> operation.code.equals(code))
                     .findFirst()
-                    .orElse(null);
+                    .orElseThrow(() ->
+                            new IllegalArgumentException("Invalid operation code: " + code));
 
         }
 

@@ -2,7 +2,6 @@ package core.basesyntax;
 
 import core.basesyntax.dao.FruitOperationDao;
 import core.basesyntax.dao.FruitOperationDaoImpl;
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.report.convertdata.DataConvertor;
 import core.basesyntax.report.convertdata.DataConvertorImpl;
@@ -49,10 +48,9 @@ public class AppMain {
         shopService.changeQuantityStore(fruitOperations);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport(Storage.SHOP_STORE);
+        String resultingReport = reportGenerator.getReport();
 
         Writer fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, FILE_WRITE_SRC);
-
     }
 }

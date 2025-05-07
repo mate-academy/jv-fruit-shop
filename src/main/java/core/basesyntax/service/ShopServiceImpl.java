@@ -1,6 +1,7 @@
 package core.basesyntax.service;
 
 import core.basesyntax.dao.FruitOperationDao;
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitOperation;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
@@ -20,6 +21,7 @@ public class ShopServiceImpl implements ShopService {
         for (FruitOperation fruit : fruits) {
             if (fruit.getOperation() == FruitOperation.Operation.BALANCE) {
                 fruitOperationDao.add(fruit);
+                Storage.SHOP_STORE.add(fruit);
                 continue;
             }
 
@@ -35,6 +37,13 @@ public class ShopServiceImpl implements ShopService {
 
             currentFruit.setQuantity(newValueFrom);
             fruitOperationDao.update(currentFruit);
+
+            for (int i = 0; i < Storage.SHOP_STORE.size(); i++) {
+                if (Storage.SHOP_STORE.get(i).getFruit().equals(currentFruit.getFruit())) {
+                    Storage.SHOP_STORE.set(i, currentFruit);
+                    break;
+                }
+            }
         }
     }
 }
