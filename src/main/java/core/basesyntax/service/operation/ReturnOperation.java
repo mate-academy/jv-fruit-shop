@@ -1,9 +1,6 @@
 package core.basesyntax.service.operation;
 
 import core.basesyntax.db.Storage;
-import core.basesyntax.model.FruitTransaction;
-
-import java.math.BigDecimal;
 
 public class ReturnOperation implements OperationHandler {
     @Override

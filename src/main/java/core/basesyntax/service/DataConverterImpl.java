@@ -1,8 +1,6 @@
 package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
-
-import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,19 +17,21 @@ public class DataConverterImpl implements DataConverter {
             String fruit = split[1].trim();
             int amount = Integer.parseInt(split[2].trim());
 
-            FruitTransaction.Operation operation =  MapToOperation(operationValue);
+            FruitTransaction.Operation operation = mapToOperation(operationValue);
             FruitTransaction transaction = new FruitTransaction(operation, fruit, amount);
 
             transactions.add(transaction);
         }
         return transactions;
     }
-    private FruitTransaction.Operation MapToOperation(String operationToCheck) {
+
+    private FruitTransaction.Operation mapToOperation(String operationToCheck) {
         for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
             if (operation.getCode().equals(operationToCheck)) {
                 return operation;
             }
         }
-        throw new IllegalArgumentException("Unknown type of operation incoming : " + operationToCheck);
+        throw new IllegalArgumentException("Unknown type of operation incoming : "
+                + operationToCheck);
     }
 }
