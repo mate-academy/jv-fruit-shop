@@ -25,8 +25,7 @@ public class ShopServiceImpl implements ShopService {
 
             Optional<FruitOperation> currentFruitOpt = fruitOperationDao.get(fruit.getFruit());
             if (currentFruitOpt.isEmpty()) {
-                System.err.println("Fruit not found in store, skipping: " + fruit.getFruit());
-                continue;
+                throw new IllegalArgumentException("Fruit not found in store: " + fruit.getFruit());
             }
 
             FruitOperation currentFruit = currentFruitOpt.get();
