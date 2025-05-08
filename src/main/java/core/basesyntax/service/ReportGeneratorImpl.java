@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     public static final String VALUES = "fruit, quanity";
+
     @Override
     public String getReport() {
         StringBuilder builder = new StringBuilder();

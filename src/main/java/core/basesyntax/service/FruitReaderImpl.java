@@ -11,7 +11,7 @@ public class FruitReaderImpl implements Reader {
         try {
             return Files.readAllLines(Path.of(fileName));
         } catch (IOException e) {
-            throw new RuntimeException("Can't get data from file : " + fileName , e);
+            throw new RuntimeException("Can't get data from file : " + fileName, e);
         }
     }
 }

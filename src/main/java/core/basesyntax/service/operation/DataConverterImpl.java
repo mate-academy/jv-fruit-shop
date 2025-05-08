@@ -6,6 +6,7 @@ import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
     public static final String COMMA = ",";
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
         List<FruitTransaction> transactions = new ArrayList<>();

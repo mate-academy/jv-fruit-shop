@@ -1,8 +1,6 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.operation.DataConverter;
-import core.basesyntax.service.operation.DataConverterImpl;
 import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FruitReaderImpl;
 import core.basesyntax.service.Reader;
@@ -12,6 +10,8 @@ import core.basesyntax.service.ShopService;
 import core.basesyntax.service.ShopServiceImpl;
 import core.basesyntax.service.Writer;
 import core.basesyntax.service.operation.BalanceOperation;
+import core.basesyntax.service.operation.DataConverter;
+import core.basesyntax.service.operation.DataConverterImpl;
 import core.basesyntax.service.operation.OperationHandler;
 import core.basesyntax.service.operation.PurchaseOperation;
 import core.basesyntax.service.operation.ReturnOperation;
