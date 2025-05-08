@@ -1,8 +1,8 @@
 package core.basesyntax;
 
 import core.basesyntax.model.FruitTransaction;
-import core.basesyntax.service.DataConverter;
-import core.basesyntax.service.DataConverterImpl;
+import core.basesyntax.service.operation.DataConverter;
+import core.basesyntax.service.operation.DataConverterImpl;
 import core.basesyntax.service.FileWriterImpl;
 import core.basesyntax.service.FruitReaderImpl;
 import core.basesyntax.service.Reader;
