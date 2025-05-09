@@ -5,11 +5,11 @@ import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
     @Override
-    public List<FruitTransaction> convertToTransaction(List<String> dateFromFile) {
-        if (dateFromFile.isEmpty()) {
+    public List<FruitTransaction> convertToTransaction(List<String> dataFromFile) {
+        if (dataFromFile.isEmpty()) {
             throw new RuntimeException("Empty list!");
         }
-        return dateFromFile.stream()
+        return dataFromFile.stream()
                 .skip(1)
                 .map(line -> line.split(","))
                 .map(splitLine -> new FruitTransaction(FruitTransaction

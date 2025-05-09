@@ -11,10 +11,17 @@ public class PurchaseOperation implements OperationHandler {
         if (fruits.isEmpty()) {
             throw new RuntimeException("Fruit's list is empty");
         }
-        return fruits.entrySet().stream()
+        Map<String, Integer> tempMap = fruits.entrySet().stream()
                 .map(entry -> entry.getKey().equals(fruitTransaction.getFruit())
                         ? Map.entry(entry.getKey(),
                         entry.getValue() - fruitTransaction.getQuantity()) : entry)
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        for (Map.Entry<String, Integer> entry : tempMap.entrySet()) {
+            if (entry.getValue() < 0) {
+                throw new RuntimeException("Value smaller than 0");
+            }
+        }
+        return tempMap;
     }
 }
