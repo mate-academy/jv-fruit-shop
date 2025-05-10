@@ -88,7 +88,7 @@ Please provide the relative path to a resource instead.
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
-In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
+In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operationsList.
 
 - Example:  
     ```java
