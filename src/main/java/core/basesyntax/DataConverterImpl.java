@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
     private static final int LINE_LENGTH = 3;
+
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> dataFromFile) {
         if (dataFromFile.isEmpty()) {
