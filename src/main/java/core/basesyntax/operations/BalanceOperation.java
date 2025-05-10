@@ -8,8 +8,7 @@ public class BalanceOperation implements OperationHandler {
     @Override
     public Map<String, Integer> getCalculation(
             Map<String, Integer> fruits, FruitTransaction fruitTransaction) {
-        Map<String, Integer> listFruits = new HashMap<>();
-        listFruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-        return listFruits;
+        fruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        return fruits;
     }
 }

@@ -11,10 +11,15 @@ public class SupplyOperation implements OperationHandler {
         if (fruits.isEmpty()) {
             throw new RuntimeException("Fruit's list is empty");
         }
-        return fruits.entrySet().stream()
-                .map(entry -> entry.getKey().equals(fruitTransaction.getFruit())
-                        ? Map.entry(entry.getKey(),
-                        entry.getValue() + fruitTransaction.getQuantity()) : entry)
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        if (fruits.containsKey(fruitTransaction.getFruit())) {
+            return fruits.entrySet().stream()
+                    .map(entry -> entry.getKey().equals(fruitTransaction.getFruit())
+                            ? Map.entry(entry.getKey(),
+                            entry.getValue() + fruitTransaction.getQuantity()) : entry)
+                    .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        } else {
+            fruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+            return fruits;
+        }
     }
 }
