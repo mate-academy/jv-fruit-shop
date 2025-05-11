@@ -50,5 +50,14 @@ public class FruitTransaction {
         public String getCode() {
             return code;
         }
+        public static Operation mapToOperation(String operationToCheck) {
+            for (Operation operation : Operation.values()) {
+                if (operation.getCode().equals(operationToCheck)) {
+                    return operation;
+                }
+            }
+            throw new IllegalArgumentException("Unknown type of operation incoming : "
+                    + operationToCheck);
+        }
     }
 }
