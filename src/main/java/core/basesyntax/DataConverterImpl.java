@@ -14,7 +14,14 @@ public class DataConverterImpl implements DataConverter {
         return dataFromFile.stream()
                 .skip(1)
                 .map(line -> line.split(","))
-                .filter(lines -> lines.length == LINE_LENGTH)
+                .map(lines -> {
+                    int checkLength = lines.length == LINE_LENGTH ? lines.length : 0;
+                    if (checkLength == 3) {
+                        return lines;
+                    } else {
+                        throw new RuntimeException("Wrong data");
+                    }
+                })
                 .map(splitLine -> new FruitTransaction(FruitTransaction
                         .Operation.fromCode(splitLine[0]),
                         splitLine[1], Integer.parseInt(splitLine[2])))

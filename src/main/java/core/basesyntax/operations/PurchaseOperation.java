@@ -2,7 +2,7 @@ package core.basesyntax.operations;
 
 import core.basesyntax.FruitTransaction;
 import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 public class PurchaseOperation implements OperationHandler {
     @Override
@@ -11,16 +11,17 @@ public class PurchaseOperation implements OperationHandler {
         if (fruits.isEmpty()) {
             throw new RuntimeException("Fruit's list is empty");
         }
-        return fruits.entrySet().stream()
-                .map(entry -> {
-                    int newValue = entry.getKey().equals(fruitTransaction.getFruit())
-                            ? entry.getValue() - fruitTransaction.getQuantity()
-                            : entry.getValue();
-                    if (newValue < 0) {
-                        throw new RuntimeException("Value cant be smaller than 0");
-                    }
-                    return Map.entry(entry.getKey(), newValue);
-                })
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        if (fruits.containsKey(fruitTransaction.getFruit())) {
+            Optional<Map.Entry<String, Integer>> fruitEntry = fruits.entrySet().stream()
+                    .filter(entry -> entry.getKey().equals(fruitTransaction.getFruit()))
+                    .map(entry -> Map.entry(
+                            entry.getKey(), entry.getValue() - fruitTransaction.getQuantity()))
+                    .findFirst();
+            fruits.put(fruitEntry.get().getKey(), fruitEntry.get().getValue());
+        } else {
+            throw new RuntimeException("Such fruit doest exist" + fruitTransaction.getFruit());
+        }
+        return fruits;
+
     }
 }
