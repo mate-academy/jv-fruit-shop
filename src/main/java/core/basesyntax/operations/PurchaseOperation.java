@@ -14,8 +14,16 @@ public class PurchaseOperation implements OperationHandler {
         if (fruits.containsKey(fruitTransaction.getFruit())) {
             Optional<Map.Entry<String, Integer>> fruitEntry = fruits.entrySet().stream()
                     .filter(entry -> entry.getKey().equals(fruitTransaction.getFruit()))
-                    .map(entry -> Map.entry(
-                            entry.getKey(), entry.getValue() - fruitTransaction.getQuantity()))
+                    .map(entry -> {
+                        int valueIsNegative = entry.getValue() - fruitTransaction.getQuantity() > 0
+                                ? 1 : 0;
+                        if (valueIsNegative > 0) {
+                            return Map.entry(entry.getKey(),
+                                    entry.getValue() - fruitTransaction.getQuantity());
+                        } else {
+                            throw new RuntimeException("Value is negative");
+                        }
+                    })
                     .findFirst();
             fruits.put(fruitEntry.get().getKey(), fruitEntry.get().getValue());
         } else {

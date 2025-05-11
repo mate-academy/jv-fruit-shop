@@ -25,8 +25,8 @@ public class ShopServiceImpl implements ShopService {
             if (fruit.getFruit() == null) {
                 throw new RuntimeException("Fruit is null");
             }
-            fruitsMap.putAll(strategyOperations.get(fruit.getOperation())
-                    .getCalculation(fruitsMap, fruit));
+            fruitsMap.put(fruit.getFruit(), strategyOperations.get(fruit.getOperation())
+                    .getCalculation(fruitsMap, fruit).get(fruit.getFruit()));
         }
         return fruitsMap;
     }
