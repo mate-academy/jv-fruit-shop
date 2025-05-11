@@ -19,13 +19,12 @@ public class DataConverterImpl implements DataConverter {
             String fruit = split[1];
             int amount = Integer.parseInt(split[2]);
 
-            FruitTransaction.Operation operation = FruitTransaction.Operation.mapToOperation(operationValue);
+            FruitTransaction.Operation operation = FruitTransaction.Operation
+                    .mapToOperation(operationValue);
             FruitTransaction transaction = new FruitTransaction(operation, fruit, amount);
 
             transactions.add(transaction);
         }
         return transactions;
     }
-
-
 }
