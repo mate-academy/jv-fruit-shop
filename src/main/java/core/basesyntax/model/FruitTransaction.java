@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 public class FruitTransaction {
     private Operation operation;
@@ -59,6 +59,5 @@ public class FruitTransaction {
             }
             throw new RuntimeException("Invalid code: " + code);
         }
-
     }
 }

@@ -1,11 +1,9 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.FruitTransaction;
-import java.util.Map;
+import core.basesyntax.model.FruitTransaction;
 
 public interface OperationHandler {
 
-    Map<String, Integer> getCalculation(
-            Map<String, Integer> fruits, FruitTransaction fruitTransaction);
+    void getCalculation(FruitTransaction fruitTransaction);
 
 }

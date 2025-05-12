@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.service;
 
 public interface FileWriter {
     void writeToFile(String report, String filePath);

@@ -1,10 +1,11 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.DataConverter;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class DataConverterImpl implements DataConverter {
-    private static final int LINE_LENGTH = 3;
+    private static final String PUNCTUATION_MARK = ",";
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> dataFromFile) {
@@ -13,18 +14,16 @@ public class DataConverterImpl implements DataConverter {
         }
         return dataFromFile.stream()
                 .skip(1)
-                .map(line -> line.split(","))
+                .map(line -> line.split(PUNCTUATION_MARK))
                 .map(lines -> {
-                    int checkLength = lines.length == LINE_LENGTH ? lines.length : 0;
-                    if (checkLength == 3) {
-                        return lines;
-                    } else {
-                        throw new RuntimeException("Wrong data");
+                    if (lines.length != 3) {
+                        throw new RuntimeException("Wrong data: " + lines);
                     }
+                    return lines;
                 })
                 .map(splitLine -> new FruitTransaction(FruitTransaction
                         .Operation.fromCode(splitLine[0]),
                         splitLine[1], Integer.parseInt(splitLine[2])))
-                .collect(Collectors.toList());
+                .toList();
     }
 }

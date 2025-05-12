@@ -1,27 +1,24 @@
 package core.basesyntax.operations;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 import java.util.Optional;
 
 public class ReturnOperation implements OperationHandler {
     @Override
-    public Map<String, Integer> getCalculation(
-            Map<String, Integer> fruits, FruitTransaction fruitTransaction) {
-        if (fruits.isEmpty()) {
+    public void getCalculation(FruitTransaction fruitTransaction) {
+
+        if (Storage.fruits.isEmpty()) {
             throw new RuntimeException("Fruit's list is empty");
         }
-        if (fruits.containsKey(fruitTransaction.getFruit())) {
-            Optional<Map.Entry<String, Integer>> fruitEntry = fruits.entrySet().stream()
+        if (Storage.fruits.containsKey(fruitTransaction.getFruit())) {
+            Optional<Map.Entry<String, Integer>> fruitEntry = Storage.fruits.entrySet().stream()
                     .filter(entry -> entry.getKey().equals(fruitTransaction.getFruit()))
                     .map(entry -> Map.entry(
                             entry.getKey(), entry.getValue() + fruitTransaction.getQuantity()))
                     .findFirst();
-            fruits.put(fruitEntry.get().getKey(), fruitEntry.get().getValue());
-            return fruits;
-        } else {
-            fruits.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
-            return fruits;
+            Storage.fruits.put(fruitEntry.get().getKey(), fruitEntry.get().getValue());
         }
     }
 }

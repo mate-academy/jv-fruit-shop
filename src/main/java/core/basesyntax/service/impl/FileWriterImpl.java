@@ -1,5 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.service.impl;
 
+import core.basesyntax.service.FileWriter;
 import java.io.IOException;
 
 public class FileWriterImpl implements FileWriter {
@@ -11,7 +12,7 @@ public class FileWriterImpl implements FileWriter {
         try (java.io.FileWriter writer = new java.io.FileWriter(filePath)) {
             writer.write(report);
         } catch (IOException e) {
-            throw new RuntimeException("Fail recording: " + e.getMessage());
+            throw new RuntimeException("Can't write file by path: " + filePath, e);
         }
     }
 }
