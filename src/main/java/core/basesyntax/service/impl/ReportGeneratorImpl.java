@@ -6,11 +6,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
+
+    private static final String HEADLINE = "fruit,quantity";
+
     @Override
     public String getReport() {
-        String headline = "fruit,quantity";
         if (Storage.storage.isEmpty()) {
-            return headline;
+            return HEADLINE;
         }
         for (Map.Entry<String, Integer> tempMap : Storage.storage.entrySet()) {
             if (tempMap.getValue() < 0) {
@@ -19,8 +21,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
         }
         String report = Storage.storage.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue().toString())
-                .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining(System.lineSeparator()));
 
-        return headline + System.lineSeparator() + report;
+        return HEADLINE + System.lineSeparator() + report;
     }
 }
