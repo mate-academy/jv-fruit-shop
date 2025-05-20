@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 public class ReportGeneratorImpl implements ReportGenerator {
 
     private static final String HEADLINE = "fruit,quantity";
+    private static final String SEPARATOR = System.lineSeparator();
+
 
     @Override
     public String getReport() {
@@ -21,8 +23,8 @@ public class ReportGeneratorImpl implements ReportGenerator {
         }
         String report = Storage.storage.entrySet().stream()
                 .map(entry -> entry.getKey() + "," + entry.getValue().toString())
-                .collect(Collectors.joining(System.lineSeparator()));
+                .collect(Collectors.joining(SEPARATOR));
 
-        return HEADLINE + System.lineSeparator() + report;
+        return HEADLINE + SEPARATOR + report;
     }
 }
