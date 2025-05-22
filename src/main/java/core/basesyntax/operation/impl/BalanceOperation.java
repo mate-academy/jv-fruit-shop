@@ -9,8 +9,7 @@ public class BalanceOperation implements OperationHandler {
     public void handle(FruitTransaction transaction, Map<String, Integer> storage) {
         String fruit = transaction.getFruit();
         int currentQuantity = storage.getOrDefault(fruit, 0);
-        int newQuantity = currentQuantity - transaction.getQuantity();
-        storage.put(fruit, newQuantity);
+        storage.put(fruit, transaction.getQuantity());
     }
 }
 

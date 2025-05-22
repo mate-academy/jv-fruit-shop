@@ -9,12 +9,11 @@ import java.nio.file.Paths;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void write(String content, String fileName) {
-        Path path = Paths.get(fileName);
-        try (BufferedWriter writer = Files.newBufferedWriter(path)) {
-            writer.write(content);
+    public void write(String data, String path) {
+        try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(path))) {
+            writer.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write data to file " + fileName, e);
+            throw new RuntimeException("Can't write data to file " + path, e);
         }
     }
 }
