@@ -1,11 +1,12 @@
 package core.basesyntax.strategy.operation;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitOperation;
 
 public class PurchaseOperationHandler implements OperationHandler {
     @Override
-    public int getQuantityFromStore(int prev, int value) {
+    public int getQuantityFromStore(FruitOperation fruitOperation, int value) {
+        int prev = fruitOperation.getQuantity();
+
         if (value > prev) {
             throw new IllegalArgumentException("Cannot purchase more than "
                     + "available in stock. Requested: "
@@ -13,14 +14,7 @@ public class PurchaseOperationHandler implements OperationHandler {
         }
 
         int newQuantity = prev - value;
-
-        for (int i = 0; i < Storage.SHOP_STORE.size(); i++) {
-            FruitOperation fruit = Storage.SHOP_STORE.get(i);
-            if (fruit.getFruit().equals(fruit.getFruit())) {
-                fruit.setQuantity(newQuantity);
-                break;
-            }
-        }
+        fruitOperation.setQuantity(newQuantity);
         return newQuantity;
     }
 }

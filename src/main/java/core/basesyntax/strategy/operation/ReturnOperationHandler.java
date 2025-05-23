@@ -1,21 +1,12 @@
 package core.basesyntax.strategy.operation;
 
-import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitOperation;
 
 public class ReturnOperationHandler implements OperationHandler {
     @Override
-    public int getQuantityFromStore(int prev, int value) {
-        int newQuantity = prev + value;
-
-        for (int i = 0; i < Storage.SHOP_STORE.size(); i++) {
-            FruitOperation fruit = Storage.SHOP_STORE.get(i);
-            if (fruit.getFruit().equals(fruit.getFruit())) {
-                fruit.setQuantity(newQuantity);
-                break;
-            }
-        }
-
+    public int getQuantityFromStore(FruitOperation fruitOperation, int value) {
+        int newQuantity = fruitOperation.getQuantity() + value;
+        fruitOperation.setQuantity(newQuantity);
         return newQuantity;
     }
 }
