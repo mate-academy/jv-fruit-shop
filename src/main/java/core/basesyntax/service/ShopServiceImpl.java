@@ -1,8 +1,8 @@
 package core.basesyntax.service;
 
+import core.basesyntax.model.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationStrategy;
-import static core.basesyntax.model.FruitStorage.storage;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.processTransaction(transaction);
         }
-        return storage;
+        return FruitStorage.getStorage();
     }
 }
 

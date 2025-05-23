@@ -4,7 +4,6 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 import java.util.Map;
-import static core.basesyntax.model.FruitStorage.storage;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> handlers;

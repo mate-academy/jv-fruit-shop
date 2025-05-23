@@ -4,30 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class FruitStorage {
-    private String fruit;
-    private int quantity;
+    private static Map<String, Integer> storage = new HashMap<>();
 
-    public static Map<String, Integer> storage = new HashMap<>();
-
-    public FruitStorage(String fruit, int quantity) {
-        this.fruit = fruit;
-        this.quantity = quantity;
-    }
-
-    public String getFruit() {
-        return fruit;
-    }
-
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public static Map<String, Integer> getStorage() {
+        return storage;
     }
 }
 

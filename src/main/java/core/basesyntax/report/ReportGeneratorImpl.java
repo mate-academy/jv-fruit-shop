@@ -1,8 +1,7 @@
 package core.basesyntax.report;
 
+import core.basesyntax.model.FruitStorage;
 import java.util.Map;
-
-import static core.basesyntax.model.FruitStorage.storage;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String CSV_HEADER = "fruit,quantity";
@@ -13,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         StringBuilder report = new StringBuilder();
 
         report.append(CSV_HEADER).append(System.lineSeparator());
-        for (Map.Entry<String, Integer> entry : storage.entrySet()) {
+        for (Map.Entry<String, Integer> entry : FruitStorage.getStorage().entrySet()) {
             report.append(entry.getKey())
                     .append(CSV_SEPARATOR)
                     .append(entry.getValue())
