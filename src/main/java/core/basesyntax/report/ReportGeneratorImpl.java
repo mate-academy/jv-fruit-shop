@@ -2,23 +2,22 @@ package core.basesyntax.report;
 
 import java.util.Map;
 
-public class ReportGeneratorImpl implements ReportGenerator {
-    private final Map<String, Integer> storage;
+import static core.basesyntax.model.FruitStorage.storage;
 
-    public ReportGeneratorImpl(Map<String, Integer> storage) {
-        this.storage = storage;
-    }
+public class ReportGeneratorImpl implements ReportGenerator {
+    private static final String CSV_HEADER = "fruit,quantity";
+    private static final String CSV_SEPARATOR = ",";
 
     @Override
     public String getReport() {
         StringBuilder report = new StringBuilder();
 
-        report.append("fruit,quantity\n");
+        report.append(CSV_HEADER).append(System.lineSeparator());
         for (Map.Entry<String, Integer> entry : storage.entrySet()) {
             report.append(entry.getKey())
-                    .append(",")
+                    .append(CSV_SEPARATOR)
                     .append(entry.getValue())
-                    .append("\n");
+                    .append(System.lineSeparator());
         }
         return report.toString();
     }

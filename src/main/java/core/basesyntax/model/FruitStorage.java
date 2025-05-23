@@ -1,8 +1,13 @@
 package core.basesyntax.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class FruitStorage {
     private String fruit;
     private int quantity;
+
+    public static Map<String, Integer> storage = new HashMap<>();
 
     public FruitStorage(String fruit, int quantity) {
         this.fruit = fruit;

@@ -4,6 +4,7 @@ import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationHandler;
 import core.basesyntax.operation.OperationStrategy;
 import java.util.Map;
+import static core.basesyntax.model.FruitStorage.storage;
 
 public class OperationStrategyImpl implements OperationStrategy {
     private final Map<FruitTransaction.Operation, OperationHandler> handlers;
@@ -13,9 +14,9 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void processTransaction(FruitTransaction transaction, Map<String, Integer> storage) {
+    public void processTransaction(FruitTransaction transaction) {
         OperationHandler handler = handlers.get(transaction.getOperation());
-        handler.handle(transaction, storage);
+        handler.handle(transaction);
     }
 }
 

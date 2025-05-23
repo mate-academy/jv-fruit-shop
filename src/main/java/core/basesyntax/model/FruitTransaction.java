@@ -23,16 +23,8 @@ public class FruitTransaction {
         return fruit;
     }
 
-    public void setFruit(String fruit) {
-        this.fruit = fruit;
-    }
-
     public int getQuantity() {
         return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
     }
 
     @Override
@@ -42,6 +34,15 @@ public class FruitTransaction {
                 + ", fruit='" + fruit + '\''
                 + ", quantity=" + quantity
                 + '}';
+    }
+
+    public static Operation fromCode(String code) {
+        for (Operation op : Operation.values()) {
+            if (op.getCode().equals(code)) {
+                return op;
+            }
+        }
+        throw new IllegalArgumentException("Invalid code: " + code);
     }
 
     public enum Operation {

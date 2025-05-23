@@ -2,7 +2,7 @@ package core.basesyntax.service;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.operation.OperationStrategy;
-import java.util.HashMap;
+import static core.basesyntax.model.FruitStorage.storage;
 import java.util.List;
 import java.util.Map;
 
@@ -15,9 +15,8 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Map<String, Integer> process(List<FruitTransaction> transactions) {
-        Map<String, Integer> storage = new HashMap<>();
         for (FruitTransaction transaction : transactions) {
-            operationStrategy.processTransaction(transaction, storage);
+            operationStrategy.processTransaction(transaction);
         }
         return storage;
     }
