@@ -2,7 +2,6 @@ package core.basesyntax.file.impl;
 
 import core.basesyntax.exception.InvalidDataException;
 import core.basesyntax.file.FileReader;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
