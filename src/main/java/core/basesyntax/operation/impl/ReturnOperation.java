@@ -8,12 +8,12 @@ public class ReturnOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
-        if (!FruitStorage.getStorage().containsKey(fruit)) {
-            FruitStorage.getStorage().put(fruit, transaction.getQuantity());
+        if (!FruitStorage.storage.containsKey(fruit)) {
+            FruitStorage.storage.put(fruit, transaction.getQuantity());
             return;
         }
-        FruitStorage.getStorage()
-                .put(fruit, FruitStorage.getStorage()
+        FruitStorage.storage
+                .put(fruit, FruitStorage.storage
                         .get(fruit) + transaction.getQuantity());
     }
 }

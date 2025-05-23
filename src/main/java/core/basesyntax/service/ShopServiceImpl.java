@@ -18,7 +18,7 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction transaction : transactions) {
             operationStrategy.processTransaction(transaction);
         }
-        return FruitStorage.getStorage();
+        return FruitStorage.storage;
     }
 }
 

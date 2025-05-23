@@ -17,7 +17,7 @@ public class DataConverterImpl implements DataConverter {
                 .map(line -> line.split(SEPARATOR))
                 .forEach(parts -> {
                     fruitTransactions
-                            .add(new FruitTransaction(FruitTransaction.fromCode(parts[0]),
+                            .add(new FruitTransaction(FruitTransaction.Operation.fromCode(parts[0]),
                                     parts[1],
                                     Integer.parseInt(parts[2])));
                 });
