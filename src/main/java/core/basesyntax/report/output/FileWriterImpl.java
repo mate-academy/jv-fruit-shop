@@ -12,7 +12,7 @@ public class FileWriterImpl implements Writer {
         )) {
             writer.write(resultingReport);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Failed to write file at path: " + pathFile, e);
         }
     }
 }

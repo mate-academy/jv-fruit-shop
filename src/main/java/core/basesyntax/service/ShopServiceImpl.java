@@ -19,15 +19,20 @@ public class ShopServiceImpl implements ShopService {
     @Override
     public void changeQuantityStore(List<FruitOperation> fruits) {
         for (FruitOperation fruit : fruits) {
+            String fruitName = fruit.getFruit();
             if (fruit.getOperation() == FruitOperation.Operation.BALANCE) {
+                if (fruitOperationDao.get(fruit.getFruit()).isPresent()) {
+                    throw new IllegalArgumentException("Fruit already exists in store: "
+                            + fruit.getFruit());
+                }
                 fruitOperationDao.add(fruit);
-                Storage.SHOP_STORE.add(fruit);
+                Storage.SHOP_STORE.put(fruit.getFruit(), fruit);
                 continue;
             }
 
-            Optional<FruitOperation> currentFruitOpt = fruitOperationDao.get(fruit.getFruit());
+            Optional<FruitOperation> currentFruitOpt = fruitOperationDao.get(fruitName);
             if (currentFruitOpt.isEmpty()) {
-                throw new IllegalArgumentException("Fruit not found in store: " + fruit.getFruit());
+                throw new IllegalArgumentException("Fruit not found in store: " + fruitName);
             }
 
             FruitOperation currentFruit = currentFruitOpt.get();
@@ -38,12 +43,7 @@ public class ShopServiceImpl implements ShopService {
             currentFruit.setQuantity(newValueFrom);
             fruitOperationDao.update(currentFruit);
 
-            for (int i = 0; i < Storage.SHOP_STORE.size(); i++) {
-                if (Storage.SHOP_STORE.get(i).getFruit().equals(currentFruit.getFruit())) {
-                    Storage.SHOP_STORE.set(i, currentFruit);
-                    break;
-                }
-            }
+            Storage.SHOP_STORE.put(fruitName, currentFruit);
         }
     }
 }
