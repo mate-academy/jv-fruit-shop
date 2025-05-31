@@ -29,8 +29,8 @@ public class AppMain {
     private static final String FILE_WRITE_SRC = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
-        Reader reader = new FileReaderImpl();
-        List<String> inputReport = reader.read(FILE_READ_SRC);
+        Reader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read(FILE_READ_SRC);
 
         DataConvertor dataConvertor = new DataConvertorImpl();
         final List<FruitOperation>
