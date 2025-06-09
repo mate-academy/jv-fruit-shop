@@ -1,3 +1,4 @@
+import core.basesyntax.dao.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.DataConverter;
@@ -40,6 +41,6 @@ public class Main {
             );
         }
         WriterReportToCsv reportGenerator = new WriterReportToCsvImpl();
-        reportGenerator.writeReport("src/main/resources/finalReport.csv");
+        reportGenerator.writeReport(FruitStorage.storage, "src/main/resources/finalReport.csv");
     }
 }
