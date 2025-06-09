@@ -1,31 +1,24 @@
 package core.basesyntax.service;
 
-import core.basesyntax.dao.FruitStorage;
+import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
+import core.basesyntax.service.operations.OperationHandler;
 import java.math.BigDecimal;
 
 public class ShopServiceImpl implements ShopService {
+    private final OperationStrategy operationStrategy;
+
+    public ShopServiceImpl(OperationStrategy operationStrategy) {
+        this.operationStrategy = operationStrategy;
+    }
 
     @Override
     public void transfer(Operation operation, String fruit, BigDecimal quantity) {
-        BigDecimal current = FruitStorage.storage.getOrDefault(fruit, BigDecimal.ZERO);
-
-        switch (operation) {
-            case BALANCE:
-                FruitStorage.storage.put(fruit, quantity);
-                break;
-            case SUPPLY:
-            case RETURN:
-                FruitStorage.storage.put(fruit, current.add(quantity));
-                break;
-            case PURCHASE:
-                if (current.compareTo(quantity) < 0) {
-                    throw new RuntimeException("Not enough stock for: " + fruit);
-                }
-                FruitStorage.storage.put(fruit, current.subtract(quantity));
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown operation: " + operation);
+        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
+        OperationHandler handler = operationStrategy.get(operation);
+        if (handler == null) {
+            throw new RuntimeException("No handler found for operation: " + operation);
         }
+        handler.apply(transaction);
     }
 }
