@@ -1,13 +1,11 @@
 package core.basesyntax.model;
 
-import java.math.BigDecimal;
-
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
-    private BigDecimal quantity;
+    private Integer quantity;
 
-    public FruitTransaction(Operation operation, String fruit, BigDecimal quantity) {
+    public FruitTransaction(Operation operation, String fruit, Integer quantity) {
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -29,11 +27,11 @@ public class FruitTransaction {
         this.fruit = fruit;
     }
 
-    public BigDecimal getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 }

@@ -3,7 +3,6 @@ package core.basesyntax.service;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.model.Operation;
 import core.basesyntax.service.operations.OperationHandler;
-import java.math.BigDecimal;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;
@@ -13,7 +12,7 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void transfer(Operation operation, String fruit, BigDecimal quantity) {
+    public void transfer(Operation operation, String fruit, Integer quantity) {
         FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
         OperationHandler handler = operationStrategy.get(operation);
         if (handler == null) {

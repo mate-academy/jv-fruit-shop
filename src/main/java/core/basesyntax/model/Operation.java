@@ -1,8 +1,28 @@
 package core.basesyntax.model;
 
+import java.util.Arrays;
+
 public enum Operation {
-    BALANCE,
-    SUPPLY,
-    PURCHASE,
-    RETURN
+    BALANCE("b"),
+    SUPPLY("s"),
+    PURCHASE("p"),
+    RETURN("r");
+
+    private final String code;
+
+    Operation(String code) {
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public static Operation fromCode(String code) {
+        return Arrays.stream(Operation.values())
+                .filter(op -> op.code.equals(code.trim()))
+                .findFirst()
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Unknown operation code: " + code));
+    }
 }
