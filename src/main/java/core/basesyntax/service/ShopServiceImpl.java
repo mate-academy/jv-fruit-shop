@@ -12,8 +12,8 @@ public class ShopServiceImpl implements ShopService {
     }
 
     @Override
-    public void transfer(Operation operation, String fruit, Integer quantity) {
-        FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
+    public void transfer(FruitTransaction transaction) {
+        Operation operation = transaction.getOperation();
         OperationHandler handler = operationStrategy.get(operation);
         if (handler == null) {
             throw new RuntimeException("No handler found for operation: " + operation);

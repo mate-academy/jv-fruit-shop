@@ -20,9 +20,9 @@ public class DataConverterImpl implements DataConverter {
             if (parts.length != 3) {
                 throw new IllegalArgumentException("Invalid string CSV: " + line);
             }
-            String operationCode = parts[0].trim().toLowerCase();
-            String fruit = parts[1].trim();
-            Integer quantity = Integer.parseInt(parts[2].trim());
+            String operationCode = parts[0];
+            String fruit = parts[1];
+            Integer quantity = Integer.parseInt(parts[2]);
             Operation operation = Operation.fromCode(operationCode);
             FruitTransaction transaction = new FruitTransaction(operation, fruit, quantity);
             transactions.add(transaction);

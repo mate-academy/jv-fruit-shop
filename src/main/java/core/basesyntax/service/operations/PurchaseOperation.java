@@ -3,7 +3,7 @@ package core.basesyntax.service.operations;
 import core.basesyntax.dao.FruitStorage;
 import core.basesyntax.model.FruitTransaction;
 
-public class BuyOperation implements OperationHandler {
+public class PurchaseOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
