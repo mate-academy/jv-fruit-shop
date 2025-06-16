@@ -35,7 +35,7 @@ public class DataConverterImpl implements DataConverter {
             return new FruitTransaction(
                     parts[OPERATION_INDEX],
                     parts[FRUIT_NAME_INDEX],
-                    parts[QUANTITY_INDEX]);
+                    Integer.parseInt(parts[QUANTITY_INDEX]));
 
         } catch (NumberFormatException e) {
             throw new RuntimeException("Invalid quantity format in line: " + line, e);
