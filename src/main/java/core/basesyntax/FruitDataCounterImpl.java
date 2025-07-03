@@ -23,9 +23,15 @@ public class FruitDataCounterImpl implements FruitDataCounter {
     }
 
     private int quantFinder(int quant, FruitTransaction.Operation operation) {
-        if (operation == FruitTransaction.Operation.PURCHASE) {
-            quant = -quant;
-        }
-        return quant;
+        // На випадок невідомої операції
+        return switch (operation) {
+            case RETURN -> quant; // Повертаємо кількість при операції RETURN
+            case PURCHASE -> -quant; // Операція PURCHASE змінює знак кількості
+            case SUPPLY -> quant; // Повертаємо кількість при операції SUPPLY
+            case BALANCE -> quant; // Повертаємо кількість при операції BALANCE
+            default ->
+                    throw new IllegalArgumentException("Unknown operation: "
+                            + operation); // На випадок невідомої операції
+        };
     }
 }

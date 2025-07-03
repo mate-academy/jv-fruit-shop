@@ -7,6 +7,9 @@ public class DataConvertorImpl implements DataConvertor {
 
     @Override
     public List<FruitTransaction> dataConvert(List<String> allLines) {
+        if (allLines.size() < 2 || allLines.isEmpty()) {
+            throw new RuntimeException("Empty lines");
+        }
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
         for (int i = 1; i < allLines.size(); i++) {
             String[] parts = allLines.get(i).split(",");
