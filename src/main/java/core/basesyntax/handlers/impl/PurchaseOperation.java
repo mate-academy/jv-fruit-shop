@@ -20,7 +20,8 @@ public class PurchaseOperation implements OperationHandler {
         }
         int result = current - quantity;
         if (result < 0) {
-            throw new IllegalArgumentException("Not enough '" + nameFruit + "' in storage! Only " + current + " left.");
+            throw new IllegalArgumentException("Not enough '"
+                    + nameFruit + "' in storage! Only " + current + " left.");
         }
         Storage.getAssortment().put(nameFruit, result);
     }
