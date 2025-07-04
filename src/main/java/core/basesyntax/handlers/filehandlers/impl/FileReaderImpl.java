@@ -1,7 +1,6 @@
 package core.basesyntax.handlers.filehandlers.impl;
 
 import core.basesyntax.handlers.filehandlers.FileReader;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -15,7 +14,7 @@ public class FileReaderImpl implements FileReader {
         List<String> dbList = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new java.io.FileReader(db))) {
             String line;
-            while ((line = reader.readLine()) != null){
+            while ((line = reader.readLine()) != null) {
                 dbList.add(line);
             }
         } catch (IOException e) {

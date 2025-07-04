@@ -1,17 +1,16 @@
 package core.basesyntax;
 
 import core.basesyntax.handlers.DataConverter;
-import core.basesyntax.handlers.ReportGenerator;
-import core.basesyntax.handlers.filehandlers.FileReader;
 import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.handlers.OperationStrategy;
+import core.basesyntax.handlers.ReportGenerator;
+import core.basesyntax.handlers.filehandlers.FileReader;
 import core.basesyntax.handlers.filehandlers.FileWriter;
 import core.basesyntax.handlers.filehandlers.impl.FileReaderImpl;
 import core.basesyntax.handlers.filehandlers.impl.FileWriterImpl;
 import core.basesyntax.handlers.impl.*;
 import core.basesyntax.handlers.service.ShopService;
 import core.basesyntax.handlers.service.impl.ShopServiceImpl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

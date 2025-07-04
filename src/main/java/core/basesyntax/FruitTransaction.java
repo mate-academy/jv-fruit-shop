@@ -1,13 +1,21 @@
 package core.basesyntax;
 
 public class FruitTransaction {
-    public Operation operation;
+    private Operation operation;
     private String fruit;
     private int quantity;
 
     public FruitTransaction(String fruit, int quantity, Operation operation) {
         this.fruit = fruit;
         this.quantity = quantity;
+        this.operation = operation;
+    }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public void setOperation(Operation operation) {
         this.operation = operation;
     }
 

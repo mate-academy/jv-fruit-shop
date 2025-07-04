@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    public static Map<String, Integer> assortment = new HashMap<>();
+    private static Map<String, Integer> assortment = new HashMap<>();
 
-    public Map<String, Integer> getAssortment() {
+    public static Map<String, Integer> getAssortment() {
         return assortment;
     }
 
