@@ -8,8 +8,12 @@ public class SupplyOperation implements OperationHandler {
     @Override
     public void apply(FruitTransaction transaction) {
         String nameFruit = transaction.getFruit();
-        int current = Storage.getAssortment().get(nameFruit);
-        int res = current + transaction.getQuantity();
-        Storage.getAssortment().put(nameFruit, res);
+        int quantity = transaction.getQuantity();
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative: " + quantity);
+        }
+        int current = Storage.getAssortment().getOrDefault(nameFruit, 0);
+        int updated = current + quantity;
+        Storage.getAssortment().put(nameFruit, updated);
     }
 }
