@@ -25,12 +25,14 @@ import java.util.Map;
  * Feel free to remove this class and create your own.
  */
 public class HelloWorld {
+    private static final String nameInput = "reportToRead.csv";
+    private static final String nameOutput = "finalReport.csv";
+
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+        List<String> inputReport = fileReader.read(nameInput);
 
         DataConverter converter = new DataConverterImpl();
-        List<FruitTransaction> fruitTransactions = converter.convert(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceHandler());
@@ -39,6 +41,7 @@ public class HelloWorld {
         handlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy strategy = new OperationStrategyImpl(handlers);
 
+        List<FruitTransaction> fruitTransactions = converter.convert(inputReport);
         ShopService service = new ShopServiceImpl(strategy);
         service.process(fruitTransactions);
 
@@ -46,6 +49,6 @@ public class HelloWorld {
         List<String> resultingReport = generator.getReport();
 
         FileWriter writer = new FileWriterImpl();
-        writer.write(resultingReport, "finalReport.csv");
+        writer.write(resultingReport, nameOutput);
     }
 }

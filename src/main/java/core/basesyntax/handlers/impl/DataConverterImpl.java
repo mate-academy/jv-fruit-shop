@@ -6,12 +6,12 @@ import core.basesyntax.handlers.FruitPars;
 import java.util.List;
 
 public class DataConverterImpl implements DataConverter {
-    private final String FOR_SPLIT = ",";
+    private final String forSplit = ",";
 
     @Override
     public List<FruitTransaction> convert(List<String> value) {
         return value.stream()
-                .map(v -> v.split(FOR_SPLIT))
+                .map(v -> v.split(forSplit))
                 .map(v -> new FruitTransaction(v[1],
                         Integer.parseInt(v[2]),
                         FruitPars.parse(v[0])))
