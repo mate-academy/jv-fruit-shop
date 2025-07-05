@@ -5,26 +5,46 @@ import core.basesyntax.service.DataConvertor;
 import core.basesyntax.service.FileReaderService;
 import core.basesyntax.service.FileWriterService;
 import core.basesyntax.service.FruitDataCounter;
+import core.basesyntax.service.ReportGenerator;
 import core.basesyntax.service.impl.DataConvertorImpl;
 import core.basesyntax.service.impl.FileReaderServiceImpl;
 import core.basesyntax.service.impl.FileWriterServiceImpl;
 import core.basesyntax.service.impl.FruitDataCounterImpl;
+import core.basesyntax.service.impl.ReportGeneratorImpl;
+import core.basesyntax.strategy.BalanceStrategy;
+import core.basesyntax.strategy.PurchaseStrategy;
+import core.basesyntax.strategy.QuantityCalculationStrategy;
+import core.basesyntax.strategy.ReturnStrategy;
+import core.basesyntax.strategy.SupplyStrategy;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Main {
+    static final String inputFile = "input.csv";
+    static final String outputFile = "output.csv";
+
     public static void main(String[] args) {
-        final String inputFile = "input.csv";
-        final String outputFile = "output.csv";
+        Map<FruitTransaction.Operation, QuantityCalculationStrategy> strategyMap = new HashMap<>();
+        strategyMap.put(FruitTransaction.Operation.BALANCE, new BalanceStrategy());
+        strategyMap.put(FruitTransaction.Operation.PURCHASE, new PurchaseStrategy());
+        strategyMap.put(FruitTransaction.Operation.RETURN, new ReturnStrategy());
+        strategyMap.put(FruitTransaction.Operation.SUPPLY, new SupplyStrategy());
 
-        FileReaderService fileReaderLines = new FileReaderServiceImpl();
-        FruitDataCounter fruitDataCounter = new FruitDataCounterImpl();
+        FileReaderService fileReaderService = new FileReaderServiceImpl();
+        List<String> lines = fileReaderService.lines(inputFile);
+
         DataConvertor dataConvertor = new DataConvertorImpl();
-
-        List<String> lines = fileReaderLines.lines(inputFile);
         List<FruitTransaction> fruitTransactions = dataConvertor.dataConvert(lines);
-        List<String> fruits = fruitDataCounter.fruits(fruitTransactions);
-        FileWriterService fileWriter = new FileWriterServiceImpl();
-        fileWriter.fileWriterCsv(fruits, outputFile);
+
+        FruitDataCounter fruitDataCounter = new FruitDataCounterImpl(strategyMap);
+        fruitDataCounter.fruitsCounter(fruitTransactions);
+
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        reportGenerator.reportGenerate();
+
+        FileWriterService fileWriterService = new FileWriterServiceImpl();
+        fileWriterService.fileWriterCsv(outputFile);
     }
 }
 
