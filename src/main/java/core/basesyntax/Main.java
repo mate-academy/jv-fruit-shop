@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    static final String inputFile = "input.csv";
-    static final String outputFile = "output.csv";
+    static final String inputFile = "src/main/resources/input.csv";
+    static final String outputFile = "src/main/resources/output.csv";
 
     public static void main(String[] args) {
         Map<FruitTransaction.Operation, QuantityCalculationStrategy> strategyMap = new HashMap<>();
@@ -39,6 +39,7 @@ public class Main {
 
         FruitDataCounter fruitDataCounter = new FruitDataCounterImpl(strategyMap);
         fruitDataCounter.fruitsCounter(fruitTransactions);
+
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         reportGenerator.reportGenerate();
