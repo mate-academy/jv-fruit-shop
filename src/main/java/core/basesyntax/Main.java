@@ -40,7 +40,6 @@ public class Main {
         FruitDataCounter fruitDataCounter = new FruitDataCounterImpl(strategyMap);
         fruitDataCounter.fruitsCounter(fruitTransactions);
 
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         reportGenerator.reportGenerate();
 
