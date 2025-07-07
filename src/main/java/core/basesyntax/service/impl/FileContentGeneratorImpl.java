@@ -2,8 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.service.FileContentGenerator;
-
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class FileContentGeneratorImpl implements FileContentGenerator {
