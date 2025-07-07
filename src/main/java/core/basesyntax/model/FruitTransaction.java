@@ -1,4 +1,6 @@
-package core.basesyntax;
+package core.basesyntax.model;
+
+import core.basesyntax.HelloWorld;
 
 public class FruitTransaction {
     private Operation operation;
@@ -48,7 +50,14 @@ public class FruitTransaction {
         }
 
         public String getCode() {
+            if (!codeExists(code)) {
+                throw new RuntimeException("Code was not found");
+            }
             return code;
+        }
+
+        private boolean codeExists(String code) {
+            return HelloWorld.getHandlers().containsKey(code);
         }
     }
 }

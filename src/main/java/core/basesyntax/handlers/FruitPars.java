@@ -1,6 +1,6 @@
 package core.basesyntax.handlers;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 
 public interface FruitPars {
     static FruitTransaction.Operation parse(String value) {

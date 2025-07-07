@@ -1,6 +1,6 @@
 package core.basesyntax.handlers;
 
-import core.basesyntax.FruitTransaction;
+import core.basesyntax.model.FruitTransaction;
 import java.util.List;
 
 public interface DataConverter {

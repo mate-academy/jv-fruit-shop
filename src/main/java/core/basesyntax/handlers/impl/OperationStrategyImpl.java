@@ -1,8 +1,8 @@
 package core.basesyntax.handlers.impl;
 
-import core.basesyntax.FruitTransaction;
 import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.handlers.OperationStrategy;
+import core.basesyntax.model.FruitTransaction;
 import java.util.Map;
 
 public class OperationStrategyImpl implements OperationStrategy {
@@ -14,6 +14,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction.Operation operation) {
-        return handlers.get(operation);
+        OperationHandler handler = handlers.get(operation);
+        if (handler == null) {
+            throw new IllegalArgumentException("No handler found for operation: " + operation);
+        }
+        return handler;
     }
 }

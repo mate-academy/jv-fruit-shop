@@ -1,8 +1,8 @@
 package core.basesyntax.handlers.impl;
 
-import core.basesyntax.FruitTransaction;
 import core.basesyntax.data.Storage;
 import core.basesyntax.handlers.OperationHandler;
+import core.basesyntax.model.FruitTransaction;
 
 public class BalanceHandler implements OperationHandler {
 
