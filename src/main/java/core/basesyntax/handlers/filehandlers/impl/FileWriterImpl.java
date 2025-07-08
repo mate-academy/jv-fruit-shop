@@ -5,16 +5,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 public class FileWriterImpl implements FileWriter {
     @Override
-    public void write(List<String> text, String name) {
+    public void write(String text, String name) {
         Path path = Paths.get(name);
         try {
-            Files.write(path, text);
+            Files.write(path, text.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Errors create and write file: " + name);
+            throw new RuntimeException("Errors create and write file: " + name, e);
         }
     }
 }

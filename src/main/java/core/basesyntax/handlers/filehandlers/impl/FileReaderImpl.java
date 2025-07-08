@@ -16,7 +16,7 @@ public class FileReaderImpl implements FileReader {
                 dbList.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Errors reading file: " + name);
+            throw new RuntimeException("Errors reading file: " + name, e);
         }
         return dbList;
     }

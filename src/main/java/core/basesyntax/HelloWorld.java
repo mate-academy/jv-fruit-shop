@@ -28,7 +28,6 @@ import java.util.Map;
 public class HelloWorld {
     private static final String INPUT_FILE = "src/main/resources/reportToRead.csv";
     private static final String OUTPUT_FILE = "src/main/resources/finalReport.csv";
-    private static Map<FruitTransaction.Operation, OperationHandler> handlers;
 
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
@@ -49,8 +48,9 @@ public class HelloWorld {
 
         ReportGenerator generator = new ReportGeneratorImpl();
         List<String> resultingReport = generator.getReport();
+        String reportAsString = String.join(System.lineSeparator(), resultingReport);
 
         FileWriter writer = new FileWriterImpl();
-        writer.write(resultingReport, OUTPUT_FILE);
+        writer.write(reportAsString, OUTPUT_FILE);
     }
 }
