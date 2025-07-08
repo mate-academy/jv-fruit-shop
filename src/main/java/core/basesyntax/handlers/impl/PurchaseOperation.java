@@ -5,7 +5,6 @@ import core.basesyntax.handlers.OperationHandler;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
-    private int current = 0;
 
     @Override
     public void apply(FruitTransaction transaction) {

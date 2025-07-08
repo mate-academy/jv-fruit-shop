@@ -1,11 +1,13 @@
 package core.basesyntax.model;
 
-import core.basesyntax.HelloWorld;
+import core.basesyntax.handlers.OperationHandler;
+import java.util.Map;
 
 public class FruitTransaction {
     private Operation operation;
     private String fruit;
     private int quantity;
+    private Map<Operation, OperationHandler> handler;
 
     public FruitTransaction(String fruit, int quantity, Operation operation) {
         this.fruit = fruit;
@@ -50,14 +52,16 @@ public class FruitTransaction {
         }
 
         public String getCode() {
-            if (!codeExists(code)) {
-                throw new RuntimeException("Code was not found");
-            }
             return code;
         }
 
-        private boolean codeExists(String code) {
-            return HelloWorld.getHandlers().containsKey(code);
+        public static Operation fromCode(String code) {
+            for (Operation op : values()) {
+                if (op.getCode().equals(code)) {
+                    return op;
+                }
+            }
+            throw new IllegalArgumentException("Unknown operation code: " + code);
         }
     }
 }

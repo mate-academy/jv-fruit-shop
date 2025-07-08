@@ -130,7 +130,7 @@ public class Main {
 ```
 
 
-#### [Try to avoid these common mistakes while solving task](src/main/resources/checklist.md)
+#### [Try to avoid these common mistakes while solving task](checklist.md)
 
 <details>
   <summary>Additional tips (IMPORTANT: before viewing, create a solution architecture and check it against these tips)</summary>
