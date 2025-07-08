@@ -11,9 +11,22 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
+        isInputValid(inputReport);
         return inputReport.stream()
                 .map(this::getFromCsvRow)
                 .toList();
+    }
+
+    private void isInputValid(List<String> inputReport) {
+        if (inputReport.isEmpty()) {
+            throw new RuntimeException("Input file does not contain data: " + inputReport);
+        }
+        List<String> correctRows = inputReport.stream()
+                .filter(r -> r.matches("^[a-z],[a-z]+,\\d+$"))
+                .toList();
+        if (correctRows.size() != inputReport.size()) {
+            throw new RuntimeException("Input report contains wrong row(s)");
+        }
     }
 
     private FruitTransaction getFromCsvRow(String record) {

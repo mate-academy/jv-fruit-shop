@@ -12,6 +12,10 @@ public class PurchaseOperation implements OperationHandler {
         if (transaction.getQuantity() < 0) {
             throw new RuntimeException("Quantity can't be negative: " + transaction.getQuantity());
         }
+        if (Storage.fruits.get(transaction.getFruit()) == null) {
+            throw new RuntimeException("There is no such fruit in storage: "
+                    + transaction.getFruit());
+        }
         int oldQuantity = Storage.fruits.get(transaction.getFruit());
         int newQuantity = oldQuantity - transaction.getQuantity();
         if (newQuantity < 0) {
