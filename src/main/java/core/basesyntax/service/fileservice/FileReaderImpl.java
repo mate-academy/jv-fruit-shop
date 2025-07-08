@@ -6,8 +6,6 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-    private static final int HEADER_INDEX_TO_REMOVE = 0;
-
     @Override
     public List<String> read(String inputFileName) {
         List<String> inputReport;
@@ -16,10 +14,6 @@ public class FileReaderImpl implements FileReader {
         } catch (IOException e) {
             throw new RuntimeException("Can't get data from file " + inputFileName);
         }
-        if (inputReport.isEmpty()) {
-            throw new RuntimeException("Input file is empty " + inputFileName);
-        }
-        inputReport.remove(HEADER_INDEX_TO_REMOVE);
         return inputReport;
     }
 }

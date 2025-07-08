@@ -4,10 +4,9 @@ import core.basesyntax.db.Storage;
 import java.util.stream.Collectors;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private static final String HEADER_OF_REPORT = "fruit,quantity\n";
+    private static final String HEADER_OF_REPORT = "fruit,quantity" + System.lineSeparator();
     private static final char EQUALS = '=';
     private static final char COMMA = ',';
-    private static final String NEW_LINE = "\n";
 
     @Override
     public String getReport() {
@@ -15,6 +14,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                 + Storage.fruits.entrySet().stream()
                         .map(String::valueOf)
                         .map(s -> s.replace(EQUALS, COMMA))
-                        .collect(Collectors.joining(NEW_LINE));
+                        .collect(Collectors.joining(System.lineSeparator()));
     }
 }
