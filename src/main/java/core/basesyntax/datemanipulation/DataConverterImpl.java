@@ -12,7 +12,11 @@ public class DataConverterImpl implements DataConverter {
         }
         for (int i = 1; i < list.size(); i++) {
             String[] split = list.get(i).split(",");
-            result.add(new FruitTransaction(split[0],split[1],Integer.parseInt(split[2])));
+            if (split.length == 3) {
+                result.add(new FruitTransaction(split[0], split[1], Integer.parseInt(split[2])));
+            } else {
+                throw new NumberFormatException("Wrong format date at input file");
+            }
         }
         return result;
     }
