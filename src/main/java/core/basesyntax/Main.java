@@ -50,7 +50,7 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(fruitDao, operationStrategy);
         shopService.process(transactions);
 
-         ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();

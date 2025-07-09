@@ -15,7 +15,7 @@ public class FruitDaoImpl implements FruitDao {
         return Storage.fruits.stream()
                 .filter(f -> (f != null && f.getName().equals(nameFruit)))
                 .findFirst()
-                .get();
+                .orElse(null);
     }
 
     @Override
