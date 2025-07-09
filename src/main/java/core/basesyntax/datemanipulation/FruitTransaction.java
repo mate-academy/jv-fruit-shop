@@ -19,9 +19,12 @@ public class FruitTransaction {
                 operation = Operation.PURCHASE;
                 break;
             }
-            default: {
+            case "r": {
                 operation = Operation.RETURN;
                 break;
+            }
+            default: {
+                throw new IllegalArgumentException("Wrong type of input date");
             }
         }
         this.fruit = fruit;
