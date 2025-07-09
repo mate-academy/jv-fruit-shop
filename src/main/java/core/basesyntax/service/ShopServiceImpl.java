@@ -25,7 +25,7 @@ public class ShopServiceImpl implements ShopService {
             if (fruitDao.isPresent(fruitName)) {
                 fruit = fruitDao.get(fruitName);
             } else {
-                fruit = fruitService.createNewFruit(fruitName, quant);
+                fruit = fruitService.createNewFruit(fruitName);
             }
             int countFrut = fruit.getAmount();
 

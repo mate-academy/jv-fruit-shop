@@ -6,9 +6,8 @@ public class Fruit {
     private String name;
     private int amount;
 
-    public Fruit(String name, int amount) {
+    public Fruit(String name) {
         this.name = name;
-        this.amount = amount;
     }
 
     public String getName() {

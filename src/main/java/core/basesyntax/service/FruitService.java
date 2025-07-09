@@ -3,5 +3,5 @@ package core.basesyntax.service;
 import core.basesyntax.model.Fruit;
 
 public interface FruitService {
-    Fruit createNewFruit(String fruitName, int count);
+    Fruit createNewFruit(String fruitName);
 }
