@@ -11,8 +11,9 @@ public class FruitServiceImpl implements FruitService {
     }
 
     @Override
-    public void createNewFruit(String fruitName, int count) {
+    public Fruit createNewFruit(String fruitName, int count) {
         Fruit fruit = new Fruit(fruitName,count);
         fruitDao.add(fruit);
+        return fruit;
     }
 }
