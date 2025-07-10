@@ -1,8 +1,11 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.model.Fruit;
+
 public class ReturnOperation implements OperationHandler {
+
     @Override
-    public int getOperation() {
-        return 1;
+    public void doOperation(Fruit fruit, int quantity) {
+        fruit.setAmount(fruit.getAmount() + quantity);
     }
 }

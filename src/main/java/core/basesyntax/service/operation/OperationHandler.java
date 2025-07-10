@@ -1,5 +1,7 @@
 package core.basesyntax.service.operation;
 
+import core.basesyntax.model.Fruit;
+
 public interface OperationHandler {
-    int getOperation();
+    void doOperation(Fruit fruit, int quantity);
 }

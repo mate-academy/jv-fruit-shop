@@ -15,7 +15,7 @@ public class DataConverterImpl implements DataConverter {
             if (split.length == 3) {
                 result.add(new FruitTransaction(split[0], split[1], Integer.parseInt(split[2])));
             } else {
-                throw new NumberFormatException("Wrong format date at input file");
+                throw new IllegalArgumentException("Wrong format date at input file");
             }
         }
         return result;
