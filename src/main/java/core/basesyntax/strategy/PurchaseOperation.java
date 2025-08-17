@@ -4,14 +4,14 @@ import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
-    private final Storage storage;
-
-    public PurchaseOperation(Storage storage) {
-        this.storage = storage;
-    }
-
     @Override
     public void handle(FruitTransaction transaction) {
-        storage.purchase(transaction.getFruit(), transaction.getQuantity());
+        String fruit = transaction.getFruit();
+        int quantity = transaction.getQuantity();
+        int current = Storage.inventory.getOrDefault(fruit, 0);
+        if (current < quantity) {
+            throw new IllegalArgumentException("Not enough " + fruit + " in stock");
+        }
+        Storage.inventory.put(fruit, current - quantity);
     }
 }

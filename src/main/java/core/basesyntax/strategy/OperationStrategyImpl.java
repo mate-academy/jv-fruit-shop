@@ -13,7 +13,7 @@ public class OperationStrategyImpl implements OperationStrategy {
     }
 
     @Override
-    public void process(FruitTransaction transaction, core.basesyntax.db.Storage storage) {
+    public void process(FruitTransaction transaction) {
         OperationHandler handler = operationHandlers.get(transaction.getOperation());
         if (handler == null) {
             throw new IllegalArgumentException("Unknown operation: " + transaction.getOperation());

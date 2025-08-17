@@ -6,15 +6,15 @@ import java.util.Map;
 public class Storage {
     public static final Map<String, Integer> inventory = new HashMap<>();
 
-    public void setBalance(String fruit, int quantity) {
+    public static void setBalance(String fruit, int quantity) {
         inventory.put(fruit, quantity);
     }
 
-    public void supply(String fruit, int quantity) {
+    public static void supply(String fruit, int quantity) {
         inventory.put(fruit, inventory.getOrDefault(fruit, 0) + quantity);
     }
 
-    public void purchase(String fruit, int quantity) {
+    public static void purchase(String fruit, int quantity) {
         int currentQuantity = inventory.getOrDefault(fruit, 0);
         if (currentQuantity < quantity) {
             throw new IllegalArgumentException("Not enough " + fruit + " in stock");
@@ -22,11 +22,11 @@ public class Storage {
         inventory.put(fruit, currentQuantity - quantity);
     }
 
-    public void returnFruits(String fruit, int quantity) {
+    public static void returnFruits(String fruit, int quantity) {
         inventory.put(fruit, inventory.getOrDefault(fruit, 0) + quantity);
     }
 
-    public Map<String, Integer> getInventory() {
+    public static Map<String, Integer> getInventory() {
         return new HashMap<>(inventory);
     }
 }
