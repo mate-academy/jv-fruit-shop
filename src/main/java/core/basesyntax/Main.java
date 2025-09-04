@@ -24,26 +24,29 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         try {
-            FileReaderService fileReader = new FileReaderServiceImpl();
-            List<String> inputReport = fileReader.read("reportToRead.csv");
+            final FileReaderService fileReader = new FileReaderServiceImpl();
+            final List<String> inputReport = fileReader.read("reportToRead.csv");
 
-            DataConverter dataConverter = new DataConverterImpl();
-            List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+            final DataConverter dataConverter = new DataConverterImpl();
+            final List<FruitTransaction> transactions = dataConverter.convertToTransaction(
+                    inputReport);
 
-            Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+            final Map<FruitTransaction.Operation, OperationHandler> operationHandlers
+                    = new HashMap<>();
             operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
             operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
             operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
             operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-            OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-            ShopService shopService = new ShopServiceImpl(operationStrategy);
+            final OperationStrategyImpl operationStrategy = new OperationStrategyImpl(
+                    operationHandlers);
+            final ShopService shopService = new ShopServiceImpl(operationStrategy);
             shopService.process(transactions);
 
-            ReportGenerator reportGenerator = new ReportGeneratorImpl();
-            String resultingReport = reportGenerator.getReport();
+            final ReportGenerator reportGenerator = new ReportGeneratorImpl();
+            final String resultingReport = reportGenerator.getReport();
 
-            FileWriterService fileWriter = new FileWriterServiceImpl();
+            final FileWriterService fileWriter = new FileWriterServiceImpl();
             fileWriter.write(resultingReport, "finalReport.csv");
 
         } catch (Exception e) {

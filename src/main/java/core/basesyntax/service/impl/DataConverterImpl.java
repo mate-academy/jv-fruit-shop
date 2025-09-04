@@ -21,7 +21,8 @@ public class DataConverterImpl implements DataConverter {
                 continue;
             }
 
-            if (i == 0 && (line.toLowerCase().contains("operation") || line.toLowerCase().contains("fruit"))) {
+            if (i == 0 && (line.toLowerCase().contains("operation")
+                    || line.toLowerCase().contains("fruit"))) {
                 continue;
             }
 
