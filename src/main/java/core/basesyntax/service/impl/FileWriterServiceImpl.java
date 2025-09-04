@@ -15,9 +15,6 @@ public class FileWriterServiceImpl implements FileWriterService {
             writer.write(report);
         } catch (IOException e) {
             throw new RuntimeException("Failed to write to file: " + path.toAbsolutePath(), e);
-        } catch (Exception e) {
-            throw new RuntimeException("Unexpected error writing file: "
-                    + path.toAbsolutePath(), e);
         }
     }
 }

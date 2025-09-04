@@ -16,12 +16,12 @@ public class DataConverterImpl implements DataConverter {
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 0; i < inputReport.size(); i++) {
-            String line = inputReport.get(i).trim();
+            String line = inputReport.get(i);
             if (line.isEmpty()) {
                 continue;
             }
 
-            if (i == 0 && (line.toLowerCase().startsWith("operation") || line.contains("fruit"))) {
+            if (i == 0 && (line.toLowerCase().contains("operation") || line.toLowerCase().contains("fruit"))) {
                 continue;
             }
 
@@ -32,12 +32,12 @@ public class DataConverterImpl implements DataConverter {
                                 + parts.length);
             }
 
-            String operationCode = parts[OPERATION_INDEX].trim();
-            String fruit = parts[FRUIT_INDEX].trim();
+            String operationCode = parts[OPERATION_INDEX];
+            String fruit = parts[FRUIT_INDEX];
             int quantity;
 
             try {
-                quantity = Integer.parseInt(parts[QUANTITY_INDEX].trim());
+                quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
             } catch (NumberFormatException e) {
                 throw new IllegalArgumentException("Invalid quantity at line "
                         + (i + 1) + ": " + parts[QUANTITY_INDEX], e);

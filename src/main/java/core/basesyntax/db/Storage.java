@@ -25,8 +25,4 @@ public class Storage {
     public static void returnFruits(String fruit, int quantity) {
         inventory.put(fruit, inventory.getOrDefault(fruit, 0) + quantity);
     }
-
-    public static Map<String, Integer> getInventory() {
-        return new HashMap<>(inventory);
-    }
 }
