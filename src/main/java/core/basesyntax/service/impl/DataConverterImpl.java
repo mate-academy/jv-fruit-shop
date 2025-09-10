@@ -21,11 +21,6 @@ public class DataConverterImpl implements DataConverter {
                 continue;
             }
 
-            if (i == 0 && (line.toLowerCase().contains("operation")
-                    || line.toLowerCase().contains("fruit"))) {
-                continue;
-            }
-
             String[] parts = line.split(DELIMITER);
             if (parts.length != EXPECTED_PARTS_COUNT) {
                 throw new IllegalArgumentException(

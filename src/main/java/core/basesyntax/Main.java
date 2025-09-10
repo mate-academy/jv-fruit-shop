@@ -17,41 +17,36 @@ import core.basesyntax.strategy.OperationStrategyImpl;
 import core.basesyntax.strategy.PurchaseOperation;
 import core.basesyntax.strategy.ReturnOperation;
 import core.basesyntax.strategy.SupplyOperation;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            final FileReaderService fileReader = new FileReaderServiceImpl();
-            final List<String> inputReport = fileReader.read("reportToRead.csv");
+    private static final String INPUT_FILE_PATH = "reportToRead.csv";
+    private static final String OUTPUT_FILE_PATH = "finalReport.csv";
 
-            final DataConverter dataConverter = new DataConverterImpl();
-            final List<FruitTransaction> transactions = dataConverter.convertToTransaction(
-                    inputReport);
+    public static void main(String[] args) throws IOException {
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        final List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
 
-            final Map<FruitTransaction.Operation, OperationHandler> operationHandlers
-                    = new HashMap<>();
-            operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-            operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-            operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-            operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        DataConverter dataConverter = new DataConverterImpl();
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-            final OperationStrategyImpl operationStrategy = new OperationStrategyImpl(
-                    operationHandlers);
-            final ShopService shopService = new ShopServiceImpl(operationStrategy);
-            shopService.process(transactions);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-            final ReportGenerator reportGenerator = new ReportGeneratorImpl();
-            final String resultingReport = reportGenerator.getReport();
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transactions);
 
-            final FileWriterService fileWriter = new FileWriterServiceImpl();
-            fileWriter.write(resultingReport, "finalReport.csv");
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String resultingReport = reportGenerator.getReport();
 
-        } catch (Exception e) {
-            System.err.println("Error processing fruit transactions: " + e.getMessage());
-            e.printStackTrace();
-        }
+        FileWriterService fileWriter = new FileWriterServiceImpl();
+        fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
     }
 }
