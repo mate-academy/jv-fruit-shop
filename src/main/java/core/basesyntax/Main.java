@@ -24,23 +24,24 @@ import java.util.Map;
 
 public class Main {
     private static final String INPUT_FILE_PATH = "reportToRead.csv";
-    private static final String OUTPUT_FILE_PATH = "finalReport.csv";
+    private static final String OUTPUT_FILE_PATH = "finalReport";
 
     public static void main(String[] args) throws IOException {
         FileReaderService fileReader = new FileReaderServiceImpl();
-        final List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
+        List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
 
+        OperationStrategyImpl operationStrategy = new OperationStrategyImpl(operationHandlers);
         ShopService shopService = new ShopServiceImpl(operationStrategy);
+
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
