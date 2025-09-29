@@ -96,7 +96,7 @@ public class FruitTransaction {
 
 Also, here is an example of what the `main` method may look like:
 ```java
-public class Main {
+public class core.basesyntax.Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         FileReader fileReader = new FileReaderImpl();
