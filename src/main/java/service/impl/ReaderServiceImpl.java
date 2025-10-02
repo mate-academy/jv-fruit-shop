@@ -8,8 +8,13 @@ import java.util.List;
 import service.ReaderService;
 
 public class ReaderServiceImpl implements ReaderService {
+
     @Override
     public List<String> readFromFile(String filePath) {
+        if (filePath == null || filePath.isBlank()) {
+            throw new IllegalArgumentException("File path cannot be null or empty");
+        }
+
         List<String> lines = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
@@ -17,8 +22,11 @@ public class ReaderServiceImpl implements ReaderService {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException("Can't read file by path: " + filePath, e);
+            throw new RuntimeException(
+                    "Can't read file by path: " + filePath, e
+            );
         }
         return lines;
     }
 }
+

@@ -21,6 +21,7 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Main {
+
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceImpl();
         List<String> lines = reader.readFromFile("src/main/resources/reportToRead.csv");
