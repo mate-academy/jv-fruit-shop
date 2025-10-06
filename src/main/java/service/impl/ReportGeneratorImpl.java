@@ -8,13 +8,16 @@ public class ReportGeneratorImpl implements ReportGenerator {
 
     @Override
     public String getReport() {
-        StringBuilder report = new StringBuilder("fruit,quantity\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("fruit,quantity\n");
+
         for (Map.Entry<String, Integer> entry : Storage.getSnapshot().entrySet()) {
-            report.append(entry.getKey())
+            sb.append(entry.getKey())
                     .append(",")
                     .append(entry.getValue())
                     .append("\n");
         }
-        return report.toString();
+
+        return sb.toString();
     }
 }

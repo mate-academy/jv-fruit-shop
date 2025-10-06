@@ -7,26 +7,25 @@ import java.util.ArrayList;
 import java.util.List;
 import service.ReaderService;
 
-public class ReaderServiceImpl implements ReaderService {
+public class FileReaderImpl implements ReaderService {
 
     @Override
-    public List<String> readFromFile(String filePath) {
+    public List<String> read(String filePath) {
         if (filePath == null || filePath.isBlank()) {
-            throw new IllegalArgumentException("File path cannot be null or empty");
+            throw new IllegalArgumentException("File path is null or empty");
         }
 
         List<String> lines = new ArrayList<>();
+
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(
-                    "Can't read file by path: " + filePath, e
-            );
+            throw new RuntimeException("Cannot read file: " + filePath, e);
         }
+
         return lines;
     }
 }
-

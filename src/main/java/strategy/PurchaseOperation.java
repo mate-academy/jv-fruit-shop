@@ -7,12 +7,18 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new IllegalArgumentException("Transaction null");
+        }
+
         String fruit = transaction.getFruit();
         int current = Storage.getQuantity(fruit);
-        int newBalance = current - transaction.getQuantity();
-        if (newBalance < 0) {
-            throw new RuntimeException("Negative balance for fruit: " + fruit);
+        int newQty = current - transaction.getQuantity();
+
+        if (newQty < 0) {
+            throw new RuntimeException("Negative balance for " + fruit);
         }
-        Storage.setQuantity(fruit, newBalance);
+
+        Storage.setQuantity(fruit, newQty);
     }
 }

@@ -50,15 +50,21 @@ public class FruitTransaction {
         }
 
         public static Operation fromCode(String code) {
-            for (Operation op : values()) {
-                if (op.getCode().equals(code)) {
-                    return op;
-                }
+            if (code == null || code.isBlank()) {
+                throw new IllegalArgumentException("Code cannot be null");
             }
-            throw new IllegalArgumentException(
-                    "Unknown operation code: " + code
-            );
+            switch (code.trim().toLowerCase()) {
+                case "b":
+                    return BALANCE;
+                case "s":
+                    return SUPPLY;
+                case "p":
+                    return PURCHASE;
+                case "r":
+                    return RETURN;
+                default:
+                    throw new IllegalArgumentException("Unknown code: " + code);
+            }
         }
     }
 }
-

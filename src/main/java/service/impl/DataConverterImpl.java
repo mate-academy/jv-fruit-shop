@@ -7,50 +7,54 @@ import service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
 
+    private static final String HEADER = "type,fruit,quantity";
+
     @Override
-    public List<FruitTransaction> convertToTransactions(List<String> lines) {
-        if (lines == null || lines.size() < 2) {
-            throw new IllegalArgumentException(
-                    "File must contain header and at least one data line");
+    public List<FruitTransaction> convertToTransaction(List<String> lines) {
+        if (lines == null || lines.isEmpty()) {
+            throw new IllegalArgumentException("Input is null or empty");
         }
 
-        List<FruitTransaction> transactions = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++) {
-            String line = lines.get(i).trim();
+        List<FruitTransaction> result = new ArrayList<>();
+        int lineNum = 0;
+
+        for (String raw : lines) {
+            lineNum++;
+            if (raw == null) {
+                throw new IllegalArgumentException("Null line at: " + lineNum);
+            }
+
+            String line = raw.trim();
+
+            if (lineNum == 1) {
+                if (!line.equalsIgnoreCase(HEADER)) {
+                    throw new IllegalArgumentException("Invalid header: " + line);
+                }
+                continue;
+            }
+
             if (line.isEmpty()) {
                 continue;
             }
 
             String[] parts = line.split(",");
             if (parts.length != 3) {
-                throw new IllegalArgumentException(
-                        "Invalid line at index " + i + ": " + line);
+                throw new IllegalArgumentException("Invalid line at " + lineNum + ": " + line);
             }
 
-            final FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.fromCode(parts[0].trim());
-            final String fruit = parts[1].trim();
-            if (fruit.isEmpty()) {
-                throw new IllegalArgumentException(
-                        "Fruit name cannot be empty at line: " + line);
-            }
+            String code = parts[0].trim();
+            String fruit = parts[1].trim();
+            int qty;
 
-            int quantity;
             try {
-                quantity = Integer.parseInt(parts[2].trim());
+                qty = Integer.parseInt(parts[2].trim());
             } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(
-                        "Invalid quantity at line: " + line, e);
+                throw new IllegalArgumentException("Invalid quantity at line " + lineNum);
             }
 
-            if (quantity < 0) {
-                throw new IllegalArgumentException(
-                        "Quantity cannot be negative at line: " + line);
-            }
-
-            transactions.add(new FruitTransaction(operation, fruit, quantity));
+            result.add(new FruitTransaction(FruitTransaction.Operation.fromCode(code), fruit, qty));
         }
 
-        return transactions;
+        return result;
     }
 }

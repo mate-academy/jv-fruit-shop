@@ -1,3 +1,5 @@
+package app;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +10,10 @@ import service.ReportGenerator;
 import service.ShopService;
 import service.WriterService;
 import service.impl.DataConverterImpl;
-import service.impl.ReaderServiceImpl;
+import service.impl.FileReaderImpl;
+import service.impl.FileWriterImpl;
 import service.impl.ReportGeneratorImpl;
 import service.impl.ShopServiceImpl;
-import service.impl.WriterServiceImpl;
 import strategy.BalanceOperation;
 import strategy.OperationHandler;
 import strategy.OperationStrategy;
@@ -21,13 +23,15 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Main {
-
     public static void main(String[] args) {
-        ReaderService reader = new ReaderServiceImpl();
-        List<String> lines = reader.readFromFile("src/main/resources/reportToRead.csv");
+        final String inputFile = "src/main/resources/reportToRead.csv";
+        final String outputFile = "src/main/resources/finalReport.csv";
 
-        DataConverter converter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = converter.convertToTransactions(lines);
+        ReaderService readerService = new FileReaderImpl();
+        final List<String> inputData = readerService.read(inputFile);
+
+        DataConverter dataConverter = new DataConverterImpl();
+        final List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputData);
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
@@ -35,14 +39,16 @@ public class Main {
         handlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
         handlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
 
-        OperationStrategy strategy = new OperationStrategyImpl(handlers);
-        ShopService shopService = new ShopServiceImpl(strategy);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(handlers);
+
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
 
-        WriterService writer = new WriterServiceImpl();
-        writer.writeToFile(report, "src/main/resources/finalReport.csv");
+        WriterService writerService = new FileWriterImpl();
+        writerService.write(report, outputFile);
     }
 }
+
