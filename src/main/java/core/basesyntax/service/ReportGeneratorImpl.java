@@ -1,5 +1,7 @@
 package core.basesyntax.service;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -10,7 +12,7 @@ public class ReportGeneratorImpl implements ReportGenerator {
         if (stock == null) {
             throw new RuntimeException("Stock map for ReportGeneratorImpl is null");
         }
-        this.stock = stock;
+        this.stock = Collections.unmodifiableMap(new HashMap<>(stock));
     }
 
     @Override
