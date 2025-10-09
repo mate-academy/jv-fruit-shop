@@ -26,7 +26,7 @@ public class Main {
         List<String> lines = reader.readFromFile("src/main/resources/reportToRead.csv");
 
         DataConverter converter = new DataConverterImpl();
-        List<FruitTransaction> transactions = converter.convertToTransactions(lines);
+        final List<FruitTransaction> transactions = converter.convertToTransactions(lines);
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
