@@ -7,6 +7,9 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private final Map<String, Integer> stock;
 
     public ReportGeneratorImpl(Map<String, Integer> stock) {
+        if (stock == null) {
+            throw new RuntimeException("Stock map for ReportGeneratorImpl is null");
+        }
         this.stock = stock;
     }
 
