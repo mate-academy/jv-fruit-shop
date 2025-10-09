@@ -4,7 +4,6 @@ import db.Storage;
 import model.FruitTransaction;
 
 public class PurchaseOperation implements OperationHandler {
-
     @Override
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();

@@ -6,51 +6,26 @@ import model.FruitTransaction;
 import service.DataConverter;
 
 public class DataConverterImpl implements DataConverter {
+    private static final String DELIMITER = ",";
+    private static final int OPERATION_INDEX = 0;
+    private static final int FRUIT_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
 
     @Override
     public List<FruitTransaction> convertToTransactions(List<String> lines) {
-        if (lines == null || lines.size() < 2) {
-            throw new IllegalArgumentException(
-                    "File must contain header and at least one data line");
-        }
-
         List<FruitTransaction> transactions = new ArrayList<>();
-        for (int i = 1; i < lines.size(); i++) {
-            String line = lines.get(i).trim();
-            if (line.isEmpty()) {
-                continue;
-            }
-
-            String[] parts = line.split(",");
-            if (parts.length != 3) {
-                throw new IllegalArgumentException(
-                        "Invalid line at index " + i + ": " + line);
-            }
-
-            final FruitTransaction.Operation operation =
-                    FruitTransaction.Operation.fromCode(parts[0].trim());
-            final String fruit = parts[1].trim();
-            if (fruit.isEmpty()) {
-                throw new IllegalArgumentException(
-                        "Fruit name cannot be empty at line: " + line);
-            }
-
-            int quantity;
-            try {
-                quantity = Integer.parseInt(parts[2].trim());
-            } catch (NumberFormatException e) {
-                throw new IllegalArgumentException(
-                        "Invalid quantity at line: " + line, e);
-            }
-
-            if (quantity < 0) {
-                throw new IllegalArgumentException(
-                        "Quantity cannot be negative at line: " + line);
-            }
-
-            transactions.add(new FruitTransaction(operation, fruit, quantity));
+        for (int i = 1; i < lines.size(); i++) { // skip header
+            transactions.add(parseLine(lines.get(i)));
         }
-
         return transactions;
+    }
+
+    private FruitTransaction parseLine(String line) {
+        String[] parts = line.split(DELIMITER);
+        FruitTransaction.Operation operation =
+                FruitTransaction.Operation.fromCode(parts[OPERATION_INDEX]);
+        String fruit = parts[FRUIT_INDEX];
+        int quantity = Integer.parseInt(parts[QUANTITY_INDEX]);
+        return new FruitTransaction(operation, fruit, quantity);
     }
 }

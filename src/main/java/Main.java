@@ -21,13 +21,12 @@ import strategy.ReturnOperation;
 import strategy.SupplyOperation;
 
 public class Main {
-
     public static void main(String[] args) {
         ReaderService reader = new ReaderServiceImpl();
         List<String> lines = reader.readFromFile("src/main/resources/reportToRead.csv");
 
         DataConverter converter = new DataConverterImpl();
-        final List<FruitTransaction> transactions = converter.convertToTransactions(lines);
+        List<FruitTransaction> transactions = converter.convertToTransactions(lines);
 
         Map<FruitTransaction.Operation, OperationHandler> handlers = new HashMap<>();
         handlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());

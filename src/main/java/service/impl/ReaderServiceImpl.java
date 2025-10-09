@@ -11,22 +11,17 @@ public class ReaderServiceImpl implements ReaderService {
 
     @Override
     public List<String> readFromFile(String filePath) {
-        if (filePath == null || filePath.isBlank()) {
-            throw new IllegalArgumentException("File path cannot be null or empty");
-        }
-
         List<String> lines = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            while ((line = br.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
         } catch (IOException e) {
-            throw new RuntimeException(
-                    "Can't read file by path: " + filePath, e
-            );
+            throw new RuntimeException("Can't read file by path: " + filePath, e);
         }
         return lines;
     }
 }
+
 
