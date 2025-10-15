@@ -9,6 +9,6 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        fruitDao.remove(transaction.getFruit(),  transaction.getQuantity());
+        fruitDao.remove(transaction.getFruit(), transaction.getQuantity());
     }
 }
