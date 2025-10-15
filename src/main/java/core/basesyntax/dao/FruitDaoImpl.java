@@ -1,9 +1,9 @@
 package core.basesyntax.dao;
 
-import java.util.Map;
 import core.basesyntax.db.FruitDB;
+import java.util.Map;
 
-public class FruitDaoImpl implements FruitDao{
+public class FruitDaoImpl implements FruitDao {
     private final FruitDB fruitDB = new FruitDB();
 
     @Override

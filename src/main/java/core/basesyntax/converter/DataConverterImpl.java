@@ -1,8 +1,8 @@
 package core.basesyntax.converter;
 
+import core.basesyntax.model.FruitTransaction;
 import java.util.Arrays;
 import java.util.List;
-import core.basesyntax.model.FruitTransaction;
 
 public class DataConverterImpl implements DataConverter {
     private static final String COMMA_SEPARATOR = ",";
@@ -12,10 +12,10 @@ public class DataConverterImpl implements DataConverter {
         return report.stream()
                 .map(str -> {
                     List<String> data = Arrays.asList(str.split(COMMA_SEPARATOR));
-                    FruitTransaction.Operation operation = FruitTransaction.Operation.fromCode(data.get(0));
+                    FruitTransaction.Operation operation
+                            = FruitTransaction.Operation.fromCode(data.get(0));
                     String fruit = data.get(1);
                     int quantity = Integer.parseInt(data.get(2));
-
 
                     return new FruitTransaction(operation, fruit, quantity);
                 })
