@@ -1,10 +1,13 @@
 package core.basesyntax.report;
 
 import core.basesyntax.dao.FruitDao;
-import core.basesyntax.dao.FruitDaoImpl;
 
 public class ReportGeneratorImpl implements ReportGenerator {
-    private final FruitDao fruitDao = new FruitDaoImpl();
+    private final FruitDao fruitDao;
+
+    public ReportGeneratorImpl(FruitDao fruitDao) {
+        this.fruitDao = fruitDao;
+    }
 
     @Override
     public String getReport() {
