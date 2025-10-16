@@ -6,6 +6,9 @@ public class ReportGeneratorImpl implements ReportGenerator {
     private final FruitDao fruitDao;
 
     public ReportGeneratorImpl(FruitDao fruitDao) {
+        if (fruitDao == null) {
+            throw new IllegalArgumentException("fruitDao must not be null");
+        }
         this.fruitDao = fruitDao;
     }
 

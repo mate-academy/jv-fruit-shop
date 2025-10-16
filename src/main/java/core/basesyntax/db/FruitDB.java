@@ -1,10 +1,13 @@
 package core.basesyntax.db;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class FruitDB {
-    private static final Map<String, Integer> fruits = new HashMap<>();
+    private final Map<String, Integer> fruits;
+
+    public FruitDB(Map<String, Integer> fruits) {
+        this.fruits = fruits;
+    }
 
     public void setQuantity(String fruit, Integer quantity) {
         fruits.put(fruit, quantity);

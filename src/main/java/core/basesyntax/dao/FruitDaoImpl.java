@@ -4,7 +4,11 @@ import core.basesyntax.db.FruitDB;
 import java.util.Map;
 
 public class FruitDaoImpl implements FruitDao {
-    private final FruitDB fruitDB = new FruitDB();
+    private final FruitDB fruitDB;
+
+    public FruitDaoImpl(FruitDB fruitDB) {
+        this.fruitDB = fruitDB;
+    }
 
     @Override
     public void set(String fruit, Integer quantity) {

@@ -12,6 +12,15 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new IllegalArgumentException(
+                    "transaction must not be null");
+        }
+        if (transaction.getFruit() == null
+                || transaction.getFruit().trim().isEmpty()) {
+            throw new IllegalArgumentException(
+                    "transaction.fruit must not be null or blank");
+        }
         fruitDao.set(transaction.getFruit(), transaction.getQuantity());
     }
 }
