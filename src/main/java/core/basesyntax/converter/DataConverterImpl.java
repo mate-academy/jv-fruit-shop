@@ -58,7 +58,8 @@ public class DataConverterImpl implements DataConverter {
         }
         if (quantity < 0) {
             throw new IllegalArgumentException(
-                    "Negative quantity " + quantity + " on line " + lineNumber + ": \"" + line + "\"");
+                    "Negative quantity " + quantity + " on line "
+                            + lineNumber + ": \"" + line + "\"");
         }
         return quantity;
     }
