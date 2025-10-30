@@ -19,7 +19,7 @@ You can use packages to make the structure of the code better, so let's do it. G
 purpose/common logic in a corresponding package.
 
 Your project structure should consist the following packages:
-- `db` for holding Storage
+- `db` for holding service.basesyntax.db.Storage
 - `model` for holding models like Fruit (if necessary)
 - `service` for holding services, like Writer, Reader, Parser and so on
 - `service.impl` for holding implementations of services
@@ -55,18 +55,18 @@ the most suitable for your needs.
 #### Avoid hardcode in your solution
 * Use hardcoded values only in the Main class and/or test classes.  
     
-- Bad:  
+- Bad:
     ```java
-    public class ReaderServiceImpl implements ReaderService {
+    public class ReaderServiceImpl implements service.basesyntax.service.impl.ReaderServiceImpl {
        public List<String> readFromFile() {
           File file = new File("src/main/resources/file.txt");
           ...
        }
     }
     ```     
-- Good:  
+- Good:
     ```java
-    public class ReaderServiceImpl implements ReaderService {
+    public class ReaderServiceImpl implements service.basesyntax.service.impl.ReaderServiceImpl {
        public List<String> readFromFile(String filePath) {
           File file = new File(filePath);
           ...
@@ -101,4 +101,4 @@ In the `main()` method you can pass the strategy map into the service that choos
 #### Be attentive with [class](https://mate-academy.github.io/style-guides/java/java.html#s5.2.2-class-names) and [method](https://mate-academy.github.io/style-guides/java/java.html#s5.2.3-method-names) naming. 
 
 #### Handling Purchase operation.
-Check result balance before saving it in the Storage - it should be positive. Throw `RuntimeException` in case the balance is negative.
+Check result balance before saving it in the service.basesyntax.db.Storage - it should be positive. Throw `RuntimeException` in case the balance is negative.
