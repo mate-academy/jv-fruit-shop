@@ -2,7 +2,6 @@ package core.basesyntax.dao;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.Fruit;
-import java.util.Collections;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
@@ -14,7 +13,7 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public void save(Fruit fruit, Integer amount) {
-        storage.put(fruit, amount);
+        Storage.getModifiableLeftovers().put(fruit, amount);
     }
 
     @Override
@@ -24,6 +23,6 @@ public class StorageDaoImpl implements StorageDao {
 
     @Override
     public Map<Fruit, Integer> getAll() {
-        return Collections.unmodifiableMap(storage);
+        return storage;
     }
 }
