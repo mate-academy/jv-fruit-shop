@@ -14,7 +14,13 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public void process(List<FruitTransaction> transactions) {
+        if (transactions == null) {
+            throw new RuntimeException("The transactions list is empty.");
+        }
         for (FruitTransaction transaction : transactions) {
+            if (transaction.getQuantity() < 0) {
+                throw new RuntimeException("The quantity of operation can't be negative!");
+            }
             OperationHandler handler = operationStrategy.get(transaction.getOperation());
             handler.apply(transaction);
         }

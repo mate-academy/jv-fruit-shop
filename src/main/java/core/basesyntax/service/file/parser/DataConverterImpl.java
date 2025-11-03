@@ -13,6 +13,10 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> inputReport) {
+        if (inputReport == null) {
+            throw new RuntimeException("Input report for processing was null." + inputReport);
+        }
+
         return inputReport.stream()
                 .map(line -> {
                     String[] parts = line.split(",");

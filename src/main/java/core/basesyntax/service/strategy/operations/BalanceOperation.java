@@ -12,6 +12,9 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new RuntimeException("Transaction was null.");
+        }
         storageDao.save(transaction.getFruit(), transaction.getQuantity());
     }
 }

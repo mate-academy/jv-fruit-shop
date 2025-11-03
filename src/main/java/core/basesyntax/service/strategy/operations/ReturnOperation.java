@@ -13,10 +13,12 @@ public class ReturnOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new RuntimeException("Transaction was null.");
+        }
         Fruit fruit = transaction.getFruit();
-        Integer newQuantity = storageDao.get(fruit)
-                + transaction.getQuantity();
-
+        int availableQuantity = storageDao.getAll().getOrDefault(fruit, 0);
+        Integer newQuantity = availableQuantity + transaction.getQuantity();
         storageDao.save(fruit, newQuantity);
     }
 }

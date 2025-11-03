@@ -13,14 +13,15 @@ public class PurchaseOperation implements OperationHandler {
 
     @Override
     public void apply(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new RuntimeException("Transaction was null.");
+        }
         Fruit fruit = transaction.getFruit();
-        Integer newQuantity = storageDao.get(fruit)
-                - transaction.getQuantity();
-
+        int availableQuantity = storageDao.getAll().getOrDefault(fruit, 0);
+        Integer newQuantity = availableQuantity - transaction.getQuantity();
         if (newQuantity < 0) {
             throw new RuntimeException("Not enough " + fruit.getFruitName() + " in the storage");
         }
-
         storageDao.save(fruit, newQuantity);
     }
 }

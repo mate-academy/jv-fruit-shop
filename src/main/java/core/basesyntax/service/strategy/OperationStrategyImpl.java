@@ -9,6 +9,9 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     public OperationStrategyImpl(Map<FruitTransaction.Operation,
             OperationHandler> operationHandlers) {
+        if (operationHandlers == null) {
+            throw new RuntimeException("Map of operations was null.");
+        }
         this.operationHandlers = operationHandlers;
     }
 
