@@ -18,6 +18,7 @@ public class DataConverterImpl implements DataConverter {
         }
 
         return inputReport.stream()
+                .skip(1)
                 .map(line -> {
                     String[] parts = line.split(",");
                     if (parts.length != LENGTH_OF_PART) {

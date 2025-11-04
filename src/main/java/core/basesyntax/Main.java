@@ -25,9 +25,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    public static final String SOURCE_PATH = "src/main/resources/file.csv";
+    public static final String REPORT_PATH = "src/main/resources/report.csv";
+
     public static void main(String[] arg) {
         FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("src/main/resources/file.csv");
+        List<String> inputReport = fileReader.read(SOURCE_PATH);
 
         DataConverter dataConverter = new DataConverterImpl();
 
@@ -49,6 +52,6 @@ public class Main {
         String resultingReport = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "src/main/resources/report.csv");
+        fileWriter.write(resultingReport, REPORT_PATH);
     }
 }
