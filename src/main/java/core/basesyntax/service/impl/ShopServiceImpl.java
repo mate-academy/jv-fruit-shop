@@ -31,6 +31,10 @@ public class ShopServiceImpl implements ShopService {
             }
 
             OperationHandler operationHandler = operationStrategy.get(transaction.getOperation());
+            if (operationHandler == null) {
+                throw new RuntimeException("No handler found for operation: "
+                        + transaction.getOperation());
+            }
             operationHandler.handle(transaction, storage);
         }
 

@@ -8,7 +8,7 @@ public class FruitTransaction {
     public FruitTransaction(Operation operation, String fruit, int quantity) {
         this.operation = operation;
         this.fruit = fruit;
-        this.quantity = quantity;
+        setQuantity(quantity);
     }
 
     public Operation getOperation() {

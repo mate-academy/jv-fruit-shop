@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.CsvReader;
 import core.basesyntax.service.FileWriter;
 import core.basesyntax.service.Parser;
 import core.basesyntax.service.ReportGenerator;
@@ -24,7 +25,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
         Storage storage = new Storage();
-        CsvReaderImpl reader = new CsvReaderImpl();
+        CsvReader reader = new CsvReaderImpl();
         List<String> data = reader.readAll("src/main/resources/data.csv");
 
         Parser parser = new ParserImpl();

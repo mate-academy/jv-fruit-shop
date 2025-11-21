@@ -15,7 +15,7 @@ public class FileWriterImpl implements FileWriter {
         try {
             Files.write(file.toPath(),report.getBytes());
         } catch (IOException e) {
-            throw new RuntimeException("Can't read the file: " + path, e);
+            throw new RuntimeException("Can't write to the file: " + path, e);
         }
     }
 }
