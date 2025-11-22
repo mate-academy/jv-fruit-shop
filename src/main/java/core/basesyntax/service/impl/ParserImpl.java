@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParserImpl implements Parser {
+    private static final String COMA = ",";
+    private static final int OPERATION_POS = 0;
+    private static final int FRUIT_POS = 1;
+    private static final int QUANTITY_POS = 2;
+
     @Override
     public List<FruitTransaction> parse(List<String> data) {
         List<FruitTransaction> fruitTransactionList = new ArrayList<>();
@@ -19,9 +24,9 @@ public class ParserImpl implements Parser {
     }
 
     private FruitTransaction parseLine(String line) {
-        String[] split = line.trim().split(",");
-        return new FruitTransaction(FruitTransaction.Operation.fromCode(split[0]),
-                split[1],
-                Integer.parseInt(split[2]));
+        String[] split = line.trim().split(COMA);
+        return new FruitTransaction(FruitTransaction.Operation.fromCode(split[OPERATION_POS]),
+                split[FRUIT_POS],
+                Integer.parseInt(split[QUANTITY_POS]));
     }
 }

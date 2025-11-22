@@ -23,10 +23,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+    private static final String DATA_FILE_PATH = "src/main/resources/data.csv";
+    private static final String REPORT_FILE_PATH = "src/main/resources/data.csv";
+
     public static void main(String[] args) {
         Storage storage = new Storage();
         CsvReader reader = new CsvReaderImpl();
-        List<String> data = reader.readAll("src/main/resources/data.csv");
+        List<String> data = reader.readAll(DATA_FILE_PATH);
 
         Parser parser = new ParserImpl();
         final List<FruitTransaction> fruitTransactions = parser.parse(data);
@@ -45,6 +48,6 @@ public class Main {
         String report = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.writeReport(report,"src/main/resources/report.csv");
+        fileWriter.writeReport(report,REPORT_FILE_PATH);
     }
 }

@@ -67,13 +67,12 @@ public class FruitTransaction {
         }
 
         public static Operation fromCode(String code) {
-            return switch (code) {
-                case "b" -> Operation.BALANCE;
-                case "s" -> Operation.SUPPLY;
-                case "p" -> Operation.PURCHASE;
-                case "r" -> Operation.RETURN;
-                default -> throw new IllegalArgumentException("No operation for code: " + code);
-            };
+            for (Operation value : Operation.values()) {
+                if (value.getCode().equals(code)) {
+                    return value;
+                }
+            }
+            throw new IllegalArgumentException(code + " operation doesn't exist.");
         }
     }
 }
