@@ -13,7 +13,7 @@ public class DataConverterImpl implements DataConverter {
 
     @Override
     public List<FruitTransaction> convertToTransaction(List<String> lines) {
-        if (lines.isEmpty() || lines == null) {
+        if (lines == null || lines.isEmpty()) {
             throw new RuntimeException("List 'lines' can't be empty or null");
         }
         List<FruitTransaction> fruitTransactions = new ArrayList<>();
