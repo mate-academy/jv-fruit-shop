@@ -6,12 +6,10 @@ import strategy.OperationHandler;
 
 public class ReturnAndSupplyOpHandler implements OperationHandler {
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
-        if (fruitTransaction.getFruit() == null || fruitTransaction.getQuantity() < 0) {
+    public void handler(FruitTransaction fruitTransaction, Storage storage) {
+        if (fruitTransaction.getFruit() == null) {
             throw new IllegalArgumentException("Fruit is null or quantity is less  than 0");
         }
-        int currentQuantity = Storage.fruitStorage.getOrDefault(fruitTransaction.getFruit(), 0);
-        Storage.fruitStorage
-                .put(fruitTransaction.getFruit(), currentQuantity + fruitTransaction.getQuantity());
+        storage.add(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }

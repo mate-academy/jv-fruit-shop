@@ -1,15 +1,18 @@
 package service.impl;
 
 import core.basesyntax.FruitTransaction;
+import db.Storage;
 import java.util.List;
 import service.ShopService;
 import strategy.OperationHandler;
 import strategy.OperationStrategy;
 
 public class ShopServiceImpl implements ShopService {
+    private final Storage storage;
     private final OperationStrategy operationStrategy;
 
-    public ShopServiceImpl(OperationStrategy operationStrategy) {
+    public ShopServiceImpl(Storage storage, OperationStrategy operationStrategy) {
+        this.storage = storage;
         this.operationStrategy = operationStrategy;
     }
 
@@ -27,7 +30,7 @@ public class ShopServiceImpl implements ShopService {
                 throw new RuntimeException(
                         "Not found a handler for operation " + transaction.getOperation());
             }
-            handler.handler(transaction);
+            handler.handler(transaction, storage);
         }
     }
 }

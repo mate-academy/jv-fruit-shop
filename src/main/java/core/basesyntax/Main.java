@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import db.Storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,11 +22,12 @@ import strategy.impl.PurchaseOperationHandler;
 import strategy.impl.ReturnAndSupplyOpHandler;
 
 public class Main {
-    public static final String DATA_PATH = "src/main/java/resources/reportToRead.csv";
-    public static final String RESULT_PATH = "src/main/java/resources/finalReport.csv";
+    public static final String DATA_PATH = "src/main/resources/reportToRead.csv";
+    public static final String RESULT_PATH = "src/main/resources/finalReport.csv";
 
     public static void main(String[] args) {
 
+        Storage storage = new Storage();
         FileReader fileReader = new FileReaderImpl();
         List<String> fileToRead = fileReader.readFile(DATA_PATH);
 
@@ -46,10 +48,10 @@ public class Main {
         List<FruitTransaction> transactions =
                 dataConverter.convertToTransaction(fileToRead);
 
-        ShopService service = new ShopServiceImpl(operationStrategy);
+        ShopService service = new ShopServiceImpl(storage, operationStrategy);
         service.process(transactions);
 
-        ReportCreating reportCreating = new ReportCreatingImpl();
+        ReportCreating reportCreating = new ReportCreatingImpl(storage);
         String generatedReport = reportCreating.generateReport();
 
         FileWriter fileWriter = new FileWriterImpl();

@@ -60,7 +60,7 @@ public class FruitTransaction {
                     return operation;
                 }
             }
-            throw new RuntimeException("Valid operation: " + code);
+            throw new RuntimeException("Invalid operation code: " + code);
         }
     }
 }

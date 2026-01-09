@@ -7,11 +7,10 @@ import strategy.OperationHandler;
 public class BalanceOperationHandler implements OperationHandler {
 
     @Override
-    public void handler(FruitTransaction fruitTransaction) {
+    public void handler(FruitTransaction fruitTransaction, Storage storage) {
         if (fruitTransaction.getFruit() == null || fruitTransaction.getQuantity() < 0) {
             throw new IllegalArgumentException("Fruit is null or quantity is less  than 0");
         }
-        Storage.fruitStorage
-                .put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
+        storage.put(fruitTransaction.getFruit(), fruitTransaction.getQuantity());
     }
 }
