@@ -19,7 +19,7 @@ public class DataConverterImpl implements DataConvert {
             }
             String[] parts = line.trim().split(",");
             if (parts.length != 3) {
-                throw new RuntimeException("Invalid format at line " + i + ": " + line);
+                throw new RuntimeException("Invalid format at line " + i + 1 + ": " + line);
             }
             FruitTransaction fruitTransaction = new FruitTransaction();
             String code = parts[0].trim();
