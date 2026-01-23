@@ -2,6 +2,7 @@ package core.basesyntax.serviceimpl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConvert;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class DataConverterImpl implements DataConvert {
             try {
                 fruitTransaction.setOperation(FruitTransaction.Operation.fromCode(code));
             } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException("Invalid operation code at line "
+                throw new RuntimeException("Invalid operation code at line "
                         + i + ": " + code, e);
             }
             fruitTransaction.setFruit(fruit);
@@ -38,9 +39,6 @@ public class DataConverterImpl implements DataConvert {
                 fruitTransaction.setQuantity(qty);
             } catch (NumberFormatException e) {
                 throw new RuntimeException("Invalid quantity at line " + i + ": " + parts[2], e);
-            }
-            if (qty < 0) {
-                throw new RuntimeException("Invalid quantity at line " + i + ": " + parts[2]);
             }
             result.add(fruitTransaction);
         }
