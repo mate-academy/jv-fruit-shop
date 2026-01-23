@@ -2,7 +2,6 @@ package core.basesyntax.serviceimpl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConvert;
-
 import java.util.ArrayList;
 import java.util.List;
 
