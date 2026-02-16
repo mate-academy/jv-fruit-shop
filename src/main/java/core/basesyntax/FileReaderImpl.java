@@ -7,19 +7,17 @@ import java.util.*;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String path) {
-        Path filePath = Path.of(path);
-        List<String> lines = null;
         try {
-            lines = Files.readAllLines(filePath);
+            Path filePath = Path.of(path);
+            List<String> lines = Files.readAllLines(filePath);
 
             if (!lines.isEmpty()) {
                 lines.remove(0);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+            return lines;
 
-        if (!lines.isEmpty()) {
-            lines.remove(0);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file by path: " + path, e);
         }
     }
 }
