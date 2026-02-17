@@ -13,7 +13,7 @@ public class FileReaderImpl implements FileReader {
 
             if (!lines.isEmpty()) {
                 lines.remove(0);
-        }
+            }
             return lines;
 
         } catch (IOException e) {
