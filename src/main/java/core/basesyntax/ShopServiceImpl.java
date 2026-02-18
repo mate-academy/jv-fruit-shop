@@ -6,7 +6,7 @@ public class ShopServiceImpl implements ShopService{
     private final Map<String, Integer> storage = new HashMap<>();
     private final OperationStrategy operationStrategy;
 
-    public ShopServiceImpl(OperationStrategyImpl operationStrategy) {
+    public ShopServiceImpl(OperationStrategy operationStrategy) {
         this.operationStrategy = operationStrategy;
     }
     @Override

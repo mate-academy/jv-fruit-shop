@@ -2,6 +2,7 @@ package core.basesyntax;
 
 import core.basesyntax.handler.*;
 
+import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -19,9 +20,16 @@ public class Main {
         operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(fruitTransactionList);
 
+        Map<String, Integer> storage = shopService.getStorage();
 
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String resultingReport = reportGenerator.getReport(storage);
 
-
+        // 6. Write the received report into the destination file
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, "finalReport.csv");
     }
 }
