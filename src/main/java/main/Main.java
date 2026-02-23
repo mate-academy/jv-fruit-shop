@@ -11,12 +11,12 @@ public class Main {
     public static void main(String[] args) {
         ActivityDao activityDao = new ActivityDaoImpl();
         List<Activity> activities = activityDao.getActivities("src/main/resources"
-                + "/activitiesBefore.txt");
+                + "/activitiesBefore.csv");
 
         StrategyProvider strategyProvider = new StrategyProvider();
         ActivityService activityService = new ActivityService(strategyProvider);
         activityService.process(activities);
 
-        activityDao.saveActivities("src/main/resources/activitiesAfter.txt");
+        activityDao.saveActivities("src/main/resources/activitiesAfter.csv");
     }
 }
