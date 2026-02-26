@@ -58,8 +58,9 @@ public class FruitTransaction {
         this.quantity = quantity;
     }
 
-//TODO: Зберегти лише код і public static Operation fromCode(String code) з trim() та ignoreCase;
-// кидати IllegalArgumentException для null/unknown.
+    //TODO: Зберегти лише код і public static Operation fromCode(String code)
+    // з trim() та ignoreCase;
+    // кидати IllegalArgumentException для null/unknown.
     public enum Operation {
         BALANCE("b"),
         SUPPLY("s"),

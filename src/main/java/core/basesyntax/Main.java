@@ -12,10 +12,10 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class Main {
-//TODO: Використовувати Reader/Writer інтерфейси замість прямого Files/FileWriter;
-// закривати ресурси через try-with-resources.
-//TODO: Не читати жорстко "data.csv" — передавати шлях через args або конфігурацію.
-//TODO: Не кастити List<?> — змінити сигнатуру DataConverter на List<FruitTransaction>.
+    //TODO: Використовувати Reader/Writer інтерфейси замість прямого Files/FileWriter;
+    // закривати ресурси через try-with-resources.
+    //TODO: Не читати жорстко "data.csv" — передавати шлях через args або конфігурацію.
+    //TODO: Не кастити List<?> — змінити сигнатуру DataConverter на List<FruitTransaction>.
 
     public static void main(String[] arg) throws IOException {
         // 1. Read the data from the input CSV file
