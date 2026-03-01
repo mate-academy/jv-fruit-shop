@@ -1,5 +1,6 @@
 package core.basesyntax.db;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class Storage {
@@ -10,7 +11,7 @@ public class Storage {
     }
 
     public Map<String, Integer> getStorage() {
-        return storage;
+        return Collections.unmodifiableMap(storage);
     }
 
     public boolean findFruit(String fruit) {
