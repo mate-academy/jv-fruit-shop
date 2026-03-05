@@ -1,6 +1,6 @@
 package fruitshop.service;
 
-import db.Storage;
+import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
 
 public class BalanceOperation implements OperationHandler {

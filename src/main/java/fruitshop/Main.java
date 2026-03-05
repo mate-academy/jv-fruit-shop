@@ -1,4 +1,5 @@
-import db.Storage;
+package fruitshop;
+import fruitshop.db.Storage;
 import fruitshop.model.FruitTransaction;
 import fruitshop.service.*;
 import fruitshop.util.FileReader;

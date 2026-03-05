@@ -1,13 +1,13 @@
-package db;
+package fruitshop.db;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class Storage {
-    private static Map<String, Integer> fruits = new HashMap<>();
+    private static final Map<String, Integer> fruits = new HashMap<>();
 
-    public static int setQuantity(String fruit) {
+    public static int getQuantity(String fruit) {
         if (fruit == null) {
             throw new IllegalArgumentException("Fruit cannot be null");
         }
