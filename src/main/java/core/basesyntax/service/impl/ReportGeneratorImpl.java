@@ -1,22 +1,24 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.ReportGenerator;
+import core.basesyntax.service.ShopService;
 import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Generates CSV report from storage. Depends on ShopService (interface).
+ */
 public class ReportGeneratorImpl implements ReportGenerator {
-    private final ShopServiceImpl shopService;
+    private final ShopService shopService;
 
-    public ReportGeneratorImpl(ShopServiceImpl shopService) {
+    public ReportGeneratorImpl(ShopService shopService) {
         this.shopService = Objects.requireNonNull(shopService);
     }
 
     @Override
     public String getReport() {
         Map<String, Integer> storage = shopService.getStorage();
-        // Build CSV: header + lines.
-        // Keep iteration order by fruit name (sorted) for deterministic output.
         StringBuilder sb = new StringBuilder();
         sb.append("fruit,quantity").append(System.lineSeparator());
         String body = storage.entrySet().stream()
