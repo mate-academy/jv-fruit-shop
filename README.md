@@ -118,7 +118,7 @@ public class Main {
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
-        // 5.Generate report based on the current Storage state
+        // 5.Generate report based on the current InMemoryStorage state
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
 
