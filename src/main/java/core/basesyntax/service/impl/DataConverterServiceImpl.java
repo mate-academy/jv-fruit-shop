@@ -1,9 +1,8 @@
 package core.basesyntax.service.impl;
-
-import java.util.ArrayList;
-import java.util.List;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataConverterService;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataConverterServiceImpl implements DataConverterService {
     @Override

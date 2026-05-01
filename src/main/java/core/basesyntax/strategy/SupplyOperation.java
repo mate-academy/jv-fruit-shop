@@ -1,8 +1,7 @@
 package core.basesyntax.strategy;
-
-import java.util.Map;
 import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
 
 public class SupplyOperation implements OperationHandler {
     @Override
