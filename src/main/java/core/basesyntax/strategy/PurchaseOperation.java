@@ -1,0 +1,18 @@
+package core.basesyntax.strategy;
+
+import core.basesyntax.db.Storage;
+import core.basesyntax.model.FruitTransaction;
+import java.util.Map;
+
+public class PurchaseOperation implements OperationHandler {
+    @Override
+    public void handle(FruitTransaction transaction) {
+        Map<String, Integer> storage = Storage.getStorage();
+        int current = storage.getOrDefault(transaction.getFruit(), 0);
+        int result = current - transaction.getQuantity();
+        if (result < 0) {
+            throw new RuntimeException("Not enough stock");
+        }
+        storage.put(transaction.getFruit(), result);
+    }
+}
