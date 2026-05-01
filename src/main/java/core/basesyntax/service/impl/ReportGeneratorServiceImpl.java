@@ -14,7 +14,7 @@ public class ReportGeneratorServiceImpl implements ReportGeneratorService {
             report.append(entry.getKey());
             report.append(",");
             report.append(entry.getValue());
-            report.append(",");
+            report.append("\n");
         }
         return report.toString();
     }
