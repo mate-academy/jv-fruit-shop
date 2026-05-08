@@ -69,13 +69,13 @@ The line above means you have 152 bananas, and 90 apples in your Fruit store aft
 (this is only a recommendation, you can use other classes/approaches to solve this task at your discretion):**
 ```java
 public class FruitTransaction {
-  private Operation operation;
+  private operation operation;
   private String fruit;
   private int quantity;
 
   // getters, setters, ...
   
-  public enum Operation {
+  public enum operation {
     BALANCE("b"),
     SUPPLY("s"),
     PURCHASE("p"),
@@ -83,7 +83,7 @@ public class FruitTransaction {
 
     private String code;
 
-    Operation(String code) {
+    operation(String code) {
       this.code = code;
     }
 
@@ -95,37 +95,40 @@ public class FruitTransaction {
 ```
 
 Also, here is an example of what the `main` method may look like:
+
 ```java
+import operation.*;
+
 public class Main {
-    public static void main(String[] arg) {
-        // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl();
-        List<String> inputReport = fileReader.read("reportToRead.csv");
+   public static void main(String[] arg) {
+      // 1. Read the data from the input CSV file
+      FileReader fileReader = new FileReaderImpl();
+      List<String> inputReport = fileReader.read("reportToRead.csv");
 
-        // 2. Convert the incoming data into FruitTransactions list
-        DataConverter dataConverter = new DataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+      // 2. Convert the incoming data into FruitTransactions list
+      DataConverter dataConverter = new DataConverterImpl();
+      List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-        // 3. Create and feel the map with all OperationHandler implementations
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+      // 3. Create and feel the map with all operation.OperationHandler implementations
+      Map<FruitTransaction.operation, OperationHandler> operationHandlers = new HashMap<>();
+      operationHandlers.put(FruitTransaction.operation.BALANCE, new BalanceOperation());
+      operationHandlers.put(FruitTransaction.operation.PURCHASE, new PurchaseOperation());
+      operationHandlers.put(FruitTransaction.operation.RETURN, new ReturnOperation());
+      operationHandlers.put(FruitTransaction.operation.SUPPLY, new SupplyOperation());
+      OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
+      // 4. Process the incoming transactions with applicable operation.OperationHandler implementations
+      ShopService shopService = new ShopServiceImpl(operationStrategy);
+      shopService.process(transactions);
 
-        // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new ReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
+      // 5.Generate report based on the current Storage state
+      ReportGenerator reportGenerator = new ReportGeneratorImpl();
+      String resultingReport = reportGenerator.getReport();
 
-        // 6. Write the received report into the destination file
-        FileWriter fileWriter = new FileWriterImpl();
-        fileWriter.write(resultingReport, "finalReport.csv");
-    }
+      // 6. Write the received report into the destination file
+      FileWriter fileWriter = new FileWriterImpl();
+      fileWriter.write(resultingReport, "finalReport.csv");
+   }
 }
 ```
 
