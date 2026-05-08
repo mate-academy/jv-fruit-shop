@@ -1,5 +1,5 @@
 package service;
 
 public interface ReportGenerator {
-    String getReport ();
+    String getReport();
 }

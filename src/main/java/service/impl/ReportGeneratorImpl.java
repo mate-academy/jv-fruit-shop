@@ -1,8 +1,8 @@
 package service.impl;
 
-import Storage.Storage;
-import service.ReportGenerator;
+import db.Storage;
 import java.util.Map;
+import service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     @Override
@@ -16,4 +16,3 @@ public class ReportGeneratorImpl implements ReportGenerator {
         return builder.toString();
     }
 }
-

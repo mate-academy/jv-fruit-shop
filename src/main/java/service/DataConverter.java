@@ -1,7 +1,7 @@
 package service;
 
-import model.FruitTransaction;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface DataConverter {
     List<FruitTransaction> convert(List<String> lines);

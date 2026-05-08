@@ -1,10 +1,9 @@
 package service.impl;
 
+import java.util.List;
 import model.FruitTransaction;
 import service.OperationStrategy;
 import service.ShopService;
-
-import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
     private final OperationStrategy operationStrategy;

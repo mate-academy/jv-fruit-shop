@@ -1,9 +1,8 @@
 package service;
 
-import model.FruitTransaction;
 import java.util.List;
+import model.FruitTransaction;
 
 public interface ShopService {
     void process(List<FruitTransaction> fruitTransactionList);
-
 }
