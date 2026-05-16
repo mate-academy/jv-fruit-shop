@@ -1,5 +1,23 @@
 package core.basesyntax;
 
+import core.db.Storage;
+import core.db.impl.StorageImpl;
+import core.io.FileReaderImpl;
+import core.io.FileWriterImpl;
+import core.service.DataConverter;
+import core.service.ReportGenerator;
+import core.service.ShopService;
+import core.service.impl.DataConverterImpl;
+import core.service.impl.ReportGeneratorImpl;
+import core.service.impl.ShopServiceImpl;
+import core.strategy.FruitTransaction;
+import core.strategy.OperationHandler;
+import core.strategy.OperationStrategy;
+import core.strategy.impl.BalanceOperation;
+import core.strategy.impl.OperationStrategyImpl;
+import core.strategy.impl.PurchaseOperation;
+import core.strategy.impl.ReturnOperation;
+import core.strategy.impl.SupplyOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

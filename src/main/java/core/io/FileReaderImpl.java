@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.io;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class FileReaderImpl {
         try (InputStream is = getClass().getResourceAsStream(fileName);
                 InputStreamReader reader = new InputStreamReader(is, Charset.defaultCharset());
                 BufferedReader bufferedReader = new BufferedReader(reader)) {
-            return bufferedReader.lines().toList();
+            return bufferedReader.lines().skip(1).toList();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,4 +1,8 @@
-package core.basesyntax;
+package core.strategy.impl;
+
+import core.db.Storage;
+import core.strategy.FruitTransaction;
+import core.strategy.OperationHandler;
 
 public class PurchaseOperation implements OperationHandler {
     @Override

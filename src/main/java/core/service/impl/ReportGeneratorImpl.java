@@ -1,4 +1,7 @@
-package core.basesyntax;
+package core.service.impl;
+
+import core.db.Storage;
+import core.service.ReportGenerator;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private Storage storage;
