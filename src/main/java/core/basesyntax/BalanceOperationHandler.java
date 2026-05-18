@@ -1,9 +1,9 @@
 package core.basesyntax;
 
-public class BalanceOperation implements OperationHandler {
+public class BalanceOperationHandler implements OperationHandler {
     private final Storage storage;
 
-    public BalanceOperation(Storage storage) {
+    public BalanceOperationHandler(Storage storage) {
         this.storage = storage;
     }
 
