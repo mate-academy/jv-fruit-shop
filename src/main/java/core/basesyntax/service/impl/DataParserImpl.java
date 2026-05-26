@@ -2,7 +2,6 @@ package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.DataParser;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +10,7 @@ public class DataParserImpl implements DataParser {
     private static final int TYPE_POS = 0;
     private static final int FRUIT_POS = 1;
     private static final int QUANTITY_POS = 2;
-    private static final String[] HEADER = new String[] {"type", "fruit", "quantity"} ;
+    private static final String[] HEADER = new String[] {"type", "fruit", "quantity"};
     private static final int PROPER_LINE_LENGTH = 3;
 
 
@@ -38,7 +37,6 @@ public class DataParserImpl implements DataParser {
         return transactions;
     }
 
-
     /*
     Pretty hard to read, but it's chek right columns in CSV by comparing with hardcoded String's.
     Not really necessary, but in case if some value will change throw Runtime
@@ -62,7 +60,7 @@ public class DataParserImpl implements DataParser {
         return transaction;
     }
 
-    private boolean checkLineLength (String[] dataLine) {
+    private boolean checkLineLength(String[] dataLine) {
         return dataLine.length == PROPER_LINE_LENGTH;
     }
 

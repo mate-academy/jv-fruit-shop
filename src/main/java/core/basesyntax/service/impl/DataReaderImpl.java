@@ -1,7 +1,6 @@
 package core.basesyntax.service.impl;
 
 import core.basesyntax.service.DataReader;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -15,7 +14,8 @@ public class DataReaderImpl implements DataReader {
     public List<String> read(String path) {
         String line = "";
         List<String> fileContent = new ArrayList<>();
-        try (BufferedReader br = new BufferedReader(new FileReader(new File(path).getAbsoluteFile()))) {
+        try (BufferedReader br = new BufferedReader(
+                new FileReader(new File(path).getAbsoluteFile()))) {
             String headLine = br.readLine();
             if (headLine == null) {
                 throw new RuntimeException("Nothing to read");
