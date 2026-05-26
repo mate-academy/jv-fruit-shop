@@ -7,6 +7,8 @@ import java.util.List;
 
 public class DataParserImpl implements DataParser {
     private static final String DELIMITER = ",";
+    private static final int HEADER_POS = 0;
+    private static final int FROM_VALUE_POS = 1;
     private static final int TYPE_POS = 0;
     private static final int FRUIT_POS = 1;
     private static final int QUANTITY_POS = 2;
@@ -23,13 +25,14 @@ public class DataParserImpl implements DataParser {
         if (data.isEmpty()) {
             throw new RuntimeException("Empty data");
         }
-        String[] header = splitData(data.remove(0));
-        if (!checkFormat(header) && checkLineLength(header)) {
+        String[] header = splitData(data.get(HEADER_POS));
+        if (!checkFormat(header) || checkLineLength(header)) {
             throw new RuntimeException("Incorrect CSV formatting");
         }
-        for (String line : data) {
+        for (int i = FROM_VALUE_POS; i < data.size(); i++) {
+            String line = data.get(i);
             String[] splitData = splitData(line);
-            if (!checkLineLength(splitData)) {
+            if (checkLineLength(splitData)) {
                 throw new RuntimeException("Incorrect line length");
             }
             transactions.add(toTransaction(splitData));
@@ -61,7 +64,7 @@ public class DataParserImpl implements DataParser {
     }
 
     private boolean checkLineLength(String[] dataLine) {
-        return dataLine.length == PROPER_LINE_LENGTH;
+        return dataLine.length != PROPER_LINE_LENGTH;
     }
 
     private String[] splitData(String line) {
