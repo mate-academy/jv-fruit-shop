@@ -20,8 +20,8 @@ import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-        final String inputFilePath = "src/main/java/core/basesyntax/resources/input.csv";
-        final String outputFilePath = "src/main/java/core/basesyntax/resources/report.csv";
+        final String inputFilePath = "src/main/resources/input.csv";
+        final String outputFilePath = "src/main/resources/report.csv";
 
         Map<FruitTransaction.Operation, OperationHandler> operationStrategies = new HashMap<>();
         operationStrategies.put(FruitTransaction.Operation.BALANCE,
