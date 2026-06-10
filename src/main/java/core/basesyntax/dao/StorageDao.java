@@ -1,0 +1,12 @@
+package core.basesyntax.dao;
+
+import java.util.Map;
+
+public interface StorageDao {
+
+    void set(String fruit, Integer quantity);
+
+    Integer get(String fruit);
+
+    Map<String, Integer> getAll();
+}
