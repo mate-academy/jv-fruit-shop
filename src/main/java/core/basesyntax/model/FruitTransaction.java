@@ -6,6 +6,9 @@ public class FruitTransaction {
     private final Integer quantity;
 
     public FruitTransaction(Operation operation, String fruit, Integer quantity) {
+        if (operation == null || fruit == null || quantity == null) {
+            throw new RuntimeException("Operation and fruit must not be null");
+        }
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;

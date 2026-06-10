@@ -33,8 +33,31 @@ public class Main {
         FileReader fileReader = new CsvFileReaderImpl();
         List<String> inputReport = fileReader.readAllLines(FILE_TO_READ);
 
-        // 2. Create and feel the map with all OperationHandler implementations
+        // 2. Convert the incoming data into FruitTransactions list
+        DataConverter dataConverter = new CsvDataConverterImpl();
+        List<FruitTransaction> transactions = dataConverter.convertToTransactionList(inputReport);
+
+        // 3. Create and feel the map with all OperationHandler implementations
         StorageDao storageDao = new StorageDaoImpl();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers =
+                getOperationHandlersMap(storageDao);
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+
+        // 4. Process the incoming transactions with applicable OperationHandler implementations
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transactions);
+
+        // 5.Generate report based on the current Storage state
+        ReportGenerator reportGenerator = new CsvReportGeneratorImpl(storageDao);
+        String resultingReport = reportGenerator.getReport();
+
+        // 6. Write the received report into the destination file
+        FileWriter fileWriter = new CsvFileWriterImpl();
+        fileWriter.write(FILE_TO_WRITE, resultingReport);
+    }
+
+    private static Map<FruitTransaction.Operation, OperationHandler>
+                    getOperationHandlersMap(StorageDao storageDao) {
         Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
         operationHandlers.put(FruitTransaction.Operation.BALANCE,
                 new BalanceOperationHandler(storageDao));
@@ -44,22 +67,7 @@ public class Main {
                 new ReturnOperationHandler(storageDao));
         operationHandlers.put(FruitTransaction.Operation.SUPPLY,
                 new SupplyOperationHandler(storageDao));
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-        // 3. Convert the incoming data into FruitTransactions list
-        DataConverter dataConverter = new CsvDataConverterImpl();
-        List<FruitTransaction> transactions = dataConverter.convertToTransactionList(inputReport);
-
-        // 4. Process the incoming transactions with applicable OperationHandler implementations
-        ShopService shopService = new ShopServiceImpl(operationStrategy);
-        shopService.process(transactions);
-
-        // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new CsvReportGeneratorImpl();
-        String resultingReport = reportGenerator.getReport();
-
-        // 6. Write the received report into the destination file
-        FileWriter fileWriter = new CsvFileWriterImpl();
-        fileWriter.write(FILE_TO_WRITE, resultingReport);
+        return operationHandlers;
     }
 }

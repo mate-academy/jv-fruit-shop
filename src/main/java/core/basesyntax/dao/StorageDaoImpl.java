@@ -1,6 +1,6 @@
 package core.basesyntax.dao;
 
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class StorageDaoImpl implements StorageDao {
