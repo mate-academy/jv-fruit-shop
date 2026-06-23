@@ -6,7 +6,7 @@ import model.FruitTransaction;
 public class SupplyOperation implements OperationHandler {
     @Override
     public void handle(FruitTransaction transaction) {
-        int currentQuantity = Storage.fruitStorage.getOrDefault(transaction.getFruit(), 0);
-        Storage.fruitStorage.put(transaction.getFruit(), currentQuantity + transaction.getQuantity());
+        int currentQuantity = Storage.getQuantity(transaction.getFruit());
+        Storage.setQuantity(transaction.getFruit(), currentQuantity + transaction.getQuantity());
     }
 }

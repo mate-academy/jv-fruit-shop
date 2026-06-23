@@ -12,6 +12,10 @@ public class OperationStrategyImpl implements OperationStrategy {
 
     @Override
     public OperationHandler get(FruitTransaction transaction) {
-        return operationHandlers.get(transaction.getOperation());
+        OperationHandler handler = operationHandlers.get(transaction.getOperation());
+        if (handler == null) {
+            throw new RuntimeException("No handler registered for operation: " + transaction.getOperation());
+        }
+        return handler;
     }
 }
