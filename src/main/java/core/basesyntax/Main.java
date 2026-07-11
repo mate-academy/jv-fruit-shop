@@ -1,5 +1,10 @@
 package core.basesyntax;
 
+import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.*;
+import core.basesyntax.service.impl.*;
+import core.basesyntax.strategy.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

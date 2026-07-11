@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.model;
 
 import java.util.Arrays;
 
@@ -45,7 +45,7 @@ public class FruitTransaction {
             return Arrays.stream(values())
                     .filter(s -> s.code.equals(code))
                     .findAny()
-                    .orElseThrow(() -> new IllegalArgumentException("Unknown s code: " + code));
+                    .orElseThrow(() -> new IllegalArgumentException("Unknown operation code: " + code));
         }
     }
 }
