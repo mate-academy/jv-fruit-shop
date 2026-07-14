@@ -34,13 +34,13 @@ public class Main {
         StorageForChoosingTypeOperation operationStorage =
                 new StorageForChoosingTypeOperation();
 
-        operationStorage.getChoosingTypeOperations().put(
+        operationStorage.addHandler(
                 FruitTransaction.Operation.BALANCE, new Balance(fruitStorage));
-        operationStorage.getChoosingTypeOperations().put(
+        operationStorage.addHandler(
                 FruitTransaction.Operation.SUPPLY, new Supply(fruitStorage));
-        operationStorage.getChoosingTypeOperations().put(
+        operationStorage.addHandler(
                 FruitTransaction.Operation.PURCHASE, new Purchase(fruitStorage));
-        operationStorage.getChoosingTypeOperations().put(
+        operationStorage.addHandler(
                 FruitTransaction.Operation.RETURN, new Return(fruitStorage));
 
         ProcessingAllTransactions transactionProcessor =

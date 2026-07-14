@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class StorageForChoosingTypeOperation {
-    private Map<FruitTransaction.Operation, OperationHandler>
+    private final Map<FruitTransaction.Operation, OperationHandler>
             choosingTypeOperations = new HashMap<FruitTransaction.Operation, OperationHandler>();
 
-    public Map<FruitTransaction.Operation, OperationHandler> getChoosingTypeOperations() {
-        return choosingTypeOperations;
+    public void addHandler(FruitTransaction.Operation operation,
+                           OperationHandler handler) {
+        choosingTypeOperations.put(operation, handler);
     }
 
     public OperationHandler getHandler(FruitTransaction.Operation operation) {
