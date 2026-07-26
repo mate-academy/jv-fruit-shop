@@ -1,17 +1,13 @@
 package core.basesyntax.strategy;
 
 import core.basesyntax.model.FruitTransaction;
-import jdk.dynalink.Operation;
-
 import java.util.Map;
 
-public class OperationStrategyImpl implements OperationStrategy{
+public class OperationStrategyImpl implements OperationStrategy {
+    private final Map<FruitTransaction.Operation, OperationHandler> operationHandlers;
 
-    private final Map<FruitTransaction.Operation,
-            OperationHandler> operationHandlers;
-
-    public OperationStrategyImpl(Map<FruitTransaction.Operation
-            , OperationHandler> operationHandlers) {
+    public OperationStrategyImpl(
+            Map<FruitTransaction.Operation, OperationHandler> operationHandlers) {
         this.operationHandlers = operationHandlers;
     }
 

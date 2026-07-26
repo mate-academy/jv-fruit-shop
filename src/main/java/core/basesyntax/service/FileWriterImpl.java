@@ -5,12 +5,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
+
     @Override
-    public void write(String date, String fileName) {
+    public void write(String data, String fileName) {
         try {
-            Files.writeString(Path.of(fileName), date);
+            Files.writeString(Path.of(fileName), data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write file:" + fileName,e);
+            throw new RuntimeException("Can't write file: " + fileName, e);
         }
     }
 }

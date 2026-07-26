@@ -2,9 +2,9 @@ package core.basesyntax.service;
 
 import core.basesyntax.db.Storage;
 
-public class ReportGeneratorImpl implements ReportGenerator{
-    private static final String SEPARATOR = ",";
+public class ReportGeneratorImpl implements ReportGenerator {
     private static final String HEADER = "fruit,quantity";
+    private static final String SEPARATOR = ",";
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
     @Override
