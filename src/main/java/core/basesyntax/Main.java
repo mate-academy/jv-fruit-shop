@@ -31,40 +31,20 @@ public class Main {
 
         OperationParser operationParser = new OperationParserImpl();
         DataConverter dataConverter = new DataConverterImpl(operationParser);
-        List<FruitTransaction> transactions =
-                dataConverter.convertToTransaction(inputReport);
 
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers =
-                new HashMap<>();
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
 
-        operationHandlers.put(
-                FruitTransaction.Operation.BALANCE,
-                new BalanceOperation()
-        );
-        operationHandlers.put(
-                FruitTransaction.Operation.SUPPLY,
-                new SupplyOperation()
-        );
-        operationHandlers.put(
-                FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperation()
-        );
-        operationHandlers.put(
-                FruitTransaction.Operation.RETURN,
-                new ReturnOperation()
-        );
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
 
-        OperationStrategy operationStrategy =
-                new OperationStrategyImpl(operationHandlers);
-
-        ShopService shopService =
-                new ShopServiceImpl(operationStrategy);
-
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
         shopService.process(transactions);
 
-        ReportGenerator reportGenerator =
-                new ReportGeneratorImpl();
-
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String report = reportGenerator.getReport();
 
         FileWriter fileWriter = new FileWriterImpl();
