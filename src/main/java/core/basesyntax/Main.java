@@ -30,38 +30,25 @@ public class Main {
     public static void main(String[] args) {
         FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.read(INPUT_FILE_PATH);
-
         DataConverter dataConverter = new DataConverterImpl();
         List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
-
-        Map<FruitTransaction.Operation, OperationHandler> operationHandlers =
-                new EnumMap<>(FruitTransaction.Operation.class);
-        operationHandlers.put(
-                FruitTransaction.Operation.BALANCE,
-                new BalanceOperationHandler()
-        );
-        operationHandlers.put(
-                FruitTransaction.Operation.PURCHASE,
-                new PurchaseOperationHandler()
-        );
-        operationHandlers.put(
-                FruitTransaction.Operation.RETURN,
-                new ReturnOperationHandler()
-        );
-        operationHandlers.put(
-                FruitTransaction.Operation.SUPPLY,
-                new SupplyOperationHandler()
-        );
-        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
-
+        OperationStrategy operationStrategy = new OperationStrategyImpl(createOperationHandlers());
         Storage.clear();
         ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
-
         ReportGenerator reportGenerator = new ReportGeneratorImpl();
         String resultingReport = reportGenerator.getReport();
-
         FileWriter fileWriter = new FileWriterImpl();
         fileWriter.write(resultingReport, OUTPUT_FILE_PATH);
+    }
+
+    private static Map<FruitTransaction.Operation, OperationHandler> createOperationHandlers() {
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers =
+                new EnumMap<>(FruitTransaction.Operation.class);
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperationHandler());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperationHandler());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperationHandler());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperationHandler());
+        return operationHandlers;
     }
 }
