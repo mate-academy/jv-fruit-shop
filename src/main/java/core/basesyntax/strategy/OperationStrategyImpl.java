@@ -14,7 +14,8 @@ public class OperationStrategyImpl implements OperationStrategy {
     public void apply(FruitTransaction transaction, Map<String, Integer> storage) {
         OperationHandler handler = handlers.get(transaction.getOperation());
         if (handler == null) {
-            throw new RuntimeException("No handler found for operation: " + transaction.getOperation());
+            throw new RuntimeException("No handler found for operation: "
+                    + transaction.getOperation());
         }
         handler.apply(transaction, storage);
     }

@@ -22,7 +22,6 @@ public final class Storage {
         FRUITS.put(fruit, quantity);
     }
 
-    // Використовувати тільки всередині реалізацій сервісів (package-private доступ можна організувати інакше)
     public static Map<String, Integer> internalMapForService() {
         return FRUITS;
     }
