@@ -9,9 +9,15 @@ public class PurchaseOperation implements OperationHandler {
     public void apply(FruitTransaction transaction) {
         String fruit = transaction.getFruit();
         int quantity = transaction.getQuantity();
-        int currentQuantity =
-                Storage.storage.getOrDefault(fruit, 0);
+        int currentQuantity = Storage.getStorage()
+                .getOrDefault(fruit, 0);
 
-        Storage.storage.put(fruit, currentQuantity - quantity);
+        int newQuantity = currentQuantity - quantity;
+
+        if (newQuantity < 0) {
+            throw new RuntimeException("Not enough " + fruit + " in storage");
+        }
+
+        Storage.getStorage().put(fruit, newQuantity);
     }
 }

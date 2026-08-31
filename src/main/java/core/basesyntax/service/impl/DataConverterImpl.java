@@ -12,29 +12,35 @@ public class DataConverterImpl implements DataConverter {
 
         for (int i = 1; i < inputReport.size(); i++) {
             String[] parts = inputReport.get(i).split(",");
-
             String operationCode = parts[0].trim();
             String fruit = parts[1].trim();
-            int quantity = Integer.parseInt(parts[2].trim());
+
+            int quantity;
+            try {
+                quantity = Integer.parseInt(parts[2].trim());
+            } catch (NumberFormatException e) {
+                throw new RuntimeException("Invalid fruit quantity: " + parts[2], e);
+            }
+
+            if (quantity < 0) {
+                throw new RuntimeException("Fruit quantity can't be negative: " + quantity);
+            }
 
             FruitTransaction.Operation operation = getOperation(operationCode);
-            transactions.add(
-                    new FruitTransaction(operation, fruit, quantity)
-            );
+
+            transactions.add(new FruitTransaction(operation, fruit, quantity));
         }
+
         return transactions;
     }
 
     private FruitTransaction.Operation getOperation(String operationCode) {
-        for (FruitTransaction.Operation operation
-                : FruitTransaction.Operation.values()) {
+        for (FruitTransaction.Operation operation : FruitTransaction.Operation.values()) {
             if (operation.getCode().equals(operationCode)) {
                 return operation;
             }
         }
 
-        throw new RuntimeException(
-                "Unknown operation code: " + operationCode
-        );
+        throw new RuntimeException("Unknown operation code: " + operationCode);
     }
 }

@@ -8,4 +8,8 @@ public class Storage {
 
     private Storage() {
     }
+
+    public static Map<String, Integer> getStorage() {
+        return storage;
+    }
 }
