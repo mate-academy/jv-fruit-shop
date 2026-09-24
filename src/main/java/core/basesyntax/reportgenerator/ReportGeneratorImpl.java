@@ -1,6 +1,6 @@
 package core.basesyntax.reportgenerator;
 
-import core.basesyntax.Storage;
+import core.basesyntax.dao.Storage;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private String report;

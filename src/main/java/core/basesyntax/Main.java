@@ -16,7 +16,6 @@ import core.basesyntax.handlers.SupplyOperation;
 import core.basesyntax.operationstrategy.OperationStrategy;
 import core.basesyntax.operationstrategy.OperationStrategyImpl;
 import core.basesyntax.reportgenerator.ReportGenerator;
-import core.basesyntax.reportgenerator.ReportGeneratorImpl;
 import core.basesyntax.shopservice.ShopService;
 import core.basesyntax.shopservice.ShopServiceImpl;
 import java.util.HashMap;
@@ -26,7 +25,7 @@ import java.util.Map;
 public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
-        FileReader fileReader = new FileReaderImpl();
+        final FileReader fileReader = new FileReaderImpl();
         List<String> inputReport = fileReader.readFromFile("reportToRead.csv");
 
         // 2. Convert the incoming data into FruitTransactions list
@@ -42,12 +41,12 @@ public class Main {
         OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
         // 4. Process the incoming transactions with applicable OperationHandler implementations
-        Storage storage = new Storage();
-        ShopService shopService = new ShopServiceImpl(storage, operationStrategy);
+
+        final ShopService shopService = new ShopServiceImpl(operationStrategy);
         shopService.process(transactions);
 
         // 5.Generate report based on the current Storage state
-        ReportGenerator reportGenerator = new ReportGeneratorImpl(storage);
+        ReportGenerator reportGenerator = shopService.getRaportGenerator();
         String resultingReport = reportGenerator.getReport();
 
         // 6. Write the received report into the destination file
