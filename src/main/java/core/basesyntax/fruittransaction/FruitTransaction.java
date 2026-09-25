@@ -10,4 +10,30 @@ public class FruitTransaction {
         this.fruitName = fruitName;
         this.quantity = quantity;
     }
+
+    public Operation getOperation() {
+        return operation;
+    }
+
+    public String getFruitName() {
+        return fruitName;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    @Override
+    public String toString() {
+        return System.lineSeparator()
+                + "FruitTransaction{"
+                + "operation="
+                + operation
+                + ", fruitName='"
+                + fruitName
+                + '\''
+                + ", quantity="
+                + quantity
+                + '}';
+    }
 }
