@@ -21,7 +21,6 @@ public class ReportGeneratorImpl implements ReportGenerator {
                 .forEach((k, v) ->
                         sb.append(System.lineSeparator()).append(k).append(",").append(v)
                 );
-
         return sb.toString();
     }
 }

@@ -1,4 +1,4 @@
-package core.basesyntax.dao;
+package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class Storage {
         storage.put(key, value);
     }
 
-    Integer getFromStorage(String key) {
+    public Integer getFromStorage(String key) {
         return storage.get(key);
     }
 }

@@ -23,8 +23,8 @@ public class DataConverterImpl implements DataConverter {
         String fruitName = details[1];
         int quantity = Integer.parseInt(details[2]);
 
-        if (quantity < 1) {
-            throw new IllegalArgumentException("Operation value can't be less than 1");
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Operation value can't be less than 0");
         }
 
         return new FruitTransaction(operation, fruitName, quantity);
