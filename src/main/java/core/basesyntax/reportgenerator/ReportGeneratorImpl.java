@@ -1,29 +1,27 @@
 package core.basesyntax.reportgenerator;
 
-import core.basesyntax.dao.Storage;
+import core.basesyntax.dao.FruitsDao;
 
 public class ReportGeneratorImpl implements ReportGenerator {
     private static final String REPORT_FIRST_LINE = "fruit,quantity";
-    private String report;
-    private final Storage storage;
+    private final FruitsDao dao;
 
-    public ReportGeneratorImpl(Storage storage) {
-        this.storage = storage;
+    public ReportGeneratorImpl(FruitsDao dao) {
+        this.dao = dao;
     }
 
     @Override
     public String getReport() {
-        createReport();
-        return report;
+        return createReport();
     }
 
-    private void createReport() {
+    private String createReport() {
         StringBuilder sb = new StringBuilder(REPORT_FIRST_LINE);
-        storage.getStorage()
-                .forEach((key, value) ->
-                        sb.append(System.lineSeparator()).append(key).append(",").append(value)
+        dao.getAll()
+                .forEach((k, v) ->
+                        sb.append(System.lineSeparator()).append(k).append(",").append(v)
                 );
 
-        this.report = sb.toString();
+        return sb.toString();
     }
 }

@@ -1,8 +1,10 @@
 package core.basesyntax.dao;
 
+import java.util.Map;
+
 public interface FruitsDao {
 
-    Storage getStorage();
+    Map<String, Integer> getAll();
 
     void addFruitToStorage(String key, Integer value);
 

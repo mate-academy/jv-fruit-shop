@@ -10,8 +10,7 @@ import java.util.stream.Collectors;
 public class DataConverterImpl implements DataConverter {
     @Override
     public List<FruitTransaction> convertFromStrings(List<String> data) {
-        data.remove(0);
-        return data.stream().map(this::convert).collect(Collectors.toList());
+        return data.stream().skip(1).map(this::convert).collect(Collectors.toList());
     }
 
     private FruitTransaction convert(String s) {
@@ -23,6 +22,10 @@ public class DataConverterImpl implements DataConverter {
                 .orElseThrow(IllegalArgumentException::new);
         String fruitName = details[1];
         int quantity = Integer.parseInt(details[2]);
+
+        if (quantity < 1) {
+            throw new IllegalArgumentException("Operation value can't be less than 1");
+        }
 
         return new FruitTransaction(operation, fruitName, quantity);
     }
