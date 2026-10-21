@@ -15,6 +15,13 @@ public class OperationStrategyImpl implements OperationStrategy {
     public void process(FruitTransaction transaction) {
         FruitTransaction.Operation operation = transaction.getOperation();
         OperationHandler handler = handlerMap.get(operation);
+
+        if (handler == null) {
+            throw new RuntimeException(
+                    "No handler found for operation: " + operation
+            );
+        }
+
         handler.apply(transaction.getFruit(), transaction.getQuantity());
     }
 }

@@ -1,4 +1,4 @@
-package core.basesyntax;
+package core.basesyntax.db;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,7 +11,17 @@ public class Storage {
     }
 
     public void remove(String fruit, int quantity) {
-        fruits.put(fruit, fruits.get(fruit) - quantity);
+        int currentQuantity = fruits.getOrDefault(fruit, 0);
+        int newQuantity = currentQuantity - quantity;
+
+        if (newQuantity < 0) {
+            throw new RuntimeException(
+                    "Not enough " + fruit + " in storage. Available: "
+                            + currentQuantity + ", requested: " + quantity
+            );
+        }
+
+        fruits.put(fruit, newQuantity);
     }
 
     public void set(String fruit, int quantity) {

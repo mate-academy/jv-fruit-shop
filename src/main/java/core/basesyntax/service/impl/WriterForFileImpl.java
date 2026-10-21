@@ -8,13 +8,10 @@ import java.io.IOException;
 public class WriterForFileImpl implements WriterForFile {
     @Override
     public void write(String data, String fileName) {
-        String filePath = "src/main/java/" + fileName;
-        File file = new File(filePath);
-
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
             writer.write(data);
         } catch (IOException e) {
-            throw new RuntimeException("Can't write to file: " + filePath, e);
+            throw new RuntimeException("Can't write to file: " + fileName, e);
         }
     }
 }

@@ -11,7 +11,11 @@ public class ParserServiceImpl implements ParserService {
         List<FruitTransaction> transactions = new ArrayList<>();
         for (int i = 1; i < lines.size(); i++) {
             String line = lines.get(i);
-            String[] parts = line.split(",");
+            String[] parts = line.split(",", -1);
+
+            if (parts.length != 3) {
+                throw new RuntimeException("Invalid transaction format: " + line);
+            }
 
             String code = parts[0];
             String fruit = parts[1];

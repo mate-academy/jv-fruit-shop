@@ -1,5 +1,6 @@
 package core.basesyntax;
 
+import core.basesyntax.db.Storage;
 import core.basesyntax.model.FruitTransaction;
 import core.basesyntax.service.impl.BalanceOperation;
 import core.basesyntax.service.impl.OperationHandler;
@@ -31,7 +32,7 @@ public class Main {
     public static void main(String[] arg) {
         // 1. Read the data from the input CSV file
         ReaderServiceImpl fileReader = new ReaderServiceImpl();
-        List<String> inputReport = fileReader.read("src/main/java/reportToRead.csv");
+        List<String> inputReport = fileReader.read("src/main/resources/reportToRead.csv");
 
         // 2. Convert the incoming data into FruitTransactions list
         ParserService dataConverter = new ParserServiceImpl();
