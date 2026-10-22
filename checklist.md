@@ -12,7 +12,7 @@ All services should be independent.
 We shouldn't have Strategy and call its methods in CsvFileReaderService, or we shouldn't have CsvFileWriterService and call its methods in the Strategy class.
 
 Let's create `Main` class with `main()` method to show how the program works.
-Make all services independent and call them in the right order in `main()` method step by step (the result of previous service method should be the input for next one)
+Make all services independent and call them in the right order in `main()` method step by step (the result of previous core.basesyntax.service method should be the input for next one)
 
 #### Don't keep all logic in a single package
 You can use packages to make the structure of the code better, so let's do it. Gather classes with same 
@@ -22,7 +22,7 @@ Your project structure should consist the following packages:
 - `db` for holding Storage
 - `model` for holding models like Fruit (if necessary)
 - `service` for holding services, like Writer, Reader, Parser and so on
-- `service.impl` for holding implementations of services
+- `core.basesyntax.service` for holding implementations of services
 - `strategy` for holding handlers for different operations (you are expected to apply Strategy pattern)
 
 #### VCS usage
@@ -40,8 +40,8 @@ Let's rethrow a RuntimeException with an **informative** message and exception o
         }
     ```
   
-#### try-with-resources
-Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-resources.
+#### try-with-core.basesyntax.resources
+Remember, if you are using classes that implement an AutoCloseable interface, we should use it with try-with-core.basesyntax.resources.
 
 #### Follow the encapsulation principle
 Hide inner class elements with the help of access modifiers. It's a bad practice to make your class exposed.
@@ -59,7 +59,7 @@ the most suitable for your needs.
     ```java
     public class ReaderServiceImpl implements ReaderService {
        public List<String> readFromFile() {
-          File file = new File("src/main/resources/file.txt");
+          File file = new File("src/main/core.basesyntax.resources/file.txt");
           ...
        }
     }
@@ -79,21 +79,21 @@ Please provide the relative path to a resource instead.
  
 - Bad:  
     ```java
-    readerService.readFromFile("C:/Users/.../my-project/src/main/resources/file.txt");
+    readerService.readFromFile("C:/Users/.../my-project/src/main/core.basesyntax.resources/file.txt");
     ```  
     
 - Good:  
     ```java
-    readerService.readFromFile("src/main/resources/file.txt");
+    readerService.readFromFile("src/main/core.basesyntax.resources/file.txt");
     ```
       
 #### Avoid using switch-cases and if-else constructions. It is recommended to use the Strategy pattern instead. 
-In the `main()` method you can pass the strategy map into the service that chooses the correct strategy for each operation.
+In the `main()` method you can pass the core.basesyntax.strategy map into the core.basesyntax.service that chooses the correct core.basesyntax.strategy for each operation.
 
 - Example:  
     ```java
     public static void main(String[] args){
-        // create and fill the strategy map
+        // create and fill the core.basesyntax.strategy map
         FruitService fruitService = new FruitServiceImpl(operationStrategies);
     }
     ```  
