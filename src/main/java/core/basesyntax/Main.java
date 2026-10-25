@@ -23,30 +23,30 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-  private static final String INPUT_FILE = "reportToRead.csv";
-  private static final String OUTPUT_FILE = "finalReport.csv";
+    private static final String INPUT_FILE = "reportToRead.csv";
+    private static final String OUTPUT_FILE = "finalReport.csv";
 
-  public static void main(String[] args) {
-    FileReader fileReader = new FileReaderImpl();
-    List<String> inputReport = fileReader.read(INPUT_FILE);
+    public static void main(String[] args) {
+        FileReader fileReader = new FileReaderImpl();
+        List<String> inputReport = fileReader.read(INPUT_FILE);
 
-    DataConverter dataConverter = new DataConverterImpl();
-    List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
+        Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
+        operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
+        operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
+        operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
+        operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
+        OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
 
-    Map<FruitTransaction.Operation, OperationHandler> operationHandlers = new HashMap<>();
-    operationHandlers.put(FruitTransaction.Operation.BALANCE, new BalanceOperation());
-    operationHandlers.put(FruitTransaction.Operation.SUPPLY, new SupplyOperation());
-    operationHandlers.put(FruitTransaction.Operation.PURCHASE, new PurchaseOperation());
-    operationHandlers.put(FruitTransaction.Operation.RETURN, new ReturnOperation());
-    OperationStrategy operationStrategy = new OperationStrategyImpl(operationHandlers);
+        DataConverter dataConverter = new DataConverterImpl();
+        List<FruitTransaction> transactions = dataConverter.convertToTransaction(inputReport);
 
-    ShopService shopService = new ShopServiceImpl(operationStrategy);
-    shopService.process(transactions);
+        ShopService shopService = new ShopServiceImpl(operationStrategy);
+        shopService.process(transactions);
 
-    ReportGenerator reportGenerator = new ReportGeneratorImpl();
-    String resultingReport = reportGenerator.getReport();
+        ReportGenerator reportGenerator = new ReportGeneratorImpl();
+        String resultingReport = reportGenerator.getReport();
 
-    FileWriter fileWriter = new FileWriterImpl();
-    fileWriter.write(resultingReport, OUTPUT_FILE);
-  }
+        FileWriter fileWriter = new FileWriterImpl();
+        fileWriter.write(resultingReport, OUTPUT_FILE);
+    }
 }

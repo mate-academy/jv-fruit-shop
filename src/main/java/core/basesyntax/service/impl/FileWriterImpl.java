@@ -6,14 +6,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileWriterImpl implements FileWriter {
-  @Override
-  public void write(String content, String filePath) {
-    Path path = Path.of(filePath);
+    @Override
+    public void write(String content, String filePath) {
+        Path path = Path.of(filePath);
 
-    try {
-      Files.writeString(path, content);
-    } catch (IOException e) {
-      throw new RuntimeException("Can't write to file: " + filePath, e);
+        try {
+            Files.writeString(path, content);
+        } catch (IOException e) {
+            throw new RuntimeException("Can't write to file: " + filePath, e);
+        }
     }
-  }
 }

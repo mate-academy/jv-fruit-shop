@@ -7,15 +7,15 @@ import java.nio.file.Path;
 import java.util.List;
 
 public class FileReaderImpl implements FileReader {
-  @Override
-  public List<String> read(String filePath) {
-    Path path = Path.of(filePath);
+    @Override
+    public List<String> read(String filePath) {
+        Path path = Path.of(filePath);
 
-    try {
-      List<String> lines = Files.readAllLines(path);
-      return lines;
-    } catch (IOException e) {
-      throw new RuntimeException("Can't read file: " + filePath, e);
+        try {
+            List<String> lines = Files.readAllLines(path);
+            return lines;
+        } catch (IOException e) {
+            throw new RuntimeException("Can't read file: " + filePath, e);
+        }
     }
-  }
 }
