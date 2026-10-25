@@ -9,6 +9,9 @@ import java.util.List;
 public class FileReaderImpl implements FileReader {
     @Override
     public List<String> read(String filePath) {
+        if (filePath == null || filePath.isBlank()) {
+            throw new IllegalArgumentException("File path can't be null or empty");
+        }
         Path path = Path.of(filePath);
 
         try {
