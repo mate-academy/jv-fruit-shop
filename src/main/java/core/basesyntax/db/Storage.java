@@ -10,7 +10,9 @@ public class Storage {
     public static void add(String fruit, int quantity) {
         validateFruit(fruit);
         if (quantity < 0) {
-            throw new IllegalArgumentException("The quantity to add cannot be negative: " + quantity);
+            throw new IllegalArgumentException(
+                    "The quantity to add cannot be negative: "
+                            + quantity);
         }
         storage.put(fruit, storage.getOrDefault(fruit, 0) + quantity);
     }
@@ -18,7 +20,9 @@ public class Storage {
     public static void remove(String fruit, int quantity) {
         validateFruit(fruit);
         if (quantity < 0) {
-            throw new IllegalArgumentException("The quantity to be written off cannot be negative: " + quantity);
+            throw new IllegalArgumentException(
+                    "The quantity to be written off cannot be negative: "
+                            + quantity);
         }
         int currentQuantity = storage.getOrDefault(fruit, 0);
         if (currentQuantity < quantity) {

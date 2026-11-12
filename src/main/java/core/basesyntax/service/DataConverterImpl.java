@@ -19,7 +19,8 @@ public class DataConverterImpl implements DataConverter {
                     String fruit = parts[1].trim();
                     int quantity = Integer.parseInt(parts[2]);
                     if (quantity < 0) {
-                        throw new IllegalArgumentException("The quantity cannot be negative: " + quantity);
+                        throw new IllegalArgumentException("The quantity cannot be negative: "
+                                + quantity);
                     }
                     return new FruitTransaction(operation, fruit, quantity);
                 })
