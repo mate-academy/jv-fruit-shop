@@ -1,13 +1,13 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationHandler;
-import core.basesyntax.strategy.OperationStrategy;
 import core.basesyntax.strategy.OperationStrategyImpl;
 import java.util.List;
 
 public class ShopServiceImpl implements ShopService {
-    private final OperationStrategy operationStrategy;
+    private final OperationStrategyImpl operationStrategy;
 
     public ShopServiceImpl(OperationStrategyImpl operationStrategy) {
         if (operationStrategy == null) {
@@ -24,6 +24,10 @@ public class ShopServiceImpl implements ShopService {
         for (FruitTransaction transaction : transactions) {
             FruitTransaction.Operation operation = transaction.getOperation();
             OperationHandler handler = operationStrategy.get(operation);
+            if (handler == null) {
+                throw new IllegalArgumentException(
+                        "No handler found for operation: " + operation);
+            }
             handler.apply(transaction);
         }
     }
