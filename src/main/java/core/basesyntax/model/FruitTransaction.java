@@ -52,6 +52,9 @@ public class FruitTransaction {
         }
 
         public static Operation fromCode(String code) {
+            if (code == null) {
+                throw new IllegalArgumentException("The operation code cannot be null.");
+            }
             for (Operation operation : Operation.values()) {
                 if (operation.getCode().equalsIgnoreCase(code.trim())) {
                     return operation;
