@@ -1,6 +1,6 @@
 package core.basesyntax.report;
 
-import core.basesyntax.storage.Storage;
+import core.basesyntax.db.Storage;
 import java.util.Map;
 
 public class ReportGeneratorImpl implements ReportGenerator {

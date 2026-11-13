@@ -1,11 +1,21 @@
 package core.basesyntax.model;
 
 public class FruitTransaction {
-    private Operation operation;
-    private String fruit;
-    private int quantity;
+    private final Operation operation;
+    private final String fruit;
+    private final int quantity;
 
     public FruitTransaction(Operation operation, String fruit, int quantity) {
+        if (operation == null) {
+            throw new IllegalArgumentException("Operation cannot be null");
+        }
+        if (fruit == null || fruit.isBlank()) {
+            throw new IllegalArgumentException("Fruit cannot be null or empty");
+        }
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
+
         this.operation = operation;
         this.fruit = fruit;
         this.quantity = quantity;
@@ -40,12 +50,18 @@ public class FruitTransaction {
         }
 
         public static Operation getOperationByCode(String code) {
+            if (code == null || code.isBlank()) {
+                throw new IllegalArgumentException("Operation code cannot be empty");
+            }
+
             for (Operation operation : values()) {
                 if (operation.code.equals(code)) {
                     return operation;
                 }
             }
-            throw new IllegalArgumentException("Unknown operation: " + code);
+
+            throw new IllegalArgumentException(
+                    "Unknown operation code: " + code);
         }
     }
 }
