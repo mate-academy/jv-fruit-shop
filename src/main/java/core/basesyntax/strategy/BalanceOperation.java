@@ -7,7 +7,21 @@ public class BalanceOperation implements OperationHandler {
 
     @Override
     public void handle(FruitTransaction transaction) {
-        validateTransaction(transaction);
+        if (transaction == null) {
+            throw new IllegalArgumentException(
+                    "Transaction cannot be null");
+        }
+
+        if (transaction.getFruit() == null
+                || transaction.getFruit().isBlank()) {
+            throw new IllegalArgumentException(
+                    "Fruit cannot be null or empty");
+        }
+
+        if (transaction.getQuantity() < 0) {
+            throw new IllegalArgumentException(
+                    "Quantity cannot be negative");
+        }
 
         Storage.put(transaction.getFruit(), transaction.getQuantity());
     }

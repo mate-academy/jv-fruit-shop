@@ -1,6 +1,7 @@
-package core.basesyntax.service;
+package core.basesyntax.service.impl;
 
 import core.basesyntax.model.FruitTransaction;
+import core.basesyntax.service.ShopService;
 import core.basesyntax.strategy.OperationStrategy;
 import java.util.List;
 
@@ -23,13 +24,33 @@ public class ShopServiceImpl implements ShopService {
         }
 
         for (FruitTransaction transaction : transactions) {
-            if (transaction == null) {
-                throw new IllegalArgumentException(
-                        "Transaction cannot be null");
-            }
+            validateTransaction(transaction);
 
             operationStrategy.getHandler(transaction.getOperation())
                     .handle(transaction);
+        }
+    }
+
+    private void validateTransaction(FruitTransaction transaction) {
+        if (transaction == null) {
+            throw new IllegalArgumentException(
+                    "Transaction cannot be null");
+        }
+
+        if (transaction.getOperation() == null) {
+            throw new IllegalArgumentException(
+                    "Operation cannot be null");
+        }
+
+        if (transaction.getFruit() == null
+                || transaction.getFruit().isBlank()) {
+            throw new IllegalArgumentException(
+                    "Fruit cannot be null or empty");
+        }
+
+        if (transaction.getQuantity() < 0) {
+            throw new IllegalArgumentException(
+                    "Quantity cannot be negative");
         }
     }
 }
